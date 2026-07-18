@@ -50,7 +50,7 @@ export function BrainPage() {
         )}
       </div>
 
-      <div className="pointer-events-none absolute bottom-4 left-88 flex items-center gap-4">
+      <div className="pointer-events-none absolute bottom-4 left-4 flex items-center gap-4">
         {markets.map((m, i) => (
           <span key={m.id} style={hudMono} className="flex items-center gap-1.5">
             <i

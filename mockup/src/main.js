@@ -37,8 +37,12 @@ const SECTORS = [
 ];
 const ACCENT = '#266df0'; // Attio blue-500: candidates, hover ring, focus, fit bar
 const SHOW_LINES = false; // resting-state edges + shimmer; focused node's edges still show
-// uniform node radius multiplier. Default here, override with ?scale=1.5, tune live with [ and ]
-const NODE_SCALE = parseFloat(new URLSearchParams(location.search).get('scale')) || 1.0;
+// uniform node radius multiplier. Priority: ?scale= param, then your last [ ] tuning
+// (saved per browser), then the baked-in default.
+const NODE_SCALE =
+  parseFloat(new URLSearchParams(location.search).get('scale')) ||
+  parseFloat(localStorage.getItem('vcbrain-node-scale')) ||
+  1.0;
 // which sectors plausibly trade companies between them (cross-links)
 const SECTOR_ADJ = [[0, 4], [0, 1], [0, 2], [1, 5], [3, 1], [2, 3], [4, 1], [5, 4]];
 
@@ -652,7 +656,8 @@ window.addEventListener('keydown', (e) => {
   if (e.key !== '[' && e.key !== ']') return;
   const u = pMat.uniforms.uScale;
   u.value = Math.min(3, Math.max(0.4, u.value * (e.key === ']' ? 1.1 : 1 / 1.1)));
-  showToast(`node scale ×${u.value.toFixed(2)} · <span class="pulse">?scale=${u.value.toFixed(2)}</span> to keep`);
+  localStorage.setItem('vcbrain-node-scale', u.value.toFixed(2));
+  showToast(`node scale ×${u.value.toFixed(2)} · <span class="pulse">saved as your default</span>`);
 });
 
 // open with #demo to auto-fly into a sourced candidate after load (pitch + testing aid);

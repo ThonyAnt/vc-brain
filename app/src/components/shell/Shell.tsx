@@ -1,6 +1,6 @@
 import { Outlet, useLocation, useNavigate } from 'react-router'
-import { Brain, Landmark, MessageSquare, Users, Workflow } from 'lucide-react'
 import Dock from '@/components/ui/dock'
+import { AnalystIcon, BrainIcon, FoundersIcon, FundIcon, PipelineIcon } from '@/components/ui/nav-icons'
 import { useAppStore } from '../../state/store'
 import { ChatDrawer } from './ChatDrawer'
 import { LearningToast } from './LearningToast'
@@ -20,11 +20,11 @@ export function Shell() {
   const toggleChat = useAppStore((s) => s.toggleChat)
 
   const items = [
-    { icon: Brain, label: 'Brain', onClick: () => navigate('/') },
-    { icon: Workflow, label: 'Pipeline', onClick: () => navigate('/pipeline') },
-    { icon: Users, label: 'Founders', onClick: () => navigate('/founders') },
-    { icon: Landmark, label: 'Fund', onClick: () => navigate('/fund') },
-    { icon: MessageSquare, label: 'Analyst', onClick: toggleChat },
+    { icon: BrainIcon, label: 'Brain', onClick: () => navigate('/') },
+    { icon: PipelineIcon, label: 'Pipeline', onClick: () => navigate('/pipeline') },
+    { icon: FoundersIcon, label: 'Founders', onClick: () => navigate('/founders') },
+    { icon: FundIcon, label: 'Fund', onClick: () => navigate('/fund') },
+    { icon: AnalystIcon, label: 'Analyst', onClick: toggleChat },
   ]
 
   return (
@@ -37,9 +37,14 @@ export function Shell() {
       </div>
       <ChatDrawer />
 
-      {/* macOS-style dock replaces the nav rail */}
-      <div className="fixed bottom-3 left-1/2 z-40 -translate-x-1/2">
-        <Dock className="w-auto py-0" items={items} activeLabel={routeLabel(location.pathname)} />
+      {/* macOS-style dock, docked to the left edge */}
+      <div className="fixed top-1/2 left-3 z-40 -translate-y-1/2">
+        <Dock
+          orientation="vertical"
+          className="w-auto p-0"
+          items={items}
+          activeLabel={routeLabel(location.pathname)}
+        />
       </div>
 
       <LearningToast />

@@ -35,7 +35,7 @@ export function BrainPage() {
       {graph && <BrainCanvas ref={brainRef} graph={graph} onSelect={onSelect} />}
 
       {/* HUD overlays */}
-      <div className="pointer-events-none absolute inset-0 flex p-4">
+      <div className="pointer-events-none absolute inset-0 flex p-4 pl-24">
         <SourcingInbox onFocus={(id) => brainRef.current?.focusNode(id)} onFeedback={onFeedback} />
         <div className="flex-1" />
         {selectedId && (

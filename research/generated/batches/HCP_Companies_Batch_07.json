@@ -1,0 +1,448 @@
+[
+  {
+    "id": "co_beli",
+    "name": "Beli",
+    "description": "Restaurant-focused social app that ranks dining experiences using a comparative, Elo-style ranking system built from a user's own visited-restaurant history and social graph, rather than absolute star ratings.",
+    "attributes": {
+      "industryPath": ["Consumer", "Social discovery", "Dining and restaurants"],
+      "productCategoryPath": ["Software", "Consumer mobile app", "Social ranking network"],
+      "targetCustomers": ["Consumers", "Urban diners", "Gen Z and millennials"],
+      "technicalApproaches": ["Mobile app", "Elo-style relative ranking algorithm", "Personalized recommendation engine", "Social graph"],
+      "founderArchetypes": ["First-time founder", "Elite MBA (Harvard Business School)"],
+      "disruptionMechanisms": ["Relative/comparative ranking vs. absolute star ratings", "Social-graph-driven discovery vs. anonymous reviews", "Network effects"],
+      "regulatoryLabels": ["Unregulated consumer software"],
+      "businessModel": "Consumer subscription plus B2B restaurant advertising/insights (monetization largely undisclosed; HCP assumption)",
+      "goToMarket": "Consumer organic/viral, word-of-mouth and social sharing",
+      "operationalModel": "Pure software",
+      "problemStatement": "Restaurant discovery on star-rating platforms like Yelp and Google is noisy and not personalized to an individual's taste; Beli replaces absolute ratings with a comparative ranking system built from a user's own visited restaurants.",
+      "productDescription": "Beli lets users rank restaurants head-to-head against places they've already visited, building a personal, continuously re-sorted list, and surfaces recommendations based on taste similarity to friends and other users."
+    },
+    "founders": [
+      {"name": "Judy Thelen", "role": "Co-founder and CEO", "background": "Harvard Business School alumna; built the original restaurant-tracking concept as a shared Google Map with Frost before founding Beli."},
+      {"name": "Eliot Frost", "role": "Co-founder", "background": "Harvard Business School alumnus; co-built the original restaurant-tracking concept; \"Beli\" is derived from his high school nickname."}
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Consumer social / dining discovery",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "graphMetrics": {
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.9,
+      "proprietary_data_moat": 0.6,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["Yelp", "Google Maps", "OpenTable", "TikTok"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://beliapp.com/",
+      "https://beliapp.com/ourstory",
+      "https://en.wikipedia.org/wiki/Beli_(app)"
+    ]
+  },
+  {
+    "id": "co_partiful",
+    "name": "Partiful",
+    "description": "Mobile-first, SMS-native event invitation and RSVP platform popular with Gen Z and millennial hosts for informal in-person gatherings.",
+    "attributes": {
+      "industryPath": ["Consumer", "Social", "Events and gatherings"],
+      "productCategoryPath": ["Software", "Consumer mobile app", "Event invitation and planning"],
+      "targetCustomers": ["Consumers", "Gen Z and millennials", "Event hosts"],
+      "technicalApproaches": ["Mobile app", "SMS-native invitations", "Social graph"],
+      "founderArchetypes": ["First-time founder", "Ex-Palantir"],
+      "disruptionMechanisms": ["SMS-native distribution vs. email/Facebook Events", "Design-led virality", "Network effects"],
+      "regulatoryLabels": ["Unregulated consumer software"],
+      "businessModel": "Undisclosed; brand partnerships and premium features are the plausible paths (HCP assumption)",
+      "goToMarket": "Consumer organic/viral, social sharing",
+      "operationalModel": "Pure software",
+      "problemStatement": "Coordinating informal gatherings via group texts, email, or Facebook Events is clunky and impersonal; Partiful gives hosts a fast, design-forward, SMS-native invitation and RSVP tool.",
+      "productDescription": "Partiful provides customizable event invitations, SMS-based guest communication, group chat, RSVP tracking, and photo sharing built around the arc of a single event."
+    },
+    "founders": [
+      {"name": "Shreya Murthy", "role": "Co-founder and CEO", "background": "Met co-founder Joy Tao while working at Palantir Technologies; led Partiful through early investor skepticism to becoming a widely used Gen Z consumer app."},
+      {"name": "Joy Tao", "role": "Co-founder and CTO", "background": "Met co-founder Shreya Murthy while working at Palantir Technologies."}
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Consumer social / events",
+    "round": "Series A",
+    "checkSizeSought": 1500000,
+    "graphMetrics": {
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.95,
+      "proprietary_data_moat": 0.5,
+      "competition_intensity": 0.6
+    },
+    "competitors": ["Evite", "Facebook Events", "Luma"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://partiful.com/",
+      "https://fortune.com/2023/05/23/partiful-founders-startup-raises-series-a/",
+      "https://techcrunch.com/2024/11/18/partiful-is-googles-best-app-of-2024/"
+    ]
+  },
+  {
+    "id": "co_posh",
+    "name": "Posh",
+    "description": "Mobile event discovery and ticketing platform for grassroots and community events, offering organizers a vertical-feed discovery experience alongside ticketing, checkout, and analytics tools.",
+    "attributes": {
+      "industryPath": ["Consumer", "Events and live experiences", "Ticketing and discovery"],
+      "productCategoryPath": ["Software", "Marketplace", "Event ticketing and discovery"],
+      "targetCustomers": ["Consumers", "Independent event organizers", "Community/nightlife promoters"],
+      "technicalApproaches": ["Mobile app", "Vertical-feed discovery algorithm", "Ticketing/payments infrastructure"],
+      "founderArchetypes": ["First-time founder", "Non-traditional background (DJ, photographer)", "College dropout"],
+      "disruptionMechanisms": ["Algorithmic discovery feed vs. static listings", "Grassroots/community event focus vs. major-venue incumbents", "Network effects"],
+      "regulatoryLabels": ["Payments/ticketing intermediary (money transmission exposure)"],
+      "businessModel": "Marketplace / ticketing commission and processing fees",
+      "goToMarket": "Organizer-led supply acquisition plus consumer viral discovery",
+      "operationalModel": "Pure software (payments-dependent marketplace)",
+      "problemStatement": "Small, grassroots events are hard to discover and monetize through legacy ticketing platforms built for large venues; Posh gives independent organizers a TikTok-style discovery feed plus ticketing tools.",
+      "productDescription": "Posh combines a vertical-scroll event discovery feed with ticketing, checkout, and organizer analytics, focused on grassroots and community events rather than major-venue shows."
+    },
+    "founders": [
+      {"name": "Avante Price", "role": "Co-founder and CEO", "background": "Grew up DJing in Chicago and competed in hip-hop turntable competitions before dropping out of NYU to co-found Posh."},
+      {"name": "Eli Taylor-Lemire", "role": "Co-founder and CPO", "background": "Previously ran a freelance photo/video agency producing content for major fashion publications and musicians; dropped out of NYU to co-found Posh."}
+    ],
+    "stage": "series_b",
+    "geography": "United States",
+    "sector": "Consumer commerce / event marketplace",
+    "round": "Series B",
+    "checkSizeSought": 1500000,
+    "valuation": 253000000,
+    "metrics": {
+      "customers": 2000000
+    },
+    "graphMetrics": {
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.85,
+      "proprietary_data_moat": 0.45,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["Eventbrite", "Vivid Seats", "Dice", "Resident Advisor"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://posh.vip/",
+      "https://www.forbes.com/sites/dariashunina/2024/07/23/posh-raises-22m-to-power-your-social-life/",
+      "https://fortune.com/2026/03/19/exclusive-posh-lands-37m-series-b-what-are-we-doing-tonight-problem/"
+    ]
+  },
+  {
+    "id": "co_pickle",
+    "name": "Pickle",
+    "description": "Peer-to-peer fashion rental marketplace where clothing supply comes directly from individual lenders' closets rather than company-owned inventory.",
+    "attributes": {
+      "industryPath": ["Consumer", "Fashion and apparel", "Rental and resale"],
+      "productCategoryPath": ["Software", "Marketplace", "Peer-to-peer rental"],
+      "targetCustomers": ["Consumers", "Fashion-conscious renters", "Closet owners/lenders"],
+      "technicalApproaches": ["Mobile/web marketplace", "Peer-to-peer logistics coordination", "Trust and reputation system"],
+      "founderArchetypes": ["First-time founder", "Ex-Blackstone/finance"],
+      "disruptionMechanisms": ["Peer-to-peer supply vs. owned-inventory rental", "Asset-light marketplace economics", "Network effects"],
+      "regulatoryLabels": ["Unregulated consumer marketplace"],
+      "businessModel": "Marketplace / per-transaction service fee",
+      "goToMarket": "Consumer organic/viral plus influencer and community-led supply acquisition",
+      "operationalModel": "Marketplace with physical-goods logistics (shipping/courier dependent)",
+      "problemStatement": "Owned-inventory rental platforms carry heavy warehousing and depreciation costs and a limited catalog; Pickle sources rental inventory directly from people's closets, removing inventory risk while offering a larger, more dynamic catalog.",
+      "productDescription": "Pickle is a marketplace connecting people who want to rent clothing with people willing to lend items from their own closets, charging a service fee per transaction and offering same-day courier delivery in select markets."
+    },
+    "founders": [
+      {"name": "Brian McMahon", "role": "Co-founder and CEO", "background": "Former Blackstone analyst; co-founded Pickle after observing organic peer-to-peer clothing-sharing behavior."},
+      {"name": "Julia O'Mara", "role": "Co-founder", "background": "Former Blackstone analyst; previously worked with McMahon at Blackstone before co-founding Pickle."}
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Consumer commerce / fashion marketplace",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "graphMetrics": {
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.85,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.65
+    },
+    "competitors": ["Rent the Runway", "Poshmark", "ThredUp", "By Rotation"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.shoponpickle.com/",
+      "https://alleywatch.com/2025/04/pickle-peer-to-peer-clothing-rental-marketplace-brian-mcmahon/",
+      "https://techcrunch.com/2023/10/11/peer-to-peer-fashion-rental-marketplace-pickle-picks-up-8-million/"
+    ]
+  },
+  {
+    "id": "co_pie",
+    "name": "Pie",
+    "description": "IRL friendship app that uses an AI personality quiz to assemble small groups of compatible strangers for in-person events, and pays local organizers to run those events.",
+    "attributes": {
+      "industryPath": ["Consumer", "Social", "IRL/offline connection"],
+      "productCategoryPath": ["Software", "Consumer mobile app", "Friendship and community matching"],
+      "targetCustomers": ["Consumers", "Urban young professionals", "Newcomers to a city"],
+      "technicalApproaches": ["Mobile app", "AI-powered personality matching", "Curated small-group event formation"],
+      "founderArchetypes": ["Repeat/serial founder", "Prior exit (Bonobos to Walmart)"],
+      "disruptionMechanisms": ["AI-curated small groups vs. open RSVP meetups", "Paid event organizers to guarantee quality", "Post-social-media offline focus"],
+      "regulatoryLabels": ["Unregulated consumer software"],
+      "businessModel": "Undisclosed; likely future membership/subscription (HCP assumption); current model pays organizers, a net cost",
+      "goToMarket": "Local city-by-city launch with paid event organizers and community seeding",
+      "operationalModel": "Pure software with a paid-operations layer (compensates human event hosts)",
+      "problemStatement": "Existing meetup and dating apps are optimized for browsing profiles, not for reliably getting people into real rooms with compatible strangers; Pie uses an AI personality quiz to assemble small in-person groups and pays organizers to ensure events happen.",
+      "productDescription": "Pie matches users into small groups of roughly six compatible people via an AI personality quiz and pays local organizers to host the resulting in-person events."
+    },
+    "founders": [
+      {"name": "Andy Dunn", "role": "Co-founder and CEO", "background": "Co-founded menswear brand Bonobos and led it as CEO through its 2017 acquisition by Walmart."},
+      {"name": "Samir Mahafzah", "role": "Co-founder", "background": "Built a tool called Sparked Connections with Sam Stubbs that was acqui-hired into Pie."},
+      {"name": "Sam Stubbs", "role": "Co-founder", "background": "Co-built Sparked Connections with Samir Mahafzah prior to joining Pie."}
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Consumer social / IRL connection",
+    "round": "Series A",
+    "checkSizeSought": 1500000,
+    "graphMetrics": {
+      "ai_adoption": 0.5,
+      "legacy_disruptiveness": 0.4,
+      "technical_feasibility": 0.75,
+      "proprietary_data_moat": 0.35,
+      "competition_intensity": 0.6
+    },
+    "competitors": ["Timeleft", "222", "Meetup"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://getpie.app/",
+      "https://techcrunch.com/2025/03/04/andy-dunns-new-app-pie-uses-ai-to-help-you-make-friends/",
+      "https://techcrunch.com/2024/11/19/irl-social-app-pie-is-coming-to-sf-to-make-you-less-lonely/"
+    ]
+  },
+  {
+    "id": "co_timeleft",
+    "name": "Timeleft",
+    "description": "Social platform that matches small groups of strangers, based on a compatibility questionnaire, for a recurring weekly dinner, scaled to 200+ cities and 52 countries.",
+    "attributes": {
+      "industryPath": ["Consumer", "Social", "IRL/offline connection"],
+      "productCategoryPath": ["Software", "Consumer mobile app", "Scheduled group dining and social matching"],
+      "targetCustomers": ["Consumers", "Urban adults 25-45", "People new to a city"],
+      "technicalApproaches": ["Mobile app", "Compatibility-matching algorithm", "Scheduled recurring events (weekly dinners)"],
+      "founderArchetypes": ["Repeat/serial founder"],
+      "disruptionMechanisms": ["Recurring scheduled ritual vs. one-off meetups", "Algorithmic small-group matching", "Global city-by-city network effects"],
+      "regulatoryLabels": ["Unregulated consumer software"],
+      "businessModel": "Consumer subscription/per-event fee",
+      "goToMarket": "City-by-city consumer launch, viral/word-of-mouth and press-driven",
+      "operationalModel": "Pure software with local restaurant-partner operations",
+      "problemStatement": "Adult loneliness and the difficulty of making new friends in a new city are growing problems that dating and networking apps do not solve; Timeleft matches small groups of strangers for a recurring weekly dinner ritual.",
+      "productDescription": "Timeleft matches five to six compatible strangers via questionnaire for a recurring Wednesday dinner at a partner restaurant, scaled to over 200 cities across 52 countries."
+    },
+    "founders": [
+      {"name": "Maxime Barbier", "role": "Co-founder and CEO", "background": "Serial entrepreneur with prior ventures spanning nightlife promotion and media before founding Timeleft in France."},
+      {"name": "Adrien de Oliveira", "role": "Co-founder", "background": "Named alongside Barbier as co-founder in company-adjacent reporting; current operating role to be confirmed in diligence."}
+    ],
+    "stage": "series_a",
+    "geography": "France (global operations, 200+ cities across 52 countries)",
+    "sector": "Consumer social / IRL connection",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "graphMetrics": {
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.9,
+      "proprietary_data_moat": 0.45,
+      "competition_intensity": 0.65
+    },
+    "competitors": ["222", "Pie", "Meetup", "Bumble BFF"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://timeleft.com/",
+      "https://www.trysignalbase.com/news/funding/timeleft-raises-70m-series-a-funding",
+      "https://www.temy.co/breaking-bread-building-bonds-how-maxime-barbiers-timeleft-is-redefining-connections-in-cities-worldwide/",
+      "https://timeleft.com/post/timelefts-london-debut-eclectic-dinners-in-the-uks-metropolis/"
+    ]
+  },
+  {
+    "id": "co_chowdeck",
+    "name": "Chowdeck",
+    "description": "On-demand food, grocery, and pharmacy delivery platform operating an owned rider network across 11 cities in Nigeria and Ghana, reporting profitability while scaling.",
+    "attributes": {
+      "industryPath": ["Consumer", "Food and grocery delivery", "On-demand logistics"],
+      "productCategoryPath": ["Software", "Marketplace", "Last-mile delivery"],
+      "targetCustomers": ["Consumers", "Urban Nigerian and Ghanaian households", "Restaurants and vendors"],
+      "technicalApproaches": ["Mobile app", "Dispatch/routing algorithm", "Rider network coordination", "Dark-store quick commerce"],
+      "founderArchetypes": ["First-time founder", "Y Combinator alumnus"],
+      "disruptionMechanisms": ["Organized on-demand delivery vs. informal/no delivery infrastructure", "Bicycle-heavy dense-area logistics for cost efficiency", "Multi-vertical expansion (food, grocery, pharmacy)"],
+      "regulatoryLabels": ["Gig-worker classification exposure", "Food-safety and logistics regulation (Nigeria/Ghana)"],
+      "businessModel": "Marketplace / delivery and commission fees plus subscription (Chowpass) and advertising",
+      "goToMarket": "City-by-city launch, rider-network and merchant-supply-led",
+      "operationalModel": "Physical logistics-dependent (riders, dark stores)",
+      "problemStatement": "Food and grocery delivery in Nigeria and Ghana has historically been informal, slow, and unreliable; Chowdeck built an organized rider network and dispatch system that delivers in about 30 minutes while remaining profitable in a notoriously low-margin market.",
+      "productDescription": "Chowdeck operates a multi-sided delivery platform spanning restaurant food delivery, groceries, pharmacy items, a vendor marketplace (Chowstore), advertising, a subscription tier (Chowpass), and package relay, backed by an owned rider network of over 20,000 riders."
+    },
+    "founders": [
+      {"name": "Femi Aluko", "role": "Co-founder and CEO", "background": "Founded Chowdeck in October 2021 in Lagos; led the company through Y Combinator and multiple funding rounds while reportedly maintaining profitability."},
+      {"name": "Olumide Ojo", "role": "Co-founder", "background": "Named as a founding member alongside Aluko in TechCrunch's coverage of the Series A."},
+      {"name": "Lanre Yusuf", "role": "Co-founder", "background": "Named as a founding member alongside Aluko and Ojo; current operating role to be confirmed in diligence."}
+    ],
+    "stage": "series_a",
+    "geography": "Nigeria and Ghana",
+    "sector": "Consumer commerce / on-demand delivery",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "metrics": {
+      "customers": 1500000
+    },
+    "graphMetrics": {
+      "legacy_disruptiveness": 0.7,
+      "technical_feasibility": 0.9,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.6
+    },
+    "competitors": ["Glovo", "Bolt Food"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://chowdeck.com/",
+      "https://techcrunch.com/2025/08/11/nigeria-profitable-food-delivery-chowdeck-lands-9m-from-novastar-y-combinator/",
+      "https://afrotech.com/chowdeck-closes-9m-series-a-round"
+    ]
+  },
+  {
+    "id": "co_bezel",
+    "name": "Bezel",
+    "description": "Technology-enabled marketplace for buying, selling, and trading pre-owned luxury watches, centered on in-house physical authentication of every listed timepiece.",
+    "attributes": {
+      "industryPath": ["Consumer", "Luxury goods", "Watches"],
+      "productCategoryPath": ["Software", "Marketplace", "Authenticated resale/trading"],
+      "targetCustomers": ["Consumers", "Watch collectors", "Luxury goods buyers and sellers"],
+      "technicalApproaches": ["Mobile/web marketplace", "In-house physical authentication process", "Price/market-intelligence data"],
+      "founderArchetypes": ["First-time founder", "Ex-Google (product/design)"],
+      "disruptionMechanisms": ["Centralized in-house authentication vs. fragmented dealer/grey-market trust problem", "Technology-forward UX vs. legacy watch dealers", "Data-driven pricing transparency"],
+      "regulatoryLabels": ["Anti-money-laundering/stolen-goods exposure (high-value goods marketplace)"],
+      "businessModel": "Marketplace / transaction commission (take rate undisclosed)",
+      "goToMarket": "Consumer organic plus celebrity/influencer investor network",
+      "operationalModel": "Marketplace with physical-goods logistics (in-house authentication, shipping)",
+      "problemStatement": "Buying and selling a luxury watch peer-to-peer or through a dealer carries high fraud, counterfeit, and trust risk; Bezel centralizes authentication in-house and gives buyers and sellers price transparency across a large listed inventory.",
+      "productDescription": "Bezel lists thousands of pre-owned luxury watches (reported over $500m in inventory value), inspecting each one in-house before delivery and issuing a digital and physical certificate of authenticity, alongside wishlist, price-tracking, and concierge-sourcing tools."
+    },
+    "founders": [
+      {"name": "Quaid Walker", "role": "Co-founder and CEO", "background": "Former product/design employee at Google and watch collector; founded Bezel after a frustrating personal Rolex-buying experience."},
+      {"name": "Chase Payan", "role": "Co-founder (CFO/COO)", "background": "Childhood friend of Walker's with a finance and operations background; one source spells the name \"Chase Pion\" — confirm in diligence."},
+      {"name": "Darryl Johnson", "role": "Co-founder (engineering)", "background": "Named in a single Forbes profile as an engineer and prior Google employee; not corroborated elsewhere in HCP's research."}
+    ],
+    "stage": "seed",
+    "geography": "United States",
+    "sector": "Consumer commerce / luxury marketplace",
+    "round": "Seed",
+    "checkSizeSought": 1500000,
+    "graphMetrics": {
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.85,
+      "proprietary_data_moat": 0.5,
+      "competition_intensity": 0.65
+    },
+    "competitors": ["Chrono24", "eBay", "WatchBox", "1stDibs"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.getbezel.com/",
+      "https://www.getbezel.com/post/bezel-seed-round",
+      "https://www.forbes.com/sites/daveknox/2024/10/14/how-bezel-is-redefining-the-luxury-watch-market-through-technology/"
+    ]
+  },
+  {
+    "id": "co_yope",
+    "name": "Yope",
+    "description": "Private, feed-less photo-sharing app for small trusted friend groups, positioned against public algorithm-optimized social feeds; batch substitute for Flagship, which shut down its core creator-storefront product.",
+    "attributes": {
+      "industryPath": ["Consumer", "Social", "Photo sharing"],
+      "productCategoryPath": ["Software", "Consumer mobile app", "Private group photo network"],
+      "targetCustomers": ["Consumers", "Gen Z", "Close-friend micro-communities"],
+      "technicalApproaches": ["Mobile app", "AI/ML-generated photo collage (\"wall\") feature", "No public feed/algorithmic ranking by design"],
+      "founderArchetypes": ["Repeat founder (multiple prior pivots)", "International (Belarusian State University)"],
+      "disruptionMechanisms": ["Private-group-only design vs. public feeds", "No likes/algorithm as an anti-Instagram positioning", "Network effects within small trusted groups"],
+      "regulatoryLabels": ["Unregulated consumer software"],
+      "businessModel": "Undisclosed; no monetization confirmed publicly (HCP assumption of future subscription/brand features)",
+      "goToMarket": "Consumer organic/viral (Gen Z word-of-mouth)",
+      "operationalModel": "Pure software",
+      "problemStatement": "Public social feeds optimized for likes and performance have made platforms like Instagram feel inauthentic for sharing with close friends; Yope offers a private, feed-less, algorithm-free space for small friend groups to share photos.",
+      "productDescription": "Yope lets users send photos to a private friend group, which are assembled into a machine-learning-generated collage rather than a chronological or algorithmic feed, with no likes and no public feed by design."
+    },
+    "founders": [
+      {"name": "Bahram Ismailau", "role": "Co-founder and CEO", "background": "Met co-founder Paul Rudkouski studying together at Belarusian State University; the pair worked on prior products for years before Yope."},
+      {"name": "Paul Rudkouski", "role": "Co-founder", "background": "Met co-founder Bahram Ismailau studying together at Belarusian State University."}
+    ],
+    "stage": "seed",
+    "geography": "United States",
+    "sector": "Consumer social / photo sharing",
+    "round": "Seed",
+    "checkSizeSought": 1500000,
+    "valuation": 50000000,
+    "graphMetrics": {
+      "ai_adoption": 0.55,
+      "legacy_disruptiveness": 0.35,
+      "technical_feasibility": 0.8,
+      "proprietary_data_moat": 0.3,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["BeReal", "Instagram", "Locket"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://yope.app/",
+      "https://techcrunch.com/2025/02/24/yope-is-sparking-genz-and-vc-interest-with-an-instagram-like-app-for-private-groups/",
+      "https://en.wikipedia.org/wiki/YOPE"
+    ]
+  },
+  {
+    "id": "co_222",
+    "name": "222",
+    "description": "AI-driven platform that matches strangers by personality assessment and books them into curated in-person experiences such as dinners and comedy shows, aiming to combat social isolation.",
+    "attributes": {
+      "industryPath": ["Consumer", "Social", "IRL/offline connection"],
+      "productCategoryPath": ["Software", "Consumer mobile app", "AI-matched social experiences"],
+      "targetCustomers": ["Consumers", "Urban singles and professionals", "People experiencing social isolation"],
+      "technicalApproaches": ["Mobile app", "AI/ML personality-based matching", "Curated in-person experience booking (dinners, comedy shows)"],
+      "founderArchetypes": ["First-time founder", "Y Combinator alumnus"],
+      "disruptionMechanisms": ["Algorithmic matching to curated real-world events vs. profile-swiping dating/social apps", "No DMs/profiles by design", "Network effects across expanding cities"],
+      "regulatoryLabels": ["Unregulated consumer software"],
+      "businessModel": "Undisclosed; likely per-event or subscription fee (HCP assumption)",
+      "goToMarket": "City-by-city consumer launch (Los Angeles then New York), press and community-led",
+      "operationalModel": "Pure software with local venue/event operations",
+      "problemStatement": "Loneliness and social isolation are rising, and existing dating and networking apps optimize for browsing rather than real-world connection; 222 uses a personality assessment to algorithmically match small groups for curated in-person experiences.",
+      "productDescription": "222 matches users via a personality assessment into small groups for booked, real-world experiences (dinners, comedy shows) at local venues, without profiles, DMs, or swiping."
+    },
+    "founders": [
+      {"name": "Danial Hashemi", "role": "Co-founder", "background": "One of three co-founders of 222, founded in 2023; identified in Fast Company's coverage of the Series A."},
+      {"name": "Keyan Kazemian", "role": "Co-founder", "background": "One of three co-founders of 222, founded in 2023."},
+      {"name": "Arman Roshannai", "role": "Co-founder", "background": "One of three co-founders of 222, founded in 2023."}
+    ],
+    "stage": "series_a",
+    "geography": "United States (New York City, Los Angeles)",
+    "sector": "Consumer social / IRL connection",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "graphMetrics": {
+      "ai_adoption": 0.6,
+      "legacy_disruptiveness": 0.45,
+      "technical_feasibility": 0.75,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.65
+    },
+    "competitors": ["Timeleft", "Pie", "Bumble BFF"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://222.place/",
+      "https://www.fastcompany.com/91356813/222-aims-to-end-loneliness-by-engineering-chance",
+      "https://www.ycombinator.com/companies/222"
+    ]
+  }
+]

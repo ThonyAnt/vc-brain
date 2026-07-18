@@ -1,0 +1,481 @@
+[
+  {
+    "id": "co_concourse",
+    "name": "Concourse",
+    "description": "AI agent platform for corporate finance teams that connects to ERPs, data warehouses, billing, payroll, and CRM systems and automates financial analysis, reporting, and natural-language data queries with source-traceable outputs.",
+    "attributes": {
+      "industryPath": ["Financial Software", "Corporate Finance", "FP&A and Reporting Automation"],
+      "productCategoryPath": ["Software", "AI Agent Platform", "Finance Agents"],
+      "targetCustomers": ["Corporate finance teams", "Fortune 500 enterprises", "High-growth private companies", "Accounting teams", "Data teams"],
+      "technicalApproaches": ["LLM agents", "Natural-language query interface", "ERP/warehouse integrations", "Auditable/source-traceable outputs"],
+      "founderArchetypes": ["Undisclosed in public sources"],
+      "disruptionMechanisms": ["Automates manual financial analysis and reporting", "Reduces reliance on spreadsheet-based workflows", "Natural-language interface over structured financial systems"],
+      "regulatoryLabels": ["Pure software", "Not independently regulated"],
+      "businessModel": "Subscription SaaS with free entry tier",
+      "goToMarket": "Product-led plus enterprise sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "Corporate finance teams spend excessive manual effort on financial analysis, reporting, and reconciling data across disconnected ERP, warehouse, and billing systems.",
+      "productDescription": "Concourse is an AI agent platform that connects to a company's financial systems (ERPs, data warehouses, billing, payroll, CRM) and lets finance teams query data in natural language, generate CFO-ready reports on a schedule, and export results with every number traceable to source data."
+    },
+    "founders": [
+      {"name": "Matthieu Hafemeister", "role": "Founder (unconfirmed)", "background": "Name appears in an AlleyWatch article URL slug covering Concourse's Series A; not confirmed as founder on Concourse's own site or financing press release. Confirm in diligence."}
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Enterprise AI / Finance Agents",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.8,
+      "regulatory_moat": 0.15,
+      "proprietary_data_moat": 0.35,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["Mosaic", "Runway", "Abacum", "Cube", "Datarails", "Vareto"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.concourse.co/",
+      "https://www.prnewswire.com/news-releases/concourse-raises-12m-series-a-and-expands-access-to-its-enterprise-grade-ai-agents-for-finance-302670827.html",
+      "https://www.concourse.co/insights/concourse-12m-series-a-launches-general-availability"
+    ]
+  },
+  {
+    "id": "co_dust",
+    "name": "Dust",
+    "description": "Paris-based 'multiplayer' agentic AI platform that lets employees and AI agents share workspaces and context across an enterprise, connecting to internal tools like Notion, Google Drive, Slack, and Intercom.",
+    "attributes": {
+      "industryPath": ["Enterprise Software", "AI Infrastructure", "Enterprise AI Assistants"],
+      "productCategoryPath": ["Software", "AI Agent Platform", "Enterprise Knowledge Assistants"],
+      "targetCustomers": ["Enterprises", "Mid-market companies", "SMB workspace teams"],
+      "technicalApproaches": ["Multi-agent orchestration", "Workspace/document integrations", "Collaborative human-agent workflow"],
+      "founderArchetypes": ["Ex-OpenAI researcher", "Repeat technical founder"],
+      "disruptionMechanisms": ["Shifts enterprise AI from single-player assistants to shared multiplayer agent workflows", "Displaces point AI-assistant tools with a workspace-level control plane"],
+      "regulatoryLabels": ["Pure software", "EU data-residency relevant"],
+      "businessModel": "Subscription SaaS, usage-adjacent tiers",
+      "goToMarket": "Enterprise sales plus product-led adoption",
+      "operationalModel": "Pure software",
+      "problemStatement": "Enterprise AI adoption has been limited to isolated single-user assistants rather than collaborative, auditable workflows shared across teams and agents.",
+      "productDescription": "Dust is a multiplayer agentic AI platform connecting humans and AI agents in shared enterprise workspaces, with deep integrations into internal knowledge and communication tools, reporting 3,000+ organizations, 51,000 monthly active users, and zero churn in 2025."
+    },
+    "founders": [
+      {"name": "Stanislas Polu", "role": "Co-founder", "background": "OpenAI alumnus; co-founded Dust to build enterprise multiplayer AI assistants from Paris."},
+      {"name": "Gabriel Hubert", "role": "Co-founder", "background": "Co-founded Dust alongside Polu; named in TechCrunch's 2024 Series A coverage."}
+    ],
+    "stage": "series_b",
+    "geography": "France",
+    "sector": "Enterprise AI / Horizontal Agent Platform",
+    "round": "Series B",
+    "checkSizeSought": 2000000,
+    "metrics": {
+      "customers": 3000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.85,
+      "regulatory_moat": 0.15,
+      "proprietary_data_moat": 0.45,
+      "competition_intensity": 0.8
+    },
+    "competitors": ["Glean", "Microsoft Copilot", "Notion AI", "Sierra", "Lindy", "Writer"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://dust.tt/",
+      "https://techcrunch.com/2024/06/27/dust-grabs-another-16-million-for-its-enterprise-ai-assistants-connected-to-internal-data/",
+      "https://sifted.eu/articles/dust-series-b-40m"
+    ]
+  },
+  {
+    "id": "co_squint",
+    "name": "Squint",
+    "description": "Mobile AI/AR platform that captures expert factory-operator knowledge from video and auto-generates step-by-step guided procedures for manufacturing workers, with customers including PepsiCo, Michelin, and Ford.",
+    "attributes": {
+      "industryPath": ["Industrial Software", "Manufacturing", "Frontline Worker AI"],
+      "productCategoryPath": ["Software", "AI/AR Knowledge Capture", "Connected Worker Platform"],
+      "targetCustomers": ["Large multinational manufacturers", "Mid-size manufacturers", "Small manufacturers"],
+      "technicalApproaches": ["Multimodal generative AI", "Video-to-procedure generation", "Augmented reality guidance"],
+      "founderArchetypes": ["Consumer-product background founder"],
+      "disruptionMechanisms": ["Replaces manual/paper SOPs with AI-generated, video-derived procedures", "Digitizes tacit tribal knowledge held by experienced operators"],
+      "regulatoryLabels": ["Pure software", "Industrial safety-adjacent"],
+      "businessModel": "Subscription SaaS, per-site/per-seat",
+      "goToMarket": "Enterprise sales",
+      "operationalModel": "Pure software (deployed into manufacturing operations)",
+      "problemStatement": "Manufacturers lose critical operational knowledge as experienced operators retire or turn over, and onboarding new workers to complex procedures is slow and error-prone.",
+      "productDescription": "Squint uses multimodal generative AI to turn a video recording of an expert operator performing a task into interactive AR navigation, multimedia tutorials, forms, and digital notes, cutting new-operator time-to-value by over 50% per company claims."
+    },
+    "founders": [
+      {"name": "Devin Bhushan", "role": "Founder and CEO", "background": "Previously built features for Yahoo's fantasy-sports platform, where he connected with investors Tim Tully and Jess Lee, who later backed Squint's Series A and B."}
+    ],
+    "stage": "series_b",
+    "geography": "US",
+    "sector": "Enterprise AI / Manufacturing",
+    "round": "Series B",
+    "checkSizeSought": 2000000,
+    "valuation": 265000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.75,
+      "legacy_disruptiveness": 0.65,
+      "technical_feasibility": 0.8,
+      "regulatory_moat": 0.1,
+      "proprietary_data_moat": 0.55,
+      "competition_intensity": 0.5
+    },
+    "competitors": ["Augmentir", "Poka", "Tulip Interfaces", "Parsable", "Rockwell Automation", "PTC"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.squint.ai/",
+      "https://www.squint.ai/blog/series-a",
+      "https://fortune.com/2025/08/12/exclusive-squint-raises-40-million-at-265-million-valuation-to-modernize-manufacturing-for-companies-like-pepsi-and-michelin/"
+    ]
+  },
+  {
+    "id": "co_kick",
+    "name": "Kick",
+    "description": "AI-native, self-driving bookkeeping platform for small businesses, solopreneurs, and accounting firms, automating transaction categorization, receipt matching, and financial reporting.",
+    "attributes": {
+      "industryPath": ["Financial Software", "SMB Accounting", "Bookkeeping Automation"],
+      "productCategoryPath": ["Software", "AI Bookkeeping", "SMB Financial Tools"],
+      "targetCustomers": ["Small businesses", "Solopreneurs and gig workers", "Accounting firms serving SMB clients"],
+      "technicalApproaches": ["AI transaction categorization", "Bank/payment integrations", "Agent-accessible tooling (MCP/CLI)"],
+      "founderArchetypes": ["Solo named founder"],
+      "disruptionMechanisms": ["Automates manual SMB bookkeeping historically done by human bookkeepers", "Reduces cost of outsourced bookkeeping via AI automation"],
+      "regulatoryLabels": ["Pure software", "Tax-adjacent"],
+      "businessModel": "Tiered subscription SaaS (free, $40/mo, $100/mo, custom)",
+      "goToMarket": "Product-led plus accounting-firm channel",
+      "operationalModel": "Pure software",
+      "problemStatement": "Small businesses and solopreneurs face expensive, error-prone, and slow manual bookkeeping, and prior automated solutions (e.g., Bench) have failed to sustain the category.",
+      "productDescription": "Kick auto-categorizes transactions, matches receipts, and produces profit-and-loss and balance-sheet reporting for SMBs and accounting firms, integrating with Plaid, Stripe, PayPal, Mercury, Ramp, and Gusto, serving 3,000+ businesses."
+    },
+    "founders": [
+      {"name": "Conrad Wadowski", "role": "Founder", "background": "Publishes Kick's funding announcements under the Kick Finance Medium publication; identified as founder in Axios's October 2024 seed coverage."}
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "SMB AI / Bookkeeping",
+    "round": "Series A (public sources describe the Nov. 2025 round simply as new funding, not explicitly labeled Series A)",
+    "checkSizeSought": 2000000,
+    "metrics": {
+      "customers": 3000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.8,
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.1,
+      "proprietary_data_moat": 0.25,
+      "competition_intensity": 0.75
+    },
+    "competitors": ["Bench", "Pilot.com", "QuickBooks Live", "Bookkeeper360", "Truewind", "Found"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.kick.co/",
+      "https://www.axios.com/pro/fintech-deals/2024/10/17/bookkeeping-startup-kick-9-million-ai",
+      "https://medium.com/kickfinance/kick-raises-to-build-the-accounting-firm-of-the-future-10af7f38cabf",
+      "https://www.kick.co/pricing"
+    ]
+  },
+  {
+    "id": "co_artisan",
+    "name": "Artisan",
+    "description": "Builder of 'AI employees' starting with Ava, an autonomous AI Business Development Representative that prospects, personalizes outreach, and books meetings for sales teams.",
+    "attributes": {
+      "industryPath": ["Sales Software", "Revenue Operations", "AI Sales Agents"],
+      "productCategoryPath": ["Software", "AI Agent Platform", "Sales Development Automation"],
+      "targetCustomers": ["Enterprise sales teams", "Mid-market companies", "SMB/startups"],
+      "technicalApproaches": ["Multi-agent system", "Real-time buying-signal context engine", "Multi-channel outreach automation"],
+      "founderArchetypes": ["Solo publicly named founder", "Consumer-facing branding-led founder"],
+      "disruptionMechanisms": ["Automates SDR prospecting and outbound historically done by human sales development reps", "Consolidates prospecting, research, and outreach into one agent"],
+      "regulatoryLabels": ["Pure software", "Email/outbound compliance-adjacent"],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Enterprise and mid-market sales, PLG trial",
+      "operationalModel": "Pure software",
+      "problemStatement": "Outbound sales development is labor-intensive, expensive to scale with human SDRs, and inconsistent in personalization and follow-up.",
+      "productDescription": "Artisan's Ava is an AI Business Development Rep that discovers leads, researches buying signals (job changes, funding, leadership moves), writes personalized multi-channel outreach, and books meetings autonomously; the company is building additional agents Aaron (inbound) and Aria (scheduling)."
+    },
+    "founders": [
+      {"name": "Jaspar Carmichael-Jack", "role": "Co-founder and CEO", "background": "Named in TechCrunch's April 2025 Series A coverage as CEO and public spokesperson; additional co-founders not identified in sources reviewed."}
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Enterprise AI / Sales Agents",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "metrics": {
+      "arr": 5000000,
+      "customers": 250
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.8,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.05,
+      "proprietary_data_moat": 0.3,
+      "competition_intensity": 0.85
+    },
+    "competitors": ["11x", "Regie.ai", "Clay", "Outreach", "HubSpot", "ZoomInfo"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.artisan.co/",
+      "https://techcrunch.com/2025/04/09/artisan-the-stop-hiring-humans-ai-agent-startup-raises-25m-and-is-still-hiring-humans/",
+      "https://www.artisan.co/blog/artisan-series-a"
+    ]
+  },
+  {
+    "id": "co_numeric",
+    "name": "Numeric",
+    "description": "AI-powered close-automation platform unifying close management, cash reconciliation, and reporting for enterprise and mid-market accounting teams, used by Brex, Plaid, Wealthfront, and OpenAI.",
+    "attributes": {
+      "industryPath": ["Financial Software", "Enterprise Accounting", "Close Automation"],
+      "productCategoryPath": ["Software", "AI Close Automation", "Financial Data Platform"],
+      "targetCustomers": ["Enterprise accounting teams", "Mid-market companies", "High-growth startups"],
+      "technicalApproaches": ["AI transaction matching and anomaly detection", "Automated variance explanation generation", "MCP connector for custom agents"],
+      "founderArchetypes": ["Finance-operator founder (VP of Finance background)", "Multi-founder technical team"],
+      "disruptionMechanisms": ["Automates manual month-end close and reconciliation work", "Displaces spreadsheet-based close processes"],
+      "regulatoryLabels": ["Pure software", "Financial-reporting-adjacent"],
+      "businessModel": "Enterprise subscription SaaS",
+      "goToMarket": "Enterprise sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "Enterprise accounting teams spend days on manual month-end close, reconciliation, and variance analysis using disconnected spreadsheets and legacy tools.",
+      "productDescription": "Numeric automates close checklists, account reconciliation, and cash matching (90%+ automated), with AI-generated variance explanations and CFO-ready reporting, expanding from close management toward a broader finance-data platform."
+    },
+    "founders": [
+      {"name": "Parker Gilbert", "role": "Co-founder", "background": "Prior VP of Finance experience at Hearth, per Numeric's own Series B announcement."},
+      {"name": "Anthony Alvernaz", "role": "Co-founder", "background": "Named in TechCrunch's October 2024 Series A coverage; specific background not detailed in sources reviewed."},
+      {"name": "Andrew Bihl", "role": "Co-founder", "background": "Named in TechCrunch's October 2024 Series A coverage; specific background not detailed in sources reviewed."}
+    ],
+    "stage": "series_b",
+    "geography": "US",
+    "sector": "Enterprise AI / Accounting Close Automation",
+    "round": "Series B",
+    "checkSizeSought": 2500000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.75,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.8,
+      "regulatory_moat": 0.15,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.65
+    },
+    "competitors": ["BlackLine", "Workiva", "FloQast", "Trintech", "Netgain", "Zeni"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.numeric.io/",
+      "https://techcrunch.com/2024/10/10/numeric-grabs-28m-series-a-for-automating-accounting-with-ai/",
+      "https://www.numeric.io/blog/numeric-raises-51m-series-b"
+    ]
+  },
+  {
+    "id": "co_happyrobot",
+    "name": "HappyRobot",
+    "description": "Agentic AI platform deploying autonomous 'AI workers' to automate phone-based and multi-channel operational communication, initially for freight logistics and now expanding across industries.",
+    "attributes": {
+      "industryPath": ["Logistics Technology", "Supply Chain", "Voice AI"],
+      "productCategoryPath": ["Software", "AI Voice Agent Platform", "Operations Automation"],
+      "targetCustomers": ["Freight brokers and 3PLs", "Carriers", "Enterprises across utilities, airlines, retail, manufacturing, insurance, financial services"],
+      "technicalApproaches": ["Conversational voice AI", "Agentic workflow automation", "Behavioral governance/evaluation framework"],
+      "founderArchetypes": ["AI research background founders", "Domain-operator founder (shipper-side logistics)"],
+      "disruptionMechanisms": ["Automates manual phone-based freight coordination and communication", "Displaces human call-center labor for repetitive operational calls"],
+      "regulatoryLabels": ["Pure software", "SOC 2 / GDPR / HIPAA / EU AI Act / NIST CSF / DORA compliant"],
+      "businessModel": "Enterprise subscription SaaS",
+      "goToMarket": "Enterprise sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "Freight brokerage and logistics operations depend on high-volume, repetitive phone communication (carrier sales, check calls, POD collection) that is expensive and hard to scale with human staff.",
+      "productDescription": "HappyRobot deploys AI voice and multi-channel agents that handle inbound/outbound carrier communication, check calls, and document collection, with a governance layer for behavioral evaluation and auditing, serving 150+ enterprises including DHL, Schneider, and Uber Freight."
+    },
+    "founders": [
+      {"name": "Pablo", "role": "Co-founder and CEO", "background": "AI research background; full surname not disclosed in HappyRobot's own Series A announcement."},
+      {"name": "Luis", "role": "Co-founder and CTO", "background": "AI research background; full surname not disclosed in HappyRobot's own Series A announcement."},
+      {"name": "Javi", "role": "Co-founder and COO", "background": "Shipper-side logistics operating experience; full surname not disclosed in HappyRobot's own Series A announcement."}
+    ],
+    "stage": "series_b",
+    "geography": "US",
+    "sector": "Enterprise AI / Logistics Voice Agents",
+    "round": "Series B",
+    "checkSizeSought": 2000000,
+    "metrics": {
+      "customers": 150
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.85,
+      "regulatory_moat": 0.1,
+      "proprietary_data_moat": 0.35,
+      "competition_intensity": 0.55
+    },
+    "competitors": ["Parade", "Vooma", "Samsara", "Trimble", "Retell AI", "Bland AI"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.happyrobot.ai/",
+      "https://www.prnewswire.com/news-releases/happyrobot-raises-15-6-million-series-a-funding-led-by-a16z-to-transform-logistics-with-agentic-ai-302322662.html",
+      "https://techfundingnews.com/happyrobot-44m-series-b-ai-workforce-supply-chain/"
+    ]
+  },
+  {
+    "id": "co_spellbook",
+    "name": "Spellbook",
+    "description": "AI copilot for transactional lawyers, integrated into Microsoft Word, offering contract review, drafting, benchmarking, and playbook-driven workflows for law firms and in-house legal teams.",
+    "attributes": {
+      "industryPath": ["Legal Technology", "Transactional Law", "Contract AI"],
+      "productCategoryPath": ["Software", "AI Legal Drafting", "Contract Review and Management"],
+      "targetCustomers": ["Law firms (transactional practice)", "In-house legal departments"],
+      "technicalApproaches": ["LLM-based drafting and review (GPT-5 and others)", "Microsoft Word-native integration", "Firm-specific playbook encoding"],
+      "founderArchetypes": ["Solo publicly named founder/CEO"],
+      "disruptionMechanisms": ["Accelerates contract drafting and review historically performed manually by associates", "Encodes firm-specific standards into reusable AI playbooks"],
+      "regulatoryLabels": ["Pure software", "Legal-practice / bar-rule adjacent"],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Enterprise sales plus PLG trial",
+      "operationalModel": "Pure software",
+      "problemStatement": "Transactional lawyers spend excessive hours drafting, reviewing, and benchmarking contracts using manual, Word-based workflows.",
+      "productDescription": "Spellbook integrates into Microsoft Word to review and redline contracts, draft from templates, benchmark against industry standards, answer legal questions, encode firm playbooks, and run multi-document agentic workflows via its 'Associate' feature, serving 4,500+ legal teams across 80+ countries."
+    },
+    "founders": [
+      {"name": "Scott Stevenson", "role": "Co-founder and CEO", "background": "Identified as co-founder and CEO in SiliconANGLE's October 2025 Series B coverage; publicly frames Spellbook's positioning as legal work's 'spreadsheet moment.'"}
+    ],
+    "stage": "series_b",
+    "geography": "Canada",
+    "sector": "Enterprise AI / Legal Drafting",
+    "round": "Series B",
+    "checkSizeSought": 2000000,
+    "valuation": 350000000,
+    "metrics": {
+      "customers": 4500
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.8,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.85,
+      "regulatory_moat": 0.2,
+      "proprietary_data_moat": 0.35,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["Ironclad", "Robin AI", "Harvey", "LinkSquares", "DocuSign", "Thomson Reuters"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://spellbook.com/",
+      "https://www.businesswire.com/news/home/20251009110230/en/Spellbook-Raises-$50M-Series-B-to-Expand-AI-Contract-Review-Platform",
+      "https://siliconangle.com/2025/10/09/legal-ai-firm-spellbook-raises-50m-expand-contract-review-platform/"
+    ]
+  },
+  {
+    "id": "co_basis",
+    "name": "Basis",
+    "description": "AI agent platform that automates structured accounting workflows (tax, audit, reconciliation, document review) end-to-end for professional accounting firms and in-house accounting departments.",
+    "attributes": {
+      "industryPath": ["Financial Software", "Professional Services", "Accounting Firm Automation"],
+      "productCategoryPath": ["Software", "AI Accounting Agents", "Tax and Audit Automation"],
+      "targetCustomers": ["Accounting firms (client accounting services, tax, audit)", "In-house accounting departments"],
+      "technicalApproaches": ["Autonomous LLM agents with rules-based controls", "Firm-specific engagement-context adaptation", "Human-in-the-loop handoff at critical junctures"],
+      "founderArchetypes": ["Operator CEO (ex-BCG/SoftBank)", "AI research team founders"],
+      "disruptionMechanisms": ["Automates structured accounting labor across tax, audit, and advisory workflows", "Addresses capacity constraints in the accounting profession"],
+      "regulatoryLabels": ["Pure software", "Audit/tax-standard compliance-adjacent"],
+      "businessModel": "Enterprise subscription SaaS",
+      "goToMarket": "Enterprise sales into accounting firms",
+      "operationalModel": "Pure software",
+      "problemStatement": "Accounting firms face a growing capacity crisis, with too few qualified accountants to handle tax, audit, and advisory workloads using traditional manual processes.",
+      "productDescription": "Basis builds autonomous agents that perform accounting work end-to-end across tax preparation, audit testing, reconciliation, and document review, reporting that roughly 30% of the Top 25 U.S. accounting firms use its agents, with named customers including Boulay PLLP, Clark Nuber PS, MarksNelson LLC, Pinion LLC, and UHY LLC."
+    },
+    "founders": [
+      {"name": "Matt Harpe", "role": "Co-founder and CEO", "background": "Prior Boston Consulting Group and SoftBank executive experience, per SiliconANGLE's February 2026 Series B coverage."},
+      {"name": "Zenna Tavares", "role": "Reported co-founder / research lead", "background": "Innovation scholar at Columbia University's Zuckerman Mind Brain Behavior Institute; identified as a founding researcher by an industry newsletter (nextplayso.substack.com), not confirmed on Basis's own site in materials reviewed."},
+      {"name": "Emily Mackevicius", "role": "Reported co-founder / research lead", "background": "Postdoctoral researcher studying memory in birds at the Aronov lab and Center for Theoretical Neuroscience; identified as a founding researcher by the same secondary source."},
+      {"name": "Eli Bingham", "role": "Reported co-founder / research lead", "background": "Machine learning fellow at the Broad Institute of MIT and Harvard, co-creator of the Pyro probabilistic-programming language, and former senior research scientist at Uber AI Labs; identified as a founding researcher by the same secondary source."}
+    ],
+    "stage": "series_b",
+    "geography": "US",
+    "sector": "Enterprise AI / Accounting Agents",
+    "round": "Series B",
+    "checkSizeSought": 1500000,
+    "valuation": 1150000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.65,
+      "technical_feasibility": 0.85,
+      "regulatory_moat": 0.25,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.6
+    },
+    "competitors": ["Intuit", "Thomson Reuters", "BlackLine", "Vic.ai", "Truewind", "Workiva"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.getbasis.ai/",
+      "https://siliconangle.com/2026/02/24/ai-accounting-startup-basis-secures-100m-1-15b-valuation-firms-adopt-agent-based-workflows/",
+      "https://www.citybiz.co/article/640958/basis-raises-34m-to-advance-ai-agents-for-accounting/"
+    ]
+  },
+  {
+    "id": "co_eve",
+    "name": "Eve",
+    "description": "AI platform purpose-built for plaintiff law firms, automating case intake, medical chronologies, drafting, and discovery to help personal-injury and labor/employment firms handle more cases with the same headcount.",
+    "attributes": {
+      "industryPath": ["Legal Technology", "Plaintiff Law", "Litigation Support AI"],
+      "productCategoryPath": ["Software", "AI Legal Case Automation", "Plaintiff Firm Operating Platform"],
+      "targetCustomers": ["Plaintiff law firms (personal injury)", "Plaintiff law firms (labor and employment)"],
+      "technicalApproaches": ["LLM-based case intake and evaluation", "Medical chronology generation", "Agentic discovery and drafting workflows"],
+      "founderArchetypes": ["AI/ML engineering team (Facebook, Rubrik alumni)", "VC-operator founder (ex-Lightspeed)"],
+      "disruptionMechanisms": ["Automates document- and data-heavy plaintiff case preparation", "Increases case throughput per attorney at plaintiff firms"],
+      "regulatoryLabels": ["Pure software", "Legal-practice / bar-rule adjacent", "Sensitive medical/case data"],
+      "businessModel": "Enterprise subscription SaaS",
+      "goToMarket": "Enterprise sales into plaintiff law firms",
+      "operationalModel": "Pure software",
+      "problemStatement": "Plaintiff law firms are chronically under-resourced relative to case volume, spending excessive attorney and staff time on case intake, medical chronology preparation, drafting, and discovery.",
+      "productDescription": "Eve's EveOS platform automates case intake and evaluation, medical chronologies and overviews, legal document and demand-letter drafting, and discovery management for plaintiff law firms, reporting 100+ firms live and 500% year-over-year revenue growth at its Series A."
+    },
+    "founders": [
+      {"name": "Jay Madheswaran", "role": "Co-founder and CEO", "background": "15+ years in AI/ML at Facebook and Rubrik (first engineer, head of product engineering); previously at Lightspeed Venture Partners, which later co-led Eve's Series A."},
+      {"name": "Matt Noe", "role": "Co-founder and Chief Product Officer", "background": "Founding engineer at Rubrik with roughly a decade of AI product-development experience."},
+      {"name": "David Zeng", "role": "Co-founder and Chief Architect / Head of Engineering", "background": "10+ years of AI and machine-learning experience, per Eve's company page."}
+    ],
+    "stage": "series_b",
+    "geography": "US",
+    "sector": "Vertical AI / Plaintiff Legal",
+    "round": "Series B",
+    "checkSizeSought": 1500000,
+    "valuation": 1000000000,
+    "metrics": {
+      "customers": 100,
+      "arrGrowthRate": 500
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.85,
+      "regulatory_moat": 0.3,
+      "proprietary_data_moat": 0.5,
+      "competition_intensity": 0.45
+    },
+    "competitors": ["EvenUp", "Alexi", "Thomson Reuters", "Josef", "Filevine", "Litify"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.eve.legal/",
+      "https://www.prnewswire.com/news-releases/eve-secures-47-million-to-fuel-era-of-ai-native-law-firms-302353165.html",
+      "https://www.prnewswire.com/news-releases/eve-raises-103-million-at-1-billion-valuation-to-help-plaintiff-firms-deliver-justice-through-ai-transformation-302570807.html"
+    ]
+  }
+]

@@ -1,0 +1,473 @@
+[
+  {
+    "id": "co_howie",
+    "name": "Howie",
+    "description": "Email-native AI scheduling assistant that coordinates meeting times, updates calendars, and follows up automatically, backed by a human-in-the-loop review layer.",
+    "attributes": {
+      "industryPath": ["Future of work", "Productivity software", "Scheduling and calendar automation"],
+      "productCategoryPath": ["Software", "AI agent", "Scheduling assistant"],
+      "targetCustomers": ["Individual professionals", "Sales and recruiting teams", "Executives and their assistants", "SMB teams"],
+      "technicalApproaches": ["LLM agent orchestration", "Human-in-the-loop review", "Email-native interface", "Calendar API integration"],
+      "founderArchetypes": ["Repeat collaborators (decade-long working relationship)", "Prior operator experience (Vendr growth role)"],
+      "disruptionMechanisms": ["Automates manual executive-assistant labor", "Narrow-scope reliability versus broad AI-assistant bundles"],
+      "regulatoryLabels": ["Pure software", "Handles calendar/email personal data"],
+      "businessModel": "Subscription SaaS, per-seat pricing",
+      "goToMarket": "Product-led with viral email CC mechanic; SMB and prosumer self-serve",
+      "operationalModel": "Pure software with human-in-the-loop review layer",
+      "problemStatement": "Professionals with high external-meeting volume waste significant time manually negotiating and coordinating meeting scheduling.",
+      "productDescription": "An AI assistant that users CC on email threads to autonomously negotiate meeting times, add calendar events, follow up with participants, and flag schedule conflicts, backed by human reviewers who correct errors before they reach the customer."
+    },
+    "founders": [
+      {"name": "Austin Petersmith", "role": "Co-founder and CEO", "background": "Previously VP Growth and Community at Vendr; co-prototyped an AI scheduling assistant with Dave Newman in 2015 before founding Howie once the technology matured."},
+      {"name": "Dave Newman", "role": "Co-founder", "background": "Worked with Petersmith at Assembly starting in 2013; co-founded Howie after a decade-long collaboration on the scheduling-automation idea."}
+    ],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "Future of work / AI productivity",
+    "round": "Seed",
+    "checkSizeSought": 1500000,
+    "valuation": 30000000,
+    "metrics": {
+      "customers": 1000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.05,
+      "proprietary_data_moat": 0.3,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["Calendly", "Reclaim.ai", "Motion", "Vimcal", "Google Gemini in Workspace", "Microsoft 365 Copilot"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://howie.com/",
+      "https://www.geekwire.com/2025/ai-scheduling-assistant-howie-raises-6m-launches-publicly-with-1000-paying-customers/",
+      "https://www.webpronews.com/howie-ai-scheduler-raises-6m-from-sequoia-a16z-at-30m-valuation/"
+    ]
+  },
+  {
+    "id": "co_chronicle",
+    "name": "Chronicle",
+    "description": "AI presentation maker that converts documents, notes, and business context into editable, branded slide decks on a free-form canvas.",
+    "attributes": {
+      "industryPath": ["Future of work", "Creator and productivity tools", "Presentation software"],
+      "productCategoryPath": ["Software", "AI generation tool", "Presentation builder"],
+      "targetCustomers": ["Knowledge workers", "Startups and business teams", "Enterprise communications and sales teams"],
+      "technicalApproaches": ["Generative AI for design and layout", "Free-form canvas editing", "AI-assisted research and narrative structuring"],
+      "founderArchetypes": ["Domain expert founder (decade in presentation consulting)", "Growth/marketing specialist co-founder"],
+      "disruptionMechanisms": ["Replaces manual slide design labor", "Competes with legacy office suites via AI-native generation"],
+      "regulatoryLabels": ["Pure software"],
+      "businessModel": "Freemium SaaS subscription",
+      "goToMarket": "Product-led, organic/viral (100k-user waitlist with zero paid marketing)",
+      "operationalModel": "Pure software",
+      "problemStatement": "Building professional, narrative-driven presentations from raw notes and data is slow and design-skill-dependent.",
+      "productDescription": "An AI presentation tool that turns documents, notes, and data into editable, branded decks with AI-driven research, narrative structuring, and design execution, including live 'Peek' and 'Deep Hover' presentation modes."
+    },
+    "founders": [
+      {"name": "Mayuresh Patole", "role": "Co-founder", "background": "Former management consultant and designer with roughly a decade of focus on presentations, per Forbes."},
+      {"name": "Tejas Gawande", "role": "Co-founder", "background": "Brings social-media and growth-strategy expertise, per Forbes; company site cites a founding team with McKinsey, BCG, and Apple backgrounds."}
+    ],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "Future of work / creator tools",
+    "round": "Seed",
+    "checkSizeSought": 2000000,
+    "metrics": {
+      "customers": 5000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.7,
+      "legacy_disruptiveness": 0.35,
+      "technical_feasibility": 0.65,
+      "regulatory_moat": 0.05,
+      "proprietary_data_moat": 0.15,
+      "competition_intensity": 0.85
+    },
+    "competitors": ["Gamma", "Canva", "Beautiful.ai", "Microsoft PowerPoint / Copilot", "Google Slides / Gemini"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://chroniclehq.com/",
+      "https://www.forbes.com/sites/charliefink/2025/06/10/chronicle-ai-presentations-launches-with-100000-user-waitlist/"
+    ]
+  },
+  {
+    "id": "co_fyxer",
+    "name": "Fyxer",
+    "description": "AI executive-assistant SaaS that organizes inboxes, drafts email replies, and produces meeting notes, trained on real executive-assistant workflow data.",
+    "attributes": {
+      "industryPath": ["Future of work", "Productivity software", "AI email and meeting assistant"],
+      "productCategoryPath": ["Software", "AI agent", "Inbox and meeting assistant"],
+      "targetCustomers": ["Individual professionals", "SMB teams", "Enterprise (50+ seats)"],
+      "technicalApproaches": ["LLM-based inbox triage and drafting", "Meeting transcription and summarization", "Training on proprietary EA-workflow dataset"],
+      "founderArchetypes": ["Operator-turned-founder (ran a real executive-assistant agency pre-software)", "Sibling co-founders"],
+      "disruptionMechanisms": ["Automates manual executive-assistant labor", "Competes with bundled Google/Microsoft AI features"],
+      "regulatoryLabels": ["Pure software", "Handles email and calendar personal data"],
+      "businessModel": "Subscription SaaS, per-seat pricing",
+      "goToMarket": "Product-led self-serve plus enterprise sales at scale",
+      "operationalModel": "Pure software",
+      "problemStatement": "Professionals spend significant time on inbox triage, email drafting, and meeting note-taking that a trained AI assistant can automate.",
+      "productDescription": "An AI executive assistant that organizes inboxes, drafts email replies, and produces meeting notes and summaries, differentiated by training data drawn from the founders' prior real-world executive-assistant agency."
+    },
+    "founders": [
+      {"name": "Richard Hollingsworth", "role": "Co-founder and CEO", "background": "Co-built the UK's largest executive-assistant agency with his brother, bootstrapping it to $5m revenue, before founding Fyxer."},
+      {"name": "Archie Hollingsworth", "role": "Co-founder", "background": "Co-built the original bootstrapped executive-assistant agency with Richard before the pivot to Fyxer."},
+      {"name": "Matt Ffrench", "role": "Co-founder and CTO", "background": "Technical co-founder who used roughly 500,000 hours of executive-assistant workflow data from the original agency to train Fyxer's product."}
+    ],
+    "stage": "series_b",
+    "geography": "UK/US",
+    "sector": "Future of work / AI productivity",
+    "round": "Series B",
+    "checkSizeSought": 1500000,
+    "metrics": {
+      "arr": 25000000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.8,
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.85,
+      "regulatory_moat": 0.1,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.8
+    },
+    "competitors": ["Superhuman", "Read AI", "Otter.ai", "Shortwave", "Google Gemini in Workspace", "Microsoft 365 Copilot"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.fyxer.com/",
+      "https://sifted.eu/articles/ai-exec-assistant-startup-fyxer-raises-30m-to-expand-to-the-us",
+      "https://www.fyxer.com/blog/series-b-statement",
+      "https://www.fyxer.com/pricing"
+    ]
+  },
+  {
+    "id": "co_napkin",
+    "name": "Napkin",
+    "description": "Text-to-visual generation platform that converts written content into diagrams, charts, and infographics for business storytelling.",
+    "attributes": {
+      "industryPath": ["Future of work", "Creator and productivity tools", "Visual content generation"],
+      "productCategoryPath": ["Software", "AI generation tool", "Text-to-visual"],
+      "targetCustomers": ["Knowledge workers", "Consultants and PMs", "Educators", "Enterprise teams"],
+      "technicalApproaches": ["Generative AI for diagram/chart layout", "Generation-first editing UX"],
+      "founderArchetypes": ["Repeat founders with a prior exit (Osmo)", "Ex-Google engineers"],
+      "disruptionMechanisms": ["Reduces manual design labor for business visuals", "Competes with prompt-based AI image generators"],
+      "regulatoryLabels": ["Pure software"],
+      "businessModel": "Freemium SaaS subscription",
+      "goToMarket": "Product-led self-serve with enterprise tier",
+      "operationalModel": "Pure software",
+      "problemStatement": "Knowledge workers need to communicate ideas visually but lack design skill, time, or prompt-engineering fluency to create diagrams and infographics.",
+      "productDescription": "A web-based tool that transforms text into customizable visuals -- diagrams, flowcharts, infographics, Venn diagrams, and decision trees -- using a generation-first interaction model rather than requiring users to describe a desired image."
+    },
+    "founders": [
+      {"name": "Pramod Sharma", "role": "Co-founder", "background": "Ex-Google engineer; previously founded and sold Osmo, an educational-games company."},
+      {"name": "Jerome Scholler", "role": "Co-founder", "background": "Was on Osmo's founding team with Sharma; previously worked at Ubisoft, LucasArts, and Google."}
+    ],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "Future of work / creator tools",
+    "round": "Seed",
+    "checkSizeSought": 2000000,
+    "graphMetrics": {
+      "ai_adoption": 0.75,
+      "legacy_disruptiveness": 0.35,
+      "technical_feasibility": 0.7,
+      "regulatory_moat": 0.05,
+      "proprietary_data_moat": 0.2,
+      "competition_intensity": 0.85
+    },
+    "competitors": ["Canva", "Gamma", "Miro", "Whimsical", "Microsoft Designer / Copilot"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.napkin.ai/",
+      "https://techcrunch.com/2024/08/07/napkin-turns-text-into-visuals-with-a-bit-of-generative-ai/",
+      "https://www.napkin.ai/pricing/"
+    ]
+  },
+  {
+    "id": "co_ello",
+    "name": "Ello",
+    "description": "AI reading coach for children ages 4-9 that listens to a child read aloud from physical books and provides real-time correction using child-specific speech recognition.",
+    "attributes": {
+      "industryPath": ["Education", "K-12 consumer edtech", "Literacy and reading instruction"],
+      "productCategoryPath": ["Software", "AI tutor", "Reading coach"],
+      "targetCustomers": ["Parents of K-3 children", "Schools and districts (site licenses)"],
+      "technicalApproaches": ["Child-specific speech recognition", "Real-time reading error correction", "Physical-book-plus-app hybrid delivery"],
+      "founderArchetypes": ["Cross-disciplinary team (education operator, clinical psychologist, AI researcher)", "Repeat founder with prior ML exits (Voss)"],
+      "disruptionMechanisms": ["Automates one-on-one reading tutoring", "Targets literacy gap underserved by generic edtech"],
+      "regulatoryLabels": ["Children's data privacy (COPPA-relevant)", "Pure software plus physical-goods logistics"],
+      "businessModel": "Consumer subscription (app plus mailed physical books)",
+      "goToMarket": "Consumer direct-to-parent subscription; school/district site licensing",
+      "operationalModel": "Software plus physical-goods fulfillment (book mailing)",
+      "problemStatement": "Many young children lack access to consistent, one-on-one reading practice and correction, contributing to childhood literacy gaps.",
+      "productDescription": "A subscription product combining a mobile app with child-specific AI speech recognition and a monthly mailing of physical books, designed to give children real-time reading coaching similar to a parent or tutor sitting beside them."
+    },
+    "founders": [
+      {"name": "Tom Sayer", "role": "Co-founder and CEO", "background": "Previously led impact and adoption programs at Google for Education."},
+      {"name": "Elizabeth Adams", "role": "Co-founder and Chief Experience Officer", "background": "Clinical psychologist specializing in child development and behavior."},
+      {"name": "Catalin Voss", "role": "Co-founder and CTO", "background": "AI researcher and PhD candidate at Stanford; co-founded and sold two prior ML startups, DukaConnect and Sension."}
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Education / consumer edtech",
+    "round": "Series A",
+    "checkSizeSought": 1500000,
+    "metrics": {
+      "customers": 10000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.7,
+      "legacy_disruptiveness": 0.45,
+      "technical_feasibility": 0.6,
+      "regulatory_moat": 0.2,
+      "proprietary_data_moat": 0.35,
+      "competition_intensity": 0.6
+    },
+    "competitors": ["Lalilo", "Amira Learning", "Duolingo ABC", "Epic!"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.ello.com/",
+      "https://www.globenewswire.com/news-release/2023/09/07/2739711/0/en/Ello-World-s-Most-Advanced-AI-Reading-Coach-Raises-15M-Series-A.html",
+      "https://techcrunch.com/2023/09/07/ai-reading-coach-startup-ello-raises-15-million-to-bolster-child-literacy/"
+    ]
+  },
+  {
+    "id": "co_schoolai",
+    "name": "SchoolAI",
+    "description": "K-12 classroom AI platform combining teacher-facing AI assistants with student-facing personalized AI tutors and lessons, with full FERPA/COPPA/SOC2/ESSA compliance positioning.",
+    "attributes": {
+      "industryPath": ["Education", "K-12 institutional edtech", "Classroom AI platform"],
+      "productCategoryPath": ["Software", "AI platform", "Teacher and student AI tools"],
+      "targetCustomers": ["K-12 teachers", "School districts", "Higher education institutions"],
+      "technicalApproaches": ["LLM-based teacher assistants", "Personalized/adaptive student AI tutors", "SIS-powered rostering integration"],
+      "founderArchetypes": ["Career educator turned founder", "Prior edtech product leadership (Apple, Lambda School)"],
+      "disruptionMechanisms": ["Automates lesson prep and classroom administrative work", "Personalizes instruction at scale beyond one teacher's bandwidth"],
+      "regulatoryLabels": ["FERPA", "COPPA", "SOC 2 Type 2", "1EdTech certified", "ESSA Level III validated"],
+      "businessModel": "Freemium to paid tiered SaaS (Free, Pro, Scale) plus district contracts",
+      "goToMarket": "Bottoms-up teacher adoption expanding into district-level enterprise sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "Teachers face shrinking budgets, teacher shortages, and growing class sizes that make personalized attention for every student difficult to deliver.",
+      "productDescription": "A K-12 AI platform pairing teacher-facing AI assistants for classroom prep and administrative work with 'Spaces' -- personalized AI tutors, games, and lessons that adapt to each student's learning style -- built with a full education-compliance certification stack."
+    },
+    "founders": [
+      {"name": "Caleb Hicks", "role": "Founder and CEO", "background": "15-plus years in education as a classroom teacher and product leader, including developing iOS curriculum at Apple and co-founding Lambda School."}
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Education / K-12 institutional",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "metrics": {
+      "customers": 400
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.8,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.4,
+      "proprietary_data_moat": 0.35,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["MagicSchool AI", "Khanmigo", "Brisk Teaching", "Google Gemini for Education", "Microsoft Copilot for Education"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://schoolai.com/",
+      "https://www.globenewswire.com/news-release/2025/04/02/3054126/0/en/SchoolAI-Secures-25-Million-to-Help-Teachers-and-Schools-Reach-Every-Student.html",
+      "https://schoolai.com/pricing"
+    ]
+  },
+  {
+    "id": "co_lindy",
+    "name": "Lindy",
+    "description": "No-code platform for building and managing AI agents that automate SMB business workflows including inbox, calendar, CRM, and support tasks.",
+    "attributes": {
+      "industryPath": ["Future of work", "Business process automation", "No-code AI agent platform"],
+      "productCategoryPath": ["Software", "AI agent platform", "Workflow automation"],
+      "targetCustomers": ["SMBs and startups (5-100 employees)", "Sales, marketing, operations, support, and recruiting teams"],
+      "technicalApproaches": ["No-code AI agent builder", "Multi-app workflow orchestration", "LLM-based task automation"],
+      "founderArchetypes": ["Pivoted founder (rebuilt company from a prior startup, TeamFlow)"],
+      "disruptionMechanisms": ["Automates manual SMB operations workflows", "Extends no-code automation into autonomous agent execution"],
+      "regulatoryLabels": ["Pure software", "Handles connected-app business data"],
+      "businessModel": "Subscription SaaS, tiered per-account pricing",
+      "goToMarket": "Product-led self-serve (viral launch) plus direct sales for enterprise",
+      "operationalModel": "Pure software",
+      "problemStatement": "SMB teams need to automate repetitive cross-application workflows (inbox, CRM, scheduling, support) without engineering resources.",
+      "productDescription": "A no-code AI agent builder that automates business workflows across connected apps -- inbox management, meeting scheduling, CRM updates, and ad hoc tasks -- targeted at SMBs and startups."
+    },
+    "founders": [
+      {"name": "Flo Crivello", "role": "Founder and CEO", "background": "Founded TeamFlow, then pivoted the company to Lindy in early 2023 after recognizing an AI-agent opportunity in a customer's request to automate CRM updates; cut the team by roughly two-thirds during the pivot to preserve capital."}
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Future of work / AI automation",
+    "round": "Series A (stage and financing history disputed across public sources; no confirmed round since 2023)",
+    "checkSizeSought": 2000000,
+    "graphMetrics": {
+      "ai_adoption": 0.75,
+      "legacy_disruptiveness": 0.4,
+      "technical_feasibility": 0.6,
+      "regulatory_moat": 0.05,
+      "proprietary_data_moat": 0.15,
+      "competition_intensity": 0.85
+    },
+    "competitors": ["Zapier", "n8n", "Gumloop", "Make (Integromat)", "Microsoft Copilot Studio"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.lindy.ai/",
+      "https://www.clay.com/dossier/lindy-funding",
+      "https://saasclub.io/podcast/lindy-flo-crivello-450/"
+    ]
+  },
+  {
+    "id": "co_delphi",
+    "name": "Delphi",
+    "description": "Platform that lets experts and creators build self-updating 'digital minds' trained on their own content, enabling audiences to call, text, or video-chat with an AI trained to match the creator's voice and thinking.",
+    "attributes": {
+      "industryPath": ["Creator economy", "Creator monetization tools", "AI persona platform"],
+      "productCategoryPath": ["Software", "AI platform", "Digital persona / clone"],
+      "targetCustomers": ["Coaches and consultants", "Authors and experts", "Content creators with an existing audience"],
+      "technicalApproaches": ["LLM fine-tuning/RAG on creator content corpus", "Voice, text, and video conversational interface", "Self-updating persona model"],
+      "founderArchetypes": ["Repeat founder with a prior exit (Friday)", "Technical co-founder"],
+      "disruptionMechanisms": ["Shifts creator monetization from one-to-many content to one-to-one interactive access at scale"],
+      "regulatoryLabels": ["Pure software", "Likeness/consent considerations for AI personas"],
+      "businessModel": "Tiered subscription SaaS (Free, Builder, Scaler, Immortal)",
+      "goToMarket": "Creator-led adoption; direct outreach to established experts and public figures",
+      "operationalModel": "Pure software",
+      "problemStatement": "Experts and creators cannot personally scale one-on-one interaction with their full audience, limiting how much of their accumulated knowledge and time can be monetized.",
+      "productDescription": "A platform where creators link their existing content (writing, video, podcasts, books) to a self-updating AI 'digital mind' that audiences can call, text, or video-chat with, matching the creator's speaking and thinking style."
+    },
+    "founders": [
+      {"name": "Dara Ladjevardian", "role": "Co-founder and CEO", "background": "Previously founded and sold Friday, an AI shopping assistant; worked as a Forward Deployed Engineer at C3 AI and as a product engineer at OpenStore."},
+      {"name": "Sam Spelsberg", "role": "Co-founder and CTO", "background": "Co-built Delphi's technical architecture with Ladjevardian."}
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Creator economy / AI platform",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "metrics": {
+      "customers": 2000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.8,
+      "legacy_disruptiveness": 0.4,
+      "technical_feasibility": 0.7,
+      "regulatory_moat": 0.05,
+      "proprietary_data_moat": 0.45,
+      "competition_intensity": 0.55
+    },
+    "competitors": ["Character.AI", "HeyGen", "Tolan", "Personal AI"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.delphi.ai/",
+      "https://www.delphi.ai/blog/delphi-raises-16m-series-a-from-sequoia",
+      "https://www.fastcompany.com/91356476/delphi-ai-digital-mind",
+      "https://www.delphi.ai/pricing"
+    ]
+  },
+  {
+    "id": "co_happenstance",
+    "name": "Happenstance",
+    "description": "AI-powered people-search tool that indexes a user's own network across email, calendar, and social platforms into a searchable relationship graph.",
+    "attributes": {
+      "industryPath": ["Future of work", "Professional networking tools", "AI people search"],
+      "productCategoryPath": ["Software", "AI search", "Relationship/network intelligence"],
+      "targetCustomers": ["Recruiters and talent teams", "Founders (fundraising)", "Sales and business-development professionals"],
+      "technicalApproaches": ["LLM-based natural-language search", "Embedding search over aggregated contact data", "OAuth-based multi-source data aggregation (Gmail, LinkedIn, X, Instagram, Outlook)"],
+      "founderArchetypes": ["Technical PhD founder (Stanford CS, autonomous-vehicle perception background)"],
+      "disruptionMechanisms": ["Surfaces warm-introduction paths not visible on LinkedIn alone", "Aggregates fragmented personal-network data into one searchable index"],
+      "regulatoryLabels": ["Personal data aggregation (OAuth-based)", "Pure software"],
+      "businessModel": "Freemium with paid 'Pro seats' (exact pricing undisclosed)",
+      "goToMarket": "Product-led viral adoption (YC-backed)",
+      "operationalModel": "Pure software",
+      "problemStatement": "Professionals' networks are fragmented across email, calendar, and social platforms, making it hard to find and act on warm connections for recruiting, sales, or fundraising.",
+      "productDescription": "An AI tool that connects to a user's Gmail, Calendar, LinkedIn, Twitter/X, Instagram, and Outlook accounts to build a searchable relationship graph, returning natural-language search results ranked by relevance, relationship strength, and recency."
+    },
+    "founders": [
+      {"name": "Alex Teichman", "role": "Founder and CEO", "background": "Stanford CS PhD who worked on perception systems for self-driving cars; Y Combinator Winter 2024 batch founder backed by Elad Gil and Garry Tan."}
+    ],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "Future of work / AI search",
+    "round": "Seed (exact amount disputed across public sources: $500k-$2.5m range reported)",
+    "checkSizeSought": 1500000,
+    "graphMetrics": {
+      "ai_adoption": 0.75,
+      "legacy_disruptiveness": 0.35,
+      "technical_feasibility": 0.6,
+      "regulatory_moat": 0.15,
+      "proprietary_data_moat": 0.5,
+      "competition_intensity": 0.6
+    },
+    "competitors": ["Clay", "Apollo.io", "LinkedIn Sales Navigator", "Folk"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://happenstance.ai/",
+      "https://www.ycombinator.com/companies/happenstance",
+      "https://getlatka.com/companies/happenstance.ai"
+    ]
+  },
+  {
+    "id": "co_brisk_teaching",
+    "name": "Brisk Teaching",
+    "description": "Browser-native AI copilot for K-12 educators that embeds into existing tools (Google Docs, Slides, Canvas) to generate lesson plans, feedback, and classroom activities.",
+    "attributes": {
+      "industryPath": ["Education", "K-12 institutional edtech", "Teacher productivity AI"],
+      "productCategoryPath": ["Software", "AI copilot", "Browser extension"],
+      "targetCustomers": ["K-12 teachers", "Schools and districts"],
+      "technicalApproaches": ["LLM-based content generation", "Browser-extension embedding into existing edtech tools", "Reading-level differentiation"],
+      "founderArchetypes": ["Policy and big-tech cross-background founder (White House OCTO, Google, CZI Education)"],
+      "disruptionMechanisms": ["Automates lesson planning, grading feedback, and activity creation", "Embeds into incumbent tools rather than replacing them"],
+      "regulatoryLabels": ["Education data privacy considerations", "Pure software"],
+      "businessModel": "Freemium (implied) with school/district licensing",
+      "goToMarket": "Bottoms-up individual teacher adoption via browser extension, expanding to district contracts",
+      "operationalModel": "Pure software",
+      "problemStatement": "K-12 teachers spend significant unpaid time on lesson planning, differentiation, and feedback that could be automated within tools they already use.",
+      "productDescription": "A browser-native AI copilot that layers into Google Docs, Slides, Canvas, and similar tools to generate lesson plans, differentiate reading levels, draft feedback and report-card comments, and create quizzes and student-facing activities."
+    },
+    "founders": [
+      {"name": "Arman Jaffer", "role": "Founder and CEO", "background": "Previously worked in the White House Office of the Chief Technology Officer, on Google's mobile search team, and as a product manager on the Chan Zuckerberg Initiative's Education team; Forbes 30 Under 30 Education honoree."}
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Education / K-12 institutional",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "metrics": {
+      "customers": 2000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.8,
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.25,
+      "proprietary_data_moat": 0.25,
+      "competition_intensity": 0.75
+    },
+    "competitors": ["SchoolAI", "MagicSchool AI", "Khanmigo", "Google Gemini for Education", "Microsoft Copilot for Education"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.briskteaching.com/",
+      "https://www.prnewswire.com/news-releases/brisk-teaching-raises-15-million-to-reinvent-classroom-technology-for-the-ai-era-302412034.html",
+      "https://www.bvp.com/news/giving-teachers-their-time-back-our-investment-in-brisk-teaching"
+    ]
+  }
+]

@@ -1,0 +1,455 @@
+[
+  {
+    "id": "co_letta",
+    "name": "Letta",
+    "description": "Stateful AI agent platform descended from the MemGPT research project at UC Berkeley, giving agents persistent, versioned memory and offline 'sleep-time compute' reasoning. Ships as an open-source framework and a hosted service.",
+    "attributes": {
+      "industryPath": ["Software", "AI Infrastructure", "Agent memory and runtime"],
+      "productCategoryPath": ["Developer Tools", "AI Agent Infrastructure", "Agent memory platform"],
+      "targetCustomers": ["AI application developers", "Enterprise AI platform teams", "Agent framework builders"],
+      "technicalApproaches": ["Large language models", "Stateful agent runtime", "Self-editing memory (MemGPT lineage)", "Open source core"],
+      "founderArchetypes": ["Academic researcher founders", "Repeat research-to-product team"],
+      "disruptionMechanisms": ["Replaces ad hoc RAG/context management", "New agent-runtime primitive"],
+      "regulatoryLabels": ["Pure software"],
+      "businessModel": "Usage-based SaaS plus open source",
+      "goToMarket": "Developer-led / open source",
+      "operationalModel": "Pure software",
+      "problemStatement": "AI agents built on stateless LLM calls lose memory and context between sessions, forcing developers to rebuild ad hoc memory management for every application.",
+      "productDescription": "A stateful agent runtime with git-style versioned memory ('Context Repositories') and offline 'sleep-time compute' that lets agents reorganize and improve memory while idle, shipped as open source plus a managed hosted service."
+    },
+    "founders": [
+      { "name": "Charles Packer", "role": "Co-founder and CEO", "background": "Co-created the MemGPT research project at UC Berkeley's Sky Computing Lab under advisors Joseph Gonzalez and Ion Stoica." },
+      { "name": "Sarah Wooders", "role": "Co-founder and CTO", "background": "Co-authored the MemGPT research paper introducing self-editing memory for LLMs; UC Berkeley Sky Computing Lab." }
+    ],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "AI infrastructure and developer tools",
+    "round": "Seed",
+    "checkSizeSought": 2000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.8,
+      "proprietary_data_moat": 0.45,
+      "competition_intensity": 0.75
+    },
+    "competitors": ["Mem0", "Zep", "Cognee", "LangMem", "Supermemory"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.letta.com/",
+      "https://www.prnewswire.com/news-releases/berkeley-ai-research-lab-spinout-letta-raises-10m-seed-financing-led-by-felicis-to-build-ai-with-memory-302257004.html",
+      "https://techcrunch.com/2024/09/23/letta-one-of-uc-berkeleys-most-anticipated-ai-startups-has-just-come-out-of-stealth/"
+    ]
+  },
+  {
+    "id": "co_firecrawl",
+    "name": "Firecrawl",
+    "description": "Developer API that turns web pages into clean, LLM-ready data (markdown, JSON, HTML, screenshots) via scraping, crawling, search, and page interaction, built on proprietary Fire-Engine infrastructure.",
+    "attributes": {
+      "industryPath": ["Software", "AI Infrastructure", "Web data infrastructure"],
+      "productCategoryPath": ["Developer Tools", "Data Infrastructure", "Web scraping and extraction API"],
+      "targetCustomers": ["AI application developers", "Data engineering teams", "Enterprise AI platform teams"],
+      "technicalApproaches": ["Proprietary crawling/rendering engine", "Large language models (output formatting)", "Open source core", "Usage-based API"],
+      "founderArchetypes": ["Repeat technical founders", "Open-source project founders"],
+      "disruptionMechanisms": ["Replaces in-house scraping/ETL stacks", "AI-native data formatting"],
+      "regulatoryLabels": ["Pure software", "Web scraping / copyright exposure"],
+      "businessModel": "Usage-based SaaS (API credits) plus open source",
+      "goToMarket": "Developer-led / product-led growth",
+      "operationalModel": "Pure software",
+      "problemStatement": "AI systems need clean, structured, machine-readable web data, but reliably scraping and rendering the modern web at scale (anti-bot defenses, rendering, rate limits) is a hard, unglamorous infrastructure problem most AI teams should not build themselves.",
+      "productDescription": "An API that scrapes, crawls, searches, and interacts with websites to return LLM-ready structured data, with a proprietary Fire-Engine backend for speed and reliability, offered as both open source and a managed hosted service."
+    },
+    "founders": [
+      { "name": "Caleb Peffer", "role": "Co-founder and CEO", "background": "Named as CEO in the company's Series A announcement and press coverage." },
+      { "name": "Eric Ciarla", "role": "Co-founder", "background": "Credited as a project co-founder on Firecrawl's official GitHub repository." },
+      { "name": "Nicolas Camara", "role": "Co-founder", "background": "Credited as a project co-founder on Firecrawl's official GitHub repository." }
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "AI infrastructure and developer tools",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.8,
+      "proprietary_data_moat": 0.3,
+      "competition_intensity": 0.75
+    },
+    "competitors": ["Tavily", "Exa", "Apify", "Browserbase", "ScrapingBee"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.firecrawl.dev/",
+      "https://techcrunch.com/2025/08/19/ai-crawler-firecrawl-raises-14-5m-is-still-looking-to-hire-agents-as-employees/",
+      "https://www.firecrawl.dev/blog/firecrawl-v2-series-a-announcement",
+      "https://github.com/firecrawl/firecrawl"
+    ]
+  },
+  {
+    "id": "co_honeyhive",
+    "name": "HoneyHive",
+    "description": "OpenTelemetry-native observability and evaluation platform for production AI agents, covering tracing, monitoring, offline experimentation, annotation, and prompt management.",
+    "attributes": {
+      "industryPath": ["Software", "AI Infrastructure", "AI observability and evaluation"],
+      "productCategoryPath": ["Developer Tools", "Observability", "LLM/agent observability platform"],
+      "targetCustomers": ["AI application developers", "Enterprise AI platform teams", "Regulated-industry AI teams (financial services, insurance)"],
+      "technicalApproaches": ["OpenTelemetry-native instrumentation", "Large language models (evaluation)", "Distributed tracing"],
+      "founderArchetypes": ["First-time technical founders"],
+      "disruptionMechanisms": ["Replaces ad hoc logging/eval scripts", "Standards-based instrumentation for AI-specific observability"],
+      "regulatoryLabels": ["Pure software", "SOC 2 / HIPAA compliant"],
+      "businessModel": "Usage-based SaaS",
+      "goToMarket": "Developer-led plus enterprise sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "Teams shipping production AI agents lack standardized tracing, monitoring, and evaluation tooling built for multi-agent, non-deterministic systems, and existing APM tools were not designed for this workload.",
+      "productDescription": "An observability and evaluation platform built on OpenTelemetry standards, offering distributed tracing across 100+ LLMs and agent frameworks, drift/failure monitoring, offline experimentation with regression detection, annotation workflows, and analytics dashboards."
+    },
+    "founders": [
+      { "name": "Mohak Sharma", "role": "Co-founder and CEO", "background": "Named as founder/CEO in the company's funding announcement and independent PR Newswire release." },
+      { "name": "Dhruv Singh", "role": "Co-founder and CTO", "background": "Named as co-founder/CTO in the PR Newswire financing announcement." }
+    ],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "AI infrastructure and developer tools",
+    "round": "Seed",
+    "checkSizeSought": 1500000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.8,
+      "legacy_disruptiveness": 0.45,
+      "technical_feasibility": 0.7,
+      "proprietary_data_moat": 0.35,
+      "competition_intensity": 0.85
+    },
+    "competitors": ["Braintrust", "Arize AI", "LangSmith", "Langfuse", "Helicone"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.honeyhive.ai/",
+      "https://www.prnewswire.com/news-releases/honeyhive-a-leadingai-agent-observability-and-evaluation-platform-announces-launch-and-7-4m-in-total-funding-led-by-insight-partners-302419249.html",
+      "https://www.honeyhive.ai/post/honeyhive-raises-7-4m"
+    ]
+  },
+  {
+    "id": "co_e2b",
+    "name": "E2B",
+    "description": "Secure, isolated cloud sandboxes for running AI agent-generated code, built on Firecracker microVM isolation with sub-200ms start times, used by 88%+ of the Fortune 100 per company/press reporting.",
+    "attributes": {
+      "industryPath": ["Software", "AI Infrastructure", "Agent execution infrastructure"],
+      "productCategoryPath": ["Developer Tools", "Cloud Infrastructure", "Agent code sandbox / execution environment"],
+      "targetCustomers": ["AI application developers", "Enterprise AI platform teams", "Fortune 100 enterprises"],
+      "technicalApproaches": ["Firecracker microVM isolation", "Usage-based cloud API", "Multi-language runtime support"],
+      "founderArchetypes": ["Repeat technical founders"],
+      "disruptionMechanisms": ["Replaces self-managed container/VM infra for untrusted code execution"],
+      "regulatoryLabels": ["Pure software", "Security-sensitive infrastructure"],
+      "businessModel": "Usage-based SaaS plus open source",
+      "goToMarket": "Developer-led plus enterprise sales",
+      "operationalModel": "Pure software (infrastructure-heavy)",
+      "problemStatement": "Letting AI agents execute arbitrary, untrusted code is dangerous unless that execution happens in a properly isolated, fast-starting, disposable environment, which is a nontrivial infrastructure and security problem for most AI teams to build themselves.",
+      "productDescription": "A cloud platform providing secure, Firecracker-isolated sandboxes for AI agent code execution, with sub-200ms starts, multi-language support, extended session runtimes, and integration with major model providers."
+    },
+    "founders": [
+      { "name": "Vasek Mlejnsky", "role": "Co-founder", "background": "Named in company Series A materials and independent press coverage as co-founder of FoundryLabs, Inc." },
+      { "name": "Tomas Valenta", "role": "Co-founder", "background": "Named in company Series A materials and independent press coverage as co-founder." }
+    ],
+    "stage": "series_a",
+    "geography": "US/EU",
+    "sector": "AI infrastructure and developer tools",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.9,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.85,
+      "proprietary_data_moat": 0.25,
+      "competition_intensity": 0.75
+    },
+    "competitors": ["Modal", "Daytona", "Browserbase", "AWS Lambda", "Google Cloud Run"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://e2b.dev/",
+      "https://www.prnewswire.com/news-releases/e2b-raises-a-21m-series-a-to-offer-cloud-for-ai-agents-to-fortune-100-302514540.html",
+      "https://venturebeat.com/ai/how-e2b-became-essential-to-88-of-fortune-100-companies-and-raised-21-million"
+    ]
+  },
+  {
+    "id": "co_tavily",
+    "name": "Tavily",
+    "description": "Web access API purpose-built for AI agents, providing real-time search, extraction, and crawling with agent-specific security features (PII detection, prompt-injection blocking) and low latency.",
+    "attributes": {
+      "industryPath": ["Software", "AI Infrastructure", "Web data infrastructure"],
+      "productCategoryPath": ["Developer Tools", "Data Infrastructure", "Web search/access API"],
+      "targetCustomers": ["AI application developers", "Enterprise AI platform teams", "Agent framework builders"],
+      "technicalApproaches": ["Usage-based API", "Real-time web search and crawling", "Built-in security filtering (PII, prompt injection)"],
+      "founderArchetypes": ["Serial open-source project founders", "Venture-studio incubated team"],
+      "disruptionMechanisms": ["Replaces generic search APIs with agent-specific structured output and security"],
+      "regulatoryLabels": ["Pure software"],
+      "businessModel": "Usage-based SaaS (API credits)",
+      "goToMarket": "Developer-led plus enterprise sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "AI agents need to ground responses in current web data, but generic search APIs are not built for agent-specific requirements like structured output, low latency at scale, and security guardrails against prompt injection and PII leakage.",
+      "productDescription": "A web access API delivering real-time search, page extraction, and crawling with structured, chunked output optimized for LLM consumption, built-in PII detection and prompt-injection blocking, and a 99.99% uptime SLA."
+    },
+    "founders": [
+      { "name": "Rotem Weiss", "role": "Co-founder and CEO", "background": "Quoted as CEO in the company's Series A announcement and independent press coverage." },
+      { "name": "Assaf Elovic", "role": "Co-founder", "background": "Also founder of GPT Researcher and prior ventures Tiv.ai and COM.UNITY per Crunchbase." }
+    ],
+    "stage": "series_a",
+    "geography": "IL/US",
+    "sector": "AI infrastructure and developer tools",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.8,
+      "proprietary_data_moat": 0.2,
+      "competition_intensity": 0.8
+    },
+    "competitors": ["Exa", "Firecrawl", "SerpAPI", "Perplexity"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.tavily.com/",
+      "https://techcrunch.com/2025/08/06/tavily-raises-25m-to-connect-ai-agents-to-the-web/",
+      "https://www.insightpartners.com/ideas/tavily-raises-25-million-to-power-the-internet-of-agents/"
+    ]
+  },
+  {
+    "id": "co_lancedb",
+    "name": "LanceDB",
+    "description": "AI-native multimodal lakehouse built on the open-source Lance file format, unifying storage and retrieval for vectors, metadata, and multimodal data at petabyte-to-exabyte scale, used by Netflix, Midjourney, and Character.ai.",
+    "attributes": {
+      "industryPath": ["Software", "AI Infrastructure", "Data infrastructure"],
+      "productCategoryPath": ["Developer Tools", "Data Infrastructure", "Multimodal data lake / vector database"],
+      "targetCustomers": ["AI/ML platform teams", "Generative AI companies", "Autonomous vehicle companies"],
+      "technicalApproaches": ["Open-source columnar file format (Lance)", "Vector/hybrid/full-text search", "Usage-based cloud"],
+      "founderArchetypes": ["Renowned open-source maintainers"],
+      "disruptionMechanisms": ["Replaces siloed vector database plus data lake combinations with a unified file format"],
+      "regulatoryLabels": ["Pure software"],
+      "businessModel": "Usage-based SaaS plus open source",
+      "goToMarket": "Developer-led plus enterprise sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "AI/ML teams need to store and query vectors alongside multimodal data (text, images, audio, video) at massive scale for both training and retrieval, but existing tools force a separate, siloed vector database rather than a unified data format.",
+      "productDescription": "An AI-native multimodal lakehouse built on the open-source Lance file format, offering declarative feature pipelines, dataset branching/versioning, hybrid vector/full-text/SQL search at 100k+ QPS, and data-curation tooling, shipped as open source plus managed cloud."
+    },
+    "founders": [
+      { "name": "Chang She", "role": "Co-founder and CEO", "background": "Creator of the Pandas library, a widely used Python data-analysis tool." },
+      { "name": "Lei Xu", "role": "Co-founder", "background": "Core contributor to HDFS (Hadoop Distributed File System)." }
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "AI infrastructure and developer tools",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.85,
+      "proprietary_data_moat": 0.25,
+      "competition_intensity": 0.75
+    },
+    "competitors": ["Chroma", "Pinecone", "Weaviate", "Qdrant", "Databricks"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.lancedb.com/",
+      "https://www.lancedb.com/blog/series-a-funding",
+      "https://www.ycombinator.com/companies/lancedb"
+    ]
+  },
+  {
+    "id": "co_browser_use",
+    "name": "Browser Use",
+    "description": "Open-source infrastructure letting AI agents control web browsers via a text-structured page representation rather than pure vision, plus stealth browsing and remote execution features.",
+    "attributes": {
+      "industryPath": ["Software", "AI Infrastructure", "Agent web infrastructure"],
+      "productCategoryPath": ["Developer Tools", "AI Agent Infrastructure", "Browser automation for agents"],
+      "targetCustomers": ["AI application developers", "QA/automation teams", "Agent framework builders"],
+      "technicalApproaches": ["Text-structured DOM parsing for LLM consumption", "Open source core", "Proxy/anti-detection network"],
+      "founderArchetypes": ["University-accelerator founders", "YC-backed founders"],
+      "disruptionMechanisms": ["Replaces brittle selector-based automation and pure vision-based computer use"],
+      "regulatoryLabels": ["Pure software", "Anti-bot / terms-of-service exposure"],
+      "businessModel": "Usage-based SaaS plus open source",
+      "goToMarket": "Developer-led / open source",
+      "operationalModel": "Pure software",
+      "problemStatement": "AI agents need to operate real websites autonomously (fill forms, extract data, run QA), but pure vision-based approaches are slow and expensive per action, and brittle hard-coded automation scripts break as sites change.",
+      "productDescription": "An open-source browser harness that converts webpage elements into a structured, text-like format agents can parse reliably, plus a managed stealth-browsing and proxy network and a remote execution environment ('Browser Use Box') accessible via Telegram, web, or SSH."
+    },
+    "founders": [
+      { "name": "Magnus Müller", "role": "Co-founder", "background": "Named in TechCrunch's funding coverage and the company's own seed-round blog post." },
+      { "name": "Gregor Žunič", "role": "Co-founder", "background": "Named in TechCrunch's funding coverage; project originated through ETH Zurich's Student Project House accelerator." }
+    ],
+    "stage": "seed",
+    "geography": "US/EU",
+    "sector": "AI infrastructure and developer tools",
+    "round": "Seed",
+    "checkSizeSought": 2000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.7,
+      "proprietary_data_moat": 0.2,
+      "competition_intensity": 0.8
+    },
+    "competitors": ["Browserbase", "Skyvern", "Playwright", "OpenAI Operator"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://browser-use.com/",
+      "https://techcrunch.com/2025/03/23/browser-use-the-tool-making-it-easier-for-ai-agents-to-navigate-websites-raises-17m/",
+      "https://github.com/browser-use/browser-use"
+    ]
+  },
+  {
+    "id": "co_chroma",
+    "name": "Chroma",
+    "description": "Open-source AI search infrastructure supporting vector, sparse, full-text, regex, and metadata search in one system, with a large open-source install base and a newly launched serverless cloud product.",
+    "attributes": {
+      "industryPath": ["Software", "AI Infrastructure", "Data infrastructure"],
+      "productCategoryPath": ["Developer Tools", "Data Infrastructure", "Vector / retrieval database"],
+      "targetCustomers": ["AI application developers", "Enterprise AI platform teams"],
+      "technicalApproaches": ["Vector search", "Sparse lexical search (BM25/SPLADE)", "Open source core", "Rust-based query engine"],
+      "founderArchetypes": ["Technical founders (ML and robotics backgrounds)"],
+      "disruptionMechanisms": ["Replaces bespoke retrieval stacks with a unified open-source search database"],
+      "regulatoryLabels": ["Pure software", "SOC 2 Type II compliant (cloud tier)"],
+      "businessModel": "Open source plus usage-based cloud SaaS",
+      "goToMarket": "Developer-led / open source",
+      "operationalModel": "Pure software",
+      "problemStatement": "AI applications need fast, scalable retrieval across vector, lexical, and metadata search, but stitching together separate systems for each search type is complex; developers need one library that handles all of it.",
+      "productDescription": "Open-source (Apache 2.0) search infrastructure for AI supporting vector, sparse, full-text, regex, and metadata search with dataset versioning, alongside a serverless cloud product and an enterprise BYOC tier."
+    },
+    "founders": [
+      { "name": "Jeff Huber", "role": "Co-founder and CEO", "background": "Machine learning background; company and independent press identify him as CEO." },
+      { "name": "Anton Troynikov", "role": "Co-founder", "background": "Background as a robotics engineer, researcher, and prior edtech startup founder." }
+    ],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "AI infrastructure and developer tools",
+    "round": "Seed",
+    "checkSizeSought": 1500000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.8,
+      "proprietary_data_moat": 0.2,
+      "competition_intensity": 0.75
+    },
+    "competitors": ["LanceDB", "Pinecone", "Weaviate", "Qdrant", "Milvus"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.trychroma.com/",
+      "https://www.trychroma.com/company/seed",
+      "https://github.com/chroma-core/chroma"
+    ]
+  },
+  {
+    "id": "co_patronus_ai",
+    "name": "Patronus AI",
+    "description": "AI evaluation and safety platform (hallucination detection, benchmarking) that has expanded into 'Digital World Models' -- high-fidelity simulation environments for training and stress-testing AI agents before production deployment.",
+    "attributes": {
+      "industryPath": ["Software", "AI Infrastructure", "AI evaluation and safety"],
+      "productCategoryPath": ["Developer Tools", "AI Evaluation", "Agent evaluation and simulation platform"],
+      "targetCustomers": ["Frontier AI labs", "Enterprise AI platform teams", "AI startups"],
+      "technicalApproaches": ["Automated LLM evaluation models (Lynx, GLIDER)", "Reinforcement learning", "Simulation/digital-world environment generation"],
+      "founderArchetypes": ["Repeat ML researcher founders (ex-Meta AI)"],
+      "disruptionMechanisms": ["Replaces manual QA/red-teaming with automated evaluation and pre-deployment simulation"],
+      "regulatoryLabels": ["Pure software", "AI safety / evaluation"],
+      "businessModel": "Enterprise SaaS/API",
+      "goToMarket": "Enterprise sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "Organizations deploying increasingly autonomous AI agents need to evaluate and stress-test agent behavior before production, but manual QA and red-teaming do not scale to the complexity and speed of agentic workflows.",
+      "productDescription": "An AI evaluation and safety platform (hallucination detection via Lynx, plus FinanceBench, BLUR, and GLIDER benchmarks) that has expanded into Digital World Models: dynamically generated simulation environments replicating real websites and internal systems, used to train and stress-test AI agents via reinforcement learning before deployment."
+    },
+    "founders": [
+      { "name": "Anand Kannappan", "role": "Co-founder", "background": "Former Meta AI machine learning researcher." },
+      { "name": "Rebecca Qian", "role": "Co-founder", "background": "Former Meta AI machine learning researcher." }
+    ],
+    "stage": "series_b",
+    "geography": "US",
+    "sector": "AI infrastructure and developer tools",
+    "round": "Series B",
+    "checkSizeSought": 2000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.9,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.8,
+      "proprietary_data_moat": 0.6,
+      "competition_intensity": 0.65
+    },
+    "competitors": ["Braintrust", "HoneyHive", "Arize AI", "Unity"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.patronus.ai/",
+      "https://www.prnewswire.com/news-releases/patronus-ai-raises-50-million-series-b-and-unveils-first-digital-world-models-for-ai-agent-training-and-simulation-302811248.html",
+      "https://techcrunch.com/2026/06/25/patronus-ai-lands-50m-to-build-digital-worlds-that-stress-test-ai-agents/"
+    ]
+  },
+  {
+    "id": "co_braintrust",
+    "name": "Braintrust",
+    "description": "AI observability and evaluation platform for production AI products, combining tracing, evaluation, and automation, with a proprietary trace database (Brainstore) and blue-chip customers including Notion, Stripe, Vercel, and Cloudflare.",
+    "attributes": {
+      "industryPath": ["Software", "AI Infrastructure", "AI observability and evaluation"],
+      "productCategoryPath": ["Developer Tools", "Observability", "AI observability and evaluation platform"],
+      "targetCustomers": ["Enterprise AI product teams", "AI-native software companies"],
+      "technicalApproaches": ["Distributed tracing", "LLM/code/human evaluation scoring", "Proprietary trace database (Brainstore)"],
+      "founderArchetypes": ["Repeat founder (prior exit to Figma)"],
+      "disruptionMechanisms": ["Replaces general-purpose APM tools and ad hoc eval scripts for AI-specific workflows"],
+      "regulatoryLabels": ["Pure software", "SOC 2 Type II, GDPR, HIPAA compliant"],
+      "businessModel": "Usage-based SaaS",
+      "goToMarket": "Enterprise sales plus developer-led adoption",
+      "operationalModel": "Pure software",
+      "problemStatement": "Teams building production AI products need to monitor quality (not just system health), evaluate model/prompt changes, and catch hallucinations, drift, and regressions, but generic APM tools were not built for AI-specific quality metrics.",
+      "productDescription": "An AI observability platform combining real-time trace inspection and monitoring, an evaluation workflow with versioned datasets and LLM/code/human scoring, automated pattern discovery and quality gates, an AI-assisted optimization agent ('Loop Agent'), and a proprietary trace database ('Brainstore')."
+    },
+    "founders": [
+      { "name": "Ankur Goyal", "role": "Founder and CEO", "background": "Previously founded Impira (acquired by Figma, where he led the AI team); early team member at SingleStore/MemSQL." }
+    ],
+    "stage": "series_b",
+    "geography": "US",
+    "sector": "AI infrastructure and developer tools",
+    "round": "Series B",
+    "checkSizeSought": 1500000,
+    "valuation": 800000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.9,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.85,
+      "proprietary_data_moat": 0.55,
+      "competition_intensity": 0.8
+    },
+    "competitors": ["HoneyHive", "Patronus AI", "Arize AI", "LangSmith", "Datadog"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.braintrust.dev/",
+      "https://www.axios.com/pro/enterprise-software-deals/2026/02/17/ai-observability-braintrust-80-million-800-million",
+      "https://www.braintrust.dev/blog/announcing-series-b",
+      "https://www.braintrust.dev/blog/announcing-series-a"
+    ]
+  }
+]

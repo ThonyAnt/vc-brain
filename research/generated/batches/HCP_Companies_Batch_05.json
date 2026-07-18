@@ -1,0 +1,467 @@
+[
+  {
+    "id": "co_aembit",
+    "name": "Aembit",
+    "description": "Aembit provides non-human identity and access management, giving workloads secretless, policy-based, just-in-time access to sensitive resources instead of relying on long-lived API keys or embedded credentials.",
+    "attributes": {
+      "industryPath": ["Cybersecurity", "Identity and Access Management", "Non-human identity"],
+      "productCategoryPath": ["Software", "Security platform", "Workload identity and access management"],
+      "targetCustomers": ["Platform engineering teams", "Security engineering teams", "Mid-market and enterprise cloud-native companies", "DevOps/SRE teams"],
+      "technicalApproaches": ["Policy-based access control", "Secretless/certificate-based workload identity", "API-native cloud integration", "Zero standing privilege"],
+      "founderArchetypes": ["Repeat cybersecurity entrepreneur", "Enterprise security operator"],
+      "disruptionMechanisms": ["Replaces static secrets/API keys with dynamic workload identity", "Extends the IAM paradigm from humans to machines and AI agents"],
+      "regulatoryLabels": ["Pure software", "Not separately regulated (customer compliance dependent)"],
+      "businessModel": "Subscription SaaS, per-workload/per-identity pricing (tiers undisclosed)",
+      "goToMarket": "Enterprise sales, security-team-led",
+      "operationalModel": "Pure software",
+      "problemStatement": "Non-human identities such as service accounts, API keys, and AI agents now outnumber human identities in modern cloud environments but lack the lifecycle governance, just-in-time access, and secretless authentication that human IAM already provides, leaving credentials long-lived, over-privileged, and exposed.",
+      "productDescription": "Aembit issues short-lived, policy-scoped credentials to workloads at request time based on verified workload identity and posture, replacing hardcoded secrets and static API keys across cloud, SaaS, and data-center environments."
+    },
+    "founders": [
+      {"name": "David Goldschlag", "role": "Co-founder and CEO", "background": "Named as co-founder and CEO on Aembit's Series A press release; detailed prior operating history not confirmed in public sources reviewed."},
+      {"name": "Kevin Sapp", "role": "Co-founder", "background": "Named as co-founder on Aembit's Series A press release; detailed prior operating history not confirmed in public sources reviewed."}
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Cybersecurity",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "graphMetrics": {
+      "ai_adoption": 0.3,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.8,
+      "regulatory_moat": 0.3,
+      "proprietary_data_moat": 0.3,
+      "competition_intensity": 0.6
+    },
+    "competitors": ["SPIFFE/SPIRE", "HashiCorp Vault", "Astrix Security", "Oasis Security", "Natoma"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://aembit.io/press-release/aembit-raises-25-million-in-series-a-funding-for-non-human-identity-and-access-management/",
+      "https://www.securityweek.com/non-human-iam-provider-aembit-raises-25-million/",
+      "https://www.prnewswire.com/news-releases/cybersecurity-startup-aembit-launches-with-16-6m-in-total-funding-to-bring-identity-first-security-to-workloads-301776133.html",
+      "https://aembit.io/"
+    ]
+  },
+  {
+    "id": "co_p0_security",
+    "name": "P0 Security",
+    "description": "P0 Security provides an agentless, just-in-time cloud access control plane that replaces standing privileges with short-lived, auditable access for both human and non-human identities across AWS, GCP, and Azure.",
+    "attributes": {
+      "industryPath": ["Cybersecurity", "Identity and Access Management", "Privileged access management"],
+      "productCategoryPath": ["Software", "Security platform", "Just-in-time cloud access governance"],
+      "targetCustomers": ["Security engineering teams", "Platform/DevOps teams", "Cloud-native mid-market and enterprise companies"],
+      "technicalApproaches": ["Agentless API-native integration", "Just-in-time entitlement automation", "Policy-as-code authorization"],
+      "founderArchetypes": ["Repeat enterprise software entrepreneur", "Security engineering operator"],
+      "disruptionMechanisms": ["Replaces standing cloud privileges with ephemeral just-in-time access", "Consolidates human and non-human identity governance in one control plane"],
+      "regulatoryLabels": ["Pure software"],
+      "businessModel": "Subscription SaaS, enterprise contracts (pricing undisclosed)",
+      "goToMarket": "Enterprise/security-team-led sales, cloud marketplace listings",
+      "operationalModel": "Pure software",
+      "problemStatement": "Cloud engineers and non-human identities accumulate standing privileged access that is rarely revoked, creating a large, hard-to-audit attack surface across AWS, GCP, and Azure that PAM tools built for on-premises systems do not address.",
+      "productDescription": "P0's AuthZ Control Plane grants short-lived, scoped, auditable access to servers, databases, cloud consoles, and Kubernetes clusters through Slack, CLI, or automation, revoking access automatically once a task is complete."
+    },
+    "founders": [
+      {"name": "Shashwat Sehgal", "role": "Co-founder and CEO", "background": "Presented publicly as CEO at P0's RSAC Innovation Sandbox finalist appearance; detailed prior employer history not confirmed in public sources reviewed."},
+      {"name": "Gergely Danyi", "role": "Co-founder and CTO", "background": "Named on P0's own about page; detailed prior employer history not confirmed in public sources reviewed."},
+      {"name": "Nathan Brahms", "role": "Co-founder and VP Engineering", "background": "Named on P0's own about page; detailed prior employer history not confirmed in public sources reviewed."}
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Cybersecurity",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "graphMetrics": {
+      "ai_adoption": 0.3,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.8,
+      "regulatory_moat": 0.2,
+      "proprietary_data_moat": 0.2,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["SailPoint", "Okta", "Britive", "Apono", "Teleport"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.p0.dev/blog/15m-series-a",
+      "https://www.businesswire.com/news/home/20240910761539/en/P0-Security-Closes-$15M-Series-A-Funding-to-Help-Enterprises-Govern-and-Secure-Cloud-Access-for-All-Human-and-Machine-Identities-in-Minutes",
+      "https://p0.dev/about/",
+      "https://www.p0.dev/"
+    ]
+  },
+  {
+    "id": "co_nudge_security",
+    "name": "Nudge Security",
+    "description": "Nudge Security is a SaaS and AI security governance platform that continuously discovers SaaS and AI application usage across an organization and delivers real-time behavioral guidance to employees to reduce shadow-IT and shadow-AI risk.",
+    "attributes": {
+      "industryPath": ["Cybersecurity", "SaaS security posture management", "Shadow IT and shadow AI security"],
+      "productCategoryPath": ["Software", "Security platform", "SaaS and AI security governance"],
+      "targetCustomers": ["IT security teams", "CISOs", "Mid-market and enterprise organizations with distributed SaaS/AI adoption"],
+      "technicalApproaches": ["SaaS discovery via email/expense/network signal analysis", "Behavioral nudges via chat/browser", "Identity-centric governance"],
+      "founderArchetypes": ["Repeat cybersecurity entrepreneur (threat-intelligence background)"],
+      "disruptionMechanisms": ["Replaces manual/periodic SaaS audits with continuous automated discovery", "Uses positive behavioral nudges instead of hard-block controls"],
+      "regulatoryLabels": ["Pure software"],
+      "businessModel": "Subscription SaaS, org/seat-based pricing (tiers undisclosed)",
+      "goToMarket": "Enterprise sales, security-team-led, PLG-assisted trials",
+      "operationalModel": "Pure software",
+      "problemStatement": "Employees adopt SaaS and AI tools faster than IT can track them, creating shadow-IT sprawl, ungoverned data flows, and identity risk that periodic manual audits cannot keep up with.",
+      "productDescription": "Nudge Security discovers SaaS and AI applications in use, assesses risk and security posture, manages associated identities, and delivers real-time behavioral guidance through browser notifications and workplace chat tools."
+    },
+    "founders": [
+      {"name": "Russell Spitler", "role": "Co-founder and CEO", "background": "Held product and strategy leadership roles at AlienVault and AT&T Cybersecurity; co-founded the Open Threat Exchange with Jaime Blasco."},
+      {"name": "Jaime Blasco", "role": "Co-founder and CTO", "background": "Led AT&T Alien Labs (formerly AlienVault Labs) as a security researcher; thirteen-year working history with Spitler predating Nudge Security."}
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Cybersecurity",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "metrics": {
+      "customers": 200
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.4,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.85,
+      "regulatory_moat": 0.2,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.65
+    },
+    "competitors": ["Obsidian Security", "Reco", "Wing Security", "Grip Security", "Zscaler"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.nudgesecurity.com/press/nudge-security-raises-22-5m-series-a-to-secure-workforce-ai-and-saas",
+      "https://www.prnewswire.com/news-releases/nudge-security-raises-22-5m-series-a-to-secure-workforce-ai-and-saas-302617997.html",
+      "https://www.nudgesecurity.com/about-us",
+      "https://www.nudgesecurity.com/"
+    ]
+  },
+  {
+    "id": "co_tobiko_data",
+    "name": "Tobiko Data",
+    "description": "Tobiko Data builds SQLMesh and SQLGlot, open-source data transformation and SQL-parsing tools positioned as a state-aware, cost-efficient alternative to dbt, plus Tobiko Cloud, an enterprise-grade managed platform on top.",
+    "attributes": {
+      "industryPath": ["Data infrastructure", "Data engineering", "Data transformation / analytics engineering"],
+      "productCategoryPath": ["Software", "Developer tool", "Data transformation framework (open-core)"],
+      "targetCustomers": ["Data engineering teams", "Analytics engineers", "Mid-market to enterprise data platform teams"],
+      "technicalApproaches": ["State-aware/incremental SQL transformation engine", "Open-source core (SQLMesh, SQLGlot) with managed cloud", "Virtual data environments"],
+      "founderArchetypes": ["Technical open-source maintainers from Big Tech (Airbnb, Netflix)"],
+      "disruptionMechanisms": ["Reduces redundant recomputation and warehouse spend versus dbt-style full-refresh models", "Open-source-led adoption competing with the entrenched dbt incumbency"],
+      "regulatoryLabels": ["Pure software"],
+      "businessModel": "Open-core: free OSS (SQLMesh/SQLGlot) plus paid Tobiko Cloud enterprise platform",
+      "goToMarket": "Developer-led / open-source-led with an enterprise sales overlay",
+      "operationalModel": "Pure software",
+      "problemStatement": "Data teams using dbt-style full-refresh transformation frameworks pay for redundant compute and lose confidence in change correctness as pipelines scale, without built-in state-awareness, environment isolation, or automated impact analysis.",
+      "productDescription": "SQLMesh tracks what has actually changed in a data pipeline and only reprocesses what is necessary, lowering warehouse compute costs versus full-refresh transformation tools; Tobiko Cloud adds collaboration and governance on top."
+    },
+    "founders": [
+      {"name": "Tyson Mao", "role": "Co-founder and CEO", "background": "Named on Tobiko's own about page as co-founder and CEO; detailed prior operating background not confirmed in public sources reviewed."},
+      {"name": "Toby Mao", "role": "Co-founder and CTO", "background": "Previously senior staff engineer at Airbnb leading the XP experimentation and Minerva metrics platforms; earlier led the XP platform at Netflix."},
+      {"name": "Iaroslav Zeigerman", "role": "Co-founder and Chief Architect", "background": "Previously a senior software engineer on Netflix's data team, where he worked with co-founder Toby Mao."}
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Data infrastructure",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "graphMetrics": {
+      "ai_adoption": 0.2,
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.1,
+      "proprietary_data_moat": 0.1,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["dbt Labs", "Dagster", "Coalesce", "Y42", "Snowflake"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://techcrunch.com/2024/06/05/with-21-8m-in-funding-tobiko-aims-to-build-a-modern-data-platform/",
+      "https://www.tobikodata.com/about",
+      "https://www.tobikodata.com/",
+      "https://www.businesswire.com/news/home/20240605904710/en/CORRECTING-and-REPLACING-Data-Infrastructure-Startup-Tobiko-Data-Launches-with-%2421.8-Million-in-Funding"
+    ]
+  },
+  {
+    "id": "co_turso",
+    "name": "Turso",
+    "description": "Turso is a Rust-rewritten, SQLite-compatible database built on the open-source libSQL engine that lets developers create millions of small, isolated, file-based databases for multi-tenant SaaS, AI agents, and edge workloads.",
+    "attributes": {
+      "industryPath": ["Data infrastructure", "Databases", "Edge/embedded relational databases"],
+      "productCategoryPath": ["Software", "Developer tool", "Distributed SQLite-compatible database"],
+      "targetCustomers": ["Application developers", "AI agent developers", "Multi-tenant SaaS platform teams"],
+      "technicalApproaches": ["SQLite-compatible engine rewritten in Rust (libSQL)", "Per-tenant/per-agent database-as-a-file architecture", "Edge replication across 35-plus regions", "Built-in vector search"],
+      "founderArchetypes": ["Systems/database infrastructure engineers (ex-ScyllaDB, ex-Datadog, former Linux kernel maintainer)"],
+      "disruptionMechanisms": ["Replaces single shared-server database architecture with millions of lightweight per-tenant databases", "Brings SQLite to distributed/edge and agentic workloads it was not originally designed for"],
+      "regulatoryLabels": ["Pure software"],
+      "businessModel": "Usage-based self-serve subscription tiers (free, $4.99/mo Developer, Scaler, Pro) plus enterprise",
+      "goToMarket": "Developer-led, product-led growth, open-source community",
+      "operationalModel": "Pure software",
+      "problemStatement": "Modern multi-tenant SaaS and AI-agent applications need thousands to millions of small, isolated databases with edge-local latency, a pattern traditional single-server SQL databases and most serverless databases are not architected to serve cheaply or simply.",
+      "productDescription": "Turso treats each database as a lightweight file rather than a running server process, allowing instant creation, global replication, and per-tenant or per-agent isolation, with concurrent writes and native vector search built in."
+    },
+    "founders": [
+      {"name": "Glauber Costa", "role": "Co-founder and CEO", "background": "Former VP of Field Engineering at ScyllaDB and former staff engineer at Datadog, per Turso's own investors page."},
+      {"name": "Pekka Enberg", "role": "Co-founder and CTO", "background": "Early employee at ScyllaDB and a former Linux kernel maintainer, per Turso's own investors page."}
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Data infrastructure",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "graphMetrics": {
+      "ai_adoption": 0.5,
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.6,
+      "regulatory_moat": 0.1,
+      "proprietary_data_moat": 0.1,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["Cloudflare D1", "Supabase", "PlanetScale", "Neon", "Fly.io (LiteFS)"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://turso.tech/investors",
+      "https://turso.tech/what-is-turso",
+      "https://tracxn.com/d/companies/turso/__9yiGkZbmMa-YcuYPa2835J-NujMZua-HZOqt-ap7kg8/funding-and-investors",
+      "https://turso.tech/"
+    ]
+  },
+  {
+    "id": "co_estuary",
+    "name": "Estuary",
+    "description": "Estuary builds Flow, a unified right-time data platform that merges change data capture, streaming, and batch data movement into a single low-latency runtime across more than 200 source and destination systems.",
+    "attributes": {
+      "industryPath": ["Data infrastructure", "Data integration", "Real-time ETL / CDC"],
+      "productCategoryPath": ["Software", "Data pipeline platform", "Unified batch and streaming data movement"],
+      "targetCustomers": ["Data engineering teams", "Enterprise IT in finance, healthcare, logistics, and SaaS"],
+      "technicalApproaches": ["Change data capture", "Streaming compute with exactly-once delivery", "Unified batch/streaming runtime built on the Gazette broker"],
+      "founderArchetypes": ["Infrastructure engineers/operators from Google, YouTube, and a prior acquisition exit (LiveRamp/Arbor)"],
+      "disruptionMechanisms": ["Collapses separate batch-ELT and streaming-CDC tools into one platform", "Sub-100ms latency versus traditional batch-only ELT tools"],
+      "regulatoryLabels": ["Pure software"],
+      "businessModel": "Subscription/usage-based SaaS (pricing undisclosed)",
+      "goToMarket": "Enterprise sales with self-serve free trial",
+      "operationalModel": "Pure software",
+      "problemStatement": "Enterprises run separate, duplicative tools for batch ELT and real-time streaming/CDC, creating cost, latency, and reliability gaps as AI and operational use cases demand fresher data than nightly batch jobs can deliver.",
+      "productDescription": "Estuary Flow captures, transforms, and synchronizes data with sub-100ms latency and exactly-once delivery across 200-plus connectors, serving both batch ELT and real-time streaming use cases from one pipeline definition."
+    },
+    "founders": [
+      {"name": "David Yaffe", "role": "Co-founder and CEO", "background": "Previously COO of LiveRamp and co-founder/CEO of Arbor, which LiveRamp acquired in 2016."},
+      {"name": "Johnny Graettinger", "role": "Co-founder and CTO", "background": "Prior infrastructure engineering experience at Google and YouTube."}
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Data infrastructure",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "graphMetrics": {
+      "ai_adoption": 0.4,
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.8,
+      "regulatory_moat": 0.2,
+      "proprietary_data_moat": 0.2,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["Fivetran", "Confluent", "Airbyte", "Debezium", "Snowflake"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.prnewswire.com/news-releases/estuary-raises-17m-series-a-to-power-ai-for-enterprises-with-right-time-data-movement-302586382.html",
+      "https://estuary.dev/blog/estuary-raises-17m-series-a-right-time-data/",
+      "https://estuary.dev/product/",
+      "https://estuary.dev/"
+    ]
+  },
+  {
+    "id": "co_runreveal",
+    "name": "RunReveal",
+    "description": "RunReveal is a unified, AI-native security data platform built as a modern alternative to legacy SIEM, combining a security data lake, log pipelines, and AI-assisted detection and investigation.",
+    "attributes": {
+      "industryPath": ["Cybersecurity", "Security operations", "Security data platform / SIEM alternative"],
+      "productCategoryPath": ["Software", "Security platform", "AI-native security data lake and detection"],
+      "targetCustomers": ["Security engineering teams", "Platform/DevOps-adjacent security teams at technology companies"],
+      "technicalApproaches": ["Modern data-stack-based security data lake", "Detection-as-code", "AI chat/MCP-based investigation with bring-your-own-LLM support"],
+      "founderArchetypes": ["Security engineering operators"],
+      "disruptionMechanisms": ["Replaces legacy per-gigabyte SIEM pricing with a modern data-stack cost structure", "AI-assisted investigation reduces manual log-analysis time"],
+      "regulatoryLabels": ["Pure software"],
+      "businessModel": "Subscription/usage-based SaaS (pricing undisclosed)",
+      "goToMarket": "Developer/security-engineer-led, technical content-driven",
+      "operationalModel": "Pure software",
+      "problemStatement": "Legacy SIEM platforms charge premium per-gigabyte prices for log ingestion and still leave security teams manually correlating alerts, forcing a tradeoff between visibility and cost that AI-native, modern-data-stack architectures can remove.",
+      "productDescription": "RunReveal ingests, routes, and stores terabytes of security data cost-efficiently, layering detection-as-code and conversational AI investigation (via chat and MCP) on top to replace legacy SIEM workflows."
+    },
+    "founders": [
+      {"name": "Evan Johnson", "role": "Co-founder", "background": "Named as a co-founder on RunReveal's own funding announcement; specific prior employer not confirmed in public sources reviewed."},
+      {"name": "Alan Braithwaite", "role": "Co-founder", "background": "Named as a co-founder on RunReveal's own funding announcement; specific prior employer not confirmed in public sources reviewed."}
+    ],
+    "stage": "seed",
+    "geography": "United States",
+    "sector": "Cybersecurity",
+    "round": "Seed",
+    "checkSizeSought": 2000000,
+    "graphMetrics": {
+      "ai_adoption": 0.6,
+      "legacy_disruptiveness": 0.7,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.2,
+      "proprietary_data_moat": 0.3,
+      "competition_intensity": 0.6
+    },
+    "competitors": ["Panther", "Cribl", "Google SecOps (Chronicle)", "Datadog", "Rapid7"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://blog.runreveal.com/runreveal-raises-7m-ai-security-platform/",
+      "https://www.finsmes.com/2025/08/runreveal-raises-7m-in-seed-funding.html",
+      "https://runreveal.com/"
+    ]
+  },
+  {
+    "id": "co_twine_security",
+    "name": "Twine Security",
+    "description": "Twine Security builds AI 'digital employees' that perform recurring cybersecurity operations tasks, starting with identity and access management, autonomously detecting, analyzing, planning, and remediating identity risk.",
+    "attributes": {
+      "industryPath": ["Cybersecurity", "Security operations", "Identity and access management automation"],
+      "productCategoryPath": ["Software", "Agentic AI", "AI security operations employee (IAM-focused)"],
+      "targetCustomers": ["Enterprise security and IAM teams", "Fortune 500 healthcare and food and beverage organizations (disclosed reference sectors)"],
+      "technicalApproaches": ["Agentic AI workflow automation", "Identity/entitlement analysis and remediation"],
+      "founderArchetypes": ["Repeat cybersecurity operators (former Claroty leadership team)"],
+      "disruptionMechanisms": ["Substitutes AI 'digital employee' labor for manual identity-governance analyst work such as access reviews and entitlement cleanup"],
+      "regulatoryLabels": ["Pure software"],
+      "businessModel": "Subscription SaaS, enterprise contracts (pricing undisclosed)",
+      "goToMarket": "Enterprise sales, demo-gated",
+      "operationalModel": "Pure software",
+      "problemStatement": "Identity and access management teams face a chronic shortage of skilled analysts to perform recurring, high-volume tasks like user access reviews, stale-account cleanup, and entitlement optimization, leaving organizations with access sprawl that manual review cannot keep pace with.",
+      "productDescription": "Twine's AI digital employee, Alex, detects identity and access issues, analyzes the underlying risk, plans a remediation approach, and executes remediation across tasks including access reviews, stale-account cleanup, and least-privilege enforcement."
+    },
+    "founders": [
+      {"name": "Benny Porat", "role": "Co-founder", "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed."},
+      {"name": "Omri Green", "role": "Co-founder", "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed."},
+      {"name": "Justin Woody", "role": "Co-founder", "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed."},
+      {"name": "Nadav Erez", "role": "Co-founder", "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed."}
+    ],
+    "stage": "seed",
+    "geography": "Israel",
+    "sector": "Cybersecurity",
+    "round": "Seed",
+    "checkSizeSought": 2000000,
+    "graphMetrics": {
+      "ai_adoption": 0.9,
+      "legacy_disruptiveness": 0.7,
+      "technical_feasibility": 0.6,
+      "regulatory_moat": 0.2,
+      "proprietary_data_moat": 0.3,
+      "competition_intensity": 0.6
+    },
+    "competitors": ["SailPoint", "Okta", "Opal Security", "Zilla Security", "Torq"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://siliconangle.com/2024/11/20/ai-meets-cybersecurity-twine-launches-12m-funding-digital-cyber-employees/",
+      "https://www.calcalistech.com/ctechnews/article/hy9k4eofkg",
+      "https://twinesecurity.com/"
+    ]
+  },
+  {
+    "id": "co_edera",
+    "name": "Edera",
+    "description": "Edera builds a hardened runtime that brings virtual-machine-grade isolation to containers using a Rust-rewritten Type 1 hypervisor, extending the approach to secure AI/GPU workloads through automated GPU configuration and isolation.",
+    "attributes": {
+      "industryPath": ["Cybersecurity", "Cloud and container security", "Workload isolation"],
+      "productCategoryPath": ["Software", "Security platform", "Hypervisor-grade container and AI/GPU workload isolation"],
+      "targetCustomers": ["Platform engineering teams", "AI infrastructure/MLOps teams", "Federal and regulated multi-tenant operators"],
+      "technicalApproaches": ["Type-1 hypervisor isolation rewritten in Rust", "No shared kernel state between containers", "Automated GPU configuration/isolation for AI workloads"],
+      "founderArchetypes": ["Security infrastructure operator (ex-Chainguard) and systems engineer"],
+      "disruptionMechanisms": ["Replaces shared-kernel Linux namespace container isolation with VM-grade per-container isolation without traditional VM performance/ops overhead"],
+      "regulatoryLabels": ["Federal/public-sector sales motion (In-Q-Tel backed)"],
+      "businessModel": "Subscription SaaS/enterprise licensing (pricing undisclosed)",
+      "goToMarket": "Enterprise and federal/public-sector sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "Multi-tenant Kubernetes and AI/GPU workloads share a kernel with weak isolation guarantees, so a single container escape or misconfigured GPU driver can compromise an entire cluster, a risk traditional namespace-based isolation and manual hardening do not fully close.",
+      "productDescription": "Edera Protect runs each container as an isolated hypervisor guest with no shared kernel state, and Edera Protect AI automates GPU detection, configuration, and isolation to secure AI infrastructure against container-escape and driver vulnerabilities."
+    },
+    "founders": [
+      {"name": "Emily Long", "role": "Co-founder and CEO", "background": "Previously at Chainguard prior to co-founding Edera, per company financing materials."},
+      {"name": "Alex Zenla", "role": "Co-founder and CTO", "background": "Described in company and press materials as an experienced systems and cybersecurity engineer; specific prior employers not detailed in sources reviewed."}
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Cybersecurity",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "graphMetrics": {
+      "ai_adoption": 0.4,
+      "legacy_disruptiveness": 0.7,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.35,
+      "proprietary_data_moat": 0.1,
+      "competition_intensity": 0.5
+    },
+    "competitors": ["Kata Containers", "gVisor", "AWS Firecracker", "Chainguard", "Palo Alto Networks (Prisma Cloud)"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.prnewswire.com/news-releases/edera-raises-15-million-series-a-to-transform-cloud-and-ai-infrastructure-security-302384242.html",
+      "https://edera.dev/stories/series-a",
+      "https://www.securityweek.com/edera-banks-15m-for-kubernetes-workload-isolation-tech/",
+      "https://edera.dev/"
+    ]
+  },
+  {
+    "id": "co_prophet_security",
+    "name": "Prophet Security",
+    "description": "Prophet Security's Agentic AI SOC Platform autonomously triages, investigates, and responds to security alerts, proactively hunts for threats, and tunes detections, aiming to automate the manual work that dominates SOC analyst time.",
+    "attributes": {
+      "industryPath": ["Cybersecurity", "Security operations", "AI SOC automation"],
+      "productCategoryPath": ["Software", "Agentic AI", "Autonomous SOC alert triage and investigation"],
+      "targetCustomers": ["Security operations center (SOC) teams", "Enterprise and mid-market security teams"],
+      "technicalApproaches": ["Agentic AI investigation and triage", "MITRE ATT&CK-aligned detection tuning", "Autonomous evidence-linked alert response"],
+      "founderArchetypes": ["Repeat cybersecurity entrepreneurs (StackRox founding team, acquired by Red Hat)"],
+      "disruptionMechanisms": ["Automates L1/L2 SOC analyst alert triage that today consumes most analyst time", "Reduces false-positive load through AI-driven detection tuning"],
+      "regulatoryLabels": ["Pure software"],
+      "businessModel": "Subscription SaaS, enterprise contracts (pricing undisclosed)",
+      "goToMarket": "Enterprise sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "SOC teams are overwhelmed by alert volume and spend most of their time on manual triage and investigation rather than genuine threats, a workload gap that has outpaced hiring and that rule-based SOAR automation has not fully solved.",
+      "productDescription": "Prophet's platform includes an AI SOC Analyst that autonomously triages and investigates alerts, an AI Threat Hunter that proactively investigates across environments, and an AI Detection Advisor that analyzes telemetry to close detection gaps aligned to MITRE ATT&CK."
+    },
+    "founders": [
+      {"name": "Kamal Shah", "role": "Co-founder and CEO", "background": "Previously CEO of StackRox, a Kubernetes-native security company acquired by Red Hat."},
+      {"name": "Vibhav Sreekanti", "role": "Co-founder and CTO", "background": "Previously VP of Engineering at StackRox, then Senior Director of Software Engineering at Red Hat; earlier co-founder/CTO of Defend7 and Senior Director of Software Development at Oracle."}
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Cybersecurity",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "graphMetrics": {
+      "ai_adoption": 0.9,
+      "legacy_disruptiveness": 0.7,
+      "technical_feasibility": 0.8,
+      "regulatory_moat": 0.1,
+      "proprietary_data_moat": 0.3,
+      "competition_intensity": 0.85
+    },
+    "competitors": ["CrowdStrike (Charlotte AI)", "Palo Alto Networks (Cortex XSIAM)", "Dropzone AI", "Radiant Security", "Microsoft Security Copilot"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.businesswire.com/news/home/20250729681026/en/Prophet-Security-Raises-$30M-Series-A-Announces-Industrys-Most-Comprehensive-Agentic-AI-SOC-Platform-to-Transform-Security-Operations",
+      "https://www.prophetsecurity.ai/blog/prophet-security-raises-30-million-series-a-led-by-accel",
+      "https://www.businesswire.com/news/home/20240423436213/en/Prophet-Security-Secures-$11M-in-Seed-Financing-to-Supercharge-Security-Operations",
+      "https://www.prophetsecurity.ai/"
+    ]
+  }
+]

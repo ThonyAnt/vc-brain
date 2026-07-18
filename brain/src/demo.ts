@@ -110,6 +110,20 @@ async function main() {
   }
   console.log(`  learned: ${state.learningResult?.whatTheFundLearned}`);
 
+  // The causal payoff: the weight change reranked the universe. Show who moved.
+  const nameOf = new Map(state.candidateUniverse.map((c) => [c.id, c.name] as const));
+  const movers = (state.learningResult?.changedRankings ?? [])
+    .filter((m) => m.oldRank >= 0)
+    .sort((a, b) => a.newRank - a.oldRank - (b.newRank - b.oldRank)) // biggest climbers first
+    .slice(0, 5);
+  if (movers.length) {
+    console.log("  ranking shifts:");
+    for (const m of movers) {
+      const arrow = m.newRank < m.oldRank ? "↑" : "↓";
+      console.log(`    ${arrow} ${(nameOf.get(m.companyId) ?? m.companyId).padEnd(22)} #${m.oldRank + 1} -> #${m.newRank + 1}`);
+    }
+  }
+
   console.log(`\n• ${state.events.length} graph events emitted.`);
 }
 

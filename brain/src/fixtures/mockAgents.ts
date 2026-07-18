@@ -260,14 +260,40 @@ export const mockAgentStructured: NonNullable<MockLLMOptions["structured"]> = {
     };
   },
 
-  LearningInterpretation: (req: StructuredRequest) => ({
-    criterionId: firstMatch(req.prompt, /crit_[a-z]+/, "crit_distribution"),
+  LearningInterpretation: (req: StructuredRequest) => {
+    const prompt = req.prompt;
+    // Parse the (id, name) pairs the agent listed for the fund's criteria.
+    const criteria: { id: string; name: string }[] = [];
+    for (const m of prompt.matchAll(/(crit_[a-z]+)\(([^,]+),/g)) {
+      criteria.push({ id: m[1] ?? "", name: (m[2] ?? "").trim() });
+    }
+    const rationale = prompt.match(/rationale="([^"]*)"/)?.[1] ?? "";
+    const explicit = prompt.match(/criterion=(crit_[a-z]+)/)?.[1];
+
+    // Choose the criterion the feedback most implicates: an explicit id wins;
+    // otherwise the one whose name shares the most words with the rationale.
+    const words = new Set(rationale.toLowerCase().match(/[a-z]+/g) ?? []);
+    const byOverlap = criteria
+      .map((c) => ({ c, overlap: c.name.toLowerCase().split(/\s+/).filter((w) => words.has(w)).length }))
+      .sort((a, b) => b.overlap - a.overlap);
+    const chosen =
+      (explicit ? criteria.find((c) => c.id === explicit) : undefined) ??
+      (byOverlap[0]?.overlap ? byOverlap[0].c : undefined) ??
+      criteria[0] ??
+      { id: "crit_distribution", name: "distribution readiness" };
+
     // A pass on a weak criterion strengthens it; "incorrect"/"decrease" weakens.
-    feedbackDirection: /incorrect|decrease concern|over-?weighted/i.test(req.prompt) ? -0.6 : 0.6,
-    confidence: 0.7,
-    whatTheFundLearned:
-      "The fund now weights distribution readiness more heavily for healthcare deals.",
-  }),
+    const strengthen = !/incorrect|decrease concern|over-?weighted/i.test(prompt);
+    return {
+      criterionId: chosen.id,
+      feedbackDirection: strengthen ? 0.6 : -0.6,
+      confidence: 0.7,
+      // Sentence names the SAME criterion that actually changed, so the demo stays coherent.
+      whatTheFundLearned: `The fund now weights ${chosen.name.toLowerCase()} ${
+        strengthen ? "more" : "less"
+      } heavily for these deals.`,
+    };
+  },
 };
 
 export const mockAgentOptions: MockLLMOptions = { structured: mockAgentStructured };

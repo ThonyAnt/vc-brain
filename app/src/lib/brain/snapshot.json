@@ -1,0 +1,1742 @@
+{
+  "mandate": "Find the best seed-stage healthcare AI company for this fund.",
+  "historicalMemos": [
+    {
+      "id": "memo_medflow",
+      "companyId": "co_medflow",
+      "companyName": "MedFlow",
+      "decision": "invested",
+      "text": "Invested in MedFlow: clinician founder, clear hospital pull, ambient documentation replaces hours of manual charting. Enterprise sales motion into health systems.",
+      "rationale": "Clinician founder credibility plus urgent hospital workflow pain.",
+      "identifiedMoat": "Clinical workflow integration and clinician trust.",
+      "decisionDrivers": [
+        "clinician-founder",
+        "urgent workflow pain",
+        "enterprise distribution"
+      ],
+      "outcome": "succeeded"
+    },
+    {
+      "id": "memo_healthadboard",
+      "companyId": "co_healthadboard",
+      "companyName": "HealthAdBoard",
+      "decision": "rejected",
+      "text": "Passed on HealthAdBoard: ad-supported consumer model, weak distribution, no clinical moat, unclear willingness to pay.",
+      "rationale": "Consumer ad model outside thesis; no defensible clinical workflow.",
+      "identifiedMoat": "None identified.",
+      "decisionDrivers": [
+        "consumer ad model",
+        "weak distribution",
+        "no clinical moat"
+      ],
+      "outcome": "failed"
+    }
+  ],
+  "portfolioCompanies": [
+    {
+      "id": "co_medflow",
+      "name": "MedFlow",
+      "description": "Ambient clinical documentation for hospital physicians.",
+      "attributes": {
+        "industryPath": [
+          "Healthcare",
+          "Infrastructure",
+          "Clinical documentation"
+        ],
+        "productCategoryPath": [
+          "Software",
+          "Workflow application"
+        ],
+        "targetCustomers": [
+          "Hospitals",
+          "Clinicians"
+        ],
+        "technicalApproaches": [
+          "Foundation-model application"
+        ],
+        "founderArchetypes": [
+          "Clinician-founder"
+        ],
+        "disruptionMechanisms": [
+          "Replaces manual labor"
+        ],
+        "regulatoryLabels": [
+          "Clinical-validation-dependent"
+        ],
+        "businessModel": "Subscription SaaS",
+        "goToMarket": "Enterprise sales",
+        "operationalModel": "Pure software",
+        "problemStatement": "reducing clinical documentation burden for physicians",
+        "productDescription": ""
+      },
+      "founders": [],
+      "stage": "seed",
+      "geography": "US",
+      "sector": "Healthcare",
+      "competitors": [],
+      "status": "sourced",
+      "historicalStatus": "portfolio",
+      "outcome": "succeeded",
+      "sourceRefs": []
+    },
+    {
+      "id": "co_careloop",
+      "name": "CareLoop",
+      "description": "Care-coordination workflow for hospital discharge.",
+      "attributes": {
+        "industryPath": [
+          "Healthcare",
+          "Infrastructure",
+          "Care coordination"
+        ],
+        "productCategoryPath": [
+          "Software",
+          "Workflow application"
+        ],
+        "targetCustomers": [
+          "Hospitals",
+          "Care teams"
+        ],
+        "technicalApproaches": [
+          "Workflow automation"
+        ],
+        "founderArchetypes": [
+          "Former industry operator"
+        ],
+        "disruptionMechanisms": [
+          "Creates a new workflow"
+        ],
+        "regulatoryLabels": [
+          "Clinical-validation-dependent"
+        ],
+        "businessModel": "Subscription SaaS",
+        "goToMarket": "Enterprise sales",
+        "operationalModel": "Pure software",
+        "problemStatement": "coordinating patient discharge across care teams",
+        "productDescription": ""
+      },
+      "founders": [],
+      "stage": "seed",
+      "geography": "US",
+      "sector": "Healthcare",
+      "competitors": [],
+      "status": "sourced",
+      "historicalStatus": "portfolio",
+      "outcome": "active",
+      "sourceRefs": []
+    }
+  ],
+  "rejectedDeals": [
+    {
+      "id": "co_healthadboard",
+      "name": "HealthAdBoard",
+      "description": "Ad-supported patient education content network.",
+      "attributes": {
+        "industryPath": [
+          "Healthcare",
+          "Consumer",
+          "Patient education"
+        ],
+        "productCategoryPath": [
+          "Software",
+          "Consumer application"
+        ],
+        "targetCustomers": [
+          "Consumers",
+          "Patients"
+        ],
+        "technicalApproaches": [
+          "Data aggregation"
+        ],
+        "founderArchetypes": [
+          "Repeat founder"
+        ],
+        "disruptionMechanisms": [
+          "Changes distribution"
+        ],
+        "regulatoryLabels": [
+          "Pure software"
+        ],
+        "businessModel": "Advertising",
+        "goToMarket": "Direct to consumer",
+        "operationalModel": "Pure software",
+        "problemStatement": "distributing patient education content to consumers",
+        "productDescription": ""
+      },
+      "founders": [],
+      "stage": "seed",
+      "geography": "US",
+      "sector": "Healthcare",
+      "competitors": [],
+      "status": "sourced",
+      "historicalStatus": "rejected",
+      "outcome": "failed",
+      "sourceRefs": []
+    }
+  ],
+  "candidateUniverse": [
+    {
+      "id": "co_scribeai",
+      "name": "ScribeAI",
+      "description": "AI medical scribe that drafts clinical notes from visit audio.",
+      "attributes": {
+        "industryPath": [
+          "Healthcare",
+          "Infrastructure",
+          "Clinical documentation"
+        ],
+        "productCategoryPath": [
+          "Software",
+          "Workflow application"
+        ],
+        "targetCustomers": [
+          "Hospitals",
+          "Clinicians"
+        ],
+        "technicalApproaches": [
+          "Foundation-model application"
+        ],
+        "founderArchetypes": [
+          "Clinician-founder"
+        ],
+        "disruptionMechanisms": [
+          "Replaces manual labor"
+        ],
+        "regulatoryLabels": [
+          "Clinical-validation-dependent"
+        ],
+        "businessModel": "Subscription SaaS",
+        "goToMarket": "Enterprise sales",
+        "operationalModel": "Pure software",
+        "problemStatement": "drafting clinical notes automatically from patient visits",
+        "productDescription": ""
+      },
+      "founders": [
+        {
+          "name": "Dr. Alina Reyes",
+          "role": "CEO",
+          "background": "Practicing physician, ex-Epic"
+        }
+      ],
+      "stage": "seed",
+      "geography": "US",
+      "sector": "Healthcare",
+      "checkSizeSought": 2000000,
+      "valuation": 18000000,
+      "metrics": {
+        "arr": 1200000,
+        "arrGrowthRate": 2.5,
+        "churnRate": 0.08,
+        "nrr": 1.15,
+        "grossMargin": 0.78
+      },
+      "competitors": [],
+      "status": "sourced",
+      "historicalStatus": "external",
+      "outcome": "unknown",
+      "sourceRefs": []
+    },
+    {
+      "id": "co_radintel",
+      "name": "RadIntel",
+      "description": "Computer-vision triage for radiology departments.",
+      "attributes": {
+        "industryPath": [
+          "Healthcare",
+          "Infrastructure",
+          "Diagnostics"
+        ],
+        "productCategoryPath": [
+          "Software",
+          "Workflow application"
+        ],
+        "targetCustomers": [
+          "Hospitals",
+          "Radiologists"
+        ],
+        "technicalApproaches": [
+          "Computer vision"
+        ],
+        "founderArchetypes": [
+          "Academic researcher"
+        ],
+        "disruptionMechanisms": [
+          "Improves diagnosis"
+        ],
+        "regulatoryLabels": [
+          "FDA-regulated"
+        ],
+        "businessModel": "Subscription SaaS",
+        "goToMarket": "Founder-led enterprise sales",
+        "operationalModel": "Pure software",
+        "problemStatement": "triaging radiology studies to speed up diagnosis",
+        "productDescription": ""
+      },
+      "founders": [
+        {
+          "name": "Wei Chen",
+          "role": "CEO",
+          "background": "Stanford CS PhD, medical imaging"
+        }
+      ],
+      "stage": "seed",
+      "geography": "US",
+      "sector": "Healthcare",
+      "checkSizeSought": 3000000,
+      "valuation": 25000000,
+      "metrics": {
+        "arr": 800000,
+        "arrGrowthRate": 1.8,
+        "churnRate": 0.05,
+        "nrr": 1.1,
+        "grossMargin": 0.7
+      },
+      "competitors": [],
+      "status": "sourced",
+      "historicalStatus": "external",
+      "outcome": "unknown",
+      "sourceRefs": []
+    },
+    {
+      "id": "co_payflow",
+      "name": "PayFlow",
+      "description": "Consumer peer-to-peer payments app.",
+      "attributes": {
+        "industryPath": [
+          "Fintech",
+          "Payments"
+        ],
+        "productCategoryPath": [
+          "Infrastructure",
+          "API"
+        ],
+        "targetCustomers": [
+          "Consumers"
+        ],
+        "technicalApproaches": [
+          "Marketplace matching"
+        ],
+        "founderArchetypes": [
+          "Former big-tech engineer"
+        ],
+        "disruptionMechanisms": [
+          "Reduces cost"
+        ],
+        "regulatoryLabels": [
+          "Financially-regulated"
+        ],
+        "businessModel": "Transaction fees",
+        "goToMarket": "Direct to consumer",
+        "operationalModel": "Pure software",
+        "problemStatement": "moving money between consumers cheaply",
+        "productDescription": ""
+      },
+      "founders": [],
+      "stage": "seed",
+      "geography": "US",
+      "sector": "Fintech",
+      "checkSizeSought": 4000000,
+      "competitors": [],
+      "status": "sourced",
+      "historicalStatus": "external",
+      "outcome": "unknown",
+      "sourceRefs": []
+    },
+    {
+      "id": "co_vetcharts",
+      "name": "VetCharts",
+      "description": "Clinical documentation for veterinary clinics.",
+      "attributes": {
+        "industryPath": [
+          "Healthcare",
+          "Infrastructure",
+          "Clinical documentation"
+        ],
+        "productCategoryPath": [
+          "Software",
+          "Workflow application"
+        ],
+        "targetCustomers": [
+          "Veterinary clinics"
+        ],
+        "technicalApproaches": [
+          "Foundation-model application"
+        ],
+        "founderArchetypes": [
+          "Former industry operator"
+        ],
+        "disruptionMechanisms": [
+          "Replaces manual labor"
+        ],
+        "regulatoryLabels": [
+          "Pure software"
+        ],
+        "businessModel": "Subscription SaaS",
+        "goToMarket": "Product-led growth",
+        "operationalModel": "Pure software",
+        "problemStatement": "drafting clinical notes for veterinarians",
+        "productDescription": ""
+      },
+      "founders": [],
+      "stage": "seed",
+      "geography": "US",
+      "sector": "Healthcare",
+      "checkSizeSought": 1500000,
+      "competitors": [],
+      "status": "sourced",
+      "historicalStatus": "external",
+      "outcome": "unknown",
+      "sourceRefs": []
+    }
+  ],
+  "events": [
+    {
+      "id": "evt_1",
+      "stage": "profiling",
+      "eventType": "fund_profile_ready",
+      "timestamp": 1,
+      "nodeIds": [],
+      "payload": {
+        "criteria": 4
+      }
+    },
+    {
+      "id": "evt_2",
+      "stage": "sourcing",
+      "eventType": "candidate_universe_loaded",
+      "timestamp": 2,
+      "nodeIds": [
+        "co_scribeai",
+        "co_radintel",
+        "co_payflow",
+        "co_vetcharts"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "evt_3",
+      "stage": "sourcing",
+      "eventType": "market_landscape_built",
+      "timestamp": 3,
+      "payload": {
+        "nodes": [
+          {
+            "id": "co_scribeai",
+            "clusterId": 0,
+            "x": 100,
+            "y": 0,
+            "z": 10
+          },
+          {
+            "id": "co_radintel",
+            "clusterId": 0,
+            "x": 117.95714285714286,
+            "y": 31.102683787343977,
+            "z": -1.9714285714285706
+          },
+          {
+            "id": "co_vetcharts",
+            "clusterId": 0,
+            "x": 88.181916487767,
+            "y": 20.469521091279614,
+            "z": 2.121277658511329
+          },
+          {
+            "id": "co_medflow",
+            "clusterId": 0,
+            "x": 93.40535117721181,
+            "y": 8.076115572328408e-16,
+            "z": 7.801783725737272
+          },
+          {
+            "id": "co_careloop",
+            "clusterId": 0,
+            "x": 85.48873014965882,
+            "y": -25.134256663133318,
+            "z": 0.32582009977255355
+          },
+          {
+            "id": "co_notegen",
+            "clusterId": 0,
+            "x": 116.01126985034118,
+            "y": -27.732332874486644,
+            "z": -0.6741799002274484
+          },
+          {
+            "id": "co_payflow",
+            "clusterId": 1,
+            "x": -49.99999999999998,
+            "y": 86.60254037844388,
+            "z": 10
+          },
+          {
+            "id": "co_healthadboard",
+            "clusterId": 2,
+            "x": -50.00000000000004,
+            "y": -86.60254037844385,
+            "z": 10
+          }
+        ],
+        "edges": [
+          {
+            "source": "co_scribeai",
+            "target": "co_medflow",
+            "weight": 0.8900891862868636,
+            "type": "nearest"
+          },
+          {
+            "source": "co_scribeai",
+            "target": "co_vetcharts",
+            "weight": 0.6060638829255665,
+            "type": "nearest"
+          },
+          {
+            "source": "co_scribeai",
+            "target": "co_careloop",
+            "weight": 0.5162910049886277,
+            "type": "nearest"
+          },
+          {
+            "source": "co_radintel",
+            "target": "co_careloop",
+            "weight": 0.4031455024943138,
+            "type": "nearest"
+          },
+          {
+            "source": "co_radintel",
+            "target": "co_scribeai",
+            "weight": 0.40142857142857147,
+            "type": "nearest"
+          },
+          {
+            "source": "co_radintel",
+            "target": "co_medflow",
+            "weight": 0.40004459314343177,
+            "type": "nearest"
+          },
+          {
+            "source": "co_payflow",
+            "target": "co_healthadboard",
+            "weight": 0.1673861278752583,
+            "type": "nearest"
+          },
+          {
+            "source": "co_payflow",
+            "target": "co_scribeai",
+            "weight": 0,
+            "type": "nearest"
+          },
+          {
+            "source": "co_payflow",
+            "target": "co_radintel",
+            "weight": 0,
+            "type": "nearest"
+          },
+          {
+            "source": "co_vetcharts",
+            "target": "co_medflow",
+            "weight": 0.6011512473537886,
+            "type": "nearest"
+          },
+          {
+            "source": "co_vetcharts",
+            "target": "co_careloop",
+            "weight": 0.39738612787525834,
+            "type": "nearest"
+          },
+          {
+            "source": "co_medflow",
+            "target": "co_careloop",
+            "weight": 0.47000000000000003,
+            "type": "nearest"
+          },
+          {
+            "source": "co_careloop",
+            "target": "co_notegen",
+            "weight": 0.5800000000000001,
+            "type": "nearest"
+          },
+          {
+            "source": "co_healthadboard",
+            "target": "co_careloop",
+            "weight": 0.16000000000000003,
+            "type": "nearest"
+          },
+          {
+            "source": "co_healthadboard",
+            "target": "co_vetcharts",
+            "weight": 0.16,
+            "type": "nearest"
+          },
+          {
+            "source": "co_notegen",
+            "target": "co_scribeai",
+            "weight": 0.4662910049886276,
+            "type": "nearest"
+          },
+          {
+            "source": "co_notegen",
+            "target": "co_medflow",
+            "weight": 0.44165063509461094,
+            "type": "nearest"
+          }
+        ],
+        "clusters": [
+          {
+            "id": 0,
+            "label": "Healthcare",
+            "memberIds": [
+              "co_scribeai",
+              "co_radintel",
+              "co_vetcharts",
+              "co_medflow",
+              "co_careloop",
+              "co_notegen"
+            ]
+          },
+          {
+            "id": 1,
+            "label": "Fintech",
+            "memberIds": [
+              "co_payflow"
+            ]
+          },
+          {
+            "id": 2,
+            "label": "Healthcare",
+            "memberIds": [
+              "co_healthadboard"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "evt_4",
+      "stage": "sourcing",
+      "eventType": "semifinalists_selected",
+      "timestamp": 4,
+      "nodeIds": [
+        "co_scribeai",
+        "co_vetcharts",
+        "co_radintel",
+        "co_payflow"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "evt_5",
+      "stage": "sourcing",
+      "eventType": "finalists_selected",
+      "timestamp": 5,
+      "nodeIds": [
+        "co_scribeai",
+        "co_vetcharts",
+        "co_radintel"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "evt_6",
+      "stage": "diligence",
+      "eventType": "diligence_complete",
+      "timestamp": 6,
+      "nodeIds": [
+        "co_scribeai"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "evt_7",
+      "stage": "diligence",
+      "eventType": "diligence_complete",
+      "timestamp": 7,
+      "nodeIds": [
+        "co_vetcharts"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "evt_8",
+      "stage": "diligence",
+      "eventType": "diligence_complete",
+      "timestamp": 8,
+      "nodeIds": [
+        "co_radintel"
+      ],
+      "payload": {}
+    },
+    {
+      "id": "evt_9",
+      "stage": "partner_review",
+      "eventType": "partner_vote",
+      "timestamp": 9,
+      "nodeIds": [
+        "co_scribeai"
+      ],
+      "payload": {
+        "partnerId": "partner_tech",
+        "vote": "strong_yes"
+      }
+    },
+    {
+      "id": "evt_10",
+      "stage": "partner_review",
+      "eventType": "partner_vote",
+      "timestamp": 10,
+      "nodeIds": [
+        "co_vetcharts"
+      ],
+      "payload": {
+        "partnerId": "partner_tech",
+        "vote": "uncertain"
+      }
+    },
+    {
+      "id": "evt_11",
+      "stage": "partner_review",
+      "eventType": "partner_vote",
+      "timestamp": 11,
+      "nodeIds": [
+        "co_radintel"
+      ],
+      "payload": {
+        "partnerId": "partner_tech",
+        "vote": "uncertain"
+      }
+    },
+    {
+      "id": "evt_12",
+      "stage": "partner_review",
+      "eventType": "partner_vote",
+      "timestamp": 12,
+      "nodeIds": [
+        "co_scribeai"
+      ],
+      "payload": {
+        "partnerId": "partner_comm",
+        "vote": "yes"
+      }
+    },
+    {
+      "id": "evt_13",
+      "stage": "partner_review",
+      "eventType": "partner_vote",
+      "timestamp": 13,
+      "nodeIds": [
+        "co_vetcharts"
+      ],
+      "payload": {
+        "partnerId": "partner_comm",
+        "vote": "uncertain"
+      }
+    },
+    {
+      "id": "evt_14",
+      "stage": "partner_review",
+      "eventType": "partner_vote",
+      "timestamp": 14,
+      "nodeIds": [
+        "co_radintel"
+      ],
+      "payload": {
+        "partnerId": "partner_comm",
+        "vote": "uncertain"
+      }
+    },
+    {
+      "id": "evt_15",
+      "stage": "partner_review",
+      "eventType": "partner_vote",
+      "timestamp": 15,
+      "nodeIds": [
+        "co_scribeai"
+      ],
+      "payload": {
+        "partnerId": "partner_fin",
+        "vote": "yes"
+      }
+    },
+    {
+      "id": "evt_16",
+      "stage": "partner_review",
+      "eventType": "partner_vote",
+      "timestamp": 16,
+      "nodeIds": [
+        "co_vetcharts"
+      ],
+      "payload": {
+        "partnerId": "partner_fin",
+        "vote": "uncertain"
+      }
+    },
+    {
+      "id": "evt_17",
+      "stage": "partner_review",
+      "eventType": "partner_vote",
+      "timestamp": 17,
+      "nodeIds": [
+        "co_radintel"
+      ],
+      "payload": {
+        "partnerId": "partner_fin",
+        "vote": "uncertain"
+      }
+    },
+    {
+      "id": "evt_18",
+      "stage": "committee",
+      "eventType": "recommendation_produced",
+      "timestamp": 18,
+      "nodeIds": [
+        "co_scribeai"
+      ],
+      "payload": {
+        "confidence": 0.72
+      }
+    },
+    {
+      "id": "evt_19",
+      "stage": "memo",
+      "eventType": "memo_generated",
+      "timestamp": 19,
+      "nodeIds": [
+        "co_scribeai"
+      ],
+      "payload": {
+        "scenarios": {
+          "base": {
+            "exitValuation": 108000000,
+            "ownershipAtExit": 0.066,
+            "proceeds": 7128000,
+            "moic": 3.564,
+            "irr": 0.2359178819395109
+          },
+          "bull": {
+            "exitValuation": 241920000,
+            "ownershipAtExit": 0.066,
+            "proceeds": 15966720,
+            "moic": 7.98336,
+            "irr": 0.41372287623798165
+          },
+          "bear": {
+            "exitValuation": 37800000,
+            "ownershipAtExit": 0.066,
+            "proceeds": 2494800,
+            "moic": 1.2474,
+            "irr": 0.0375307011813375
+          }
+        }
+      }
+    }
+  ],
+  "fundProfile": {
+    "thesisSummary": "Seed-stage healthcare infrastructure software with clinician or operator founders, enterprise distribution into health systems, and a clinical-workflow moat.",
+    "stages": [
+      "seed",
+      "pre_seed"
+    ],
+    "sectors": [
+      "Healthcare"
+    ],
+    "geographies": [
+      "US"
+    ],
+    "checkSize": {
+      "min": 1000000,
+      "max": 3000000
+    },
+    "ownershipTarget": 0.1,
+    "criteria": [
+      {
+        "id": "crit_founder",
+        "name": "Founder credibility",
+        "weight": 0.3,
+        "positiveSignals": [
+          "clinician-founder",
+          "domain operator"
+        ],
+        "negativeSignals": [
+          "no domain experience"
+        ],
+        "supportingMemoIds": [
+          "memo_medflow"
+        ]
+      },
+      {
+        "id": "crit_distribution",
+        "name": "Distribution readiness",
+        "weight": 0.25,
+        "positiveSignals": [
+          "enterprise sales",
+          "existing hospital relationships"
+        ],
+        "negativeSignals": [
+          "unproven consumer channel"
+        ],
+        "supportingMemoIds": [
+          "memo_medflow",
+          "memo_healthadboard"
+        ]
+      },
+      {
+        "id": "crit_moat",
+        "name": "Clinical workflow moat",
+        "weight": 0.25,
+        "positiveSignals": [
+          "workflow integration",
+          "regulatory barrier"
+        ],
+        "negativeSignals": [
+          "commodity content"
+        ],
+        "supportingMemoIds": [
+          "memo_medflow"
+        ]
+      },
+      {
+        "id": "crit_market",
+        "name": "Market urgency",
+        "weight": 0.2,
+        "positiveSignals": [
+          "acute staffing pain",
+          "reimbursed workflow"
+        ],
+        "negativeSignals": [
+          "nice to have"
+        ],
+        "supportingMemoIds": []
+      }
+    ],
+    "attributePreferences": {
+      "industry:clinical documentation": 0.8,
+      "founderArchetypes:clinician-founder": 0.9,
+      "founderArchetypes:former industry operator": 0.4,
+      "businessModel:subscription saas": 0.6,
+      "goToMarket:enterprise sales": 0.7,
+      "targetCustomers:hospitals": 0.7,
+      "businessModel:advertising": -0.9,
+      "goToMarket:direct to consumer": -0.7,
+      "targetCustomers:consumers": -0.6
+    },
+    "archetypes": {
+      "successful": [
+        "Clinician-founder healthcare infrastructure with enterprise pull"
+      ],
+      "rejected": [
+        "Consumer ad-supported healthcare content"
+      ]
+    },
+    "recurringReasonsToInvest": [
+      "Clinician founder",
+      "Urgent hospital workflow pain",
+      "Enterprise distribution"
+    ],
+    "recurringReasonsToPass": [
+      "Consumer ad model",
+      "No clinical moat",
+      "Weak distribution"
+    ],
+    "partnerProfiles": [
+      {
+        "id": "partner_tech",
+        "name": "Tara (Technical)",
+        "archetype": "technical",
+        "priorities": [
+          "founder quality",
+          "technical moat",
+          "regulatory defensibility"
+        ],
+        "biases": {}
+      },
+      {
+        "id": "partner_comm",
+        "name": "Cole (Commercial)",
+        "archetype": "commercial",
+        "priorities": [
+          "distribution",
+          "market size",
+          "scalability"
+        ],
+        "biases": {}
+      },
+      {
+        "id": "partner_fin",
+        "name": "Fiona (Financial)",
+        "archetype": "financial",
+        "priorities": [
+          "capital efficiency",
+          "ownership",
+          "fund return"
+        ],
+        "biases": {}
+      }
+    ],
+    "sourcingCoefficients": {
+      "positiveHistory": 0.45,
+      "rejectedHistory": 0.2,
+      "thesisMatch": 0.35
+    }
+  },
+  "sourcedCandidates": [
+    {
+      "companyId": "co_scribeai",
+      "totalScore": 0.7154665758340417,
+      "criterionScores": {},
+      "fundFitScore": 0.9758729785823308,
+      "similarityToWinners": 0.8900891862868636,
+      "similarityToRejected": 0.13314550249431378,
+      "closestWinnerId": "co_medflow",
+      "closestRejectedDealId": "co_healthadboard",
+      "closestCompetitorId": "co_notegen",
+      "reasonsToAdvance": [
+        "Resembles a prior winner on thesis fit (co_scribeai)"
+      ],
+      "reasonsToReject": [
+        "Distribution not yet proven at scale"
+      ],
+      "unresolvedRisks": [
+        "Depends on enterprise sales execution"
+      ]
+    },
+    {
+      "companyId": "co_vetcharts",
+      "totalScore": 0.5388701885940341,
+      "criterionScores": {},
+      "fundFitScore": 0.8581489350995123,
+      "similarityToWinners": 0.6011512473537886,
+      "similarityToRejected": 0.16,
+      "closestWinnerId": "co_medflow",
+      "closestRejectedDealId": "co_healthadboard",
+      "closestCompetitorId": "co_notegen",
+      "reasonsToAdvance": [
+        "Resembles a prior winner on thesis fit (co_vetcharts)"
+      ],
+      "reasonsToReject": [
+        "Distribution not yet proven at scale"
+      ],
+      "unresolvedRisks": [
+        "Depends on enterprise sales execution"
+      ]
+    },
+    {
+      "companyId": "co_radintel",
+      "totalScore": 0.4298286196884739,
+      "criterionScores": {},
+      "fundFitScore": 0.7858349830425586,
+      "similarityToWinners": 0.4031455024943138,
+      "similarityToRejected": 0.13314550249431378,
+      "closestWinnerId": "co_careloop",
+      "closestRejectedDealId": "co_healthadboard",
+      "closestCompetitorId": "co_notegen",
+      "reasonsToAdvance": [
+        "Resembles a prior winner on thesis fit (co_radintel)"
+      ],
+      "reasonsToReject": [
+        "Distribution not yet proven at scale"
+      ],
+      "unresolvedRisks": [
+        "Depends on enterprise sales execution"
+      ]
+    },
+    {
+      "companyId": "co_payflow",
+      "totalScore": 0.04148053036005283,
+      "criterionScores": {},
+      "fundFitScore": 0.21416501695744142,
+      "similarityToWinners": 0,
+      "similarityToRejected": 0.1673861278752583,
+      "closestRejectedDealId": "co_healthadboard",
+      "reasonsToAdvance": [
+        "Resembles a prior winner on thesis fit (co_payflow)"
+      ],
+      "reasonsToReject": [
+        "Distribution not yet proven at scale"
+      ],
+      "unresolvedRisks": [
+        "Depends on enterprise sales execution"
+      ]
+    }
+  ],
+  "finalists": [
+    {
+      "id": "co_scribeai",
+      "name": "ScribeAI",
+      "description": "AI medical scribe that drafts clinical notes from visit audio.",
+      "attributes": {
+        "industryPath": [
+          "Healthcare",
+          "Infrastructure",
+          "Clinical documentation"
+        ],
+        "productCategoryPath": [
+          "Software",
+          "Workflow application"
+        ],
+        "targetCustomers": [
+          "Hospitals",
+          "Clinicians"
+        ],
+        "technicalApproaches": [
+          "Foundation-model application"
+        ],
+        "founderArchetypes": [
+          "Clinician-founder"
+        ],
+        "disruptionMechanisms": [
+          "Replaces manual labor"
+        ],
+        "regulatoryLabels": [
+          "Clinical-validation-dependent"
+        ],
+        "businessModel": "Subscription SaaS",
+        "goToMarket": "Enterprise sales",
+        "operationalModel": "Pure software",
+        "problemStatement": "drafting clinical notes automatically from patient visits",
+        "productDescription": ""
+      },
+      "founders": [
+        {
+          "name": "Dr. Alina Reyes",
+          "role": "CEO",
+          "background": "Practicing physician, ex-Epic"
+        }
+      ],
+      "stage": "seed",
+      "geography": "US",
+      "sector": "Healthcare",
+      "checkSizeSought": 2000000,
+      "valuation": 18000000,
+      "metrics": {
+        "arr": 1200000,
+        "arrGrowthRate": 2.5,
+        "churnRate": 0.08,
+        "nrr": 1.15,
+        "grossMargin": 0.78
+      },
+      "competitors": [],
+      "status": "sourced",
+      "historicalStatus": "external",
+      "outcome": "unknown",
+      "sourceRefs": []
+    },
+    {
+      "id": "co_vetcharts",
+      "name": "VetCharts",
+      "description": "Clinical documentation for veterinary clinics.",
+      "attributes": {
+        "industryPath": [
+          "Healthcare",
+          "Infrastructure",
+          "Clinical documentation"
+        ],
+        "productCategoryPath": [
+          "Software",
+          "Workflow application"
+        ],
+        "targetCustomers": [
+          "Veterinary clinics"
+        ],
+        "technicalApproaches": [
+          "Foundation-model application"
+        ],
+        "founderArchetypes": [
+          "Former industry operator"
+        ],
+        "disruptionMechanisms": [
+          "Replaces manual labor"
+        ],
+        "regulatoryLabels": [
+          "Pure software"
+        ],
+        "businessModel": "Subscription SaaS",
+        "goToMarket": "Product-led growth",
+        "operationalModel": "Pure software",
+        "problemStatement": "drafting clinical notes for veterinarians",
+        "productDescription": ""
+      },
+      "founders": [],
+      "stage": "seed",
+      "geography": "US",
+      "sector": "Healthcare",
+      "checkSizeSought": 1500000,
+      "competitors": [],
+      "status": "sourced",
+      "historicalStatus": "external",
+      "outcome": "unknown",
+      "sourceRefs": []
+    },
+    {
+      "id": "co_radintel",
+      "name": "RadIntel",
+      "description": "Computer-vision triage for radiology departments.",
+      "attributes": {
+        "industryPath": [
+          "Healthcare",
+          "Infrastructure",
+          "Diagnostics"
+        ],
+        "productCategoryPath": [
+          "Software",
+          "Workflow application"
+        ],
+        "targetCustomers": [
+          "Hospitals",
+          "Radiologists"
+        ],
+        "technicalApproaches": [
+          "Computer vision"
+        ],
+        "founderArchetypes": [
+          "Academic researcher"
+        ],
+        "disruptionMechanisms": [
+          "Improves diagnosis"
+        ],
+        "regulatoryLabels": [
+          "FDA-regulated"
+        ],
+        "businessModel": "Subscription SaaS",
+        "goToMarket": "Founder-led enterprise sales",
+        "operationalModel": "Pure software",
+        "problemStatement": "triaging radiology studies to speed up diagnosis",
+        "productDescription": ""
+      },
+      "founders": [
+        {
+          "name": "Wei Chen",
+          "role": "CEO",
+          "background": "Stanford CS PhD, medical imaging"
+        }
+      ],
+      "stage": "seed",
+      "geography": "US",
+      "sector": "Healthcare",
+      "checkSizeSought": 3000000,
+      "valuation": 25000000,
+      "metrics": {
+        "arr": 800000,
+        "arrGrowthRate": 1.8,
+        "churnRate": 0.05,
+        "nrr": 1.1,
+        "grossMargin": 0.7
+      },
+      "competitors": [],
+      "status": "sourced",
+      "historicalStatus": "external",
+      "outcome": "unknown",
+      "sourceRefs": []
+    }
+  ],
+  "diligence": {
+    "co_scribeai": {
+      "companyId": "co_scribeai",
+      "technical": {
+        "moatScore": 0.7,
+        "feasibilityScore": 0.8,
+        "founderTechnicalScore": 0.75,
+        "keyStrengths": [
+          "Domain-credible founder",
+          "Workflow integration depth"
+        ],
+        "keyRisks": [
+          "Foundation-model layer is replicable"
+        ],
+        "diligenceQuestions": [
+          "What proprietary data compounds over time?"
+        ],
+        "historicalAnalogues": []
+      },
+      "commercial": {
+        "marketScore": 0.75,
+        "urgencyScore": 0.7,
+        "competitiveIntensity": 0.55,
+        "distributionScore": 0.6,
+        "pricingPowerScore": 0.6,
+        "scalabilityScore": 0.7,
+        "keyStrengths": [
+          "Acute hospital staffing pain"
+        ],
+        "keyRisks": [
+          "Long enterprise sales cycles"
+        ],
+        "portfolioSynergies": [
+          "Shares buyers with MedFlow"
+        ],
+        "portfolioConflicts": [],
+        "diligenceQuestions": [
+          "What is the current sales cycle length?"
+        ]
+      },
+      "financial": {
+        "revenueQualityScore": 0.72,
+        "capitalEfficiencyScore": 0.65,
+        "assumptions": {
+          "investmentAmount": 2000000,
+          "entryValuation": 18000000,
+          "initialOwnership": 0.11,
+          "projectedArr": 12000000,
+          "exitMultiple": 9,
+          "dilutionFactor": 0.6,
+          "yearsToExit": 6
+        },
+        "keyStrengths": [
+          "Recurring revenue with expansion"
+        ],
+        "keyRisks": [
+          "CAC payback unproven"
+        ],
+        "diligenceQuestions": [
+          "What is net revenue retention by cohort?"
+        ]
+      },
+      "risk": {
+        "criticalRisks": [
+          "Distribution execution risk"
+        ],
+        "unsupportedClaims": [
+          "Claimed NRR not yet cohort-verified"
+        ],
+        "contradictions": [],
+        "missingInformation": [
+          "Security/compliance posture"
+        ],
+        "highValueQuestions": [
+          "Show cohort retention and CAC payback"
+        ]
+      }
+    },
+    "co_vetcharts": {
+      "companyId": "co_vetcharts",
+      "technical": {
+        "moatScore": 0.7,
+        "feasibilityScore": 0.8,
+        "founderTechnicalScore": 0.75,
+        "keyStrengths": [
+          "Domain-credible founder",
+          "Workflow integration depth"
+        ],
+        "keyRisks": [
+          "Foundation-model layer is replicable"
+        ],
+        "diligenceQuestions": [
+          "What proprietary data compounds over time?"
+        ],
+        "historicalAnalogues": []
+      },
+      "commercial": {
+        "marketScore": 0.75,
+        "urgencyScore": 0.7,
+        "competitiveIntensity": 0.55,
+        "distributionScore": 0.6,
+        "pricingPowerScore": 0.6,
+        "scalabilityScore": 0.7,
+        "keyStrengths": [
+          "Acute hospital staffing pain"
+        ],
+        "keyRisks": [
+          "Long enterprise sales cycles"
+        ],
+        "portfolioSynergies": [
+          "Shares buyers with MedFlow"
+        ],
+        "portfolioConflicts": [],
+        "diligenceQuestions": [
+          "What is the current sales cycle length?"
+        ]
+      },
+      "financial": {
+        "revenueQualityScore": 0.72,
+        "capitalEfficiencyScore": 0.65,
+        "assumptions": {
+          "investmentAmount": 2000000,
+          "entryValuation": 18000000,
+          "initialOwnership": 0.11,
+          "projectedArr": 12000000,
+          "exitMultiple": 9,
+          "dilutionFactor": 0.6,
+          "yearsToExit": 6
+        },
+        "keyStrengths": [
+          "Recurring revenue with expansion"
+        ],
+        "keyRisks": [
+          "CAC payback unproven"
+        ],
+        "diligenceQuestions": [
+          "What is net revenue retention by cohort?"
+        ]
+      },
+      "risk": {
+        "criticalRisks": [
+          "Distribution execution risk"
+        ],
+        "unsupportedClaims": [
+          "Claimed NRR not yet cohort-verified"
+        ],
+        "contradictions": [],
+        "missingInformation": [
+          "Security/compliance posture"
+        ],
+        "highValueQuestions": [
+          "Show cohort retention and CAC payback"
+        ]
+      }
+    },
+    "co_radintel": {
+      "companyId": "co_radintel",
+      "technical": {
+        "moatScore": 0.7,
+        "feasibilityScore": 0.8,
+        "founderTechnicalScore": 0.75,
+        "keyStrengths": [
+          "Domain-credible founder",
+          "Workflow integration depth"
+        ],
+        "keyRisks": [
+          "Foundation-model layer is replicable"
+        ],
+        "diligenceQuestions": [
+          "What proprietary data compounds over time?"
+        ],
+        "historicalAnalogues": []
+      },
+      "commercial": {
+        "marketScore": 0.75,
+        "urgencyScore": 0.7,
+        "competitiveIntensity": 0.55,
+        "distributionScore": 0.6,
+        "pricingPowerScore": 0.6,
+        "scalabilityScore": 0.7,
+        "keyStrengths": [
+          "Acute hospital staffing pain"
+        ],
+        "keyRisks": [
+          "Long enterprise sales cycles"
+        ],
+        "portfolioSynergies": [
+          "Shares buyers with MedFlow"
+        ],
+        "portfolioConflicts": [],
+        "diligenceQuestions": [
+          "What is the current sales cycle length?"
+        ]
+      },
+      "financial": {
+        "revenueQualityScore": 0.72,
+        "capitalEfficiencyScore": 0.65,
+        "assumptions": {
+          "investmentAmount": 2000000,
+          "entryValuation": 18000000,
+          "initialOwnership": 0.11,
+          "projectedArr": 12000000,
+          "exitMultiple": 9,
+          "dilutionFactor": 0.6,
+          "yearsToExit": 6
+        },
+        "keyStrengths": [
+          "Recurring revenue with expansion"
+        ],
+        "keyRisks": [
+          "CAC payback unproven"
+        ],
+        "diligenceQuestions": [
+          "What is net revenue retention by cohort?"
+        ]
+      },
+      "risk": {
+        "criticalRisks": [
+          "Distribution execution risk"
+        ],
+        "unsupportedClaims": [
+          "Claimed NRR not yet cohort-verified"
+        ],
+        "contradictions": [],
+        "missingInformation": [
+          "Security/compliance posture"
+        ],
+        "highValueQuestions": [
+          "Show cohort retention and CAC payback"
+        ]
+      }
+    }
+  },
+  "partnerOpinions": {
+    "partner_tech": [
+      {
+        "partnerId": "partner_tech",
+        "companyId": "co_scribeai",
+        "vote": "strong_yes",
+        "confidence": 0.8,
+        "thesis": "Best fit to the fund's thesis via partner_tech's lens",
+        "topEvidence": [
+          "Founder-market fit",
+          "Workflow moat"
+        ],
+        "biggestConcern": "Replicability of the model layer",
+        "evidenceThatWouldChangeVote": [
+          "Signed enterprise pilots with retention data"
+        ]
+      },
+      {
+        "partnerId": "partner_tech",
+        "companyId": "co_vetcharts",
+        "vote": "uncertain",
+        "confidence": 0.5,
+        "thesis": "Plausible but weaker on this partner's priorities",
+        "topEvidence": [
+          "Founder-market fit",
+          "Workflow moat"
+        ],
+        "biggestConcern": "Replicability of the model layer",
+        "evidenceThatWouldChangeVote": [
+          "Signed enterprise pilots with retention data"
+        ]
+      },
+      {
+        "partnerId": "partner_tech",
+        "companyId": "co_radintel",
+        "vote": "uncertain",
+        "confidence": 0.5,
+        "thesis": "Plausible but weaker on this partner's priorities",
+        "topEvidence": [
+          "Founder-market fit",
+          "Workflow moat"
+        ],
+        "biggestConcern": "Replicability of the model layer",
+        "evidenceThatWouldChangeVote": [
+          "Signed enterprise pilots with retention data"
+        ]
+      }
+    ],
+    "partner_comm": [
+      {
+        "partnerId": "partner_comm",
+        "companyId": "co_scribeai",
+        "vote": "yes",
+        "confidence": 0.8,
+        "thesis": "Best fit to the fund's thesis via partner_comm's lens",
+        "topEvidence": [
+          "Founder-market fit",
+          "Workflow moat"
+        ],
+        "biggestConcern": "Distribution and CAC payback",
+        "evidenceThatWouldChangeVote": [
+          "Signed enterprise pilots with retention data"
+        ]
+      },
+      {
+        "partnerId": "partner_comm",
+        "companyId": "co_vetcharts",
+        "vote": "uncertain",
+        "confidence": 0.5,
+        "thesis": "Plausible but weaker on this partner's priorities",
+        "topEvidence": [
+          "Founder-market fit",
+          "Workflow moat"
+        ],
+        "biggestConcern": "Distribution and CAC payback",
+        "evidenceThatWouldChangeVote": [
+          "Signed enterprise pilots with retention data"
+        ]
+      },
+      {
+        "partnerId": "partner_comm",
+        "companyId": "co_radintel",
+        "vote": "uncertain",
+        "confidence": 0.5,
+        "thesis": "Plausible but weaker on this partner's priorities",
+        "topEvidence": [
+          "Founder-market fit",
+          "Workflow moat"
+        ],
+        "biggestConcern": "Distribution and CAC payback",
+        "evidenceThatWouldChangeVote": [
+          "Signed enterprise pilots with retention data"
+        ]
+      }
+    ],
+    "partner_fin": [
+      {
+        "partnerId": "partner_fin",
+        "companyId": "co_scribeai",
+        "vote": "yes",
+        "confidence": 0.8,
+        "thesis": "Best fit to the fund's thesis via partner_fin's lens",
+        "topEvidence": [
+          "Founder-market fit",
+          "Workflow moat"
+        ],
+        "biggestConcern": "Distribution and CAC payback",
+        "evidenceThatWouldChangeVote": [
+          "Signed enterprise pilots with retention data"
+        ]
+      },
+      {
+        "partnerId": "partner_fin",
+        "companyId": "co_vetcharts",
+        "vote": "uncertain",
+        "confidence": 0.5,
+        "thesis": "Plausible but weaker on this partner's priorities",
+        "topEvidence": [
+          "Founder-market fit",
+          "Workflow moat"
+        ],
+        "biggestConcern": "Distribution and CAC payback",
+        "evidenceThatWouldChangeVote": [
+          "Signed enterprise pilots with retention data"
+        ]
+      },
+      {
+        "partnerId": "partner_fin",
+        "companyId": "co_radintel",
+        "vote": "uncertain",
+        "confidence": 0.5,
+        "thesis": "Plausible but weaker on this partner's priorities",
+        "topEvidence": [
+          "Founder-market fit",
+          "Workflow moat"
+        ],
+        "biggestConcern": "Distribution and CAC payback",
+        "evidenceThatWouldChangeVote": [
+          "Signed enterprise pilots with retention data"
+        ]
+      }
+    ]
+  },
+  "committeeDecision": {
+    "rankedFinalistIds": [
+      "co_scribeai",
+      "co_vetcharts",
+      "co_radintel"
+    ],
+    "recommendedCompanyId": "co_scribeai",
+    "confidence": 0.72,
+    "recommendedCheckSize": 2000000,
+    "centralDisagreement": "Technical conviction vs. unproven distribution/CAC.",
+    "strongestBullCase": "Clinician-founder with acute hospital pull, mirrors MedFlow.",
+    "strongestBearCase": "Model layer is replicable and sales cycle is long.",
+    "unresolvedDiligence": [
+      "Cohort retention",
+      "CAC payback",
+      "Security posture"
+    ],
+    "rationale": "Closest analogue to a prior winner; fits thesis and check size."
+  },
+  "investmentMemo": {
+    "companyId": "co_scribeai",
+    "executiveSummary": "Recommended seed investment; closest analogue to a prior winner.",
+    "companyOverview": "AI clinical documentation for hospital physicians.",
+    "investmentThesis": "Clinician-founder + acute workflow pain + enterprise distribution.",
+    "whyNow": "Hospital staffing pressure makes documentation automation urgent.",
+    "historicalAnalogues": [
+      {
+        "text": "Mirrors MedFlow's clinician-founder pattern",
+        "sourceNodeIds": [
+          "co_medflow"
+        ],
+        "confidence": 0.8
+      }
+    ],
+    "marketAndCompetition": "Crowded but differentiated on workflow depth vs. NoteGen.",
+    "technicalMoat": "Workflow integration and clinician trust; data compounding TBD.",
+    "businessModel": "Subscription SaaS into health systems.",
+    "financialScenarios": "Base ~3x MOIC; bull higher on expansion, bear on churn.",
+    "reasonsToInvest": [
+      {
+        "text": "Founder-market fit",
+        "sourceNodeIds": [
+          "co_scribeai"
+        ],
+        "confidence": 0.8
+      }
+    ],
+    "reasonsToPass": [
+      {
+        "text": "Distribution unproven at scale",
+        "sourceNodeIds": [
+          "co_scribeai"
+        ],
+        "confidence": 0.5
+      }
+    ],
+    "keyRisks": [
+      "Distribution execution",
+      "Model replicability"
+    ],
+    "openDiligenceQuestions": [
+      "Cohort retention",
+      "CAC payback"
+    ],
+    "committeeDisagreement": "Technical conviction vs. distribution caution.",
+    "recommendation": "Advance to partner meeting with a term-sheet-conditional check."
+  },
+  "financialScenarios": {
+    "base": {
+      "exitValuation": 108000000,
+      "ownershipAtExit": 0.066,
+      "proceeds": 7128000,
+      "moic": 3.564,
+      "irr": 0.2359178819395109
+    },
+    "bull": {
+      "exitValuation": 241920000,
+      "ownershipAtExit": 0.066,
+      "proceeds": 15966720,
+      "moic": 7.98336,
+      "irr": 0.41372287623798165
+    },
+    "bear": {
+      "exitValuation": 37800000,
+      "ownershipAtExit": 0.066,
+      "proceeds": 2494800,
+      "moic": 1.2474,
+      "irr": 0.0375307011813375
+    }
+  },
+  "competitors": [
+    {
+      "id": "co_notegen",
+      "name": "NoteGen",
+      "description": "Incumbent clinical-notes vendor bundled with an EHR.",
+      "attributes": {
+        "industryPath": [
+          "Healthcare",
+          "Infrastructure",
+          "Clinical documentation"
+        ],
+        "productCategoryPath": [
+          "Software",
+          "System of record"
+        ],
+        "targetCustomers": [
+          "Hospitals"
+        ],
+        "technicalApproaches": [
+          "Workflow automation"
+        ],
+        "founderArchetypes": [
+          "Former industry operator"
+        ],
+        "disruptionMechanisms": [
+          "Replaces an incumbent product"
+        ],
+        "regulatoryLabels": [
+          "Clinical-validation-dependent"
+        ],
+        "businessModel": "Licensing",
+        "goToMarket": "Enterprise sales",
+        "operationalModel": "Pure software",
+        "problemStatement": "documenting clinical encounters inside the EHR",
+        "productDescription": ""
+      },
+      "founders": [],
+      "sector": "Healthcare",
+      "competitors": [],
+      "status": "sourced",
+      "historicalStatus": "external",
+      "outcome": "unknown",
+      "sourceRefs": []
+    }
+  ]
+}

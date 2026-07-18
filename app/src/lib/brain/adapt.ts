@@ -126,6 +126,12 @@ const usd = (n: number | undefined, digits = 1) =>
   n === undefined ? '—' : `$${(n / 1_000_000).toFixed(digits)}M`
 const cap = (s: string) => (s ? s[0].toUpperCase() + s.slice(1) : s)
 
+/** Reject extraction placeholders like "Co-Founder Name" / "Unknown". */
+function isRealFounderName(n: string | undefined): boolean {
+  if (!n || n.trim().length < 3) return false
+  return !/\b(name|unknown|founder|co-founder|n\/a|tbd|unnamed)\b/i.test(n)
+}
+
 function appType(hs: string | undefined): Company['type'] {
   if (hs === 'portfolio') return 'portfolio'
   if (hs === 'rejected') return 'rejected'
@@ -163,18 +169,29 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
   const weights: CriteriaWeights = {}
   for (const c of snap.fundProfile?.criteria ?? []) weights[c.name] = Number(c.weight.toFixed(2))
 
-  /* ---- founders (synthesize ids; brain founders are embedded, unkeyed) ---- */
+  /* ---- founders (synthesize ids; brain founders are embedded, unkeyed) ----
+   * Web-discovered companies often come back with a placeholder founder name
+   * ("Co-Founder Name") when the source snippet has none — drop those rather
+   * than show junk rows. Score varies by diligence, else by fund-fit. */
   const founders: Founder[] = []
   for (const c of all) {
+    const r = ranked.get(c.id)
     c.founders?.forEach((f, i) => {
+      if (!isRealFounderName(f.name)) return
       const techScore = diligence[c.id]?.technical?.founderTechnicalScore
+      const score =
+        techScore !== undefined
+          ? Math.round(techScore * 100)
+          : r?.fundFitScore !== undefined
+            ? Math.round(Math.min(0.95, r.fundFitScore * 0.9 + 0.05) * 100)
+            : 68
       founders.push({
         id: `f-${c.id}-${i}`,
         name: f.name,
         companyId: c.id,
         role: f.role ?? 'Founder',
         background: f.background ?? '',
-        score: Math.round((techScore ?? 0.72) * 100),
+        score,
         justification: f.background ?? 'Founder profile from sourcing.',
         signals: c.attributes?.founderArchetypes ?? [],
       })

@@ -28,14 +28,17 @@ function mulberry32(seed) {
 const rand = mulberry32(20260718);
 const pick = (arr) => arr[Math.floor(rand() * arr.length)];
 
+// muted sector palette (Attio/Harmonic teardowns: neutrals + restraint; hue identifies,
+// never shouts). The single hot accent below is reserved for candidates + focus states.
 const SECTORS = [
-  { name: 'AI Infra',   color: '#ff4fd8', desc: 'training + inference plumbing' },
-  { name: 'Fintech',    color: '#4fd6ff', desc: 'money movement and risk' },
-  { name: 'Healthcare', color: '#9d6bff', desc: 'care delivery and clinical ops' },
-  { name: 'Climate',    color: '#5fff9d', desc: 'energy, grid and industrial decarb' },
-  { name: 'DevTools',   color: '#ffb347', desc: 'software that builds software' },
-  { name: 'Consumer',   color: '#ff6b6b', desc: 'products people choose themselves' },
+  { name: 'AI Infra',   color: '#c77dba', desc: 'training + inference plumbing' },
+  { name: 'Fintech',    color: '#6bb0c9', desc: 'money movement and risk' },
+  { name: 'Healthcare', color: '#9585cf', desc: 'care delivery and clinical ops' },
+  { name: 'Climate',    color: '#75b98e', desc: 'energy, grid and industrial decarb' },
+  { name: 'DevTools',   color: '#c9a266', desc: 'software that builds software' },
+  { name: 'Consumer',   color: '#c47f7f', desc: 'products people choose themselves' },
 ];
+const ACCENT = '#709ff5'; // Attio blue-400: candidates, hover ring, focus, fit bar
 // which sectors plausibly trade companies between them (cross-links)
 const SECTOR_ADJ = [[0, 4], [0, 1], [0, 2], [1, 5], [3, 1], [2, 3], [4, 1], [5, 4]];
 
@@ -191,13 +194,13 @@ const pPulse = new Float32Array(N);
 const pPhase = new Float32Array(N);
 const pDim = new Float32Array(N).fill(1);
 
+const accentColor = new THREE.Color(ACCENT);
+const warmWhite = new THREE.Color('#f4efe6');
 function nodeColor(n) {
-  const c = sectorColors[n.sector].clone();
-  if (n.role === 'rejected') c.multiplyScalar(0.32);
-  if (n.role === 'tracked') c.multiplyScalar(0.72);
-  if (n.role === 'portfolio') c.lerp(white, 0.12);
-  if (n.role === 'candidate') c.lerp(white, 0.35);
-  return c;
+  if (n.role === 'candidate') return accentColor.clone().lerp(white, 0.25);
+  if (n.role === 'portfolio') return sectorColors[n.sector].clone().lerp(warmWhite, 0.5);
+  if (n.role === 'rejected') return new THREE.Color('#3f434c');
+  return sectorColors[n.sector].clone().multiplyScalar(0.8);
 }
 nodes.forEach((n, i) => {
   const c = nodeColor(n);
@@ -296,7 +299,7 @@ function ringTexture() {
   const c = document.createElement('canvas');
   c.width = c.height = 128;
   const g = c.getContext('2d');
-  g.strokeStyle = 'rgba(255,255,255,0.9)';
+  g.strokeStyle = 'rgba(112,159,245,0.95)';
   g.lineWidth = 7;
   g.beginPath(); g.arc(64, 64, 52, 0, Math.PI * 2); g.stroke();
   const t = new THREE.CanvasTexture(c);
@@ -357,14 +360,14 @@ function featherTexture() {
   t.colorSpace = THREE.SRGBColorSpace;
   return t;
 }
-const HAZE_OPACITY = 0.11;
+const HAZE_OPACITY = 0.075;
 const hazeTex = featherTexture();
 const hazeSprites = [];
 SECTORS.forEach((s, si) => {
   for (let k = 0; k < 4; k++) {
     const mat = new THREE.SpriteMaterial({
       map: hazeTex,
-      color: new THREE.Color(s.color).multiplyScalar(0.55),
+      color: new THREE.Color(s.color).multiplyScalar(0.4),
       opacity: HAZE_OPACITY, transparent: true,
       depthTest: false, depthWrite: false,
     });
@@ -429,7 +432,6 @@ SECTORS.forEach((s) => {
   chip.className = 'chip';
   const dot = document.createElement('i');
   dot.style.background = s.color;
-  dot.style.boxShadow = `0 0 6px ${s.color}`;
   chip.appendChild(dot);
   chip.appendChild(document.createTextNode(s.name));
   legend.appendChild(chip);
@@ -577,8 +579,6 @@ function setFocus(node) {
   const fitPct = Math.round(node.fit * 100);
   const bar = document.getElementById('p-fitbar');
   bar.style.width = `${fitPct}%`;
-  bar.style.background = s.color;
-  bar.style.boxShadow = `0 0 8px ${s.color}`;
   document.getElementById('p-fit').textContent = `${fitPct} / 100`;
   panel.classList.add('open');
 }

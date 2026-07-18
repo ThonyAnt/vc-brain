@@ -5,11 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>VC Brain — fund memory mockup</title>
 <style>
+  /* tokens per Attio teardown: warm-grey darks, one blue accent, hairline strokes */
   :root {
-    --ink: #e8ecf6;
-    --muted: #8b94ab;
-    --line: rgba(130, 150, 255, 0.16);
-    --glass: rgba(9, 12, 22, 0.78);
+    --ink: #fafafb;
+    --muted: #a4adba;
+    --line: rgba(255, 255, 255, 0.09);
+    --glass: rgba(16, 16, 16, 0.82);
+    --accent: #709ff5;
   }
   * { box-sizing: border-box; }
   html, body { height: 100%; }
@@ -63,29 +65,35 @@
   #tooltip .t-meta { color: var(--muted); font-size: 0.64rem; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.15rem; }
   #panel {
     position: fixed; z-index: 15; top: 4.4rem; right: 1.25rem; width: 300px;
-    background: var(--glass); border: 1px solid var(--line); border-radius: 10px;
-    padding: 1rem 1.1rem 1.05rem; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    transform: translateX(24px); opacity: 0; transition: all 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+    background: var(--glass); border: 1px solid var(--line); border-radius: 13px;
+    padding: 1rem 1.1rem 1.05rem; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    /* Attio house entrance: blur-in + slide, ease-out-cubic */
+    transform: translateX(16px); opacity: 0; filter: blur(8px);
+    transition: all 0.25s cubic-bezier(0.33, 1, 0.68, 1);
     pointer-events: none;
   }
-  #panel.open { transform: none; opacity: 1; pointer-events: auto; }
+  #panel.open { transform: none; opacity: 1; filter: none; pointer-events: auto; }
   #panel h2 { margin: 0 0 0.15rem; font-size: 1.02rem; letter-spacing: -0.01em; }
   #panel .p-sector { font-family: ui-monospace, Menlo, monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; }
   #panel .p-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.45; margin: 0.55rem 0 0.75rem; }
   #panel .row { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.72rem; margin: 0.32rem 0; }
   #panel .row .k { color: var(--muted); }
   #panel .row .v { font-family: ui-monospace, Menlo, monospace; text-align: right; }
-  .fitbar { height: 3px; border-radius: 2px; background: rgba(130, 150, 255, 0.14); margin: 0.7rem 0 0.25rem; overflow: hidden; }
-  .fitbar i { display: block; height: 100%; border-radius: 2px; }
+  .fitbar { height: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.08); margin: 0.7rem 0 0.25rem; overflow: hidden; }
+  .fitbar i { display: block; height: 100%; border-radius: 2px; background: var(--accent); }
   .fitlabel { display: flex; justify-content: space-between; font-family: ui-monospace, Menlo, monospace; font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
   #panel .actions { display: flex; gap: 0.5rem; margin-top: 0.9rem; }
+  /* Attio primary button recipe: top-lit radial, 10px radius, 300ms rest / 50ms snap */
   #panel button {
-    flex: 1; cursor: pointer; border-radius: 6px; padding: 0.45rem 0;
-    font-family: ui-monospace, Menlo, monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
-    border: 1px solid var(--line); background: rgba(130, 150, 255, 0.08); color: var(--ink);
+    flex: 1; cursor: pointer; border-radius: 10px; padding: 0.5rem 0;
+    font-family: inherit; font-size: 0.78rem; font-weight: 500; letter-spacing: -0.005em;
+    border: 1px solid #383e47;
+    background-image: radial-gradient(at center -10%, #202124 0%, #17181a 100%);
+    color: #f3f4f6;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
   }
-  #panel button:hover { background: rgba(130, 150, 255, 0.18); }
-  #panel button:focus-visible { outline: 1px solid rgba(160, 175, 255, 0.7); outline-offset: 1px; }
+  #panel button:hover { background-color: #2e3238; background-image: none; transition-duration: 0.05s; }
+  #panel button:focus-visible { outline: 3px solid rgba(112, 159, 245, 0.4); outline-offset: 0; }
   #toast {
     position: fixed; z-index: 30; left: 50%; bottom: 2.4rem; transform: translate(-50%, 12px);
     background: var(--glass); border: 1px solid var(--line); border-radius: 999px;

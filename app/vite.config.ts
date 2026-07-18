@@ -4,4 +4,11 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  // Live brain API (real OpenAI chat + learning). Run `npm run api` in brain/.
+  // If it's not running, the client falls back to local stubs.
+  server: {
+    proxy: {
+      '/api': 'http://localhost:8787',
+    },
+  },
 })

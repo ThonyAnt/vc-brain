@@ -12,9 +12,10 @@ import type {
 } from '../types'
 
 /*
- * Stub API — now backed by a deterministic brain snapshot (VCBrainState),
- * adapted into the app's view types. Same interface the UI already consumes;
- * swap the snapshot import for a live `runPipeline` call to go online.
+ * Data comes from a deterministic brain snapshot (VCBrainState), adapted into
+ * the app's view types. The interactive endpoints (chat, feedback) hit the live
+ * brain API (real OpenAI + learning loop) when it's running, and fall back to
+ * local stubs when it isn't — so the app works with or without the API server.
  */
 
 const data = adaptSnapshot(snapshotJson as unknown as BrainSnapshot)
@@ -23,6 +24,21 @@ const store = {
   graph: data.graph,
   weights: { ...data.weights },
   feedbackLog: [] as { input: FeedbackInput; note: string }[],
+}
+
+/** POST to the live brain API; returns null if it's unreachable or errors. */
+async function postJson<T>(path: string, body: unknown): Promise<T | null> {
+  try {
+    const res = await fetch(path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    })
+    if (!res.ok) return null
+    return (await res.json()) as T
+  } catch {
+    return null
+  }
 }
 
 export const api = {
@@ -59,59 +75,79 @@ export const api = {
   },
 
   async postFeedback(input: FeedbackInput): Promise<FeedbackResult> {
-    const founder = data.founders.find((f) => f.id === input.entityId)
-    const company = data.companies.find((c) => c.id === input.entityId)
-    const changedNodeIds = [input.entityId]
-    let note = 'Feedback recorded.'
-
-    if (founder) {
-      const delta = input.action === 'agree' ? 0.05 : -0.05
-      const key = criterionKey('founder')
-      if (key) store.weights[key] = clamp(store.weights[key] + delta)
-      const c = data.companies.find((x) => x.id === founder.companyId)
-      if (c) changedNodeIds.push(c.id)
-      note =
-        input.action === 'agree'
-          ? `The fund now places greater weight on founder credibility in ${c?.sector ?? 'this sector'} investments.`
-          : `The fund now discounts founder-signal scoring in ${c?.sector ?? 'this sector'} until re-validated.`
-    } else if (company) {
-      const pass = input.action === 'pass'
-      const delta = pass ? -0.04 : 0.04
-      const key = criterionKey(pass ? 'distribution' : 'market')
-      if (key) store.weights[key] = clamp(store.weights[key] + delta)
-      for (const a of company.analogues) changedNodeIds.push(a.companyId)
-      note = pass
-        ? `Pass recorded. ${company.name}'s pattern now argues against similar ${company.sector} deals.`
-        : `Signal strengthened. Deals resembling ${company.name} (${company.sector}) will rank higher.`
+    // Live: the real learning agent interprets the feedback and re-weights.
+    const live = await postJson<FeedbackResult>('/api/feedback', input)
+    if (live) {
+      store.weights = { ...store.weights, ...live.weights }
+      store.graph = { ...store.graph, weights: { ...store.weights } }
+      return live
     }
-
-    store.feedbackLog.push({ input, note })
-    store.graph = { ...store.graph, weights: { ...store.weights } }
-    return { weights: { ...store.weights }, changedNodeIds, note }
+    return localFeedback(input)
   },
 
   async chat(messages: ChatMessage[], context?: { route?: string; companyId?: string }): Promise<ChatMessage> {
-    await delay(600)
-    const last = messages[messages.length - 1]?.content.toLowerCase() ?? ''
-    const company = context?.companyId ? data.companies.find((c) => c.id === context.companyId) : undefined
-    const fund = data.fundProfile
-
-    let content: string
-    if (company) {
-      if (last.includes('risk')) {
-        content = `Top risks for ${company.name}: ${company.risks.slice(0, 2).join(' ')} The unresolved diligence question I'd raise first: ${company.diligenceQuestions[0] ?? 'none logged.'}`
-      } else if (last.includes('compare') || last.includes('similar')) {
-        content = `${company.name} maps to ${company.analogues.map((a) => a.note).join(' ') || 'no logged analogues.'}`
-      } else {
-        content = `${company.name}: ${company.summary} Fund-fit score ${company.fitScore}. Ask me about risks, analogues, or the model.`
-      }
-    } else if (last.includes('check size') || last.includes('criteria')) {
-      content = `${fund.name} writes ${fund.checkSize} at ${fund.stages.join('/')} in ${fund.sectors.slice(0, 3).join(', ')}. Current top criteria: ${topCriteria(3)}.`
-    } else {
-      content = `I'm the fund brain for ${fund.name}. I can explain why a company surfaced, compare it to past decisions, or update the sourcing criteria. What are you evaluating?`
-    }
-    return { role: 'assistant', content }
+    // Live: real OpenAI, grounded in the fund + company context.
+    const live = await postJson<ChatMessage>('/api/chat', { messages, context })
+    if (live?.content) return live
+    return localChat(messages, context)
   },
+}
+
+/* ---------------- local fallbacks (used when the API is down) ------------- */
+
+function localFeedback(input: FeedbackInput): FeedbackResult {
+  const founder = data.founders.find((f) => f.id === input.entityId)
+  const company = data.companies.find((c) => c.id === input.entityId)
+  const changedNodeIds = [input.entityId]
+  let note = 'Feedback recorded.'
+
+  if (founder) {
+    const delta = input.action === 'agree' ? 0.05 : -0.05
+    const key = criterionKey('founder')
+    if (key) store.weights[key] = clamp(store.weights[key] + delta)
+    const c = data.companies.find((x) => x.id === founder.companyId)
+    if (c) changedNodeIds.push(c.id)
+    note =
+      input.action === 'agree'
+        ? `The fund now places greater weight on founder credibility in ${c?.sector ?? 'this sector'} investments.`
+        : `The fund now discounts founder-signal scoring in ${c?.sector ?? 'this sector'} until re-validated.`
+  } else if (company) {
+    const pass = input.action === 'pass'
+    const delta = pass ? -0.04 : 0.04
+    const key = criterionKey(pass ? 'distribution' : 'market')
+    if (key) store.weights[key] = clamp(store.weights[key] + delta)
+    for (const a of company.analogues) changedNodeIds.push(a.companyId)
+    note = pass
+      ? `Pass recorded. ${company.name}'s pattern now argues against similar ${company.sector} deals.`
+      : `Signal strengthened. Deals resembling ${company.name} (${company.sector}) will rank higher.`
+  }
+
+  store.feedbackLog.push({ input, note })
+  store.graph = { ...store.graph, weights: { ...store.weights } }
+  return { weights: { ...store.weights }, changedNodeIds, note }
+}
+
+async function localChat(messages: ChatMessage[], context?: { route?: string; companyId?: string }): Promise<ChatMessage> {
+  await delay(400)
+  const last = messages[messages.length - 1]?.content.toLowerCase() ?? ''
+  const company = context?.companyId ? data.companies.find((c) => c.id === context.companyId) : undefined
+  const fund = data.fundProfile
+
+  let content: string
+  if (company) {
+    if (last.includes('risk')) {
+      content = `Top risks for ${company.name}: ${company.risks.slice(0, 2).join(' ')} The unresolved diligence question I'd raise first: ${company.diligenceQuestions[0] ?? 'none logged.'}`
+    } else if (last.includes('compare') || last.includes('similar')) {
+      content = `${company.name} maps to ${company.analogues.map((a) => a.note).join(' ') || 'no logged analogues.'}`
+    } else {
+      content = `${company.name}: ${company.summary} Fund-fit score ${company.fitScore}. Ask me about risks, analogues, or the model.`
+    }
+  } else if (last.includes('check size') || last.includes('criteria')) {
+    content = `${fund.name} writes ${fund.checkSize} at ${fund.stages.join('/')} in ${fund.sectors.slice(0, 3).join(', ')}. Current top criteria: ${topCriteria(3)}.`
+  } else {
+    content = `I'm the fund brain for ${fund.name}. I can explain why a company surfaced, compare it to past decisions, or update the sourcing criteria. What are you evaluating?`
+  }
+  return { role: 'assistant', content }
 }
 
 /** Find a live weight key whose name mentions `hint` (e.g. "founder"). */

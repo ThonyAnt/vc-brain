@@ -1,5 +1,11 @@
-import snapshotJson from '../brain/snapshot.json'
-import { adaptSnapshot, type BrainSnapshot } from '../brain/adapt'
+import {
+  buildGraph,
+  companies as fixtureCompanies,
+  criteriaWeights,
+  executionQueue as fixtureExecutionQueue,
+  founders as fixtureFounders,
+  fundProfile as fixtureFundProfile,
+} from '../mock/fixtures'
 import type {
   ChatMessage,
   Company,
@@ -34,13 +40,19 @@ type ChatContext = {
 }
 
 /*
- * Data comes from a deterministic brain snapshot (VCBrainState), adapted into
- * the app's view types. The interactive endpoints (chat, feedback) hit the live
- * brain API (real OpenAI + learning loop) when it's running, and fall back to
- * local stubs when it isn't — so the app works with or without the API server.
+ * The polished UI fixtures are the deterministic frontend seed. Interactive
+ * endpoints hit the live brain API, and newly sourced companies are merged into
+ * this dataset at runtime so the demo content and real pipeline coexist.
  */
 
-const data = adaptSnapshot(snapshotJson as unknown as BrainSnapshot)
+const data = {
+  companies: [...fixtureCompanies],
+  founders: [...fixtureFounders],
+  fundProfile: fixtureFundProfile,
+  weights: { ...criteriaWeights },
+  graph: buildGraph(),
+  executionQueue: [...fixtureExecutionQueue],
+}
 
 const store = {
   graph: data.graph,

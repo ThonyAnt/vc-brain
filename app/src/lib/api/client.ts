@@ -22,7 +22,7 @@ export type OrchestratorStreamEvent =
   | { type: 'agent_started'; runId: string; agent: string; label: string }
   | { type: 'agent_completed'; runId: string; agent: string; summary: string }
   | { type: 'agent_failed'; runId: string; agent: string; error: string }
-  | { type: 'companies_sourced'; runId: string; companies: Company[] }
+  | { type: 'companies_sourced'; runId: string; companies: Company[]; founders?: Founder[] }
   | { type: 'text_delta'; runId: string; delta: string }
   | { type: 'run_completed'; runId: string; message: ChatMessage }
   | { type: 'error'; error: string }
@@ -62,10 +62,13 @@ const store = {
 
 const sourcingListeners = new Set<(companies: Company[]) => void>()
 
-function mergeSourcedCompanies(companies: Company[]) {
+function mergeSourcedCompanies(companies: Company[], founders: Founder[] = []) {
   const byId = new Map(data.companies.map((company) => [company.id, company]))
   for (const company of companies) byId.set(company.id, company)
   data.companies = [...byId.values()]
+  const foundersById = new Map(data.founders.map((founder) => [founder.id, founder]))
+  for (const founder of founders) foundersById.set(founder.id, founder)
+  data.founders = [...foundersById.values()]
   for (const listener of sourcingListeners) listener(companies)
 }
 
@@ -178,7 +181,7 @@ export const api = {
         if (!event) return
         handlers.onEvent?.(event)
         if (event.type === 'companies_sourced') {
-          mergeSourcedCompanies(event.companies)
+          mergeSourcedCompanies(event.companies, event.founders)
         } else if (event.type === 'text_delta') {
           content += event.delta
           handlers.onDelta?.(event.delta)

@@ -101,7 +101,9 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
 
     const markets = graph.nodes.filter((n) => n.type === 'market')
     const clusterCount = Math.max(markets.length, 1)
-    const anchors = markets.map((_, i) => {
+    const POSITION_SCALE = 5.5
+    const anchors = markets.map((market, i) => {
+      if (market.position) return new THREE.Vector3(...market.position).multiplyScalar(POSITION_SCALE)
       const phi = Math.acos(1 - (2 * (i + 0.5)) / clusterCount)
       const theta = Math.PI * (1 + Math.sqrt(5)) * i
       const r = 330
@@ -135,7 +137,9 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     for (const gn of graph.nodes) {
       if (gn.type === 'market' || gn.type === 'criterion') continue
       const cluster = clusterOf.get(gn.id) ?? 0
-      const base = anchors[cluster].clone().add(jitterVec(gn.id, gn.type === 'founder' ? 150 : 120))
+      const base = gn.position
+        ? new THREE.Vector3(...gn.position).multiplyScalar(POSITION_SCALE)
+        : anchors[cluster].clone().add(jitterVec(gn.id, gn.type === 'founder' ? 150 : 120))
       nodes.push({
         id: gn.id,
         label: gn.label,

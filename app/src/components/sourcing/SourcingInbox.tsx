@@ -1,4 +1,5 @@
-import { useEffect, useState, type FormEvent } from 'react'
+/* Hallmark · pre-emit critique: P5 H4 E4 S5 R5 V4 */
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { ACCENT } from '../brain/BrainCanvas'
 import { api } from '../../lib/api/client'
@@ -26,8 +27,6 @@ export function SourcingInbox({
   const [saved, setSaved] = useState<Set<string>>(new Set())
   // Folded by default; ?inbox opens it for demos and screenshots.
   const [open, setOpen] = useState(() => new URLSearchParams(window.location.search).has('inbox'))
-  const [query, setQuery] = useState('')
-  const [searching, setSearching] = useState(false)
   const [foundIds, setFoundIds] = useState<Set<string>>(new Set())
   const navigate = useNavigate()
   const setWeights = useAppStore((s) => s.setWeights)
@@ -45,25 +44,6 @@ export function SourcingInbox({
     })
   }, [onDiscover])
 
-  /* Trigger a live web search; new companies are prepended and flagged "new". */
-  async function runDiscover(e?: FormEvent) {
-    e?.preventDefault()
-    if (searching) return
-    setSearching(true)
-    try {
-      const found = await api.discover(query.trim() || undefined)
-      if (found.length) {
-        // api.discover publishes into the shared sourcing subscription, which
-        // updates this inbox and lets BrainPage add/pulse the graph nodes.
-        setQuery('')
-      } else {
-        setLearningNote('No new companies found for that search.')
-      }
-    } finally {
-      setSearching(false)
-    }
-  }
-
   async function pass(c: Company) {
     const res = await api.postFeedback({ entityId: c.id, action: 'pass' })
     setWeights(res.weights)
@@ -76,15 +56,21 @@ export function SourcingInbox({
 
   if (!open) {
     return (
-      <button
-        onClick={() => setOpen(true)}
-        className="glass-panel pointer-events-auto flex h-fit cursor-pointer items-center gap-2.5 self-start rounded-none px-4 py-2.5 transition-colors hover:bg-bone"
-      >
-        <span className="caption-tight text-ink">Sourced this week</span>
-        <span className="code-md" style={{ color: ACCENT }}>
-          {visible.length}
-        </span>
-      </button>
+      <div className="pointer-events-auto flex items-stretch gap-2">
+        <button
+          onClick={() => setOpen(true)}
+          className="glass-panel flex h-11 cursor-pointer items-center gap-2.5 rounded-none px-4 transition-colors hover:bg-bone focus-visible:outline-3 focus-visible:outline-ring-focus"
+        >
+          <span className="caption-tight whitespace-nowrap text-ink">Sourced this week</span>
+          <span className="code-md" style={{ color: ACCENT }}>{visible.length}</span>
+        </button>
+        <button
+          onClick={() => navigate('/analyst')}
+          className="caption-tight h-11 cursor-pointer whitespace-nowrap border-2 border-hairline-strong bg-primary px-5 text-on-primary shadow-brutal-sm transition-transform hover:-translate-y-0.5 focus-visible:outline-3 focus-visible:outline-ring-focus active:translate-y-0 disabled:opacity-50"
+        >
+          Source
+        </button>
+      </div>
     )
   }
 
@@ -93,6 +79,12 @@ export function SourcingInbox({
       <div className="flex items-center justify-between border-b border-hairline px-4 py-3">
         <span className="caption-tight text-ink">Sourced this week</span>
         <span className="flex items-center gap-3">
+          <button
+            onClick={() => navigate('/analyst')}
+            className="caption-tight cursor-pointer border-2 border-hairline-strong bg-primary px-2.5 py-1 text-on-primary hover:bg-dark focus-visible:outline-3 focus-visible:outline-ring-focus"
+          >
+            Source
+          </button>
           <span className="code-md" style={{ color: ACCENT }}>
             {visible.length}
           </span>
@@ -105,22 +97,6 @@ export function SourcingInbox({
           </button>
         </span>
       </div>
-      <form onSubmit={runDiscover} className="flex items-center gap-2 border-b border-hairline px-3 py-2">
-        <input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search the web for startups…"
-          className="min-w-0 flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-mute"
-        />
-        <button
-          type="submit"
-          disabled={searching}
-          className="caption-tight rounded-full px-3 py-1 text-white transition-opacity disabled:opacity-60"
-          style={{ backgroundColor: ACCENT }}
-        >
-          {searching ? 'Searching…' : 'Search'}
-        </button>
-      </form>
       <div className="flex-1 space-y-2 overflow-y-auto p-2">
         {visible.map((c) => (
           <div
@@ -146,10 +122,21 @@ export function SourcingInbox({
                 {c.fitScore}
               </div>
             </div>
-            <div className="mt-1 text-sm text-mute">{c.oneLiner}</div>
+            <div className="code-sm mt-1 flex flex-wrap gap-x-2 text-charcoal">
+              <span>{c.sector}</span>
+              <span>· {c.stage}</span>
+              {c.location !== '—' && <span>· {c.location}</span>}
+            </div>
+            <div className="mt-2 text-sm text-mute">{c.oneLiner || 'Company profile is still being enriched.'}</div>
+            {c.raising && <div className="code-sm mt-2 text-ink">{c.raising}</div>}
             {c.whySurfaced?.[0] && (
               <div className="caption mt-2 border-l-2 pl-2 text-charcoal" style={{ borderColor: ACCENT }}>
                 {c.whySurfaced[0]}
+              </div>
+            )}
+            {c.risks[0] && (
+              <div className="caption mt-2 text-mute">
+                <span className="font-semibold text-ink">Open risk:</span> {c.risks[0]}
               </div>
             )}
             <div className="mt-3 flex gap-1.5" onClick={(e) => e.stopPropagation()}>

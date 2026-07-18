@@ -106,6 +106,7 @@ async function handleFeedback(body: { entityId: string; action: string; justific
  */
 function sourcedView(c: Company, r: RankedCandidate | undefined) {
   const fit = r?.fundFitScore !== undefined ? Math.round(r.fundFitScore * 100) : 70;
+  const diligence = state.diligence?.[c.id];
   const winner = r?.closestWinnerId ? findCompany(r.closestWinnerId) : undefined;
   const rejected = r?.closestRejectedDealId ? findCompany(r.closestRejectedDealId) : undefined;
   const competitor = r?.closestCompetitorId ? findCompany(r.closestCompetitorId) : undefined;
@@ -113,6 +114,39 @@ function sourcedView(c: Company, r: RankedCandidate | undefined) {
   const analogues = [];
   if (winner) analogues.push({ companyId: winner.id, kind: "portfolio", note: `Resembles prior winner ${winner.name}.` });
   if (rejected) analogues.push({ companyId: rejected.id, kind: "rejected", note: `Echoes passed deal ${rejected.name}.` });
+
+  const risks = [...new Set([
+    ...(r?.unresolvedRisks ?? []),
+    ...(diligence?.technical.keyRisks ?? []),
+    ...(diligence?.commercial.keyRisks ?? []),
+    ...(diligence?.financial.keyRisks ?? []),
+    ...(diligence?.risk?.criticalRisks ?? []),
+  ])];
+  const diligenceQuestions = [...new Set([
+    ...(diligence?.technical.diligenceQuestions ?? []),
+    ...(diligence?.commercial.diligenceQuestions ?? []),
+    ...(diligence?.financial.diligenceQuestions ?? []),
+    ...(diligence?.risk?.highValueQuestions ?? []),
+  ])];
+  const assumptions = diligence?.financial.assumptions;
+  const metrics = c.metrics;
+  const model = metrics || assumptions
+    ? {
+        arr: metrics?.arr ?? assumptions?.projectedArr ?? 0,
+        growthPct: Math.round((metrics?.arrGrowthRate ?? 0) * 100),
+        churnPct: Math.round((metrics?.churnRate ?? 0) * 100),
+        nrrPct: Math.round((metrics?.nrr ?? 0) * 100),
+        grossMarginPct: Math.round((metrics?.grossMargin ?? 0) * 100),
+        cac: metrics?.cac ?? 0,
+        cacPaybackMonths: 0,
+        burnMonthly: metrics?.monthlyBurn ?? 0,
+        runwayMonths: metrics?.runwayMonths ?? 0,
+        valuation: c.valuation ?? assumptions?.entryValuation ?? 0,
+        checkSize: assumptions?.investmentAmount ?? c.checkSizeSought ?? 0,
+        exitMultiple: assumptions?.exitMultiple ?? 0,
+        yearsToExit: assumptions?.yearsToExit ?? 0,
+      }
+    : undefined;
 
   return {
     id: c.id,
@@ -125,21 +159,40 @@ function sourcedView(c: Company, r: RankedCandidate | undefined) {
     raising: c.checkSizeSought ? `$${(c.checkSizeSought / 1_000_000).toFixed(1)}M round` : undefined,
     fitScore: fit,
     summary: c.description ?? "",
-    founderIds: [],
+    founderIds: c.founders.map((_, index) => `f-${c.id}-${index}`),
     analogues,
     whySurfaced: [
       winner
         ? `Surfaced from a live web search — closest to portfolio winner ${winner.name} (fund-fit ${fit}).`
         : `Surfaced from a live web search — matches the fund thesis (fund-fit ${fit}).`,
+      ...(r?.reasonsToAdvance ?? []),
     ],
-    risks: r?.unresolvedRisks ?? [],
-    diligenceQuestions: [],
+    risks,
+    diligenceQuestions,
     reasonsToInvest: r?.reasonsToAdvance ?? [],
     reasonsToPass: r?.reasonsToReject ?? [],
     competitors: competitor
       ? [{ name: competitor.name, kind: "direct", note: "Closest external competitor by similarity." }]
       : [],
+    model,
   };
+}
+
+function sourcedFounderViews(c: Company, r: RankedCandidate | undefined) {
+  const technicalScore = state.diligence?.[c.id]?.technical.founderTechnicalScore;
+  const score = technicalScore !== undefined
+    ? Math.round(technicalScore * 100)
+    : r?.fundFitScore !== undefined ? Math.round(r.fundFitScore * 100) : 70;
+  return c.founders.map((founder, index) => ({
+    id: `f-${c.id}-${index}`,
+    name: founder.name,
+    companyId: c.id,
+    role: founder.role || `Founder, ${c.name}`,
+    background: founder.background,
+    score,
+    justification: founder.background || "Founder background requires further verification.",
+    signals: c.attributes.founderArchetypes,
+  }));
 }
 
 /** Trigger a live web search, fold results into the universe, return sourced views. */
@@ -225,6 +278,10 @@ async function handleStreamingChat(req: http.IncomingMessage, res: http.ServerRe
       ? {
           ...event,
           companies: event.companies.map((company) => sourcedView(
+            company,
+            state.sourcedCandidates?.find((candidate) => candidate.companyId === company.id),
+          )),
+          founders: event.companies.flatMap((company) => sourcedFounderViews(
             company,
             state.sourcedCandidates?.find((candidate) => candidate.companyId === company.id),
           )),

@@ -25,11 +25,12 @@ const INPUT_FONT = `${INPUT_FONT_PX}px 'DM Sans', sans-serif`
 const PARTICLE_RGB = '0,0,0'
 
 const DEFAULT_PLACEHOLDERS = [
-  'Why did Aureline surface this week?',
-  'Compare Tessellate to the Corepay memo',
-  'What would Marcus think of Solstice Health?',
-  'Which passes does the fund regret most?',
-  'Draft outreach to the Ledgerline founder',
+  'Source 10 companies in fintech infrastructure',
+  'Source 10 seed-stage healthcare data companies',
+  'Run the full analysis on Aureline',
+  'Run the full analysis on Perch Security',
+  'Compare Tessellate to similar compliance startups',
+  'Compare Aureline to its closest portfolio analogues',
 ]
 
 export function AskInput({

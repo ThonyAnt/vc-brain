@@ -483,7 +483,6 @@ function flyToPose(toPos, toTarget, dur) {
     .addScaledVector(camera.up, Math.min(travel * 0.14, 130))
     .addScaledVector(flySide, Math.min(travel * 0.1, 90));
   controls.enabled = false;
-  controls.autoRotate = false;
 }
 
 function setFocus(node) {
@@ -614,7 +613,6 @@ function animate() {
     if (tween.t >= 1) {
       tween.active = false;
       controls.enabled = true;
-      controls.autoRotate = !reducedMotion && !focused;
     }
   } else if (focused) {
     controls.target.copy(tmpA.copy(focused.pos).applyMatrix4(group.matrixWorld));

@@ -265,7 +265,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     const intro = { active: !reducedMotion, start: -1 }
     const revealAt = new Float32Array(N)
     nodes.forEach((n, i) => {
-      revealAt[i] = 0.2 + n.cluster * 0.12 + ((hash(n.id + 'reveal') % 997) / 997) * 0.45
+      revealAt[i] = 0.08 + n.cluster * 0.05 + ((hash(n.id + 'reveal') % 997) / 997) * 0.18
     })
     if (intro.active) {
       pDim.fill(0)
@@ -635,7 +635,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         const t = time - intro.start
         let done = true
         for (let i = 0; i < N; i++) {
-          const p = Math.min(Math.max((t - revealAt[i]) / 0.5, 0), 1)
+          const p = Math.min(Math.max((t - revealAt[i]) / 0.25, 0), 1)
           pDim[i] = p * p * (3 - 2 * p)
           if (p < 1) done = false
         }
@@ -745,7 +745,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     ro.observe(container)
 
     if (intro.active) {
-      flyToPose(new THREE.Vector3(0, 170, 1180), new THREE.Vector3(0, 0, 0), 1.9)
+      flyToPose(new THREE.Vector3(0, 170, 1180), new THREE.Vector3(0, 0, 0), 0.8)
     }
 
     animate()

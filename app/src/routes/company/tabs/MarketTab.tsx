@@ -2,20 +2,31 @@ import { Card } from '../../../components/ui/Card'
 import { Eyebrow } from '../../../components/ui/Eyebrow'
 import type { Company, Competitor } from '../../../lib/types'
 
-const KIND_COLOR: Record<Competitor['kind'], string> = {
-  incumbent: '#202020',
-  direct: '#575757',
-  adjacent: '#8d8d8d',
-  emerging: '#2b9a66',
+/* kind → brutal fill: black incumbents, white directs, bone adjacents, yellow emergents */
+const KIND_FILL: Record<Competitor['kind'], string> = {
+  incumbent: 'bg-dark text-on-dark',
+  direct: 'bg-card text-ink',
+  adjacent: 'bg-bone text-ink',
+  emerging: 'bg-hero-glow text-ink',
 }
 
 /* Deterministic quadrant placement: x = maturity (incumbent left, emerging right),
-   y = proximity (direct high, adjacent low), jittered by name hash. */
+   y = proximity (direct high, adjacent low), spread along the diagonal. */
 function place(c: Competitor, i: number, total: number) {
-  const xBase = { incumbent: 15, direct: 45, adjacent: 55, emerging: 82 }[c.kind]
-  const yBase = { incumbent: 30, direct: 22, adjacent: 68, emerging: 55 }[c.kind]
-  const spread = (i / Math.max(total - 1, 1) - 0.5) * 28
+  const xBase = { incumbent: 24, direct: 44, adjacent: 56, emerging: 78 }[c.kind]
+  const yBase = { incumbent: 32, direct: 20, adjacent: 70, emerging: 56 }[c.kind]
+  const spread = (i / Math.max(total - 1, 1) - 0.5) * 30
   return { x: xBase + spread * 0.4, y: yBase + spread }
+}
+
+function AxisTag({ children, className }: { children: string; className: string }) {
+  return (
+    <span
+      className={`code-sm absolute z-10 border-2 border-hairline-strong bg-dark px-2 py-0.5 uppercase text-on-dark ${className}`}
+    >
+      {children}
+    </span>
+  )
 }
 
 export function MarketTab({ company }: { company: Company }) {
@@ -24,43 +35,60 @@ export function MarketTab({ company }: { company: Company }) {
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
       <Card className="lg:col-span-2">
-        <Eyebrow>Competitor landscape</Eyebrow>
-        <div className="relative mt-3 aspect-[4/3] rounded-card bg-bone">
+        <div className="flex items-baseline justify-between">
+          <Eyebrow>Competitor landscape</Eyebrow>
+          <span className="code-sm text-charcoal">{comps.length} tracked</span>
+        </div>
+
+        <div
+          className="relative mt-3 aspect-[4/3] overflow-hidden border-2 border-hairline-strong bg-card"
+          style={{
+            backgroundImage: 'radial-gradient(rgba(0,0,0,0.14) 1px, transparent 1px)',
+            backgroundSize: '22px 22px',
+          }}
+        >
           {/* axes */}
-          <div className="absolute inset-x-4 top-1/2 border-t border-hairline" />
-          <div className="absolute inset-y-4 left-1/2 border-l border-hairline" />
-          <span className="caption absolute top-2 left-3 text-ash">direct</span>
-          <span className="caption absolute bottom-2 left-3 text-ash">adjacent</span>
-          <span className="caption absolute top-1/2 left-3 -translate-y-4 text-ash">incumbent</span>
-          <span className="caption absolute top-1/2 right-3 -translate-y-4 text-ash">emerging</span>
+          <div className="absolute inset-x-0 top-1/2 border-t-2 border-hairline-strong" />
+          <div className="absolute inset-y-0 left-1/2 border-l-2 border-hairline-strong" />
+          <AxisTag className="top-2 left-1/2 -translate-x-1/2">direct</AxisTag>
+          <AxisTag className="bottom-2 left-1/2 -translate-x-1/2">adjacent</AxisTag>
+          <AxisTag className="top-1/2 left-2 -translate-y-1/2">incumbent</AxisTag>
+          <AxisTag className="top-1/2 right-2 -translate-y-1/2">emerging</AxisTag>
 
           {comps.map((c, i) => {
             const p = place(c, i, comps.length)
             return (
               <div
                 key={c.name}
-                className="group absolute -translate-x-1/2 -translate-y-1/2"
+                className="group absolute z-20 -translate-x-1/2 -translate-y-1/2"
                 style={{ left: `${p.x}%`, top: `${p.y}%` }}
               >
-                <div className="mx-auto h-3 w-3 rounded-full" style={{ background: KIND_COLOR[c.kind] }} />
-                <div className="mt-1 text-center text-[11px] leading-3 text-charcoal">{c.name}</div>
-                <div className="pointer-events-none absolute top-full left-1/2 z-10 mt-1 hidden w-44 -translate-x-1/2 rounded-none border-2 border-hairline-strong bg-card p-2 shadow-brutal-sm text-[11px] leading-4 text-body group-hover:block">
-                  {c.note}
+                {/* dot at the coordinate, label floating above it */}
+                <i
+                  className={`block h-3.5 w-3.5 cursor-default rounded-full border-2 border-hairline-strong transition-transform group-hover:scale-125 ${KIND_FILL[c.kind]}`}
+                />
+                <span className="code-sm pointer-events-none absolute bottom-full left-1/2 mb-1 -translate-x-1/2 whitespace-nowrap bg-card/85 px-1 leading-tight text-ink">
+                  {c.name}
+                </span>
+                <div className="pointer-events-none absolute top-full left-1/2 z-30 mt-2 hidden w-48 -translate-x-1/2 border-2 border-hairline-strong bg-card p-2 shadow-brutal group-hover:block">
+                  <span className="caption text-body">{c.note}</span>
                 </div>
               </div>
             )
           })}
 
-          {/* the company itself — the one orange stamp */}
-          <div className="absolute left-[63%] top-[38%] -translate-x-1/2 -translate-y-1/2">
-            <div className="mx-auto h-4 w-4 rounded-full border border-hairline-strong bg-primary" />
-            <div className="caption-tight mt-1 text-center text-ink">{company.name}</div>
+          {/* the company itself — big red dot, name stamped above */}
+          <div className="absolute top-[38%] left-[63%] z-30 -translate-x-1/2 -translate-y-1/2">
+            <i className="block h-5 w-5 rounded-full border-2 border-hairline-strong bg-primary shadow-brutal-sm" />
+            <span className="caption-tight absolute bottom-full left-1/2 mb-1.5 -translate-x-1/2 whitespace-nowrap border-2 border-hairline-strong bg-card px-2 py-0.5 text-ink shadow-brutal-sm">
+              {company.name}
+            </span>
           </div>
 
           {/* white space callout */}
-          <div className="absolute right-[6%] bottom-[10%] w-36 rounded-none border-2 border-dashed border-ash p-2">
-            <span className="caption text-ash">white space</span>
-            <div className="mt-1 text-[11px] leading-4 text-mute">emerging + adjacent, no funded player</div>
+          <div className="absolute right-[5%] bottom-[8%] w-40 border-2 border-dashed border-hairline-strong bg-card/80 p-2">
+            <span className="code-sm uppercase text-ink">White space</span>
+            <div className="caption mt-1 text-charcoal">emerging + adjacent, no funded player</div>
           </div>
         </div>
       </Card>
@@ -70,17 +98,23 @@ export function MarketTab({ company }: { company: Company }) {
           const list = comps.filter((c) => c.kind === kind)
           if (!list.length) return null
           return (
-            <Card key={kind}>
-              <div className="flex items-center gap-2">
-                <i className="h-2.5 w-2.5 rounded-full" style={{ background: KIND_COLOR[kind] }} />
-                <Eyebrow>{kind}</Eyebrow>
+            <Card key={kind} className="p-0">
+              <div className="flex items-center justify-between border-b-2 border-hairline-strong px-4 py-2">
+                <span
+                  className={`code-sm border-2 border-hairline-strong px-2 py-0.5 uppercase ${KIND_FILL[kind]}`}
+                >
+                  {kind}
+                </span>
+                <span className="code-sm text-charcoal">{list.length}</span>
               </div>
-              {list.map((c) => (
-                <div key={c.name} className="mt-2">
-                  <div className="caption-tight text-ink">{c.name}</div>
-                  <div className="text-sm text-mute">{c.note}</div>
-                </div>
-              ))}
+              <div className="space-y-3 p-4">
+                {list.map((c) => (
+                  <div key={c.name}>
+                    <div className="caption-tight text-ink">{c.name}</div>
+                    <div className="text-sm text-mute">{c.note}</div>
+                  </div>
+                ))}
+              </div>
             </Card>
           )
         })}

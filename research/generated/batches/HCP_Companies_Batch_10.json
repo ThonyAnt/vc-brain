@@ -1,0 +1,462 @@
+[
+  {
+    "id": "co_tofu",
+    "name": "Tofu",
+    "description": "Agentic demand-generation platform that generates and launches personalized B2B marketing campaigns across email, landing pages, and ads, consolidating point martech tools into one AI-driven workflow.",
+    "attributes": {
+      "industryPath": ["B2B SaaS", "Marketing technology"],
+      "productCategoryPath": ["Software", "Marketing technology", "AI campaign generation and orchestration"],
+      "targetCustomers": ["B2B marketing teams", "Enterprise GTM organizations", "Mid-market demand-generation teams"],
+      "technicalApproaches": ["LLM-based content generation", "Agentic workflow orchestration", "Brand/product knowledge base"],
+      "founderArchetypes": ["Technical builder"],
+      "disruptionMechanisms": ["Point-tool consolidation", "AI-generated content at scale"],
+      "regulatoryLabels": [],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Product-led plus enterprise sales-assist",
+      "operationalModel": "Pure software",
+      "problemStatement": "B2B marketing teams rely on a sprawl of disconnected point tools for personalization, landing pages, ad copy, and localization, slowing campaign velocity and fragmenting brand consistency.",
+      "productDescription": "Tofu is an agentic demand-generation platform for B2B marketing teams that generates and launches hyper-personalized campaigns across email, landing pages, and paid ads from a shared brand and product knowledge base, positioned to consolidate martech point tools into one orchestration workflow."
+    },
+    "founders": [
+      { "name": "EJ Cho", "role": "Co-founder and CEO", "background": "Named CEO in the company's February 2025 Series A financing announcement; leads GTM and product strategy." },
+      { "name": "Elaine", "role": "Co-founder", "background": "Named as a co-founder in the Series A financing announcement; full surname and background undisclosed in public sources." },
+      { "name": "Honglei", "role": "Co-founder", "background": "Named as a co-founder in the Series A financing announcement; full surname and background undisclosed in public sources." }
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Marketing technology",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "graphMetrics": {
+      "ai_adoption": 0.7,
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.75,
+      "competition_intensity": 0.8,
+      "proprietary_data_moat": 0.4
+    },
+    "competitors": ["HubSpot", "6sense", "Mutiny", "Jasper", "Demandbase", "Clay"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.tofuhq.com/",
+      "https://www.tofuhq.com/platform",
+      "https://www.prnewswire.com/news-releases/tofu-raises-12m-series-a-to-consolidate-martech-for-enterprise-gtm-teams-302375706.html",
+      "https://www.tofuhq.com/post/tofu-raises-12m-series-a-to-cut-martech-bloat-for-gtm-teams"
+    ]
+  },
+  {
+    "id": "co_default",
+    "name": "Default",
+    "description": "AI infrastructure platform for revenue teams that unifies the inbound GTM stack (data layer, scheduling, routing, enrichment, and an AI revenue agent called Dot) into one orchestration platform.",
+    "attributes": {
+      "industryPath": ["B2B SaaS", "Sales and revenue operations"],
+      "productCategoryPath": ["Software", "Sales and marketing technology", "Inbound GTM orchestration"],
+      "targetCustomers": ["RevOps teams", "B2B sales organizations", "Inbound-led growth teams"],
+      "technicalApproaches": ["Real-time GTM data layer", "AI revenue agent", "Workflow orchestration"],
+      "founderArchetypes": ["Technical builder"],
+      "disruptionMechanisms": ["Point-tool consolidation", "Agent-executed workflow automation"],
+      "regulatoryLabels": [],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Product-led plus enterprise sales-assist",
+      "operationalModel": "Pure software",
+      "problemStatement": "Revenue teams stitch together separate forms, scheduling, lead-routing, and enrichment tools, creating data fragmentation that slows inbound lead response and blocks agentic automation.",
+      "productDescription": "Default provides a real-time GTM data layer connecting CRM and marketing-automation systems, an AI revenue agent (Dot) that plans and executes multi-step GTM work, and orchestration tools covering forms, scheduling, routing, and waterfall enrichment."
+    },
+    "founders": [
+      { "name": "Nico Ferreyra", "role": "CEO and Co-founder", "background": "Named CEO in the company's Series A / agent-launch announcement; no further public operating background disclosed." }
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Sales and revenue operations software",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "graphMetrics": {
+      "ai_adoption": 0.7,
+      "legacy_disruptiveness": 0.45,
+      "technical_feasibility": 0.7,
+      "competition_intensity": 0.75,
+      "proprietary_data_moat": 0.35
+    },
+    "competitors": ["HubSpot", "Chili Piper", "Clay", "Common Room", "Warmly", "RevenueHero"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.default.com/",
+      "https://www.default.com/post/agent-launch",
+      "https://www.contentgrip.com/default-agentic-gtm-platform/",
+      "https://www.demandgenreport.com/industry-news/default-launches-ai-powered-inbound-sales-funnel-reveals-6-6m-seed-funding/8099/"
+    ]
+  },
+  {
+    "id": "co_thena",
+    "name": "Thena",
+    "description": "Customer support platform purpose-built for B2B teams that live in Slack, Microsoft Teams, chat, and email, bringing SLA policies, escalations, ownership rules, and AI routing directly into those channels.",
+    "attributes": {
+      "industryPath": ["B2B SaaS", "Customer support software"],
+      "productCategoryPath": ["Software", "Customer support software", "Slack-native ticketing"],
+      "targetCustomers": ["B2B customer support teams", "Technology companies supporting technical customers"],
+      "technicalApproaches": ["Native Slack/Teams integration", "AI-based ticket routing", "AI chat agent"],
+      "founderArchetypes": [],
+      "disruptionMechanisms": ["Workflow-native delivery inside existing collaboration tools"],
+      "regulatoryLabels": [],
+      "businessModel": "Per-seat subscription SaaS",
+      "goToMarket": "Product-led plus inside sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "B2B customers and support teams increasingly communicate through Slack and other collaboration tools, but standalone helpdesk software forces support workflows outside those channels.",
+      "productDescription": "Thena brings enterprise-grade support workflows -- SLA policies, escalations, ownership rules, AI-based routing, and an AI web-chat agent -- directly into Slack, Microsoft Teams, in-app chat, and email rather than a standalone ticketing tool."
+    },
+    "founders": [
+      { "name": "Mike Molinet", "role": "Co-founder", "background": "Founding team member per company-funding coverage dating to Thena's 2022 founding." },
+      { "name": "Govind Kavaturi", "role": "Co-founder", "background": "Founding team member per the same sourcing; role details not further broken out publicly." },
+      { "name": "Unmukt Raizada", "role": "Co-founder", "background": "Founding team member per the same sourcing; role details not further broken out publicly." },
+      { "name": "Satyavrat Bondre", "role": "Co-founder", "background": "Founding team member per the same sourcing; role details not further broken out publicly." }
+    ],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "Customer support software",
+    "round": "Seed",
+    "checkSizeSought": 1500000,
+    "graphMetrics": {
+      "ai_adoption": 0.55,
+      "legacy_disruptiveness": 0.4,
+      "technical_feasibility": 0.7,
+      "competition_intensity": 0.75
+    },
+    "competitors": ["Zendesk", "Freshdesk", "Intercom", "Front", "Help Scout"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.thena.ai/",
+      "https://www.thena.ai/solutions/customer-support",
+      "https://www.thena.ai/slack",
+      "https://getlatka.com/companies/thena"
+    ]
+  },
+  {
+    "id": "co_dock",
+    "name": "Dock",
+    "description": "AI revenue-enablement platform built around client-facing digital workspaces -- digital sales rooms, onboarding plans, and content libraries -- connected to Dock AI, which generates real-time guidance from CRM and call-transcript data.",
+    "attributes": {
+      "industryPath": ["B2B SaaS", "Sales enablement"],
+      "productCategoryPath": ["Software", "Sales enablement", "Digital sales rooms and buyer workspaces"],
+      "targetCustomers": ["B2B sales teams", "Customer success teams", "Revenue enablement teams"],
+      "technicalApproaches": ["AI content guidance", "CRM and call-transcript integration", "Client-facing workspace"],
+      "founderArchetypes": ["Domain operator"],
+      "disruptionMechanisms": ["Point-tool consolidation", "Full customer-lifecycle workspace lock-in"],
+      "regulatoryLabels": [],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Product-led plus enterprise sales-assist",
+      "operationalModel": "Pure software",
+      "problemStatement": "Sales, customer success, and enablement teams manage buyer-facing content through disconnected decks, emails, and file shares, giving buyers a fragmented and hard-to-navigate experience.",
+      "productDescription": "Dock combines digital sales rooms, customer onboarding plans, client portals, and a content library with Dock AI, an engine that connects CRM data, call transcripts, the content library, and buyer engagement data to generate real-time guidance."
+    },
+    "founders": [
+      { "name": "Alex Kracov", "role": "CEO and Co-founder", "background": "Former VP of Marketing and third employee at Lattice; founded Dock in 2021 after building an internal customer-facing portal at Lattice." },
+      { "name": "Luc", "role": "Co-founder, brand design", "background": "Former Lattice employee who worked with Kracov; full surname undisclosed in public sources." },
+      { "name": "Victor", "role": "Co-founder, engineering", "background": "Early Lattice engineer; full surname undisclosed in public sources." }
+    ],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "Sales enablement software",
+    "round": "Seed",
+    "checkSizeSought": 1500000,
+    "graphMetrics": {
+      "ai_adoption": 0.45,
+      "legacy_disruptiveness": 0.35,
+      "technical_feasibility": 0.75,
+      "competition_intensity": 0.65
+    },
+    "competitors": ["Highspot", "Seismic", "GetAccept", "Aligned", "PandaDoc"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.dock.us/",
+      "https://www.dock.us/about-us",
+      "https://www.dock.us/library/seed-round",
+      "https://www.dock.us/library/craft-ventures-fundraising-announcement"
+    ]
+  },
+  {
+    "id": "co_kula",
+    "name": "Kula",
+    "description": "AI-native applicant tracking system that unifies sourcing, recruiting CRM, screening, interview scheduling, interview intelligence, and analytics into one workflow.",
+    "attributes": {
+      "industryPath": ["B2B SaaS", "Human resources technology"],
+      "productCategoryPath": ["Software", "HR technology", "Applicant tracking system"],
+      "targetCustomers": ["Talent acquisition teams", "SMB and mid-market recruiting teams"],
+      "technicalApproaches": ["AI resume screening", "AI interview notetaker", "Conversational analytics"],
+      "founderArchetypes": ["Domain operator"],
+      "disruptionMechanisms": ["Legacy ATS-plus-point-tool consolidation"],
+      "regulatoryLabels": [],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Inside sales plus product-led trial",
+      "operationalModel": "Pure software",
+      "problemStatement": "Recruiting teams stitch together a legacy ATS with separate sourcing, CRM, scheduling, and interview-note tools, creating data fragmentation and manual overhead across the hiring workflow.",
+      "productDescription": "Kula is an AI-native ATS unifying sourcing, a recruiting CRM, screening, interview scheduling, interview intelligence, and analytics, integrating with 100+ third-party systems, with AI-powered resume screening, an AI interview notetaker, and a conversational analytics dashboard."
+    },
+    "founders": [
+      { "name": "Achuthanand Tanjore Ravi", "role": "CEO and Co-founder", "background": "Previously held recruiting operating roles at Stripe, Uber, and Freshworks per the company's seed-funding announcement." }
+    ],
+    "stage": "seed",
+    "geography": "US/IN",
+    "sector": "HR technology / recruiting software",
+    "round": "Seed",
+    "checkSizeSought": 1500000,
+    "metrics": {
+      "arrGrowthRate": 70
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.65,
+      "legacy_disruptiveness": 0.45,
+      "technical_feasibility": 0.7,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["Greenhouse", "Lever", "Ashby", "SmartRecruiters", "Gem"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.kula.ai/",
+      "https://www.kula.ai/blog/seed-funding",
+      "https://techcrunch.com/2022/08/30/kula-makes-the-job-recruitment-process-less-exhausting/",
+      "https://www.forbes.com/sites/davidprosser/2024/09/19/why-kula-believes-ai-can-change-the-face-of-recruitment-forever/"
+    ]
+  },
+  {
+    "id": "co_metaview",
+    "name": "Metaview",
+    "description": "AI interview-intelligence platform: an AI notetaker captures interviews, generates structured reports, and feeds a broader hiring workflow that extends to job-post generation and candidate search.",
+    "attributes": {
+      "industryPath": ["B2B SaaS", "Human resources technology"],
+      "productCategoryPath": ["Software", "HR technology", "Interview intelligence"],
+      "targetCustomers": ["Talent acquisition teams", "Enterprise recruiting organizations"],
+      "technicalApproaches": ["AI transcript analysis", "Structured interview reporting", "Conversation-data platform"],
+      "founderArchetypes": ["Technical builder"],
+      "disruptionMechanisms": ["Unstructured-to-structured hiring data"],
+      "regulatoryLabels": [],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Enterprise sales-led",
+      "operationalModel": "Pure software",
+      "problemStatement": "Interview outcomes historically live as unstructured notes and inconsistent scoring, making hiring decisions hard to audit, compare, or improve over time.",
+      "productDescription": "Metaview's AI notetaker captures interviews, generates structured reports, and feeds a hiring workflow that has expanded into job-post generation and candidate search, having captured and analyzed more than 3 million interviews across its customer base."
+    },
+    "founders": [
+      { "name": "Siadhal Magos", "role": "Co-founder", "background": "Previously at Uber and Palantir; co-founded Metaview in 2018." },
+      { "name": "Shahriar Tajbakhsh", "role": "Co-founder and CTO", "background": "Previously at Uber and Palantir; leads technical development of Metaview's interview-intelligence platform." }
+    ],
+    "stage": "series_b",
+    "geography": "UK/US",
+    "sector": "HR technology / interview intelligence",
+    "round": "Series B",
+    "checkSizeSought": 2000000,
+    "metrics": {
+      "customers": 3000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.75,
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.75,
+      "competition_intensity": 0.6,
+      "proprietary_data_moat": 0.6
+    },
+    "competitors": ["Gong", "HireVue", "BrightHire", "Aspect", "Ashby"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.metaview.ai/",
+      "https://www.metaview.ai/resources/blog/fresh-capital-announcement",
+      "https://www.metaview.ai/resources/blog/series-b",
+      "https://www.gv.com/news/metaview-ai-hiring"
+    ]
+  },
+  {
+    "id": "co_campfire",
+    "name": "Campfire",
+    "description": "AI-native enterprise resource planning platform automating core accounting workflows -- bank reconciliation, invoicing, and revenue accounting -- for mid-market and enterprise organizations, positioned as a modern replacement for NetSuite.",
+    "attributes": {
+      "industryPath": ["B2B SaaS", "Financial operations software", "Enterprise resource planning"],
+      "productCategoryPath": ["Software", "Enterprise resource planning", "AI-native general ledger/ERP"],
+      "targetCustomers": ["Mid-market finance teams", "Enterprise finance teams", "Fast-growing technology companies"],
+      "technicalApproaches": ["LLM-native accounting automation", "Automated bank reconciliation"],
+      "founderArchetypes": ["Technical builder"],
+      "disruptionMechanisms": ["Legacy incumbent replacement", "AI-accelerated financial close"],
+      "regulatoryLabels": [],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Enterprise sales-led",
+      "operationalModel": "Pure software",
+      "problemStatement": "Legacy ERP systems built in the 1990s require lengthy implementations and slow, manual month-end close processes that fast-growing companies find hard to tolerate.",
+      "productDescription": "Campfire automates core accounting workflows -- bank reconciliation, invoicing, and revenue accounting -- for mid-market and enterprise finance teams, with a disclosed customer example cutting month-end close from 15 days to 3 days after migrating from NetSuite."
+    },
+    "founders": [
+      { "name": "John Glasgow", "role": "Founder and CEO", "background": "Launched Campfire in 2023 to replace legacy 1990s-era ERP accounting software with an LLM-powered alternative, per TechCrunch's reporting. Additional co-founders, if any, are not identified in public sources." }
+    ],
+    "stage": "series_b",
+    "geography": "US",
+    "sector": "Enterprise resource planning software",
+    "round": "Series B",
+    "checkSizeSought": 2000000,
+    "valuation": 375000000,
+    "graphMetrics": {
+      "ai_adoption": 0.75,
+      "legacy_disruptiveness": 0.65,
+      "technical_feasibility": 0.7,
+      "competition_intensity": 0.55
+    },
+    "competitors": ["NetSuite", "Sage Intacct", "Rillet", "QuickBooks", "Ramp"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://meetcampfire.com/",
+      "https://www.prnewswire.com/news-releases/campfire-raises-35-million-series-a-led-by-accel-to-build-the-next-generation-ai-driven-erp-302494153.html",
+      "https://www.prnewswire.com/news-releases/campfire-raises-65-million-series-b-to-redefine-how-finance-works-in-the-ai-era-302585077.html",
+      "https://techcrunch.com/2025/06/30/tiny-ai-erp-startup-campfire-is-winning-so-many-startups-from-netsuite-accel-led-a-35m-series-a/"
+    ]
+  },
+  {
+    "id": "co_doss",
+    "name": "Doss",
+    "description": "AI-native ERP and operations cloud (DossARP, the Adaptive Resource Platform) unifying inventory management, order processing, accounting, and production for mid-market physical-goods companies.",
+    "attributes": {
+      "industryPath": ["B2B SaaS", "Financial operations software", "Enterprise resource planning"],
+      "productCategoryPath": ["Software", "Enterprise resource planning", "Adaptive/inventory ERP"],
+      "targetCustomers": ["Mid-market physical-goods companies", "Retail, wholesale, and manufacturing operators"],
+      "technicalApproaches": ["Composable/agent-reconfigurable architecture", "AI-native ERP workflows"],
+      "founderArchetypes": ["Domain operator"],
+      "disruptionMechanisms": ["Legacy incumbent replacement", "Fast-implementation ERP"],
+      "regulatoryLabels": [],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Enterprise sales-led",
+      "operationalModel": "Pure software",
+      "problemStatement": "Mid-market physical-goods companies outgrow spreadsheets and basic accounting tools but face multi-year implementations and high failure rates when adopting traditional ERP systems like NetSuite.",
+      "productDescription": "Doss unifies inventory management, order processing, accounting, and production into a single, composable AI-native ERP system designed for both humans and AI agents to reconfigure, targeting mid-market physical-goods companies with implementations as fast as two days."
+    },
+    "founders": [
+      { "name": "Wiley Jones", "role": "Co-founder", "background": "Co-authored the company's Series A announcement; described prior ERP-systems experience before founding Doss." },
+      { "name": "Arnav", "role": "Co-founder", "background": "Co-founder per the Series A announcement; full surname and background undisclosed in public sources." }
+    ],
+    "stage": "series_b",
+    "geography": "US",
+    "sector": "Enterprise resource planning software",
+    "round": "Series B",
+    "checkSizeSought": 2000000,
+    "valuation": 250000000,
+    "graphMetrics": {
+      "ai_adoption": 0.7,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.65,
+      "competition_intensity": 0.5
+    },
+    "competitors": ["NetSuite", "Cin7", "Katana", "Fishbowl", "Brightpearl"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.doss.com/",
+      "https://www.doss.com/news/announcing-our-18m-series-a",
+      "https://www.doss.com/news/doss-raises-55m-series-b",
+      "https://techcrunch.com/2026/03/24/doss-raises-55m-for-ai-inventory-management-that-plugs-into-erp/",
+      "https://www.madrona.com/investing-in-doss-a-new-form-of-ai-native-enterprise-application/"
+    ]
+  },
+  {
+    "id": "co_sequence",
+    "name": "Sequence",
+    "description": "AI-native revenue-automation platform for B2B SaaS and fintech companies covering CPQ, billing, and revenue recognition in one connected quote-to-cash workflow.",
+    "attributes": {
+      "industryPath": ["B2B SaaS", "Financial operations software", "Billing and revenue operations"],
+      "productCategoryPath": ["Software", "Finance operations software", "Billing and revenue automation"],
+      "targetCustomers": ["B2B SaaS finance and RevOps teams", "Fintech finance teams"],
+      "technicalApproaches": ["AI-native billing engine", "Usage-based metering", "Automated revenue recognition"],
+      "founderArchetypes": ["Technical builder"],
+      "disruptionMechanisms": ["Point-tool consolidation", "Native usage/hybrid pricing support"],
+      "regulatoryLabels": [],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Enterprise sales-led",
+      "operationalModel": "Pure software",
+      "problemStatement": "RevOps and finance teams manage custom deals and modern usage-based or hybrid pricing models through spreadsheets and fragmented billing tools that cannot keep pace with pricing complexity.",
+      "productDescription": "Sequence covers CPQ (quoting), billing, and revenue recognition in one connected quote-to-cash workflow, built to natively support usage-based, hybrid, and seat-based pricing models used by fast-growing B2B SaaS and fintech companies."
+    },
+    "founders": [
+      { "name": "Riya Grover", "role": "CEO and Co-founder", "background": "Named CEO in the Series A financing announcement; leads product and company strategy." },
+      { "name": "Eamon", "role": "Co-founder", "background": "Named as a co-founder in the Series A financing announcement; full surname and background undisclosed in public sources." },
+      { "name": "Enda", "role": "Co-founder", "background": "Named as a co-founder in the Series A financing announcement; full surname and background undisclosed in public sources." }
+    ],
+    "stage": "series_a",
+    "geography": "UK",
+    "sector": "Billing and revenue operations software",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "graphMetrics": {
+      "ai_adoption": 0.6,
+      "legacy_disruptiveness": 0.4,
+      "technical_feasibility": 0.75,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["Zuora", "Chargebee", "Maxio", "Stripe Billing", "Metronome"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.sequencehq.com/",
+      "https://www.sequencehq.com/blog/sequence-announces-series-a",
+      "https://www.sequencehq.com/blog/introducing-sequence-20",
+      "https://www.sequencehq.com/products/billing"
+    ]
+  },
+  {
+    "id": "co_gradient_labs",
+    "name": "Gradient Labs",
+    "description": "AI agents for customer operations at regulated financial-services companies -- dispute resolution, KYC/KYB, lending, collections, onboarding, and insurance claims -- built with financial-services-specific regulatory guardrails.",
+    "attributes": {
+      "industryPath": ["B2B SaaS", "Financial technology", "Regulated customer operations"],
+      "productCategoryPath": ["Software", "Customer support software", "Regulated financial-services AI agents"],
+      "targetCustomers": ["Regulated fintech companies", "Neobanks", "Insurance and lending firms"],
+      "technicalApproaches": ["Specialist LLM agents", "Regulatory guardrail engine", "Multi-channel deployment (email, text, voice)"],
+      "founderArchetypes": ["Domain operator", "Regulated-industry operator"],
+      "disruptionMechanisms": ["Regulatory-native design versus horizontal AI support", "Automation of manual compliance-heavy operations"],
+      "regulatoryLabels": ["Financial-services regulated", "GDPR", "SOC 2 Type II"],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Enterprise sales-led",
+      "operationalModel": "Pure software",
+      "problemStatement": "Regulated financial-services companies cannot safely deploy horizontal AI customer-support tools because compliance, audit-trail, and guardrail requirements (FCA Consumer Duty, PSD2, EU AI Act) were not built into general-purpose products.",
+      "productDescription": "Gradient Labs' AI agents handle dispute resolution, KYC/KYB, lending, collections, onboarding, insurance claims, and general customer service across email, text, and voice, carrying financial-services-specific regulatory guardrails and SOC 2 Type II / GDPR compliance."
+    },
+    "founders": [
+      { "name": "Dimitri Masin", "role": "CEO and Founder", "background": "Founded Gradient Labs in 2023 after working at Monzo as an early employee, where he met his co-founders while helping build the bank at scale." },
+      { "name": "Neal Lathia", "role": "Co-founder", "background": "Former Monzo colleague of Masin; co-founded Gradient Labs in 2023." },
+      { "name": "Danai Antoniou", "role": "Co-founder", "background": "Former Monzo colleague of Masin; co-founded Gradient Labs in 2023." }
+    ],
+    "stage": "series_a",
+    "geography": "UK",
+    "sector": "Regulated fintech customer operations software",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "metrics": {
+      "arrGrowthRate": 900
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.8,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.65,
+      "regulatory_moat": 0.75,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.5
+    },
+    "competitors": ["Ada", "Decagon", "Sierra", "Intercom", "Zendesk"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://gradient-labs.ai/",
+      "https://gradient-labs.ai/blog/series-a-announcement",
+      "https://gradient-labs.ai/blog/weve-raised-26m-to-bring-autonomous-customer-operations-to-financial-services",
+      "https://sifted.eu/articles/gradient-labs-doubles-series-a"
+    ]
+  }
+]

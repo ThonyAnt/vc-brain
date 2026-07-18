@@ -1,0 +1,457 @@
+[
+  {
+    "id": "co_theseus",
+    "name": "Theseus",
+    "description": "Theseus builds Cyclops, a software-only visual positioning system that lets drones navigate reliably when GPS is jammed, spoofed, or unavailable, by comparing live camera imagery against pre-generated reference maps and running on commodity compute integrated via standard MAVLink flight-controller interfaces.",
+    "attributes": {
+      "industryPath": ["Defense and aerospace", "Autonomy and navigation", "GPS-denied navigation"],
+      "productCategoryPath": ["Hardware-enabled software", "Sensing and navigation module"],
+      "targetCustomers": ["Defense/military end users", "Drone OEMs", "Government program offices"],
+      "technicalApproaches": ["Computer vision", "Visual positioning against reference imagery", "Sensor retrofit / hardware-agnostic integration"],
+      "founderArchetypes": ["Young technical founders", "Hackathon-to-company origin", "First-time founders"],
+      "disruptionMechanisms": ["Retrofit onto existing platforms rather than requiring new hardware", "Software-first replacement of GPS dependency"],
+      "regulatoryLabels": ["Defense/export-controlled", "Dual-use technology"],
+      "businessModel": "hardware retrofit kit plus software license",
+      "goToMarket": "enterprise/government direct sales",
+      "operationalModel": "hardware-dependent",
+      "problemStatement": "Military and commercial drones lose navigation capability in GPS-denied or GPS-contested environments such as active conflict zones, and existing alternatives are too expensive, heavy, or complex for widespread retrofit.",
+      "productDescription": "Cyclops is a visual positioning system using EO/LWIR camera imagery matched against reference maps to compute drone position without GPS, running on commodity compute (Raspberry Pi 5, Nvidia Jetson) and integrating via MAVLink."
+    },
+    "founders": [
+      { "name": "Carl Schoeller", "role": "Co-founder and CEO", "background": "Stanford senior at founding; led the team through Y Combinator and early Special Forces engagement." },
+      { "name": "Ian Laffey", "role": "Co-founder", "background": "Recent college graduate at founding; a viral tweet about the team's hackathon prototype led to the company's founding." },
+      { "name": "Sacha Lévy", "role": "Co-founder", "background": "Yale PhD student at founding; part of the original three-person hackathon team." }
+    ],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "Defense tech / robotics navigation",
+    "round": "Seed",
+    "checkSizeSought": 1500000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.6,
+      "legacy_disruptiveness": 0.7,
+      "technical_feasibility": 0.65,
+      "regulatory_moat": 0.55,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.45
+    },
+    "competitors": ["Anduril Industries", "Palantir", "Xona Space Systems"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.theseus.us/",
+      "https://www.ycombinator.com/companies/theseus",
+      "https://techcrunch.com/2025/04/17/defense-tech-theseus-landed-y-combinator-the-us-special-forces-and-4-3m-from-a-tweet/"
+    ]
+  },
+  {
+    "id": "co_anyware_robotics",
+    "name": "Anyware Robotics",
+    "description": "Anyware Robotics builds Pixmo, a mobile robotic system combining an autonomous mobile robot base, a collaborative-robot arm, 3D perception, and an AI control stack, designed to unload floor-loaded containers and trailers and be redeployed for sorting, palletizing, picking, and loading.",
+    "attributes": {
+      "industryPath": ["Logistics and supply chain", "Warehouse automation", "Dock and trailer unloading robotics"],
+      "productCategoryPath": ["Hardware-enabled software", "Autonomous mobile manipulation robot"],
+      "targetCustomers": ["3PLs", "Retail distribution centers", "E-commerce logistics operators"],
+      "technicalApproaches": ["Autonomous mobile robot (AMR)", "Collaborative robot arm (cobot)", "3D perception / computer vision", "Patent-pending conveyor mechanism"],
+      "founderArchetypes": ["Deep technical PhD founders", "Ex-industrial-incumbent operators (FANUC)"],
+      "disruptionMechanisms": ["Multi-task hardware redeployability replacing single-purpose automation", "Robotics-as-a-service replacing manual dock labor"],
+      "regulatoryLabels": ["Pure hardware-dependent, non-regulated logistics operations"],
+      "businessModel": "Robotics-as-a-Service (RaaS)",
+      "goToMarket": "enterprise direct sales",
+      "operationalModel": "hardware-dependent",
+      "problemStatement": "Trailer and container unloading is one of the most physically demanding, highest-turnover warehouse jobs, and floor-loaded (non-palletized) freight has resisted automation because of its irregularity.",
+      "productDescription": "Pixmo combines an AMR base, cobot arm, 3D perception sensors, and an AI brain, with a patent-pending conveyor 'pull' accessory for container/trailer unloading and redeployable capability for sorting, palletizing, picking, and loading."
+    },
+    "founders": [
+      { "name": "Thomas Tang", "role": "Co-founder and CEO", "background": "PhD from UC Berkeley; worked at FANUC before co-founding Anyware Robotics; leads vision, strategy, and partnerships." },
+      { "name": "Bruce Fan", "role": "Co-founder and CTO", "background": "PhD from UC Berkeley; was a senior scientist at FANUC leading AI picking-capability design." }
+    ],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "Logistics robotics",
+    "round": "Seed",
+    "checkSizeSought": 2000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.6,
+      "legacy_disruptiveness": 0.65,
+      "technical_feasibility": 0.6,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.6
+    },
+    "competitors": ["Contoro", "Pickle Robot", "Boston Dynamics (Stretch)", "Dexterity"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://anyware-robotics.com/",
+      "https://www.prnewswire.com/news-releases/anyware-robotics-secures-12m-seed-funding-deploys-pixmo-commercially-302401361.html",
+      "https://spectrum.ieee.org/anyware-robotics-pixmo"
+    ]
+  },
+  {
+    "id": "co_daedalus",
+    "name": "Daedalus",
+    "description": "Daedalus builds AI-driven, software-defined precision-manufacturing factories, using largely off-the-shelf CNC hardware with a proprietary Manufacturing AI Platform that automates quoting, scheduling, machine programming, and quality control to produce high-precision, high-mix parts for semiconductor, defense, energy, e-mobility, and medical customers.",
+    "attributes": {
+      "industryPath": ["Manufacturing", "Precision machining", "Software-defined factories"],
+      "productCategoryPath": ["Hardware-enabled software", "Manufacturing-as-a-service platform"],
+      "targetCustomers": ["Semiconductor manufacturers", "Defense supply chain", "Energy and e-mobility OEMs", "Medical device makers"],
+      "technicalApproaches": ["AI-driven shop-floor orchestration", "Automated quoting and scheduling", "CNC/precision machining automation"],
+      "founderArchetypes": ["Elite AI-lab alumnus (first OpenAI engineer)", "Software-to-hardware translator"],
+      "disruptionMechanisms": ["Software-defined factory replacing manual job-shop scheduling", "Consolidation of an aging, fragmented small-shop industry"],
+      "regulatoryLabels": ["Defense/strategic-sector supplier (indirect)", "Manufacturing-dependent, capital-intensive"],
+      "businessModel": "per-part / contracted manufacturing revenue",
+      "goToMarket": "enterprise direct sales",
+      "operationalModel": "manufacturing-dependent",
+      "problemStatement": "Precision machining is a large, fragmented, aging industry where most shops are small and owner-operated, creating a capacity crunch as owners retire, and existing automation has not addressed shop-floor scheduling and quality-control complexity.",
+      "productDescription": "The Manufacturing AI Platform automates quoting, scheduling, machine programming, and quality control across an owned factory, turning customer CAD drawings into finished high-precision, high-mix parts with less manual machinist intervention."
+    },
+    "founders": [
+      { "name": "Jonas Schneider", "role": "Founder and CEO", "background": "First engineer hired at OpenAI; co-founded and led software engineering for OpenAI's robotics team; previously worked on distributed systems at Stripe; computer science degree from the Karlsruhe Institute of Technology (KIT)." }
+    ],
+    "stage": "series_a",
+    "geography": "DE",
+    "sector": "Advanced manufacturing / industrial AI",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.65,
+      "legacy_disruptiveness": 0.7,
+      "technical_feasibility": 0.55,
+      "proprietary_data_moat": 0.5,
+      "competition_intensity": 0.45
+    },
+    "competitors": ["Isembard", "Hadrian", "Xometry", "Protolabs"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.daedalus.de/",
+      "https://techcrunch.com/2024/02/08/daedalus-manufacturing-jonas-schneider-openai-robotics-raises-21-million/",
+      "https://www.ngpcap.com/insights/daedalus-a-startup-led-by-former-openai-technical-lead-secures-21m-to-redefine-manufacturing-with-ai"
+    ]
+  },
+  {
+    "id": "co_cartken",
+    "name": "Cartken",
+    "description": "Cartken builds autonomous wheeled robots for short-distance delivery and industrial material transport, originally focused on sidewalk food delivery and now pivoting toward indoor and industrial transport (Cartken Hauler, Cartken Runner) after organic demand emerged from a manufacturing customer.",
+    "attributes": {
+      "industryPath": ["Logistics and supply chain", "Autonomous delivery robotics", "Industrial material transport"],
+      "productCategoryPath": ["Hardware-enabled software", "Autonomous wheeled delivery/transport robot"],
+      "targetCustomers": ["Campus/corporate food-delivery partners", "Industrial manufacturers", "Automotive and electronics plants"],
+      "technicalApproaches": ["Autonomous wheeled robot navigation", "Computer vision and mapping", "Fleet operations software"],
+      "founderArchetypes": ["Ex-Google Area 120 robotics team", "Serial founder (prior startup exit)"],
+      "disruptionMechanisms": ["Pivot from consumer delivery to higher-margin industrial material transport", "Multi-year fleet-operations data as a reliability moat"],
+      "regulatoryLabels": ["Pure hardware-dependent, sidewalk/indoor robot operation"],
+      "businessModel": "hardware/fleet service revenue",
+      "goToMarket": "enterprise direct sales plus consumer delivery partnerships",
+      "operationalModel": "hardware-dependent",
+      "problemStatement": "Short-distance delivery and material transport inside campuses, factories, and warehouses remains largely manual or fixed-conveyor based, and existing sidewalk-delivery robot business models have struggled to reach attractive unit economics.",
+      "productDescription": "Cartken's fleet includes the Courier (original delivery robot), Hauler (up to 660 lb industrial transport, released 2025), and Runner (indoor delivery), all built on the company's autonomous navigation and fleet-operations software stack."
+    },
+    "founders": [
+      { "name": "Christian Bersch", "role": "Co-founder and CEO", "background": "Nearly eight years at Google (2011-2019), including product/team lead for the Area 120 robotics delivery project, before co-founding Cartken in 2019." },
+      { "name": "Jonas Witt", "role": "Co-founder and CTO", "background": "Google Tech Lead for the BookBot last-mile delivery robot in Area 120; previously senior research engineer at Bosch North America leading autonomous-vehicle mapping/localization; PhD in computer vision, Hamburg University of Technology." },
+      { "name": "Anjali Jindal Naik", "role": "Co-founder and COO", "background": "Previously co-founded Saavn, an Indian music-streaming platform acquired by Reliance Jio for a reported $1 billion; earlier held product and operations roles at Google." }
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Delivery and logistics robotics",
+    "round": "Series A",
+    "checkSizeSought": 1500000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.5,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.65,
+      "proprietary_data_moat": 0.45,
+      "competition_intensity": 0.6
+    },
+    "competitors": ["Serve Robotics", "Starship Technologies", "Locus Robotics", "Anyware Robotics"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.cartken.com/",
+      "https://www.cartken.com/press-release/cartken-announces-22-5m-in-aggregate-funding-to-advance-ai-based-technology-stack-enabling-autonomous-delivery-robots",
+      "https://techcrunch.com/2025/07/20/why-cartken-pivoted-its-focus-from-last-mile-delivery-to-industrial-robots/"
+    ]
+  },
+  {
+    "id": "co_contoro",
+    "name": "Contoro",
+    "description": "Contoro Robotics builds AI-powered robots for automated container and trailer unloading using a proprietary Duo-Grasp end-effector and a human-in-the-loop (HITL) model, pricing on a pay-per-container basis rather than hardware sale or lease.",
+    "attributes": {
+      "industryPath": ["Logistics and supply chain", "Warehouse automation", "Dock and trailer unloading robotics"],
+      "productCategoryPath": ["Hardware-enabled software", "Human-in-the-loop robotic manipulation"],
+      "targetCustomers": ["3PLs", "Retail and grocery distribution centers", "E-commerce logistics operators"],
+      "technicalApproaches": ["Human-in-the-loop (HITL) teleoperation", "Proprietary end-effector design (Duo-Grasp)", "Computer vision"],
+      "founderArchetypes": ["Deep technical PhD founder", "Prior medical-robotics/FDA commercialization experience"],
+      "disruptionMechanisms": ["Usage/transaction-based pricing replacing capex-heavy automation purchases", "Human-in-the-loop reliability data flywheel"],
+      "regulatoryLabels": ["Pure hardware-dependent, non-regulated logistics operations"],
+      "businessModel": "usage-based / pay-per-container",
+      "goToMarket": "enterprise direct sales",
+      "operationalModel": "hardware-dependent",
+      "problemStatement": "Floor-loaded container and trailer unloading remains one of the least automated, most labor-intensive supply-chain tasks, and existing robotic manipulation has not reliably closed the performance gap with human labor.",
+      "productDescription": "Contoro's Duo-Grasp end effector, combined with human-in-the-loop remote oversight, unloads floor-loaded containers and trailers with a reported 99%+ success rate, priced per container processed."
+    },
+    "founders": [
+      { "name": "Youngmok Yun", "role": "Founder and CEO", "background": "PhD-level researcher in human-in-the-loop teleoperated robotics with NSF/NASA/UT Austin-supported research; was CEO/CTO of Harmonic Bionics, leading FDA approval and commercialization of a stroke-rehabilitation robot, before founding Contoro in 2022." }
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Logistics robotics",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.55,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.6,
+      "proprietary_data_moat": 0.45,
+      "competition_intensity": 0.6
+    },
+    "competitors": ["Anyware Robotics", "Pickle Robot", "Boston Dynamics (Stretch)", "Dexterity"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://contoro.com/",
+      "https://www.globenewswire.com/news-release/2025/03/25/3049120/0/en/Contoro-Robotics-Secures-12M-Series-A-to-Bring-AI-Powered-Trailer-Unloading-to-Scale.html",
+      "https://www.freightwaves.com/news/contoro-robotics-raises-12m-to-scale-ai-powered-trailer-unloading"
+    ]
+  },
+  {
+    "id": "co_chef_robotics",
+    "name": "Chef Robotics",
+    "description": "Chef Robotics builds AI-enabled robotic arms for high-mix food assembly, sold as Robotics-as-a-Service to food manufacturers facing persistent labor shortages, with robots reported to have produced more than 70 million food servings across North America.",
+    "attributes": {
+      "industryPath": ["Food and beverage", "Food manufacturing automation", "Robotics-as-a-service"],
+      "productCategoryPath": ["Hardware-enabled software", "Food assembly manipulation robot"],
+      "targetCustomers": ["Prepared-meal manufacturers", "Food service and catering producers"],
+      "technicalApproaches": ["Embodied AI / food-manipulation model", "Robotic arm manipulation trained on production data"],
+      "founderArchetypes": ["Serial founder (prior startup exit)", "Applied-technology venture investor turned operator"],
+      "disruptionMechanisms": ["Robotics-as-a-service replacing manual food-line labor", "Data flywheel from real production deployments"],
+      "regulatoryLabels": ["Food-safety regulated operating environment"],
+      "businessModel": "Robotics-as-a-Service (RaaS)",
+      "goToMarket": "enterprise direct sales",
+      "operationalModel": "hardware-dependent",
+      "problemStatement": "Food manufacturers face persistent, severe labor shortages for high-mix food assembly tasks that have resisted automation because of the variability of food shape, texture, and packaging versus rigid industrial parts.",
+      "productDescription": "Chef Robotics' RaaS robotic arms place proteins, sides, and garnishes into meal trays and containers at production speed, using an AI food-manipulation model trained on real production data across customer sites and manipulating nearly 2,000 distinct ingredients."
+    },
+    "founders": [
+      { "name": "Rajat Bhageria", "role": "Founder and CEO", "background": "Previously founded ThirdEye (visual-recognition product for the visually impaired, later sold) and Prototype Capital, a pre-seed fund; holds a Master's in Robotics and Machine Learning from the University of Pennsylvania and a Bachelor's in Economics from Wharton." }
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Food-tech robotics",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "metrics": {
+      "customers": 5
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.55,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.55,
+      "proprietary_data_moat": 0.5,
+      "competition_intensity": 0.45
+    },
+    "competitors": ["Soft Robotics", "Dexterity", "Nimble Robotics"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.chefrobotics.ai/",
+      "https://www.chefrobotics.ai/post/weve-raised-43-1m-to-accelerate-our-ai-enabled-robot-deployments",
+      "https://www.cnbc.com/2025/03/31/chef-robotics-raises-20point6-million-to-continue-building-ai-robot-arms.html"
+    ]
+  },
+  {
+    "id": "co_sereact",
+    "name": "Sereact",
+    "description": "Sereact builds hardware-agnostic AI software (Vision Language Action Models) that lets industrial and warehouse robots perform tasks they were not explicitly programmed for, deployed across more than 200 systems in Europe with customers including BMW and Daimler Truck.",
+    "attributes": {
+      "industryPath": ["Logistics and supply chain", "Warehouse and manufacturing robotics", "Robot control software"],
+      "productCategoryPath": ["Software", "Robotics AI control platform"],
+      "targetCustomers": ["Automotive manufacturers", "Warehouse and 3PL operators", "E-commerce logistics operators"],
+      "technicalApproaches": ["Vision Language Action Models (VLAM)", "Hardware-agnostic robot control software", "Computer vision"],
+      "founderArchetypes": ["Deep academic AI researchers (University of Stuttgart)"],
+      "disruptionMechanisms": ["Software layer decoupling robot intelligence from specific hardware vendors", "Cross-vendor production-data flywheel"],
+      "regulatoryLabels": ["Pure software, hardware-agnostic"],
+      "businessModel": "enterprise software licensing",
+      "goToMarket": "enterprise direct sales",
+      "operationalModel": "pure software",
+      "problemStatement": "Industrial and warehouse robots are typically hard-programmed for narrow, fixed tasks, and adapting them to new tasks or SKUs requires costly reprogramming; enterprises with heterogeneous robot fleets lack a unifying intelligence layer.",
+      "productDescription": "Sereact's VLAM software runs on top of third-party robot arms already installed at a customer site, combining visual perception with language-model-style reasoning to let robots adapt to dynamic tasks in real time rather than following fixed programming."
+    },
+    "founders": [
+      { "name": "Ralf Gulde", "role": "Co-founder and CEO", "background": "Former AI researcher at the University of Stuttgart; publicly describes Sereact's approach as enabling robots to adapt to dynamic tasks in real time." },
+      { "name": "Marc Tuscher", "role": "Co-founder", "background": "Former AI researcher at the University of Stuttgart; co-developed the company's vision-language-action approach to robot control." }
+    ],
+    "stage": "series_b",
+    "geography": "DE",
+    "sector": "Robotics AI software",
+    "round": "Series B (screened at Series A)",
+    "checkSizeSought": 2000000,
+    "metrics": {
+      "customers": 5
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.75,
+      "legacy_disruptiveness": 0.65,
+      "technical_feasibility": 0.75,
+      "proprietary_data_moat": 0.65,
+      "competition_intensity": 0.55
+    },
+    "competitors": ["Covariant", "Dexterity", "Osaro", "Physical Intelligence"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://sereact.ai/",
+      "https://sereact.ai/posts/sereact-fundraising-series-a",
+      "https://siliconangle.com/2026/04/27/sereact-raises-110m-scale-ai-robotic-brain-expand-us/"
+    ]
+  },
+  {
+    "id": "co_isembard",
+    "name": "Isembard",
+    "description": "Isembard is a software-first precision-manufacturing company reshoring critical-parts production (aerospace, defense, energy) through a distributed network of company-operated and franchised factories run on its proprietary MasonOS software platform.",
+    "attributes": {
+      "industryPath": ["Manufacturing", "Precision machining", "Reshoring / distributed manufacturing"],
+      "productCategoryPath": ["Hardware-enabled software", "Distributed manufacturing-as-a-service platform"],
+      "targetCustomers": ["Aerospace and defense supply chain", "Energy operators", "Government/national-security programs"],
+      "technicalApproaches": ["Distributed factory operating software (MasonOS)", "Franchise-model manufacturing coordination"],
+      "founderArchetypes": ["Policy/operator background outsider founder", "Prior startup exit (broadband company)"],
+      "disruptionMechanisms": ["Distributed franchise network replacing large monolithic factories", "Software-driven reshoring of an aging, fragmented supplier base"],
+      "regulatoryLabels": ["Defense/aerospace supply-chain adjacent", "Manufacturing-dependent, capital-intensive"],
+      "businessModel": "manufacturing revenue via company-operated and franchised factories",
+      "goToMarket": "enterprise direct sales plus franchise network expansion",
+      "operationalModel": "manufacturing-dependent",
+      "problemStatement": "Critical precision-component manufacturing for aerospace, defense, and energy is produced mostly by small, aging, owner-operated shops nearing retirement, creating a structural capacity gap and reshoring need.",
+      "productDescription": "MasonOS coordinates quoting, scheduling, machine operations, quality checks, and workflow management across a distributed network of smaller factories, enabling faster, cheaper, and more consistent precision manufacturing than a single large facility."
+    },
+    "founders": [
+      { "name": "Alexander Fitzgerald", "role": "Founder and CEO", "background": "Studied biochemistry; worked as a UK government business-policy adviser; founded a broadband company later acquired by Octopus Telecom; identified manufacturing supply-chain inefficiencies while serving with a UK military reserve unit." }
+    ],
+    "stage": "series_a",
+    "geography": "UK",
+    "sector": "Advanced manufacturing / reshoring",
+    "round": "Series A (screened at Seed)",
+    "checkSizeSought": 2000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.4,
+      "legacy_disruptiveness": 0.65,
+      "technical_feasibility": 0.5,
+      "regulatory_moat": 0.5,
+      "competition_intensity": 0.4
+    },
+    "competitors": ["Daedalus", "Hadrian", "Xometry", "Protolabs"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.isembard.com/",
+      "https://techcrunch.com/2025/04/24/british-startup-isembard-lands-9m-to-reshore-manufacturing-for-critical-industries/",
+      "https://www.isembard.com/blogs-and-articles/isembard-raises-50m-series-a-to-open-25-ai-powered-factories-serving-aerospace-and-defence"
+    ]
+  },
+  {
+    "id": "co_orbital_materials",
+    "name": "Orbital Materials",
+    "description": "Orbital Materials (rebranded Orbital Industries) builds LINUS, an AI foundation model for materials science that generates candidate material structures from natural-language prompts, developing them to proof-of-concept in its own labs and partnering with external manufacturers for commercial-scale production; its first disclosed application is a low-cost carbon-capture sorbent.",
+    "attributes": {
+      "industryPath": ["Climate and energy", "Materials science", "AI for scientific discovery"],
+      "productCategoryPath": ["Software", "AI foundation model for physical materials discovery"],
+      "targetCustomers": ["Specialty chemical manufacturers", "Battery/semiconductor materials producers", "Carbon-capture and decarbonization programs"],
+      "technicalApproaches": ["AI foundation model (LINUS) for materials generation", "Simulation-plus-wet-lab experimental validation"],
+      "founderArchetypes": ["Elite AI-lab alumnus (DeepMind materials science researcher)"],
+      "disruptionMechanisms": ["AI-native discovery compressing traditional materials R&D cycles", "Capital-light model (partners for manufacturing rather than owning factories)"],
+      "regulatoryLabels": ["Cleantech/climate-adjacent, non-regulated core software"],
+      "businessModel": "licensing / royalty on commercialized materials",
+      "goToMarket": "enterprise partnership and licensing",
+      "operationalModel": "pure software with own wet-lab validation",
+      "problemStatement": "Discovering and commercializing new specialty materials (for carbon capture, batteries, semiconductors, and other cleantech applications) traditionally requires years of slow, expensive trial-and-error chemistry.",
+      "productDescription": "LINUS is an AI foundation model trained on public materials data, simulations, and the company's own experiments, generating 3D candidate molecular structures from natural-language prompts; validated candidates are developed to proof-of-concept and then scaled with external manufacturing partners."
+    },
+    "founders": [
+      { "name": "Jonathan Godwin", "role": "Co-founder and CEO", "background": "Previously a senior materials-science researcher at DeepMind; MSc in Machine Learning from UCL; BA in Mathematics and Philosophy from the University of Bristol." },
+      { "name": "James Gin-Pollock", "role": "Co-founder", "background": "Named as a co-founder in company-founding coverage; individual background not independently detailed in sources reviewed." },
+      { "name": "Daniel Miodovnik", "role": "Co-founder", "background": "Named as a co-founder in company-founding coverage; individual background not independently detailed in sources reviewed." }
+    ],
+    "stage": "series_b",
+    "geography": "UK/US",
+    "sector": "AI materials discovery / cleantech",
+    "round": "Series B (screened at Series A)",
+    "checkSizeSought": 2000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.75,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.5,
+      "proprietary_data_moat": 0.55,
+      "competition_intensity": 0.35
+    },
+    "competitors": ["Citrine Informatics", "Lila Sciences", "Recursion Pharmaceuticals"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.orbitalindustries.com/",
+      "https://techcrunch.com/2024/02/21/this-startup-is-using-ai-to-discover-new-materials/",
+      "https://fortune.com/2026/05/28/exclusive-orbital-industries-raises-50-million-series-b-funding-round-ai-to-discover-exotic-new-materials/"
+    ]
+  },
+  {
+    "id": "co_matic",
+    "name": "Matic",
+    "description": "Matic makes an autonomous robot that vacuums and mops floors in a single pass using camera-based computer vision instead of lidar, with independently verified best-in-class suction and noise scores, sold direct-to-consumer with no required subscription.",
+    "attributes": {
+      "industryPath": ["Consumer hardware", "Home robotics", "Floor-care appliances"],
+      "productCategoryPath": ["Hardware-enabled software", "Consumer autonomous cleaning robot"],
+      "targetCustomers": ["Premium consumer households"],
+      "technicalApproaches": ["Vision-based navigation and mapping (no lidar)", "On-device / local AI processing"],
+      "founderArchetypes": ["Repeat consumer-hardware founding team"],
+      "disruptionMechanisms": ["Vision-based navigation replacing lidar as the category-standard sensing approach", "Privacy-first, on-device processing as a differentiator"],
+      "regulatoryLabels": ["Pure consumer hardware, non-regulated"],
+      "businessModel": "one-time hardware purchase with optional paid add-ons",
+      "goToMarket": "direct-to-consumer",
+      "operationalModel": "hardware-dependent",
+      "problemStatement": "Premium consumers want a robot vacuum/mop that cleans effectively and quietly without relying on cloud data processing, and existing lidar-based competitors have not solved integrated vacuum-and-mop cleaning in a single pass as effectively.",
+      "productDescription": "Matic's robot vacuums and mops floors in a single pass using real-time 3D vision-based floor mapping instead of lidar, with all processing on-device, sold in configurations from $1,245 to $2,490 with optional bag-pass and warranty add-ons."
+    },
+    "founders": [
+      { "name": "Navneet Dalal", "role": "Co-founder", "background": "Publicly identified as a co-founder since the company's 2017 founding; detailed professional background not independently verified in sources reviewed here." },
+      { "name": "Mehul Nariyawala", "role": "Co-founder", "background": "Publicly identified as a co-founder since the company's 2017 founding; detailed professional background not independently verified in sources reviewed here." },
+      { "name": "Shafaq Presswala", "role": "Co-founder", "background": "Publicly identified as a co-founder since the company's 2017 founding; detailed professional background not independently verified in sources reviewed here." }
+    ],
+    "stage": "series_b",
+    "geography": "US",
+    "sector": "Consumer robotics",
+    "round": "Series A Prime (screened at Series A)",
+    "checkSizeSought": 1500000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.4,
+      "legacy_disruptiveness": 0.45,
+      "technical_feasibility": 0.6,
+      "competition_intensity": 0.75
+    },
+    "competitors": ["iRobot", "SharkNinja", "Roborock", "Ecovacs"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://maticrobots.com/",
+      "https://maticrobots.com/blog",
+      "https://sacra.com/c/matic/",
+      "https://vacuumwars.com/matic-robot-vacuum-review/"
+    ]
+  }
+]

@@ -1,0 +1,479 @@
+[
+  {
+    "id": "co_anterior",
+    "name": "Anterior",
+    "description": "AI clinical-review software for health-plan utilization management and prior authorization. Its 'Florence' AI agent prepares and reasons over medical records to support payer clinical-review decisions, with KLAS Research-validated 99.24% clinical accuracy in live production and deployments covering approximately 50 million lives.",
+    "attributes": {
+      "industryPath": ["Healthcare", "Payer technology", "Utilization management"],
+      "productCategoryPath": ["Software", "AI clinical decision support", "Prior authorization automation"],
+      "targetCustomers": ["Health plans", "Payer utilization-management teams", "Regulated buyers"],
+      "technicalApproaches": ["Large language models", "Clinical NLP", "AI agents"],
+      "founderArchetypes": ["Clinician founder", "Technical-clinical hybrid"],
+      "disruptionMechanisms": ["Administrative automation", "AI-augmented clinical decisioning"],
+      "regulatoryLabels": ["Healthcare-regulated", "Payer-facing", "Clinical-accuracy validated"],
+      "businessModel": "Enterprise SaaS, PMPY/covered-lives pricing",
+      "goToMarket": "Enterprise sales to health plans",
+      "operationalModel": "Pure software",
+      "problemStatement": "Prior authorization and utilization review are slow, expensive, and administratively burdensome for payers, providers, and patients, delaying care and driving denial-appeal costs.",
+      "productDescription": "Enterprise AI platform ('Florence') that prepares medical records and performs clinical reasoning to accelerate and support payer prior-authorization and utilization-review decisions, independently validated by KLAS Research for clinical accuracy."
+    },
+    "founders": [
+      { "name": "Abdel Mahmoud", "role": "Co-founder and CEO", "background": "Physician who pursued a master's degree in computer science; led the company through its June 2024 Series A and February 2026 Series B." }
+    ],
+    "stage": "series_b",
+    "geography": "US/UK",
+    "sector": "Healthcare software, payer technology",
+    "round": "Series B",
+    "checkSizeSought": 2000000,
+    "valuation": 95000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.7,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.7,
+      "proprietary_data_moat": 0.55,
+      "competition_intensity": 0.6
+    },
+    "competitors": ["Cohere Health", "Rialtic", "XSOLIS", "Availity", "Evolent Health"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.anterior.com/",
+      "https://www.businesswire.com/news/home/20240610719247/en/Anterior-Secures-$20-Million-Series-A-to-Unlock-Administrative-Efficiencies-for-Healthcare-Payers",
+      "https://www.anterior.com/insights/anterior-raises-40m-series",
+      "https://techcrunch.com/2024/06/08/anterior-grabs-20m-from-nea-at-95m-valuation-to-expedite-health-insurance-approvals-with-ai/"
+    ]
+  },
+  {
+    "id": "co_freed",
+    "name": "Freed",
+    "description": "AI medical scribe for independent and community-practice clinicians, converting patient visits into structured clinical notes with an EHR integration, plus a coding assistant and an AI front-desk receptionist product. Reports 26,000+ clinicians, 1,300+ clinics, and 32.6 million patient visits transcribed in 2025.",
+    "attributes": {
+      "industryPath": ["Healthcare", "Clinical software", "Clinical documentation"],
+      "productCategoryPath": ["Software", "AI workflow application", "Ambient clinical documentation"],
+      "targetCustomers": ["Independent physicians", "Community practices", "Clinicians (individual buyers)"],
+      "technicalApproaches": ["Ambient voice transcription", "Large language models", "Clinical NLP"],
+      "founderArchetypes": ["Repeat technical operators", "Ex-Big Tech engineers"],
+      "disruptionMechanisms": ["Product-led growth into an underserved segment", "Administrative-burden automation"],
+      "regulatoryLabels": ["Healthcare-adjacent", "HIPAA-relevant"],
+      "businessModel": "Subscription SaaS, per-seat",
+      "goToMarket": "Product-led growth, self-serve",
+      "operationalModel": "Pure software",
+      "problemStatement": "Clinicians in independent and community practices spend hours per day on clinical documentation, and are underserved by enterprise-focused AI scribes built for large health systems.",
+      "productDescription": "Self-serve AI medical scribe ($39/month) plus a coding assistant and an AI front-desk receptionist product ($149/month), purpose-built for independent and community clinical practices."
+    },
+    "founders": [
+      { "name": "Erez Druk", "role": "Co-founder and CEO", "background": "Former Meta engineer; co-founded Freed after observing his wife's, Dr. Gabi Meckler, documentation burden as a clinician." },
+      { "name": "Andrey Bannikov", "role": "Co-founder and CTO", "background": "Former Meta engineer; co-built Freed's transcription and clinical-note technology." }
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Healthcare software, clinical documentation",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "metrics": {
+      "customers": 1300
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.9,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.8,
+      "regulatory_moat": 0.25,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.85
+    },
+    "competitors": ["Abridge", "Ambience Healthcare", "Nuance DAX Copilot", "Suki AI", "Heidi Health", "Nabla"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.getfreed.ai/",
+      "https://www.getfreed.ai/press/freed-secures-30m-series-a-led-by-sequoia-capital-to-free-clinicians-from-administrative-burdens-with-ai-assistant",
+      "https://www.cnbc.com/2025/03/05/freed-raises-30-million-led-by-sequoia-to-tackle-clinician-burnout.html"
+    ]
+  },
+  {
+    "id": "co_counsel_health",
+    "name": "Counsel Health",
+    "description": "AI-native, physician-supervised virtual primary-care company. A medical-grade AI chat interface triages members and escalates to real physicians via chat or video within minutes; expanding into chronic-condition management in 2026. Reports more than 100,000 members served.",
+    "attributes": {
+      "industryPath": ["Healthcare", "Virtual care", "Primary care"],
+      "productCategoryPath": ["Software", "AI-enabled care delivery", "AI triage and virtual primary care"],
+      "targetCustomers": ["Consumers", "Employers", "Health plans"],
+      "technicalApproaches": ["Large language models", "AI clinical triage", "Physician-in-the-loop escalation"],
+      "founderArchetypes": ["Physician founder", "Prior healthtech executive"],
+      "disruptionMechanisms": ["AI-augmented care capacity", "Direct-to-consumer plus B2B distribution"],
+      "regulatoryLabels": ["Healthcare-regulated", "Physician-supervised", "HIPAA/SOC2"],
+      "businessModel": "Consumer subscription plus B2B/PMPY enterprise contracts",
+      "goToMarket": "Direct-to-consumer plus employer/health-plan enterprise sales",
+      "operationalModel": "Pure software with employed/contracted physician network",
+      "problemStatement": "Access to timely, trustworthy primary-care guidance is slow and expensive, and prior AI-triage products have struggled to convert triage into durable, safe physician-guided care.",
+      "productDescription": "AI chat-based medical triage that escalates to physician chat or video visits within minutes ($29/visit or $199/year unlimited), supervised by an in-house physician group, expanding into chronic-condition management."
+    },
+    "founders": [
+      { "name": "Muthu Alagappan", "role": "Founder and CEO", "background": "Stanford-trained MD; prior chief medical officer at Notable Health for approximately four years; attending physician at Beth Israel Deaconess Medical Center and UCSF Medical Center." }
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Healthcare software, virtual care",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "metrics": {
+      "customers": 100000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.7,
+      "regulatory_moat": 0.5,
+      "proprietary_data_moat": 0.3,
+      "competition_intensity": 0.8
+    },
+    "competitors": ["K Health", "98point6", "Teladoc", "Included Health", "Amazon One Medical"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.counselhealth.com/",
+      "https://www.businesswire.com/news/home/20251016535098/en/Counsel-Health-Raises-$25M-to-Launch-Physician-Supervised-AI-Front-Door-for-Healthcare",
+      "https://a16z.com/announcement/investing-in-counsel-health/"
+    ]
+  },
+  {
+    "id": "co_summer_health",
+    "name": "Summer Health",
+    "description": "Text-first pediatric care service: parents message a board-certified pediatrician and typically get a response within 15 minutes, including prescriptions when appropriate. Subscription is $45/month, with a newer $299/year pediatric biomarker blood-panel add-on. No follow-on financing publicly reported since its April 2024 Series A.",
+    "attributes": {
+      "industryPath": ["Healthcare", "Consumer telehealth", "Pediatric care"],
+      "productCategoryPath": ["Software", "Messaging-based care", "Consumer subscription health"],
+      "targetCustomers": ["Parents/families", "Consumers", "Employers (benefit channel)"],
+      "technicalApproaches": ["Asynchronous messaging platform", "Telehealth workflow software"],
+      "founderArchetypes": ["Consumer-health operator", "Prior Big Tech/consumer-startup product leader"],
+      "disruptionMechanisms": ["Text-native, low-friction access", "Subscription replacing episodic urgent care"],
+      "regulatoryLabels": ["Healthcare-regulated", "Telehealth-licensed", "Pediatric-specific"],
+      "businessModel": "Consumer subscription plus employer-benefit channel",
+      "goToMarket": "Direct-to-consumer plus employer partnerships",
+      "operationalModel": "Pure software with contracted pediatrician network",
+      "problemStatement": "Parents lack fast, trustworthy access to pediatric medical guidance outside standard office hours, often resorting to costly emergency-room visits for non-emergency concerns.",
+      "productDescription": "Text-messaging-based pediatric care platform with a 15-minute response SLA, prescription capability, and expansions into lactation support, sleep training, and developmental-milestone tracking."
+    },
+    "founders": [
+      { "name": "Ellen DaSilva", "role": "Founder and CEO", "background": "Early employee (#8) at Hims & Hers, serving as Head of Strategic Partnerships through IPO; prior business-operations leadership at Twitter." },
+      { "name": "Matthew Woo", "role": "Co-founder", "background": "Prior consulting at Simon-Kucher & Partners; 9+ years in product roles at Meetup, Yo, Intercom, UJET, and Meta/WhatsApp." }
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Healthcare software, consumer telehealth",
+    "round": "Series A",
+    "checkSizeSought": 1500000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.3,
+      "legacy_disruptiveness": 0.45,
+      "technical_feasibility": 0.7,
+      "regulatory_moat": 0.35,
+      "proprietary_data_moat": 0.25,
+      "competition_intensity": 0.55
+    },
+    "competitors": ["Blueberry Pediatrics", "PM Pediatric Care", "Cove", "Hims & Hers"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.summerhealth.com/",
+      "https://www.prnewswire.com/news-releases/summer-health-announces-series-a-fundraise-from-7wireventures-and-lux-capital-302125060.html",
+      "https://www.fiercehealthcare.com/digital-health/summer-health-pockets-12m-series-grow-text-based-pediatric-service"
+    ]
+  },
+  {
+    "id": "co_millie",
+    "name": "Millie",
+    "description": "Tech-enabled, midwife-led maternity and gynecology clinic model combining in-person and virtual care across the full maternity journey (conception through postpartum), accepting major insurance. Operates clinics in Berkeley and South Bay, California, with a San Jose location planned. Correct domain: millieclinic.com (roster hint milliehealth.com belongs to an unrelated company).",
+    "attributes": {
+      "industryPath": ["Healthcare", "Care delivery", "Maternity care"],
+      "productCategoryPath": ["Care delivery", "Clinic-based care", "Value-based maternity care"],
+      "targetCustomers": ["Pregnant and postpartum patients", "Insured consumers"],
+      "technicalApproaches": ["Care-coordination software", "Virtual-care extension of in-person clinics"],
+      "founderArchetypes": ["Clinician-adjacent founder with personal health crisis motivation", "Midwife co-founder"],
+      "disruptionMechanisms": ["Continuous vs. episodic care model", "Technology-enabled clinic operations"],
+      "regulatoryLabels": ["Healthcare-regulated", "Licensed clinical staff", "Insurance-contracted"],
+      "businessModel": "Insurance-reimbursed care delivery",
+      "goToMarket": "Direct-to-consumer plus payer contracting, physical clinic locations",
+      "operationalModel": "Physical clinic operations (manufacturing/services-dependent), hybrid virtual",
+      "problemStatement": "U.S. maternal-health outcomes are poor relative to peer countries, with significant preventable morbidity and mortality, and standard obstetric care is episodic rather than continuous.",
+      "productDescription": "Midwife-led maternity and gynecology clinics offering continuous, insurance-covered care from conception through postpartum, combining in-person visits with virtual-care extension."
+    },
+    "founders": [
+      { "name": "Anu Sharma", "role": "Founder and CEO", "background": "15+ years in healthcare innovation; founded Millie after a 2019 postpartum health crisis (preeclampsia and HELLP syndrome) following her own delivery." },
+      { "name": "Talia Borgo", "role": "Co-founder and Clinical Director", "background": "Practicing midwife who served as Sharma's own midwife during her pregnancy; leads Millie's clinical model." },
+      { "name": "Sarah Reynolds", "role": "Co-founder and CTO", "background": "Co-founded Millie's technology platform alongside Sharma and Borgo." }
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Healthcare care delivery, maternity",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "metrics": {
+      "customers": 2000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.15,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.6,
+      "regulatory_moat": 0.4,
+      "proprietary_data_moat": 0.2,
+      "competition_intensity": 0.45
+    },
+    "competitors": ["Pomelo Care", "Maven Clinic", "Ouma Health"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.millieclinic.com/",
+      "https://www.businesswire.com/news/home/20250220127655/en/Millie-Secures-$12M-Series-A-to-Continue-Closing-Gaps-in-Maternal-Healthcare",
+      "https://techcrunch.com/2025/02/26/maternity-clinic-millie-nabs-12m-series-a-from-an-all-star-all-female-class-of-vcs/",
+      "https://www.millieclinic.com/blog/why-we-built-millie"
+    ]
+  },
+  {
+    "id": "co_fay",
+    "name": "Fay",
+    "description": "Marketplace connecting patients with registered dietitian nutritionists for insurance-covered nutrition counseling, automating insurance billing for independent dietitians. Reports 1,000+ dietitians and partnerships with seven-plus national payers. Raised a $50m Series B at a disclosed $500m post-money valuation in February 2025, which this batch treats as an explicit Series-B exception to the roster's Series A hint.",
+    "attributes": {
+      "industryPath": ["Healthcare", "Care delivery", "Nutrition and dietetics"],
+      "productCategoryPath": ["Marketplace", "Provider marketplace", "Insurance-billed nutrition counseling"],
+      "targetCustomers": ["Patients with reimbursable nutrition needs", "Independent registered dietitians", "Health insurers"],
+      "technicalApproaches": ["Marketplace matching software", "Insurance-billing automation"],
+      "founderArchetypes": ["Founder with family-domain expertise (dietitian relatives)"],
+      "disruptionMechanisms": ["Insurance-billing automation removing a practice-economics barrier", "Digitally-native franchise model"],
+      "regulatoryLabels": ["Healthcare-regulated", "Insurance-billed", "Licensed-provider marketplace"],
+      "businessModel": "Marketplace, insurance-reimbursed take rate",
+      "goToMarket": "Payer partnerships plus direct-to-consumer, provider-supply-side recruiting",
+      "operationalModel": "Pure software marketplace with licensed provider network",
+      "problemStatement": "Independent dietitians face a major economic barrier in insurance billing, limiting the supply of accessible, insurance-covered nutrition care despite well-established clinical value.",
+      "productDescription": "Insurance-covered dietitian marketplace giving patients $0-copay in-network nutrition counseling and giving independent dietitians practice-building tools, scheduling, and automated insurance billing."
+    },
+    "founders": [
+      { "name": "Sammy Faycurry", "role": "Co-founder and CEO", "background": "Built the platform initially for his mother and sister, both registered dietitians." },
+      { "name": "Mark Stefanski", "role": "Co-founder and CTO", "background": "Co-built Fay's marketplace and insurance-billing technology." }
+    ],
+    "stage": "series_b",
+    "geography": "US",
+    "sector": "Healthcare care delivery, nutrition marketplace",
+    "round": "Series B",
+    "checkSizeSought": 1500000,
+    "valuation": 500000000,
+    "metrics": {
+      "customers": 1000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.25,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.55,
+      "regulatory_moat": 0.35,
+      "proprietary_data_moat": 0.3,
+      "competition_intensity": 0.75
+    },
+    "competitors": ["Berry Street", "Nourish", "Foodsmart", "Season Health"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.faynutrition.com/",
+      "https://www.faynutrition.com/post/fay-emerges-with-25m-in-funding",
+      "https://www.faynutrition.com/post/fay-series-b-announcement",
+      "https://www.forerunnerventures.com/perspectives/how-fay-is-scaling-customized-nutrition-care-for-consumers-while-reshaping"
+    ]
+  },
+  {
+    "id": "co_sohar_health",
+    "name": "Sohar Health",
+    "description": "API for real-time healthcare insurance eligibility determination and verification of benefits, reporting a median 6-second response time, 96% benefits-data accuracy, and more than 5 million verification checks processed annually. Named customers include Talkiatry, Rula, Headway, Mindful Health Solutions, and Two Chairs.",
+    "attributes": {
+      "industryPath": ["Healthcare", "Revenue-cycle infrastructure", "Eligibility verification"],
+      "productCategoryPath": ["Software", "API infrastructure", "Insurance eligibility verification"],
+      "targetCustomers": ["Behavioral health providers", "Telehealth platforms", "Healthcare provider organizations"],
+      "technicalApproaches": ["API infrastructure", "AI/ML-based benefits parsing"],
+      "founderArchetypes": ["Physician founder plus engineer co-founder"],
+      "disruptionMechanisms": ["Developer-first API replacing legacy clearinghouse workflows", "Specialty-specific accuracy"],
+      "regulatoryLabels": ["Healthcare-regulated", "Payer-data-dependent"],
+      "businessModel": "Usage-based API, per-check pricing",
+      "goToMarket": "Developer-led, direct sales to digital-health platforms",
+      "operationalModel": "Pure software, API infrastructure",
+      "problemStatement": "Legacy eligibility-verification clearinghouses are slow and inaccurate, causing claim denials, billing surprises, and lost patient conversion, especially in complex specialties like behavioral health.",
+      "productDescription": "Real-time eligibility-verification API covering coverage discovery, benefits detail, in-network status, and cost estimation, with bulk API support for up to 1,000 checks per call."
+    },
+    "founders": [
+      { "name": "Ashish Mandavia", "role": "Co-founder and CEO", "background": "Physician co-founder; company financing release states Sohar was founded by a physician and an engineer in 2023." }
+    ],
+    "stage": "seed",
+    "geography": "US/UK",
+    "sector": "Healthcare software, revenue-cycle infrastructure",
+    "round": "Seed",
+    "checkSizeSought": 1250000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.55,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.3,
+      "proprietary_data_moat": 0.35,
+      "competition_intensity": 0.5
+    },
+    "competitors": ["Availity", "Waystar", "pVerify", "Stedi"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.soharhealth.com/",
+      "https://www.prnewswire.com/news-releases/sohar-health-lands-3-8m-to-open-the-front-door-to-faster-fairer-care-302414445.html",
+      "https://www.soharhealth.com/products/verification",
+      "https://www.ycombinator.com/companies/sohar-health"
+    ]
+  },
+  {
+    "id": "co_tandem_health",
+    "name": "Tandem Health",
+    "description": "European ambient AI clinical-documentation platform, CE-marked as a Class IIa medical device under EU MDR, generating structured clinical notes with coding suggestions and clinical decision support across 5,000+ care organizations in the Nordics, UK, Germany, France, and Spain. Distribution partnership with Accurx gives 200,000+ NHS professionals platform access.",
+    "attributes": {
+      "industryPath": ["Healthcare", "Clinical software", "Clinical documentation"],
+      "productCategoryPath": ["Software", "Regulated medical device software", "Ambient clinical documentation"],
+      "targetCustomers": ["European ambulatory clinicians", "NHS trusts and practices", "Multi-specialty care organizations"],
+      "technicalApproaches": ["Ambient voice transcription", "Large language models", "Clinical coding automation"],
+      "founderArchetypes": ["Technical founder"],
+      "disruptionMechanisms": ["Regulatory-certified AI documentation", "Large-scale NHS distribution partnership"],
+      "regulatoryLabels": ["EU MDR Class IIa medical device", "GDPR", "ISO 13485", "ISO 27001", "NHS DSPT"],
+      "businessModel": "Subscription SaaS, per-user monthly license",
+      "goToMarket": "Direct enterprise sales plus distribution partnerships (Accurx/NHS)",
+      "operationalModel": "Pure software, regulated medical device",
+      "problemStatement": "European clinicians face significant documentation burden, and regulatory requirements (EU MDR) create a compliance barrier that most AI scribe vendors have not cleared, limiting trustworthy options in regulated markets.",
+      "productDescription": "CE-marked ambient AI scribe generating structured clinical notes with ICD-10/SNOMED coding suggestions and source-linked clinical decision support, integrated with 100+ EHR systems across five European markets."
+    },
+    "founders": [
+      { "name": "Lukas Saari", "role": "CEO and co-founder", "background": "Named as CEO and co-founder in Sifted's Series A coverage; additional background unconfirmed in sources reviewed." }
+    ],
+    "stage": "series_a",
+    "geography": "Sweden/EU/UK",
+    "sector": "Healthcare software, clinical documentation",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "metrics": {
+      "customers": 5000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.8,
+      "regulatory_moat": 0.7,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["Abridge", "Nabla", "Heidi Health", "Nuance DAX Copilot", "Freed"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://tandemhealth.ai/",
+      "https://sifted.eu/articles/tandem-series-a",
+      "https://www.kinnevik.com/insights/tandem-health-funding-round/"
+    ]
+  },
+  {
+    "id": "co_synthpop",
+    "name": "Synthpop",
+    "description": "AI platform automating administrative workflows (fax processing, field extraction, order validation, AI outbound calling) for durable medical equipment suppliers and independent diagnostic testing facilities. Reports processing more than 2 million patients and integrating with eight major EHR systems.",
+    "attributes": {
+      "industryPath": ["Healthcare", "Revenue-cycle infrastructure", "DME and specialty-workflow automation"],
+      "productCategoryPath": ["Software", "AI back-office automation", "DME/IDTF workflow automation"],
+      "targetCustomers": ["Durable medical equipment suppliers", "Independent diagnostic testing facilities", "Specialty pharmacy and infusion providers"],
+      "technicalApproaches": ["Multimodal large language models", "Document extraction/OCR", "AI outbound calling"],
+      "founderArchetypes": ["Repeat digital-health founder with prior exit", "Veteran AI researcher/educator"],
+      "disruptionMechanisms": ["Administrative-cost automation in a narrow regulated vertical"],
+      "regulatoryLabels": ["Healthcare-regulated", "Payer-rule-dependent"],
+      "businessModel": "Enterprise SaaS",
+      "goToMarket": "Direct enterprise sales to DME/IDTF operators",
+      "operationalModel": "Pure software",
+      "problemStatement": "DME suppliers and diagnostic facilities operate under highly variable, payer-specific coverage rules that require extensive manual administrative processing, driving up cost and slowing patient access to equipment and testing.",
+      "productDescription": "AI products (Fax Wrangler, Field Extractor, Order Validation, and a beta AI Caller) that automate referral intake, records analysis, payer-rule order validation, and payer-facing calls for DME and diagnostics providers."
+    },
+    "founders": [
+      { "name": "Elad Ferber", "role": "Co-founder and CEO", "background": "Previously founded Spry Health, acquired by Itamar Medical (Nasdaq: ITMR) in 2021; prior digital-health and machine-learning-product experience." },
+      { "name": "Jan Jannink", "role": "Co-founder", "background": "Co-founded imeem and VoiceBase; held multiple CTO roles; taught AI courses at Stanford's computer science department." }
+    ],
+    "stage": "series_a",
+    "geography": "US",
+    "sector": "Healthcare software, revenue-cycle infrastructure",
+    "round": "Series A",
+    "checkSizeSought": 1500000,
+    "metrics": {
+      "customers": 2000000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.75,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.7,
+      "regulatory_moat": 0.35,
+      "proprietary_data_moat": 0.35,
+      "competition_intensity": 0.4
+    },
+    "competitors": ["Parachute Health", "Brightree", "CareCloud", "Waystar", "Availity"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.synthpop.ai/",
+      "https://www.businesswire.com/news/home/20260204938691/en/Synthpop-Raises-$15-Million-Series-A-to-Scale-AI-That-Makes-Healthcare-More-Human",
+      "https://www.hmenews.com/article/synthpop-hits-23m-in-funding",
+      "https://www.synthpop.ai/resources/synthpop-secures-5-6m-in-funding-to-revolutionize-ai-driven-healthcare-solution"
+    ]
+  },
+  {
+    "id": "co_legion_health",
+    "name": "Legion Health",
+    "description": "AI-native, direct-to-consumer telepsychiatry practice offering psychiatric evaluation and medication management for conditions including ADHD, depression, anxiety, bipolar disorder, PTSD, OCD, and insomnia, covered by major commercial insurance. Claims AI automates 95% of the administrative work behind patient care. Correct domain: legionhealth.com (roster hint legionhealth.ai does not resolve).",
+    "attributes": {
+      "industryPath": ["Healthcare", "Behavioral health", "Telepsychiatry"],
+      "productCategoryPath": ["Software-enabled care delivery", "AI-native care operations", "Telepsychiatry"],
+      "targetCustomers": ["Adults seeking psychiatric medication management", "Insured consumers"],
+      "technicalApproaches": ["AI-automated administrative workflows", "Large language models"],
+      "founderArchetypes": ["Pivoted founding team (B2B marketplace to D2C care delivery)"],
+      "disruptionMechanisms": ["AI-driven lower cost-to-serve care-delivery operating model"],
+      "regulatoryLabels": ["Healthcare-regulated", "Controlled-substance prescribing", "Telehealth-licensed"],
+      "businessModel": "Insurance-billed care delivery, some self-pay",
+      "goToMarket": "Direct-to-consumer, insurance-network based",
+      "operationalModel": "Pure software with employed/contracted psychiatrist network",
+      "problemStatement": "Access to psychiatric medication management is slow and expensive nationally, and existing scaled telepsychiatry operators have drawn regulatory scrutiny over prescribing practices, creating an opening for a more disciplined, AI-efficient operator.",
+      "productDescription": "Telehealth psychiatric evaluation and medication-management platform delivered by board-certified psychiatrists, with an AI-native back office claimed to automate 95% of administrative work."
+    },
+    "founders": [
+      { "name": "Yash Patel", "role": "Co-founder", "background": "Co-founded the company in 2022; led its 2024 pivot from a clinical-operations marketplace to a direct-to-consumer AI-native psychiatry practice, per Behavioral Health Business." },
+      { "name": "Arthur MacWaters", "role": "Co-founder", "background": "Co-founding member per Behavioral Health Business; current operating role unconfirmed in sources reviewed." },
+      { "name": "Daniel Wilson", "role": "Co-founder", "background": "Co-founding member per Behavioral Health Business; current operating role unconfirmed in sources reviewed." }
+    ],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "Healthcare care delivery, behavioral health",
+    "round": "Seed",
+    "checkSizeSought": 1250000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.7,
+      "legacy_disruptiveness": 0.45,
+      "technical_feasibility": 0.6,
+      "regulatory_moat": 0.3,
+      "proprietary_data_moat": 0.2,
+      "competition_intensity": 0.8
+    },
+    "competitors": ["Talkiatry", "Brightside Health", "LifeStance Health", "Done Global", "Cerebral", "Talkspace"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.legionhealth.com/",
+      "https://bhbusiness.com/2024/10/16/legion-health-pivots-to-digital-ai-enabled-psychiatry-raises-over-6m/",
+      "https://www.ycombinator.com/companies/legion-health"
+    ]
+  }
+]

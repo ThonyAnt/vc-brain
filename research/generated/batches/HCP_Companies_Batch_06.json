@@ -1,0 +1,471 @@
+[
+  {
+    "id": "co_terminal49",
+    "name": "Terminal49",
+    "description": "Terminal49 is an API and dashboard for ocean-container shipment tracking, integrating with every major ocean carrier and U.S./Canadian marine terminals to standardize vessel schedules, container milestones, demurrage/per-diem risk, and customs holds into one feed.",
+    "attributes": {
+      "industryPath": ["Supply Chain & Logistics", "Freight Visibility", "Ocean Freight"],
+      "productCategoryPath": ["Software", "API / Developer Platform", "Container Tracking API"],
+      "targetCustomers": ["Importers/exporters (BCOs)", "Freight forwarders", "3PLs", "Customs brokers"],
+      "technicalApproaches": ["API/developer platform", "Data normalization and integration", "Carrier/terminal EDI integrations"],
+      "founderArchetypes": ["Technical/product operators", "Long-tenure bootstrapped founders"],
+      "disruptionMechanisms": ["Replaces manual carrier-website and EDI tracking with a unified API", "Standardizes data across fragmented carriers and terminals"],
+      "regulatoryLabels": ["pure-software"],
+      "businessModel": "Usage-based API / subscription",
+      "goToMarket": "Developer-led / direct sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "Importers, forwarders, and 3PLs must manually check dozens of carrier websites and portals to track ocean containers, with no standardized, real-time way to see milestones, demurrage risk, or customs holds across carriers and terminals.",
+      "productDescription": "API and dashboard that standardizes ocean-carrier and marine-terminal data into one searchable feed covering vessel schedules, container milestones, demurrage/per-diem alerts, and customs status; the company states its integrations cover about 98% of global ocean freight and container traffic."
+    },
+    "founders": [
+      { "name": "Akshay Dodeja", "role": "Co-founder", "background": "Co-founded Terminal49 in 2015; exact current title unconfirmed in public sources." },
+      { "name": "Philipp Gutheim", "role": "Co-founder", "background": "Co-founded Terminal49 in 2015 alongside Dodeja; exact current title unconfirmed in public sources." }
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Supply Chain & Logistics",
+    "round": "Series A",
+    "checkSizeSought": 1750000,
+    "metrics": {},
+    "graphMetrics": {
+      "legacy_disruptiveness": 0.65,
+      "technical_feasibility": 0.85,
+      "regulatory_moat": 0.2,
+      "proprietary_data_moat": 0.75,
+      "competition_intensity": 0.55
+    },
+    "competitors": ["project44", "FourKites", "Portcast", "GoComet", "CargoSmart"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://terminal49.com/",
+      "https://www.prnewswire.com/news-releases/terminal49-secures-6-5m-series-a-to-power-ocean-freight-visibility-and-automation-301725978.html",
+      "https://terminal49.com/blog/series-a-announcement",
+      "https://terminal49.com/container-tracking-api"
+    ]
+  },
+  {
+    "id": "co_nira_energy",
+    "name": "Nira Energy",
+    "description": "Nira builds software that automates transmission interconnection and grid-planning studies for renewable, storage, and data-center developers, replacing manual engineering studies with claimed 50-100x faster analysis.",
+    "attributes": {
+      "industryPath": ["Climate & Energy", "Grid Infrastructure", "Interconnection Planning"],
+      "productCategoryPath": ["Software", "Vertical SaaS", "Grid Interconnection Software"],
+      "targetCustomers": ["Renewable energy developers", "Battery storage developers", "Data center developers", "Transmission-owning utilities"],
+      "technicalApproaches": ["Grid/engineering modeling software", "Data analytics"],
+      "founderArchetypes": ["Technical operator (ex-Palantir)", "Profitable bootstrapped founder"],
+      "disruptionMechanisms": ["Automates manual engineering studies (50-100x speed claim)", "Replaces spreadsheet/PSS-E based transmission planning"],
+      "regulatoryLabels": ["utility-adjacent", "pure-software"],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Direct enterprise sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "Renewable, storage, and data-center developers face years-long, manual, opaque interconnection studies run by a scarce pool of transmission planning engineers, creating a major bottleneck to U.S. grid buildout.",
+      "productDescription": "Cloud software that ingests utility and RTO/ISO grid data to identify the lowest-cost, fastest interconnection points for a proposed project; the company reports support across more than 500 GW of interconnection studies and identification of more than $3 billion in cost discrepancies for customers."
+    },
+    "founders": [
+      { "name": "Chris Ariante", "role": "Co-founder and CEO", "background": "Founded Nira in 2021 and led the company to profitability from its first year; identified as CEO in Latitude Media and Energize Capital coverage." },
+      { "name": "Andy Chen", "role": "Co-founder", "background": "Previously worked at Palantir before co-founding Nira Energy, per Latitude Media." }
+    ],
+    "stage": "seed",
+    "geography": "United States",
+    "sector": "Climate & Energy",
+    "round": "Seed (2025 undisclosed-size growth round)",
+    "checkSizeSought": 1500000,
+    "metrics": {
+      "customers": 100
+    },
+    "graphMetrics": {
+      "legacy_disruptiveness": 0.75,
+      "technical_feasibility": 0.85,
+      "regulatory_moat": 0.55,
+      "proprietary_data_moat": 0.75,
+      "competition_intensity": 0.4
+    },
+    "competitors": ["Anza", "Neara", "GridUnity", "Bentley Systems"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.niraenergy.com/",
+      "https://www.ycombinator.com/companies/nira-energy",
+      "https://www.prnewswire.com/news-releases/nira-energy-partners-with-energize-capital-to-scale-transmission-automation-software-302467710.html",
+      "https://www.latitudemedia.com/news/how-nira-energy-is-using-software-to-unclog-the-interconnection-queue/"
+    ]
+  },
+  {
+    "id": "co_bayou_energy",
+    "name": "Bayou Energy",
+    "description": "Bayou Energy provides a developer API that aggregates and standardizes customer utility bills, interval usage, and account data across thousands of regional U.S. electric and gas utilities for clean-energy software platforms.",
+    "attributes": {
+      "industryPath": ["Climate & Energy", "Energy Data Infrastructure", "Utility Data Access"],
+      "productCategoryPath": ["Software", "API / Developer Platform", "Utility Data API"],
+      "targetCustomers": ["Clean-energy software platforms", "Solar developers", "Community solar operators", "EV charging networks"],
+      "technicalApproaches": ["API/developer platform", "Credential-based data aggregation"],
+      "founderArchetypes": ["Technical founders", "Y Combinator alumni"],
+      "disruptionMechanisms": ["Replaces bespoke utility-website integrations with a unified API", "Removes per-integration engineering cost for clean-energy platforms"],
+      "regulatoryLabels": ["utility-data-access", "pure-software"],
+      "businessModel": "Usage-based API (per-meter)",
+      "goToMarket": "Developer-led self-serve",
+      "operationalModel": "Pure software",
+      "problemStatement": "Clean-energy software companies must otherwise build and maintain their own screen-scraping or login integrations against thousands of fragmented, non-standardized U.S. utility websites to access customer bill and usage data.",
+      "productDescription": "Developer API that returns standardized utility bill, interval-usage, and account data typically within 60 seconds of a customer connecting their utility account, with a stated 95%+ reliability rate across major U.S. utilities; public pricing is $24 per connected meter per year with the first ten meters free."
+    },
+    "founders": [
+      { "name": "James Gordey", "role": "Co-founder", "background": "Co-founded Bayou Energy in 2021; company went through Y Combinator's Winter 2022 batch. Exact current title unconfirmed." },
+      { "name": "Joris Van Hecke", "role": "Co-founder", "background": "Co-founded Bayou Energy alongside Gordey. Exact current title unconfirmed." }
+    ],
+    "stage": "seed",
+    "geography": "United States",
+    "sector": "Climate & Energy",
+    "round": "Pre-seed",
+    "checkSizeSought": 1250000,
+    "metrics": {
+      "customers": 8
+    },
+    "graphMetrics": {
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.85,
+      "regulatory_moat": 0.3,
+      "proprietary_data_moat": 0.6,
+      "competition_intensity": 0.55
+    },
+    "competitors": ["Arcadia (UtilityAPI)", "Urjanet", "Copper Labs", "Span"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.bayou.energy/",
+      "https://www.geekwire.com/2024/this-energy-startup-wants-to-make-utility-data-more-accessible-and-spur-creation-of-new-companies/",
+      "https://docs.bayou.energy/reference/getting-started-with-your-api"
+    ]
+  },
+  {
+    "id": "co_vooma",
+    "name": "Vooma",
+    "description": "Vooma builds AI agents (Vooma Quote, Vooma Build, Vooma Voice) that automate the repetitive email, data-entry, and phone communication tasks embedded in truckload freight brokerage and carrier operations.",
+    "attributes": {
+      "industryPath": ["Supply Chain & Logistics", "Freight Brokerage", "Broker/Carrier Automation"],
+      "productCategoryPath": ["Software", "AI Agents", "Freight Communication Automation"],
+      "targetCustomers": ["Freight brokers", "Freight carriers", "3PLs"],
+      "technicalApproaches": ["AI agents", "Natural language processing", "Voice AI", "Workflow automation"],
+      "founderArchetypes": ["Domain operator (ex-logistics CEO)", "Technical engineer (ex-autonomous vehicles)"],
+      "disruptionMechanisms": ["Automates manual broker/carrier communication across email, text, and voice", "Reduces the historically linear headcount-to-volume scaling of freight brokerage"],
+      "regulatoryLabels": ["pure-software"],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Direct enterprise sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "Freight brokerage and carrier operations rely on large teams manually drafting rate quotes, entering load data, and handling booking calls, which scales headcount roughly linearly with load volume and caps margin.",
+      "productDescription": "Multi-channel AI agent platform for freight brokers and carriers: Vooma Quote identifies rate requests and drafts responses, Vooma Build automates load-order data entry, and Vooma Voice handles inbound booking and scheduling calls; customers include Echo, MODE, Arrive Logistics, and NFI."
+    },
+    "founders": [
+      { "name": "Jesse Buckingham", "role": "Co-founder", "background": "Stanford graduate; former CEO of ASG LogisTech, a logistics operator, prior to co-founding Vooma." },
+      { "name": "Mike Carter", "role": "Co-founder", "background": "Stanford graduate; former founding engineer at Kodiak Robotics, an autonomous-trucking company, prior to co-founding Vooma." }
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Supply Chain & Logistics",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.7,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.2,
+      "proprietary_data_moat": 0.5,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["HappyRobot", "Greenscreens.ai", "Parade", "Turvo", "DAT Freight & Analytics"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.vooma.com/",
+      "https://www.businesswire.com/news/home/20241202150186/en/Vooma-Scores-Over-$16-Million-in-Seed-and-Series-A-Funding-Led-by-Index-and-Craft-Ventures",
+      "https://www.indexventures.com/perspectives/vooma-secures-166-million-to-build-an-ai-powered-agent-for-the-1t-trucking-industry/"
+    ]
+  },
+  {
+    "id": "co_lithos_carbon",
+    "name": "Lithos Carbon",
+    "description": "Lithos Carbon removes atmospheric CO2 through enhanced rock weathering, spreading crushed basalt on farmland and selling registry-certified carbon-removal credits under offtake agreements with corporate buyers.",
+    "attributes": {
+      "industryPath": ["Climate & Energy", "Carbon Removal", "Enhanced Rock Weathering"],
+      "productCategoryPath": ["Climate Services", "Carbon Removal Delivery", "Agricultural Enhanced Weathering"],
+      "targetCustomers": ["Corporate carbon-removal buyers", "Farmers and landowners"],
+      "technicalApproaches": ["Applied geochemistry", "MRV (measurement, reporting, verification)", "Agricultural deployment"],
+      "founderArchetypes": ["Academic/scientist founders", "Operator CEO"],
+      "disruptionMechanisms": ["New scalable carbon-removal pathway using existing farmland", "Registry-certified MRV for a historically hard-to-verify removal method"],
+      "regulatoryLabels": ["environmental-registry-dependent", "agriculture-dependent", "physical-operations"],
+      "businessModel": "Carbon-removal credit sales / offtake",
+      "goToMarket": "Direct enterprise/offtake sales",
+      "operationalModel": "Physical operations-dependent (farmland deployment)",
+      "problemStatement": "Gigaton-scale, durable carbon removal requires pathways that do not depend on new energy-intensive industrial infrastructure or new land use, and existing enhanced-weathering approaches lack rigorous, registry-certifiable measurement of actual CO2 removed.",
+      "productDescription": "Applies crushed basalt to farmland, where weathering reactions convert atmospheric CO2 into dissolved bicarbonate while releasing soil nutrients; the company measures and verifies removal through its own MRV process and sells resulting credits, and in December 2025 delivered 5,160 registry-certified tons in what it described as the world's largest enhanced-rock-weathering issuance to date."
+    },
+    "founders": [
+      { "name": "Mary Yap", "role": "Co-founder and CEO", "background": "Identified as CEO and company spokesperson across public reporting, including the Frontier offtake announcement." },
+      { "name": "Noah Planavsky", "role": "Co-founder", "background": "Academic geochemistry/earth-science background; exact current institutional affiliation not independently confirmed." },
+      { "name": "Chris Reinhard", "role": "Co-founder", "background": "Academic geochemistry/earth-science background; exact current institutional affiliation not independently confirmed." }
+    ],
+    "stage": "seed",
+    "geography": "United States",
+    "sector": "Climate & Energy",
+    "round": "Seed",
+    "checkSizeSought": 1500000,
+    "metrics": {},
+    "graphMetrics": {
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.55,
+      "regulatory_moat": 0.25,
+      "proprietary_data_moat": 0.55,
+      "competition_intensity": 0.65
+    },
+    "competitors": ["Eion", "UNDO Carbon", "InPlanet", "Mati Carbon", "Terradot", "Charm Industrial"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.lithoscarbon.com/",
+      "https://www.geekwire.com/2022/carbon-removal-company-lithos-lands-6-3m-for-ag-focused-climate-tech/",
+      "https://frontierclimate.com/writing/lithos",
+      "https://www.businesswire.com/news/home/20251202793450/en/Lithos-Carbon-Delivers-5160-Registry-Certified-Tons-of-Carbon-Removal-in-Worlds-Largest-Enhanced-Rock-Weathering-Issuance-to-Date"
+    ]
+  },
+  {
+    "id": "co_paces",
+    "name": "Paces",
+    "description": "Paces is a GIS and AI-driven data platform (Project Search, Permitting Predictor) that helps renewable-energy developers screen and de-risk potential project sites using consolidated spatial, zoning, permitting, interconnection, and environmental data.",
+    "attributes": {
+      "industryPath": ["Climate & Energy", "Renewable Development", "Site Selection & Permitting"],
+      "productCategoryPath": ["Software", "AI/GIS Analytics", "Green Infrastructure Siting AI"],
+      "targetCustomers": ["Renewable energy developers", "Battery storage developers", "Independent power producers", "EPCs"],
+      "technicalApproaches": ["Geospatial (GIS) analytics", "AI/ML risk scoring", "Data aggregation"],
+      "founderArchetypes": ["Technical/product operator"],
+      "disruptionMechanisms": ["Replaces manual multi-jurisdiction GIS/permitting research with AI-driven due diligence", "Compresses siting due diligence from months to minutes (company claim)"],
+      "regulatoryLabels": ["permitting-data-dependent", "pure-software"],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Direct enterprise sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "Renewable developers must manually cross-reference zoning maps, environmental data, and permitting history across thousands of U.S. jurisdictions with no common schema before committing capital to a potential project site.",
+      "productDescription": "Project Search lets developers screen sites against custom parameters using consolidated spatial, zoning, permitting, interconnection, and environmental data; Permitting Predictor analyzes local, state, and federal zoning/permitting risk. Disclosed customers include EDF Renewables, AES, and Third Pillar Solar."
+    },
+    "founders": [
+      { "name": "James Mcwalter", "role": "Co-founder and CEO", "background": "Identified as co-founder and CEO across multiple financing reports (ESG Dive, Utility Dive, ESG Today); company founded 2022, headquartered in Brooklyn, NY." },
+      { "name": "Charles Bai", "role": "Co-founder", "background": "Identified alongside Mcwalter as co-founder in company and press materials; exact current title unconfirmed." }
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Climate & Energy",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.8,
+      "legacy_disruptiveness": 0.65,
+      "technical_feasibility": 0.8,
+      "regulatory_moat": 0.55,
+      "proprietary_data_moat": 0.7,
+      "competition_intensity": 0.5
+    },
+    "competitors": ["Anza", "Landgate", "Crux Climate", "Bentley Systems"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.paces.com/",
+      "https://www.paces.com/news/paces-raises-11-million-to-accelerate-clean-energy-development",
+      "https://www.esgtoday.com/energy-infrastructure-software-startup-paces-raises-11-million-to-accelerate-green-energy-development/"
+    ]
+  },
+  {
+    "id": "co_verse",
+    "name": "Verse",
+    "description": "Verse builds Aria, a SaaS platform that helps corporations set, plan, procure, and manage clean-energy goals, from renewable energy credit purchases to hourly-matched carbon-free-energy portfolios spanning PPAs and on-site assets.",
+    "attributes": {
+      "industryPath": ["Climate & Energy", "Corporate Sustainability", "Clean Power Procurement"],
+      "productCategoryPath": ["Software", "Vertical SaaS", "Clean-Power Procurement Software"],
+      "targetCustomers": ["Corporate sustainability teams", "Corporate energy procurement teams"],
+      "technicalApproaches": ["Generative AI", "Portfolio optimization", "Market data aggregation"],
+      "founderArchetypes": ["Repeat operator founders"],
+      "disruptionMechanisms": ["Replaces broker/consultant-led clean-power procurement with software", "AI-driven portfolio optimization for clean-energy contracts"],
+      "regulatoryLabels": ["policy-exposed", "pure-software"],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Direct enterprise sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "Corporate clean-power procurement is largely a manual, broker- and consultant-driven process for structuring PPAs and REC purchases, with limited software tooling to continuously optimize a multi-year clean-energy portfolio for cost and emissions.",
+      "productDescription": "Aria is a SaaS platform using generative AI to help customers define clean-energy targets and plan, procure, and manage portfolios of clean-energy assets; the company states it can help reduce electricity costs by 10% or more while eliminating Scope 2 emissions. First disclosed customer was Climeworks."
+    },
+    "founders": [
+      { "name": "Seyed Madaeni", "role": "Co-founder", "background": "Identified as co-founder in Series A and seed financing press releases; company founded 2022. Exact current title unconfirmed." },
+      { "name": "Matt Penfold", "role": "Co-founder", "background": "Identified as co-founder alongside Madaeni in company financing materials. Exact current title unconfirmed." }
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Climate & Energy",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.75,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.8,
+      "regulatory_moat": 0.2,
+      "proprietary_data_moat": 0.5,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["LevelTen Energy", "Watershed", "Persefoni", "Schneider Electric Sustainability Business", "Edison Energy"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://verse.inc/",
+      "https://verse.inc/press/verse-inc-secures-20-5-million-series-a-funding-led-by-gv/",
+      "https://www.prnewswire.com/news-releases/verse-secures-20-5-million-in-series-a-funding-led-by-gv-to-help-organizations-reduce-electricity-costs--emissions-302152878.html",
+      "https://www.prnewswire.com/news-releases/clean-energy-procurement-and-management-software-provider-verse-closes-5-75m-seed-round-led-by-coatue-launches-first-product-and-signs-climeworks-as-customer-301879805.html"
+    ]
+  },
+  {
+    "id": "co_texture",
+    "name": "Texture",
+    "description": "Texture is a grid software platform providing utilities and cooperatives a single view of every meter, device, and data source on their network, with grid-visibility (outage detection, transformer load tracking) and grid-operations (load shifting, asset dispatch, DER coordination) capabilities.",
+    "attributes": {
+      "industryPath": ["Climate & Energy", "Grid Infrastructure", "Distributed Energy Resources"],
+      "productCategoryPath": ["Software", "Vertical SaaS", "Energy Device Data Platform"],
+      "targetCustomers": ["Electric utilities", "Utility cooperatives", "DER aggregators / VPP operators"],
+      "technicalApproaches": ["IoT/device integration", "Real-time data aggregation", "Grid operations software"],
+      "founderArchetypes": ["Technical operator"],
+      "disruptionMechanisms": ["Unifies fragmented utility device and data sources into one operating layer", "Extends modern DER-management capability to underserved co-ops via the NRTC channel"],
+      "regulatoryLabels": ["utility-adjacent", "SOC2-certified", "pure-software"],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Direct enterprise sales plus channel partnership (NRTC)",
+      "operationalModel": "Pure software",
+      "problemStatement": "Utilities, especially smaller cooperatives, lack a unified view of meters, devices, and distributed energy resources across fragmented OEM systems, and legacy DERMS vendors are built for large investor-owned utilities, leaving co-ops underserved.",
+      "productDescription": "Platform connecting to any meter, device, or data source for real-time monitoring, outage detection, transformer load tracking, and DER coordination; integrates with Tesla, FranklinWH, Honeywell, Ecobee, SolarEdge, Leap Energy, and WattTime, and is SOC 2 Type I/II certified. Disclosed customers include Vermont Electric Cooperative and sonnen, with a distribution partnership through NRTC covering 850 utility co-ops."
+    },
+    "founders": [
+      { "name": "Sanjiv Sanghavi", "role": "Co-founder and CEO", "background": "Identified by name and title in the company's own Series A blog post." },
+      { "name": "Additional co-founders (undisclosed full names)", "role": "Co-founder", "background": "Company's Series A post references two additional co-founders by first name only (\"Nick\" and \"Victor\"); full names and titles not independently verified. Confirm in diligence." }
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Climate & Energy",
+    "round": "Series A",
+    "checkSizeSought": 2250000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.4,
+      "legacy_disruptiveness": 0.65,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.35,
+      "proprietary_data_moat": 0.65,
+      "competition_intensity": 0.65
+    },
+    "competitors": ["Camus Energy", "Uplight", "Itron", "Bidgely", "Kraken Technologies"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.texturehq.com/",
+      "https://www.texturehq.com/blog/texture-series-a",
+      "https://www.powermag.com/texture-raises-12-5m-to-tackle-the-operational-complexity-of-the-modern-grid/"
+    ]
+  },
+  {
+    "id": "co_cargado",
+    "name": "Cargado",
+    "description": "Cargado operates an invite-only, carrier-vetted load board for cross-border U.S.-Mexico trucking freight, connecting brokers, 3PLs, and freight forwarders with a personally vetted network of cross-border trucking companies.",
+    "attributes": {
+      "industryPath": ["Supply Chain & Logistics", "Freight Marketplace", "Cross-Border Trucking"],
+      "productCategoryPath": ["Marketplace", "Load Board", "Cross-Border Freight Marketplace"],
+      "targetCustomers": ["Freight brokers", "3PLs", "Freight forwarders", "Cross-border trucking carriers"],
+      "technicalApproaches": ["Two-sided marketplace", "Manual plus software-assisted carrier vetting"],
+      "founderArchetypes": ["Marketplace operator founders"],
+      "disruptionMechanisms": ["Digitizes phone/email-based cross-border freight brokering", "Adds a carrier-vetting trust layer absent from generic load boards"],
+      "regulatoryLabels": ["cross-border-customs-compliance", "marketplace"],
+      "businessModel": "Marketplace / take rate",
+      "goToMarket": "Marketplace network growth (invite-only)",
+      "operationalModel": "Asset-light marketplace",
+      "problemStatement": "U.S.-Mexico cross-border trucking freight is underserved by modern digital marketplaces relative to domestic U.S. freight, and carrier legitimacy/customs compliance are harder to verify across the border, creating fraud and reliability risk for brokers.",
+      "productDescription": "Invite-only load board where brokers, 3PLs, and freight forwarders post cross-border loads and receive bids from a vetted network of cross-border trucking companies; at its Series A the company reported more than 200 broker/3PL/forwarder customers and more than 650 vetted carriers within about six months of public launch."
+    },
+    "founders": [
+      { "name": "Matt Silver", "role": "Co-founder", "background": "Identified as co-founder in FreightWaves coverage and company materials; company founded January 2024. Exact current title unconfirmed." },
+      { "name": "Rylan Hawkins", "role": "Co-founder", "background": "Identified as co-founder alongside Silver in FreightWaves coverage and company materials. Exact current title unconfirmed." }
+    ],
+    "stage": "series_a",
+    "geography": "United States / Mexico",
+    "sector": "Supply Chain & Logistics",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "metrics": {
+      "customers": 200
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.4,
+      "legacy_disruptiveness": 0.6,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.5,
+      "proprietary_data_moat": 0.55,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["Nuvocargo", "DAT Freight & Analytics", "Uber Freight", "J.B. Hunt 360"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://cargado.com/",
+      "https://cargado.com/news",
+      "https://www.freightwaves.com/news/exclusive-cargado-raises-12m-to-boost-cross-border-trucking-marketplace"
+    ]
+  },
+  {
+    "id": "co_isometric",
+    "name": "Isometric",
+    "description": "Isometric operates Certify, an AI-agent-driven certification platform, alongside a public carbon-removal registry, verifying carbon-removal and (increasingly) broader industrial-sustainability claims using sensor, satellite, supply-chain, and lab data.",
+    "attributes": {
+      "industryPath": ["Climate & Energy", "Carbon Markets", "Certification & Registry"],
+      "productCategoryPath": ["Software", "Trust & Verification Infrastructure", "Carbon Removal Registry"],
+      "targetCustomers": ["Carbon-removal project developers", "Corporate carbon-removal buyers", "Industrial companies seeking certification"],
+      "technicalApproaches": ["AI agents", "Remote sensing / satellite imagery analysis", "Evidence-based verification", "Registry/ledger infrastructure"],
+      "founderArchetypes": ["Repeat founder (prior $650m exit)", "Domain-expert leadership team"],
+      "disruptionMechanisms": ["AI-accelerated certification (12 months to hours, company claim)", "Buyer-funded model removing the supplier-paid conflict of interest common in legacy carbon registries"],
+      "regulatoryLabels": ["registry/certification-dependent", "voluntary-carbon-market-exposed"],
+      "businessModel": "Certification / registry fees",
+      "goToMarket": "Direct enterprise sales",
+      "operationalModel": "Pure software / verification services",
+      "problemStatement": "The voluntary carbon market's credibility has suffered because project developers historically paid for their own verification, and manual certification processes take up to 12 months, slowing both project financing and buyer confidence.",
+      "productDescription": "Certify deploys AI agents to ingest and cross-check the data underlying a certification claim (sensor readings, satellite imagery, supply-chain records, lab results), flagging inconsistencies and escalating cases needing expert review; the public registry gives buyers and suppliers access to project data, protocols, and issued certificates. Started with carbon removal (biochar, enhanced weathering, direct air capture, reforestation, ocean alkalinity enhancement) and is expanding into industrial certification (steel, cement, RECs, low-carbon fuels). Disclosed customers/counterparties include Microsoft, Boeing, JPMorgan Chase, and Anglo American, with more than 16 million tonnes of carbon removal contracted across 200+ projects."
+    },
+    "founders": [
+      { "name": "Eamon Jubbawy", "role": "Founder and CEO", "background": "Previously co-founded Onfido, a digital-identity verification company that verified over a billion identities before a $650m acquisition by Entrust." },
+      { "name": "Jennifer Wilcox", "role": "Chief Scientist (not a founder)", "background": "Former Principal Deputy Assistant Secretary at the U.S. Department of Energy; published foundational carbon-dioxide-removal research." },
+      { "name": "Stacy Kauk", "role": "Chief Science Officer (not a founder)", "background": "Former Head of Sustainability at Shopify; founding member of the Frontier carbon-removal offtake coalition." }
+    ],
+    "stage": "series_a",
+    "geography": "United Kingdom",
+    "sector": "Climate & Energy",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "metrics": {},
+    "graphMetrics": {
+      "ai_adoption": 0.85,
+      "legacy_disruptiveness": 0.8,
+      "technical_feasibility": 0.7,
+      "regulatory_moat": 0.45,
+      "proprietary_data_moat": 0.75,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["Verra", "Gold Standard", "Puro.earth", "BeZero Carbon", "Sylvera"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://isometric.com/",
+      "https://isometric.com/writing-articles/isometric-raises-40m-to-bring-agentic-certification-to-the-industrial-economy",
+      "https://techfundingnews.com/isometric-40m-series-a-industrial-certification-ai/",
+      "https://techcrunch.com/2023/07/17/isometric-taps-25m-to-build-a-registry-and-science-platform-focused-on-carbon-removal/"
+    ]
+  }
+]

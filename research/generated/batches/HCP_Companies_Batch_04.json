@@ -1,0 +1,538 @@
+[
+  {
+    "id": "co_herald",
+    "name": "Herald",
+    "description": "API infrastructure connecting commercial-insurance brokers to carriers for real-time quoting and binding, with an AI layer that extracts and normalizes submission data from carrier-specific formats.",
+    "attributes": {
+      "industryPath": ["Financial Services", "Insurance", "Commercial insurance infrastructure"],
+      "productCategoryPath": ["Software", "API infrastructure", "Insurance connectivity API"],
+      "targetCustomers": ["Insurance brokerages", "Insurance carriers", "Commercial insurance agencies"],
+      "technicalApproaches": ["API integration", "AI data extraction", "Real-time quoting and binding"],
+      "founderArchetypes": [],
+      "disruptionMechanisms": ["API-first infrastructure replacing manual re-keying between brokers and carriers", "Carrier-connectivity network effects"],
+      "regulatoryLabels": ["Regulated-industry-adjacent (insurance)"],
+      "businessModel": "API/platform licensing fee (subscription plus usage)",
+      "goToMarket": "Enterprise/brokerage direct sales",
+      "operationalModel": "Pure software / API infrastructure",
+      "problemStatement": "Commercial insurance placement between brokers and carriers is still largely manual, with re-keyed submission data and fragmented per-carrier quoting workflows.",
+      "productDescription": "Herald offers a unified API that connects brokerages to 80-plus insurance products across 35-plus carrier partners spanning cyber, management liability, professional liability, BOP, general liability, and workers' compensation, with AI-driven extraction of submission data into a standardized transaction format."
+    },
+    "founders": [
+      {
+        "name": "Matt Antoszyk",
+        "role": "Co-founder and CEO",
+        "background": "Led Herald from its December 2021 seed round through its October 2024 Series A; public sources reviewed do not disclose detailed prior career history."
+      }
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Insurance infrastructure / Fintech",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "graphMetrics": {
+      "ai_adoption": 0.55,
+      "legacy_disruptiveness": 0.7,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.5,
+      "proprietary_data_moat": 0.6,
+      "competition_intensity": 0.5
+    },
+    "competitors": ["Vertafore", "Applied Systems", "Bold Penguin", "Duck Creek Technologies", "CoverForce"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.heraldai.com/",
+      "https://www.prnewswire.com/news-releases/herald-raises-12-million-to-revolutionize-insurance-connectivity-with-ai-powered-solutions-302277522.html",
+      "https://docs.heraldapi.com/"
+    ]
+  },
+  {
+    "id": "co_straddle",
+    "name": "Straddle",
+    "description": "Identity-to-payment API combining identity verification, open banking, and real-time bank-to-bank (ACH/RTP) payments for SaaS platforms, payment facilitators, and marketplaces.",
+    "attributes": {
+      "industryPath": ["Financial Services", "Payments", "Bank-to-bank payment infrastructure"],
+      "productCategoryPath": ["Software", "API infrastructure", "Payments API"],
+      "targetCustomers": ["SaaS platforms", "Payment facilitators", "Marketplaces"],
+      "technicalApproaches": ["API integration", "Open banking", "Identity verification", "Real-time payment rails (ACH/RTP)"],
+      "founderArchetypes": [],
+      "disruptionMechanisms": ["Replacing card-network rails with bank-to-bank payment", "Bundling identity verification with payment execution in one API"],
+      "regulatoryLabels": ["Money transmission / payments regulation", "AML and sanctions screening"],
+      "businessModel": "Usage-based API (per-transaction fee)",
+      "goToMarket": "Developer-led / platform partnerships",
+      "operationalModel": "Pure software / API infrastructure",
+      "problemStatement": "Bank-to-bank payments lack the identity and fraud confidence of card transactions, forcing platforms to stitch together separate KYC, open-banking, and ACH vendors.",
+      "productDescription": "Straddle's Pay by Bank API combines identity verification (SSN/ID/liveness checks), pre-debit balance confirmation (Watchtower), and ACH/RTP payment execution with built-in AML and fraud monitoring, settling within 24 hours."
+    },
+    "founders": [
+      {
+        "name": "Keith Raphael",
+        "role": "Co-founder and CEO",
+        "background": "Based in Broomfield, Colorado; public sources reviewed do not disclose detailed prior career history."
+      }
+    ],
+    "stage": "seed",
+    "geography": "United States",
+    "sector": "Payments infrastructure / Fintech",
+    "round": "Seed",
+    "checkSizeSought": 1500000,
+    "graphMetrics": {
+      "ai_adoption": 0.2,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.7,
+      "regulatory_moat": 0.5,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["Plaid", "Astra", "Method Financial", "Trustly", "Marqeta"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://straddle.com/",
+      "https://straddle.com/pay-by-bank",
+      "https://www.crunchbase.com/organization/straddle-db8e"
+    ]
+  },
+  {
+    "id": "co_mercoa",
+    "name": "Mercoa",
+    "description": "Embedded B2B payments and BillPay API letting vertical SaaS platforms offer accounts-payable automation (including an AI card-conversion agent) and accounts-receivable automation to their own SMB customers.",
+    "attributes": {
+      "industryPath": ["Financial Services", "Payments", "Embedded accounts payable / receivable"],
+      "productCategoryPath": ["Software", "API infrastructure", "Embedded finance API"],
+      "targetCustomers": ["Vertical SaaS platforms", "SMB software platforms"],
+      "technicalApproaches": ["API integration", "AI document/bill processing", "Embedded UI components (React/iFrame)"],
+      "founderArchetypes": ["Technical/engineering founder"],
+      "disruptionMechanisms": ["Embedding AP/AR into vertical software instead of standalone tools", "AI-driven ACH-to-card payment conversion to capture card interchange"],
+      "regulatoryLabels": ["Money movement / payments regulation"],
+      "businessModel": "Embedded transaction/interchange revenue share plus platform fee",
+      "goToMarket": "Developer-led / platform partnerships",
+      "operationalModel": "Pure software / API infrastructure",
+      "problemStatement": "SMB software platforms want to own the AP/AR relationship with their customers but lack the infrastructure to build bill-pay and invoicing themselves.",
+      "productDescription": "Mercoa provides an AI-driven bill-pay inbox, vendor onboarding, approval workflows, and a CardPay agent that converts ACH/check vendor payments to card where accepted, plus AI-assisted contract-to-invoice AR automation, delivered via React components, hosted iFrame, or REST API/SDKs."
+    },
+    "founders": [
+      {
+        "name": "Sai Arora",
+        "role": "Co-founder",
+        "background": "Listed as co-founder on Mercoa's Y Combinator (W23) company profile; further prior career detail not disclosed in sources reviewed."
+      },
+      {
+        "name": "Sandeep Dinesh",
+        "role": "Co-founder",
+        "background": "Previously Senior Software Engineer at Stripe, Lead Software Engineer at Furmacy (YC W21), and Senior Developer Advocate at Google Cloud, per Y Combinator's company profile."
+      }
+    ],
+    "stage": "seed",
+    "geography": "United States",
+    "sector": "Embedded finance / Fintech",
+    "round": "Seed",
+    "checkSizeSought": 1500000,
+    "graphMetrics": {
+      "ai_adoption": 0.5,
+      "legacy_disruptiveness": 0.65,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.45,
+      "proprietary_data_moat": 0.45,
+      "competition_intensity": 0.75
+    },
+    "competitors": ["Bill.com", "Melio", "Routable", "Modern Treasury", "AvidXchange"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://mercoa.com/",
+      "https://www.ycombinator.com/companies/mercoa",
+      "https://mercoa.com/changelog",
+      "https://www.openbankingtracker.com/embedded-finance/mercoa"
+    ]
+  },
+  {
+    "id": "co_ansa",
+    "name": "Ansa",
+    "description": "White-label stored-value wallet infrastructure ('wallet-as-a-service') letting merchants and platforms launch branded closed-loop balances, loyalty-linked funds, and incentive programs without building the ledger and compliance stack themselves.",
+    "attributes": {
+      "industryPath": ["Financial Services", "Payments", "Stored-value / closed-loop wallet infrastructure"],
+      "productCategoryPath": ["Software", "API/SDK infrastructure", "Stored-value wallet platform"],
+      "targetCustomers": ["Merchants (coffee, QSR, retail)", "Marketplaces", "Platforms"],
+      "technicalApproaches": ["Mobile SDKs and APIs", "Ledger / balance management", "Self-serve incentive engine"],
+      "founderArchetypes": ["Domain-experienced founder (payments)"],
+      "disruptionMechanisms": ["Replacing card-network fees with closed-loop stored value", "Enabling merchant-branded wallets without in-house build"],
+      "regulatoryLabels": ["Money transmission / stored-value regulation"],
+      "businessModel": "Platform fee plus transaction markup",
+      "goToMarket": "Direct sales to merchants and platforms",
+      "operationalModel": "Pure software / API-SDK infrastructure",
+      "problemStatement": "Merchants want the customer-retention and fee benefits of stored-value programs (like Starbucks') but cannot justify building the ledger and compliance stack in-house.",
+      "productDescription": "Ansa provides mobile SDKs and APIs for merchants and platforms to launch a white-labeled stored-value wallet, with a self-serve incentive engine and a merchant analytics portal tracking revenue, transaction frequency, and user segmentation."
+    },
+    "founders": [
+      {
+        "name": "Sophia Goldberg",
+        "role": "Co-founder and CEO",
+        "background": "Previously a product manager at Adyen, per TechCrunch."
+      },
+      {
+        "name": "JT Cho",
+        "role": "Co-founder",
+        "background": "Previously a software engineer at Affirm, per TechCrunch."
+      }
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Payments infrastructure / Fintech",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "graphMetrics": {
+      "ai_adoption": 0.15,
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.5,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.6
+    },
+    "competitors": ["Fiserv", "Marqeta", "PayPal", "Punchh", "Stored Value Solutions"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://ansa.dev/",
+      "https://techcrunch.com/2024/04/30/wallet-as-a-service-startup-ansa-raises-14m-with-female-investors-leading-the-way/",
+      "https://www.prnewswire.com/news-releases/ansa-raises-14-million-series-a-funding-to-redefine-merchant-transaction-solutions-302131675.html"
+    ]
+  },
+  {
+    "id": "co_kudos",
+    "name": "Kudos",
+    "description": "AI-powered smart wallet (browser extension and app) that recommends the optimal credit card for a purchase and layers additional cash-back rewards across partner retailers.",
+    "attributes": {
+      "industryPath": ["Financial Services", "Consumer fintech", "Card rewards optimization"],
+      "productCategoryPath": ["Software", "Consumer application", "AI recommendation wallet"],
+      "targetCustomers": ["Individual consumers, multi-card holders"],
+      "technicalApproaches": ["AI/LLM-based recommendation (MariaGPT)", "Browser extension", "Spend-data analysis"],
+      "founderArchetypes": ["Domain-experienced founder (fintech/consumer)"],
+      "disruptionMechanisms": ["Automating manual card-selection decisions at checkout", "Aggregating card and cash-back data into one recommendation layer"],
+      "regulatoryLabels": [],
+      "businessModel": "Affiliate/referral and partner cash-back economics",
+      "goToMarket": "Consumer / product-led (browser extension)",
+      "operationalModel": "Pure software / consumer app",
+      "problemStatement": "Consumers routinely use the wrong card for a purchase and leave rewards value on the table because manually tracking optimal card-to-purchase matching is impractical.",
+      "productDescription": "Kudos indexes 3,000-plus credit cards (MariaGPT), recommends the best card for a given purchase (Dream Wallet), and layers additional cash-back rewards across 15,000-plus partner retailers (Kudos Boost) via a browser extension and app."
+    },
+    "founders": [
+      {
+        "name": "Tikue Anazodo",
+        "role": "Co-founder and CEO",
+        "background": "Previously worked at Google and Affirm, per TechCrunch."
+      },
+      {
+        "name": "Ahmad Ismail",
+        "role": "Co-founder",
+        "background": "Previously worked at Google and Affirm alongside Anazodo, per TechCrunch."
+      }
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Consumer fintech",
+    "round": "Series A",
+    "checkSizeSought": 2000000,
+    "metrics": {
+      "customers": 200000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.7,
+      "legacy_disruptiveness": 0.35,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.2,
+      "proprietary_data_moat": 0.5,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["NerdWallet", "MaxRewards", "Extend", "Credit Karma", "The Points Guy"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://joinkudos.com",
+      "https://techcrunch.com/2024/05/17/kudos-ai-smart-wallet-10m-credit-card/",
+      "https://www.finextra.com/newsarticle/44168/kudos-raises-102m-for-ai-powered-smart-wallet"
+    ]
+  },
+  {
+    "id": "co_baselayer",
+    "name": "Baselayer",
+    "description": "AI-powered business identity verification (KYB), risk, and fraud platform for banks, credit unions, fintechs, marketplaces, and SMB lenders, combining public-records matching, a cross-customer fraud consortium, and portfolio monitoring.",
+    "attributes": {
+      "industryPath": ["Financial Services", "Risk and compliance", "Business identity verification (KYB)"],
+      "productCategoryPath": ["Software", "API infrastructure", "Identity and fraud-risk platform"],
+      "targetCustomers": ["Banks and credit unions", "Fintechs", "Marketplaces", "Payment processors", "SMB lenders"],
+      "technicalApproaches": ["API integration", "AI risk scoring", "Public-records matching", "Fraud-signal network / consortium"],
+      "founderArchetypes": ["Domain-experienced founder (risk/compliance)"],
+      "disruptionMechanisms": ["Replacing manual KYB underwriting with real-time automated verification", "Cross-customer fraud-consortium network effect"],
+      "regulatoryLabels": ["KYB/AML compliance infrastructure", "Sanctions (OFAC) screening"],
+      "businessModel": "Usage-based / tiered subscription API",
+      "goToMarket": "Enterprise direct sales (banks, fintechs)",
+      "operationalModel": "Pure software / API and data infrastructure",
+      "problemStatement": "Verifying and monitoring the identity and risk of a business counterparty is still slow and manual, and legacy vendors have not kept pace with real-time fintech onboarding expectations.",
+      "productDescription": "Baselayer matches applicant business data against Secretary of State filings across all 50 states, validates TINs with the IRS in real time, screens OFAC/sanctions, and layers liens, lawsuit/bankruptcy detection, and an AI 'Risk Co.Pilot,' backed by an Identity Network fraud consortium and continuous portfolio monitoring."
+    },
+    "founders": [
+      {
+        "name": "Jonathan Awad",
+        "role": "Co-founder",
+        "background": "Co-founded Baselayer in 2023 after encountering KYB gaps firsthand, per the company's May 2024 seed-round announcement."
+      },
+      {
+        "name": "Timothy Hyde",
+        "role": "Co-founder",
+        "background": "Named alongside Awad as co-founder in Baselayer's May 2024 seed-round announcement."
+      }
+    ],
+    "stage": "seed",
+    "geography": "United States",
+    "sector": "Risk and compliance infrastructure / Fintech",
+    "round": "Seed",
+    "checkSizeSought": 2000000,
+    "metrics": {
+      "customers": 2200
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.65,
+      "legacy_disruptiveness": 0.7,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.6,
+      "proprietary_data_moat": 0.7,
+      "competition_intensity": 0.7
+    },
+    "competitors": ["Middesk", "Alloy", "Persona", "Equifax", "TransUnion", "LexisNexis Risk Solutions"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://baselayer.com/",
+      "https://www.businesswire.com/news/home/20240501810500/en/Baselayer-Raises-$6.5M-Seed-Round-to-Redefine-Business-Risk-with-AI-Risk-Engine",
+      "https://baselayer.com/business-verification/",
+      "https://baselayer.com/identity-network/"
+    ]
+  },
+  {
+    "id": "co_felix_pago",
+    "name": "Felix Pago",
+    "description": "WhatsApp-native remittance platform letting users send money to Latin America entirely inside a chat interface, using USDC stablecoin rails to reduce FX cost, with payout via bank deposit, mobile wallet, or cash pickup.",
+    "attributes": {
+      "industryPath": ["Financial Services", "Payments", "Cross-border remittances"],
+      "productCategoryPath": ["Software", "Consumer application (chat-native)", "Remittance platform"],
+      "targetCustomers": ["Latino migrant workers in the United States sending money to Latin America"],
+      "technicalApproaches": ["WhatsApp chatbot interface", "Stablecoin (USDC) settlement rail", "Voice-message transaction input"],
+      "founderArchetypes": [],
+      "disruptionMechanisms": ["Removing app-download friction via a WhatsApp-native interface", "Using stablecoin rails to reduce FX cost versus legacy remittance products"],
+      "regulatoryLabels": ["Money transmission licensing (multi-country)", "AML/KYC for cross-border transfers"],
+      "businessModel": "Per-transaction fee plus FX spread",
+      "goToMarket": "Referral-driven consumer growth",
+      "operationalModel": "Pure software / consumer fintech with payout-network partnerships",
+      "problemStatement": "Legacy remittance products require a dedicated app and charge high FX-inclusive fees, creating friction for underbanked, mobile-first senders who already live inside WhatsApp.",
+      "productDescription": "Felix Pago lets users complete a cross-border money transfer, including by voice message, entirely inside WhatsApp, using Circle's USDC stablecoin to source and settle FX, with payout to bank accounts, mobile wallets, or 40,000-plus cash-pickup locations across ten Latin American countries."
+    },
+    "founders": [
+      {
+        "name": "Manuel Godoy",
+        "role": "Co-founder and CEO",
+        "background": "Identified as CEO in TechCrunch's May 2024 Series A coverage; further prior career detail not disclosed in sources reviewed."
+      },
+      {
+        "name": "Bernardo García",
+        "role": "Co-founder",
+        "background": "Identified alongside Godoy in TechCrunch's May 2024 Series A coverage; a third co-founder was referenced in that coverage but not individually named."
+      }
+    ],
+    "stage": "series_a",
+    "geography": "United States / Latin America",
+    "sector": "Cross-border payments / Fintech",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "metrics": {
+      "customers": 300000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.3,
+      "legacy_disruptiveness": 0.75,
+      "technical_feasibility": 0.7,
+      "regulatory_moat": 0.65,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.75
+    },
+    "competitors": ["Western Union", "Remitly", "Wise", "Xoom", "ARQ (formerly DolarApp)"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.felixpago.com",
+      "https://techcrunch.com/2024/05/28/felix-pago-raises-15-5-million-to-help-latino-workers-send-money-home-via-whatsapp/",
+      "https://www.qedinvestors.com/blog/why-we-invested-in-felix-pago"
+    ]
+  },
+  {
+    "id": "co_formance",
+    "name": "Formance",
+    "description": "Open-source, programmable core ledger for fintech and regulated financial companies, with modules for ledger, connectivity, fund-lifecycle automation, and reconciliation, available self-hosted or as managed cloud.",
+    "attributes": {
+      "industryPath": ["Financial Services", "Financial infrastructure", "Core ledger / transaction infrastructure"],
+      "productCategoryPath": ["Software", "Open-source infrastructure", "Programmable ledger"],
+      "targetCustomers": ["Fintechs", "Regulated financial institutions"],
+      "technicalApproaches": ["Open-source core (self-hostable)", "Domain-specific scripting language (Numscript)", "Managed cloud hosting"],
+      "founderArchetypes": ["Domain-experienced founder (payments/security)"],
+      "disruptionMechanisms": ["Open-source distribution replacing costly in-house ledger builds", "Hosted control plane monetizing free/self-hosted adoption"],
+      "regulatoryLabels": ["SOC 2 Type II", "ISO 27001", "DORA compliance"],
+      "businessModel": "Open-core: open-source free tier plus managed/hosted subscription",
+      "goToMarket": "Developer-led / open-source adoption",
+      "operationalModel": "Pure software / open-source infrastructure",
+      "problemStatement": "Fintechs need a reconciled, multi-rail ledger to track money movement across banks and partners, and most build one in-house at high cost and risk.",
+      "productDescription": "Formance's Ledger module models transactions and balances using Numscript; Connectivity ingests data across banks, rails, wallets, and exchanges; Flows automates fund-lifecycle steps (holds, KYC, payouts); and Reconciliation matches internal ledger records against external statements, deployable self-hosted or via managed cloud."
+    },
+    "founders": [
+      {
+        "name": "Clément Salaün",
+        "role": "Co-founder",
+        "background": "Previously payments lead at Selency, per TechCrunch."
+      },
+      {
+        "name": "Anne-Sybille Pradelles",
+        "role": "Co-founder",
+        "background": "Previously COO of cybersecurity startup Alsid, per TechCrunch."
+      }
+    ],
+    "stage": "series_a",
+    "geography": "France / United States",
+    "sector": "Financial infrastructure / Fintech",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "graphMetrics": {
+      "ai_adoption": 0.15,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.8,
+      "regulatory_moat": 0.3,
+      "proprietary_data_moat": 0.2,
+      "competition_intensity": 0.6
+    },
+    "competitors": ["Modern Treasury", "Unit", "Increase", "nCino", "Fiserv", "TigerBeetle"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.formance.com/",
+      "https://www.formance.com/blog/company/formance-secures-21-million-dollar-in-series-a-funding-co-led-by-paypal-ventures-and-portage-ventures-to-expand-its-open-source-financial-infrastructure",
+      "https://techcrunch.com/2025/01/29/formance-raises-21-million-to-build-the-aws-of-fintech-infrastructure/",
+      "https://github.com/formancehq/ledger"
+    ]
+  },
+  {
+    "id": "co_keep",
+    "name": "Keep",
+    "description": "All-in-one financial platform for Canadian small and mid-size businesses combining a corporate credit card, expense automation, multi-currency banking, international payments, and growth-capital financing. Swapped into this batch in place of Moment, which had raised a Series C and outgrown the fund's check-size mandate.",
+    "attributes": {
+      "industryPath": ["Financial Services", "SMB banking", "Corporate cards and spend management"],
+      "productCategoryPath": ["Software", "Vertically integrated fintech platform", "SMB banking and card platform"],
+      "targetCustomers": ["Canadian small and mid-size businesses"],
+      "technicalApproaches": ["Card issuing via bank partner (Peoples Trust / Mastercard)", "AI-powered transaction categorization", "Multi-currency account infrastructure"],
+      "founderArchetypes": ["Repeat founder (two-time Y Combinator founder)"],
+      "disruptionMechanisms": ["Vertically integrating card, banking, and expense management for a market underserved by U.S.-first platforms", "Higher credit limits via alternative underwriting"],
+      "regulatoryLabels": ["Banking-as-a-service partner dependency (Peoples Trust)", "Card issuing regulation (Mastercard license)"],
+      "businessModel": "Interchange plus subscription plus credit-facility spread",
+      "goToMarket": "Direct sales / product-led SMB acquisition",
+      "operationalModel": "Pure software with regulated banking-partner dependency",
+      "problemStatement": "Canadian SMBs are underserved by vertically integrated card-and-spend platforms because U.S. products (Brex, Ramp) do not natively fit Canadian banking and card economics.",
+      "productDescription": "Keep provides a corporate Mastercard-branded card (issued by Peoples Trust) with credit limits 10-20x higher than typical small-business cards, expense automation with AI-powered categorization, multi-currency banking, international payments, and growth-capital financing up to $1m, targeting Canadian SMBs."
+    },
+    "founders": [
+      {
+        "name": "Oliver Takach",
+        "role": "Co-founder and CEO",
+        "background": "Two-time Y Combinator founder who previously bootstrapped a business to C$2m revenue by 2019, per the company's May 2025 funding announcement."
+      }
+    ],
+    "stage": "series_a",
+    "geography": "Canada",
+    "sector": "SMB banking / Fintech",
+    "round": "Series A",
+    "checkSizeSought": 2500000,
+    "metrics": {
+      "arr": 14500000,
+      "customers": 5000,
+      "nrr": 3.0
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.35,
+      "legacy_disruptiveness": 0.5,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.45,
+      "proprietary_data_moat": 0.4,
+      "competition_intensity": 0.75
+    },
+    "competitors": ["Ramp", "Brex", "Float", "Loop", "American Express Business"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.trykeep.com/",
+      "https://www.prnewswire.com/news-releases/keep-raises-c108m-to-transform-small-business-banking-in-canada-302459385.html",
+      "https://www.newswire.ca/news-releases/keep-raises-c-108m-to-transform-small-business-banking-in-canada-879787919.html",
+      "https://www.fintech.ca/2025/05/20/keep-emerges-stealth-transform-finance-small-business/"
+    ]
+  },
+  {
+    "id": "co_layer",
+    "name": "Layer",
+    "description": "Embedded accounting infrastructure letting SMB software platforms offer accounting software and white-labeled, human-backed bookkeeping directly inside their own product via API and pre-built UI components.",
+    "attributes": {
+      "industryPath": ["Financial Services", "Accounting and bookkeeping", "Embedded accounting infrastructure"],
+      "productCategoryPath": ["Software", "API infrastructure", "Embedded accounting API"],
+      "targetCustomers": ["Vertical SaaS platforms", "Horizontal SaaS platforms serving SMBs", "Fintechs serving SMBs"],
+      "technicalApproaches": ["API integration", "Pre-built JavaScript UI components", "Human-backed bookkeeping service layer"],
+      "founderArchetypes": [],
+      "disruptionMechanisms": ["Embedding accounting/bookkeeping into SMB software instead of a standalone tool", "Owning the financial-home relationship for platform end customers"],
+      "regulatoryLabels": [],
+      "businessModel": "Embedded subscription/service fee (software plus human bookkeeping)",
+      "goToMarket": "Developer-led / platform partnerships",
+      "operationalModel": "Software plus services (human-backed bookkeeping layer)",
+      "problemStatement": "SMB software platforms want to own the financial relationship with their customers but lack the infrastructure to build accounting and bookkeeping themselves.",
+      "productDescription": "Layer offers embedded accounting software connected to a platform's transaction data, plus white-labeled full-service bookkeeping with dedicated human bookkeepers for monthly reconciliation and reporting, integrated via API and JavaScript UI components."
+    },
+    "founders": [
+      {
+        "name": "Justin Meretab",
+        "role": "Co-founder",
+        "background": "Co-founded Layer in 2023; further prior career detail not disclosed in sources reviewed."
+      },
+      {
+        "name": "Daniel O'Neel",
+        "role": "Co-founder",
+        "background": "Co-founded Layer alongside Meretab in 2023; further prior career detail not disclosed in sources reviewed."
+      }
+    ],
+    "stage": "seed",
+    "geography": "United States",
+    "sector": "Embedded finance / Fintech",
+    "round": "Seed",
+    "checkSizeSought": 1750000,
+    "metrics": {
+      "customers": 30000
+    },
+    "graphMetrics": {
+      "ai_adoption": 0.6,
+      "legacy_disruptiveness": 0.55,
+      "technical_feasibility": 0.75,
+      "regulatory_moat": 0.2,
+      "proprietary_data_moat": 0.45,
+      "competition_intensity": 0.65
+    },
+    "competitors": ["Intuit QuickBooks", "Puzzle", "Digits", "Bill.com", "Xero"],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.layerfi.com/",
+      "https://www.globenewswire.com/news-release/2025/07/09/3112479/0/en/Layer-Raises-6-6M-Led-by-Emergence-Capital-to-Bring-Embedded-Accounting-to-the-SMB-Software-Stack.html",
+      "https://techcrunch.com/2024/05/15/embedded-accounting-layer-2-3m-quickbooks/"
+    ]
+  }
+]

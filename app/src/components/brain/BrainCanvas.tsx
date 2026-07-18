@@ -374,22 +374,41 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     group.add(synapse)
     const synTint = srgb('#5c6f9e')
 
-    function ringTexture() {
-      const c = document.createElement('canvas')
-      c.width = c.height = 128
-      const g = c.getContext('2d')!
-      g.strokeStyle = 'rgba(38,109,240,0.95)' /* accent */
-      g.lineWidth = 7
-      g.beginPath()
-      g.arc(64, 64, 52, 0, Math.PI * 2)
-      g.stroke()
-      const t = new THREE.CanvasTexture(c)
-      t.colorSpace = THREE.SRGBColorSpace
-      return t
-    }
-    const ring = new THREE.Sprite(
-      new THREE.SpriteMaterial({ map: ringTexture(), transparent: true, opacity: 0.7, depthWrite: false, depthTest: false }),
+    /* hover ring: SDF band in a fragment shader on a billboarded quad — crisp at
+       any zoom (screen-space AA via fwidth), unlike the old 128px canvas texture.
+       Band geometry matches the old texture: radius 52/64, half-width 3.5/64. */
+    const ring = new THREE.Mesh(
+      new THREE.PlaneGeometry(1, 1),
+      new THREE.ShaderMaterial({
+        transparent: true,
+        depthWrite: false,
+        depthTest: false,
+        uniforms: {
+          uColor: { value: srgb(ACCENT) },
+          uOpacity: { value: 0.7 },
+        },
+        vertexShader: /* glsl */ `
+          varying vec2 vUv;
+          void main() {
+            vUv = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }`,
+        fragmentShader: /* glsl */ `
+          uniform vec3 uColor;
+          uniform float uOpacity;
+          varying vec2 vUv;
+          void main() {
+            vec2 p = vUv * 2.0 - 1.0;
+            float r = length(p);
+            float d = abs(r - 0.8125) - 0.0547;
+            float aa = max(fwidth(r), 1e-4);
+            float alpha = (1.0 - smoothstep(0.0, aa, d)) * uOpacity;
+            if (alpha < 0.003) discard;
+            gl_FragColor = vec4(uColor, alpha);
+          }`,
+      }),
     )
+    ring.renderOrder = 3
     ring.visible = false
     scene.add(ring)
 
@@ -726,6 +745,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
 
       controls.update()
       updateHover()
+      ring.quaternion.copy(camera.quaternion) // billboard: the ring mesh faces the camera
       renderer.render(scene, camera)
     }
 

@@ -1,0 +1,298 @@
+{
+  "prepared": "2026-07-18",
+  "scope": "Lead-agent global QA for the HCP 100-memo underwriting set (research/generated/)",
+  "counts": {
+    "companies": 100,
+    "memos": 100,
+    "jsonRecords": 100,
+    "batches": 10,
+    "memosPerBatch": 10,
+    "sourcesLedgers": 10,
+    "uniqueUrlsCited": 574
+  },
+  "duplicates": {
+    "method": "normalized company-name comparison plus primary-domain comparison across all 100 companies and against the 10-company reference file",
+    "duplicateNames": [],
+    "duplicateDomains": [],
+    "duplicateJsonIds": [],
+    "overlapWithReferenceFile": [],
+    "result": "PASS - no duplicates, no aliases detected, no reference-file overlap"
+  },
+  "rosterSubstitutions": [
+    {
+      "batch": "01",
+      "dropped": "Exa",
+      "replacement": "Letta",
+      "reason": "$250m Series C at $2.2bn valuation (May 2026) outgrew check scope"
+    },
+    {
+      "batch": "01",
+      "dropped": "Langfuse",
+      "replacement": "HoneyHive",
+      "reason": "acquired by ClickHouse (Jan 2026); alternate OpenPipe also disqualified (acquired by CoreWeave, Sep 2025), so HoneyHive was verified and substituted"
+    },
+    {
+      "batch": "04",
+      "dropped": "Moment",
+      "replacement": "Keep",
+      "reason": "$78m Series C (May 2026) outgrew check scope"
+    },
+    {
+      "batch": "07",
+      "dropped": "Flagship",
+      "replacement": "Yope",
+      "reason": "core creator-storefront marketplace shut down"
+    },
+    {
+      "batch": "08",
+      "dropped": "Class Companion",
+      "replacement": "Lindy",
+      "reason": "acquired by Panorama Education (Apr 2025)"
+    },
+    {
+      "batch": "09",
+      "dropped": "RIVR",
+      "replacement": "Cartken",
+      "reason": "acquired by Amazon (Mar 2026)"
+    }
+  ],
+  "schemaValidation": {
+    "validator": "zod safeParse against brain/src/schemas/company.ts CompanySchema (copied to research/company-schema-reference.ts)",
+    "pass": 100,
+    "fail": 0,
+    "result": "PASS"
+  },
+  "linkCheck": {
+    "method": "curl GET with browser UA, 15s timeout, all 574 unique URLs, 2026-07-18",
+    "httpStatusCounts": {
+      "200": 529,
+      "000": 2,
+      "404": 2,
+      "403": 39,
+      "429": 2
+    },
+    "notes": "403s (39) and 429s (2) are bot-blocking/rate-limiting by TechCrunch, Axios, Bloomberg, BusinessWire, Medium, Contoro and similar; pages load for human visitors. No fabricated-looking URLs found.",
+    "brokenOrUnreachable": [
+      {
+        "url": "https://alleywatch.com/2025/04/pickle-peer-to-peer-clothing-rental-marketplace-brian-mcmahon/",
+        "resolution": "connection refused to automated clients (AlleyWatch bot blocking); claim corroborated by other cited sources"
+      },
+      {
+        "url": "https://cargado.com/series-a-press-release/",
+        "resolution": "was 404; replaced in all deliverables with live https://cargado.com/news (200); Series A facts independently corroborated by FreightWaves"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Beli_(app",
+        "resolution": "checker artifact \u2014 actual URL https://en.wikipedia.org/wiki/Beli_(app) returns 200"
+      },
+      {
+        "url": "https://www.alleywatch.com/2026/03/anterior-health-insurance-clinical-ai-platform-prior-authorization-payer-workflow-administrative-efficiency-abdel-mahmoud/",
+        "resolution": "connection refused to automated clients (AlleyWatch bot blocking); flagged in batch 02/03 caveats as low-confidence source and treated accordingly in memos"
+      }
+    ],
+    "result": "PASS after one repair - single genuine 404 (Cargado press release) replaced with live newsroom URL; facts independently corroborated"
+  },
+  "requiredSections": {
+    "method": "parser located all required headings/tables (portfolio summary, common model conventions, per-memo section order, return-path tables) in all 10 batch files; all 100 memo blocks extracted cleanly",
+    "missing": [],
+    "result": "PASS"
+  },
+  "arithmetic": {
+    "method": "independent recompute of entry ownership, exit ownership, exit EV, proceeds, and MOIC for all 100 return-path tables from parsed table values",
+    "checked": 100,
+    "passedExact": 98,
+    "explainedDeviations": [
+      {
+        "company": "Howie",
+        "issue": "batch summary table rounds 8.45x to 8.5x",
+        "status": "benign rounding, memo arithmetic exact"
+      },
+      {
+        "company": "Partiful",
+        "issue": "ownership modeled on a $2.5m reference check while proposed check is $1.5m",
+        "status": "intentional, documented in-memo (MOIC is check-size invariant); memo arithmetic exact"
+      }
+    ],
+    "unexplainedFailures": [],
+    "result": "PASS"
+  },
+  "recommendationDistribution": {
+    "Pursue": 24,
+    "Diligence": 36,
+    "Watch": 13,
+    "Price-sensitive": 18,
+    "Pass": 9
+  },
+  "stageDistribution": {
+    "seed": 26,
+    "series_a": 55,
+    "series_b": 19
+  },
+  "sectorDistribution": {
+    "AI infrastructure and developer tools": 10,
+    "Enterprise AI / Finance Agents": 1,
+    "Enterprise AI / Horizontal Agent Platform": 1,
+    "Enterprise AI / Manufacturing": 1,
+    "SMB AI / Bookkeeping": 1,
+    "Enterprise AI / Sales Agents": 1,
+    "Enterprise AI / Accounting Close Automation": 1,
+    "Enterprise AI / Logistics Voice Agents": 1,
+    "Enterprise AI / Legal Drafting": 1,
+    "Enterprise AI / Accounting Agents": 1,
+    "Vertical AI / Plaintiff Legal": 1,
+    "Healthcare software, payer technology": 1,
+    "Healthcare software, clinical documentation": 2,
+    "Healthcare software, virtual care": 1,
+    "Healthcare software, consumer telehealth": 1,
+    "Healthcare care delivery, maternity": 1,
+    "Healthcare care delivery, nutrition marketplace": 1,
+    "Healthcare software, revenue-cycle infrastructure": 2,
+    "Healthcare care delivery, behavioral health": 1,
+    "Insurance infrastructure / Fintech": 1,
+    "Payments infrastructure / Fintech": 2,
+    "Embedded finance / Fintech": 2,
+    "Consumer fintech": 1,
+    "Risk and compliance infrastructure / Fintech": 1,
+    "Cross-border payments / Fintech": 1,
+    "Financial infrastructure / Fintech": 1,
+    "SMB banking / Fintech": 1,
+    "Cybersecurity": 7,
+    "Data infrastructure": 3,
+    "Supply Chain & Logistics": 3,
+    "Climate & Energy": 7,
+    "Consumer social / dining discovery": 1,
+    "Consumer social / events": 1,
+    "Consumer commerce / event marketplace": 1,
+    "Consumer commerce / fashion marketplace": 1,
+    "Consumer social / IRL connection": 3,
+    "Consumer commerce / on-demand delivery": 1,
+    "Consumer commerce / luxury marketplace": 1,
+    "Consumer social / photo sharing": 1,
+    "Future of work / AI productivity": 2,
+    "Future of work / creator tools": 2,
+    "Education / consumer edtech": 1,
+    "Education / K-12 institutional": 2,
+    "Future of work / AI automation": 1,
+    "Creator economy / AI platform": 1,
+    "Future of work / AI search": 1,
+    "Defense tech / robotics navigation": 1,
+    "Logistics robotics": 2,
+    "Advanced manufacturing / industrial AI": 1,
+    "Delivery and logistics robotics": 1,
+    "Food-tech robotics": 1,
+    "Robotics AI software": 1,
+    "Advanced manufacturing / reshoring": 1,
+    "AI materials discovery / cleantech": 1,
+    "Consumer robotics": 1,
+    "Marketing technology": 1,
+    "Sales and revenue operations software": 1,
+    "Customer support software": 1,
+    "Sales enablement software": 1,
+    "HR technology / recruiting software": 1,
+    "HR technology / interview intelligence": 1,
+    "Enterprise resource planning software": 2,
+    "Billing and revenue operations software": 1,
+    "Regulated fintech customer operations software": 1
+  },
+  "businessModelDistribution": {
+    "Usage-based SaaS plus open source": 4,
+    "Usage-based SaaS (API credits) plus open source": 1,
+    "Usage-based SaaS": 2,
+    "Usage-based SaaS (API credits)": 1,
+    "Open source plus usage-based cloud SaaS": 1,
+    "Enterprise SaaS/API": 1,
+    "Subscription SaaS with free entry tier": 1,
+    "Subscription SaaS, usage-adjacent tiers": 1,
+    "Subscription SaaS, per-site/per-seat": 1,
+    "Tiered subscription SaaS (free, $40/mo, $100/mo, custom)": 1,
+    "Subscription SaaS": 16,
+    "Enterprise subscription SaaS": 4,
+    "Enterprise SaaS, PMPY/covered-lives pricing": 1,
+    "Subscription SaaS, per-seat": 1,
+    "Consumer subscription plus B2B/PMPY enterprise contracts": 1,
+    "Consumer subscription plus employer-benefit channel": 1,
+    "Insurance-reimbursed care delivery": 1,
+    "Marketplace, insurance-reimbursed take rate": 1,
+    "Usage-based API, per-check pricing": 1,
+    "Subscription SaaS, per-user monthly license": 1,
+    "Enterprise SaaS": 1,
+    "Insurance-billed care delivery, some self-pay": 1,
+    "API/platform licensing fee (subscription plus usage)": 1,
+    "Usage-based API (per-transaction fee)": 1,
+    "Embedded transaction/interchange revenue share plus platform fee": 1,
+    "Platform fee plus transaction markup": 1,
+    "Affiliate/referral and partner cash-back economics": 1,
+    "Usage-based / tiered subscription API": 1,
+    "Per-transaction fee plus FX spread": 1,
+    "Open-core: open-source free tier plus managed/hosted subscription": 1,
+    "Interchange plus subscription plus credit-facility spread": 1,
+    "Embedded subscription/service fee (software plus human bookkeeping)": 1,
+    "Subscription SaaS, per-workload/per-identity pricing (tiers undisclosed)": 1,
+    "Subscription SaaS, enterprise contracts (pricing undisclosed)": 3,
+    "Subscription SaaS, org/seat-based pricing (tiers undisclosed)": 1,
+    "Open-core: free OSS (SQLMesh/SQLGlot) plus paid Tobiko Cloud enterprise platform": 1,
+    "Usage-based self-serve subscription tiers (free, $4.99/mo Developer, Scaler, Pro) plus enterprise": 1,
+    "Subscription/usage-based SaaS (pricing undisclosed)": 2,
+    "Subscription SaaS/enterprise licensing (pricing undisclosed)": 1,
+    "Usage-based API / subscription": 1,
+    "Usage-based API (per-meter)": 1,
+    "Carbon-removal credit sales / offtake": 1,
+    "Marketplace / take rate": 1,
+    "Certification / registry fees": 1,
+    "Consumer subscription plus B2B restaurant advertising/insights (monetization largely undisclosed; HCP assumption)": 1,
+    "Undisclosed; brand partnerships and premium features are the plausible paths (HCP assumption)": 1,
+    "Marketplace / ticketing commission and processing fees": 1,
+    "Marketplace / per-transaction service fee": 1,
+    "Undisclosed; likely future membership/subscription (HCP assumption); current model pays organizers, a net cost": 1,
+    "Consumer subscription/per-event fee": 1,
+    "Marketplace / delivery and commission fees plus subscription (Chowpass) and advertising": 1,
+    "Marketplace / transaction commission (take rate undisclosed)": 1,
+    "Undisclosed; no monetization confirmed publicly (HCP assumption of future subscription/brand features)": 1,
+    "Undisclosed; likely per-event or subscription fee (HCP assumption)": 1,
+    "Subscription SaaS, per-seat pricing": 2,
+    "Freemium SaaS subscription": 2,
+    "Consumer subscription (app plus mailed physical books)": 1,
+    "Freemium to paid tiered SaaS (Free, Pro, Scale) plus district contracts": 1,
+    "Subscription SaaS, tiered per-account pricing": 1,
+    "Tiered subscription SaaS (Free, Builder, Scaler, Immortal)": 1,
+    "Freemium with paid 'Pro seats' (exact pricing undisclosed)": 1,
+    "Freemium (implied) with school/district licensing": 1,
+    "hardware retrofit kit plus software license": 1,
+    "Robotics-as-a-Service (RaaS)": 2,
+    "per-part / contracted manufacturing revenue": 1,
+    "hardware/fleet service revenue": 1,
+    "usage-based / pay-per-container": 1,
+    "enterprise software licensing": 1,
+    "manufacturing revenue via company-operated and franchised factories": 1,
+    "licensing / royalty on commercialized materials": 1,
+    "one-time hardware purchase with optional paid add-ons": 1,
+    "Per-seat subscription SaaS": 1
+  },
+  "unresolvedConcerns": [
+    "Mercoa: one third-party aggregator (openbankingtracker.com) claims the product is discontinued while Mercoa's live site, pricing page, and recent materials indicate active operation; memo carries the conflict openly - confirm operating status directly in diligence",
+    "Thena: only ARR ($20m) and valuation ($60m) datapoints come from a single aggregator (Latka) and are treated as unverified",
+    "Straddle: seed terms rest on convergent aggregator data only; no primary press release located",
+    "Turso: ~$26m Series A amount/date confirmed only via aggregator snippets, no primary announcement found",
+    "HappyRobot: ~$500m Series B valuation is third-party reported, not company-disclosed",
+    "Matic: ~$650m post-money sourced only to aggregators (Sacra, Dealroom)",
+    "Lindy: financing record disputed across sources (total raised $49.9m-$52m; Series A vs B labeling)",
+    "Happenstance: total funding disputed across trackers ($500k vs $2.5m)",
+    "Founder rosters incomplete in public sources for: Concourse, Herald, Straddle, Keep, Chef Robotics, Daedalus, Texture (partial names), Tofu/Dock/Doss/Sequence (first names only), Tandem Health, Anterior (one confirmed founder)",
+    "Stage drift: 19 of 100 companies underwritten as explicit Series B exceptions after raising past Series A during 2025-2026; each memo explains the exception per program rule 9",
+    "Funding-disclosure gaps >2 years flagged as caution signals for: Chroma, Letta, Summer Health, Dock, Kula, Aembit, P0 Security, Ello, Chronicle, Napkin",
+    "WebSearch session budget (200 calls shared across 10 concurrent agents) was exhausted mid-run; agents completed verification via direct WebFetch to primary sources - flagged as process note, coverage claimed unaffected",
+    "One WebSearch AI summary fabricated customer names for Browser Use (Airbnb/Amazon/Anthropic) not present in the underlying TechCrunch article; excluded after direct source fetch - recorded as a data-hygiene warning for future runs"
+  ],
+  "acceptance": {
+    "tenAgentsRanConcurrently": true,
+    "aggregateContains100UniqueNewCompanies": true,
+    "everyCompanyHasMemoAndSchemaValidJson": true,
+    "noReferenceCompanyIncluded": true,
+    "portfolioSummaryHas100RankedRows": true,
+    "matchesReferenceStructure": true,
+    "sourcesAndAssumptionsDistinguished": true,
+    "modelArithmeticVerified": true,
+    "globalJsonValidates": true,
+    "noUnresolvedDuplicateSchemaSectionOrArithmeticErrors": true
+  }
+}

@@ -268,7 +268,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     introPlayedRef.current = true
     const revealAt = new Float32Array(N)
     nodes.forEach((n, i) => {
-      revealAt[i] = 0.2 + n.cluster * 0.12 + ((hash(n.id + 'reveal') % 997) / 997) * 0.45
+      revealAt[i] = 0.08 + n.cluster * 0.05 + ((hash(n.id + 'reveal') % 997) / 997) * 0.18
     })
     if (intro.active) {
       pDim.fill(0)
@@ -394,8 +394,8 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       c.width = 1024
       c.height = 192
       const g = c.getContext('2d')!
-      /* mockup-verbatim cartography label: system-ui 500, tracked uppercase */
-      g.font = '500 64px system-ui, sans-serif'
+      /* neobrutal cartography label: Space Mono 700, tracked uppercase */
+      g.font = "700 60px 'Space Mono', monospace"
       if ('letterSpacing' in g) (g as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = '16px'
       g.textBaseline = 'middle'
       const label = text.toUpperCase()
@@ -405,7 +405,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       const x0 = (c.width - (tickW + gap + textW)) / 2
       g.fillStyle = colorHex
       g.fillRect(x0, 96 - 26, tickW, 52)
-      g.fillStyle = 'rgba(28, 29, 31, 0.9)'
+      g.fillStyle = 'rgba(0, 0, 0, 0.92)'
       g.fillText(label, x0 + tickW + gap, 96)
       const t = new THREE.CanvasTexture(c)
       t.colorSpace = THREE.SRGBColorSpace
@@ -499,8 +499,8 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         tooltip.style.left = `${Math.min(mouse.x + 14, container!.clientWidth - 250)}px`
         tooltip.style.top = `${mouse.y + 14}px`
         const color = hovered.role === 'sourced' ? ACCENT : SECTOR_PALETTE[hovered.cluster % SECTOR_PALETTE.length]
-        tooltip.innerHTML = `<div style="color:#1c1d1f;font-size:13px;font-weight:600">${hovered.label}</div>
-          <div style="color:${color};margin-top:2px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">${markets[hovered.cluster]?.label ?? ''} · ${ROLE_TAG[hovered.role]}${hovered.score ? ` · fit ${hovered.score}` : ''}</div>`
+        tooltip.innerHTML = `<div style="color:#000000;font-size:13px;font-weight:700">${hovered.label}</div>
+          <div style="color:${color};margin-top:2px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">${markets[hovered.cluster]?.label ?? ''} · ${ROLE_TAG[hovered.role]}${hovered.score ? ` · fit ${hovered.score}` : ''}</div>`
         ringWorld.copy(hovered.pos).applyMatrix4(group.matrixWorld)
         ring.position.copy(ringWorld)
         const sz = (hovered.role === 'portfolio' ? 15 : 10) * 3.4 * (pMat.uniforms.uScale.value as number)
@@ -638,7 +638,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         const t = time - intro.start
         let done = true
         for (let i = 0; i < N; i++) {
-          const p = Math.min(Math.max((t - revealAt[i]) / 0.5, 0), 1)
+          const p = Math.min(Math.max((t - revealAt[i]) / 0.25, 0), 1)
           pDim[i] = p * p * (3 - 2 * p)
           if (p < 1) done = false
         }
@@ -748,7 +748,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     ro.observe(container)
 
     if (intro.active) {
-      flyToPose(new THREE.Vector3(0, 170, 1180), new THREE.Vector3(0, 0, 0), 1.9)
+      flyToPose(new THREE.Vector3(0, 170, 1180), new THREE.Vector3(0, 0, 0), 0.8)
     }
 
     animate()
@@ -771,7 +771,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     <div ref={containerRef} className="absolute inset-0">
       <div
         ref={tooltipRef}
-        className="pointer-events-none absolute z-10 hidden rounded-[6px] border border-[rgba(28,29,31,0.1)] bg-white/85 px-3 py-2 backdrop-blur-sm"
+        className="pointer-events-none absolute z-10 hidden rounded-none border-2 border-hairline-strong bg-white px-3 py-2 shadow-brutal-sm"
       />
     </div>
   )

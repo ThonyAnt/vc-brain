@@ -20,7 +20,7 @@ export function MemoTab({ company, founders }: { company: Company; founders: Fou
           {company.sector} · {company.location} {company.raising ? `· ${company.raising}` : ''}
         </p>
 
-        <div className={`caption mt-5 inline-block rounded-full px-2.5 py-1 ${recommend ? 'bg-success text-on-dark' : 'bg-bone text-ink'}`}>
+        <div className={`caption mt-5 inline-block rounded-none border-2 border-hairline-strong px-2.5 py-1 ${recommend ? 'bg-success text-ink' : 'bg-bone text-ink'}`}>
           {recommend ? 'Recommend: advance to partner meeting' : 'Recommend: watch, do not advance'}
         </div>
 

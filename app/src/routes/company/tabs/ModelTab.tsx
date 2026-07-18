@@ -89,7 +89,7 @@ export function ModelTab({ company }: { company: Company }) {
                 step={f.step}
                 value={a[f.key]}
                 onChange={(e) => setA({ ...a, [f.key]: Number(e.target.value) })}
-                className="code-md h-11 w-32 rounded-full border border-hairline bg-card px-4 text-right text-ink focus:outline-3 focus:outline-ring-focus"
+                className="code-md h-11 w-32 rounded-none border-2 border-hairline-strong bg-card px-4 text-right text-ink focus:outline-3 focus:outline-ring-focus"
               />
             </label>
           ))}
@@ -123,7 +123,7 @@ export function ModelTab({ company }: { company: Company }) {
             return (
               <div
                 key={k}
-                className={`rounded-lg p-6 ${featured ? 'bg-dark text-on-dark' : 'border border-hairline bg-card text-ink'}`}
+                className={`rounded-none border-2 border-hairline-strong p-6 shadow-brutal ${featured ? 'bg-dark text-on-dark' : 'bg-card text-ink'}`}
               >
                 <span className={`caption-tight ${featured ? 'text-hero-glow' : 'text-mute'}`}>{k}</span>
                 <div className="display-md mt-2">{s.moic.toFixed(1)}×</div>

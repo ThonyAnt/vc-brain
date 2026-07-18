@@ -3,23 +3,29 @@ import { useNavigate } from 'react-router'
 import { ACCENT } from '../brain/BrainCanvas'
 import { api } from '../../lib/api/client'
 import type { Company } from '../../lib/types'
+import type { LatLng } from '../../lib/geo'
+import { cityLatLng } from '../../lib/geo'
 import { useAppStore } from '../../state/store'
 import { Pill } from '../ui/Pill'
 
-/* White-glass panel over the light brain canvas (final-mockup chrome). */
+/* Neobrutal panel over the brain canvas. The sourcing globe lives in GlobeCard
+   on the brain page; hover here reports the city so the globe rotates to it. */
 export function SourcingInbox({
   onFocus,
   onFeedback,
   onDiscover,
+  onHoverCity,
 }: {
   onFocus: (id: string) => void
   onFeedback: (changedIds: string[]) => void
   onDiscover?: (companies: Company[]) => void
+  onHoverCity?: (city: LatLng | null) => void
 }) {
   const [items, setItems] = useState<Company[]>([])
   const [dismissed, setDismissed] = useState<Set<string>>(new Set())
   const [saved, setSaved] = useState<Set<string>>(new Set())
-  const [open, setOpen] = useState(false) // folded by default — the graph stays immersive
+  // Folded by default; ?inbox opens it for demos and screenshots.
+  const [open, setOpen] = useState(() => new URLSearchParams(window.location.search).has('inbox'))
   const [query, setQuery] = useState('')
   const [searching, setSearching] = useState(false)
   const [foundIds, setFoundIds] = useState<Set<string>>(new Set())
@@ -69,7 +75,7 @@ export function SourcingInbox({
     return (
       <button
         onClick={() => setOpen(true)}
-        className="glass-panel pointer-events-auto flex h-fit cursor-pointer items-center gap-2.5 self-start rounded-full px-4 py-2.5 transition-colors hover:bg-white"
+        className="glass-panel pointer-events-auto flex h-fit cursor-pointer items-center gap-2.5 self-start rounded-none px-4 py-2.5 transition-colors hover:bg-bone"
       >
         <span className="caption-tight text-ink">Sourced this week</span>
         <span className="code-md" style={{ color: ACCENT }}>
@@ -80,7 +86,7 @@ export function SourcingInbox({
   }
 
   return (
-    <div className="glass-panel pointer-events-auto flex h-full w-80 flex-col overflow-hidden">
+    <div className="glass-panel pointer-events-auto flex min-h-0 w-full flex-1 flex-col overflow-hidden">
       <div className="flex items-center justify-between border-b border-hairline px-4 py-3">
         <span className="caption-tight text-ink">Sourced this week</span>
         <span className="flex items-center gap-3">
@@ -116,8 +122,10 @@ export function SourcingInbox({
         {visible.map((c) => (
           <div
             key={c.id}
-            className="cursor-pointer rounded-card border border-hairline bg-card p-3 transition-colors hover:border-hairline-strong"
+            className="cursor-pointer rounded-none border-2 border-hairline-strong bg-card p-3 transition-colors hover:bg-bone"
             onClick={() => onFocus(c.id)}
+            onMouseEnter={() => onHoverCity?.(cityLatLng(c.location))}
+            onMouseLeave={() => onHoverCity?.(null)}
           >
             <div className="flex items-baseline justify-between">
               <div className="flex items-center gap-2">

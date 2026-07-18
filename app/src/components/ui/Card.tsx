@@ -1,6 +1,11 @@
 import type { HTMLAttributes } from 'react'
 
-/* model-card recipe: white on cream, 10px radius, hairline outline, no shadow. */
+/* Neobrutal card: solid white, 2px black border, square corners, hard 4px shadow. */
 export function Card({ className = '', ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={`rounded-card border border-hairline bg-card p-4 ${className}`} {...props} />
+  return (
+    <div
+      className={`rounded-none border-2 border-hairline-strong bg-card p-4 shadow-brutal ${className}`}
+      {...props}
+    />
+  )
 }

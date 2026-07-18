@@ -3,45 +3,63 @@
 @import '@fontsource/inter/400.css';
 @import '@fontsource/inter/600.css';
 @import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/dm-sans/400.css';
+@import '@fontsource/dm-sans/500.css';
+@import '@fontsource/dm-sans/700.css';
+@import '@fontsource/space-mono/400.css';
+@import '@fontsource/space-mono/700.css';
 @import 'tailwindcss';
+@import 'tw-animate-css';
 
 /*
- * Replicate design tokens — docs/design/awesome-design-md/design-md/replicate/DESIGN.md
- * Proprietary families substituted per the file's own note:
- * rb-freigeist-neue → Bricolage Grotesque, basier-square → Inter, JetBrains Mono direct.
+ * Legacy role tokens, remapped onto the CANONICAL SITE THEME (see end of file /
+ * docs/design/site-theme.css). Values come from the guide only — never invent.
+ * shadcn-namespace tokens live exclusively in the canonical block at the end.
  */
 @theme {
-  --color-primary: #ea2804;
-  --color-primary-deep: #c01f00;
+  --color-primary: #ff3333;
+  --color-primary-deep: #000000; /* hover state: invert to black */
   --color-on-primary: #ffffff;
-  --color-ink: #202020;
-  --color-body: #3a3a3a;
-  --color-charcoal: #575757;
-  --color-mute: #646464;
-  --color-ash: #8d8d8d;
-  --color-stone: #bbbbbb;
-  --color-on-dark: #fcfcfc;
-  --color-on-dark-mute: rgba(252, 252, 252, 0.72);
-  --color-canvas: #f9f7f3;
-  --color-bone: #f3f0e8;
+  --color-ink: #000000;
+  --color-body: #000000;
+  --color-charcoal: #333333;
+  --color-mute: #333333;
+  --color-ash: #333333;
+  --color-stone: #cccccc;
+  --color-on-dark: #ffffff;
+  --color-on-dark-mute: #cccccc;
+  --color-canvas: #ffffff;
+  --color-bone: #f0f0f0;
   --color-card: #ffffff;
-  --color-dark: #202020;
+  --color-dark: #000000;
   --color-deep: #000000;
-  --color-hairline: rgba(32, 32, 32, 0.12);
-  --color-hairline-strong: #202020;
-  --color-divider-dark: rgba(255, 255, 255, 0.2);
-  --color-hero-glow: #ff6a3d;
-  --color-hero-pink: #f4a8a0;
-  --color-success: #2b9a66;
-  --color-ring-focus: rgba(59, 130, 246, 0.5);
+  --color-hairline: #000000;
+  --color-hairline-strong: #000000;
+  --color-divider-dark: #ffffff;
+  --color-hero-glow: #ffff00;
+  --color-hero-pink: #f0f0f0;
+  --color-success: #00cc00;
+  --color-ring-focus: #ff3333;
 
-  --font-display: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: 'DM Sans', sans-serif;
+  --font-sans: 'DM Sans', sans-serif;
+  --font-mono: 'Space Mono', monospace;
 
-  --radius-xs: 4px;
-  --radius-card: 10px;
-  --radius-lg: 16px;
+  --radius-xs: 0px;
+  --radius-card: 0px;
+  --radius-lg: 0px;
+
+  --shadow-brutal: 4px 4px 0px 0px hsl(0 0% 0%);
+  --shadow-brutal-sm: 2px 2px 0px 0px hsl(0 0% 0%);
+}
+
+/* shadcn components use bare `border`; default the border color to the hairline token */
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border);
+  }
 }
 
 html,
@@ -130,32 +148,157 @@ body {
   letter-spacing: 0;
 }
 
-/* Brain page background (ported verbatim from final mockup, light theme):
-   single bottom-lit surface + faint dot grid with gentle mouse parallax */
+/* Brain page background: flat theme white + faint black dot grid with parallax */
 .brain-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  background: radial-gradient(ellipse at bottom, #ffffff 0%, #e9ebf0 100%);
+  background: #ffffff;
 }
 .brain-bg-parallax {
   position: absolute;
   inset: -80px;
   will-change: transform;
-  background-image: radial-gradient(rgba(28, 29, 31, 0.07) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
-/* Final mockup panel chrome for brain-page overlays: white glass, Attio-layered shadow */
+/* Brain-page overlay panels, neobrutal: solid white, 2px black border, hard shadow */
 @utility glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid #e4e7ec;
-  border-radius: 13px;
-  box-shadow:
-    0 1px 3px #00000008,
-    0 4px 8px -2px #00000008,
-    0 16px 32px -8px #0000000d;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 0;
+  box-shadow: 4px 4px 0px 0px hsl(0 0% 0%);
+}
+
+/* ============================================================================
+ * CANONICAL SITE THEME (Anthony, 2026-07-18) — use these values VERBATIM.
+ * Guiding design for the website from now on; never invent token values.
+ * Pristine reference copy: docs/design/site-theme.css
+ * This block must stay LAST so its tokens win over the legacy theme above.
+ * ========================================================================== */
+
+:root {
+  --card: #ffffff;
+  --ring: #ff3333;
+  --input: #000000;
+  --muted: #f0f0f0;
+  --accent: #0066ff;
+  --border: #000000;
+  --radius: 0px;
+  --chart-1: #ff3333;
+  --chart-2: #ffff00;
+  --chart-3: #0066ff;
+  --chart-4: #00cc00;
+  --chart-5: #cc00cc;
+  --popover: #ffffff;
+  --primary: #ff3333;
+  --sidebar: #f0f0f0;
+  --font-mono: Space Mono, monospace;
+  --font-sans: DM Sans, sans-serif;
+  --secondary: #ffff00;
+  --background: #ffffff;
+  --foreground: #000000;
+  --destructive: #000000;
+  --shadow-blur: 0px;
+  --shadow-color: hsl(0 0% 0%);
+  --sidebar-ring: #ff3333;
+  --shadow-spread: 0px;
+  --shadow-opacity: 1;
+  --sidebar-accent: #0066ff;
+  --sidebar-border: #000000;
+  --card-foreground: #000000;
+  --shadow-offset-x: 4px;
+  --shadow-offset-y: 4px;
+  --sidebar-primary: #ff3333;
+  --muted-foreground: #333333;
+  --accent-foreground: #ffffff;
+  --popover-foreground: #000000;
+  --primary-foreground: #ffffff;
+  --sidebar-foreground: #000000;
+  --secondary-foreground: #000000;
+  --destructive-foreground: #ffffff;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-primary-foreground: #ffffff;
+}
+
+.dark {
+  --card: #333333;
+  --ring: #ff6666;
+  --input: #ffffff;
+  --muted: #1a1a1a;
+  --accent: #3399ff;
+  --border: #ffffff;
+  --radius: 0px;
+  --chart-1: #ff6666;
+  --chart-2: #ffff33;
+  --chart-3: #3399ff;
+  --chart-4: #33cc33;
+  --chart-5: #cc33cc;
+  --popover: #333333;
+  --primary: #ff6666;
+  --sidebar: #000000;
+  --secondary: #ffff33;
+  --background: #000000;
+  --foreground: #ffffff;
+  --destructive: #ffffff;
+  --sidebar-ring: #ff6666;
+  --sidebar-accent: #3399ff;
+  --sidebar-border: #ffffff;
+  --card-foreground: #ffffff;
+  --sidebar-primary: #ff6666;
+  --muted-foreground: #cccccc;
+  --accent-foreground: #000000;
+  --popover-foreground: #ffffff;
+  --primary-foreground: #000000;
+  --sidebar-foreground: #ffffff;
+  --secondary-foreground: #000000;
+  --destructive-foreground: #000000;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-primary-foreground: #000000;
+}
+
+@theme inline {
+  --color-card: var(--card);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --color-radius: var(--radius);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-popover: var(--popover);
+  --color-primary: var(--primary);
+  --color-sidebar: var(--sidebar);
+  --color-font-mono: var(--font-mono);
+  --color-font-sans: var(--font-sans);
+  --color-secondary: var(--secondary);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-destructive: var(--destructive);
+  --color-shadow-blur: var(--shadow-blur);
+  --color-shadow-color: var(--shadow-color);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-shadow-spread: var(--shadow-spread);
+  --color-shadow-opacity: var(--shadow-opacity);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-card-foreground: var(--card-foreground);
+  --color-shadow-offset-x: var(--shadow-offset-x);
+  --color-shadow-offset-y: var(--shadow-offset-y);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
 }

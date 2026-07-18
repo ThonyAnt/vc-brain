@@ -27,7 +27,7 @@ export function PipelinePage() {
   const active = companies.filter((c) => c.dealStage)
 
   return (
-    <div className="mx-auto max-w-[1280px] p-8">
+    <div className="mx-auto max-w-[1280px] p-8 pb-28">
       <Eyebrow>Pipeline</Eyebrow>
       <h1 className="display-lg mt-2">Active deals</h1>
 
@@ -37,10 +37,10 @@ export function PipelinePage() {
           <button
             key={item.id}
             onClick={() => item.companyId && navigate(`/company/${item.companyId}`)}
-            className="flex shrink-0 cursor-pointer items-center gap-3 rounded-full border border-hairline bg-card py-2 pr-5 pl-3 text-left transition-colors hover:bg-bone"
+            className="flex shrink-0 cursor-pointer items-center gap-3 rounded-none border-2 border-hairline-strong bg-card py-2 pr-5 pl-3 text-left transition-colors hover:bg-bone"
           >
             <span
-              className={`caption rounded-full px-2.5 py-1 ${
+              className={`caption rounded-none border border-hairline-strong px-2.5 py-1 ${
                 item.kind === 'call' ? 'bg-dark text-on-dark' : 'bg-bone text-charcoal'
               }`}
             >

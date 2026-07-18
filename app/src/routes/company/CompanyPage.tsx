@@ -49,7 +49,7 @@ export function CompanyPage() {
   }
 
   return (
-    <div className="mx-auto max-w-[1280px] p-8">
+    <div className="mx-auto max-w-[1280px] p-8 pb-28">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <Eyebrow>

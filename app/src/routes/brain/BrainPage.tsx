@@ -2,9 +2,11 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { BrainCanvas, SECTOR_PALETTE, type BrainHandle } from '../../components/brain/BrainCanvas'
 import { DotGridBackground } from '../../components/brain/DotGridBackground'
 import { NodePanel } from '../../components/brain/NodePanel'
+import { GlobeCard } from '../../components/geo/GlobeCard'
 import { SourcingInbox } from '../../components/sourcing/SourcingInbox'
 import { api } from '../../lib/api/client'
 import type { Company, FundGraph, GraphEdge, GraphNode } from '../../lib/types'
+import type { LatLng } from '../../lib/geo'
 
 /* Turn freshly web-discovered companies into graph nodes + edges: each joins the
    market cluster matching its sector and links to its closest prior winner. */
@@ -32,23 +34,26 @@ function discoveredToGraph(companies: Company[], graph: FundGraph): { nodes: Gra
   return { nodes, edges }
 }
 
-/* HUD chips/hints use the mockup's mono uppercase voice (graph zone, not app chrome) */
+/* HUD chips/hints: neobrutal mono voice (Space Mono, ink) */
 const hudMono: React.CSSProperties = {
-  fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+  fontFamily: "'Space Mono', monospace",
   fontSize: '0.66rem',
   letterSpacing: '0.1em',
   textTransform: 'uppercase',
-  color: '#6f7988',
+  color: '#333333',
 }
 
 export function BrainPage() {
   const [graph, setGraph] = useState<FundGraph | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [sourced, setSourced] = useState<Company[]>([])
+  const [hoverCity, setHoverCity] = useState<LatLng | null>(null)
   const brainRef = useRef<BrainHandle>(null)
   const pendingDiscovered = useRef<string[]>([])
 
   useEffect(() => {
     api.getGraph().then(setGraph)
+    api.getSourcing().then(setSourced)
   }, [])
 
   const onSelect = useCallback((id: string | null) => setSelectedId(id), [])
@@ -56,6 +61,10 @@ export function BrainPage() {
 
   /* Web discovery: fold new companies into the graph, then pulse + fly to them. */
   const onDiscover = useCallback((companies: Company[]) => {
+    setSourced((previous) => {
+      const known = new Set(previous.map((company) => company.id))
+      return [...companies.filter((company) => !known.has(company.id)), ...previous]
+    })
     setGraph((prev) => {
       if (!prev) return prev
       const { nodes, edges } = discoveredToGraph(companies, prev)
@@ -82,12 +91,19 @@ export function BrainPage() {
       {graph && <BrainCanvas ref={brainRef} graph={graph} onSelect={onSelect} />}
 
       {/* HUD overlays */}
-      <div className="pointer-events-none absolute inset-0 flex p-4">
-        <SourcingInbox
-          onFocus={(id) => brainRef.current?.focusNode(id)}
-          onFeedback={onFeedback}
-          onDiscover={onDiscover}
-        />
+      <div className="pointer-events-none absolute inset-0 flex p-4 pl-24">
+        {/* left rail: inbox stacks above the standing sourcing map */}
+        <div className="flex h-full w-80 flex-col gap-3">
+          <SourcingInbox
+            onFocus={(id) => brainRef.current?.focusNode(id)}
+            onFeedback={onFeedback}
+            onDiscover={onDiscover}
+            onHoverCity={setHoverCity}
+          />
+          <div className="mt-auto">
+            <GlobeCard companies={sourced} focus={hoverCity} />
+          </div>
+        </div>
         <div className="flex-1" />
         {selectedId && (
           <NodePanel
@@ -101,7 +117,7 @@ export function BrainPage() {
         )}
       </div>
 
-      <div className="pointer-events-none absolute bottom-4 left-88 flex items-center gap-4">
+      <div className="pointer-events-none absolute top-4 right-4 flex flex-col items-end gap-1.5">
         {markets.map((m, i) => (
           <span key={m.id} style={hudMono} className="flex items-center gap-1.5">
             <i

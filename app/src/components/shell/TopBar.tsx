@@ -14,7 +14,7 @@ export function TopBar() {
   const chatOpen = useAppStore((s) => s.chatOpen)
 
   return (
-    <header className="flex h-15 shrink-0 items-center justify-between border-b border-hairline bg-canvas px-6">
+    <header className="flex h-15 shrink-0 items-center justify-between border-b-2 border-hairline-strong bg-canvas px-6">
       <div className="flex items-baseline gap-3">
         <span className="text-sm font-semibold text-ink">Meridian Ventures</span>
         <span className="code-sm text-ash">{crumb(location.pathname)}</span>

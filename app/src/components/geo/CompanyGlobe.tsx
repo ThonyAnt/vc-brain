@@ -1,13 +1,14 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import createGlobe from 'cobe'
 import type { LatLng } from '../../lib/geo'
 
 /**
- * Cobe v2 globe matching the pasted GlobeInteractive reference: light dotted
- * sphere (dark 0, diffuse 1.5, mapBrightness 10), white base, warm glow, navy
- * markers, 0.003 auto-spin, grab-drag with momentum offsets, circular canvas
- * with 1.2s fade-in, and anchor-positioned label chips that fade/blur behind
- * the horizon. Props are unchanged — this stays the inbox integration boundary.
+ * Sticker globe (GlobeStickers reference): light dotted cobe sphere with
+ * die-cut company "logo" stickers anchored to their cities — neobrutal
+ * letter-marks (Space Mono monograms, white edge, hard shadow, slight
+ * rotations) since the demo companies are fictional and have no real logos.
+ * Drag with momentum, 0.003 auto-spin, hover-to-rotate via the focus prop.
+ * Props are unchanged — this stays the GlobeCard integration boundary.
  */
 export interface GlobeMarker extends LatLng {
   label?: string
@@ -18,6 +19,7 @@ export interface GlobeMarker extends LatLng {
 const DEG = Math.PI / 180
 const BASE_THETA = 0.2
 const SPEED = 0.003
+const STICKER_ROT = [-8, 6, -4, 10]
 
 /* cobe centers longitude L when phi = π - (L·π/180 - π/2) */
 const phiForLng = (lng: number) => Math.PI - (lng * DEG - Math.PI / 2)
@@ -41,32 +43,16 @@ export function CompanyGlobe({
   const isPausedRef = useRef(false)
   const focusRef = useRef<LatLng | null>(null)
   focusRef.current = focus ?? null
-  const [expanded, setExpanded] = useState<string | null>(null)
 
-  /* one chip per city — per-company chips pile up on the small globe */
-  const groups: { lat: number; lng: number; city: string; hq: boolean; names: string[] }[] = []
-  for (const m of markers) {
-    const g = groups.find((g) => Math.abs(g.lat - m.lat) < 1e-6 && Math.abs(g.lng - m.lng) < 1e-6)
-    if (g) {
-      g.hq ||= m.kind === 'hq'
-      if (m.label) g.names.push(m.label)
-      if (!g.city && m.city) g.city = m.city
-    } else {
-      groups.push({
-        lat: m.lat,
-        lng: m.lng,
-        city: m.city ?? '',
-        hq: m.kind === 'hq',
-        names: m.label ? [m.label] : [],
-      })
-    }
-  }
-  const items = groups.map((g, i) => ({
-    ...g,
-    id: `${slug(g.city || g.names[0] || 'hq')}-${i}`,
-    name: g.hq ? 'HQ' : g.city || g.names[0] || '',
+  /* one sticker per company: monogram letter-mark; HQ gets an inverted MV */
+  const items = markers.map((m, i) => ({
+    ...m,
+    id: `${slug(m.kind === 'hq' ? 'hq' : (m.label ?? 'm'))}-${i}`,
+    mark: m.kind === 'hq' ? 'MV' : (m.label ?? '?').slice(0, 1).toUpperCase(),
+    title: m.kind === 'hq' ? 'Meridian Ventures (HQ)' : `${m.label ?? ''}${m.city ? ` · ${m.city}` : ''}`,
+    rot: STICKER_ROT[i % STICKER_ROT.length],
   }))
-  const markersKey = JSON.stringify(items)
+  const markersKey = JSON.stringify(items.map((m) => ({ lat: m.lat, lng: m.lng, id: m.id })))
 
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
     pointerInteracting.current = { x: e.clientX, y: e.clientY }
@@ -113,8 +99,7 @@ export function CompanyGlobe({
 
     function init() {
       const width = canvas.offsetWidth
-      if (width === 0) return
-      if (globe) return // already initialized
+      if (width === 0 || globe) return
 
       globe = createGlobe(canvas, {
         devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
@@ -125,14 +110,14 @@ export function CompanyGlobe({
         dark: 0,
         diffuse: 1.5,
         mapSamples: 16000,
-        mapBrightness: 10,
+        mapBrightness: 8,
         baseColor: [1, 1, 1],
-        markerColor: [0.1, 0.2, 0.45],
+        markerColor: [1, 0.2, 0.2],
         glowColor: [0.94, 0.93, 0.91],
         markerElevation: 0,
-        markers: parsed.map((m) => ({ location: [m.lat, m.lng] as [number, number], size: 0.025, id: m.id })),
+        markers: parsed.map((m) => ({ location: [m.lat, m.lng] as [number, number], size: 0.03, id: m.id })),
         arcs: [],
-        arcColor: [0.15, 0.3, 0.55],
+        arcColor: [0.9, 0.4, 0.7],
         arcWidth: 0.5,
         arcHeight: 0.25,
         opacity: 0.7,
@@ -179,12 +164,6 @@ export function CompanyGlobe({
 
   return (
     <div className={`relative flex select-none items-center justify-center ${className ?? ''}`}>
-      <style>{`
-        @keyframes fade-slide-in {
-          from { opacity: 0; transform: translateY(-4px); }
-          to { opacity: 0.8; transform: translateY(0); }
-        }
-      `}</style>
       <div className="relative h-full" style={{ aspectRatio: '1 / 1' }}>
         <canvas
           ref={canvasRef}
@@ -202,57 +181,35 @@ export function CompanyGlobe({
         {items.map((m) => (
           <div
             key={m.id}
-            onClick={() => setExpanded(expanded === m.id ? null : m.id)}
+            title={m.title}
             style={{
               position: 'absolute',
               positionAnchor: `--cobe-${m.id}`,
               bottom: 'anchor(top)',
               left: 'anchor(center)',
               translate: '-50% 0',
-              marginBottom: 6,
+              marginBottom: 2,
+              width: 22,
+              height: 22,
               display: 'flex',
-              flexDirection: 'column' as const,
               alignItems: 'center',
-              padding: expanded === m.id ? '0.4rem 0.6rem' : '0.3rem 0.5rem',
-              background: '#1a1a2e',
-              color: '#fff',
-              borderRadius: 3,
-              cursor: 'pointer',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+              justifyContent: 'center',
+              background: m.kind === 'hq' ? '#000000' : '#ffffff',
+              color: m.kind === 'hq' ? '#ffffff' : '#000000',
+              border: '2px solid #000000',
+              /* die-cut sticker edge + hard lift */
+              boxShadow: '0 0 0 2px #ffffff, 2px 3px 0px 0px rgba(0,0,0,0.35)',
+              fontFamily: "'Space Mono', monospace",
+              fontWeight: 700,
+              fontSize: m.kind === 'hq' ? '0.5rem' : '0.7rem',
+              lineHeight: 1,
+              transform: `rotate(${m.rot}deg)`,
+              pointerEvents: 'none' as const,
               opacity: `var(--cobe-visible-${m.id}, 0)`,
-              filter: `blur(calc((1 - var(--cobe-visible-${m.id}, 0)) * 8px))`,
-              transition: 'opacity 0.4s, filter 0.4s, transform 0.2s, padding 0.2s',
-              zoom: expanded === m.id ? 1.05 : 1,
+              transition: 'opacity 0.2s',
             }}
           >
-            <span
-              style={{
-                fontFamily: 'monospace',
-                fontSize: '0.6rem',
-                fontWeight: 600,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase' as const,
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {m.name}
-            </span>
-            {expanded === m.id && (
-              <span
-                style={{
-                  fontFamily: 'system-ui, sans-serif',
-                  fontSize: '0.55rem',
-                  opacity: 0.8,
-                  marginTop: '0.15rem',
-                  animation: 'fade-slide-in 0.2s ease-out',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                {m.hq
-                  ? ['Meridian Ventures', ...m.names].join(' · ')
-                  : m.names.join(' · ') || 'sourced this week'}
-              </span>
-            )}
+            {m.mark}
           </div>
         ))}
       </div>

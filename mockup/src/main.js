@@ -42,7 +42,7 @@ const SHOW_LINES = false; // resting-state edges + shimmer; focused node's edges
 const NODE_SCALE =
   parseFloat(new URLSearchParams(location.search).get('scale')) ||
   parseFloat(localStorage.getItem('vcbrain-node-scale')) ||
-  1.0;
+  2.0;
 // which sectors plausibly trade companies between them (cross-links)
 const SECTOR_ADJ = [[0, 4], [0, 1], [0, 2], [1, 5], [3, 1], [2, 3], [4, 1], [5, 4]];
 

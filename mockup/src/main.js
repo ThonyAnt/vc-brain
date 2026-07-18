@@ -9,10 +9,6 @@
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
-import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 
 // ---------------------------------------------------------------- rng / data
 
@@ -31,12 +27,12 @@ const pick = (arr) => arr[Math.floor(rand() * arr.length)];
 // muted sector palette (Attio/Harmonic teardowns: neutrals + restraint; hue identifies,
 // never shouts). The single hot accent below is reserved for candidates + focus states.
 const SECTORS = [
-  { name: 'AI Infra',   color: '#c77dba', desc: 'training + inference plumbing' },
-  { name: 'Fintech',    color: '#6bb0c9', desc: 'money movement and risk' },
-  { name: 'Healthcare', color: '#9585cf', desc: 'care delivery and clinical ops' },
-  { name: 'Climate',    color: '#75b98e', desc: 'energy, grid and industrial decarb' },
-  { name: 'DevTools',   color: '#c9a266', desc: 'software that builds software' },
-  { name: 'Consumer',   color: '#c47f7f', desc: 'products people choose themselves' },
+  { name: 'AI Infra',   color: '#d795cc', desc: 'training + inference plumbing' },
+  { name: 'Fintech',    color: '#85c4dc', desc: 'money movement and risk' },
+  { name: 'Healthcare', color: '#a99ade', desc: 'care delivery and clinical ops' },
+  { name: 'Climate',    color: '#8ccaa2', desc: 'energy, grid and industrial decarb' },
+  { name: 'DevTools',   color: '#d8b57e', desc: 'software that builds software' },
+  { name: 'Consumer',   color: '#d49494', desc: 'products people choose themselves' },
 ];
 const ACCENT = '#709ff5'; // Attio blue-400: candidates, hover ring, focus, fit bar
 // which sectors plausibly trade companies between them (cross-links)
@@ -162,9 +158,7 @@ const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(0x000000, 0); // transparent: DOM StarsBackground shows through
-// GalaxyThreeJS: ACESFilmic at low exposure is what turns flat discs into rich orbs
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 0.8;
+// cosmos renders raw flat color: no tone mapping, no bloom, no halos
 container.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
@@ -199,15 +193,17 @@ const warmWhite = new THREE.Color('#f4efe6');
 function nodeColor(n) {
   if (n.role === 'candidate') return accentColor.clone().lerp(white, 0.25);
   if (n.role === 'portfolio') return sectorColors[n.sector].clone().lerp(warmWhite, 0.5);
-  if (n.role === 'rejected') return new THREE.Color('#3f434c');
-  return sectorColors[n.sector].clone().multiplyScalar(0.8);
+  if (n.role === 'rejected') return new THREE.Color('#5c626e');
+  return sectorColors[n.sector].clone();
 }
+const pOutline = new Float32Array(N);
 nodes.forEach((n, i) => {
   const c = nodeColor(n);
   pCol[i * 3] = c.r; pCol[i * 3 + 1] = c.g; pCol[i * 3 + 2] = c.b;
-  pSize[i] = n.role === 'portfolio' ? 34 : n.role === 'candidate' ? 26 : n.role === 'rejected' ? 11 : 15;
+  pSize[i] = n.role === 'portfolio' ? 23 : n.role === 'candidate' ? 18 : n.role === 'rejected' ? 8 : 11;
   pPulse[i] = n.role === 'candidate' ? 1 : 0;
   pPhase[i] = n.phase;
+  pOutline[i] = n.role === 'portfolio' ? 1 : 0;
 });
 
 const pGeo = new THREE.BufferGeometry();
@@ -217,6 +213,7 @@ pGeo.setAttribute('aSize', new THREE.BufferAttribute(pSize, 1));
 pGeo.setAttribute('aPulse', new THREE.BufferAttribute(pPulse, 1));
 pGeo.setAttribute('aPhase', new THREE.BufferAttribute(pPhase, 1));
 pGeo.setAttribute('aDim', new THREE.BufferAttribute(pDim, 1).setUsage(THREE.DynamicDrawUsage));
+pGeo.setAttribute('aOutline', new THREE.BufferAttribute(pOutline, 1));
 
 // additive over a TRANSPARENT canvas: add RGB but never write alpha, otherwise
 // glow quads occlude the DOM stars behind the canvas and read as dark patches
@@ -236,39 +233,46 @@ const pMat = new THREE.ShaderMaterial({
   uniforms: { uTime: { value: 0 }, uMotion: { value: reducedMotion ? 0 : 1 } },
   vertexShader: /* glsl */`
     attribute vec3 aColor;
-    attribute float aSize, aPulse, aPhase, aDim;
+    attribute float aSize, aPulse, aPhase, aDim, aOutline;
     uniform float uTime, uMotion;
     varying vec3 vColor;
-    varying float vDim;
+    varying float vDim, vOutline;
     void main() {
       vColor = aColor;
       vDim = aDim;
+      vOutline = aOutline;
       vec4 mv = modelViewMatrix * vec4(position, 1.0);
-      float pulse = 1.0 + aPulse * uMotion * 0.3 * sin(uTime * 2.2 + aPhase);
-      gl_PointSize = clamp(aSize * pulse * (620.0 / -mv.z), 2.0, 72.0);
+      float pulse = 1.0 + aPulse * uMotion * 0.22 * sin(uTime * 2.2 + aPhase);
+      gl_PointSize = clamp(aSize * pulse * (620.0 / -mv.z), 2.0, 52.0);
       gl_Position = projectionMatrix * mv;
     }`,
   fragmentShader: /* glsl */`
     varying vec3 vColor;
-    varying float vDim;
+    varying float vDim, vOutline;
     void main() {
-      float d = length(gl_PointCoord - vec2(0.5)) * 2.0;
-      if (d > 1.0) discard;
-      // galaxy-style exponential falloff (sboez pow(1-d, 10)): tight core, no fog
-      float body = pow(1.0 - d, 2.6);
-      float hot = pow(1.0 - d, 12.0);
-      vec3 col = (vColor * body * 1.8 + vec3(1.0) * hot * 0.9) * vDim;
-      gl_FragColor = vec4(col, 1.0);
+      // cosmos draw-points.frag: flat disc, AA edge only in the last ~5% of radius
+      vec2 p = 2.0 * gl_PointCoord - 1.0;
+      float d2 = dot(p, p);
+      float alpha = 1.0 - smoothstep(0.9, 1.0, d2);
+      if (alpha < 0.004) discard;
+      vec3 col = vColor;
+      if (vOutline > 0.5) {
+        // cosmos outline ring: crisp rim, no glow (marks portfolio)
+        float r = length(p);
+        float ring = smoothstep(0.6, 0.68, r) * (1.0 - smoothstep(0.86, 0.97, r));
+        col = mix(col, vec3(0.98), ring * 0.85);
+      }
+      gl_FragColor = vec4(col, alpha * vDim);
     }`,
 });
-pureAdditive(pMat);
 const points = new THREE.Points(pGeo, pMat);
+points.renderOrder = 2; // flat discs composite over the additive lines
 group.add(points);
 
 // --- static links (cosmos-style: endpoint-tinted, fade with length, greyout on focus)
 const LINK_FADE_NEAR = 55, LINK_FADE_FAR = 240;   // world-unit analogue of [50,150]
 const LINK_MIN_TRANSPARENCY = 0.25;               // cosmos linkVisibilityMinTransparency
-const GREYOUT = 0.1;                              // cosmos linkGreyoutOpacity
+const GREYOUT = 0.22;                             // point greyout (lines dim harder below)
 const E = edges.length;
 const lPos = new Float32Array(E * 6);
 const lCol = new Float32Array(E * 6);
@@ -279,6 +283,7 @@ const lMat = pureAdditive(new THREE.LineBasicMaterial({
   vertexColors: true, transparent: true, depthWrite: false,
 }));
 const links = new THREE.LineSegments(lGeo, lMat);
+links.renderOrder = 1;
 group.add(links);
 
 // --- synapse shimmer (drawrange-style ephemeral proximity lines)
@@ -291,6 +296,7 @@ sGeo.setAttribute('position', new THREE.BufferAttribute(sPos, 3).setUsage(THREE.
 sGeo.setAttribute('color', new THREE.BufferAttribute(sCol, 3).setUsage(THREE.DynamicDrawUsage));
 sGeo.setDrawRange(0, 0);
 const synapse = new THREE.LineSegments(sGeo, lMat.clone());
+synapse.renderOrder = 1;
 group.add(synapse);
 const synTint = new THREE.Color('#8fa8ff');
 
@@ -346,43 +352,6 @@ SECTORS.forEach((s, i) => {
   labelSprites.push(sp);
 });
 
-// --- cluster nebula haze (GalaxyThreeJS Haze: feathered sprite, tinted, fades up close)
-function featherTexture() {
-  const c = document.createElement('canvas');
-  c.width = c.height = 128;
-  const g = c.getContext('2d');
-  const grad = g.createRadialGradient(64, 64, 0, 64, 64, 64);
-  grad.addColorStop(0, 'rgba(255,255,255,1)');
-  grad.addColorStop(1, 'rgba(255,255,255,0)');
-  g.fillStyle = grad;
-  g.fillRect(0, 0, 128, 128);
-  const t = new THREE.CanvasTexture(c);
-  t.colorSpace = THREE.SRGBColorSpace;
-  return t;
-}
-const HAZE_OPACITY = 0.075;
-const hazeTex = featherTexture();
-const hazeSprites = [];
-SECTORS.forEach((s, si) => {
-  for (let k = 0; k < 4; k++) {
-    const mat = new THREE.SpriteMaterial({
-      map: hazeTex,
-      color: new THREE.Color(s.color).multiplyScalar(0.4),
-      opacity: HAZE_OPACITY, transparent: true,
-      depthTest: false, depthWrite: false,
-    });
-    const sp = new THREE.Sprite(mat);
-    sp.position.copy(anchors[si]).add(new THREE.Vector3(
-      (rand() - 0.5) * 130, (rand() - 0.5) * 90, (rand() - 0.5) * 130
-    ));
-    sp.scale.setScalar(200 + rand() * 120);
-    sp.renderOrder = -1;
-    sp.userData.sector = si;
-    group.add(sp);
-    hazeSprites.push(sp);
-  }
-});
-
 // --- stars background (animate-ui StarsBackground, ported verbatim: three box-shadow
 // layers of 1000/400/200 dots at 1/2/3px drifting over 50/100/150s, spring mouse parallax)
 function generateStars(count, starColor) {
@@ -413,16 +382,6 @@ window.addEventListener('mousemove', (e) => {
   parallax.tx = -(e.clientX - window.innerWidth / 2) * 0.05;
   parallax.ty = -(e.clientY - window.innerHeight / 2) * 0.05;
 });
-
-// --- bloom
-const composer = new EffectComposer(renderer);
-composer.addPass(new RenderPass(scene, camera));
-// GalaxyThreeJS: strength 1.5, threshold 0.4, radius ~0 — only hot cores bloom
-const bloom = new UnrealBloomPass(
-  new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.2, 0.4
-);
-composer.addPass(bloom);
-composer.addPass(new OutputPass());
 
 // ---------------------------------------------------------------- hud / dom
 
@@ -628,7 +587,7 @@ function animate() {
     lPos[i * 6 + 3] = b.x; lPos[i * 6 + 4] = b.y; lPos[i * 6 + 5] = b.z;
     const len = a.distanceTo(b);
     const fade = 1 - THREE.MathUtils.smoothstep(len, LINK_FADE_NEAR, LINK_FADE_FAR) * (1 - LINK_MIN_TRANSPARENCY);
-    const breathe = 0.8 + 0.2 * Math.sin(time * 0.7 + e.phase) * motion;
+    const breathe = 0.9 + 0.1 * Math.sin(time * 0.7 + e.phase) * motion;
     let alpha = 0.55 * fade * breathe * e.weight;
     if (focused) {
       const on = e.a === focused || e.b === focused;
@@ -652,7 +611,7 @@ function animate() {
         const dx = a.pos.x - b.pos.x, dy = a.pos.y - b.pos.y, dz = a.pos.z - b.pos.z;
         const d2 = dx * dx + dy * dy + dz * dz;
         if (d2 > SYN_DIST * SYN_DIST) continue;
-        const alpha = (1 - Math.sqrt(d2) / SYN_DIST) * 0.16;
+        const alpha = (1 - Math.sqrt(d2) / SYN_DIST) * 0.1;
         sPos[seg * 6] = a.pos.x; sPos[seg * 6 + 1] = a.pos.y; sPos[seg * 6 + 2] = a.pos.z;
         sPos[seg * 6 + 3] = b.pos.x; sPos[seg * 6 + 4] = b.pos.y; sPos[seg * 6 + 5] = b.pos.z;
         for (const off of [0, 3]) {
@@ -689,18 +648,10 @@ function animate() {
     controls.target.copy(tmpA.copy(focused.pos).applyMatrix4(group.matrixWorld));
   }
 
-  // labels fade out as the camera flies close, so they never blow out in bloom
+  // labels fade out as the camera flies close, so they never crowd the cluster
   for (const sp of labelSprites) {
     tmpA.setFromMatrixPosition(sp.matrixWorld);
     sp.material.opacity = 0.7 * THREE.MathUtils.smoothstep(camera.position.distanceTo(tmpA), 260, 620);
-  }
-  // haze fades as the camera approaches (GalaxyThreeJS updateScale), dims off-focus sectors
-  for (const sp of hazeSprites) {
-    tmpA.setFromMatrixPosition(sp.matrixWorld);
-    const d = camera.position.distanceTo(tmpA);
-    let o = HAZE_OPACITY * Math.min((d / 640) ** 2, 1);
-    if (focused && sp.userData.sector !== focused.sector) o *= 0.25;
-    sp.material.opacity = o;
   }
 
   // spring-follow mouse parallax on the DOM star layers
@@ -710,7 +661,7 @@ function animate() {
 
   controls.update();
   updateHover();
-  composer.render();
+  renderer.render(scene, camera);
   requestAnimationFrame(animate);
 }
 
@@ -727,7 +678,6 @@ window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  composer.setSize(window.innerWidth, window.innerHeight);
 });
 
 animate();

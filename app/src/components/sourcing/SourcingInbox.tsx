@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router'
 import { ACCENT } from '../brain/BrainCanvas'
 import { api } from '../../lib/api/client'
 import type { Company } from '../../lib/types'
+import type { LatLng } from '../../lib/geo'
+import { FUND_HQ, cityLatLng } from '../../lib/geo'
 import { useAppStore } from '../../state/store'
+import { CompanyGlobe, type GlobeMarker } from '../geo/CompanyGlobe'
 import { Pill } from '../ui/Pill'
 
 /* White-glass panel over the light brain canvas (final-mockup chrome). */
@@ -17,7 +20,9 @@ export function SourcingInbox({
   const [items, setItems] = useState<Company[]>([])
   const [dismissed, setDismissed] = useState<Set<string>>(new Set())
   const [saved, setSaved] = useState<Set<string>>(new Set())
-  const [open, setOpen] = useState(false) // folded by default — the graph stays immersive
+  // folded by default — the graph stays immersive. ?inbox opens it (demo/screenshot aid)
+  const [open, setOpen] = useState(() => new URLSearchParams(window.location.search).has('inbox'))
+  const [hoverCity, setHoverCity] = useState<LatLng | null>(null)
   const navigate = useNavigate()
   const setWeights = useAppStore((s) => s.setWeights)
   const setLearningNote = useAppStore((s) => s.setLearningNote)
@@ -35,6 +40,14 @@ export function SourcingInbox({
   }
 
   const visible = items.filter((c) => !dismissed.has(c.id))
+  const globeMarkers: GlobeMarker[] = [
+    { ...FUND_HQ, kind: 'hq' as const },
+    ...visible.flatMap((c) => {
+      const ll = cityLatLng(c.location)
+      return ll ? [{ ...ll, label: c.name, kind: 'company' as const }] : []
+    }),
+  ]
+  const cityCount = new Set(visible.map((c) => c.location)).size
 
   if (!open) {
     return (
@@ -67,12 +80,20 @@ export function SourcingInbox({
           </button>
         </span>
       </div>
+      <div className="relative h-44 shrink-0 border-b border-hairline">
+        <CompanyGlobe className="h-full w-full" markers={globeMarkers} focus={hoverCity} />
+        <span className="caption pointer-events-none absolute bottom-2 left-3 text-mute">
+          {visible.length} companies · {cityCount} cities · arcs from SF
+        </span>
+      </div>
       <div className="flex-1 space-y-2 overflow-y-auto p-2">
         {visible.map((c) => (
           <div
             key={c.id}
             className="cursor-pointer rounded-card border border-hairline bg-card p-3 transition-colors hover:border-hairline-strong"
             onClick={() => onFocus(c.id)}
+            onMouseEnter={() => setHoverCity(cityLatLng(c.location))}
+            onMouseLeave={() => setHoverCity(null)}
           >
             <div className="flex items-baseline justify-between">
               <div className="text-sm font-semibold text-ink">{c.name}</div>

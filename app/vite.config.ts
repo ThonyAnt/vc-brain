@@ -14,7 +14,7 @@ export default defineConfig({
   // If it's not running, the client falls back to local stubs.
   server: {
     proxy: {
-      '/api': 'http://localhost:8787',
+      '/api': 'http://127.0.0.1:8790',
     },
   },
 })

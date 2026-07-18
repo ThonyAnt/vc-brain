@@ -41,7 +41,7 @@ import type { Company } from "./schemas/company.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const SNAPSHOT = resolve(here, "../../app/src/lib/brain/snapshot.json");
-const PORT = Number(process.env.VC_BRAIN_API_PORT ?? "8787");
+const PORT = Number(process.env.VC_BRAIN_API_PORT ?? "8790");
 const MODEL = process.env.VC_BRAIN_OPENAI_MODEL ?? "gpt-4o-mini";
 
 const state = JSON.parse(readFileSync(SNAPSHOT, "utf8")) as VCBrainState & { competitors?: Company[] };

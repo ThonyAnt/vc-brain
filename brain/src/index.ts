@@ -35,7 +35,7 @@ export * from "./tools/index.js";
 export * from "./agents/index.js";
 
 // Orchestrator
-export { runPipeline, applyFeedback, type OrchestratorOptions } from "./orchestrator.js";
+export { runPipeline, applyFeedback, type AgentExecutionEvent, type OrchestratorOptions } from "./orchestrator.js";
 
 // Interactive main-agent orchestration (regular response or streamed deltas).
 export {

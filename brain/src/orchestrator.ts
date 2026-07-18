@@ -35,17 +35,34 @@ export interface OrchestratorOptions {
   search?: SearchClient;
   /** Discover real companies from the web and add them to the candidate universe. */
   discover?: boolean | { queries?: string[]; limit?: number; resultsPerQuery?: number };
+  /** Observe real agent execution for streamed UIs. */
+  onAgentEvent?: (event: AgentExecutionEvent) => void | Promise<void>;
 }
 
-async function withRetry<T>(fn: () => Promise<T>, retries: number, label: string): Promise<T> {
+export interface AgentExecutionEvent {
+  agent: string;
+  status: "started" | "completed" | "failed";
+  error?: string;
+}
+
+async function withRetry<T>(
+  fn: () => Promise<T>,
+  retries: number,
+  label: string,
+  onAgentEvent?: OrchestratorOptions["onAgentEvent"],
+): Promise<T> {
+  await onAgentEvent?.({ agent: label, status: "started" });
   let lastErr: unknown;
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      return await fn();
+      const result = await fn();
+      await onAgentEvent?.({ agent: label, status: "completed" });
+      return result;
     } catch (e) {
       lastErr = e;
     }
   }
+  await onAgentEvent?.({ agent: label, status: "failed", error: String(lastErr) });
   throw new Error(`Agent '${label}' failed after ${retries + 1} attempt(s): ${String(lastErr)}`);
 }
 
@@ -101,6 +118,7 @@ export async function runPipeline(
       ),
     retries,
     "fundProfiler",
+    opts.onAgentEvent,
   );
   emit("profiling", "fund_profile_ready", [], { criteria: state.fundProfile.criteria.length });
 
@@ -128,6 +146,7 @@ export async function runPipeline(
         ),
       retries,
       "discovery",
+      opts.onAgentEvent,
     );
     for (const c of discovered) {
       state.candidateUniverse.push(c);
@@ -165,6 +184,7 @@ export async function runPipeline(
       ),
     retries,
     "marketScout",
+    opts.onAgentEvent,
   );
   state.sourcedCandidates = scout.ranked;
   emit("sourcing", "semifinalists_selected", scout.semifinalistIds);
@@ -185,14 +205,15 @@ export async function runPipeline(
     const dilInput = { company, fundProfile: state.fundProfile, analogues: analogueCompanies };
 
     const [technical, commercial, financial] = await Promise.all([
-      withRetry(() => technicalDiligenceAgent(dilInput, { llm }), retries, "technicalDiligence"),
-      withRetry(() => commercialDiligenceAgent(dilInput, { llm }), retries, "commercialDiligence"),
-      withRetry(() => financialDiligenceAgent(dilInput, { llm }), retries, "financialDiligence"),
+      withRetry(() => technicalDiligenceAgent(dilInput, { llm }), retries, "technicalDiligence", opts.onAgentEvent),
+      withRetry(() => commercialDiligenceAgent(dilInput, { llm }), retries, "commercialDiligence", opts.onAgentEvent),
+      withRetry(() => financialDiligenceAgent(dilInput, { llm }), retries, "financialDiligence", opts.onAgentEvent),
     ]);
     const risk = await withRetry(
       () => riskAgent({ ...dilInput, technical, commercial, financial }, { llm }),
       retries,
       "risk",
+      opts.onAgentEvent,
     );
     diligence[company.id] = { companyId: company.id, technical, commercial, financial, risk };
     emit("diligence", "diligence_complete", [company.id]);
@@ -210,6 +231,7 @@ export async function runPipeline(
         ),
       retries,
       `partner:${partner.id}`,
+      opts.onAgentEvent,
     );
     partnerOpinions[partner.id] = opinions;
     for (const o of opinions) {
@@ -227,6 +249,7 @@ export async function runPipeline(
       ),
     retries,
     "committee",
+    opts.onAgentEvent,
   );
   emit("committee", "recommendation_produced", [state.committeeDecision.recommendedCompanyId], {
     confidence: state.committeeDecision.confidence,
@@ -254,6 +277,7 @@ export async function runPipeline(
         ),
       retries,
       "memo",
+      opts.onAgentEvent,
     );
     state.investmentMemo = memo;
     state.financialScenarios = scenarios;
@@ -301,6 +325,7 @@ export async function applyFeedback(
       ),
     opts.maxRetries ?? 1,
     "learning",
+    opts.onAgentEvent,
   );
 
   state.feedback = feedback;

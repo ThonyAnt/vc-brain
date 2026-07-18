@@ -1,8 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { MockLLMClient } from "../llm/mock.js";
+import { MockSearchClient } from "../search/mock.js";
 import { createInitialState } from "../state.js";
-import { fundProfile, medflow, scribeai } from "../fixtures/sample.js";
-import { streamOrchestratorChat, type ChatStreamEvent } from "./orchestrator.js";
+import { mockAgentOptions, mockSearchResults } from "../fixtures/mockAgents.js";
+import * as fx from "../fixtures/sample.js";
+import { needsSourcingClarification, streamOrchestratorChat, type ChatStreamEvent } from "./orchestrator.js";
+
+const { fundProfile, medflow, scribeai } = fx;
 
 describe("interactive investment orchestrator", () => {
   it("routes to specialists and streams lifecycle plus text deltas", async () => {
@@ -98,5 +102,97 @@ describe("interactive investment orchestrator", () => {
     expect(events.filter((event) => event.type === "agent_started")).toContainEqual(
       expect.objectContaining({ agent: "fund_strategy_analyst" }),
     );
+  });
+
+  it.each([
+    "Source some companies.",
+    "Find a few startups for the fund.",
+    "Please surface potential deals.",
+  ])("asks for scope before running an underspecified sourcing request: '%s'", async (input) => {
+    const state = createInitialState({ mandate: "Healthcare AI", portfolioCompanies: [medflow] });
+    state.fundProfile = fundProfile;
+    const events: ChatStreamEvent[] = [];
+    const result = await streamOrchestratorChat(
+      [{ role: "user", content: input }],
+      {},
+      {
+        state,
+        companies: [medflow, scribeai],
+        llm: new MockLLMClient({ text: () => { throw new Error("LLM must not run"); } }),
+        now: () => 42,
+        onEvent: (event) => { events.push(event); },
+      },
+    );
+
+    expect(needsSourcingClarification(input)).toBe(true);
+    expect(result.content).toContain("what should I target");
+    expect(result.content).toContain("Sector or investment thesis");
+    expect(events[0]).toMatchObject({ type: "run_started", agents: [] });
+    expect(events.some((event) => event.type === "agent_started")).toBe(false);
+    expect(events.at(-1)?.type).toBe("run_completed");
+  });
+
+  it("runs live discovery after the user answers the sourcing clarification", async () => {
+    const state = createInitialState({
+      mandate: "Find healthcare AI companies.",
+      historicalMemos: fx.historicalMemos,
+      portfolioCompanies: fx.portfolioCompanies,
+      rejectedDeals: fx.rejectedDeals,
+      candidateUniverse: fx.candidateUniverse,
+    });
+    state.fundProfile = fundProfile;
+    const clarification = await streamOrchestratorChat(
+      [{ role: "user", content: "Source some companies." }],
+      {},
+      {
+        state,
+        companies: [...fx.candidateUniverse, ...fx.portfolioCompanies, ...fx.rejectedDeals, ...fx.competitors],
+        llm: new MockLLMClient({ text: () => { throw new Error("LLM must not run"); } }),
+        now: () => 41,
+      },
+    );
+    const events: ChatStreamEvent[] = [];
+    const result = await streamOrchestratorChat(
+      [
+        { role: "user", content: "Source some companies." },
+        clarification,
+        { role: "user", content: "Seed healthcare AI in the US, $1–3M checks; exclude consumer wellness." },
+      ],
+      {},
+      {
+        state,
+        companies: [...fx.candidateUniverse, ...fx.portfolioCompanies, ...fx.rejectedDeals, ...fx.competitors],
+        competitors: fx.competitors,
+        search: new MockSearchClient(mockSearchResults),
+        llm: new MockLLMClient({ ...mockAgentOptions, text: () => "Live Tavily discovery completed the full pipeline." }),
+        now: () => 42,
+        onEvent: (event) => { events.push(event); },
+      },
+    );
+
+    expect(result.content).toContain("full pipeline");
+    expect(state.candidateUniverse.map((company) => company.id)).toEqual(
+      expect.arrayContaining(["co_notehealth", "co_claimsync"]),
+    );
+    const started = events
+      .filter((event) => event.type === "agent_started")
+      .map((event) => event.type === "agent_started" ? event.agent : "");
+    expect(started).toEqual(expect.arrayContaining([
+      "discovery",
+      "fundProfiler",
+      "marketScout",
+      "technicalDiligence",
+      "commercialDiligence",
+      "financialDiligence",
+      "risk",
+      "committee",
+      "memo",
+    ]));
+    expect(events.some((event) => event.type === "agent_failed")).toBe(false);
+    expect(events).toContainEqual(expect.objectContaining({
+      type: "companies_sourced",
+      companies: expect.arrayContaining([expect.objectContaining({ id: "co_notehealth" })]),
+    }));
+    expect(events.at(-1)?.type).toBe("run_completed");
   });
 });

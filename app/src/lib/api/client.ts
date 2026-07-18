@@ -15,6 +15,8 @@ export type OrchestratorStreamEvent =
   | { type: 'run_started'; runId: string; orchestrator: string; agents: string[] }
   | { type: 'agent_started'; runId: string; agent: string; label: string }
   | { type: 'agent_completed'; runId: string; agent: string; summary: string }
+  | { type: 'agent_failed'; runId: string; agent: string; error: string }
+  | { type: 'companies_sourced'; runId: string; companies: Company[] }
   | { type: 'text_delta'; runId: string; delta: string }
   | { type: 'run_completed'; runId: string; message: ChatMessage }
   | { type: 'error'; error: string }
@@ -44,6 +46,15 @@ const store = {
   graph: data.graph,
   weights: { ...data.weights },
   feedbackLog: [] as { input: FeedbackInput; note: string }[],
+}
+
+const sourcingListeners = new Set<(companies: Company[]) => void>()
+
+function mergeSourcedCompanies(companies: Company[]) {
+  const byId = new Map(data.companies.map((company) => [company.id, company]))
+  for (const company of companies) byId.set(company.id, company)
+  data.companies = [...byId.values()]
+  for (const listener of sourcingListeners) listener(companies)
 }
 
 /** POST to the live brain API; returns null if it's unreachable or errors. */
@@ -92,6 +103,11 @@ export const api = {
 
   async getSourcing(): Promise<Company[]> {
     return data.companies.filter((c) => c.type === 'sourced').sort((a, b) => b.fitScore - a.fitScore)
+  },
+
+  subscribeSourcing(listener: (companies: Company[]) => void): () => void {
+    sourcingListeners.add(listener)
+    return () => sourcingListeners.delete(listener)
   },
 
   async getFounders(): Promise<Founder[]> {
@@ -149,7 +165,9 @@ export const api = {
         const event = parseSseFrame(frame)
         if (!event) return
         handlers.onEvent?.(event)
-        if (event.type === 'text_delta') {
+        if (event.type === 'companies_sourced') {
+          mergeSourcedCompanies(event.companies)
+        } else if (event.type === 'text_delta') {
           content += event.delta
           handlers.onDelta?.(event.delta)
         } else if (event.type === 'run_completed') {
@@ -187,9 +205,7 @@ export const api = {
   async discover(query?: string): Promise<Company[]> {
     const live = await postJson<{ companies: Company[] }>('/api/discover', { query })
     if (!live?.companies?.length) return []
-    for (const c of live.companies) {
-      if (!data.companies.some((x) => x.id === c.id)) data.companies.push(c)
-    }
+    mergeSourcedCompanies(live.companies)
     return live.companies
   },
 }

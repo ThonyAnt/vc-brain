@@ -1,9 +1,12 @@
 import type { LLMClient } from "../llm/client.js";
+import type { SearchClient } from "../search/client.js";
 import type { Company } from "../schemas/company.js";
 import type { VCBrainState } from "../state.js";
 import { compareGraphCompanies, type GraphAxisSelection } from "../graph/experience.js";
 import { companySimilarity } from "../tools/similarity.js";
+import { discoverCompanies } from "../tools/discover.js";
 import { describeCompany } from "../agents/util.js";
+import { runPipeline, type AgentExecutionEvent } from "../orchestrator.js";
 
 export interface OrchestratorChatMessage {
   role: "user" | "assistant";
@@ -21,6 +24,8 @@ export type ChatStreamEvent =
   | { type: "run_started"; runId: string; orchestrator: "investment_orchestrator"; agents: string[] }
   | { type: "agent_started"; runId: string; agent: string; label: string }
   | { type: "agent_completed"; runId: string; agent: string; summary: string }
+  | { type: "agent_failed"; runId: string; agent: string; error: string }
+  | { type: "companies_sourced"; runId: string; companies: Company[] }
   | { type: "text_delta"; runId: string; delta: string }
   | { type: "run_completed"; runId: string; message: OrchestratorChatMessage };
 
@@ -28,6 +33,8 @@ export interface ChatOrchestratorOptions {
   state: VCBrainState;
   companies: Company[];
   llm: LLMClient;
+  search?: SearchClient;
+  competitors?: Company[];
   now?: () => number;
   onEvent?: (event: ChatStreamEvent) => void | Promise<void>;
 }
@@ -42,6 +49,18 @@ interface DirectReply {
   intent: "greeting" | "help" | "thanks" | "goodbye";
   content: string;
 }
+
+const SOURCING_CLARIFICATION_PREFIX = "Before I start live sourcing";
+const SOURCING_CLARIFICATION = `${SOURCING_CLARIFICATION_PREFIX}, what should I target?
+
+Please share:
+
+- **Sector or investment thesis**
+- **Stage and target check size**
+- **Geography**
+- **Must-have signals or exclusions**
+
+A short answer is fine—for example: “Seed–Series A computer-vision infrastructure in the US, $1–3M checks, excluding hardware-only companies.”`;
 
 function latestUserMessage(messages: OrchestratorChatMessage[]): string {
   return [...messages].reverse().find((message) => message.role === "user")?.content ?? "";
@@ -82,6 +101,85 @@ function directReplyFor(message: string): DirectReply | undefined {
 
 function hasIntent(text: string, pattern: RegExp): boolean {
   return pattern.test(text);
+}
+
+export function isSourcingRequest(message: string): boolean {
+  const text = normalizedMessage(message);
+  const action = /\b(source|sourcing|find|discover|scout|search for|look for|identify|surface)\b/.test(text);
+  const target = /\b(company|companies|startup|startups|deal|deals|candidate|candidates|investment|investments|opportunity|opportunities)\b/.test(text);
+  return action && target;
+}
+
+/** True when a sourcing command contains no usable search constraint. */
+export function needsSourcingClarification(message: string): boolean {
+  if (!isSourcingRequest(message)) return false;
+  const remainder = normalizedMessage(message)
+    .replace(/\b(search for|look for)\b/g, " ")
+    .replace(/\b(source|sourcing|find|discover|scout|identify|surface)\b/g, " ")
+    .replace(/\b(company|companies|startup|startups|deal|deals|candidate|candidates|investment|investments|opportunity|opportunities)\b/g, " ")
+    .replace(/\b(can|could|would|will|you|please|some|any|few|a|the|new|good|great|interesting|potential|for|me|us|our|fund|portfolio)\b/g, " ")
+    .replace(/[^a-z0-9$-]+/g, " ")
+    .trim();
+  return remainder.length === 0;
+}
+
+function isSourcingClarificationFollowUp(messages: OrchestratorChatMessage[]): boolean {
+  let latestUserIndex = -1;
+  for (let index = messages.length - 1; index >= 0; index--) {
+    if (messages[index]?.role === "user") {
+      latestUserIndex = index;
+      break;
+    }
+  }
+  if (latestUserIndex <= 0) return false;
+  const priorMessage = messages[latestUserIndex - 1];
+  return priorMessage?.role === "assistant" && priorMessage.content.startsWith(SOURCING_CLARIFICATION_PREFIX);
+}
+
+const PIPELINE_AGENTS = [
+  "discovery",
+  "fundProfiler",
+  "marketScout",
+  "technicalDiligence",
+  "commercialDiligence",
+  "financialDiligence",
+  "risk",
+  "partnerReview",
+  "committee",
+  "memo",
+];
+
+function agentLabel(agent: string): string {
+  if (agent.startsWith("partner:")) return `Partner review — ${agent.slice("partner:".length)}`;
+  const labels: Record<string, string> = {
+    discovery: "Tavily discovery",
+    fundProfiler: "Fund profiler",
+    marketScout: "Market scout",
+    technicalDiligence: "Technical diligence",
+    commercialDiligence: "Commercial diligence",
+    financialDiligence: "Financial diligence",
+    risk: "Risk review",
+    partnerReview: "Partner review",
+    committee: "Investment committee",
+    memo: "Memo writer",
+  };
+  return labels[agent] ?? agent.replace(/([a-z])([A-Z])/g, "$1 $2");
+}
+
+function mergePipelineState(target: VCBrainState, pipeline: VCBrainState): void {
+  const known = new Set(target.candidateUniverse.map((company) => company.id));
+  target.candidateUniverse.push(...pipeline.candidateUniverse.filter((company) => !known.has(company.id)));
+  const ranked = new Map((target.sourcedCandidates ?? []).map((candidate) => [candidate.companyId, candidate]));
+  for (const candidate of pipeline.sourcedCandidates ?? []) ranked.set(candidate.companyId, candidate);
+  target.sourcedCandidates = [...ranked.values()];
+  target.fundProfile = pipeline.fundProfile ?? target.fundProfile;
+  target.finalists = pipeline.finalists;
+  target.diligence = { ...(target.diligence ?? {}), ...(pipeline.diligence ?? {}) };
+  target.partnerOpinions = pipeline.partnerOpinions;
+  target.committeeDecision = pipeline.committeeDecision;
+  target.investmentMemo = pipeline.investmentMemo;
+  target.financialScenarios = pipeline.financialScenarios;
+  target.events.push(...pipeline.events);
 }
 
 function mentionsCompany(message: string, company: Company): boolean {
@@ -182,6 +280,130 @@ export async function streamOrchestratorChat(
     await emit({ type: "run_started", runId, orchestrator: "investment_orchestrator", agents: [] });
     await emit({ type: "text_delta", runId, delta: directReply.content });
     const message: OrchestratorChatMessage = { role: "assistant", content: directReply.content };
+    await emit({ type: "run_completed", runId, message });
+    return message;
+  }
+  const question = latestUserMessage(messages);
+  const clarificationFollowUp = isSourcingClarificationFollowUp(messages);
+  if (needsSourcingClarification(question)) {
+    const emit = async (event: ChatStreamEvent) => options.onEvent?.(event);
+    await emit({ type: "run_started", runId, orchestrator: "investment_orchestrator", agents: [] });
+    await emit({ type: "text_delta", runId, delta: SOURCING_CLARIFICATION });
+    const message: OrchestratorChatMessage = { role: "assistant", content: SOURCING_CLARIFICATION };
+    await emit({ type: "run_completed", runId, message });
+    return message;
+  }
+  if (isSourcingRequest(question) || clarificationFollowUp) {
+    const emit = async (event: ChatStreamEvent) => options.onEvent?.(event);
+    await emit({
+      type: "run_started",
+      runId,
+      orchestrator: "investment_orchestrator",
+      agents: PIPELINE_AGENTS,
+    });
+
+    if (!options.search) {
+      const content = "Live sourcing is unavailable because the server has no Tavily search client configured.";
+      await emit({ type: "text_delta", runId, delta: content });
+      const message: OrchestratorChatMessage = { role: "assistant", content };
+      await emit({ type: "run_completed", runId, message });
+      return message;
+    }
+
+    await emit({ type: "agent_started", runId, agent: "discovery", label: agentLabel("discovery") });
+    let discovered: Company[];
+    try {
+      discovered = await discoverCompanies(
+        {
+          mandate: question,
+          fundProfile: options.state.fundProfile,
+          queries: [question],
+          limit: 10,
+          resultsPerQuery: 10,
+          excludeNames: options.companies.map((company) => company.name),
+        },
+        { search: options.search, llm: options.llm },
+      );
+      await emit({
+        type: "agent_completed",
+        runId,
+        agent: "discovery",
+        summary: `Found ${discovered.length} verified candidate${discovered.length === 1 ? "" : "s"} with public sources.`,
+      });
+    } catch (error) {
+      await emit({ type: "agent_failed", runId, agent: "discovery", error: String(error) });
+      throw error;
+    }
+
+    if (!discovered.length) {
+      const content = "Tavily completed the search, but no new verifiable companies were returned after deduplication. Try a narrower sector, geography, or stage.";
+      await emit({ type: "text_delta", runId, delta: content });
+      const message: OrchestratorChatMessage = { role: "assistant", content };
+      await emit({ type: "run_completed", runId, message });
+      return message;
+    }
+
+    const pipelineState: VCBrainState = {
+      mandate: question,
+      historicalMemos: options.state.historicalMemos,
+      portfolioCompanies: options.state.portfolioCompanies,
+      rejectedDeals: options.state.rejectedDeals,
+      candidateUniverse: discovered,
+      events: [],
+    };
+    const onAgentEvent = async (event: AgentExecutionEvent) => {
+      if (event.status === "started") {
+        await emit({ type: "agent_started", runId, agent: event.agent, label: agentLabel(event.agent) });
+      } else if (event.status === "completed") {
+        await emit({ type: "agent_completed", runId, agent: event.agent, summary: `${agentLabel(event.agent)} completed.` });
+      } else {
+        await emit({ type: "agent_failed", runId, agent: event.agent, error: event.error ?? "Agent failed" });
+      }
+    };
+    await runPipeline(pipelineState, {
+      llm: options.llm,
+      competitors: options.competitors,
+      maxRetries: 1,
+      onAgentEvent,
+    });
+    mergePipelineState(options.state, pipelineState);
+    await emit({ type: "companies_sourced", runId, companies: discovered });
+
+    const scoreById = new Map((pipelineState.sourcedCandidates ?? []).map((candidate) => [candidate.companyId, candidate]));
+    const report = {
+      query: question,
+      discovered: discovered.map((company) => ({
+        id: company.id,
+        name: company.name,
+        description: company.description,
+        stage: company.stage,
+        sector: company.sector,
+        sources: company.sourceRefs,
+        fundFit: scoreById.get(company.id)?.fundFitScore,
+        reasonsToAdvance: scoreById.get(company.id)?.reasonsToAdvance,
+        unresolvedRisks: scoreById.get(company.id)?.unresolvedRisks,
+      })),
+      finalists: pipelineState.finalists?.map((company) => company.name) ?? [],
+      recommendation: pipelineState.committeeDecision,
+      memo: pipelineState.investmentMemo,
+    };
+    const prompt = [
+      `Investor sourcing request: ${question}`,
+      "",
+      "FULL PIPELINE RESULT (only name companies present here):",
+      JSON.stringify(report),
+      "",
+      "Summarize what the live search found, identify the finalists and recommendation, cite source URLs inline, and call out the most important unresolved risks. Explicitly say that the result came from live Tavily discovery followed by the full investment pipeline. Do not add companies or facts absent from the result.",
+    ].join("\n");
+    let content = "";
+    for await (const delta of options.llm.streamText({
+      system: "You are the main VC investment orchestrator reporting a completed sourcing pipeline. Be concise, factual, and strictly grounded in the supplied pipeline result.",
+      prompt,
+    })) {
+      content += delta;
+      await emit({ type: "text_delta", runId, delta });
+    }
+    const message: OrchestratorChatMessage = { role: "assistant", content };
     await emit({ type: "run_completed", runId, message });
     return message;
   }

@@ -32,6 +32,7 @@ import {
 import {
   runOrchestratorChat,
   streamOrchestratorChat,
+  type ChatStreamEvent,
   type OrchestratorChatContext,
   type OrchestratorChatMessage,
 } from "./chat/orchestrator.js";
@@ -185,7 +186,13 @@ interface ChatBody {
 }
 
 async function handleChat(body: ChatBody) {
-  return runOrchestratorChat(body.messages, body.context ?? {}, { state, companies: universe(), llm });
+  return runOrchestratorChat(body.messages, body.context ?? {}, {
+    state,
+    companies: universe(),
+    competitors,
+    llm,
+    search,
+  });
 }
 
 function handleGraphLayout(body: { axes?: Partial<GraphAxisSelection>; focalCompanyId?: string }) {
@@ -213,18 +220,29 @@ async function handleStreamingChat(req: http.IncomingMessage, res: http.ServerRe
     Connection: "keep-alive",
     "X-Accel-Buffering": "no",
   });
-  const writeEvent = (event: { type: string }) => {
-    res.write(`event: ${event.type}\ndata: ${JSON.stringify(event)}\n\n`);
+  const writeEvent = (event: ChatStreamEvent) => {
+    const outgoing = event.type === "companies_sourced"
+      ? {
+          ...event,
+          companies: event.companies.map((company) => sourcedView(
+            company,
+            state.sourcedCandidates?.find((candidate) => candidate.companyId === company.id),
+          )),
+        }
+      : event;
+    res.write(`event: ${outgoing.type}\ndata: ${JSON.stringify(outgoing)}\n\n`);
   };
   try {
     await streamOrchestratorChat(body.messages, body.context ?? {}, {
       state,
       companies: universe(),
+      competitors,
       llm,
+      search,
       onEvent: writeEvent,
     });
   } catch (error) {
-    writeEvent({ type: "error", error: String(error) } as { type: string });
+    res.write(`event: error\ndata: ${JSON.stringify({ type: "error", error: String(error) })}\n\n`);
   } finally {
     res.end();
   }

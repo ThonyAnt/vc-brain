@@ -35,7 +35,15 @@ export function SourcingInbox({
 
   useEffect(() => {
     api.getSourcing().then(setItems)
-  }, [])
+    return api.subscribeSourcing((companies) => {
+      setItems((previous) => {
+        const incoming = new Map(companies.map((company) => [company.id, company]))
+        return [...companies, ...previous.filter((company) => !incoming.has(company.id))]
+      })
+      setFoundIds((current) => new Set([...current, ...companies.map((company) => company.id)]))
+      onDiscover?.(companies)
+    })
+  }, [onDiscover])
 
   /* Trigger a live web search; new companies are prepended and flagged "new". */
   async function runDiscover(e?: FormEvent) {
@@ -45,13 +53,8 @@ export function SourcingInbox({
     try {
       const found = await api.discover(query.trim() || undefined)
       if (found.length) {
-        setItems((prev) => {
-          const have = new Set(prev.map((c) => c.id))
-          return [...found.filter((c) => !have.has(c.id)), ...prev]
-        })
-        setFoundIds((s) => new Set([...s, ...found.map((c) => c.id)]))
-        // BrainPage adds the new nodes to the graph, then pulses + flies to them.
-        onDiscover?.(found)
+        // api.discover publishes into the shared sourcing subscription, which
+        // updates this inbox and lets BrainPage add/pulse the graph nodes.
         setQuery('')
       } else {
         setLearningNote('No new companies found for that search.')

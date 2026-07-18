@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { CompanyStage } from "./company.js";
+import { WeightRecord } from "./common.js";
 
 /** A single learned, weighted investment criterion. */
 export const FundCriterionSchema = z.object({
@@ -22,7 +23,7 @@ export const PartnerProfileSchema = z.object({
   archetype: z.string(),
   priorities: z.array(z.string()).default([]),
   /** Attribute-value -> preference weight, learned tendencies. */
-  biases: z.record(z.string(), z.number()).default({}),
+  biases: WeightRecord.default({}),
 });
 export type PartnerProfile = z.infer<typeof PartnerProfileSchema>;
 
@@ -30,7 +31,7 @@ export type PartnerProfile = z.infer<typeof PartnerProfileSchema>;
  * Learned preferences for specific attribute values, keyed by
  * "<dimension>:<value>" -> weight. Drives fund-fit, NOT similarity.
  */
-export const AttributePreferencesSchema = z.record(z.string(), z.number());
+export const AttributePreferencesSchema = WeightRecord;
 export type AttributePreferences = z.infer<typeof AttributePreferencesSchema>;
 
 export const FundProfileSchema = z.object({

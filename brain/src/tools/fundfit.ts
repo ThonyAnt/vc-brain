@@ -42,9 +42,9 @@ function passesHardFilters(c: Company, profile: FundProfile): string | undefined
   if (profile.stages.length && c.stage && !profile.stages.includes(c.stage)) {
     return `stage ${c.stage} not in fund's preferred stages`;
   }
-  if (profile.geographies.length && c.geography && !profile.geographies.includes(c.geography)) {
-    return `geography ${c.geography} outside fund's regions`;
-  }
+  // Geography is intentionally NOT a hard filter: it's free-text and
+  // LLM-extracted ("US" vs "United States" vs "North America"), so an exact
+  // mismatch must not silently eliminate every candidate. Treated as a soft signal.
   if (c.checkSizeSought != null) {
     const { min, max } = profile.checkSize;
     if (c.checkSizeSought < min * 0.5 || c.checkSizeSought > max * 2) {

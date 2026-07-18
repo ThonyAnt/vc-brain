@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { zodResponseFormat } from "openai/helpers/zod";
+import { zodToJsonSchema } from "zod-to-json-schema";
 import type { z } from "zod";
 import type { LLMClient, StructuredRequest, TextRequest } from "./client.js";
 
@@ -12,9 +12,11 @@ export interface OpenAILLMOptions {
 }
 
 /**
- * OpenAI-backed LLMClient. Structured output uses OpenAI's JSON-schema
- * response format (Zod -> schema); embeddings use text-embedding-3-small.
- * Selected via env flag — never the default in tests.
+ * OpenAI-backed LLMClient. Structured output uses a NON-strict json_schema
+ * response format (our Zod schemas use defaults/records that OpenAI's strict
+ * mode rejects). The schema strongly guides the model; our own `schema.parse`
+ * validates and applies defaults, and the orchestrator retries on failure.
+ * Embeddings use text-embedding-3-small.
  */
 export class OpenAILLMClient implements LLMClient {
   private readonly client: OpenAI;
@@ -28,23 +30,40 @@ export class OpenAILLMClient implements LLMClient {
   }
 
   async generateStructured<S extends z.ZodTypeAny>(req: StructuredRequest<S>): Promise<z.infer<S>> {
-    const completion = await this.client.beta.chat.completions.parse({
+    // Default target is JSON Schema draft-7, which OpenAI's structured outputs
+    // expect (numeric exclusiveMinimum, etc.). $refStrategy:"none" inlines $refs.
+    const jsonSchema = zodToJsonSchema(req.schema, {
+      $refStrategy: "none",
+    }) as Record<string, unknown>;
+
+    const completion = await this.client.chat.completions.create({
       model: req.model ?? this.model,
       messages: [
         ...(req.system ? [{ role: "system" as const, content: req.system }] : []),
         { role: "user" as const, content: req.prompt },
       ],
-      response_format: zodResponseFormat(req.schema, req.schemaName),
+      response_format: {
+        type: "json_schema",
+        json_schema: { name: req.schemaName, schema: jsonSchema, strict: false },
+      },
     });
-    const parsed = completion.choices[0]?.message.parsed;
-    if (parsed == null) {
+
+    const content = completion.choices[0]?.message.content;
+    if (!content) {
       const refusal = completion.choices[0]?.message.refusal;
       throw new Error(
-        `OpenAILLMClient: no parsed output for '${req.schemaName}'` +
+        `OpenAILLMClient: empty output for '${req.schemaName}'` +
           (refusal ? ` (refusal: ${refusal})` : ""),
       );
     }
-    return parsed as z.infer<S>;
+    let raw: unknown;
+    try {
+      raw = JSON.parse(content);
+    } catch {
+      throw new Error(`OpenAILLMClient: non-JSON output for '${req.schemaName}'`);
+    }
+    // Validate + coerce (applies our Zod defaults). Throws -> orchestrator retries.
+    return req.schema.parse(raw);
   }
 
   async generateText(req: TextRequest): Promise<string> {

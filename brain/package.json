@@ -12,11 +12,14 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "demo": "tsx src/demo.ts"
+    "demo": "tsx src/demo.ts",
+    "demo:openai": "VC_BRAIN_LLM=openai node --env-file=../.env node_modules/.bin/tsx src/demo.ts",
+    "probe:openai": "node --env-file=../.env node_modules/.bin/tsx src/scripts/probeOpenAI.ts"
   },
   "dependencies": {
     "openai": "^4.67.0",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zod-to-json-schema": "^3.25.2"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",

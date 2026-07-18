@@ -56,11 +56,12 @@ async function main() {
   console.log(`  recommendation: ${state.investmentMemo?.recommendation}`);
 
   console.log("\n=== FEEDBACK / LEARNING ===");
+  // No hardcoded criterionId: the learning agent picks the implicated criterion
+  // from whatever the profiler actually extracted (ids differ live vs. mock).
   const feedback = InvestorFeedbackSchema.parse({
     action: "pass",
     companyId: "co_radintel",
-    rationale: "Strong tech but distribution unproven.",
-    criterionId: "crit_distribution",
+    rationale: "Strong tech but distribution is unproven at scale.",
     learningRate: 0.2,
   });
   await applyFeedback(state, feedback, { llm: makeLLM(), competitors: fx.competitors });

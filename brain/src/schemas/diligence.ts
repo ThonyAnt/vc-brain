@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { WeightRecord } from "./common.js";
 
 /** Reference to a historical company used as an analogue. */
 export const AnalogueReferenceSchema = z.object({
@@ -13,7 +14,7 @@ export const AnalogueReferenceSchema = z.object({
   ]),
   similarity: z.number().min(0).max(1),
   /** Dimension-level similarity breakdown. */
-  dimensionScores: z.record(z.string(), z.number()).default({}),
+  dimensionScores: WeightRecord.default({}),
   keySimilarities: z.array(z.string()).default([]),
   keyDifferences: z.array(z.string()).default([]),
   whyItMatters: z.string().default(""),

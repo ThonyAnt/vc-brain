@@ -16,11 +16,18 @@ npm run demo      # full pipeline against the mock LLM
 npm run typecheck
 ```
 
-Run against OpenAI (uses the OpenAI credits):
+Run against OpenAI (uses the OpenAI credits). Put `OPENAI_API_KEY=...` in
+`vc-brain/.env` (already gitignored), then:
 
 ```bash
-VC_BRAIN_LLM=openai OPENAI_API_KEY=sk-... npm run demo
+npm run demo:openai     # full pipeline, live
+npm run probe:openai    # single-agent canary (fast, cheap)
 ```
+
+Structured output uses non-strict `json_schema` mode: OpenAI's *strict* mode
+rejects our `.default()` / `z.record()` schemas, so the schema guides the model
+and our own `schema.parse()` validates + coerces, with orchestrator retries as a
+backstop. Verified end-to-end against `gpt-4o-2024-08-06`.
 
 ## Architecture
 

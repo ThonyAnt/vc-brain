@@ -1,10 +1,11 @@
 import { z } from "zod";
+import { WeightRecord } from "./common.js";
 
 /** A candidate ranked by the Market Scout agent. */
 export const RankedCandidateSchema = z.object({
   companyId: z.string(),
   totalScore: z.number(),
-  criterionScores: z.record(z.string(), z.number()).default({}),
+  criterionScores: WeightRecord.default({}),
   fundFitScore: z.number().optional(),
   similarityToWinners: z.number().optional(),
   similarityToRejected: z.number().optional(),

@@ -16,6 +16,39 @@ const KIND_LABEL: Record<ExecutionItem['kind'], string> = {
 
 type View = 'board' | 'database'
 
+/* view-switcher icons in the hand-drawn nav family (18px grid, 1.2 stroke) */
+function BoardIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.2">
+      <rect x="2" y="3" width="3.5" height="12" />
+      <rect x="7.25" y="3" width="3.5" height="8" />
+      <rect x="12.5" y="3" width="3.5" height="5" />
+    </svg>
+  )
+}
+
+function DatabaseIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.2">
+      <rect x="2" y="3" width="14" height="12" />
+      <path d="M2 7h14M2 11h14M7 3v12" />
+    </svg>
+  )
+}
+
+/* fit scores read like highlighter marks: hot deals go yellow */
+function ScoreChip({ score }: { score: number }) {
+  return (
+    <span
+      className={`code-sm rounded-none border-2 border-hairline-strong px-1.5 whitespace-nowrap ${
+        score >= 80 ? 'bg-hero-glow text-ink' : 'bg-bone text-ink'
+      }`}
+    >
+      {score}
+    </span>
+  )
+}
+
 type SortKey = 'name' | 'stage' | 'sector' | 'fitScore' | 'raising' | 'location'
 
 const COLUMNS: { key: SortKey; label: string }[] = [
@@ -85,15 +118,22 @@ export function PipelinePage() {
 
         {/* view switcher */}
         <div className="flex border-2 border-hairline-strong shadow-brutal-sm">
-          {(['board', 'database'] as const).map((v) => (
+          {(
+            [
+              { v: 'board', label: 'Board view', Icon: BoardIcon },
+              { v: 'database', label: 'Database view', Icon: DatabaseIcon },
+            ] as const
+          ).map(({ v, label, Icon }) => (
             <button
               key={v}
               onClick={() => switchView(v)}
-              className={`code-sm cursor-pointer px-4 py-2 uppercase transition-colors ${
+              title={label}
+              aria-label={label}
+              className={`cursor-pointer p-2.5 transition-colors ${
                 view === v ? 'bg-dark text-on-dark' : 'bg-card text-ink hover:bg-bone'
               } ${v === 'database' ? 'border-l-2 border-hairline-strong' : ''}`}
             >
-              {v}
+              <Icon className="h-5 w-5" />
             </button>
           ))}
         </div>
@@ -126,24 +166,32 @@ export function PipelinePage() {
           {STAGES.map((stage) => {
             const deals = active.filter((c) => c.dealStage === stage)
             return (
-              <div key={stage} className="rounded-none border-2 border-hairline-strong bg-bone p-3">
-                <div className="flex items-baseline justify-between px-1">
-                  <Eyebrow className="text-charcoal">{stage}</Eyebrow>
-                  <span className="code-sm text-ash">{deals.length}</span>
+              <div key={stage} className="rounded-none border-2 border-hairline-strong bg-bone">
+                <div className="flex items-center justify-between border-b-2 border-hairline-strong bg-card px-3 py-2">
+                  <span className="code-sm uppercase text-ink">{stage}</span>
+                  <span
+                    className={`code-sm px-1.5 ${deals.length ? 'bg-dark text-on-dark' : 'text-ash'}`}
+                  >
+                    {deals.length}
+                  </span>
                 </div>
-                <div className="mt-2 space-y-2">
+                <div className="space-y-3 p-3">
                   {deals.map((c) => (
                     <Card
                       key={c.id}
-                      className="cursor-pointer p-3 transition-colors hover:bg-card/60"
+                      className="cursor-pointer p-3 transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_#000]"
                       onClick={() => navigate(`/company/${c.id}`)}
                     >
-                      <div className="flex items-baseline justify-between">
+                      <div className="flex items-start justify-between gap-2">
                         <span className="caption-tight text-ink">{c.name}</span>
-                        <span className="code-sm text-ink">{c.fitScore}</span>
+                        <ScoreChip score={c.fitScore} />
                       </div>
-                      <div className="caption mt-1 text-mute">{c.oneLiner}</div>
-                      {c.raising && <div className="code-sm mt-2 text-charcoal">{c.raising}</div>}
+                      <div className="caption mt-1.5 line-clamp-2 text-mute">{c.oneLiner}</div>
+                      {c.raising && (
+                        <div className="code-sm mt-2.5 inline-block bg-dark px-1.5 py-0.5 text-on-dark">
+                          {c.raising}
+                        </div>
+                      )}
                     </Card>
                   ))}
                   {!deals.length && <div className="caption px-1 py-3 text-center text-ash">—</div>}
@@ -189,13 +237,19 @@ export function PipelinePage() {
                   <td className="px-4 py-3 text-sm whitespace-nowrap text-ink">{c.sector}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
-                      <span className="code-md text-ink">{c.fitScore}</span>
+                      <ScoreChip score={c.fitScore} />
                       <div className="h-2 w-16 border border-hairline-strong bg-card">
                         <div className="h-full bg-primary" style={{ width: `${c.fitScore}%` }} />
                       </div>
                     </div>
                   </td>
-                  <td className="code-sm px-4 py-3 whitespace-nowrap text-ink">{c.raising ?? '—'}</td>
+                  <td className="px-4 py-3 whitespace-nowrap">
+                    {c.raising ? (
+                      <span className="code-sm inline-block bg-dark px-1.5 py-0.5 text-on-dark">{c.raising}</span>
+                    ) : (
+                      <span className="caption text-ash">—</span>
+                    )}
+                  </td>
                   <td className="px-4 py-3 text-sm whitespace-nowrap text-ink">{c.location}</td>
                   <td className="px-4 py-3 text-right">
                     <span className="caption-tight whitespace-nowrap text-primary">open →</span>

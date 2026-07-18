@@ -22,19 +22,16 @@
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     overflow: hidden;
   }
-  /* animate-ui StarsBackground, ported: bottom-lit gradient + 3 parallax star layers */
-  #stars-bg {
+  /* single bottom-lit surface + faint dot grid with gentle mouse parallax (Attio flourish) */
+  #bg {
     position: fixed; inset: 0; z-index: 0; overflow: hidden;
     background: radial-gradient(ellipse at bottom, #262626 0%, #000 100%);
   }
-  #star-parallax { position: absolute; inset: 0; will-change: transform; }
-  .star-layer {
-    position: absolute; top: 0; left: 0; width: 100%; height: 2000px;
-    animation: star-drift linear infinite;
+  #bg-parallax {
+    position: absolute; inset: -80px; will-change: transform;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
   }
-  .star-dot { position: absolute; background: transparent; border-radius: 50%; }
-  @keyframes star-drift { to { transform: translateY(-2000px); } }
-  @media (prefers-reduced-motion: reduce) { .star-layer { animation: none; } }
   #app { position: fixed; inset: 0; z-index: 1; }
   #app canvas { display: block; }
   .hud {
@@ -110,7 +107,7 @@
 </style>
 </head>
 <body>
-  <div id="stars-bg"><div id="star-parallax"></div></div>
+  <div id="bg"><div id="bg-parallax"></div></div>
   <div id="app"></div>
 
   <div class="hud tl">

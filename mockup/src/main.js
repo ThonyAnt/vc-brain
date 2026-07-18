@@ -171,8 +171,7 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.06;
 controls.minDistance = 140;
 controls.maxDistance = 3200;
-controls.autoRotate = !reducedMotion;
-controls.autoRotateSpeed = 0.45;
+controls.autoRotate = false; // the graph holds still unless the user moves it
 
 const group = new THREE.Group();
 scene.add(group);
@@ -352,36 +351,15 @@ SECTORS.forEach((s, i) => {
   labelSprites.push(sp);
 });
 
-// --- stars background (animate-ui StarsBackground, ported verbatim: three box-shadow
-// layers of 1000/400/200 dots at 1/2/3px drifting over 50/100/150s, spring mouse parallax)
-function generateStars(count, starColor) {
-  const shadows = [];
-  for (let i = 0; i < count; i++) {
-    const x = Math.floor(rand() * 4000) - 2000;
-    const y = Math.floor(rand() * 4000) - 2000;
-    shadows.push(`${x}px ${y}px ${starColor}`);
-  }
-  return shadows.join(', ');
-}
-const starParallax = document.getElementById('star-parallax');
-for (const [count, size, dur] of [[1000, 1, 50], [400, 2, 100], [200, 3, 150]]) {
-  const layer = document.createElement('div');
-  layer.className = 'star-layer';
-  layer.style.animationDuration = `${dur}s`;
-  const shadow = generateStars(count, '#fff');
-  for (const top of [0, 2000]) {
-    const dot = document.createElement('div');
-    dot.className = 'star-dot';
-    dot.style.cssText = `width:${size}px;height:${size}px;top:${top}px;box-shadow:${shadow}`;
-    layer.appendChild(dot);
-  }
-  starParallax.appendChild(layer);
-}
+// --- background parallax: the faint dot grid follows the mouse slightly
+const bgParallax = document.getElementById('bg-parallax');
 const parallax = { x: 0, y: 0, tx: 0, ty: 0 };
-window.addEventListener('mousemove', (e) => {
-  parallax.tx = -(e.clientX - window.innerWidth / 2) * 0.05;
-  parallax.ty = -(e.clientY - window.innerHeight / 2) * 0.05;
-});
+if (!reducedMotion) {
+  window.addEventListener('mousemove', (e) => {
+    parallax.tx = -(e.clientX - window.innerWidth / 2) * 0.02;
+    parallax.ty = -(e.clientY - window.innerHeight / 2) * 0.02;
+  });
+}
 
 // ---------------------------------------------------------------- hud / dom
 
@@ -550,8 +528,6 @@ function clearFocus() {
   if (wasFocused && home.saved) {
     home.saved = false;
     flyToPose(home.pos, home.target, 1.0);
-  } else {
-    controls.autoRotate = !reducedMotion;
   }
 }
 
@@ -627,10 +603,6 @@ function animate() {
   sGeo.attributes.position.needsUpdate = true;
   sGeo.attributes.color.needsUpdate = true;
 
-  // slow rotation of the whole brain (drawrange group.rotation), gentler;
-  // paused while flying or focused so the destination holds still
-  if (!focused && !tween.active) group.rotation.y += dt * 0.02 * motion;
-
   if (tween.active) {
     tween.t = Math.min(tween.t + dt / tween.dur, 1);
     const e = easeCubic(tween.t);
@@ -654,10 +626,10 @@ function animate() {
     sp.material.opacity = 0.7 * THREE.MathUtils.smoothstep(camera.position.distanceTo(tmpA), 260, 620);
   }
 
-  // spring-follow mouse parallax on the DOM star layers
+  // spring-follow mouse parallax on the dot grid
   parallax.x += (parallax.tx - parallax.x) * Math.min(1, dt * 3);
   parallax.y += (parallax.ty - parallax.y) * Math.min(1, dt * 3);
-  starParallax.style.transform = `translate(${parallax.x}px, ${parallax.y}px)`;
+  bgParallax.style.transform = `translate(${parallax.x}px, ${parallax.y}px)`;
 
   controls.update();
   updateHover();

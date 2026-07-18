@@ -1,0 +1,96 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/geist-mono/400.css';
+@import 'tailwindcss';
+
+/* xAI design tokens — docs/design/awesome-design-md/design-md/x.ai/DESIGN.md */
+@theme {
+  --color-canvas: #0a0a0a;
+  --color-soft: #1a1c20;
+  --color-card: #191919;
+  --color-mid: #363a3f;
+  --color-hairline: #212327;
+  --color-ink: #ffffff;
+  --color-body: #dadbdf;
+  --color-mute: #7d8187;
+  --color-sunset: #ff7a17;
+  --color-sunset-soft: #ffc285;
+  --color-dusk: #7c3aed;
+  --color-twilight: #c4b5fd;
+  --color-breeze: #a0c3ec;
+  --color-midnight: #0d1726;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-card: 8px;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Display sizes carry hierarchy via size + negative tracking, never weight */
+@utility display-md {
+  font-size: 48px;
+  line-height: 48px;
+  letter-spacing: -1.2px;
+  font-weight: 400;
+}
+
+@utility display-sm {
+  font-size: 32px;
+  line-height: 36px;
+  letter-spacing: -0.6px;
+  font-weight: 400;
+}
+
+@utility display-xs {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 400;
+}
+
+/* Uppercase tracked mono eyebrow — the brand's label voice */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+/* Star layers behind the brain canvas (ported from mockup StarsBackground) */
+.star-layer {
+  position: absolute;
+  inset: 0;
+  animation: star-drift linear infinite;
+}
+.star-dot {
+  position: absolute;
+  left: 0;
+  border-radius: 9999px;
+  background: #fff;
+}
+@keyframes star-drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .star-layer {
+    animation: none;
+  }
+}

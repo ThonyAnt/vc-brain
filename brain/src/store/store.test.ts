@@ -3,6 +3,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { SeedBundleSchema, stateFromBundle } from "./bundle.js";
 import { JsonCompanyStore, loadBundle, saveBundle } from "./jsonStore.js";
+import { loadSourcedCompanies, saveSourcedCompanies } from "./sourcedCompanies.js";
 import * as fx from "../fixtures/sample.js";
 
 function sampleBundle() {
@@ -58,5 +59,14 @@ describe("loadBundle / saveBundle round-trip", () => {
       bundle.candidateUniverse.map((c) => c.id),
     );
     expect(loaded.mandate).toBe(bundle.mandate);
+  });
+});
+
+describe("portable sourced-company storage", () => {
+  it("writes and loads sourced companies from a known JSON path", () => {
+    const path = join(tmpdir(), `vcbrain-sourced-${process.pid}.json`);
+    const companies = [fx.scribeai];
+    saveSourcedCompanies(path, companies);
+    expect(loadSourcedCompanies(path).map((company) => company.id)).toEqual([fx.scribeai.id]);
   });
 });

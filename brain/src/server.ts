@@ -39,13 +39,18 @@ import {
 import type { RankedCandidate } from "./schemas/sourcing.js";
 import type { VCBrainState } from "./state.js";
 import type { Company } from "./schemas/company.js";
+import { loadSourcedCompanies, saveSourcedCompanies } from "./store/sourcedCompanies.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const SNAPSHOT = resolve(here, "../../app/src/lib/brain/snapshot.json");
+const SOURCED_COMPANIES = resolve(here, "../data/sourced-companies.json");
 const PORT = Number(process.env.VC_BRAIN_API_PORT ?? "8790");
 const MODEL = process.env.VC_BRAIN_OPENAI_MODEL ?? "gpt-4o-mini";
 
 const state = JSON.parse(readFileSync(SNAPSHOT, "utf8")) as VCBrainState & { competitors?: Company[] };
+const persistedSourcedCompanies = loadSourcedCompanies(SOURCED_COMPANIES);
+const initialCandidateIds = new Set(state.candidateUniverse.map((company) => company.id));
+state.candidateUniverse.push(...persistedSourcedCompanies.filter((company) => !initialCandidateIds.has(company.id)));
 const competitors = state.competitors ?? [];
 const llm = new OpenAILLMClient({ model: MODEL });
 // Web discovery is available only when a Tavily key is present server-side.
@@ -213,6 +218,7 @@ async function handleDiscover(body: { query?: string; limit?: number }) {
   if (discovered.length === 0) return { companies: [], count: 0 };
 
   for (const c of discovered) state.candidateUniverse.push(c);
+  saveSourcedCompanies(SOURCED_COMPANIES, state.candidateUniverse);
 
   let ranked: RankedCandidate[] = [];
   if (fundProfile) {
@@ -273,7 +279,9 @@ async function handleStreamingChat(req: http.IncomingMessage, res: http.ServerRe
     Connection: "keep-alive",
     "X-Accel-Buffering": "no",
   });
+  let sourcedCompaniesChanged = false;
   const writeEvent = (event: ChatStreamEvent) => {
+    if (event.type === "companies_sourced") sourcedCompaniesChanged = true;
     const outgoing = event.type === "companies_sourced"
       ? {
           ...event,
@@ -301,6 +309,7 @@ async function handleStreamingChat(req: http.IncomingMessage, res: http.ServerRe
   } catch (error) {
     res.write(`event: error\ndata: ${JSON.stringify({ type: "error", error: String(error) })}\n\n`);
   } finally {
+    if (sourcedCompaniesChanged) saveSourcedCompanies(SOURCED_COMPANIES, state.candidateUniverse);
     res.end();
   }
 }

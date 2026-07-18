@@ -44,7 +44,7 @@ export function SourcingInbox({
     { ...FUND_HQ, kind: 'hq' as const },
     ...visible.flatMap((c) => {
       const ll = cityLatLng(c.location)
-      return ll ? [{ ...ll, label: c.name, kind: 'company' as const }] : []
+      return ll ? [{ ...ll, label: c.name, city: c.location, kind: 'company' as const }] : []
     }),
   ]
   const cityCount = new Set(visible.map((c) => c.location)).size
@@ -83,7 +83,7 @@ export function SourcingInbox({
       <div className="relative h-44 shrink-0 border-b border-hairline">
         <CompanyGlobe className="h-full w-full" markers={globeMarkers} focus={hoverCity} />
         <span className="caption pointer-events-none absolute bottom-2 left-3 text-mute">
-          {visible.length} companies · {cityCount} cities · arcs from SF
+          {visible.length} companies · {cityCount} cities · drag to spin
         </span>
       </div>
       <div className="flex-1 space-y-2 overflow-y-auto p-2">

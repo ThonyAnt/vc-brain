@@ -70,6 +70,7 @@ interface SceneNode {
 export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({ graph, onSelect }, ref) {
   const containerRef = useRef<HTMLDivElement>(null)
   const tooltipRef = useRef<HTMLDivElement>(null)
+  const labelRefs = useRef<(HTMLDivElement | null)[]>([])
   const apiRef = useRef<BrainHandle>({ focusNode: () => {}, clearFocus: () => {}, pulseNodes: () => {} })
 
   useImperativeHandle(ref, () => ({
@@ -385,52 +386,13 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     ring.visible = false
     scene.add(ring)
 
-    /* cluster labels: Space Mono 700 uppercase, tracked 0.1em to match the HUD voice */
-    function drawLabel(c: HTMLCanvasElement, text: string, colorHex: string) {
-      const g = c.getContext('2d')!
-      g.clearRect(0, 0, c.width, c.height)
-      g.font = "700 60px 'Space Mono', monospace"
-      if ('letterSpacing' in g) (g as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = '6px'
-      g.textBaseline = 'middle'
-      const label = text.toUpperCase()
-      const tickW = 12
-      const gap = 26
-      const textW = g.measureText(label).width
-      const x0 = (c.width - (tickW + gap + textW)) / 2
-      g.fillStyle = colorHex
-      g.fillRect(x0, 96 - 26, tickW, 52)
-      g.fillStyle = 'rgba(0, 0, 0, 0.92)'
-      g.fillText(label, x0 + tickW + gap, 96)
-    }
-    function labelSprite(text: string, colorHex: string) {
-      const c = document.createElement('canvas')
-      c.width = 1024
-      c.height = 192
-      drawLabel(c, text, colorHex)
-      const t = new THREE.CanvasTexture(c)
-      t.colorSpace = THREE.SRGBColorSpace
-      const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, opacity: 0.85, depthWrite: false }))
-      sp.scale.set(150, 28.1, 1)
-      sp.userData.redraw = () => {
-        drawLabel(c, text, colorHex)
-        t.needsUpdate = true
-      }
-      return sp
-    }
-    const labelSprites: THREE.Sprite[] = []
-    markets.forEach((m, i) => {
-      const sp = labelSprite(m.label, SECTOR_PALETTE[i % SECTOR_PALETTE.length])
-      sp.position.copy(anchors[i]).multiplyScalar(1.28)
-      sp.position.y += 120
-      group.add(sp)
-      labelSprites.push(sp)
+    /* cluster labels are DOM overlays (crisp Space Mono at fixed screen size,
+       identical to the HUD) — world anchors here, projected every frame */
+    const labelAnchors = anchors.map((a) => {
+      const v = a.clone().multiplyScalar(1.28)
+      v.y += 120
+      return v
     })
-    /* canvas text bakes whatever font is loaded at draw time — re-rasterize the
-       labels once Space Mono actually arrives, or the fallback sticks forever */
-    document.fonts
-      .load("700 60px 'Space Mono'")
-      .then(() => labelSprites.forEach((sp) => (sp.userData.redraw as () => void)?.()))
-      .catch(() => {})
 
     /* ---------------- interaction (ported, HUD → React refs) ---------------- */
 
@@ -736,9 +698,23 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         controls.target.copy(tmpA.copy(focused.pos).applyMatrix4(group.matrixWorld))
       }
 
-      for (const sp of labelSprites) {
-        tmpA.setFromMatrixPosition(sp.matrixWorld)
-        sp.material.opacity = 0.7 * THREE.MathUtils.smoothstep(camera.position.distanceTo(tmpA), 260, 620)
+      {
+        const w = renderer.domElement.clientWidth
+        const h = renderer.domElement.clientHeight
+        labelAnchors.forEach((a, i) => {
+          const el = labelRefs.current[i]
+          if (!el) return
+          tmpA.copy(a).applyMatrix4(group.matrixWorld)
+          const dist = camera.position.distanceTo(tmpA)
+          tmpB.copy(tmpA).project(camera)
+          if (tmpB.z > 1) {
+            el.style.opacity = '0'
+            return
+          }
+          el.style.left = `${(tmpB.x * 0.5 + 0.5) * w}px`
+          el.style.top = `${(-tmpB.y * 0.5 + 0.5) * h}px`
+          el.style.opacity = `${0.9 * THREE.MathUtils.smoothstep(dist, 260, 620)}`
+        })
       }
 
       controls.update()
@@ -778,11 +754,36 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
   }, [graph, onSelect])
 
   return (
-    <div ref={containerRef} className="absolute inset-0">
+    <div ref={containerRef} className="absolute inset-0 overflow-hidden">
       <div
         ref={tooltipRef}
         className="pointer-events-none absolute z-10 hidden rounded-none border-2 border-hairline-strong bg-white px-3 py-2 shadow-brutal-sm"
       />
+      {/* cluster labels: real DOM text so they match the HUD exactly */}
+      {graph.nodes
+        .filter((n) => n.type === 'market')
+        .map((m, i) => (
+          <div
+            key={m.id}
+            ref={(el) => {
+              labelRefs.current[i] = el
+            }}
+            className="pointer-events-none absolute z-[5] -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
+            style={{
+              opacity: 0,
+              fontFamily: "'Space Mono', monospace",
+              fontWeight: 700,
+              fontSize: '11px',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: 'rgba(0, 0, 0, 0.92)',
+            }}
+          >
+            <span style={{ borderLeft: `3px solid ${SECTOR_PALETTE[i % SECTOR_PALETTE.length]}`, paddingLeft: 6 }}>
+              {m.label}
+            </span>
+          </div>
+        ))}
     </div>
   )
 })

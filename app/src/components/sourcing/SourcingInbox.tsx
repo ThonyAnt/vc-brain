@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router'
 import { api } from '../../lib/api/client'
 import type { Company } from '../../lib/types'
 import { useAppStore } from '../../state/store'
-import { Eyebrow } from '../ui/Eyebrow'
 import { Pill } from '../ui/Pill'
 
+/* Dark-inversion panel over the brain canvas (Replicate code-well surface). */
 export function SourcingInbox({
   onFocus,
   onFeedback,
@@ -35,36 +35,38 @@ export function SourcingInbox({
   const visible = items.filter((c) => !dismissed.has(c.id))
 
   return (
-    <div className="pointer-events-auto flex h-full w-80 flex-col rounded-card border border-hairline bg-canvas/80 backdrop-blur-sm">
-      <div className="flex items-center justify-between border-b border-hairline px-4 py-3">
-        <Eyebrow className="text-ink">Sourced this week</Eyebrow>
-        <Eyebrow className="text-sunset">{visible.length}</Eyebrow>
+    <div className="pointer-events-auto flex h-full w-80 flex-col rounded-lg bg-dark/85 text-on-dark backdrop-blur-sm">
+      <div className="flex items-center justify-between border-b border-divider-dark px-4 py-3">
+        <span className="caption-tight">Sourced this week</span>
+        <span className="eyebrow text-hero-glow">{visible.length}</span>
       </div>
       <div className="flex-1 space-y-2 overflow-y-auto p-2">
         {visible.map((c) => (
           <div
             key={c.id}
-            className="cursor-pointer rounded-card border border-hairline bg-card p-3 transition-colors hover:border-white/25"
+            className="cursor-pointer rounded-card border border-divider-dark/50 p-3 transition-colors hover:border-divider-dark"
             onClick={() => onFocus(c.id)}
           >
             <div className="flex items-baseline justify-between">
-              <div className="text-sm text-ink">{c.name}</div>
-              <div className="eyebrow text-sunset">{c.fitScore}</div>
+              <div className="text-sm font-semibold">{c.name}</div>
+              <div className="eyebrow text-hero-glow">{c.fitScore}</div>
             </div>
-            <div className="mt-1 text-[13px] leading-4.5 text-mute">{c.oneLiner}</div>
+            <div className="mt-1 text-[13px] leading-4.5 text-on-dark-mute">{c.oneLiner}</div>
             {c.whySurfaced?.[0] && (
-              <div className="mt-2 border-l border-sunset/40 pl-2 text-[12px] leading-4 text-body">{c.whySurfaced[0]}</div>
+              <div className="mt-2 border-l-2 border-hero-glow/60 pl-2 text-[12px] leading-4 text-on-dark-mute">
+                {c.whySurfaced[0]}
+              </div>
             )}
             <div className="mt-3 flex gap-1.5" onClick={(e) => e.stopPropagation()}>
-              <Pill size="sm" className="text-[12px]" onClick={() => navigate(`/company/${c.id}`)}>
+              <Pill variant="onDark" className="h-7 px-3 text-[12px]" onClick={() => navigate(`/company/${c.id}`)}>
                 Investigate
               </Pill>
-              <Pill size="sm" className="text-[12px]" onClick={() => pass(c)}>
+              <Pill variant="onDark" className="h-7 px-3 text-[12px]" onClick={() => pass(c)}>
                 Pass
               </Pill>
               <Pill
-                size="sm"
-                className={`text-[12px] ${saved.has(c.id) ? 'bg-soft' : ''}`}
+                variant="onDark"
+                className={`h-7 px-3 text-[12px] ${saved.has(c.id) ? 'bg-white/10' : ''}`}
                 onClick={() => setSaved((s) => new Set(s).add(c.id))}
               >
                 {saved.has(c.id) ? 'Saved' : 'Save'}

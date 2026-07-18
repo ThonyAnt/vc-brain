@@ -21,13 +21,16 @@ interface Props {
   onSelect?: (id: string | null) => void
 }
 
-/* xAI accent mapping — legend and UI use the same colors */
+/* Replicate palette mapping — legend and UI use the same colors.
+   sourced = hero-glow (the orange stamp on dark), portfolio = badge-success
+   ("running" semantics) with the outline ring, rejected = stone, founder =
+   hero-pink, tracked = ash. */
 export const ROLE_COLORS: Record<string, string> = {
-  sourced: '#ff7a17', // sunset
-  portfolio: '#a0c3ec', // breeze
-  rejected: '#7c3aed', // dusk
-  founder: '#c4b5fd', // twilight
-  tracked: '#565b64',
+  sourced: '#ff6a3d',
+  portfolio: '#2b9a66',
+  rejected: '#bbbbbb',
+  founder: '#f4a8a0',
+  tracked: '#8d8d8d',
 }
 
 const N_FILLER = 169
@@ -215,16 +218,21 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     controls.dampingFactor = 0.06
     controls.minDistance = 140
     controls.maxDistance = 3200
-    controls.autoRotate = !reducedMotion
-    controls.autoRotateSpeed = 0.45
+    controls.autoRotate = false // the graph holds still unless the user moves it
 
     const group = new THREE.Group()
     scene.add(group)
 
-    const white = new THREE.Color('#ffffff')
+    /* raw shaders skip three's colorspace chunk, so feed sRGB components directly
+       to make on-screen colors match the chosen hexes exactly */
+    const srgb = (hex: string) => new THREE.Color(hex).convertLinearToSRGB()
+    const roleColorCache = new Map<string, THREE.Color>()
     const roleColor = (n: SceneNode) => {
-      const c = new THREE.Color(ROLE_COLORS[n.role] ?? ROLE_COLORS.tracked)
-      if (n.role === 'sourced') c.lerp(white, 0.15)
+      let c = roleColorCache.get(n.role)
+      if (!c) {
+        c = srgb(ROLE_COLORS[n.role] ?? ROLE_COLORS.tracked)
+        roleColorCache.set(n.role, c)
+      }
       return c
     }
     const roleSize = (n: SceneNode) =>
@@ -257,17 +265,6 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     pGeo.setAttribute('aPhase', new THREE.BufferAttribute(pPhase, 1))
     pGeo.setAttribute('aDim', new THREE.BufferAttribute(pDim, 1).setUsage(THREE.DynamicDrawUsage))
     pGeo.setAttribute('aOutline', new THREE.BufferAttribute(pOutline, 1))
-
-    /* additive over transparent canvas: add RGB, never write alpha */
-    function pureAdditive<T extends THREE.Material>(mat: T): T {
-      mat.blending = THREE.CustomBlending
-      mat.blendEquation = THREE.AddEquation
-      mat.blendSrc = THREE.OneFactor
-      mat.blendDst = THREE.OneFactor
-      mat.blendSrcAlpha = THREE.ZeroFactor
-      mat.blendDstAlpha = THREE.OneFactor
-      return mat
-    }
 
     const pMat = new THREE.ShaderMaterial({
       transparent: true,
@@ -315,11 +312,24 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     const GREYOUT = 0.22
     const E = edges.length
     const lPos = new Float32Array(E * 6)
-    const lCol = new Float32Array(E * 6)
+    const lCol = new Float32Array(E * 8) // RGBA per vertex: real alpha works on light bg
     const lGeo = new THREE.BufferGeometry()
     lGeo.setAttribute('position', new THREE.BufferAttribute(lPos, 3).setUsage(THREE.DynamicDrawUsage))
-    lGeo.setAttribute('color', new THREE.BufferAttribute(lCol, 3).setUsage(THREE.DynamicDrawUsage))
-    const lMat = pureAdditive(new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, depthWrite: false }))
+    lGeo.setAttribute('aRGBA', new THREE.BufferAttribute(lCol, 4).setUsage(THREE.DynamicDrawUsage))
+    const lMat = new THREE.ShaderMaterial({
+      transparent: true,
+      depthWrite: false,
+      vertexShader: /* glsl */ `
+        attribute vec4 aRGBA;
+        varying vec4 vRGBA;
+        void main() {
+          vRGBA = aRGBA;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }`,
+      fragmentShader: /* glsl */ `
+        varying vec4 vRGBA;
+        void main() { gl_FragColor = vRGBA; }`,
+    })
     const links = new THREE.LineSegments(lGeo, lMat)
     links.renderOrder = 1
     group.add(links)
@@ -327,21 +337,21 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     const SYN_DIST = 105
     const SYN_MAX = 900
     const sPos = new Float32Array(SYN_MAX * 6)
-    const sCol = new Float32Array(SYN_MAX * 6)
+    const sCol = new Float32Array(SYN_MAX * 8)
     const sGeo = new THREE.BufferGeometry()
     sGeo.setAttribute('position', new THREE.BufferAttribute(sPos, 3).setUsage(THREE.DynamicDrawUsage))
-    sGeo.setAttribute('color', new THREE.BufferAttribute(sCol, 3).setUsage(THREE.DynamicDrawUsage))
+    sGeo.setAttribute('aRGBA', new THREE.BufferAttribute(sCol, 4).setUsage(THREE.DynamicDrawUsage))
     sGeo.setDrawRange(0, 0)
     const synapse = new THREE.LineSegments(sGeo, lMat.clone())
     synapse.renderOrder = 1
     group.add(synapse)
-    const synTint = new THREE.Color('#8f9bb3')
+    const synTint = srgb('#5c6f9e')
 
     function ringTexture() {
       const c = document.createElement('canvas')
       c.width = c.height = 128
       const g = c.getContext('2d')!
-      g.strokeStyle = 'rgba(255,255,255,0.95)'
+      g.strokeStyle = 'rgba(255,106,61,0.95)' /* hero-glow */
       g.lineWidth = 7
       g.beginPath()
       g.arc(64, 64, 52, 0, Math.PI * 2)
@@ -362,7 +372,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       c.width = 1024
       c.height = 192
       const g = c.getContext('2d')!
-      g.font = '400 58px "Geist Mono", monospace'
+      g.font = '400 58px "JetBrains Mono", monospace'
       if ('letterSpacing' in g) (g as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = '16px'
       g.textBaseline = 'middle'
       const label = text.toUpperCase()
@@ -370,9 +380,9 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       const gap = 26
       const textW = g.measureText(label).width
       const x0 = (c.width - (tickW + gap + textW)) / 2
-      g.fillStyle = '#7d8187'
+      g.fillStyle = '#8d8d8d'
       g.fillRect(x0, 96 - 24, tickW, 48)
-      g.fillStyle = 'rgba(218, 219, 223, 0.9)'
+      g.fillStyle = 'rgba(252, 252, 252, 0.72)'
       g.fillText(label, x0 + tickW + gap, 96)
       const t = new THREE.CanvasTexture(c)
       t.colorSpace = THREE.SRGBColorSpace
@@ -503,7 +513,6 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         .addScaledVector(camera.up, Math.min(travel * 0.14, 130))
         .addScaledVector(flySide, Math.min(travel * 0.1, 90))
       controls.enabled = false
-      controls.autoRotate = false
     }
 
     function setFocus(node: SceneNode) {
@@ -534,8 +543,6 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       if (wasFocused && home.saved) {
         home.saved = false
         flyToPose(home.pos, home.target, 1.0)
-      } else {
-        controls.autoRotate = !reducedMotion
       }
     }
 
@@ -600,22 +607,25 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         const len = a.distanceTo(b)
         const fade = 1 - THREE.MathUtils.smoothstep(len, LINK_FADE_NEAR, LINK_FADE_FAR) * (1 - LINK_MIN_TRANSPARENCY)
         const breathe = 0.9 + 0.1 * Math.sin(time * 0.7 + e.phase) * motion
-        let alpha = 0.55 * fade * breathe * e.weight
+        let alpha = 0.32 * fade * breathe * e.weight
         if (focused) {
           const on = e.a === focused || e.b === focused
-          alpha *= on ? 1.6 : 0.06
+          alpha *= on ? 1.8 : 0.05
         }
+        alpha = Math.min(alpha, 0.85)
         const ca = roleColor(e.a)
         const cb = roleColor(e.b)
-        lCol[i * 6] = ca.r * alpha
-        lCol[i * 6 + 1] = ca.g * alpha
-        lCol[i * 6 + 2] = ca.b * alpha
-        lCol[i * 6 + 3] = cb.r * alpha
-        lCol[i * 6 + 4] = cb.g * alpha
-        lCol[i * 6 + 5] = cb.b * alpha
+        lCol[i * 8] = ca.r
+        lCol[i * 8 + 1] = ca.g
+        lCol[i * 8 + 2] = ca.b
+        lCol[i * 8 + 3] = alpha
+        lCol[i * 8 + 4] = cb.r
+        lCol[i * 8 + 5] = cb.g
+        lCol[i * 8 + 6] = cb.b
+        lCol[i * 8 + 7] = alpha
       }
       lGeo.attributes.position.needsUpdate = true
-      lGeo.attributes.color.needsUpdate = true
+      lGeo.attributes.aRGBA.needsUpdate = true
 
       let seg = 0
       if (!focused) {
@@ -628,17 +638,18 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
             const dz = a.pos.z - b.pos.z
             const d2 = dx * dx + dy * dy + dz * dz
             if (d2 > SYN_DIST * SYN_DIST) continue
-            const alpha = (1 - Math.sqrt(d2) / SYN_DIST) * 0.1
+            const alpha = (1 - Math.sqrt(d2) / SYN_DIST) * 0.09
             sPos[seg * 6] = a.pos.x
             sPos[seg * 6 + 1] = a.pos.y
             sPos[seg * 6 + 2] = a.pos.z
             sPos[seg * 6 + 3] = b.pos.x
             sPos[seg * 6 + 4] = b.pos.y
             sPos[seg * 6 + 5] = b.pos.z
-            for (const off of [0, 3]) {
-              sCol[seg * 6 + off] = synTint.r * alpha
-              sCol[seg * 6 + off + 1] = synTint.g * alpha
-              sCol[seg * 6 + off + 2] = synTint.b * alpha
+            for (const off of [0, 4]) {
+              sCol[seg * 8 + off] = synTint.r
+              sCol[seg * 8 + off + 1] = synTint.g
+              sCol[seg * 8 + off + 2] = synTint.b
+              sCol[seg * 8 + off + 3] = alpha
             }
             if (++seg >= SYN_MAX) break outer
           }
@@ -646,9 +657,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       }
       sGeo.setDrawRange(0, seg * 2)
       sGeo.attributes.position.needsUpdate = true
-      sGeo.attributes.color.needsUpdate = true
-
-      if (!focused && !tween.active) group.rotation.y += dt * 0.02 * motion
+      sGeo.attributes.aRGBA.needsUpdate = true
 
       if (tween.active) {
         tween.t = Math.min(tween.t + dt / tween.dur, 1)
@@ -660,7 +669,6 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         if (tween.t >= 1) {
           tween.active = false
           controls.enabled = true
-          controls.autoRotate = !reducedMotion && !focused
         }
       } else if (focused) {
         controls.target.copy(tmpA.copy(focused.pos).applyMatrix4(group.matrixWorld))
@@ -706,7 +714,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     <div ref={containerRef} className="absolute inset-0">
       <div
         ref={tooltipRef}
-        className="pointer-events-none absolute z-10 hidden rounded-card border border-hairline bg-card/90 px-3 py-2"
+        className="pointer-events-none absolute z-10 hidden rounded-card border border-divider-dark bg-dark/85 px-3 py-2 backdrop-blur-sm"
       />
     </div>
   )

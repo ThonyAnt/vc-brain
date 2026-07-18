@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react'
 
-/* 8px radius, hairline border, charcoal fill. No shadows anywhere. */
+/* model-card recipe: white on cream, 10px radius, hairline outline, no shadow. */
 export function Card({ className = '', ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={`rounded-card border border-hairline bg-card p-6 ${className}`} {...props} />
+  return <div className={`rounded-card border border-hairline bg-card p-4 ${className}`} {...props} />
 }

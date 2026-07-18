@@ -40,9 +40,9 @@ const items = [
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.2">
         <path d="M3 5h12M3 9h12M3 13h12" />
-        <circle cx="7" cy="5" r="1.5" fill="#0a0a0a" />
-        <circle cx="12" cy="9" r="1.5" fill="#0a0a0a" />
-        <circle cx="5" cy="13" r="1.5" fill="#0a0a0a" />
+        <circle cx="7" cy="5" r="1.5" />
+        <circle cx="12" cy="9" r="1.5" />
+        <circle cx="5" cy="13" r="1.5" />
       </svg>
     ),
   },
@@ -50,8 +50,8 @@ const items = [
 
 export function NavRail() {
   return (
-    <nav className="flex w-16 shrink-0 flex-col items-center gap-2 border-r border-hairline py-4">
-      <div className="eyebrow mb-4 text-ink" title="VC Brain">
+    <nav className="flex w-16 shrink-0 flex-col items-center gap-2 border-r border-hairline bg-canvas py-4">
+      <div className="mb-4 font-display text-sm font-bold tracking-tight text-ink" title="VC Brain">
         VC
       </div>
       {items.map((item) => (
@@ -61,7 +61,7 @@ export function NavRail() {
           title={item.label}
           className={({ isActive }) =>
             `flex h-10 w-10 items-center justify-center rounded-full border transition-colors ${
-              isActive ? 'border-white/25 bg-soft text-ink' : 'border-transparent text-mute hover:text-ink'
+              isActive ? 'border-hairline-strong bg-card text-ink' : 'border-transparent text-mute hover:text-ink'
             }`
           }
         >

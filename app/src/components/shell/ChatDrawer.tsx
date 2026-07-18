@@ -43,23 +43,23 @@ export function ChatDrawer() {
   }
 
   return (
-    <aside className="flex w-90 shrink-0 flex-col border-l border-hairline">
-      <div className="flex h-13 items-center justify-between border-b border-hairline px-4">
-        <Eyebrow className="text-ink">Fund Analyst</Eyebrow>
+    <aside className="flex w-90 shrink-0 flex-col border-l border-hairline bg-canvas">
+      <div className="flex h-15 items-center justify-between border-b border-hairline px-4">
+        <span className="caption-tight text-ink">Fund Analyst</span>
         {companyId && <Eyebrow>ctx: {companyId.replace(/^s-|^p-|^r-/, '')}</Eyebrow>}
       </div>
       <div className="flex-1 space-y-3 overflow-y-auto p-4">
         {messages.map((m, i) => (
           <div
             key={i}
-            className={`max-w-[85%] rounded-card border border-hairline px-3 py-2 text-sm leading-5 ${
-              m.role === 'user' ? 'ml-auto bg-soft text-ink' : 'bg-card text-body'
+            className={`max-w-[85%] rounded-card px-3 py-2 text-sm leading-normal ${
+              m.role === 'user' ? 'ml-auto bg-bone text-ink' : 'border border-hairline bg-card text-body'
             }`}
           >
             {m.content}
           </div>
         ))}
-        {busy && <div className="eyebrow text-mute">thinking…</div>}
+        {busy && <Eyebrow className="text-ash">thinking…</Eyebrow>}
       </div>
       <div className="border-t border-hairline p-3">
         <div className="flex items-center gap-2">
@@ -72,7 +72,7 @@ export function ChatDrawer() {
           <button
             onClick={() => fileRef.current?.click()}
             title="Upload deck"
-            className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/25 text-ink hover:bg-soft"
+            className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-hairline bg-card text-ink hover:bg-bone"
           >
             +
           </button>
@@ -81,9 +81,9 @@ export function ChatDrawer() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && send(input)}
             placeholder="Ask the brain…"
-            className="h-9 w-full rounded-card border border-hairline bg-soft px-3 text-sm text-ink placeholder:text-mute focus:outline-none"
+            className="h-11 w-full rounded-full border border-hairline bg-card px-5 text-sm text-ink placeholder:text-ash focus:outline-3 focus:outline-ring-focus"
           />
-          <Pill size="sm" variant="solid" onClick={() => send(input)}>
+          <Pill variant="primary" onClick={() => send(input)}>
             →
           </Pill>
         </div>

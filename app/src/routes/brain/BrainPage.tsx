@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { BrainCanvas, ROLE_COLORS, type BrainHandle } from '../../components/brain/BrainCanvas'
+import { DotGridBackground } from '../../components/brain/DotGridBackground'
 import { NodePanel } from '../../components/brain/NodePanel'
-import { StarsBackground } from '../../components/brain/StarsBackground'
 import { SourcingInbox } from '../../components/sourcing/SourcingInbox'
 import { api } from '../../lib/api/client'
 import type { FundGraph } from '../../lib/types'
@@ -27,8 +27,8 @@ export function BrainPage() {
   const onFeedback = useCallback((ids: string[]) => brainRef.current?.pulseNodes(ids), [])
 
   return (
-    <div className="relative h-full overflow-hidden bg-canvas">
-      <StarsBackground />
+    <div className="relative h-full overflow-hidden">
+      <DotGridBackground />
       {graph && <BrainCanvas ref={brainRef} graph={graph} onSelect={onSelect} />}
 
       {/* HUD overlays */}
@@ -49,11 +49,14 @@ export function BrainPage() {
 
       <div className="pointer-events-none absolute bottom-4 left-88 flex items-center gap-4">
         {LEGEND.map((l) => (
-          <span key={l.role} className="eyebrow flex items-center gap-1.5 text-mute">
+          <span key={l.role} className="eyebrow flex items-center gap-1.5 text-on-dark-mute">
             <i className="inline-block h-2 w-2 rounded-full" style={{ background: ROLE_COLORS[l.role] }} />
             {l.label}
           </span>
         ))}
+      </div>
+      <div className="eyebrow pointer-events-none absolute right-4 bottom-4 text-on-dark-mute">
+        drag orbit · scroll zoom · hover inspect · click focus
       </div>
     </div>
   )

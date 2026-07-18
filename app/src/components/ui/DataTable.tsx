@@ -19,12 +19,12 @@ export function DataTable<T>({
   onRowClick?: (row: T) => void
 }) {
   return (
-    <div className="overflow-x-auto rounded-card border border-hairline">
+    <div className="overflow-x-auto rounded-card border border-hairline bg-card">
       <table className="w-full border-collapse text-left">
         <thead>
-          <tr className="bg-soft">
+          <tr className="bg-bone">
             {columns.map((c) => (
-              <th key={c.key} className={`eyebrow px-4 py-3 font-normal text-mute ${c.className ?? ''}`}>
+              <th key={c.key} className={`eyebrow px-4 py-3 font-normal text-charcoal ${c.className ?? ''}`}>
                 {c.header}
               </th>
             ))}
@@ -35,7 +35,7 @@ export function DataTable<T>({
             <tr
               key={rowKey(row)}
               onClick={onRowClick ? () => onRowClick(row) : undefined}
-              className={`border-t border-hairline ${onRowClick ? 'cursor-pointer hover:bg-soft/50' : ''}`}
+              className={`border-t border-hairline ${onRowClick ? 'cursor-pointer hover:bg-bone/60' : ''}`}
             >
               {columns.map((c) => (
                 <td key={c.key} className={`px-4 py-3 text-sm text-body ${c.className ?? ''}`}>

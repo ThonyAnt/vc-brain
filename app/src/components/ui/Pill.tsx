@@ -1,21 +1,27 @@
 import type { ButtonHTMLAttributes } from 'react'
 
 type PillProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: 'outline' | 'solid'
+  variant?: 'primary' | 'dark' | 'outline' | 'ghost' | 'onDark'
   size?: 'md' | 'sm'
 }
 
-/* Every interactive element is a pill: translucent-white outline by default,
-   white fill reserved for the single primary action on a screen. */
-export function Pill({ variant = 'outline', size = 'md', className = '', ...props }: PillProps) {
+/*
+ * Replicate button recipes: every interactive element is fully rounded,
+ * label 600. primary = the orange stamp (one per viewport), dark = equal-weight
+ * CTA, outline/ghost = tertiary. onDark for controls inside dark panels.
+ */
+export function Pill({ variant = 'outline', size = 'sm', className = '', ...props }: PillProps) {
   const variants = {
-    outline: 'border border-white/25 text-ink hover:bg-soft',
-    solid: 'border border-white bg-ink text-canvas hover:bg-body',
+    primary: 'bg-primary text-on-primary active:bg-primary-deep',
+    dark: 'bg-dark text-on-dark hover:bg-body',
+    outline: 'border border-hairline-strong bg-card text-ink hover:bg-bone',
+    ghost: 'bg-canvas text-ink hover:bg-bone',
+    onDark: 'border border-divider-dark text-on-dark hover:bg-white/10',
   }
-  const sizes = { md: 'px-4 py-2', sm: 'px-3 py-1' }
+  const sizes = { md: 'h-11 px-6 text-[16px]', sm: 'h-9 px-4 text-sm' }
   return (
     <button
-      className={`inline-flex cursor-pointer items-center gap-2 rounded-full text-sm leading-5 transition-colors ${variants[variant]} ${sizes[size]} ${className}`}
+      className={`inline-flex cursor-pointer items-center justify-center gap-2 rounded-full font-semibold leading-none transition-colors focus-visible:outline-3 focus-visible:outline-ring-focus ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     />
   )

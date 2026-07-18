@@ -1,6 +1,19 @@
 import type { StructuredRequest } from "../llm/client.js";
 import type { MockLLMOptions } from "../llm/mock.js";
+import type { SearchResult } from "../search/client.js";
 import { fundProfile } from "./sample.js";
+
+/** Canned web-search results for offline discovery tests. */
+export const mockSearchResults: SearchResult[] = [
+  {
+    title: "Seed-stage healthcare AI startups recently funded",
+    url: "https://example.com/healthcare-seed",
+    content:
+      "NoteHealth raised a seed round for AI clinical documentation in outpatient clinics. " +
+      "ClaimSync automates medical claims reconciliation for health systems.",
+    score: 0.92,
+  },
+];
 
 /** Extract unique `co_*` company IDs from a prompt, in order of appearance. */
 function companyIds(prompt: string): string[] {
@@ -22,6 +35,56 @@ function firstMatch(prompt: string, re: RegExp, fallback: string): string {
  */
 export const mockAgentStructured: NonNullable<MockLLMOptions["structured"]> = {
   FundProfile: fundProfile,
+
+  DiscoveryExtraction: {
+    companies: [
+      {
+        name: "NoteHealth",
+        description: "AI clinical documentation for outpatient clinics.",
+        website: "https://notehealth.example",
+        sector: "Healthcare",
+        stage: "seed",
+        geography: "US",
+        founders: [],
+        sourceUrls: ["https://example.com/healthcare-seed"],
+        attributes: {
+          industryPath: ["Healthcare", "Infrastructure", "Clinical documentation"],
+          productCategoryPath: ["Software", "Workflow application"],
+          targetCustomers: ["Clinics", "Clinicians"],
+          technicalApproaches: ["Foundation-model application"],
+          founderArchetypes: ["Clinician-founder"],
+          disruptionMechanisms: ["Replaces manual labor"],
+          regulatoryLabels: ["Clinical-validation-dependent"],
+          businessModel: "Subscription SaaS",
+          goToMarket: "Enterprise sales",
+          operationalModel: "Pure software",
+          problemStatement: "reducing documentation burden in outpatient clinics",
+        },
+      },
+      {
+        name: "ClaimSync",
+        description: "Automated medical claims reconciliation for health systems.",
+        sector: "Healthcare",
+        stage: "seed",
+        geography: "US",
+        founders: [],
+        sourceUrls: ["https://example.com/healthcare-seed"],
+        attributes: {
+          industryPath: ["Healthcare", "Infrastructure", "Revenue cycle"],
+          productCategoryPath: ["Software", "Workflow application"],
+          targetCustomers: ["Hospitals", "Billing teams"],
+          technicalApproaches: ["Workflow automation"],
+          founderArchetypes: ["Former industry operator"],
+          disruptionMechanisms: ["Automates compliance"],
+          regulatoryLabels: ["Financially-regulated"],
+          businessModel: "Subscription SaaS",
+          goToMarket: "Enterprise sales",
+          operationalModel: "Pure software",
+          problemStatement: "reconciling medical claims to reduce denials",
+        },
+      },
+    ],
+  },
 
   ScoutEnrichment: (req: StructuredRequest) => {
     const ids = companyIds(req.prompt);

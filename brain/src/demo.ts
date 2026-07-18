@@ -9,7 +9,10 @@ import { runPipeline, applyFeedback } from "./orchestrator.js";
 import { MockLLMClient } from "./llm/mock.js";
 import { OpenAILLMClient } from "./llm/openai.js";
 import type { LLMClient } from "./llm/client.js";
-import { mockAgentOptions } from "./fixtures/mockAgents.js";
+import { MockSearchClient } from "./search/mock.js";
+import { TavilySearchClient } from "./search/tavily.js";
+import type { SearchClient } from "./search/client.js";
+import { mockAgentOptions, mockSearchResults } from "./fixtures/mockAgents.js";
 import * as fx from "./fixtures/sample.js";
 import { InvestorFeedbackSchema } from "./schemas/feedback.js";
 
@@ -22,6 +25,17 @@ function makeLLM(): LLMClient {
   return new MockLLMClient(mockAgentOptions);
 }
 
+// Discovery is on when VC_BRAIN_DISCOVER=1. Uses Tavily live, else mock results.
+const discoverEnabled = process.env.VC_BRAIN_DISCOVER === "1";
+function makeSearch(): SearchClient {
+  if (process.env.VC_BRAIN_LLM === "openai" && process.env.TAVILY_API_KEY) {
+    console.log("• Search: Tavily (live web discovery)");
+    return new TavilySearchClient();
+  }
+  console.log("• Search: mock results");
+  return new MockSearchClient(mockSearchResults);
+}
+
 async function main() {
   const state = createInitialState({
     mandate: "Find the best seed-stage healthcare AI company for this fund.",
@@ -31,7 +45,16 @@ async function main() {
     candidateUniverse: fx.candidateUniverse,
   });
 
-  await runPipeline(state, { llm: makeLLM(), competitors: fx.competitors });
+  await runPipeline(state, {
+    llm: makeLLM(),
+    competitors: fx.competitors,
+    ...(discoverEnabled ? { search: makeSearch(), discover: { limit: 10 } } : {}),
+  });
+
+  if (discoverEnabled) {
+    const ev = state.events.find((e) => e.eventType === "candidates_discovered");
+    console.log(`\n=== DISCOVERY ===\n  ${(ev?.payload as { names?: string[] })?.names?.join(", ") ?? "none"}`);
+  }
 
   console.log("\n=== FUND PROFILE ===");
   console.log(state.fundProfile?.thesisSummary);

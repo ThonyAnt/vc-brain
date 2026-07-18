@@ -9,6 +9,10 @@ export { MockLLMClient } from "./llm/mock.js";
 export { OpenAILLMClient } from "./llm/openai.js";
 export { createLLMClient } from "./llm/index.js";
 
+// Search seam (web discovery)
+export type { SearchClient, SearchResult, SearchOptions } from "./search/client.js";
+export { TavilySearchClient, MockSearchClient, createSearchClient } from "./search/index.js";
+
 // Deterministic math
 export {
   computeCompanySimilarity,

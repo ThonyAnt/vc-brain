@@ -2,7 +2,8 @@ import { describe, it, expect } from "vitest";
 import { createInitialState } from "./state.js";
 import { runPipeline, applyFeedback } from "./orchestrator.js";
 import { MockLLMClient } from "./llm/mock.js";
-import { mockAgentOptions } from "./fixtures/mockAgents.js";
+import { MockSearchClient } from "./search/mock.js";
+import { mockAgentOptions, mockSearchResults } from "./fixtures/mockAgents.js";
 import * as fx from "./fixtures/sample.js";
 import { InvestorFeedbackSchema } from "./schemas/feedback.js";
 
@@ -67,6 +68,36 @@ describe("runPipeline (end-to-end, mock LLM)", () => {
     const landscape = state.events.find((e) => e.eventType === "market_landscape_built");
     expect(landscape).toBeDefined();
     expect((landscape!.payload as { nodes: unknown[] }).nodes.length).toBeGreaterThan(0);
+  });
+});
+
+describe("runPipeline with discovery", () => {
+  it("adds web-discovered companies to the universe and ranks them", async () => {
+    const state = freshState();
+    const before = state.candidateUniverse.length;
+    await runPipeline(state, {
+      ...makeDeps(),
+      search: new MockSearchClient(mockSearchResults),
+      discover: true,
+    });
+
+    // Discovered companies are appended and scored.
+    expect(state.candidateUniverse.length).toBe(before + 2);
+    const ids = state.candidateUniverse.map((c) => c.id);
+    expect(ids).toContain("co_notehealth");
+    expect(state.sourcedCandidates?.some((r) => r.companyId === "co_notehealth")).toBe(true);
+
+    // A discovery event is emitted for the graph.
+    const ev = state.events.find((e) => e.eventType === "candidates_discovered");
+    expect(ev).toBeDefined();
+    expect((ev!.payload as { count: number }).count).toBe(2);
+  });
+
+  it("throws if discover is set without a search client", async () => {
+    const state = freshState();
+    await expect(
+      runPipeline(state, { llm: new MockLLMClient(mockAgentOptions), discover: true }),
+    ).rejects.toThrow(/no `search` client/);
   });
 });
 

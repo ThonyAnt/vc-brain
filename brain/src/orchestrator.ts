@@ -4,8 +4,10 @@ import type { CandidateDiligence } from "./schemas/diligence.js";
 import type { PartnerOpinion } from "./schemas/committee.js";
 import type { InvestorFeedback } from "./schemas/feedback.js";
 import type { LLMClient } from "./llm/client.js";
+import type { SearchClient } from "./search/client.js";
 import { CompanyIndex, findNearestCompanies, type EmbeddingMap } from "./tools/similarity.js";
 import { buildMarketLandscape } from "./tools/landscape.js";
+import { discoverCompanies } from "./tools/discover.js";
 import { emitGraphEvent } from "./tools/events.js";
 import {
   fundProfilerAgent,
@@ -29,6 +31,10 @@ export interface OrchestratorOptions {
   now?: () => number;
   /** Skip embedding step (pure text-fallback similarity). */
   useEmbeddings?: boolean;
+  /** Web-search client for live discovery. Required when `discover` is set. */
+  search?: SearchClient;
+  /** Discover real companies from the web and add them to the candidate universe. */
+  discover?: boolean | { queries?: string[]; limit?: number; resultsPerQuery?: number };
 }
 
 async function withRetry<T>(fn: () => Promise<T>, retries: number, label: string): Promise<T> {
@@ -81,9 +87,6 @@ export async function runPipeline(
   const index = new CompanyIndex(allCompanies);
   const historyPool = [...state.portfolioCompanies, ...state.rejectedDeals, ...competitors];
 
-  const embeddings =
-    opts.useEmbeddings === false ? undefined : await buildEmbeddingMap(allCompanies, llm);
-
   // --- 1. Profiling ---
   state.fundProfile = await withRetry(
     () =>
@@ -102,6 +105,44 @@ export async function runPipeline(
   emit("profiling", "fund_profile_ready", [], { criteria: state.fundProfile.criteria.length });
 
   // --- 2. Sourcing ---
+  // Optional live discovery: pull real companies from the web into the universe
+  // BEFORE embeddings/ranking so discovered companies are scored and placed too.
+  if (opts.discover) {
+    if (!opts.search) {
+      throw new Error("runPipeline: `discover` is set but no `search` client was provided");
+    }
+    const search = opts.search;
+    const cfg = typeof opts.discover === "object" ? opts.discover : {};
+    const discovered = await withRetry(
+      () =>
+        discoverCompanies(
+          {
+            mandate: state.mandate,
+            fundProfile: state.fundProfile,
+            queries: cfg.queries,
+            limit: cfg.limit ?? 15,
+            resultsPerQuery: cfg.resultsPerQuery,
+            excludeNames: allCompanies.map((c) => c.name),
+          },
+          { search, llm },
+        ),
+      retries,
+      "discovery",
+    );
+    for (const c of discovered) {
+      state.candidateUniverse.push(c);
+      allCompanies.push(c);
+      index.add(c);
+    }
+    emit("sourcing", "candidates_discovered", discovered.map((c) => c.id), {
+      count: discovered.length,
+      names: discovered.map((c) => c.name),
+    });
+  }
+
+  const embeddings =
+    opts.useEmbeddings === false ? undefined : await buildEmbeddingMap(allCompanies, llm);
+
   emit("sourcing", "candidate_universe_loaded", state.candidateUniverse.map((c) => c.id));
   const landscape = buildMarketLandscape([...state.candidateUniverse, ...historyPool], {
     embeddings,

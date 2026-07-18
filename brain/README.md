@@ -21,8 +21,12 @@ Run against OpenAI (uses the OpenAI credits). Put `OPENAI_API_KEY=...` in
 
 ```bash
 npm run demo:openai     # full pipeline, live
+npm run demo:discover   # full pipeline + live Tavily web discovery
 npm run probe:openai    # single-agent canary (fast, cheap)
+npm run probe:discovery # Tavily + OpenAI discovery canary
 ```
+
+Live web discovery needs `TAVILY_API_KEY` in `vc-brain/.env` too.
 
 Structured output uses non-strict `json_schema` mode: OpenAI's *strict* mode
 rejects our `.default()` / `z.record()` schemas, so the schema guides the model
@@ -49,6 +53,10 @@ mandate + fund history ─▶ Fund Profiler ─▶ Market Scout ─▶ Diligence
   assumptions; the math is computed in code.
 - **`llm/`** — the `LLMClient` seam. `MockLLMClient` (fixtures + deterministic
   embeddings) is the default; `OpenAILLMClient` swaps in via `VC_BRAIN_LLM=openai`.
+- **`search/`** — the `SearchClient` seam for web discovery. `TavilySearchClient`
+  (live) or `MockSearchClient` (fixtures). `discoverCompanies` builds queries from
+  the fund thesis, searches, and LLM-extracts normalized `Company` records that
+  feed the same ranking pipeline. Enable via `runPipeline(state, { search, discover: true })`.
 - **`tools/`** — deterministic agent-callable tools: `companySimilarity`,
   `findNearestCompanies`, `fundFit`, `rankCandidates`, `calculateFinancialScenarios`,
   `buildMarketLandscape`, `emitGraphEvent`, `extractCompanyAttributes`.

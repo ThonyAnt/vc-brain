@@ -1,0 +1,37 @@
+{
+  "name": "@vc-brain/brain",
+  "version": "0.1.0",
+  "description": "VC Brain agent + logic layer: fund-specific investment reasoning.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "demo": "tsx src/demo.ts",
+    "snapshot": "tsx src/scripts/exportSnapshot.ts",
+    "snapshot:live": "VC_BRAIN_LLM=openai VC_BRAIN_DISCOVER=1 node --env-file=../.env node_modules/.bin/tsx src/scripts/exportSnapshot.ts",
+    "api": "node --env-file=../.env node_modules/.bin/tsx src/server.ts",
+    "demo:openai": "VC_BRAIN_LLM=openai node --env-file=../.env node_modules/.bin/tsx src/demo.ts",
+    "demo:discover": "VC_BRAIN_LLM=openai VC_BRAIN_DISCOVER=1 node --env-file=../.env node_modules/.bin/tsx src/demo.ts",
+    "probe:openai": "node --env-file=../.env node_modules/.bin/tsx src/scripts/probeOpenAI.ts",
+    "probe:discovery": "node --env-file=../.env node_modules/.bin/tsx src/scripts/probeDiscovery.ts",
+    "seed:write": "tsx src/scripts/writeSeed.ts",
+    "seed:demo": "tsx src/scripts/seedDemo.ts"
+  },
+  "dependencies": {
+    "openai": "^4.67.0",
+    "zod": "^3.23.8",
+    "zod-to-json-schema": "^3.25.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  }
+}

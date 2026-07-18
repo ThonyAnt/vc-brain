@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router'
 import { Shell } from './components/shell/Shell'
+import { AnalystPage } from './routes/analyst/AnalystPage'
 import { BrainPage } from './routes/brain/BrainPage'
 import { CompanyPage } from './routes/company/CompanyPage'
 import { FoundersPage } from './routes/founders/FoundersPage'
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
       { path: 'pipeline', Component: PipelinePage },
       { path: 'founders', Component: FoundersPage },
       { path: 'fund', Component: FundPage },
+      { path: 'analyst', Component: AnalystPage },
       { path: 'company/:id', Component: CompanyPage },
     ],
   },

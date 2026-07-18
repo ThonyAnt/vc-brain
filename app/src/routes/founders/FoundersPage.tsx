@@ -29,7 +29,7 @@ export function FoundersPage() {
   }
 
   return (
-    <div className="mx-auto max-w-[1280px] p-8">
+    <div className="mx-auto max-w-[1280px] p-8 pb-28">
       <Eyebrow>Founders</Eyebrow>
       <h1 className="display-lg mt-2">Leads</h1>
       <p className="mt-3 max-w-[620px] text-body">
@@ -37,7 +37,7 @@ export function FoundersPage() {
         re-weights its criteria from your call.
       </p>
 
-      <div className="mt-6 overflow-hidden rounded-card border border-hairline bg-card">
+      <div className="mt-6 overflow-hidden rounded-none border-2 border-hairline-strong bg-card shadow-brutal">
         <table className="w-full border-collapse text-left">
           <thead>
             <tr className="bg-bone">
@@ -72,7 +72,7 @@ export function FoundersPage() {
                     <td className="px-4 py-3">
                       <div className="flex flex-wrap gap-1">
                         {f.signals.map((s) => (
-                          <span key={s} className="rounded-full border border-hairline bg-canvas px-2.5 py-1 caption text-ink">
+                          <span key={s} className="rounded-none border border-hairline-strong bg-canvas px-2.5 py-1 caption text-ink">
                             {s}
                           </span>
                         ))}
@@ -80,8 +80,8 @@ export function FoundersPage() {
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <div className="h-[3px] w-16 rounded-full bg-bone">
-                          <div className="h-[3px] rounded-full bg-dark" style={{ width: `${f.score}%` }} />
+                        <div className="h-[3px] w-16 rounded-none bg-bone">
+                          <div className="h-[3px] rounded-none bg-dark" style={{ width: `${f.score}%` }} />
                         </div>
                         <span className="code-md text-ink">{f.score}</span>
                       </div>
@@ -98,7 +98,7 @@ export function FoundersPage() {
                             value={note}
                             onChange={(e) => setNote(e.target.value)}
                             placeholder="Why do you agree or disagree? (optional, feeds the brain)"
-                            className="h-11 w-96 rounded-full border border-hairline bg-card px-5 text-base text-ink placeholder:text-ash focus:outline-3 focus:outline-ring-focus"
+                            className="h-11 w-96 rounded-none border-2 border-hairline-strong bg-card px-5 text-base text-ink placeholder:text-ash focus:outline-3 focus:outline-ring-focus"
                             onClick={(e) => e.stopPropagation()}
                           />
                           <Pill variant="dark" size="md" onClick={() => feedback(f, 'agree')}>

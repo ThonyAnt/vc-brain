@@ -70,7 +70,10 @@ interface SceneNode {
 export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({ graph, onSelect }, ref) {
   const containerRef = useRef<HTMLDivElement>(null)
   const tooltipRef = useRef<HTMLDivElement>(null)
+  const labelRefs = useRef<(HTMLDivElement | null)[]>([])
   const apiRef = useRef<BrainHandle>({ focusNode: () => {}, clearFocus: () => {}, pulseNodes: () => {} })
+  // Intro swoop plays once; later rebuilds (e.g. web discovery adds nodes) skip it.
+  const introPlayedRef = useRef(false)
 
   useImperativeHandle(ref, () => ({
     focusNode: (id) => apiRef.current.focusNode(id),
@@ -98,7 +101,9 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
 
     const markets = graph.nodes.filter((n) => n.type === 'market')
     const clusterCount = Math.max(markets.length, 1)
-    const anchors = markets.map((_, i) => {
+    const POSITION_SCALE = 5.5
+    const anchors = markets.map((market, i) => {
+      if (market.position) return new THREE.Vector3(...market.position).multiplyScalar(POSITION_SCALE)
       const phi = Math.acos(1 - (2 * (i + 0.5)) / clusterCount)
       const theta = Math.PI * (1 + Math.sqrt(5)) * i
       const r = 330
@@ -132,7 +137,9 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     for (const gn of graph.nodes) {
       if (gn.type === 'market' || gn.type === 'criterion') continue
       const cluster = clusterOf.get(gn.id) ?? 0
-      const base = anchors[cluster].clone().add(jitterVec(gn.id, gn.type === 'founder' ? 150 : 120))
+      const base = gn.position
+        ? new THREE.Vector3(...gn.position).multiplyScalar(POSITION_SCALE)
+        : anchors[cluster].clone().add(jitterVec(gn.id, gn.type === 'founder' ? 150 : 120))
       nodes.push({
         id: gn.id,
         label: gn.label,
@@ -262,7 +269,8 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
 
     /* intro: camera swoop from distance + staggered node reveal on every mount,
        clusters lighting up one after another */
-    const intro = { active: !reducedMotion, start: -1 }
+    const intro = { active: !reducedMotion && !introPlayedRef.current, start: -1 }
+    introPlayedRef.current = true
     const revealAt = new Float32Array(N)
     nodes.forEach((n, i) => {
       revealAt[i] = 0.08 + n.cluster * 0.05 + ((hash(n.id + 'reveal') % 997) / 997) * 0.18
@@ -385,38 +393,12 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     ring.visible = false
     scene.add(ring)
 
-    /* cluster labels in the mono label voice */
-    function labelSprite(text: string, colorHex: string) {
-      const c = document.createElement('canvas')
-      c.width = 1024
-      c.height = 192
-      const g = c.getContext('2d')!
-      /* mockup-verbatim cartography label: system-ui 500, tracked uppercase */
-      g.font = '500 64px system-ui, sans-serif'
-      if ('letterSpacing' in g) (g as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = '16px'
-      g.textBaseline = 'middle'
-      const label = text.toUpperCase()
-      const tickW = 12
-      const gap = 26
-      const textW = g.measureText(label).width
-      const x0 = (c.width - (tickW + gap + textW)) / 2
-      g.fillStyle = colorHex
-      g.fillRect(x0, 96 - 26, tickW, 52)
-      g.fillStyle = 'rgba(28, 29, 31, 0.9)'
-      g.fillText(label, x0 + tickW + gap, 96)
-      const t = new THREE.CanvasTexture(c)
-      t.colorSpace = THREE.SRGBColorSpace
-      const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, opacity: 0.6, depthWrite: false }))
-      sp.scale.set(150, 28.1, 1)
-      return sp
-    }
-    const labelSprites: THREE.Sprite[] = []
-    markets.forEach((m, i) => {
-      const sp = labelSprite(m.label, SECTOR_PALETTE[i % SECTOR_PALETTE.length])
-      sp.position.copy(anchors[i]).multiplyScalar(1.28)
-      sp.position.y += 120
-      group.add(sp)
-      labelSprites.push(sp)
+    /* cluster labels are DOM overlays (crisp Space Mono at fixed screen size,
+       identical to the HUD) — world anchors here, projected every frame */
+    const labelAnchors = anchors.map((a) => {
+      const v = a.clone().multiplyScalar(1.28)
+      v.y += 120
+      return v
     })
 
     /* ---------------- interaction (ported, HUD → React refs) ---------------- */
@@ -496,8 +478,8 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         tooltip.style.left = `${Math.min(mouse.x + 14, container!.clientWidth - 250)}px`
         tooltip.style.top = `${mouse.y + 14}px`
         const color = hovered.role === 'sourced' ? ACCENT : SECTOR_PALETTE[hovered.cluster % SECTOR_PALETTE.length]
-        tooltip.innerHTML = `<div style="color:#1c1d1f;font-size:13px;font-weight:600">${hovered.label}</div>
-          <div style="color:${color};margin-top:2px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">${markets[hovered.cluster]?.label ?? ''} · ${ROLE_TAG[hovered.role]}${hovered.score ? ` · fit ${hovered.score}` : ''}</div>`
+        tooltip.innerHTML = `<div style="color:#000000;font-size:13px;font-weight:700">${hovered.label}</div>
+          <div style="color:${color};margin-top:2px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">${markets[hovered.cluster]?.label ?? ''} · ${ROLE_TAG[hovered.role]}${hovered.score ? ` · fit ${hovered.score}` : ''}</div>`
         ringWorld.copy(hovered.pos).applyMatrix4(group.matrixWorld)
         ring.position.copy(ringWorld)
         const sz = (hovered.role === 'portfolio' ? 15 : 10) * 3.4 * (pMat.uniforms.uScale.value as number)
@@ -723,9 +705,23 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         controls.target.copy(tmpA.copy(focused.pos).applyMatrix4(group.matrixWorld))
       }
 
-      for (const sp of labelSprites) {
-        tmpA.setFromMatrixPosition(sp.matrixWorld)
-        sp.material.opacity = 0.7 * THREE.MathUtils.smoothstep(camera.position.distanceTo(tmpA), 260, 620)
+      {
+        const w = renderer.domElement.clientWidth
+        const h = renderer.domElement.clientHeight
+        labelAnchors.forEach((a, i) => {
+          const el = labelRefs.current[i]
+          if (!el) return
+          tmpA.copy(a).applyMatrix4(group.matrixWorld)
+          const dist = camera.position.distanceTo(tmpA)
+          tmpB.copy(tmpA).project(camera)
+          if (tmpB.z > 1) {
+            el.style.opacity = '0'
+            return
+          }
+          el.style.left = `${(tmpB.x * 0.5 + 0.5) * w}px`
+          el.style.top = `${(-tmpB.y * 0.5 + 0.5) * h}px`
+          el.style.opacity = `${0.9 * THREE.MathUtils.smoothstep(dist, 260, 620)}`
+        })
       }
 
       controls.update()
@@ -765,11 +761,36 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
   }, [graph, onSelect])
 
   return (
-    <div ref={containerRef} className="absolute inset-0">
+    <div ref={containerRef} className="absolute inset-0 overflow-hidden">
       <div
         ref={tooltipRef}
-        className="pointer-events-none absolute z-10 hidden rounded-[6px] border border-[rgba(28,29,31,0.1)] bg-white/85 px-3 py-2 backdrop-blur-sm"
+        className="pointer-events-none absolute z-10 hidden rounded-none border-2 border-hairline-strong bg-white px-3 py-2 shadow-brutal-sm"
       />
+      {/* cluster labels: real DOM text so they match the HUD exactly */}
+      {graph.nodes
+        .filter((n) => n.type === 'market')
+        .map((m, i) => (
+          <div
+            key={m.id}
+            ref={(el) => {
+              labelRefs.current[i] = el
+            }}
+            className="pointer-events-none absolute z-[5] -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
+            style={{
+              opacity: 0,
+              fontFamily: "'Space Mono', monospace",
+              fontWeight: 700,
+              fontSize: '11px',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: 'rgba(0, 0, 0, 0.92)',
+            }}
+          >
+            <span style={{ borderLeft: `3px solid ${SECTOR_PALETTE[i % SECTOR_PALETTE.length]}`, paddingLeft: 6 }}>
+              {m.label}
+            </span>
+          </div>
+        ))}
     </div>
   )
 })

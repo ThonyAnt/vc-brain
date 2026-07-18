@@ -20,3 +20,6 @@ out/
 .idea/
 .vscode/
 *.log
+
+# Generated golden run snapshots (regenerate with `npm run seed:demo`)
+**/data/*.snapshot.json

@@ -38,8 +38,55 @@ interface Specialist {
   run: () => string;
 }
 
+interface DirectReply {
+  intent: "greeting" | "help" | "thanks" | "goodbye";
+  content: string;
+}
+
 function latestUserMessage(messages: OrchestratorChatMessage[]): string {
   return [...messages].reverse().find((message) => message.role === "user")?.content ?? "";
+}
+
+function normalizedMessage(message: string): string {
+  return message.toLowerCase().trim().replace(/\s+/g, " ");
+}
+
+/**
+ * High-confidence conversational intents bypass research agents entirely.
+ * Keeping these deterministic prevents a greeting from being overwhelmed by
+ * whatever fund/company context happens to be open in the UI.
+ */
+function directReplyFor(message: string): DirectReply | undefined {
+  const text = normalizedMessage(message);
+  if (/^(hi|hello|hey|hiya|howdy|yo)( there| team| everyone)?[!.?]*$/.test(text)
+    || /^good (morning|afternoon|evening)[!.?]*$/.test(text)) {
+    return {
+      intent: "greeting",
+      content: "Hi there! I’m your VC investment copilot. I can compare companies, surface historical analogues, explain graph positions, or review risks. What are you evaluating?",
+    };
+  }
+  if (/^(help|what can you do|how can you help( me)?|what should i ask you)[!.?]*$/.test(text)) {
+    return {
+      intent: "help",
+      content: "I can compare a company with past winners and failures, explain its graph position, review diligence risks, summarize the fund thesis, or find similar external companies. Select a company or tell me what you want to evaluate.",
+    };
+  }
+  if (/^(thanks|thank you|thank you very much|thx|appreciate it|got it)[!.?]*$/.test(text)) {
+    return { intent: "thanks", content: "You’re welcome. What would you like to evaluate next?" };
+  }
+  if (/^(bye|goodbye|see you|talk later|that is all|that's all)[!.?]*$/.test(text)) {
+    return { intent: "goodbye", content: "Sounds good. I’ll be here when you’re ready to evaluate the next company." };
+  }
+  return undefined;
+}
+
+function hasIntent(text: string, pattern: RegExp): boolean {
+  return pattern.test(text);
+}
+
+function mentionsCompany(message: string, company: Company): boolean {
+  const escaped = company.name.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`(^|[^a-z0-9])${escaped}([^a-z0-9]|$)`, "i").test(message);
 }
 
 function findMentionedCompany(message: string, companies: Company[], excludedId?: string): Company | undefined {
@@ -47,7 +94,7 @@ function findMentionedCompany(message: string, companies: Company[], excludedId?
   return companies
     .filter((company) => company.id !== excludedId)
     .sort((a, b) => b.name.length - a.name.length)
-    .find((company) => lower.includes(company.name.toLowerCase()));
+    .find((company) => mentionsCompany(lower, company));
 }
 
 function nearestByOutcome(source: Company, companies: Company[], outcome: Company["outcome"]): Company | undefined {
@@ -78,7 +125,7 @@ function specialistsFor(
     });
   }
 
-  if (focal && (requestedComparison || /compar|similar|analogue|winner|fail|compet|graph|axis|axes/.test(lower))) {
+  if (focal && (requestedComparison || hasIntent(lower, /\b(compar(?:e|ison)?|similar|analogue|winner|fail(?:ed|ure)?|competitor|graph|axis|axes)\b/))) {
     selected.push({
       id: "analogue_analyst",
       label: "Historical analogue analyst",
@@ -93,7 +140,7 @@ function specialistsFor(
     });
   }
 
-  if (focal && /risk|diligen|technical|commercial|financial|feasib|regulat/.test(lower)) {
+  if (focal && hasIntent(lower, /\b(risk|risks|diligence|technical|commercial|financial|feasibility|feasible|regulatory|regulation)\b/)) {
     selected.push({
       id: "diligence_analyst",
       label: "Diligence analyst",
@@ -104,7 +151,7 @@ function specialistsFor(
     });
   }
 
-  if (!focal || /fund|thesis|criter|portfolio|strategy|mandate|check size/.test(lower)) {
+  if (hasIntent(lower, /\b(fund|thesis|criterion|criteria|portfolio|strategy|mandate|check size)\b/)) {
     selected.push({
       id: "fund_strategy_analyst",
       label: "Fund strategy analyst",
@@ -119,16 +166,6 @@ function specialistsFor(
     });
   }
 
-  if (!selected.length) {
-    selected.push({
-      id: "portfolio_memory_analyst",
-      label: "Portfolio memory analyst",
-      run: () => companies
-        .filter((company) => company.historicalStatus !== "external")
-        .map(describeCompany)
-        .join("\n"),
-    });
-  }
   return selected;
 }
 
@@ -139,6 +176,15 @@ export async function streamOrchestratorChat(
 ): Promise<OrchestratorChatMessage> {
   const now = options.now ?? Date.now;
   const runId = `chat_${now().toString(36)}`;
+  const directReply = directReplyFor(latestUserMessage(messages));
+  if (directReply) {
+    const emit = async (event: ChatStreamEvent) => options.onEvent?.(event);
+    await emit({ type: "run_started", runId, orchestrator: "investment_orchestrator", agents: [] });
+    await emit({ type: "text_delta", runId, delta: directReply.content });
+    const message: OrchestratorChatMessage = { role: "assistant", content: directReply.content };
+    await emit({ type: "run_completed", runId, message });
+    return message;
+  }
   const specialists = specialistsFor(messages, context, options.state, options.companies);
   const emit = async (event: ChatStreamEvent) => options.onEvent?.(event);
   await emit({ type: "run_started", runId, orchestrator: "investment_orchestrator", agents: specialists.map((agent) => agent.id) });
@@ -159,11 +205,11 @@ export async function streamOrchestratorChat(
     "CONVERSATION",
     conversation,
     "",
-    "Answer the investor's latest question. When comparing outcomes, describe candidate explanatory factors, never claim causality from correlation. If evidence is absent, say so.",
+    "Answer the investor's latest message naturally and at the level of detail it requests. Do not invent a company or investment task when none was requested. When comparing outcomes, describe candidate explanatory factors, never claim causality from correlation. If evidence is absent, say so.",
   ].join("\n");
   let content = "";
   for await (const delta of options.llm.streamText({
-    system: "You are the main VC investment orchestrator. Synthesize specialist work into a concise, evidence-grounded answer. Be direct, analytical, and explicit about uncertainty.",
+    system: "You are the main VC investment orchestrator and a natural conversational assistant. Synthesize specialist work when present. Be concise, evidence-grounded, and direct. For casual conversation, respond casually without forcing investment analysis.",
     prompt,
   })) {
     content += delta;

@@ -61,6 +61,10 @@ export class MockLLMClient implements LLMClient {
     return `[[mock text for: ${req.prompt.slice(0, 40)}]]`;
   }
 
+  async *streamText(req: TextRequest): AsyncIterable<string> {
+    yield await this.generateText(req);
+  }
+
   async embed(texts: string[]): Promise<number[][]> {
     return texts.map((text) => this.embedOne(text));
   }

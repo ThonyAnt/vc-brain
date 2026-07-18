@@ -37,5 +37,15 @@ export * from "./agents/index.js";
 // Orchestrator
 export { runPipeline, applyFeedback, type OrchestratorOptions } from "./orchestrator.js";
 
+// Interactive main-agent orchestration (regular response or streamed deltas).
+export {
+  runOrchestratorChat,
+  streamOrchestratorChat,
+  type ChatOrchestratorOptions,
+  type ChatStreamEvent,
+  type OrchestratorChatContext,
+  type OrchestratorChatMessage,
+} from "./chat/orchestrator.js";
+
 // Storage / seeding (local JSON)
 export * from "./store/index.js";

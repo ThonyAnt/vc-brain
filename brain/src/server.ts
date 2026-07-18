@@ -6,8 +6,12 @@
  *   npm run api          (from brain/)
  *
  * Endpoints:
- *   POST /api/chat      { messages, context } -> { role, content }
- *   POST /api/feedback  { entityId, action, justification } -> { weights, changedNodeIds, note }
+ *   GET  /api/graph/axes
+ *   POST /api/graph/layout   { axes, focalCompanyId? }
+ *   POST /api/graph/compare  { sourceId, targetId, axes? }
+ *   POST /api/chat           { messages, context } -> { role, content }
+ *   POST /api/chat/stream    same input -> Server-Sent Events
+ *   POST /api/feedback       { entityId, action, justification }
  */
 import http from "node:http";
 import { readFileSync } from "node:fs";
@@ -19,6 +23,18 @@ import { applyFeedback } from "./orchestrator.js";
 import { discoverCompanies } from "./tools/discover.js";
 import { rankCandidates } from "./tools/fundfit.js";
 import { InvestorFeedbackSchema, type FeedbackActionType } from "./schemas/feedback.js";
+import {
+  buildExperienceGraph,
+  compareGraphCompanies,
+  listGraphAxes,
+  type GraphAxisSelection,
+} from "./graph/experience.js";
+import {
+  runOrchestratorChat,
+  streamOrchestratorChat,
+  type OrchestratorChatContext,
+  type OrchestratorChatMessage,
+} from "./chat/orchestrator.js";
 import type { RankedCandidate } from "./schemas/sourcing.js";
 import type { VCBrainState } from "./state.js";
 import type { Company } from "./schemas/company.js";
@@ -163,30 +179,55 @@ async function handleDiscover(body: { query?: string; limit?: number }) {
   return { companies, count: companies.length };
 }
 
-async function handleChat(body: { messages: { role: string; content: string }[]; context?: { companyId?: string } }) {
-  const last = body.messages[body.messages.length - 1]?.content ?? "";
-  const company = findCompany(body.context?.companyId);
-  const fp = state.fundProfile;
-  const memo = company && state.investmentMemo?.companyId === company.id ? state.investmentMemo : undefined;
-  const dil = company ? state.diligence?.[company.id] : undefined;
+interface ChatBody {
+  messages: OrchestratorChatMessage[];
+  context?: OrchestratorChatContext;
+}
 
-  const context = [
-    fp ? `Fund thesis: ${fp.thesisSummary}` : "",
-    fp ? `Top criteria: ${fp.criteria.map((c) => `${c.name} (${c.weight.toFixed(2)})`).join(", ")}` : "",
-    company ? `Company: ${company.name} — ${company.description} (sector ${company.sector ?? "?"}, ${company.stage ?? "?"}).` : "",
-    dil ? `Key risks: ${dil.risk?.criticalRisks?.join("; ") ?? "n/a"}.` : "",
-    memo ? `Memo thesis: ${memo.investmentThesis}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
+async function handleChat(body: ChatBody) {
+  return runOrchestratorChat(body.messages, body.context ?? {}, { state, companies: universe(), llm });
+}
 
-  const content = await llm.generateText({
-    system:
-      "You are the fund's investment brain — a sharp VC analyst. Answer in 2-4 sentences, " +
-      "specific and grounded in the context provided. No preamble.",
-    prompt: `${context}\n\nInvestor question: ${last}`,
+function handleGraphLayout(body: { axes?: Partial<GraphAxisSelection>; focalCompanyId?: string }) {
+  return buildExperienceGraph(universe(), {
+    axes: body.axes,
+    focalCompanyId: body.focalCompanyId,
+    candidateIds: new Set(state.candidateUniverse.map((company) => company.id)),
+    externalIds: new Set(competitors.map((company) => company.id)),
   });
-  return { role: "assistant", content };
+}
+
+function handleGraphCompare(body: { sourceId: string; targetId: string; axes?: GraphAxisSelection }) {
+  const source = findCompany(body.sourceId);
+  const target = findCompany(body.targetId);
+  if (!source) throw new Error(`Unknown source company '${body.sourceId}'`);
+  if (!target) throw new Error(`Unknown target company '${body.targetId}'`);
+  return compareGraphCompanies(source, target, body.axes);
+}
+
+async function handleStreamingChat(req: http.IncomingMessage, res: http.ServerResponse) {
+  const body = (await readBody(req)) as ChatBody;
+  res.writeHead(200, {
+    "Content-Type": "text/event-stream; charset=utf-8",
+    "Cache-Control": "no-cache, no-transform",
+    Connection: "keep-alive",
+    "X-Accel-Buffering": "no",
+  });
+  const writeEvent = (event: { type: string }) => {
+    res.write(`event: ${event.type}\ndata: ${JSON.stringify(event)}\n\n`);
+  };
+  try {
+    await streamOrchestratorChat(body.messages, body.context ?? {}, {
+      state,
+      companies: universe(),
+      llm,
+      onEvent: writeEvent,
+    });
+  } catch (error) {
+    writeEvent({ type: "error", error: String(error) } as { type: string });
+  } finally {
+    res.end();
+  }
 }
 
 function readBody(req: http.IncomingMessage): Promise<unknown> {
@@ -207,16 +248,28 @@ function readBody(req: http.IncomingMessage): Promise<unknown> {
 const server = http.createServer(async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Content-Type", "application/json");
   if (req.method === "OPTIONS") return res.writeHead(204).end();
 
   try {
+    if (req.method === "GET" && req.url === "/api/graph/axes") {
+      return res.end(JSON.stringify({ axes: listGraphAxes(universe()) }));
+    }
+    if (req.method === "POST" && req.url === "/api/graph/layout") {
+      return res.end(JSON.stringify(handleGraphLayout((await readBody(req)) as never)));
+    }
+    if (req.method === "POST" && req.url === "/api/graph/compare") {
+      return res.end(JSON.stringify(handleGraphCompare((await readBody(req)) as never)));
+    }
     if (req.method === "POST" && req.url === "/api/feedback") {
       return res.end(JSON.stringify(await handleFeedback((await readBody(req)) as never)));
     }
     if (req.method === "POST" && req.url === "/api/chat") {
       return res.end(JSON.stringify(await handleChat((await readBody(req)) as never)));
+    }
+    if (req.method === "POST" && req.url === "/api/chat/stream") {
+      return handleStreamingChat(req, res);
     }
     if (req.method === "POST" && req.url === "/api/discover") {
       return res.end(JSON.stringify(await handleDiscover((await readBody(req)) as never)));

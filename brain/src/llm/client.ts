@@ -26,6 +26,8 @@ export interface LLMClient {
   generateStructured<S extends z.ZodTypeAny>(req: StructuredRequest<S>): Promise<z.infer<S>>;
   /** Generate free text. */
   generateText(req: TextRequest): Promise<string>;
+  /** Stream free text as provider-sized deltas. */
+  streamText(req: TextRequest): AsyncIterable<string>;
   /** Embed texts into vectors (per-dimension semantic similarity). */
   embed(texts: string[]): Promise<number[][]>;
 }

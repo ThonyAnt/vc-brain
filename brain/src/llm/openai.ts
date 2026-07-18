@@ -77,6 +77,21 @@ export class OpenAILLMClient implements LLMClient {
     return completion.choices[0]?.message.content ?? "";
   }
 
+  async *streamText(req: TextRequest): AsyncIterable<string> {
+    const stream = await this.client.chat.completions.create({
+      model: req.model ?? this.model,
+      messages: [
+        ...(req.system ? [{ role: "system" as const, content: req.system }] : []),
+        { role: "user" as const, content: req.prompt },
+      ],
+      stream: true,
+    });
+    for await (const chunk of stream) {
+      const delta = chunk.choices[0]?.delta.content;
+      if (delta) yield delta;
+    }
+  }
+
   async embed(texts: string[]): Promise<number[][]> {
     if (texts.length === 0) return [];
     const res = await this.client.embeddings.create({

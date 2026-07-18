@@ -97,6 +97,12 @@ export const CompanySchema = z.object({
   checkSizeSought: z.number().optional(),
   valuation: z.number().optional(),
   metrics: CompanyMetricsSchema.optional(),
+  /**
+   * Fund-specific graph dimensions that do not belong in financial metrics or
+   * company-kind similarity. Values are normalized to 0..1 at ingestion time.
+   * Example keys: `proprietary_data_moat`, `technical_feasibility`.
+   */
+  graphMetrics: z.record(z.number().min(0).max(1)).default({}),
   competitors: z.array(z.string()).default([]),
   status: CompanyStatus.default("sourced"),
   historicalStatus: HistoricalStatus.default("external"),

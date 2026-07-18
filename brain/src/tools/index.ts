@@ -32,3 +32,20 @@ export type { RawCompanyInput, ImportOptions } from "./importCompanies.js";
 // Re-export the deterministic financial model as a tool.
 export { calculateFinancialScenarios } from "../finance/scenarios.js";
 export type { ScenarioSet, ScenarioResult, ScenarioMultipliers } from "../finance/scenarios.js";
+
+export {
+  buildExperienceGraph,
+  compareGraphCompanies,
+  graphAxisValue,
+  listGraphAxes,
+} from "../graph/experience.js";
+export type {
+  AnalogueEdgeType,
+  CompanyComparison,
+  ExperienceGraph,
+  ExperienceGraphEdge,
+  ExperienceGraphNode,
+  GraphAxisDefinition,
+  GraphAxisSelection,
+  GraphVisualRole,
+} from "../graph/experience.js";

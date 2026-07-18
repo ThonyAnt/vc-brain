@@ -257,6 +257,141 @@ await runPipelineWithEventStream(state, opts, (event) => {
 
 **For now (hackathon MVP):** Run the full pipeline, then consume `state.events` in order.
 
+---
+
+## Interactive 3D Graph API
+
+The live server exposes an axis-driven graph in addition to the pipeline's
+similarity landscape. Coordinates are normalized to `[-1, 1]`; raw values are
+also returned so the UI can render truthful tooltips. Missing measurements are
+listed in `missingAxes` and placed at the midpoint instead of being treated as
+zero.
+
+### List available axes
+
+```http
+GET /api/graph/axes
+```
+
+The response includes reported axes (ARR, growth, margin, NRR, customers,
+valuation), derived axes (AI adoption, disruption, recurring revenue,
+regulatory moat, feasibility, proprietary data, competition), and any
+fund-specific keys found in `Company.graphMetrics`.
+
+### Build/rebuild the graph
+
+```http
+POST /api/graph/layout
+Content-Type: application/json
+
+{
+  "axes": {
+    "x": "revenue",
+    "y": "ai_adoption",
+    "z": "recurring_revenue"
+  },
+  "focalCompanyId": "co_scribeai"
+}
+```
+
+`focalCompanyId` is optional. When provided, analogue edges are limited to the
+selected node. Each node includes `visualRole` and a backend-provided default
+color: prior success blue, prior failure neon red, active portfolio light blue,
+passed orange, candidate lime, and external gray. The UI may override colors,
+but should use `visualRole` as the semantic source of truth.
+
+Edges have one of these types:
+
+- `nearest_success`
+- `nearest_failure`
+- `nearest_external`
+
+Every edge carries similarity, shared attributes, and key differences.
+
+### Inspect a connection
+
+```http
+POST /api/graph/compare
+Content-Type: application/json
+
+{
+  "sourceId": "co_scribeai",
+  "targetId": "co_medflow",
+  "axes": {
+    "x": "revenue",
+    "y": "ai_adoption",
+    "z": "recurring_revenue"
+  }
+}
+```
+
+The response is ready for a side-by-side panel: overall and per-dimension
+similarity, shared attributes, differences, raw values/deltas on the selected
+axes, explicit categorical contrasts (business model, GTM, operating model,
+technical approach, regulation, and customer), and an outcome contrast when one company succeeded and the other failed.
+Outcome contrasts are explicitly framed as candidate explanatory factors, not
+causal conclusions.
+
+### Adding a custom fund axis
+
+Store a normalized `0..1` value on each relevant company:
+
+```json
+{
+  "graphMetrics": {
+    "proprietary_data_moat": 0.9,
+    "founder_market_fit": 0.75
+  }
+}
+```
+
+Those keys automatically appear in `GET /api/graph/axes` and can be selected as
+X, Y, or Z. The three selected axes must be distinct.
+
+---
+
+## Streamed Orchestrator Chat API
+
+The existing `POST /api/chat` endpoint remains available and now uses the main
+investment orchestrator. For the animated UI, use:
+
+```http
+POST /api/chat/stream
+Accept: text/event-stream
+Content-Type: application/json
+
+{
+  "messages": [
+    { "role": "user", "content": "Compare ScribeAI with MedFlow" }
+  ],
+  "context": {
+    "route": "/brain",
+    "companyId": "co_scribeai",
+    "comparisonCompanyId": "co_medflow",
+    "axes": {
+      "x": "revenue",
+      "y": "ai_adoption",
+      "z": "recurring_revenue"
+    }
+  }
+}
+```
+
+This is a POST SSE stream. Parse frames separated by a blank line. Event names
+and payload `type` values are identical:
+
+1. `run_started` — run ID, orchestrator name, and planned specialist IDs
+2. `agent_started` — specialist ID and human label
+3. `agent_completed` — specialist ID and a short result preview
+4. `text_delta` — append `delta` to the visible assistant message
+5. `run_completed` — authoritative final `{ role, content }` message
+6. `error` — terminal error payload
+
+Current specialist routes are company analysis, historical analogues,
+diligence, fund strategy, and portfolio memory. The main orchestrator selects
+only the relevant specialists and synthesizes their evidence into the streamed
+answer.
+
 ### Applying Feedback (Learning Loop)
 
 ```typescript

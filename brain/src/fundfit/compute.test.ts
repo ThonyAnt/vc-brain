@@ -1,5 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { computeFundFit, computeSourcingScore, attributeKeys } from "./compute.js";
+import {
+  computeFundFit,
+  computeSourcingScore,
+  attributeKeys,
+  derivePreferencesFromHistory,
+  effectivePreferences,
+} from "./compute.js";
 import { CompanyAttributesSchema } from "../schemas/company.js";
 
 const attrs = CompanyAttributesSchema.parse({
@@ -41,6 +47,40 @@ describe("computeFundFit", () => {
     const res = computeFundFit(attrs, { "founderArchetypes:clinician-founder": -0.4 });
     expect(res.raw).toBeCloseTo(-0.4);
     expect(res.negativeMatches).toContain("founderArchetypes:clinician-founder");
+  });
+});
+
+describe("derivePreferencesFromHistory", () => {
+  const winner = CompanyAttributesSchema.parse({
+    founderArchetypes: ["Clinician-founder"],
+    businessModel: "Subscription SaaS",
+  });
+  const reject = CompanyAttributesSchema.parse({
+    businessModel: "Advertising",
+    goToMarket: "Direct to consumer",
+  });
+
+  it("scores winner attributes positive and rejected ones negative", () => {
+    const prefs = derivePreferencesFromHistory([winner], [reject]);
+    expect(prefs["founderArchetypes:clinician-founder"]).toBeGreaterThan(0);
+    expect(prefs["businessModel:advertising"]).toBeLessThan(0);
+    expect(prefs["goToMarket:direct to consumer"]).toBeLessThan(0);
+  });
+
+  it("drops attributes that appear equally in winners and rejects (neutral)", () => {
+    const shared = CompanyAttributesSchema.parse({ businessModel: "Subscription SaaS" });
+    const prefs = derivePreferencesFromHistory([shared], [shared]);
+    expect(prefs["businessModel:subscription saas"]).toBeUndefined();
+  });
+
+  it("effectivePreferences lets non-zero learned weights win over the baseline", () => {
+    const prefs = effectivePreferences(
+      { "businessModel:subscription saas": 0.9, "businessModel:advertising": 0 },
+      [winner],
+      [reject],
+    );
+    expect(prefs["businessModel:subscription saas"]).toBe(0.9); // learned wins
+    expect(prefs["businessModel:advertising"]).toBeLessThan(0); // zero learned -> baseline kept
   });
 });
 

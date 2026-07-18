@@ -1,7 +1,12 @@
 import type { Company } from "../schemas/company.js";
 import type { FundProfile } from "../schemas/fundProfile.js";
 import type { RankedCandidate } from "../schemas/sourcing.js";
-import { computeFundFit, computeSourcingScore, type FundFitResult } from "../fundfit/compute.js";
+import {
+  computeFundFit,
+  computeSourcingScore,
+  effectivePreferences,
+  type FundFitResult,
+} from "../fundfit/compute.js";
 import { companySimilarity, type EmbeddingMap } from "./similarity.js";
 
 /** `compute_fund_fit` — learned-preference fit (recommendations, not position). */
@@ -62,9 +67,17 @@ function passesHardFilters(c: Company, profile: FundProfile): string | undefined
 export function rankCandidates(input: RankInput): RankedCandidate[] {
   const { fundProfile, positiveHistory, rejectedHistory, competitors = [], embeddings } = input;
 
+  // History-derived preferences (merged with any non-zero learned ones) so
+  // fund-fit is meaningful even when the LLM's attributePreferences are empty.
+  const prefs = effectivePreferences(
+    fundProfile.attributePreferences,
+    positiveHistory.map((c) => c.attributes),
+    rejectedHistory.map((c) => c.attributes),
+  );
+
   const ranked: RankedCandidate[] = input.candidates.map((c) => {
     const elimination = passesHardFilters(c, fundProfile);
-    const fit = fundFit(c, fundProfile);
+    const fit = computeFundFit(c.attributes, prefs);
     const pos = maxSimilarity(c, positiveHistory, embeddings);
     const rej = maxSimilarity(c, rejectedHistory, embeddings);
     const comp = maxSimilarity(c, competitors, embeddings);

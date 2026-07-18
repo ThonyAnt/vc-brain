@@ -69,6 +69,54 @@ export function computeFundFit(
   return { raw, score: logistic(raw), positiveMatches, negativeMatches };
 }
 
+/**
+ * Derive attribute preferences directly from fund history: attribute values
+ * common in winners score positive, those common in rejected deals score
+ * negative. Deterministic and always populated — unlike LLM-emitted preferences,
+ * which can come back empty or mis-keyed. Keys use the exact `attributeKeys`
+ * format so they match `computeFundFit`.
+ */
+export function derivePreferencesFromHistory(
+  positive: CompanyAttributes[],
+  negative: CompanyAttributes[],
+  scale = 0.5,
+): AttributePreferences {
+  const counts: Record<string, number> = {};
+  const bump = (list: CompanyAttributes[], sign: number) => {
+    for (const attrs of list) {
+      for (const key of new Set(attributeKeys(attrs))) {
+        counts[key] = (counts[key] ?? 0) + sign;
+      }
+    }
+  };
+  bump(positive, +1);
+  bump(negative, -1);
+
+  const maxAbs = Math.max(1, ...Object.values(counts).map((v) => Math.abs(v)));
+  const prefs: AttributePreferences = {};
+  for (const [key, v] of Object.entries(counts)) {
+    if (v === 0) continue; // appears equally in winners and rejects -> neutral
+    prefs[key] = (v / maxAbs) * scale;
+  }
+  return prefs;
+}
+
+/**
+ * Merge learned preferences over a history-derived baseline. Non-zero learned
+ * weights win; the baseline fills everything the LLM left empty or zeroed.
+ */
+export function effectivePreferences(
+  learned: AttributePreferences,
+  positive: CompanyAttributes[],
+  negative: CompanyAttributes[],
+): AttributePreferences {
+  const merged = derivePreferencesFromHistory(positive, negative);
+  for (const [key, weight] of Object.entries(learned)) {
+    if (weight !== 0) merged[key] = weight;
+  }
+  return merged;
+}
+
 export interface SourcingCoefficients {
   positiveHistory: number;
   rejectedHistory: number;

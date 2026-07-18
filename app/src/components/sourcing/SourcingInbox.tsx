@@ -10,9 +10,11 @@ import { Pill } from '../ui/Pill'
 export function SourcingInbox({
   onFocus,
   onFeedback,
+  onDiscover,
 }: {
   onFocus: (id: string) => void
   onFeedback: (changedIds: string[]) => void
+  onDiscover?: (companies: Company[]) => void
 }) {
   const [items, setItems] = useState<Company[]>([])
   const [dismissed, setDismissed] = useState<Set<string>>(new Set())
@@ -42,8 +44,8 @@ export function SourcingInbox({
           return [...found.filter((c) => !have.has(c.id)), ...prev]
         })
         setFoundIds((s) => new Set([...s, ...found.map((c) => c.id)]))
-        onFeedback(found.map((c) => c.id))
-        if (found[0]) onFocus(found[0].id)
+        // BrainPage adds the new nodes to the graph, then pulses + flies to them.
+        onDiscover?.(found)
         setQuery('')
       } else {
         setLearningNote('No new companies found for that search.')

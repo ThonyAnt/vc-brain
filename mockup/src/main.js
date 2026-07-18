@@ -158,6 +158,9 @@ const container = document.getElementById('app');
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
+// GalaxyThreeJS: ACESFilmic at low exposure is what turns flat discs into rich orbs
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.8;
 container.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
@@ -238,9 +241,9 @@ const pMat = new THREE.ShaderMaterial({
       float d = length(gl_PointCoord - vec2(0.5)) * 2.0;
       if (d > 1.0) discard;
       // galaxy-style exponential falloff (sboez pow(1-d, 10)): tight core, no fog
-      float body = pow(1.0 - d, 3.0);
-      float hot = pow(1.0 - d, 14.0);
-      vec3 col = (vColor * body * 1.3 + vec3(1.0) * hot * 0.7) * vDim;
+      float body = pow(1.0 - d, 2.6);
+      float hot = pow(1.0 - d, 12.0);
+      vec3 col = (vColor * body * 1.8 + vec3(1.0) * hot * 0.9) * vDim;
       gl_FragColor = vec4(col, 1.0);
     }`,
 });
@@ -328,6 +331,43 @@ SECTORS.forEach((s, i) => {
   labelSprites.push(sp);
 });
 
+// --- cluster nebula haze (GalaxyThreeJS Haze: feathered sprite, tinted, fades up close)
+function featherTexture() {
+  const c = document.createElement('canvas');
+  c.width = c.height = 128;
+  const g = c.getContext('2d');
+  const grad = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+  grad.addColorStop(0, 'rgba(255,255,255,1)');
+  grad.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = grad;
+  g.fillRect(0, 0, 128, 128);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+const HAZE_OPACITY = 0.11;
+const hazeTex = featherTexture();
+const hazeSprites = [];
+SECTORS.forEach((s, si) => {
+  for (let k = 0; k < 4; k++) {
+    const mat = new THREE.SpriteMaterial({
+      map: hazeTex,
+      color: new THREE.Color(s.color).multiplyScalar(0.55),
+      opacity: HAZE_OPACITY, transparent: true,
+      depthTest: false, depthWrite: false,
+    });
+    const sp = new THREE.Sprite(mat);
+    sp.position.copy(anchors[si]).add(new THREE.Vector3(
+      (rand() - 0.5) * 130, (rand() - 0.5) * 90, (rand() - 0.5) * 130
+    ));
+    sp.scale.setScalar(200 + rand() * 120);
+    sp.renderOrder = -1;
+    sp.userData.sector = si;
+    group.add(sp);
+    hazeSprites.push(sp);
+  }
+});
+
 // --- starfield backdrop
 {
   const M = 900;
@@ -341,7 +381,7 @@ SECTORS.forEach((s, i) => {
   stGeo.setAttribute('position', new THREE.BufferAttribute(stPos, 3));
   const stMat = new THREE.PointsMaterial({
     color: new THREE.Color('#5a6690'), size: 1.2, sizeAttenuation: false,
-    transparent: true, opacity: 0.2, depthWrite: false, blending: THREE.AdditiveBlending,
+    transparent: true, opacity: 0.28, depthWrite: false, blending: THREE.AdditiveBlending,
   });
   scene.add(new THREE.Points(stGeo, stMat));
 }
@@ -349,9 +389,9 @@ SECTORS.forEach((s, i) => {
 // --- bloom
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
-// GalaxyThreeJS: threshold 0.4 / radius ~0 — only hot cores bloom, dim geometry stays crisp
+// GalaxyThreeJS: strength 1.5, threshold 0.4, radius ~0 — only hot cores bloom
 const bloom = new UnrealBloomPass(
-  new THREE.Vector2(window.innerWidth, window.innerHeight), 1.15, 0.25, 0.4
+  new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.2, 0.4
 );
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
@@ -564,7 +604,7 @@ function animate() {
     const len = a.distanceTo(b);
     const fade = 1 - THREE.MathUtils.smoothstep(len, LINK_FADE_NEAR, LINK_FADE_FAR) * (1 - LINK_MIN_TRANSPARENCY);
     const breathe = 0.8 + 0.2 * Math.sin(time * 0.7 + e.phase) * motion;
-    let alpha = 0.42 * fade * breathe * e.weight;
+    let alpha = 0.55 * fade * breathe * e.weight;
     if (focused) {
       const on = e.a === focused || e.b === focused;
       alpha *= on ? 1.6 : 0.06;
@@ -627,7 +667,15 @@ function animate() {
   // labels fade out as the camera flies close, so they never blow out in bloom
   for (const sp of labelSprites) {
     tmpA.setFromMatrixPosition(sp.matrixWorld);
-    sp.material.opacity = 0.6 * THREE.MathUtils.smoothstep(camera.position.distanceTo(tmpA), 260, 620);
+    sp.material.opacity = 0.7 * THREE.MathUtils.smoothstep(camera.position.distanceTo(tmpA), 260, 620);
+  }
+  // haze fades as the camera approaches (GalaxyThreeJS updateScale), dims off-focus sectors
+  for (const sp of hazeSprites) {
+    tmpA.setFromMatrixPosition(sp.matrixWorld);
+    const d = camera.position.distanceTo(tmpA);
+    let o = HAZE_OPACITY * Math.min((d / 640) ** 2, 1);
+    if (focused && sp.userData.sector !== focused.sector) o *= 0.25;
+    sp.material.opacity = o;
   }
 
   controls.update();

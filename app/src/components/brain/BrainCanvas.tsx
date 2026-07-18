@@ -385,15 +385,12 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     ring.visible = false
     scene.add(ring)
 
-    /* cluster labels in the mono label voice */
-    function labelSprite(text: string, colorHex: string) {
-      const c = document.createElement('canvas')
-      c.width = 1024
-      c.height = 192
+    /* cluster labels: Space Mono 700 uppercase, tracked 0.1em to match the HUD voice */
+    function drawLabel(c: HTMLCanvasElement, text: string, colorHex: string) {
       const g = c.getContext('2d')!
-      /* neobrutal cartography label: Space Mono 700, tracked uppercase */
+      g.clearRect(0, 0, c.width, c.height)
       g.font = "700 60px 'Space Mono', monospace"
-      if ('letterSpacing' in g) (g as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = '16px'
+      if ('letterSpacing' in g) (g as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = '6px'
       g.textBaseline = 'middle'
       const label = text.toUpperCase()
       const tickW = 12
@@ -404,10 +401,20 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       g.fillRect(x0, 96 - 26, tickW, 52)
       g.fillStyle = 'rgba(0, 0, 0, 0.92)'
       g.fillText(label, x0 + tickW + gap, 96)
+    }
+    function labelSprite(text: string, colorHex: string) {
+      const c = document.createElement('canvas')
+      c.width = 1024
+      c.height = 192
+      drawLabel(c, text, colorHex)
       const t = new THREE.CanvasTexture(c)
       t.colorSpace = THREE.SRGBColorSpace
-      const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, opacity: 0.6, depthWrite: false }))
+      const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, opacity: 0.85, depthWrite: false }))
       sp.scale.set(150, 28.1, 1)
+      sp.userData.redraw = () => {
+        drawLabel(c, text, colorHex)
+        t.needsUpdate = true
+      }
       return sp
     }
     const labelSprites: THREE.Sprite[] = []
@@ -418,6 +425,12 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       group.add(sp)
       labelSprites.push(sp)
     })
+    /* canvas text bakes whatever font is loaded at draw time — re-rasterize the
+       labels once Space Mono actually arrives, or the fallback sticks forever */
+    document.fonts
+      .load("700 60px 'Space Mono'")
+      .then(() => labelSprites.forEach((sp) => (sp.userData.redraw as () => void)?.()))
+      .catch(() => {})
 
     /* ---------------- interaction (ported, HUD → React refs) ---------------- */
 

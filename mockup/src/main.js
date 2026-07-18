@@ -161,7 +161,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 container.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color('#04050c'); // cosmograph-dark, not cosmos's #222
+scene.background = new THREE.Color('#000004'); // near-pure black (galaxy repos), not cosmos's #222
 
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 8000);
 camera.position.set(0, 170, 1180);
@@ -199,7 +199,7 @@ function nodeColor(n) {
 nodes.forEach((n, i) => {
   const c = nodeColor(n);
   pCol[i * 3] = c.r; pCol[i * 3 + 1] = c.g; pCol[i * 3 + 2] = c.b;
-  pSize[i] = n.role === 'portfolio' ? 19 : n.role === 'candidate' ? 15 : n.role === 'rejected' ? 6.5 : 8.5;
+  pSize[i] = n.role === 'portfolio' ? 34 : n.role === 'candidate' ? 26 : n.role === 'rejected' ? 11 : 15;
   pPulse[i] = n.role === 'candidate' ? 1 : 0;
   pPhase[i] = n.phase;
 });
@@ -235,11 +235,12 @@ const pMat = new THREE.ShaderMaterial({
     varying vec3 vColor;
     varying float vDim;
     void main() {
-      float d = length(gl_PointCoord - vec2(0.5));
-      if (d > 0.5) discard;
-      float edge = smoothstep(0.5, 0.12, d);          // soft disc
-      float core = pow(smoothstep(0.32, 0.0, d), 2.0); // hot centre
-      vec3 col = (vColor * edge + vColor * core * 0.9 + vec3(core * 0.25)) * vDim;
+      float d = length(gl_PointCoord - vec2(0.5)) * 2.0;
+      if (d > 1.0) discard;
+      // galaxy-style exponential falloff (sboez pow(1-d, 10)): tight core, no fog
+      float body = pow(1.0 - d, 3.0);
+      float hot = pow(1.0 - d, 14.0);
+      vec3 col = (vColor * body * 1.3 + vec3(1.0) * hot * 0.7) * vDim;
       gl_FragColor = vec4(col, 1.0);
     }`,
 });
@@ -295,20 +296,27 @@ scene.add(ring);
 
 // --- cluster labels
 function labelSprite(text, colorHex) {
+  // crisp cartography-style label: no glow, tracked uppercase, sector tick
   const c = document.createElement('canvas');
-  c.width = 512; c.height = 128;
+  c.width = 1024; c.height = 192;
   const g = c.getContext('2d');
-  g.font = '600 44px system-ui, sans-serif';
-  g.textAlign = 'center'; g.textBaseline = 'middle';
-  g.shadowColor = colorHex; g.shadowBlur = 22;
-  g.fillStyle = 'rgba(238, 242, 252, 0.92)';
-  g.fillText(text.toUpperCase(), 256, 64);
+  g.font = '500 64px system-ui, sans-serif';
+  if ('letterSpacing' in g) g.letterSpacing = '16px';
+  g.textBaseline = 'middle';
+  const label = text.toUpperCase();
+  const tickW = 12, gap = 26;
+  const textW = g.measureText(label).width;
+  const x0 = (c.width - (tickW + gap + textW)) / 2;
+  g.fillStyle = colorHex;
+  g.fillRect(x0, 96 - 26, tickW, 52);
+  g.fillStyle = 'rgba(214, 222, 238, 0.9)';
+  g.fillText(label, x0 + tickW + gap, 96);
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
   const sp = new THREE.Sprite(new THREE.SpriteMaterial({
-    map: t, transparent: true, opacity: 0.5, depthWrite: false,
+    map: t, transparent: true, opacity: 0.6, depthWrite: false,
   }));
-  sp.scale.set(190, 47.5, 1);
+  sp.scale.set(150, 28.1, 1);
   return sp;
 }
 const labelSprites = [];
@@ -332,8 +340,8 @@ SECTORS.forEach((s, i) => {
   const stGeo = new THREE.BufferGeometry();
   stGeo.setAttribute('position', new THREE.BufferAttribute(stPos, 3));
   const stMat = new THREE.PointsMaterial({
-    color: new THREE.Color('#6f7fb8'), size: 1.6, sizeAttenuation: false,
-    transparent: true, opacity: 0.35, depthWrite: false, blending: THREE.AdditiveBlending,
+    color: new THREE.Color('#5a6690'), size: 1.2, sizeAttenuation: false,
+    transparent: true, opacity: 0.2, depthWrite: false, blending: THREE.AdditiveBlending,
   });
   scene.add(new THREE.Points(stGeo, stMat));
 }
@@ -341,8 +349,9 @@ SECTORS.forEach((s, i) => {
 // --- bloom
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
+// GalaxyThreeJS: threshold 0.4 / radius ~0 — only hot cores bloom, dim geometry stays crisp
 const bloom = new UnrealBloomPass(
-  new THREE.Vector2(window.innerWidth, window.innerHeight), 1.0, 0.65, 0.0
+  new THREE.Vector2(window.innerWidth, window.innerHeight), 1.15, 0.25, 0.4
 );
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
@@ -555,7 +564,7 @@ function animate() {
     const len = a.distanceTo(b);
     const fade = 1 - THREE.MathUtils.smoothstep(len, LINK_FADE_NEAR, LINK_FADE_FAR) * (1 - LINK_MIN_TRANSPARENCY);
     const breathe = 0.8 + 0.2 * Math.sin(time * 0.7 + e.phase) * motion;
-    let alpha = 0.38 * fade * breathe * e.weight;
+    let alpha = 0.42 * fade * breathe * e.weight;
     if (focused) {
       const on = e.a === focused || e.b === focused;
       alpha *= on ? 1.6 : 0.06;
@@ -618,7 +627,7 @@ function animate() {
   // labels fade out as the camera flies close, so they never blow out in bloom
   for (const sp of labelSprites) {
     tmpA.setFromMatrixPosition(sp.matrixWorld);
-    sp.material.opacity = 0.5 * THREE.MathUtils.smoothstep(camera.position.distanceTo(tmpA), 260, 620);
+    sp.material.opacity = 0.6 * THREE.MathUtils.smoothstep(camera.position.distanceTo(tmpA), 260, 620);
   }
 
   controls.update();

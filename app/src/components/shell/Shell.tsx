@@ -1,8 +1,6 @@
 import { Outlet, useLocation, useNavigate } from 'react-router'
 import Dock from '@/components/ui/dock'
 import { AnalystIcon, BrainIcon, FoundersIcon, FundIcon, PipelineIcon } from '@/components/ui/nav-icons'
-import { useAppStore } from '../../state/store'
-import { ChatDrawer } from './ChatDrawer'
 import { LearningToast } from './LearningToast'
 import { TopBar } from './TopBar'
 
@@ -11,20 +9,20 @@ function routeLabel(pathname: string): string {
   if (pathname.startsWith('/pipeline')) return 'Pipeline'
   if (pathname.startsWith('/founders')) return 'Founders'
   if (pathname.startsWith('/fund')) return 'Fund'
+  if (pathname.startsWith('/analyst')) return 'Analyst'
   return ''
 }
 
 export function Shell() {
   const navigate = useNavigate()
   const location = useLocation()
-  const toggleChat = useAppStore((s) => s.toggleChat)
 
   const items = [
     { icon: BrainIcon, label: 'Brain', onClick: () => navigate('/') },
     { icon: PipelineIcon, label: 'Pipeline', onClick: () => navigate('/pipeline') },
     { icon: FoundersIcon, label: 'Founders', onClick: () => navigate('/founders') },
     { icon: FundIcon, label: 'Fund', onClick: () => navigate('/fund') },
-    { icon: AnalystIcon, label: 'Analyst', onClick: toggleChat },
+    { icon: AnalystIcon, label: 'Analyst', onClick: () => navigate('/analyst') },
   ]
 
   return (
@@ -35,7 +33,6 @@ export function Shell() {
           <Outlet />
         </main>
       </div>
-      <ChatDrawer />
 
       {/* macOS-style dock, docked to the left edge */}
       <div className="fixed top-1/2 left-3 z-40 -translate-y-1/2">

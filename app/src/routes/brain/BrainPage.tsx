@@ -2,26 +2,31 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { BrainCanvas, SECTOR_PALETTE, type BrainHandle } from '../../components/brain/BrainCanvas'
 import { DotGridBackground } from '../../components/brain/DotGridBackground'
 import { NodePanel } from '../../components/brain/NodePanel'
+import { GlobeCard } from '../../components/geo/GlobeCard'
 import { SourcingInbox } from '../../components/sourcing/SourcingInbox'
 import { api } from '../../lib/api/client'
-import type { FundGraph } from '../../lib/types'
+import type { Company, FundGraph } from '../../lib/types'
+import type { LatLng } from '../../lib/geo'
 
-/* HUD chips/hints use the mockup's mono uppercase voice (graph zone, not app chrome) */
+/* HUD chips/hints: neobrutal mono voice (Space Mono, ink) */
 const hudMono: React.CSSProperties = {
-  fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+  fontFamily: "'Space Mono', monospace",
   fontSize: '0.66rem',
   letterSpacing: '0.1em',
   textTransform: 'uppercase',
-  color: '#6f7988',
+  color: '#333333',
 }
 
 export function BrainPage() {
   const [graph, setGraph] = useState<FundGraph | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [sourced, setSourced] = useState<Company[]>([])
+  const [hoverCity, setHoverCity] = useState<LatLng | null>(null)
   const brainRef = useRef<BrainHandle>(null)
 
   useEffect(() => {
     api.getGraph().then(setGraph)
+    api.getSourcing().then(setSourced)
   }, [])
 
   const onSelect = useCallback((id: string | null) => setSelectedId(id), [])
@@ -36,7 +41,17 @@ export function BrainPage() {
 
       {/* HUD overlays */}
       <div className="pointer-events-none absolute inset-0 flex p-4 pl-24">
-        <SourcingInbox onFocus={(id) => brainRef.current?.focusNode(id)} onFeedback={onFeedback} />
+        {/* left rail: inbox stacks above the standing sourcing map */}
+        <div className="flex h-full w-80 flex-col gap-3">
+          <SourcingInbox
+            onFocus={(id) => brainRef.current?.focusNode(id)}
+            onFeedback={onFeedback}
+            onHoverCity={setHoverCity}
+          />
+          <div className="mt-auto">
+            <GlobeCard companies={sourced} focus={hoverCity} />
+          </div>
+        </div>
         <div className="flex-1" />
         {selectedId && (
           <NodePanel

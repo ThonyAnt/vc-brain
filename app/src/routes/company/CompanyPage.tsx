@@ -8,10 +8,10 @@ import { Eyebrow } from '../../components/ui/Eyebrow'
 import { Pill } from '../../components/ui/Pill'
 import { ModelTab } from './tabs/ModelTab'
 import { MarketTab } from './tabs/MarketTab'
-import { MemoTab } from './tabs/MemoTab'
+import { FilesTab } from './tabs/FilesTab'
 import { OverviewTab } from './tabs/OverviewTab'
 
-const TABS = ['Overview', 'Market map', 'Model', 'Memo'] as const
+const TABS = ['Overview', 'Market map', 'Model', 'Files'] as const
 type Tab = (typeof TABS)[number]
 
 export function CompanyPage() {
@@ -94,7 +94,7 @@ export function CompanyPage() {
         {tab === 'Overview' && <OverviewTab company={company} founders={founders} />}
         {tab === 'Market map' && <MarketTab company={company} />}
         {tab === 'Model' && <ModelTab company={company} />}
-        {tab === 'Memo' && <MemoTab company={company} founders={founders} />}
+        {tab === 'Files' && <FilesTab company={company} />}
       </div>
 
       {company.raising && (

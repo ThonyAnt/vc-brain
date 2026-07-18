@@ -1,1 +1,388 @@
-[]
+[
+  {
+    "id": "co_scribeai",
+    "name": "ScribeAI",
+    "description": "AI medical scribe that drafts clinical notes from visit audio.",
+    "attributes": {
+      "industryPath": [
+        "Healthcare",
+        "Infrastructure",
+        "Clinical documentation"
+      ],
+      "productCategoryPath": [
+        "Software",
+        "Workflow application"
+      ],
+      "targetCustomers": [
+        "Hospitals",
+        "Clinicians"
+      ],
+      "technicalApproaches": [
+        "Foundation-model application"
+      ],
+      "founderArchetypes": [
+        "Clinician-founder"
+      ],
+      "disruptionMechanisms": [
+        "Replaces manual labor"
+      ],
+      "regulatoryLabels": [
+        "Clinical-validation-dependent"
+      ],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Enterprise sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "drafting clinical notes automatically from patient visits",
+      "productDescription": ""
+    },
+    "founders": [
+      {
+        "name": "Dr. Alina Reyes",
+        "role": "CEO",
+        "background": "Practicing physician, ex-Epic"
+      }
+    ],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "Healthcare",
+    "checkSizeSought": 2000000,
+    "valuation": 18000000,
+    "metrics": {
+      "arr": 1200000,
+      "arrGrowthRate": 2.5,
+      "churnRate": 0.08,
+      "nrr": 1.15,
+      "grossMargin": 0.78
+    },
+    "competitors": [],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": []
+  },
+  {
+    "id": "co_radintel",
+    "name": "RadIntel",
+    "description": "Computer-vision triage for radiology departments.",
+    "attributes": {
+      "industryPath": [
+        "Healthcare",
+        "Infrastructure",
+        "Diagnostics"
+      ],
+      "productCategoryPath": [
+        "Software",
+        "Workflow application"
+      ],
+      "targetCustomers": [
+        "Hospitals",
+        "Radiologists"
+      ],
+      "technicalApproaches": [
+        "Computer vision"
+      ],
+      "founderArchetypes": [
+        "Academic researcher"
+      ],
+      "disruptionMechanisms": [
+        "Improves diagnosis"
+      ],
+      "regulatoryLabels": [
+        "FDA-regulated"
+      ],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Founder-led enterprise sales",
+      "operationalModel": "Pure software",
+      "problemStatement": "triaging radiology studies to speed up diagnosis",
+      "productDescription": ""
+    },
+    "founders": [
+      {
+        "name": "Wei Chen",
+        "role": "CEO",
+        "background": "Stanford CS PhD, medical imaging"
+      }
+    ],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "Healthcare",
+    "checkSizeSought": 3000000,
+    "valuation": 25000000,
+    "metrics": {
+      "arr": 800000,
+      "arrGrowthRate": 1.8,
+      "churnRate": 0.05,
+      "nrr": 1.1,
+      "grossMargin": 0.7
+    },
+    "competitors": [],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": []
+  },
+  {
+    "id": "co_payflow",
+    "name": "PayFlow",
+    "description": "Consumer peer-to-peer payments app.",
+    "attributes": {
+      "industryPath": [
+        "Fintech",
+        "Payments"
+      ],
+      "productCategoryPath": [
+        "Infrastructure",
+        "API"
+      ],
+      "targetCustomers": [
+        "Consumers"
+      ],
+      "technicalApproaches": [
+        "Marketplace matching"
+      ],
+      "founderArchetypes": [
+        "Former big-tech engineer"
+      ],
+      "disruptionMechanisms": [
+        "Reduces cost"
+      ],
+      "regulatoryLabels": [
+        "Financially-regulated"
+      ],
+      "businessModel": "Transaction fees",
+      "goToMarket": "Direct to consumer",
+      "operationalModel": "Pure software",
+      "problemStatement": "moving money between consumers cheaply",
+      "productDescription": ""
+    },
+    "founders": [],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "Fintech",
+    "checkSizeSought": 4000000,
+    "competitors": [],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": []
+  },
+  {
+    "id": "co_vetcharts",
+    "name": "VetCharts",
+    "description": "Clinical documentation for veterinary clinics.",
+    "attributes": {
+      "industryPath": [
+        "Healthcare",
+        "Infrastructure",
+        "Clinical documentation"
+      ],
+      "productCategoryPath": [
+        "Software",
+        "Workflow application"
+      ],
+      "targetCustomers": [
+        "Veterinary clinics"
+      ],
+      "technicalApproaches": [
+        "Foundation-model application"
+      ],
+      "founderArchetypes": [
+        "Former industry operator"
+      ],
+      "disruptionMechanisms": [
+        "Replaces manual labor"
+      ],
+      "regulatoryLabels": [
+        "Pure software"
+      ],
+      "businessModel": "Subscription SaaS",
+      "goToMarket": "Product-led growth",
+      "operationalModel": "Pure software",
+      "problemStatement": "drafting clinical notes for veterinarians",
+      "productDescription": ""
+    },
+    "founders": [],
+    "stage": "seed",
+    "geography": "US",
+    "sector": "Healthcare",
+    "checkSizeSought": 1500000,
+    "competitors": [],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": []
+  },
+  {
+    "id": "co_ladder_health",
+    "name": "Ladder Health",
+    "description": "Delivers virtual-first AI-enabled pediatric developmental and therapeutic care for children and families.",
+    "attributes": {
+      "industryPath": [
+        "Healthcare",
+        "Healthcare AI",
+        "Pediatrics"
+      ],
+      "productCategoryPath": [
+        "Healthcare AI Solutions",
+        "Therapeutic Care",
+        "Virtual Care"
+      ],
+      "targetCustomers": [
+        "Children",
+        "Families",
+        "Pediatricians"
+      ],
+      "technicalApproaches": [
+        "AI Enabled Care",
+        "Virtual Therapy"
+      ],
+      "founderArchetypes": [
+        "Clinician Founder"
+      ],
+      "disruptionMechanisms": [
+        "Virtual First Care",
+        "AI Integration in Healthcare"
+      ],
+      "regulatoryLabels": [
+        "Healthcare Compliance"
+      ],
+      "businessModel": "Enterprise SaaS",
+      "goToMarket": "Partnerships with pediatric clinics and hospitals",
+      "operationalModel": "Remote service delivery",
+      "problemStatement": "Lack of accessible pediatric developmental care for children in various regions.",
+      "productDescription": "An AI platform that provides interactive and tailored therapeutic care for pediatric development."
+    },
+    "founders": [
+      {
+        "name": "Co-Founder Name",
+        "role": "Co-Founder",
+        "background": "Healthcare professional with experience in pediatric therapy.",
+        "linkedin": "linkedin.com/in/cofounder"
+      }
+    ],
+    "stage": "seed",
+    "geography": "Palo Alto, California, United States",
+    "sector": "Healthcare AI",
+    "competitors": [],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://ladderhealth.com"
+    ]
+  },
+  {
+    "id": "co_ambience_healthcare",
+    "name": "Ambience Healthcare",
+    "description": "AI operating system used for documentation, coding, and clinical workflows in healthcare organizations.",
+    "attributes": {
+      "industryPath": [
+        "Healthcare",
+        "Healthcare AI",
+        "Healthcare Operations"
+      ],
+      "productCategoryPath": [
+        "Healthcare AI Solutions",
+        "Clinical Workflow Management"
+      ],
+      "targetCustomers": [
+        "Hospitals",
+        "Clinics",
+        "Healthcare Organizations"
+      ],
+      "technicalApproaches": [
+        "AI for Documentation",
+        "Operational Workflow Automation"
+      ],
+      "founderArchetypes": [
+        "Healthcare Administrator",
+        "Clinician Founder"
+      ],
+      "disruptionMechanisms": [
+        "AI-Enhanced Operational Efficiency"
+      ],
+      "regulatoryLabels": [
+        "HIPAA Compliance"
+      ],
+      "businessModel": "Licensing Software to Hospitals",
+      "goToMarket": "Direct sales to healthcare providers",
+      "operationalModel": "On-premise or cloud-based deployment",
+      "problemStatement": "Inefficient administrative workflows in healthcare settings that lead to increased costs and delays.",
+      "productDescription": "A comprehensive AI system that streamlines documentation and coding processes in healthcare facilities."
+    },
+    "founders": [
+      {
+        "name": "Co-Founder Name",
+        "role": "Co-Founder",
+        "background": "Experienced healthcare administrator with a focus on operational workflows.",
+        "linkedin": "linkedin.com/in/cofounder"
+      }
+    ],
+    "stage": "series_a",
+    "geography": "United States",
+    "sector": "Healthcare AI",
+    "competitors": [],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://ambiencehealthcare.com"
+    ]
+  },
+  {
+    "id": "co_tala_health",
+    "name": "Tala Health",
+    "description": "AI platform designed to streamline clinical documentation and administrative tasks in healthcare environments.",
+    "attributes": {
+      "industryPath": [
+        "Healthcare",
+        "Healthcare AI",
+        "Clinical Operations"
+      ],
+      "productCategoryPath": [
+        "Healthcare AI Solutions",
+        "Clinical Documentation"
+      ],
+      "targetCustomers": [
+        "Hospitals",
+        "Healthcare Providers"
+      ],
+      "technicalApproaches": [
+        "AI Assistance in Documentation",
+        "Workflow Automation"
+      ],
+      "founderArchetypes": [
+        "Clinician Founder"
+      ],
+      "disruptionMechanisms": [
+        "Automated Clinical Documentation"
+      ],
+      "regulatoryLabels": [
+        "Healthcare Compliance"
+      ],
+      "businessModel": "Subscription-based SaaS",
+      "goToMarket": "Engagement with healthcare institutions",
+      "operationalModel": "Cloud-based platform for ease of access.",
+      "problemStatement": "Administrative burden on clinicians leading to reduced patient care quality.",
+      "productDescription": "An AI-driven platform that aids healthcare professionals in documenting clinical encounters efficiently."
+    },
+    "founders": [
+      {
+        "name": "Co-Founder Name",
+        "role": "Co-Founder",
+        "background": "Healthcare professional with expertise in clinical operations.",
+        "linkedin": "linkedin.com/in/cofounder"
+      }
+    ],
+    "stage": "seed",
+    "geography": "San Francisco, United States",
+    "sector": "Healthcare AI",
+    "competitors": [],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://talahealth.com"
+    ]
+  }
+]

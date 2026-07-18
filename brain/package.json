@@ -16,7 +16,9 @@
     "demo:openai": "VC_BRAIN_LLM=openai node --env-file=../.env node_modules/.bin/tsx src/demo.ts",
     "demo:discover": "VC_BRAIN_LLM=openai VC_BRAIN_DISCOVER=1 node --env-file=../.env node_modules/.bin/tsx src/demo.ts",
     "probe:openai": "node --env-file=../.env node_modules/.bin/tsx src/scripts/probeOpenAI.ts",
-    "probe:discovery": "node --env-file=../.env node_modules/.bin/tsx src/scripts/probeDiscovery.ts"
+    "probe:discovery": "node --env-file=../.env node_modules/.bin/tsx src/scripts/probeDiscovery.ts",
+    "seed:write": "tsx src/scripts/writeSeed.ts",
+    "seed:demo": "tsx src/scripts/seedDemo.ts"
   },
   "dependencies": {
     "openai": "^4.67.0",

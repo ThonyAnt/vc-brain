@@ -78,6 +78,23 @@ async function main() {
   console.log(`  ${state.investmentMemo?.executiveSummary}`);
   console.log(`  recommendation: ${state.investmentMemo?.recommendation}`);
 
+  console.log("\n=== FINANCIAL SCENARIOS (deterministic) ===");
+  const sc = state.financialScenarios;
+  if (sc) {
+    const pct = (n: number) => `${(n * 100).toFixed(0)}%`;
+    for (const [label, r] of [
+      ["bear", sc.bear],
+      ["base", sc.base],
+      ["bull", sc.bull],
+    ] as const) {
+      console.log(
+        `  ${label.padEnd(4)} MOIC ${r.moic.toFixed(2)}x  IRR ${pct(r.irr).padStart(4)}  proceeds $${(
+          r.proceeds / 1e6
+        ).toFixed(1)}M`,
+      );
+    }
+  }
+
   console.log("\n=== FEEDBACK / LEARNING ===");
   // No hardcoded criterionId: the learning agent picks the implicated criterion
   // from whatever the profiler actually extracted (ids differ live vs. mock).

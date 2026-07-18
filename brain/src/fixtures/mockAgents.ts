@@ -36,6 +36,20 @@ function firstMatch(prompt: string, re: RegExp, fallback: string): string {
 export const mockAgentStructured: NonNullable<MockLLMOptions["structured"]> = {
   FundProfile: fundProfile,
 
+  CompanyAttributes: {
+    industryPath: ["Healthcare", "Infrastructure", "Clinical documentation"],
+    productCategoryPath: ["Software", "Workflow application"],
+    targetCustomers: ["Hospitals", "Clinicians"],
+    technicalApproaches: ["Foundation-model application"],
+    founderArchetypes: ["Clinician-founder"],
+    disruptionMechanisms: ["Replaces manual labor"],
+    regulatoryLabels: ["Clinical-validation-dependent"],
+    businessModel: "Subscription SaaS",
+    goToMarket: "Enterprise sales",
+    operationalModel: "Pure software",
+    problemStatement: "reducing clinical documentation burden",
+  },
+
   DiscoveryExtraction: {
     companies: [
       {
@@ -212,6 +226,37 @@ export const mockAgentStructured: NonNullable<MockLLMOptions["structured"]> = {
       openDiligenceQuestions: ["Cohort retention", "CAC payback"],
       committeeDisagreement: "Technical conviction vs. distribution caution.",
       recommendation: "Advance to partner meeting with a term-sheet-conditional check.",
+    };
+  },
+
+  MemoExtraction: (req: StructuredRequest) => {
+    const p = req.prompt;
+    const name = (p.match(/company:\s*([^\n.]+)/i)?.[1] ?? "Unknown Co").trim();
+    const decisionRaw = p.match(/decision:\s*(invested|rejected|passed)/i)?.[1]?.toLowerCase();
+    const decision = (decisionRaw ?? "invested") as "invested" | "rejected" | "passed";
+    return {
+      companyName: name,
+      decision,
+      rationale: "Extracted rationale from the memo.",
+      identifiedMoat: "Clinical workflow integration and clinician trust.",
+      decisionDrivers: ["clinician-founder", "enterprise distribution", "workflow moat"],
+      outcome: decision === "invested" ? "succeeded" : "failed",
+      sector: "Healthcare",
+      stage: "seed",
+      geography: "US",
+      attributes: {
+        industryPath: ["Healthcare", "Infrastructure", "Clinical documentation"],
+        productCategoryPath: ["Software", "Workflow application"],
+        targetCustomers: ["Hospitals", "Clinicians"],
+        technicalApproaches: ["Foundation-model application"],
+        founderArchetypes: ["Clinician-founder"],
+        disruptionMechanisms: ["Replaces manual labor"],
+        regulatoryLabels: ["Clinical-validation-dependent"],
+        businessModel: "Subscription SaaS",
+        goToMarket: "Enterprise sales",
+        operationalModel: "Pure software",
+        problemStatement: "reducing clinical documentation burden",
+      },
     };
   },
 

@@ -239,7 +239,7 @@ export async function runPipeline(
     const analogues = findNearestCompanies(recommended, historyPool, { k: 3, embeddings })
       .map((n) => index.get(n.companyId))
       .filter((c): c is Company => Boolean(c));
-    const { memo } = await withRetry(
+    const { memo, scenarios } = await withRetry(
       () =>
         memoAgent(
           {
@@ -256,7 +256,8 @@ export async function runPipeline(
       "memo",
     );
     state.investmentMemo = memo;
-    emit("memo", "memo_generated", [recommended.id]);
+    state.financialScenarios = scenarios;
+    emit("memo", "memo_generated", [recommended.id], { scenarios });
   }
 
   return state;

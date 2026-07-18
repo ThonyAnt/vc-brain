@@ -6,6 +6,7 @@ import type { CandidateDiligence } from "./schemas/diligence.js";
 import type { PartnerOpinion, CommitteeDecision } from "./schemas/committee.js";
 import type { InvestmentMemo } from "./schemas/memo.js";
 import type { InvestorFeedback, LearningResult } from "./schemas/feedback.js";
+import type { ScenarioSet } from "./finance/scenarios.js";
 
 export type WorkflowStage =
   | "profiling"
@@ -48,6 +49,8 @@ export interface VCBrainState {
   partnerOpinions?: Record<string, PartnerOpinion[]>;
   committeeDecision?: CommitteeDecision;
   investmentMemo?: InvestmentMemo;
+  /** Deterministic bull/base/bear returns for the recommended company. */
+  financialScenarios?: ScenarioSet;
 
   feedback?: InvestorFeedback;
   learningResult?: LearningResult;

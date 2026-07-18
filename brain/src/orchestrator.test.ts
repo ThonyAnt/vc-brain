@@ -55,6 +55,13 @@ describe("runPipeline (end-to-end, mock LLM)", () => {
     expect(state.finalists!.map((c) => c.id)).toContain(rec);
     expect(state.investmentMemo?.companyId).toBe(rec);
     expect(rec).toBe("co_scribeai");
+
+    // Deterministic financial scenarios are computed and retained on state,
+    // ordered bear < base < bull on MOIC.
+    const sc = state.financialScenarios!;
+    expect(sc).toBeDefined();
+    expect(sc.bear.moic).toBeLessThan(sc.base.moic);
+    expect(sc.base.moic).toBeLessThan(sc.bull.moic);
   });
 
   it("emits graph events for every stage", async () => {

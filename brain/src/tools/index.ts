@@ -23,6 +23,12 @@ export type { ExtractAttributesInput } from "./attributes.js";
 export { discoverCompanies, buildDiscoveryQueries } from "./discover.js";
 export type { DiscoverInput, DiscoverDeps } from "./discover.js";
 
+export { ingestMemoText, ingestMemoTexts, ingestMemoFiles } from "./ingestHistory.js";
+export type { IngestedHistory, IngestedHistorySet } from "./ingestHistory.js";
+
+export { importCompanies } from "./importCompanies.js";
+export type { RawCompanyInput, ImportOptions } from "./importCompanies.js";
+
 // Re-export the deterministic financial model as a tool.
 export { calculateFinancialScenarios } from "../finance/scenarios.js";
 export type { ScenarioSet, ScenarioResult, ScenarioMultipliers } from "../finance/scenarios.js";

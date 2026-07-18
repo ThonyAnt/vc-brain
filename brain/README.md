@@ -63,6 +63,24 @@ mandate + fund history ─▶ Fund Profiler ─▶ Market Scout ─▶ Diligence
 - **`agents/`** — the ten reasoning agents. Each depends only on `LLMClient`.
 - **`orchestrator.ts`** — `runPipeline` (sequencing, parallel diligence,
   validation/retries, event emission) and `applyFeedback` (learning loop).
+- **`store/`** — local-JSON storage. A `SeedBundle` (mandate + history +
+  candidates) is the demo dataset; `JsonCompanyStore` indexes it with
+  nearest-neighbor queries; `loadBundle`/`saveBundle` persist it;
+  `saveSnapshot`/`loadSnapshot` persist a full golden pipeline run for instant,
+  offline replay. A `CompanyStore` interface leaves room for a Supabase adapter later.
+
+## Ingestion & seeding
+
+- **Past VC history (file upload → fund memory):** `ingestMemoText` /
+  `ingestMemoTexts` / `ingestMemoFiles` turn raw memo text (`.md`/`.txt`, or
+  pre-extracted deck/PDF text) into `HistoricalMemo` records + their subject
+  `Company`, bucketed by decision (invested → portfolio, rejected, passed).
+- **Raw company import (synthetic datasets):** `importCompanies` normalizes
+  loosely-structured entries into validated `Company` records — using supplied
+  attributes when present, else extracting them via the LLM. Deduped by name.
+- **Seed the demo:** `npm run seed:write` regenerates `data/seed.sample.json`
+  from the fixtures; `npm run seed:demo` runs the pipeline and writes a golden
+  `data/demo.snapshot.json` (gitignored — regenerate live for the real demo).
 
 ## Integration notes for the app/graph
 

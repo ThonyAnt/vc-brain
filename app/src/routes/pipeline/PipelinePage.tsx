@@ -27,7 +27,7 @@ export function PipelinePage() {
   const active = companies.filter((c) => c.dealStage)
 
   return (
-    <div className="mx-auto max-w-[1280px] p-8">
+    <div className="mx-auto max-w-[1280px] p-8 pb-28">
       <Eyebrow>Pipeline</Eyebrow>
       <h1 className="display-lg mt-2">Active deals</h1>
 

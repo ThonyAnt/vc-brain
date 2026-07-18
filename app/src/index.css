@@ -4,6 +4,7 @@
 @import '@fontsource/inter/600.css';
 @import '@fontsource/jetbrains-mono/400.css';
 @import 'tailwindcss';
+@import 'tw-animate-css';
 
 /*
  * Replicate design tokens — docs/design/awesome-design-md/design-md/replicate/DESIGN.md
@@ -42,6 +43,33 @@
   --radius-xs: 4px;
   --radius-card: 10px;
   --radius-lg: 16px;
+
+  /* shadcn token names mapped onto the Replicate palette (for components/ui) */
+  --color-background: #f9f7f3;
+  --color-foreground: #202020;
+  --color-primary-foreground: #ffffff;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #202020;
+  --color-accent: #f3f0e8;
+  --color-accent-foreground: #202020;
+  --color-secondary: #f3f0e8;
+  --color-secondary-foreground: #202020;
+  --color-muted: #f3f0e8;
+  --color-muted-foreground: #646464;
+  --color-destructive: #c01f00;
+  --color-destructive-foreground: #ffffff;
+  --color-border: rgba(32, 32, 32, 0.12);
+  --color-input: rgba(32, 32, 32, 0.12);
+  --color-ring: rgba(59, 130, 246, 0.5);
+}
+
+/* shadcn components use bare `border`; default the border color to the hairline token */
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border);
+  }
 }
 
 html,

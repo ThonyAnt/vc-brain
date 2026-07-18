@@ -29,7 +29,7 @@ export function FoundersPage() {
   }
 
   return (
-    <div className="mx-auto max-w-[1280px] p-8">
+    <div className="mx-auto max-w-[1280px] p-8 pb-28">
       <Eyebrow>Founders</Eyebrow>
       <h1 className="display-lg mt-2">Leads</h1>
       <p className="mt-3 max-w-[620px] text-body">

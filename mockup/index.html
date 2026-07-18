@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>VC Brain — fund memory mockup</title>
 <style>
-  /* tokens per Attio teardown: warm-grey darks, one blue accent, hairline strokes */
+  /* tokens per Attio teardown, light theme: white surfaces, ink text, one blue accent */
   :root {
-    --ink: #fafafb;
-    --muted: #a4adba;
-    --line: rgba(255, 255, 255, 0.09);
-    --glass: rgba(16, 16, 16, 0.82);
-    --accent: #709ff5;
+    --ink: #1c1d1f;
+    --muted: #6f7988;
+    --line: rgba(28, 29, 31, 0.1);
+    --glass: rgba(255, 255, 255, 0.85);
+    --accent: #266df0;
   }
   * { box-sizing: border-box; }
   html, body { height: 100%; }
   body {
     margin: 0;
-    background: #000004;
+    background: #ffffff;
     color: var(--ink);
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     overflow: hidden;
@@ -25,11 +25,11 @@
   /* single bottom-lit surface + faint dot grid with gentle mouse parallax (Attio flourish) */
   #bg {
     position: fixed; inset: 0; z-index: 0; overflow: hidden;
-    background: radial-gradient(ellipse at bottom, #262626 0%, #000 100%);
+    background: radial-gradient(ellipse at bottom, #ffffff 0%, #e9ebf0 100%);
   }
   #bg-parallax {
     position: absolute; inset: -80px; will-change: transform;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(28, 29, 31, 0.07) 1px, transparent 1px);
     background-size: 28px 28px;
   }
   #app { position: fixed; inset: 0; z-index: 1; }
@@ -62,7 +62,8 @@
   #tooltip .t-meta { color: var(--muted); font-size: 0.64rem; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.15rem; }
   #panel {
     position: fixed; z-index: 15; top: 4.4rem; right: 1.25rem; width: 300px;
-    background: var(--glass); border: 1px solid var(--line); border-radius: 13px;
+    background: var(--glass); border: 1px solid #e4e7ec; border-radius: 13px;
+    box-shadow: 0 1px 3px #00000008, 0 4px 8px -2px #00000008, 0 16px 32px -8px #0000000d;
     padding: 1rem 1.1rem 1.05rem; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     /* Attio house entrance: blur-in + slide, ease-out-cubic */
     transform: translateX(16px); opacity: 0; filter: blur(8px);
@@ -76,7 +77,7 @@
   #panel .row { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.72rem; margin: 0.32rem 0; }
   #panel .row .k { color: var(--muted); }
   #panel .row .v { font-family: ui-monospace, Menlo, monospace; text-align: right; }
-  .fitbar { height: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.08); margin: 0.7rem 0 0.25rem; overflow: hidden; }
+  .fitbar { height: 3px; border-radius: 2px; background: rgba(28, 29, 31, 0.08); margin: 0.7rem 0 0.25rem; overflow: hidden; }
   .fitbar i { display: block; height: 100%; border-radius: 2px; background: var(--accent); }
   .fitlabel { display: flex; justify-content: space-between; font-family: ui-monospace, Menlo, monospace; font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
   #panel .actions { display: flex; gap: 0.5rem; margin-top: 0.9rem; }
@@ -90,7 +91,7 @@
     transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
   }
   #panel button:hover { background-color: #2e3238; background-image: none; transition-duration: 0.05s; }
-  #panel button:focus-visible { outline: 3px solid rgba(112, 159, 245, 0.4); outline-offset: 0; }
+  #panel button:focus-visible { outline: 3px solid rgba(38, 109, 240, 0.3); outline-offset: 0; }
   #toast {
     position: fixed; z-index: 30; left: 50%; bottom: 2.4rem; transform: translate(-50%, 12px);
     background: var(--glass); border: 1px solid var(--line); border-radius: 999px;
@@ -99,7 +100,7 @@
     pointer-events: none; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   }
   #toast.show { opacity: 1; transform: translate(-50%, 0); }
-  #toast .pulse { color: #7ef0c6; }
+  #toast .pulse { color: #0db472; }
   @media (max-width: 640px) {
     #panel { width: calc(100vw - 2.5rem); top: auto; bottom: 3.4rem; }
     .hud.tr { display: none; }

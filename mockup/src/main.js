@@ -26,15 +26,16 @@ const pick = (arr) => arr[Math.floor(rand() * arr.length)];
 
 // muted sector palette (Attio/Harmonic teardowns: neutrals + restraint; hue identifies,
 // never shouts). The single hot accent below is reserved for candidates + focus states.
+// light-mode palette: mid-tone sector colors that read on white (Attio light theme)
 const SECTORS = [
-  { name: 'AI Infra',   color: '#d795cc', desc: 'training + inference plumbing' },
-  { name: 'Fintech',    color: '#85c4dc', desc: 'money movement and risk' },
-  { name: 'Healthcare', color: '#a99ade', desc: 'care delivery and clinical ops' },
-  { name: 'Climate',    color: '#8ccaa2', desc: 'energy, grid and industrial decarb' },
-  { name: 'DevTools',   color: '#d8b57e', desc: 'software that builds software' },
-  { name: 'Consumer',   color: '#d49494', desc: 'products people choose themselves' },
+  { name: 'AI Infra',   color: '#bd66a8', desc: 'training + inference plumbing' },
+  { name: 'Fintech',    color: '#4f9ec4', desc: 'money movement and risk' },
+  { name: 'Healthcare', color: '#7d6bc9', desc: 'care delivery and clinical ops' },
+  { name: 'Climate',    color: '#4faa74', desc: 'energy, grid and industrial decarb' },
+  { name: 'DevTools',   color: '#c08a3e', desc: 'software that builds software' },
+  { name: 'Consumer',   color: '#c96666', desc: 'products people choose themselves' },
 ];
-const ACCENT = '#709ff5'; // Attio blue-400: candidates, hover ring, focus, fit bar
+const ACCENT = '#266df0'; // Attio blue-500: candidates, hover ring, focus, fit bar
 // which sectors plausibly trade companies between them (cross-links)
 const SECTOR_ADJ = [[0, 4], [0, 1], [0, 2], [1, 5], [3, 1], [2, 3], [4, 1], [5, 4]];
 
@@ -177,8 +178,11 @@ const group = new THREE.Group();
 scene.add(group);
 
 // --- points
-const sectorColors = SECTORS.map((s) => new THREE.Color(s.color));
-const white = new THREE.Color('#ffffff');
+// raw shaders skip three's colorspace chunk, so feed sRGB components directly
+// to make on-screen colors match the chosen hexes exactly
+function srgb(hex) { return new THREE.Color(hex).convertLinearToSRGB(); }
+const sectorColors = SECTORS.map((s) => srgb(s.color));
+const white = new THREE.Color(1, 1, 1);
 
 const pPos = new Float32Array(N * 3);
 const pCol = new Float32Array(N * 3);
@@ -187,12 +191,12 @@ const pPulse = new Float32Array(N);
 const pPhase = new Float32Array(N);
 const pDim = new Float32Array(N).fill(1);
 
-const accentColor = new THREE.Color(ACCENT);
-const warmWhite = new THREE.Color('#f4efe6');
+const accentColor = srgb(ACCENT);
+const rejectedColor = srgb('#b9bec8');
 function nodeColor(n) {
-  if (n.role === 'candidate') return accentColor.clone().lerp(white, 0.25);
-  if (n.role === 'portfolio') return sectorColors[n.sector].clone().lerp(warmWhite, 0.5);
-  if (n.role === 'rejected') return new THREE.Color('#5c626e');
+  if (n.role === 'candidate') return accentColor.clone();
+  if (n.role === 'portfolio') return sectorColors[n.sector].clone().multiplyScalar(0.82); // deeper + ring
+  if (n.role === 'rejected') return rejectedColor.clone();
   return sectorColors[n.sector].clone();
 }
 const pOutline = new Float32Array(N);
@@ -213,18 +217,6 @@ pGeo.setAttribute('aPulse', new THREE.BufferAttribute(pPulse, 1));
 pGeo.setAttribute('aPhase', new THREE.BufferAttribute(pPhase, 1));
 pGeo.setAttribute('aDim', new THREE.BufferAttribute(pDim, 1).setUsage(THREE.DynamicDrawUsage));
 pGeo.setAttribute('aOutline', new THREE.BufferAttribute(pOutline, 1));
-
-// additive over a TRANSPARENT canvas: add RGB but never write alpha, otherwise
-// glow quads occlude the DOM stars behind the canvas and read as dark patches
-function pureAdditive(mat) {
-  mat.blending = THREE.CustomBlending;
-  mat.blendEquation = THREE.AddEquation;
-  mat.blendSrc = THREE.OneFactor;
-  mat.blendDst = THREE.OneFactor;
-  mat.blendSrcAlpha = THREE.ZeroFactor;
-  mat.blendDstAlpha = THREE.OneFactor;
-  return mat;
-}
 
 const pMat = new THREE.ShaderMaterial({
   transparent: true,
@@ -274,13 +266,24 @@ const LINK_MIN_TRANSPARENCY = 0.25;               // cosmos linkVisibilityMinTra
 const GREYOUT = 0.22;                             // point greyout (lines dim harder below)
 const E = edges.length;
 const lPos = new Float32Array(E * 6);
-const lCol = new Float32Array(E * 6);
+const lCol = new Float32Array(E * 8); // RGBA per vertex: real alpha works on light bg
 const lGeo = new THREE.BufferGeometry();
 lGeo.setAttribute('position', new THREE.BufferAttribute(lPos, 3).setUsage(THREE.DynamicDrawUsage));
-lGeo.setAttribute('color', new THREE.BufferAttribute(lCol, 3).setUsage(THREE.DynamicDrawUsage));
-const lMat = pureAdditive(new THREE.LineBasicMaterial({
-  vertexColors: true, transparent: true, depthWrite: false,
-}));
+lGeo.setAttribute('aRGBA', new THREE.BufferAttribute(lCol, 4).setUsage(THREE.DynamicDrawUsage));
+const lMat = new THREE.ShaderMaterial({
+  transparent: true,
+  depthWrite: false,
+  vertexShader: /* glsl */`
+    attribute vec4 aRGBA;
+    varying vec4 vRGBA;
+    void main() {
+      vRGBA = aRGBA;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }`,
+  fragmentShader: /* glsl */`
+    varying vec4 vRGBA;
+    void main() { gl_FragColor = vRGBA; }`,
+});
 const links = new THREE.LineSegments(lGeo, lMat);
 links.renderOrder = 1;
 group.add(links);
@@ -289,22 +292,22 @@ group.add(links);
 const SYN_DIST = 105;             // drawrange minDistance, scaled to our space
 const SYN_MAX = 900;
 const sPos = new Float32Array(SYN_MAX * 6);
-const sCol = new Float32Array(SYN_MAX * 6);
+const sCol = new Float32Array(SYN_MAX * 8);
 const sGeo = new THREE.BufferGeometry();
 sGeo.setAttribute('position', new THREE.BufferAttribute(sPos, 3).setUsage(THREE.DynamicDrawUsage));
-sGeo.setAttribute('color', new THREE.BufferAttribute(sCol, 3).setUsage(THREE.DynamicDrawUsage));
+sGeo.setAttribute('aRGBA', new THREE.BufferAttribute(sCol, 4).setUsage(THREE.DynamicDrawUsage));
 sGeo.setDrawRange(0, 0);
 const synapse = new THREE.LineSegments(sGeo, lMat.clone());
 synapse.renderOrder = 1;
 group.add(synapse);
-const synTint = new THREE.Color('#8fa8ff');
+const synTint = srgb('#5c6f9e');
 
 // --- hover ring (cosmos: white ring, 0.7 opacity)
 function ringTexture() {
   const c = document.createElement('canvas');
   c.width = c.height = 128;
   const g = c.getContext('2d');
-  g.strokeStyle = 'rgba(112,159,245,0.95)';
+  g.strokeStyle = 'rgba(38,109,240,0.95)';
   g.lineWidth = 7;
   g.beginPath(); g.arc(64, 64, 52, 0, Math.PI * 2); g.stroke();
   const t = new THREE.CanvasTexture(c);
@@ -332,7 +335,7 @@ function labelSprite(text, colorHex) {
   const x0 = (c.width - (tickW + gap + textW)) / 2;
   g.fillStyle = colorHex;
   g.fillRect(x0, 96 - 26, tickW, 52);
-  g.fillStyle = 'rgba(214, 222, 238, 0.9)';
+  g.fillStyle = 'rgba(28, 29, 31, 0.9)';
   g.fillText(label, x0 + tickW + gap, 96);
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
@@ -563,17 +566,18 @@ function animate() {
     const len = a.distanceTo(b);
     const fade = 1 - THREE.MathUtils.smoothstep(len, LINK_FADE_NEAR, LINK_FADE_FAR) * (1 - LINK_MIN_TRANSPARENCY);
     const breathe = 0.9 + 0.1 * Math.sin(time * 0.7 + e.phase) * motion;
-    let alpha = 0.55 * fade * breathe * e.weight;
+    let alpha = 0.32 * fade * breathe * e.weight;
     if (focused) {
       const on = e.a === focused || e.b === focused;
-      alpha *= on ? 1.6 : 0.06;
+      alpha *= on ? 1.8 : 0.05;
     }
+    alpha = Math.min(alpha, 0.85);
     const ca = nodeColor(e.a), cb = nodeColor(e.b);
-    lCol[i * 6] = ca.r * alpha; lCol[i * 6 + 1] = ca.g * alpha; lCol[i * 6 + 2] = ca.b * alpha;
-    lCol[i * 6 + 3] = cb.r * alpha; lCol[i * 6 + 4] = cb.g * alpha; lCol[i * 6 + 5] = cb.b * alpha;
+    lCol[i * 8] = ca.r; lCol[i * 8 + 1] = ca.g; lCol[i * 8 + 2] = ca.b; lCol[i * 8 + 3] = alpha;
+    lCol[i * 8 + 4] = cb.r; lCol[i * 8 + 5] = cb.g; lCol[i * 8 + 6] = cb.b; lCol[i * 8 + 7] = alpha;
   }
   lGeo.attributes.position.needsUpdate = true;
-  lGeo.attributes.color.needsUpdate = true;
+  lGeo.attributes.aRGBA.needsUpdate = true;
 
   // synapse shimmer: ephemeral lines between near pairs (drawrange collision loop)
   let seg = 0;
@@ -586,13 +590,14 @@ function animate() {
         const dx = a.pos.x - b.pos.x, dy = a.pos.y - b.pos.y, dz = a.pos.z - b.pos.z;
         const d2 = dx * dx + dy * dy + dz * dz;
         if (d2 > SYN_DIST * SYN_DIST) continue;
-        const alpha = (1 - Math.sqrt(d2) / SYN_DIST) * 0.1;
+        const alpha = (1 - Math.sqrt(d2) / SYN_DIST) * 0.09;
         sPos[seg * 6] = a.pos.x; sPos[seg * 6 + 1] = a.pos.y; sPos[seg * 6 + 2] = a.pos.z;
         sPos[seg * 6 + 3] = b.pos.x; sPos[seg * 6 + 4] = b.pos.y; sPos[seg * 6 + 5] = b.pos.z;
-        for (const off of [0, 3]) {
-          sCol[seg * 6 + off] = synTint.r * alpha;
-          sCol[seg * 6 + off + 1] = synTint.g * alpha;
-          sCol[seg * 6 + off + 2] = synTint.b * alpha;
+        for (const off of [0, 4]) {
+          sCol[seg * 8 + off] = synTint.r;
+          sCol[seg * 8 + off + 1] = synTint.g;
+          sCol[seg * 8 + off + 2] = synTint.b;
+          sCol[seg * 8 + off + 3] = alpha;
         }
         if (++seg >= SYN_MAX) break outer;
       }
@@ -600,7 +605,7 @@ function animate() {
   }
   sGeo.setDrawRange(0, seg * 2);
   sGeo.attributes.position.needsUpdate = true;
-  sGeo.attributes.color.needsUpdate = true;
+  sGeo.attributes.aRGBA.needsUpdate = true;
 
   if (tween.active) {
     tween.t = Math.min(tween.t + dt / tween.dur, 1);

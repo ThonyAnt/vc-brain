@@ -8,7 +8,7 @@ import type { Company, Founder } from '../../../lib/types'
 
 /* Stacked analysis cards: each section pins and stacks as you scroll the deal */
 const STACK_CARD =
-  'rounded-card border border-hairline bg-card/95 p-6 backdrop-blur-sm shadow-[0_8px_24px_rgba(32,32,32,0.08)]'
+  'rounded-none border-2 border-hairline-strong bg-card p-6 shadow-brutal'
 
 export function OverviewTab({ company, founders }: { company: Company; founders: Founder[] }) {
   const [names, setNames] = useState<Map<string, string>>(new Map())

@@ -768,7 +768,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     <div ref={containerRef} className="absolute inset-0">
       <div
         ref={tooltipRef}
-        className="pointer-events-none absolute z-10 hidden rounded-[6px] border border-[rgba(28,29,31,0.1)] bg-white/85 px-3 py-2 backdrop-blur-sm"
+        className="pointer-events-none absolute z-10 hidden rounded-none border-2 border-hairline-strong bg-white px-3 py-2 shadow-brutal-sm"
       />
     </div>
   )

@@ -57,7 +57,7 @@ export function ExpandableCard({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-white/50 dark:bg-black/50 backdrop-blur-md h-full w-full z-10"
+            className="fixed inset-0 bg-white/80 h-full w-full z-10"
           />
         )}
       </AnimatePresence>
@@ -68,7 +68,7 @@ export function ExpandableCard({
               layoutId={`card-${title}-${id}`}
               ref={cardRef}
               className={cn(
-                'w-full max-w-[850px] h-full flex flex-col overflow-auto [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch] sm:rounded-t-3xl bg-zinc-50 shadow-sm dark:shadow-none dark:bg-zinc-950 relative',
+                'w-full max-w-[850px] h-full flex flex-col overflow-auto [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch] sm:rounded-none bg-card border-2 border-hairline-strong shadow-brutal dark:shadow-none dark:bg-zinc-950 relative',
                 classNameExpanded,
               )}
               {...props}
@@ -97,7 +97,7 @@ export function ExpandableCard({
                   <motion.button
                     aria-label="Close card"
                     layoutId={`button-${title}-${id}`}
-                    className="h-10 w-10 shrink-0 flex items-center justify-center rounded-full bg-zinc-50 dark:bg-zinc-950 text-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-950 dark:text-white/70 text-black/70 border border-gray-200/90 dark:border-zinc-900 hover:border-gray-300/90 hover:text-black dark:hover:text-white dark:hover:border-zinc-800 transition-colors duration-300 focus:outline-none"
+                    className="h-10 w-10 shrink-0 flex items-center justify-center rounded-none border-2 border-hairline-strong bg-zinc-50 dark:bg-zinc-950 text-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-950 dark:text-white/70 text-black/70 border border-gray-200/90 dark:border-zinc-900 hover:border-gray-300/90 hover:text-black dark:hover:text-white dark:hover:border-zinc-800 transition-colors duration-300 focus:outline-none"
                     onClick={() => setActive(false)}
                   >
                     <motion.div animate={{ rotate: active ? 45 : 0 }} transition={{ duration: 0.4 }}>
@@ -142,13 +142,13 @@ export function ExpandableCard({
         layoutId={`card-${title}-${id}`}
         onClick={() => setActive(true)}
         className={cn(
-          'p-3 flex flex-col justify-between items-center bg-zinc-50 shadow-sm dark:shadow-none dark:bg-zinc-950 rounded-2xl cursor-pointer border border-gray-200/70 dark:border-zinc-900',
+          'p-3 flex flex-col justify-between items-center bg-card rounded-none cursor-pointer border-2 border-hairline-strong shadow-brutal',
           className,
         )}
       >
         <div className="flex gap-4 flex-col">
           <motion.div layoutId={`image-${title}-${id}`}>
-            <img src={src} alt={title} className="w-64 h-56 rounded-lg object-cover object-center" />
+            <img src={src} alt={title} className="w-64 h-56 rounded-none border-2 border-hairline-strong object-cover object-center" />
           </motion.div>
           <div className="flex justify-between items-center">
             <div className="flex flex-col">
@@ -169,7 +169,7 @@ export function ExpandableCard({
               aria-label="Open card"
               layoutId={`button-${title}-${id}`}
               className={cn(
-                'h-8 w-8 shrink-0 flex items-center justify-center rounded-full bg-zinc-50 dark:bg-zinc-950 text-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-950 dark:text-white/70 text-black/70 border border-gray-200/90 dark:border-zinc-900 hover:border-gray-300/90 hover:text-black dark:hover:text-white dark:hover:border-zinc-800 transition-colors duration-300  focus:outline-none',
+                'h-8 w-8 shrink-0 flex items-center justify-center rounded-none border-2 border-hairline-strong bg-zinc-50 dark:bg-zinc-950 text-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-950 dark:text-white/70 text-black/70 border border-gray-200/90 dark:border-zinc-900 hover:border-gray-300/90 hover:text-black dark:hover:text-white dark:hover:border-zinc-800 transition-colors duration-300  focus:outline-none',
                 className,
               )}
             >

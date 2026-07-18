@@ -72,7 +72,7 @@ export function ChatDrawer() {
           <button
             onClick={() => fileRef.current?.click()}
             title="Upload deck"
-            className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-hairline bg-card text-ink hover:bg-bone"
+            className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-none border-2 border-hairline-strong bg-card text-ink hover:bg-bone"
           >
             +
           </button>
@@ -81,7 +81,7 @@ export function ChatDrawer() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && send(input)}
             placeholder="Ask the brain…"
-            className="h-11 w-full rounded-full border border-hairline bg-card px-5 text-base text-ink placeholder:text-ash focus:outline-3 focus:outline-ring-focus"
+            className="h-11 w-full rounded-none border-2 border-hairline-strong bg-card px-5 text-base text-ink placeholder:text-ash focus:outline-3 focus:outline-ring-focus"
           />
           <Pill variant="primary" size="md" onClick={() => send(input)}>
             →

@@ -1,6 +1,11 @@
 import type { HTMLAttributes } from 'react'
 
-/* Section label: basier-square caption-tight (14/600/-0.35px), never mono. */
+/* Section label: Space Mono uppercase, wide tracking — the neobrutal eyebrow voice. */
 export function Eyebrow({ className = '', ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={`caption-tight text-charcoal ${className}`} {...props} />
+  return (
+    <div
+      className={`code-sm uppercase tracking-[0.12em] text-charcoal ${className}`}
+      {...props}
+    />
+  )
 }

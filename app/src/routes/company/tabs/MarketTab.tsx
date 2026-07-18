@@ -44,7 +44,7 @@ export function MarketTab({ company }: { company: Company }) {
               >
                 <div className="mx-auto h-3 w-3 rounded-full" style={{ background: KIND_COLOR[c.kind] }} />
                 <div className="mt-1 text-center text-[11px] leading-3 text-charcoal">{c.name}</div>
-                <div className="pointer-events-none absolute top-full left-1/2 z-10 mt-1 hidden w-44 -translate-x-1/2 rounded-card border border-hairline bg-card p-2 text-[11px] leading-4 text-body group-hover:block">
+                <div className="pointer-events-none absolute top-full left-1/2 z-10 mt-1 hidden w-44 -translate-x-1/2 rounded-none border-2 border-hairline-strong bg-card p-2 shadow-brutal-sm text-[11px] leading-4 text-body group-hover:block">
                   {c.note}
                 </div>
               </div>
@@ -58,7 +58,7 @@ export function MarketTab({ company }: { company: Company }) {
           </div>
 
           {/* white space callout */}
-          <div className="absolute right-[6%] bottom-[10%] w-36 rounded-card border border-dashed border-ash p-2">
+          <div className="absolute right-[6%] bottom-[10%] w-36 rounded-none border-2 border-dashed border-ash p-2">
             <span className="caption text-ash">white space</span>
             <div className="mt-1 text-[11px] leading-4 text-mute">emerging + adjacent, no funded player</div>
           </div>

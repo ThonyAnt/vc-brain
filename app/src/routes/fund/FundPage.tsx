@@ -41,12 +41,12 @@ export function FundPage() {
             <p className="mt-2 text-lg text-body">{fund.thesis}</p>
             <div className="mt-4 flex flex-wrap gap-1.5">
               {fund.sectors.map((s) => (
-                <span key={s} className="rounded-full border border-hairline bg-canvas px-2.5 py-1 caption text-ink">
+                <span key={s} className="rounded-none border border-hairline-strong bg-canvas px-2.5 py-1 caption text-ink">
                   {s}
                 </span>
               ))}
               {fund.geographies.map((g) => (
-                <span key={g} className="rounded-full border border-hairline bg-canvas px-2.5 py-1 caption text-charcoal">
+                <span key={g} className="rounded-none border border-hairline-strong bg-canvas px-2.5 py-1 caption text-charcoal">
                   {g}
                 </span>
               ))}
@@ -74,9 +74,9 @@ export function FundPage() {
                 .map(([k, v]) => (
                   <div key={k} className="flex items-center gap-3">
                     <span className="w-64 shrink-0 text-sm text-on-dark-mute">{k}</span>
-                    <div className="h-[3px] flex-1 rounded-full bg-divider-dark">
+                    <div className="h-[3px] flex-1 rounded-none bg-divider-dark">
                       <div
-                        className="h-[3px] rounded-full bg-hero-glow transition-all duration-700"
+                        className="h-[3px] rounded-none bg-hero-glow transition-all duration-700"
                         style={{ width: `${v * 100}%` }}
                       />
                     </div>

@@ -29,8 +29,8 @@ export default function Dock({ items, className, activeLabel, orientation = 'hor
         animate={vertical ? { x: [0, -2, 0] } : { y: [0, -2, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         className={cn(
-          vertical ? 'flex flex-col items-center gap-4 px-3 py-4 rounded-3xl' : 'flex items-end gap-4 px-4 py-3 rounded-3xl',
-          'border bg-background/70 backdrop-blur-2xl shadow-lg',
+          vertical ? 'flex flex-col items-center gap-4 px-3 py-4 rounded-none' : 'flex items-end gap-4 px-4 py-3 rounded-none',
+          'border-2 border-border bg-background shadow-brutal',
         )}
         style={{
           // arc layout illusion
@@ -59,9 +59,9 @@ export default function Dock({ items, className, activeLabel, orientation = 'hor
                       variant="ghost"
                       size="icon"
                       className={cn(
-                        'rounded-2xl relative',
+                        'rounded-none relative',
                         'transition-colors',
-                        isHovered && 'shadow-lg shadow-ring/40',
+                        isHovered && 'bg-muted',
                       )}
                       onClick={() => {
                         setInternalActive(item.label)
@@ -71,14 +71,14 @@ export default function Dock({ items, className, activeLabel, orientation = 'hor
                       <item.icon
                         className={cn(
                           'h-6 w-6 transition-colors',
-                          isActive ? 'text-[#3b82f6]' : 'text-foreground',
+                          isActive ? 'text-primary' : 'text-foreground',
                         )}
                       />
                       {/* Glowing ring effect */}
                       {isHovered && (
                         <motion.span
                           layoutId="glow"
-                          className="absolute inset-0 rounded-2xl border border-ring"
+                          className="absolute inset-0 rounded-none border-2 border-border"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}

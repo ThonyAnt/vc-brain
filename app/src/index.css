@@ -12,60 +12,45 @@
 @import 'tw-animate-css';
 
 /*
- * Replicate design tokens — docs/design/awesome-design-md/design-md/replicate/DESIGN.md
- * Proprietary families substituted per the file's own note:
- * rb-freigeist-neue → Bricolage Grotesque, basier-square → Inter, JetBrains Mono direct.
+ * Legacy role tokens, remapped onto the CANONICAL SITE THEME (see end of file /
+ * docs/design/site-theme.css). Values come from the guide only — never invent.
+ * shadcn-namespace tokens live exclusively in the canonical block at the end.
  */
 @theme {
-  --color-primary: #ea2804;
-  --color-primary-deep: #c01f00;
+  --color-primary: #ff3333;
+  --color-primary-deep: #000000; /* hover state: invert to black */
   --color-on-primary: #ffffff;
-  --color-ink: #202020;
-  --color-body: #3a3a3a;
-  --color-charcoal: #575757;
-  --color-mute: #646464;
-  --color-ash: #8d8d8d;
-  --color-stone: #bbbbbb;
-  --color-on-dark: #fcfcfc;
-  --color-on-dark-mute: rgba(252, 252, 252, 0.72);
-  --color-canvas: #f9f7f3;
-  --color-bone: #f3f0e8;
+  --color-ink: #000000;
+  --color-body: #000000;
+  --color-charcoal: #333333;
+  --color-mute: #333333;
+  --color-ash: #333333;
+  --color-stone: #cccccc;
+  --color-on-dark: #ffffff;
+  --color-on-dark-mute: #cccccc;
+  --color-canvas: #ffffff;
+  --color-bone: #f0f0f0;
   --color-card: #ffffff;
-  --color-dark: #202020;
+  --color-dark: #000000;
   --color-deep: #000000;
-  --color-hairline: rgba(32, 32, 32, 0.12);
-  --color-hairline-strong: #202020;
-  --color-divider-dark: rgba(255, 255, 255, 0.2);
-  --color-hero-glow: #ff6a3d;
-  --color-hero-pink: #f4a8a0;
-  --color-success: #2b9a66;
-  --color-ring-focus: rgba(59, 130, 246, 0.5);
+  --color-hairline: #000000;
+  --color-hairline-strong: #000000;
+  --color-divider-dark: #ffffff;
+  --color-hero-glow: #ffff00;
+  --color-hero-pink: #f0f0f0;
+  --color-success: #00cc00;
+  --color-ring-focus: #ff3333;
 
-  --font-display: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: 'DM Sans', sans-serif;
+  --font-sans: 'DM Sans', sans-serif;
+  --font-mono: 'Space Mono', monospace;
 
-  --radius-xs: 4px;
-  --radius-card: 10px;
-  --radius-lg: 16px;
+  --radius-xs: 0px;
+  --radius-card: 0px;
+  --radius-lg: 0px;
 
-  /* shadcn token names mapped onto the Replicate palette (for components/ui) */
-  --color-background: #f9f7f3;
-  --color-foreground: #202020;
-  --color-primary-foreground: #ffffff;
-  --color-popover: #ffffff;
-  --color-popover-foreground: #202020;
-  --color-accent: #f3f0e8;
-  --color-accent-foreground: #202020;
-  --color-secondary: #f3f0e8;
-  --color-secondary-foreground: #202020;
-  --color-muted: #f3f0e8;
-  --color-muted-foreground: #646464;
-  --color-destructive: #c01f00;
-  --color-destructive-foreground: #ffffff;
-  --color-border: rgba(32, 32, 32, 0.12);
-  --color-input: rgba(32, 32, 32, 0.12);
-  --color-ring: rgba(59, 130, 246, 0.5);
+  --shadow-brutal: 4px 4px 0px 0px hsl(0 0% 0%);
+  --shadow-brutal-sm: 2px 2px 0px 0px hsl(0 0% 0%);
 }
 
 /* shadcn components use bare `border`; default the border color to the hairline token */
@@ -163,34 +148,28 @@ body {
   letter-spacing: 0;
 }
 
-/* Brain page background (ported verbatim from final mockup, light theme):
-   single bottom-lit surface + faint dot grid with gentle mouse parallax */
+/* Brain page background: flat theme white + faint black dot grid with parallax */
 .brain-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  background: radial-gradient(ellipse at bottom, #ffffff 0%, #e9ebf0 100%);
+  background: #ffffff;
 }
 .brain-bg-parallax {
   position: absolute;
   inset: -80px;
   will-change: transform;
-  background-image: radial-gradient(rgba(28, 29, 31, 0.07) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
-/* Final mockup panel chrome for brain-page overlays: white glass, Attio-layered shadow */
+/* Brain-page overlay panels, neobrutal: solid white, 2px black border, hard shadow */
 @utility glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid #e4e7ec;
-  border-radius: 13px;
-  box-shadow:
-    0 1px 3px #00000008,
-    0 4px 8px -2px #00000008,
-    0 16px 32px -8px #0000000d;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 0;
+  box-shadow: 4px 4px 0px 0px hsl(0 0% 0%);
 }
 
 /* ============================================================================

@@ -19,7 +19,7 @@ export function DataTable<T>({
   onRowClick?: (row: T) => void
 }) {
   return (
-    <div className="overflow-x-auto rounded-card border border-hairline bg-card">
+    <div className="overflow-x-auto rounded-none border-2 border-hairline-strong bg-card shadow-brutal">
       <table className="w-full border-collapse text-left">
         <thead>
           <tr className="bg-bone">

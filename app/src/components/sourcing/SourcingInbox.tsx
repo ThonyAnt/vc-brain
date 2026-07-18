@@ -53,7 +53,7 @@ export function SourcingInbox({
     return (
       <button
         onClick={() => setOpen(true)}
-        className="glass-panel pointer-events-auto flex h-fit cursor-pointer items-center gap-2.5 self-start rounded-full px-4 py-2.5 transition-colors hover:bg-white"
+        className="glass-panel pointer-events-auto flex h-fit cursor-pointer items-center gap-2.5 self-start rounded-none px-4 py-2.5 transition-colors hover:bg-bone"
       >
         <span className="caption-tight text-ink">Sourced this week</span>
         <span className="code-md" style={{ color: ACCENT }}>
@@ -90,7 +90,7 @@ export function SourcingInbox({
         {visible.map((c) => (
           <div
             key={c.id}
-            className="cursor-pointer rounded-card border border-hairline bg-card p-3 transition-colors hover:border-hairline-strong"
+            className="cursor-pointer rounded-none border-2 border-hairline-strong bg-card p-3 transition-colors hover:bg-bone"
             onClick={() => onFocus(c.id)}
             onMouseEnter={() => setHoverCity(cityLatLng(c.location))}
             onMouseLeave={() => setHoverCity(null)}

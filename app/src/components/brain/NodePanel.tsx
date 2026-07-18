@@ -72,8 +72,8 @@ export function NodePanel({
           <p className="mt-3 text-sm text-mute">{company.oneLiner}</p>
           <div className="mt-3 flex items-center gap-3">
             <span className="caption text-mute">Fund fit</span>
-            <div className="h-[3px] flex-1 rounded-[2px] bg-[rgba(28,29,31,0.08)]">
-              <div className="h-[3px] rounded-[2px]" style={{ width: `${company.fitScore}%`, background: ACCENT }} />
+            <div className="h-[3px] flex-1 rounded-none bg-bone">
+              <div className="h-[3px] rounded-none" style={{ width: `${company.fitScore}%`, background: ACCENT }} />
             </div>
             <span className="code-sm text-ink">{company.fitScore}</span>
           </div>
@@ -111,8 +111,8 @@ export function NodePanel({
           <p className="mt-3 text-sm text-mute">{founder.background}</p>
           <div className="mt-3 flex items-center gap-3">
             <span className="caption text-mute">Founder score</span>
-            <div className="h-[3px] flex-1 rounded-[2px] bg-[rgba(28,29,31,0.08)]">
-              <div className="h-[3px] rounded-[2px]" style={{ width: `${founder.score}%`, background: ACCENT }} />
+            <div className="h-[3px] flex-1 rounded-none bg-bone">
+              <div className="h-[3px] rounded-none" style={{ width: `${founder.score}%`, background: ACCENT }} />
             </div>
             <span className="code-sm text-ink">{founder.score}</span>
           </div>

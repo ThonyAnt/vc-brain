@@ -125,17 +125,20 @@ export function BrainPage() {
         )}
       </div>
 
-      <div className="pointer-events-none absolute top-4 right-4 flex flex-col items-end gap-1.5">
-        {markets.map((m, i) => (
-          <span key={m.id} style={hudMono} className="flex items-center gap-1.5">
-            <i
-              className="inline-block h-[7px] w-[7px] rounded-full"
-              style={{ background: SECTOR_PALETTE[i % SECTOR_PALETTE.length] }}
-            />
-            {m.label}
-          </span>
-        ))}
-      </div>
+      {/* sector legend yields the corner while a company card is open */}
+      {!selectedId && (
+        <div className="pointer-events-none absolute top-4 right-4 flex flex-col items-end gap-1.5">
+          {markets.map((m, i) => (
+            <span key={m.id} style={hudMono} className="flex items-center gap-1.5">
+              <i
+                className="inline-block h-[7px] w-[7px] rounded-full"
+                style={{ background: SECTOR_PALETTE[i % SECTOR_PALETTE.length] }}
+              />
+              {m.label}
+            </span>
+          ))}
+        </div>
+      )}
       <div style={hudMono} className="pointer-events-none absolute right-4 bottom-4">
         drag orbit · scroll zoom · hover inspect · click focus · [ ] node size
       </div>

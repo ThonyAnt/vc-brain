@@ -36,6 +36,7 @@ const SECTORS = [
   { name: 'Consumer',   color: '#c96666', desc: 'products people choose themselves' },
 ];
 const ACCENT = '#266df0'; // Attio blue-500: candidates, hover ring, focus, fit bar
+const SHOW_LINES = false; // resting-state edges + shimmer; focused node's edges still show
 // which sectors plausibly trade companies between them (cross-links)
 const SECTOR_ADJ = [[0, 4], [0, 1], [0, 2], [1, 5], [3, 1], [2, 3], [4, 1], [5, 4]];
 
@@ -566,10 +567,10 @@ function animate() {
     const len = a.distanceTo(b);
     const fade = 1 - THREE.MathUtils.smoothstep(len, LINK_FADE_NEAR, LINK_FADE_FAR) * (1 - LINK_MIN_TRANSPARENCY);
     const breathe = 0.9 + 0.1 * Math.sin(time * 0.7 + e.phase) * motion;
-    let alpha = 0.32 * fade * breathe * e.weight;
+    let alpha = SHOW_LINES ? 0.32 * fade * breathe * e.weight : 0;
     if (focused) {
       const on = e.a === focused || e.b === focused;
-      alpha *= on ? 1.8 : 0.05;
+      alpha = on ? 0.55 * fade * breathe * e.weight : alpha * 0.05;
     }
     alpha = Math.min(alpha, 0.85);
     const ca = nodeColor(e.a), cb = nodeColor(e.b);
@@ -581,7 +582,7 @@ function animate() {
 
   // synapse shimmer: ephemeral lines between near pairs (drawrange collision loop)
   let seg = 0;
-  if (!focused) {
+  if (SHOW_LINES && !focused) {
     outer:
     for (let i = 0; i < N; i++) {
       const a = nodes[i];

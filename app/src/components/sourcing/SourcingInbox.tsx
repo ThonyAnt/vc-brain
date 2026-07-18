@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router'
 import { ACCENT } from '../brain/BrainCanvas'
 import { api } from '../../lib/api/client'
@@ -18,6 +18,9 @@ export function SourcingInbox({
   const [dismissed, setDismissed] = useState<Set<string>>(new Set())
   const [saved, setSaved] = useState<Set<string>>(new Set())
   const [open, setOpen] = useState(false) // folded by default — the graph stays immersive
+  const [query, setQuery] = useState('')
+  const [searching, setSearching] = useState(false)
+  const [foundIds, setFoundIds] = useState<Set<string>>(new Set())
   const navigate = useNavigate()
   const setWeights = useAppStore((s) => s.setWeights)
   const setLearningNote = useAppStore((s) => s.setLearningNote)
@@ -25,6 +28,30 @@ export function SourcingInbox({
   useEffect(() => {
     api.getSourcing().then(setItems)
   }, [])
+
+  /* Trigger a live web search; new companies are prepended and flagged "new". */
+  async function runDiscover(e?: FormEvent) {
+    e?.preventDefault()
+    if (searching) return
+    setSearching(true)
+    try {
+      const found = await api.discover(query.trim() || undefined)
+      if (found.length) {
+        setItems((prev) => {
+          const have = new Set(prev.map((c) => c.id))
+          return [...found.filter((c) => !have.has(c.id)), ...prev]
+        })
+        setFoundIds((s) => new Set([...s, ...found.map((c) => c.id)]))
+        onFeedback(found.map((c) => c.id))
+        if (found[0]) onFocus(found[0].id)
+        setQuery('')
+      } else {
+        setLearningNote('No new companies found for that search.')
+      }
+    } finally {
+      setSearching(false)
+    }
+  }
 
   async function pass(c: Company) {
     const res = await api.postFeedback({ entityId: c.id, action: 'pass' })
@@ -67,6 +94,22 @@ export function SourcingInbox({
           </button>
         </span>
       </div>
+      <form onSubmit={runDiscover} className="flex items-center gap-2 border-b border-hairline px-3 py-2">
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search the web for startups…"
+          className="min-w-0 flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-mute"
+        />
+        <button
+          type="submit"
+          disabled={searching}
+          className="caption-tight rounded-full px-3 py-1 text-white transition-opacity disabled:opacity-60"
+          style={{ backgroundColor: ACCENT }}
+        >
+          {searching ? 'Searching…' : 'Search'}
+        </button>
+      </form>
       <div className="flex-1 space-y-2 overflow-y-auto p-2">
         {visible.map((c) => (
           <div
@@ -75,7 +118,17 @@ export function SourcingInbox({
             onClick={() => onFocus(c.id)}
           >
             <div className="flex items-baseline justify-between">
-              <div className="text-sm font-semibold text-ink">{c.name}</div>
+              <div className="flex items-center gap-2">
+                <div className="text-sm font-semibold text-ink">{c.name}</div>
+                {foundIds.has(c.id) && (
+                  <span
+                    className="caption-tight rounded-full px-1.5 py-0.5 text-white"
+                    style={{ backgroundColor: ACCENT }}
+                  >
+                    new
+                  </span>
+                )}
+              </div>
               <div className="code-sm" style={{ color: ACCENT }}>
                 {c.fitScore}
               </div>

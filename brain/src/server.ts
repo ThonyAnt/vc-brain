@@ -14,8 +14,12 @@ import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { OpenAILLMClient } from "./llm/openai.js";
+import { TavilySearchClient } from "./search/tavily.js";
 import { applyFeedback } from "./orchestrator.js";
+import { discoverCompanies } from "./tools/discover.js";
+import { rankCandidates } from "./tools/fundfit.js";
 import { InvestorFeedbackSchema, type FeedbackActionType } from "./schemas/feedback.js";
+import type { RankedCandidate } from "./schemas/sourcing.js";
 import type { VCBrainState } from "./state.js";
 import type { Company } from "./schemas/company.js";
 
@@ -27,6 +31,10 @@ const MODEL = process.env.VC_BRAIN_OPENAI_MODEL ?? "gpt-4o-mini";
 const state = JSON.parse(readFileSync(SNAPSHOT, "utf8")) as VCBrainState & { competitors?: Company[] };
 const competitors = state.competitors ?? [];
 const llm = new OpenAILLMClient({ model: MODEL });
+// Web discovery is available only when a Tavily key is present server-side.
+const search = process.env.TAVILY_API_KEY ? new TavilySearchClient() : undefined;
+
+const cap = (s: string) => (s ? s[0]!.toUpperCase() + s.slice(1) : s);
 
 const universe = (): Company[] => [
   ...state.candidateUniverse,
@@ -73,6 +81,86 @@ async function handleFeedback(body: { entityId: string; action: string; justific
   const moved = (state.learningResult?.changedRankings ?? []).slice(0, 4).map((r) => r.companyId);
   const changedNodeIds = [...new Set([body.entityId, company?.id, ...moved].filter(Boolean))] as string[];
   return { weights, changedNodeIds, note: state.learningResult?.whatTheFundLearned ?? "Feedback recorded." };
+}
+
+/**
+ * Map a freshly-discovered brain company (+ its ranking) to the app's sourced
+ * Company view shape, so the dashboard can render it with no extra adaptation.
+ */
+function sourcedView(c: Company, r: RankedCandidate | undefined) {
+  const fit = r?.fundFitScore !== undefined ? Math.round(r.fundFitScore * 100) : 70;
+  const winner = r?.closestWinnerId ? findCompany(r.closestWinnerId) : undefined;
+  const rejected = r?.closestRejectedDealId ? findCompany(r.closestRejectedDealId) : undefined;
+  const competitor = r?.closestCompetitorId ? findCompany(r.closestCompetitorId) : undefined;
+
+  const analogues = [];
+  if (winner) analogues.push({ companyId: winner.id, kind: "portfolio", note: `Resembles prior winner ${winner.name}.` });
+  if (rejected) analogues.push({ companyId: rejected.id, kind: "rejected", note: `Echoes passed deal ${rejected.name}.` });
+
+  return {
+    id: c.id,
+    name: c.name,
+    type: "sourced" as const,
+    oneLiner: c.description ?? "",
+    sector: c.sector ?? c.attributes.industryPath[0] ?? "—",
+    stage: cap(c.stage ?? "seed"),
+    location: c.geography ?? "—",
+    raising: c.checkSizeSought ? `$${(c.checkSizeSought / 1_000_000).toFixed(1)}M round` : undefined,
+    fitScore: fit,
+    summary: c.description ?? "",
+    founderIds: [],
+    analogues,
+    whySurfaced: [
+      winner
+        ? `Surfaced from a live web search — closest to portfolio winner ${winner.name} (fund-fit ${fit}).`
+        : `Surfaced from a live web search — matches the fund thesis (fund-fit ${fit}).`,
+    ],
+    risks: r?.unresolvedRisks ?? [],
+    diligenceQuestions: [],
+    reasonsToInvest: r?.reasonsToAdvance ?? [],
+    reasonsToPass: r?.reasonsToReject ?? [],
+    competitors: competitor
+      ? [{ name: competitor.name, kind: "direct", note: "Closest external competitor by similarity." }]
+      : [],
+  };
+}
+
+/** Trigger a live web search, fold results into the universe, return sourced views. */
+async function handleDiscover(body: { query?: string; limit?: number }) {
+  if (!search) throw new Error("web search unavailable: TAVILY_API_KEY not set on the server");
+  const fundProfile = state.fundProfile;
+
+  const discovered = await discoverCompanies(
+    {
+      mandate: state.mandate ?? "Find companies matching the fund thesis.",
+      fundProfile,
+      queries: body.query?.trim() ? [body.query.trim()] : undefined,
+      limit: Math.min(body.limit ?? 6, 12),
+      excludeNames: universe().map((c) => c.name),
+    },
+    { search, llm },
+  );
+  if (discovered.length === 0) return { companies: [], count: 0 };
+
+  for (const c of discovered) state.candidateUniverse.push(c);
+
+  let ranked: RankedCandidate[] = [];
+  if (fundProfile) {
+    ranked = rankCandidates({
+      candidates: discovered,
+      fundProfile,
+      positiveHistory: state.portfolioCompanies,
+      rejectedHistory: state.rejectedDeals,
+      competitors,
+    });
+    state.sourcedCandidates = [...(state.sourcedCandidates ?? []), ...ranked];
+  }
+
+  const byId = new Map(ranked.map((r) => [r.companyId, r]));
+  const companies = discovered
+    .map((c) => sourcedView(c, byId.get(c.id)))
+    .sort((a, b) => b.fitScore - a.fitScore);
+  return { companies, count: companies.length };
 }
 
 async function handleChat(body: { messages: { role: string; content: string }[]; context?: { companyId?: string } }) {
@@ -129,6 +217,9 @@ const server = http.createServer(async (req, res) => {
     }
     if (req.method === "POST" && req.url === "/api/chat") {
       return res.end(JSON.stringify(await handleChat((await readBody(req)) as never)));
+    }
+    if (req.method === "POST" && req.url === "/api/discover") {
+      return res.end(JSON.stringify(await handleDiscover((await readBody(req)) as never)));
     }
     res.writeHead(404).end(JSON.stringify({ error: "not found" }));
   } catch (e) {

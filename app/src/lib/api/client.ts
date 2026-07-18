@@ -91,6 +91,21 @@ export const api = {
     if (live?.content) return live
     return localChat(messages, context)
   },
+
+  /**
+   * Trigger a live web search (Tavily) for new startups matching the fund.
+   * Needs the brain API running; returns [] if it's unreachable (no local
+   * fallback — real discovery can't be faked). New companies are merged into the
+   * in-memory store so the rest of the app (company pages, graph) can see them.
+   */
+  async discover(query?: string): Promise<Company[]> {
+    const live = await postJson<{ companies: Company[] }>('/api/discover', { query })
+    if (!live?.companies?.length) return []
+    for (const c of live.companies) {
+      if (!data.companies.some((x) => x.id === c.id)) data.companies.push(c)
+    }
+    return live.companies
+  },
 }
 
 /* ---------------- local fallbacks (used when the API is down) ------------- */

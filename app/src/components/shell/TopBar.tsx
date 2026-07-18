@@ -16,10 +16,10 @@ export function TopBar() {
   return (
     <header className="flex h-15 shrink-0 items-center justify-between border-b border-hairline bg-canvas px-6">
       <div className="flex items-baseline gap-3">
-        <span className="font-display text-[17px] font-bold tracking-tight text-ink">Meridian Ventures</span>
-        <span className="eyebrow text-ash">{crumb(location.pathname)}</span>
+        <span className="text-sm font-semibold text-ink">Meridian Ventures</span>
+        <span className="code-sm text-ash">{crumb(location.pathname)}</span>
       </div>
-      <Pill variant={chatOpen ? 'dark' : 'outline'} onClick={toggleChat}>
+      <Pill variant={chatOpen ? 'dark' : 'outline'} size="md" onClick={toggleChat}>
         Analyst
       </Pill>
     </header>

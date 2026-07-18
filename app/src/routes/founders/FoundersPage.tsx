@@ -42,7 +42,7 @@ export function FoundersPage() {
           <thead>
             <tr className="bg-bone">
               {['Founder', 'Company', 'Background', 'Signals', 'Score', ''].map((h) => (
-                <th key={h} className="eyebrow px-4 py-3 font-normal text-charcoal">
+                <th key={h} className="caption-tight px-4 py-3 text-charcoal">
                   {h}
                 </th>
               ))}
@@ -55,7 +55,7 @@ export function FoundersPage() {
               return (
                 <Fragment key={f.id}>
                   <tr
-                    className="cursor-pointer border-t border-hairline hover:bg-bone/60"
+                    className="cursor-pointer border-t border-hairline hover:bg-bone"
                     onClick={() => setOpenId(open ? null : f.id)}
                   >
                     <td className="caption-tight px-4 py-3 text-ink">{f.name}</td>
@@ -72,7 +72,7 @@ export function FoundersPage() {
                     <td className="px-4 py-3">
                       <div className="flex flex-wrap gap-1">
                         {f.signals.map((s) => (
-                          <span key={s} className="rounded-full border border-hairline bg-canvas px-2.5 py-1 text-[11px] text-ink">
+                          <span key={s} className="rounded-full border border-hairline bg-canvas px-2.5 py-1 caption text-ink">
                             {s}
                           </span>
                         ))}
@@ -81,30 +81,32 @@ export function FoundersPage() {
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
                         <div className="h-[3px] w-16 rounded-full bg-bone">
-                          <div className="h-[3px] rounded-full bg-primary" style={{ width: `${f.score}%` }} />
+                          <div className="h-[3px] rounded-full bg-dark" style={{ width: `${f.score}%` }} />
                         </div>
-                        <span className="font-mono text-sm text-ink">{f.score}</span>
+                        <span className="code-md text-ink">{f.score}</span>
                       </div>
                     </td>
                     <td className="px-4 py-3 text-right text-ash">{open ? '▾' : '▸'}</td>
                   </tr>
                   {open && (
-                    <tr className="border-t border-hairline bg-bone/40">
+                    <tr className="border-t border-hairline bg-bone">
                       <td colSpan={6} className="px-4 py-4">
                         <Eyebrow>Score rationale</Eyebrow>
-                        <p className="mt-1 max-w-[760px] text-sm leading-normal text-body">{f.justification}</p>
+                        <p className="mt-1 max-w-[760px] text-sm text-body">{f.justification}</p>
                         <div className="mt-3 flex items-center gap-2">
                           <input
                             value={note}
                             onChange={(e) => setNote(e.target.value)}
                             placeholder="Why do you agree or disagree? (optional, feeds the brain)"
-                            className="h-9 w-96 rounded-full border border-hairline bg-card px-4 text-sm text-ink placeholder:text-ash focus:outline-3 focus:outline-ring-focus"
+                            className="h-11 w-96 rounded-full border border-hairline bg-card px-5 text-base text-ink placeholder:text-ash focus:outline-3 focus:outline-ring-focus"
                             onClick={(e) => e.stopPropagation()}
                           />
-                          <Pill variant="dark" onClick={() => feedback(f, 'agree')}>
+                          <Pill variant="dark" size="md" onClick={() => feedback(f, 'agree')}>
                             Agree
                           </Pill>
-                          <Pill onClick={() => feedback(f, 'disagree')}>Disagree</Pill>
+                          <Pill size="md" onClick={() => feedback(f, 'disagree')}>
+                            Disagree
+                          </Pill>
                         </div>
                       </td>
                     </tr>

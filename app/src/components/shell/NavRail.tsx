@@ -51,7 +51,7 @@ const items = [
 export function NavRail() {
   return (
     <nav className="flex w-16 shrink-0 flex-col items-center gap-2 border-r border-hairline bg-canvas py-4">
-      <div className="mb-4 font-display text-sm font-bold tracking-tight text-ink" title="VC Brain">
+      <div className="caption-tight mb-4 text-ink" title="VC Brain">
         VC
       </div>
       {items.map((item) => (

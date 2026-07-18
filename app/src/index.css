@@ -104,28 +104,58 @@ body {
   letter-spacing: -0.35px;
 }
 
-/* Metadata/label voice: JetBrains Mono, the code-sm token */
-@utility eyebrow {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1.5;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+/* Label voice: basier-square captions. Quiet labels use caption (12/400),
+   emphatic labels use caption-tight (14/600/-0.35px). Mono is NOT a label
+   face here — it is reserved for literal values via the code tokens below,
+   both letter-spacing 0, never uppercase. */
+@utility caption {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.33;
 }
 
-/* Brain page background (ported verbatim from mockup/index.html):
+@utility code-md {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: 0;
+}
+
+@utility code-sm {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+/* Brain page background (ported verbatim from final mockup, light theme):
    single bottom-lit surface + faint dot grid with gentle mouse parallax */
 .brain-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  background: radial-gradient(ellipse at bottom, #262626 0%, #000 100%);
+  background: radial-gradient(ellipse at bottom, #ffffff 0%, #e9ebf0 100%);
 }
 .brain-bg-parallax {
   position: absolute;
   inset: -80px;
   will-change: transform;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(28, 29, 31, 0.07) 1px, transparent 1px);
   background-size: 28px 28px;
+}
+
+/* Final mockup panel chrome for brain-page overlays: white glass, Attio-layered shadow */
+@utility glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #e4e7ec;
+  border-radius: 13px;
+  box-shadow:
+    0 1px 3px #00000008,
+    0 4px 8px -2px #00000008,
+    0 16px 32px -8px #0000000d;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }

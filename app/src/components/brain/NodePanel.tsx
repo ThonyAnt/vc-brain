@@ -4,9 +4,18 @@ import { api } from '../../lib/api/client'
 import type { Company, Founder } from '../../lib/types'
 import { useAppStore } from '../../state/store'
 import { Pill } from '../ui/Pill'
-import { ROLE_COLORS } from './BrainCanvas'
+import { ACCENT } from './BrainCanvas'
+import { sectorColor } from './sectorColors'
 
-/* Dark-inversion detail panel over the brain canvas. */
+/* Mockup panel voice: mono uppercase sector line, accent fit bar */
+const sectorMono: React.CSSProperties = {
+  fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+  fontSize: '0.62rem',
+  letterSpacing: '0.14em',
+  textTransform: 'uppercase',
+}
+
+/* White-glass detail panel over the light brain canvas (final-mockup chrome). */
 export function NodePanel({
   selectedId,
   onClose,
@@ -42,55 +51,54 @@ export function NodePanel({
 
   if (!company && !founder) return null
 
-  const color = ROLE_COLORS[company?.type ?? 'founder']
+  const lineColor = company ? (company.type === 'sourced' ? ACCENT : sectorColor(company.sector)) : ACCENT
 
   return (
-    <div className="pointer-events-auto h-fit w-80 rounded-lg bg-dark/85 p-4 text-on-dark backdrop-blur-sm">
+    <div className="glass-panel pointer-events-auto h-fit w-80 p-4">
       <div className="flex items-start justify-between">
         <div>
-          <div className="heading-sm">{company?.name ?? founder?.name}</div>
-          <div className="eyebrow mt-1" style={{ color }}>
-            {company ? `${company.sector} · ${company.type}` : founder?.role}
+          <div className="heading-sm text-ink">{company?.name ?? founder?.name}</div>
+          <div className="mt-1" style={{ ...sectorMono, color: lineColor }}>
+            {company ? `${company.sector} · ${company.type === 'sourced' ? 'sourced this week' : company.type}` : founder?.role}
           </div>
         </div>
-        <button onClick={onClose} className="cursor-pointer text-on-dark-mute hover:text-on-dark">
+        <button onClick={onClose} className="cursor-pointer text-mute hover:text-ink">
           ×
         </button>
       </div>
 
       {company && (
         <>
-          <p className="mt-3 text-[13px] leading-4.5 text-on-dark-mute">{company.oneLiner}</p>
+          <p className="mt-3 text-sm text-mute">{company.oneLiner}</p>
           <div className="mt-3 flex items-center gap-3">
-            <span className="eyebrow text-on-dark-mute">Fund fit</span>
-            <div className="h-[3px] flex-1 rounded-full bg-white/10">
-              <div className="h-[3px] rounded-full bg-hero-glow" style={{ width: `${company.fitScore}%` }} />
+            <span className="caption text-mute">Fund fit</span>
+            <div className="h-[3px] flex-1 rounded-[2px] bg-[rgba(28,29,31,0.08)]">
+              <div className="h-[3px] rounded-[2px]" style={{ width: `${company.fitScore}%`, background: ACCENT }} />
             </div>
-            <span className="eyebrow">{company.fitScore}</span>
+            <span className="code-sm text-ink">{company.fitScore}</span>
           </div>
           {company.raising && (
-            <div className="mt-2 flex justify-between text-[13px]">
-              <span className="text-on-dark-mute">Raising</span>
-              <span className="font-mono text-[12px]">{company.raising}</span>
+            <div className="mt-2 flex justify-between">
+              <span className="caption text-mute">Raising</span>
+              <span className="code-sm text-ink">{company.raising}</span>
             </div>
           )}
           {company.analogues.length > 0 && (
-            <div className="mt-3 border-t border-divider-dark pt-3">
-              <span className="eyebrow text-on-dark-mute">Nearest precedents</span>
+            <div className="mt-3 border-t border-hairline pt-3">
+              <span className="caption-tight text-charcoal">Nearest precedents</span>
               {company.analogues.map((a) => (
-                <div key={a.companyId} className="mt-2 text-[12px] leading-4">
-                  <span style={{ color: ROLE_COLORS[a.kind] }}>{names.get(a.companyId) ?? a.companyId}</span>
-                  <span className="text-on-dark-mute"> — {a.note}</span>
+                <div key={a.companyId} className="caption mt-2 text-mute">
+                  <span className="caption-tight text-ink">{names.get(a.companyId) ?? a.companyId}</span> — {a.note}
                 </div>
               ))}
             </div>
           )}
           <div className="mt-4 flex gap-2">
-            <Pill variant="primary" onClick={() => navigate(`/company/${company.id}`)}>
+            <Pill variant="primary" size="md" onClick={() => navigate(`/company/${company.id}`)}>
               Open analysis
             </Pill>
             {company.type === 'sourced' && (
-              <Pill variant="onDark" onClick={pass}>
+              <Pill variant="outline" size="md" onClick={pass}>
                 Pass
               </Pill>
             )}
@@ -100,19 +108,19 @@ export function NodePanel({
 
       {founder && !company && (
         <>
-          <p className="mt-3 text-[13px] leading-4.5 text-on-dark-mute">{founder.background}</p>
+          <p className="mt-3 text-sm text-mute">{founder.background}</p>
           <div className="mt-3 flex items-center gap-3">
-            <span className="eyebrow text-on-dark-mute">Founder score</span>
-            <div className="h-[3px] flex-1 rounded-full bg-white/10">
-              <div className="h-[3px] rounded-full bg-hero-pink" style={{ width: `${founder.score}%` }} />
+            <span className="caption text-mute">Founder score</span>
+            <div className="h-[3px] flex-1 rounded-[2px] bg-[rgba(28,29,31,0.08)]">
+              <div className="h-[3px] rounded-[2px]" style={{ width: `${founder.score}%`, background: ACCENT }} />
             </div>
-            <span className="eyebrow">{founder.score}</span>
+            <span className="code-sm text-ink">{founder.score}</span>
           </div>
-          <p className="mt-3 border-l-2 border-hero-pink/60 pl-2 text-[12px] leading-4 text-on-dark-mute">
+          <p className="caption mt-3 border-l-2 pl-2 text-mute" style={{ borderColor: ACCENT }}>
             {founder.justification}
           </p>
           <div className="mt-4">
-            <Pill variant="onDark" onClick={() => navigate(`/founders`)}>
+            <Pill variant="dark" size="md" onClick={() => navigate(`/founders`)}>
               Review in Founders
             </Pill>
           </div>

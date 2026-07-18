@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
+import { ACCENT } from '../brain/BrainCanvas'
 import { api } from '../../lib/api/client'
 import type { Company } from '../../lib/types'
 import { useAppStore } from '../../state/store'
 import { Pill } from '../ui/Pill'
 
-/* Dark-inversion panel over the brain canvas (Replicate code-well surface). */
+/* White-glass panel over the light brain canvas (final-mockup chrome). */
 export function SourcingInbox({
   onFocus,
   onFeedback,
@@ -35,38 +36,42 @@ export function SourcingInbox({
   const visible = items.filter((c) => !dismissed.has(c.id))
 
   return (
-    <div className="pointer-events-auto flex h-full w-80 flex-col rounded-lg bg-dark/85 text-on-dark backdrop-blur-sm">
-      <div className="flex items-center justify-between border-b border-divider-dark px-4 py-3">
-        <span className="caption-tight">Sourced this week</span>
-        <span className="eyebrow text-hero-glow">{visible.length}</span>
+    <div className="glass-panel pointer-events-auto flex h-full w-80 flex-col overflow-hidden">
+      <div className="flex items-center justify-between border-b border-hairline px-4 py-3">
+        <span className="caption-tight text-ink">Sourced this week</span>
+        <span className="code-md" style={{ color: ACCENT }}>
+          {visible.length}
+        </span>
       </div>
       <div className="flex-1 space-y-2 overflow-y-auto p-2">
         {visible.map((c) => (
           <div
             key={c.id}
-            className="cursor-pointer rounded-card border border-divider-dark/50 p-3 transition-colors hover:border-divider-dark"
+            className="cursor-pointer rounded-card border border-hairline bg-card p-3 transition-colors hover:border-hairline-strong"
             onClick={() => onFocus(c.id)}
           >
             <div className="flex items-baseline justify-between">
-              <div className="text-sm font-semibold">{c.name}</div>
-              <div className="eyebrow text-hero-glow">{c.fitScore}</div>
+              <div className="text-sm font-semibold text-ink">{c.name}</div>
+              <div className="code-sm" style={{ color: ACCENT }}>
+                {c.fitScore}
+              </div>
             </div>
-            <div className="mt-1 text-[13px] leading-4.5 text-on-dark-mute">{c.oneLiner}</div>
+            <div className="mt-1 text-sm text-mute">{c.oneLiner}</div>
             {c.whySurfaced?.[0] && (
-              <div className="mt-2 border-l-2 border-hero-glow/60 pl-2 text-[12px] leading-4 text-on-dark-mute">
+              <div className="caption mt-2 border-l-2 pl-2 text-charcoal" style={{ borderColor: ACCENT }}>
                 {c.whySurfaced[0]}
               </div>
             )}
             <div className="mt-3 flex gap-1.5" onClick={(e) => e.stopPropagation()}>
-              <Pill variant="onDark" className="h-7 px-3 text-[12px]" onClick={() => navigate(`/company/${c.id}`)}>
+              <Pill variant="ghost" className="px-3" onClick={() => navigate(`/company/${c.id}`)}>
                 Investigate
               </Pill>
-              <Pill variant="onDark" className="h-7 px-3 text-[12px]" onClick={() => pass(c)}>
+              <Pill variant="ghost" className="px-3" onClick={() => pass(c)}>
                 Pass
               </Pill>
               <Pill
-                variant="onDark"
-                className={`h-7 px-3 text-[12px] ${saved.has(c.id) ? 'bg-white/10' : ''}`}
+                variant="ghost"
+                className={`px-3 ${saved.has(c.id) ? 'bg-bone' : ''}`}
                 onClick={() => setSaved((s) => new Set(s).add(c.id))}
               >
                 {saved.has(c.id) ? 'Saved' : 'Save'}

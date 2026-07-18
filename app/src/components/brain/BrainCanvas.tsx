@@ -21,17 +21,12 @@ interface Props {
   onSelect?: (id: string | null) => void
 }
 
-/* Replicate palette mapping — legend and UI use the same colors.
-   sourced = hero-glow (the orange stamp on dark), portfolio = badge-success
-   ("running" semantics) with the outline ring, rejected = stone, founder =
-   hero-pink, tracked = ash. */
-export const ROLE_COLORS: Record<string, string> = {
-  sourced: '#ff6a3d',
-  portfolio: '#2b9a66',
-  rejected: '#bbbbbb',
-  founder: '#f4a8a0',
-  tracked: '#8d8d8d',
-}
+/* Final mockup palette (light mode): mid-tone sector colors that read on
+   white; one blue accent reserved for sourced candidates + focus states. */
+export const SECTOR_PALETTE = ['#bd66a8', '#4f9ec4', '#7d6bc9', '#c08a3e', '#4faa74', '#c96666']
+export const ACCENT = '#266df0' // Attio blue-500: candidates, hover ring, focus, fit bar
+export const REJECTED_COLOR = '#b9bec8'
+const SHOW_LINES = false // resting-state edges + shimmer; focused node's edges still show
 
 const N_FILLER = 169
 
@@ -91,6 +86,13 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     const rand = mulberry32(20260718)
     const pick = <T,>(arr: T[]) => arr[Math.floor(rand() * arr.length)]
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    /* uniform node radius multiplier. Priority: ?scale= param, then your last
+       [ ] tuning (saved per browser), then the baked-in default. */
+    const NODE_SCALE =
+      parseFloat(new URLSearchParams(location.search).get('scale') ?? '') ||
+      parseFloat(localStorage.getItem('vcbrain-node-scale') ?? '') ||
+      2.0
 
     /* ---------------- build scene data from the fund graph ---------------- */
 
@@ -226,17 +228,18 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     /* raw shaders skip three's colorspace chunk, so feed sRGB components directly
        to make on-screen colors match the chosen hexes exactly */
     const srgb = (hex: string) => new THREE.Color(hex).convertLinearToSRGB()
-    const roleColorCache = new Map<string, THREE.Color>()
-    const roleColor = (n: SceneNode) => {
-      let c = roleColorCache.get(n.role)
-      if (!c) {
-        c = srgb(ROLE_COLORS[n.role] ?? ROLE_COLORS.tracked)
-        roleColorCache.set(n.role, c)
-      }
-      return c
+    const sectorColors = SECTOR_PALETTE.map((c) => srgb(c))
+    const accentColor = srgb(ACCENT)
+    const rejectedColor = srgb(REJECTED_COLOR)
+    const portfolioColors = sectorColors.map((c) => c.clone().multiplyScalar(0.82)) // deeper + ring
+    const nodeColor = (n: SceneNode): THREE.Color => {
+      if (n.role === 'sourced') return accentColor
+      if (n.role === 'portfolio') return portfolioColors[n.cluster % portfolioColors.length]
+      if (n.role === 'rejected') return rejectedColor
+      return sectorColors[n.cluster % sectorColors.length]
     }
     const roleSize = (n: SceneNode) =>
-      n.role === 'portfolio' ? 23 : n.role === 'sourced' ? 19 : n.role === 'founder' ? 10 : n.role === 'rejected' ? 12 : 9
+      n.role === 'portfolio' ? 23 : n.role === 'sourced' ? 18 : n.role === 'founder' ? 10 : n.role === 'rejected' ? 8 : 11
 
     const pPos = new Float32Array(N * 3)
     const pCol = new Float32Array(N * 3)
@@ -247,7 +250,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     const pOutline = new Float32Array(N)
 
     nodes.forEach((n, i) => {
-      const c = roleColor(n)
+      const c = nodeColor(n)
       pCol[i * 3] = c.r
       pCol[i * 3 + 1] = c.g
       pCol[i * 3 + 2] = c.b
@@ -269,11 +272,15 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     const pMat = new THREE.ShaderMaterial({
       transparent: true,
       depthWrite: false,
-      uniforms: { uTime: { value: 0 }, uMotion: { value: reducedMotion ? 0 : 1 } },
+      uniforms: {
+        uTime: { value: 0 },
+        uMotion: { value: reducedMotion ? 0 : 1 },
+        uScale: { value: NODE_SCALE },
+      },
       vertexShader: /* glsl */ `
         attribute vec3 aColor;
         attribute float aSize, aPulse, aPhase, aDim, aOutline;
-        uniform float uTime, uMotion;
+        uniform float uTime, uMotion, uScale;
         varying vec3 vColor;
         varying float vDim, vOutline;
         void main() {
@@ -282,7 +289,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
           vOutline = aOutline;
           vec4 mv = modelViewMatrix * vec4(position, 1.0);
           float pulse = 1.0 + aPulse * uMotion * 0.22 * sin(uTime * 2.2 + aPhase);
-          gl_PointSize = clamp(aSize * pulse * (620.0 / -mv.z), 2.0, 52.0);
+          gl_PointSize = clamp(aSize * uScale * pulse * (620.0 / -mv.z), 2.0, 52.0 * max(uScale, 1.0));
           gl_Position = projectionMatrix * mv;
         }`,
       fragmentShader: /* glsl */ `
@@ -351,7 +358,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       const c = document.createElement('canvas')
       c.width = c.height = 128
       const g = c.getContext('2d')!
-      g.strokeStyle = 'rgba(255,106,61,0.95)' /* hero-glow */
+      g.strokeStyle = 'rgba(38,109,240,0.95)' /* accent */
       g.lineWidth = 7
       g.beginPath()
       g.arc(64, 64, 52, 0, Math.PI * 2)
@@ -367,12 +374,13 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     scene.add(ring)
 
     /* cluster labels in the mono label voice */
-    function labelSprite(text: string) {
+    function labelSprite(text: string, colorHex: string) {
       const c = document.createElement('canvas')
       c.width = 1024
       c.height = 192
       const g = c.getContext('2d')!
-      g.font = '400 58px "JetBrains Mono", monospace'
+      /* mockup-verbatim cartography label: system-ui 500, tracked uppercase */
+      g.font = '500 64px system-ui, sans-serif'
       if ('letterSpacing' in g) (g as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = '16px'
       g.textBaseline = 'middle'
       const label = text.toUpperCase()
@@ -380,9 +388,9 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       const gap = 26
       const textW = g.measureText(label).width
       const x0 = (c.width - (tickW + gap + textW)) / 2
-      g.fillStyle = '#8d8d8d'
-      g.fillRect(x0, 96 - 24, tickW, 48)
-      g.fillStyle = 'rgba(252, 252, 252, 0.72)'
+      g.fillStyle = colorHex
+      g.fillRect(x0, 96 - 26, tickW, 52)
+      g.fillStyle = 'rgba(28, 29, 31, 0.9)'
       g.fillText(label, x0 + tickW + gap, 96)
       const t = new THREE.CanvasTexture(c)
       t.colorSpace = THREE.SRGBColorSpace
@@ -392,7 +400,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     }
     const labelSprites: THREE.Sprite[] = []
     markets.forEach((m, i) => {
-      const sp = labelSprite(m.label)
+      const sp = labelSprite(m.label, SECTOR_PALETTE[i % SECTOR_PALETTE.length])
       sp.position.copy(anchors[i]).multiplyScalar(1.28)
       sp.position.y += 120
       group.add(sp)
@@ -427,6 +435,17 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     renderer.domElement.addEventListener('pointermove', onPointerMove)
     renderer.domElement.addEventListener('pointerdown', onPointerDown)
     renderer.domElement.addEventListener('pointerup', onPointerUp)
+
+    /* live node-size tuning: [ shrinks, ] grows — saved as the per-browser default */
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== '[' && e.key !== ']') return
+      const target = e.target as HTMLElement | null
+      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) return
+      const u = pMat.uniforms.uScale
+      u.value = Math.min(3, Math.max(0.4, (u.value as number) * (e.key === ']' ? 1.1 : 1 / 1.1)))
+      localStorage.setItem('vcbrain-node-scale', (u.value as number).toFixed(2))
+    }
+    window.addEventListener('keydown', onKeyDown)
 
     function pickHovered() {
       const w = renderer.domElement.clientWidth
@@ -464,12 +483,12 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         tooltip.style.display = 'block'
         tooltip.style.left = `${Math.min(mouse.x + 14, container!.clientWidth - 250)}px`
         tooltip.style.top = `${mouse.y + 14}px`
-        const color = ROLE_COLORS[hovered.role] ?? ROLE_COLORS.tracked
-        tooltip.innerHTML = `<div style="color:#fff;font-size:13px">${hovered.label}</div>
-          <div class="eyebrow" style="color:${color};margin-top:2px">${ROLE_TAG[hovered.role]}${hovered.score ? ` · fit ${hovered.score}` : ''}</div>`
+        const color = hovered.role === 'sourced' ? ACCENT : SECTOR_PALETTE[hovered.cluster % SECTOR_PALETTE.length]
+        tooltip.innerHTML = `<div style="color:#1c1d1f;font-size:13px;font-weight:600">${hovered.label}</div>
+          <div style="color:${color};margin-top:2px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">${markets[hovered.cluster]?.label ?? ''} · ${ROLE_TAG[hovered.role]}${hovered.score ? ` · fit ${hovered.score}` : ''}</div>`
         ringWorld.copy(hovered.pos).applyMatrix4(group.matrixWorld)
         ring.position.copy(ringWorld)
-        const sz = (hovered.role === 'portfolio' ? 15 : 10) * 3.4
+        const sz = (hovered.role === 'portfolio' ? 15 : 10) * 3.4 * (pMat.uniforms.uScale.value as number)
         ring.scale.set(sz, sz, 1)
         ring.visible = true
         renderer.domElement.style.cursor = 'pointer'
@@ -607,14 +626,14 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         const len = a.distanceTo(b)
         const fade = 1 - THREE.MathUtils.smoothstep(len, LINK_FADE_NEAR, LINK_FADE_FAR) * (1 - LINK_MIN_TRANSPARENCY)
         const breathe = 0.9 + 0.1 * Math.sin(time * 0.7 + e.phase) * motion
-        let alpha = 0.32 * fade * breathe * e.weight
+        let alpha = SHOW_LINES ? 0.32 * fade * breathe * e.weight : 0
         if (focused) {
           const on = e.a === focused || e.b === focused
-          alpha *= on ? 1.8 : 0.05
+          alpha = on ? 0.55 * fade * breathe * e.weight : alpha * 0.05
         }
         alpha = Math.min(alpha, 0.85)
-        const ca = roleColor(e.a)
-        const cb = roleColor(e.b)
+        const ca = nodeColor(e.a)
+        const cb = nodeColor(e.b)
         lCol[i * 8] = ca.r
         lCol[i * 8 + 1] = ca.g
         lCol[i * 8 + 2] = ca.b
@@ -628,7 +647,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       lGeo.attributes.aRGBA.needsUpdate = true
 
       let seg = 0
-      if (!focused) {
+      if (SHOW_LINES && !focused) {
         outer: for (let i = 0; i < N; i++) {
           const a = nodes[i]
           for (let j = i + 1; j < N; j++) {
@@ -701,6 +720,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       cancelAnimationFrame(raf)
       clearTimeout(pulseTimer)
       ro.disconnect()
+      window.removeEventListener('keydown', onKeyDown)
       renderer.domElement.removeEventListener('pointermove', onPointerMove)
       renderer.domElement.removeEventListener('pointerdown', onPointerDown)
       renderer.domElement.removeEventListener('pointerup', onPointerUp)
@@ -714,7 +734,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     <div ref={containerRef} className="absolute inset-0">
       <div
         ref={tooltipRef}
-        className="pointer-events-none absolute z-10 hidden rounded-card border border-divider-dark bg-dark/85 px-3 py-2 backdrop-blur-sm"
+        className="pointer-events-none absolute z-10 hidden rounded-[6px] border border-[rgba(28,29,31,0.1)] bg-white/85 px-3 py-2 backdrop-blur-sm"
       />
     </div>
   )

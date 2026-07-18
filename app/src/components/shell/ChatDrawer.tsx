@@ -52,7 +52,7 @@ export function ChatDrawer() {
         {messages.map((m, i) => (
           <div
             key={i}
-            className={`max-w-[85%] rounded-card px-3 py-2 text-sm leading-normal ${
+            className={`max-w-[85%] rounded-card px-3 py-2 text-sm ${
               m.role === 'user' ? 'ml-auto bg-bone text-ink' : 'border border-hairline bg-card text-body'
             }`}
           >
@@ -81,9 +81,9 @@ export function ChatDrawer() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && send(input)}
             placeholder="Ask the brain…"
-            className="h-11 w-full rounded-full border border-hairline bg-card px-5 text-sm text-ink placeholder:text-ash focus:outline-3 focus:outline-ring-focus"
+            className="h-11 w-full rounded-full border border-hairline bg-card px-5 text-base text-ink placeholder:text-ash focus:outline-3 focus:outline-ring-focus"
           />
-          <Pill variant="primary" onClick={() => send(input)}>
+          <Pill variant="primary" size="md" onClick={() => send(input)}>
             →
           </Pill>
         </div>

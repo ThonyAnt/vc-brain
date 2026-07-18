@@ -56,12 +56,12 @@ export function CompanyPage() {
             {company.sector} · {company.stage} · {company.location}
           </Eyebrow>
           <h1 className="display-lg mt-2">{company.name}</h1>
-          <p className="mt-3 max-w-[640px] text-lg leading-relaxed text-body">{company.oneLiner}</p>
+          <p className="mt-3 max-w-[640px] text-lg text-body">{company.oneLiner}</p>
         </div>
         <div className="flex items-center gap-3">
           <div className="text-right">
             <Eyebrow>Fund fit</Eyebrow>
-            <div className="display-md text-primary">{company.fitScore}</div>
+            <div className="display-md text-ink">{company.fitScore}</div>
           </div>
           {company.type === 'sourced' && (
             <>
@@ -83,7 +83,7 @@ export function CompanyPage() {
           </Pill>
         ))}
         <div className="flex-1" />
-        <NavLink to="/" className="eyebrow self-center text-primary">
+        <NavLink to="/" className="caption-tight self-center text-primary">
           view in brain →
         </NavLink>
       </div>
@@ -98,7 +98,7 @@ export function CompanyPage() {
       {company.raising && (
         <Card className="mt-8 flex items-center justify-between bg-bone">
           <span className="text-sm text-charcoal">Raising</span>
-          <span className="font-mono text-sm text-ink">{company.raising}</span>
+          <span className="code-md text-ink">{company.raising}</span>
         </Card>
       )}
     </div>

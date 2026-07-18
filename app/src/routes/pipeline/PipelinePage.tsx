@@ -40,14 +40,14 @@ export function PipelinePage() {
             className="flex shrink-0 cursor-pointer items-center gap-3 rounded-full border border-hairline bg-card py-2 pr-5 pl-3 text-left transition-colors hover:bg-bone"
           >
             <span
-              className={`eyebrow rounded-full px-2.5 py-1 ${
-                item.kind === 'call' ? 'bg-primary text-on-primary' : 'bg-bone text-charcoal'
+              className={`caption rounded-full px-2.5 py-1 ${
+                item.kind === 'call' ? 'bg-dark text-on-dark' : 'bg-bone text-charcoal'
               }`}
             >
               {KIND_LABEL[item.kind]}
             </span>
             <span className="text-sm text-ink">{item.title}</span>
-            <span className="eyebrow text-ash">{item.due}</span>
+            <span className="code-sm text-ash">{item.due}</span>
           </button>
         ))}
       </div>
@@ -60,7 +60,7 @@ export function PipelinePage() {
             <div key={stage} className="rounded-lg bg-bone p-3">
               <div className="flex items-baseline justify-between px-1">
                 <Eyebrow className="text-charcoal">{stage}</Eyebrow>
-                <span className="font-mono text-[12px] text-ash">{deals.length}</span>
+                <span className="code-sm text-ash">{deals.length}</span>
               </div>
               <div className="mt-2 space-y-2">
                 {deals.map((c) => (
@@ -71,10 +71,10 @@ export function PipelinePage() {
                   >
                     <div className="flex items-baseline justify-between">
                       <span className="caption-tight text-ink">{c.name}</span>
-                      <span className="font-mono text-[12px] text-primary">{c.fitScore}</span>
+                      <span className="code-sm text-ink">{c.fitScore}</span>
                     </div>
-                    <div className="mt-1 text-[12px] leading-4 text-mute">{c.oneLiner}</div>
-                    {c.raising && <div className="mt-2 font-mono text-[11px] text-charcoal">{c.raising}</div>}
+                    <div className="caption mt-1 text-mute">{c.oneLiner}</div>
+                    {c.raising && <div className="code-sm mt-2 text-charcoal">{c.raising}</div>}
                   </Card>
                 ))}
                 {!deals.length && <div className="px-1 py-3 text-center text-[12px] text-ash">—</div>}

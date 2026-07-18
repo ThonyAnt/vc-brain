@@ -16,7 +16,7 @@ export function Pill({ variant = 'outline', size = 'sm', className = '', ...prop
     dark: 'bg-dark text-on-dark hover:bg-body',
     outline: 'border border-hairline-strong bg-card text-ink hover:bg-bone',
     ghost: 'bg-canvas text-ink hover:bg-bone',
-    onDark: 'border border-divider-dark text-on-dark hover:bg-white/10',
+    onDark: 'border border-divider-dark text-on-dark hover:bg-divider-dark',
   }
   const sizes = { md: 'h-11 px-6 text-[16px]', sm: 'h-9 px-4 text-sm' }
   return (

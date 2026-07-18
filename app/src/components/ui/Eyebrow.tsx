@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react'
 
-/* JetBrains Mono metadata label — the code-sm voice used for slugs and metrics. */
+/* Section label: basier-square caption-tight (14/600/-0.35px), never mono. */
 export function Eyebrow({ className = '', ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={`eyebrow text-mute ${className}`} {...props} />
+  return <div className={`caption-tight text-charcoal ${className}`} {...props} />
 }

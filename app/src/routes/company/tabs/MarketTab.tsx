@@ -29,10 +29,10 @@ export function MarketTab({ company }: { company: Company }) {
           {/* axes */}
           <div className="absolute inset-x-4 top-1/2 border-t border-hairline" />
           <div className="absolute inset-y-4 left-1/2 border-l border-hairline" />
-          <span className="eyebrow absolute top-2 left-3 text-ash">direct</span>
-          <span className="eyebrow absolute bottom-2 left-3 text-ash">adjacent</span>
-          <span className="eyebrow absolute top-1/2 left-3 -translate-y-4 text-ash">incumbent</span>
-          <span className="eyebrow absolute top-1/2 right-3 -translate-y-4 text-ash">emerging</span>
+          <span className="caption absolute top-2 left-3 text-ash">direct</span>
+          <span className="caption absolute bottom-2 left-3 text-ash">adjacent</span>
+          <span className="caption absolute top-1/2 left-3 -translate-y-4 text-ash">incumbent</span>
+          <span className="caption absolute top-1/2 right-3 -translate-y-4 text-ash">emerging</span>
 
           {comps.map((c, i) => {
             const p = place(c, i, comps.length)
@@ -53,13 +53,13 @@ export function MarketTab({ company }: { company: Company }) {
 
           {/* the company itself — the one orange stamp */}
           <div className="absolute left-[63%] top-[38%] -translate-x-1/2 -translate-y-1/2">
-            <div className="mx-auto h-4 w-4 rounded-full bg-primary ring-4 ring-primary/20" />
+            <div className="mx-auto h-4 w-4 rounded-full border border-hairline-strong bg-primary" />
             <div className="caption-tight mt-1 text-center text-ink">{company.name}</div>
           </div>
 
           {/* white space callout */}
-          <div className="absolute right-[6%] bottom-[10%] w-36 rounded-card border border-dashed border-ash/60 p-2">
-            <span className="eyebrow text-ash">white space</span>
+          <div className="absolute right-[6%] bottom-[10%] w-36 rounded-card border border-dashed border-ash p-2">
+            <span className="caption text-ash">white space</span>
             <div className="mt-1 text-[11px] leading-4 text-mute">emerging + adjacent, no funded player</div>
           </div>
         </div>
@@ -78,7 +78,7 @@ export function MarketTab({ company }: { company: Company }) {
               {list.map((c) => (
                 <div key={c.name} className="mt-2">
                   <div className="caption-tight text-ink">{c.name}</div>
-                  <div className="text-sm leading-normal text-mute">{c.note}</div>
+                  <div className="text-sm text-mute">{c.note}</div>
                 </div>
               ))}
             </Card>

@@ -17,7 +17,7 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
       <div className="space-y-4 lg:col-span-2">
         <Card>
           <Eyebrow>Summary</Eyebrow>
-          <p className="mt-2 leading-relaxed text-body">{company.summary}</p>
+          <p className="mt-2 text-body">{company.summary}</p>
         </Card>
 
         {company.whySurfaced && (
@@ -25,7 +25,7 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
             <Eyebrow>Why this surfaced</Eyebrow>
             <ul className="mt-2 space-y-1.5">
               {company.whySurfaced.map((w) => (
-                <li key={w} className="text-sm leading-normal text-body">
+                <li key={w} className="text-sm text-body">
                   · {w}
                 </li>
               ))}
@@ -45,7 +45,7 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
                   >
                     {names.get(a.companyId) ?? a.companyId}
                   </NavLink>
-                  <span className="text-sm leading-normal text-mute">{a.note}</span>
+                  <span className="text-sm text-mute">{a.note}</span>
                 </div>
               ))}
             </div>
@@ -57,17 +57,17 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
             <Eyebrow className="text-success">Reasons to invest</Eyebrow>
             <ul className="mt-2 space-y-1.5">
               {company.reasonsToInvest.map((r) => (
-                <li key={r} className="text-sm leading-normal text-body">
+                <li key={r} className="text-sm text-body">
                   · {r}
                 </li>
               ))}
             </ul>
           </Card>
           <Card>
-            <Eyebrow className="text-primary">Reasons to pass</Eyebrow>
+            <Eyebrow>Reasons to pass</Eyebrow>
             <ul className="mt-2 space-y-1.5">
               {company.reasonsToPass.map((r) => (
-                <li key={r} className="text-sm leading-normal text-body">
+                <li key={r} className="text-sm text-body">
                   · {r}
                 </li>
               ))}
@@ -81,11 +81,11 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
           <Card key={f.id}>
             <div className="flex items-baseline justify-between">
               <span className="caption-tight text-ink">{f.name}</span>
-              <span className="font-mono text-sm text-primary">{f.score}</span>
+              <span className="code-md text-ink">{f.score}</span>
             </div>
             <Eyebrow className="mt-0.5">{f.role}</Eyebrow>
-            <p className="mt-2 text-sm leading-normal text-mute">{f.background}</p>
-            <NavLink to="/founders" className="eyebrow mt-3 inline-block text-primary">
+            <p className="mt-2 text-sm text-mute">{f.background}</p>
+            <NavLink to="/founders" className="caption-tight mt-3 inline-block text-primary">
               score rationale →
             </NavLink>
           </Card>
@@ -95,7 +95,7 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
           <Eyebrow>Key risks</Eyebrow>
           <ul className="mt-2 space-y-1.5">
             {company.risks.map((r) => (
-              <li key={r} className="text-sm leading-normal text-body">
+              <li key={r} className="text-sm text-body">
                 · {r}
               </li>
             ))}
@@ -103,11 +103,10 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
         </Card>
 
         <Card className="bg-dark text-on-dark">
-          <span className="eyebrow text-on-dark-mute">Missing diligence</span>
+          <span className="caption-tight text-on-dark">Missing diligence</span>
           <ul className="mt-2 space-y-2">
             {company.diligenceQuestions.map((q) => (
-              <li key={q} className="font-mono text-[12px] leading-normal text-on-dark">
-                → {q}
+              <li key={q} className="text-sm text-on-dark">                → {q}
               </li>
             ))}
           </ul>

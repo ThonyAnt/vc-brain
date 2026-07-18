@@ -89,20 +89,28 @@ export function ModelTab({ company }: { company: Company }) {
                 step={f.step}
                 value={a[f.key]}
                 onChange={(e) => setA({ ...a, [f.key]: Number(e.target.value) })}
-                className="h-9 w-32 rounded-full border border-hairline bg-card px-4 text-right font-mono text-[12px] text-ink focus:outline-3 focus:outline-ring-focus"
+                className="code-md h-11 w-32 rounded-full border border-hairline bg-card px-4 text-right text-ink focus:outline-3 focus:outline-ring-focus"
               />
             </label>
           ))}
         </div>
         <div className="mt-4 border-t border-hairline pt-3">
           <Eyebrow>Current actuals</Eyebrow>
-          <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 font-mono text-[12px] text-charcoal">
-            <span>ARR {fmt(m.arr)}</span>
-            <span>NRR {m.nrrPct}%</span>
-            <span>CAC {fmt(m.cac)}</span>
-            <span>Payback {m.cacPaybackMonths}mo</span>
-            <span>Burn {fmt(m.burnMonthly)}/mo</span>
-            <span>Runway {m.runwayMonths}mo</span>
+          <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1">
+            {(
+              [
+                ['ARR', fmt(m.arr)],
+                ['NRR', `${m.nrrPct}%`],
+                ['CAC', fmt(m.cac)],
+                ['Payback', `${m.cacPaybackMonths}mo`],
+                ['Burn', `${fmt(m.burnMonthly)}/mo`],
+                ['Runway', `${m.runwayMonths}mo`],
+              ] as const
+            ).map(([label, value]) => (
+              <span key={label} className="caption text-charcoal">
+                {label} <span className="code-sm text-ink">{value}</span>
+              </span>
+            ))}
           </div>
         </div>
       </Card>
@@ -117,17 +125,26 @@ export function ModelTab({ company }: { company: Company }) {
                 key={k}
                 className={`rounded-lg p-6 ${featured ? 'bg-dark text-on-dark' : 'border border-hairline bg-card text-ink'}`}
               >
-                <span className={`eyebrow ${featured ? 'text-hero-glow' : 'text-mute'}`}>{k}</span>
+                <span className={`caption-tight ${featured ? 'text-hero-glow' : 'text-mute'}`}>{k}</span>
                 <div className="display-md mt-2">{s.moic.toFixed(1)}×</div>
-                <div className={`mt-1 font-mono text-[12px] ${featured ? 'text-on-dark-mute' : 'text-charcoal'}`}>
-                  IRR {(s.irr * 100).toFixed(0)}%
+                <div className={`caption mt-1 ${featured ? 'text-on-dark-mute' : 'text-charcoal'}`}>
+                  IRR <span className="code-sm">{(s.irr * 100).toFixed(0)}%</span>
                 </div>
-                <div className={`mt-4 space-y-1 font-mono text-[12px] ${featured ? 'text-on-dark-mute' : 'text-charcoal'}`}>
-                  <div className="flex justify-between"><span>ARR@exit</span><span>{fmt(s.arr)}</span></div>
-                  <div className="flex justify-between"><span>Exit value</span><span>{fmt(s.exitValue)}</span></div>
-                  <div className="flex justify-between"><span>Ownership</span><span>{(s.ownership * 100).toFixed(1)}%</span></div>
-                  <div className="flex justify-between"><span>Proceeds</span><span>{fmt(s.proceeds)}</span></div>
-                  <div className="flex justify-between"><span>% of fund</span><span>{((s.proceeds / FUND_SIZE) * 100).toFixed(0)}%</span></div>
+                <div className={`caption mt-4 space-y-1 ${featured ? 'text-on-dark-mute' : 'text-charcoal'}`}>
+                  {(
+                    [
+                      ['ARR at exit', fmt(s.arr)],
+                      ['Exit value', fmt(s.exitValue)],
+                      ['Ownership', `${(s.ownership * 100).toFixed(1)}%`],
+                      ['Proceeds', fmt(s.proceeds)],
+                      ['% of fund', `${((s.proceeds / FUND_SIZE) * 100).toFixed(0)}%`],
+                    ] as const
+                  ).map(([label, value]) => (
+                    <div key={label} className="flex justify-between">
+                      <span>{label}</span>
+                      <span className="code-sm">{value}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             )
@@ -136,7 +153,7 @@ export function ModelTab({ company }: { company: Company }) {
 
         <Card className="bg-bone">
           <Eyebrow>Read</Eyebrow>
-          <p className="mt-2 text-sm leading-normal text-body">
+          <p className="mt-2 text-sm text-body">
             Base case returns {((scenarios.base.proceeds / FUND_SIZE) * 100).toFixed(0)}% of the $60M fund on a{' '}
             {fmt(a.checkSize)} check. The bull case needs growth to hold near {Math.round(a.annualGrowthPct * 1.3)}%
             with an {Math.round(a.exitMultiple * 1.4)}× ARR exit — compare Corepay's realized path before trusting it.

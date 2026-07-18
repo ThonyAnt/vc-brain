@@ -29,15 +29,15 @@ export function FundPage() {
         <div className="space-y-4 lg:col-span-2">
           <Card>
             <Eyebrow>Thesis</Eyebrow>
-            <p className="mt-2 text-lg leading-relaxed text-body">{fund.thesis}</p>
+            <p className="mt-2 text-lg text-body">{fund.thesis}</p>
             <div className="mt-4 flex flex-wrap gap-1.5">
               {fund.sectors.map((s) => (
-                <span key={s} className="rounded-full border border-hairline bg-canvas px-2.5 py-1 text-[11px] text-ink">
+                <span key={s} className="rounded-full border border-hairline bg-canvas px-2.5 py-1 caption text-ink">
                   {s}
                 </span>
               ))}
               {fund.geographies.map((g) => (
-                <span key={g} className="rounded-full border border-hairline bg-canvas px-2.5 py-1 text-[11px] text-charcoal">
+                <span key={g} className="rounded-full border border-hairline bg-canvas px-2.5 py-1 caption text-charcoal">
                   {g}
                 </span>
               ))}
@@ -56,8 +56,8 @@ export function FundPage() {
 
           <Card className="bg-dark text-on-dark">
             <div className="flex items-baseline justify-between">
-              <span className="eyebrow text-hero-glow">Criteria weights · live</span>
-              <span className="eyebrow text-on-dark-mute">updates with every decision</span>
+              <span className="caption-tight text-hero-glow">Criteria weights · live</span>
+              <span className="caption text-on-dark-mute">updates with every decision</span>
             </div>
             <div className="mt-4 space-y-2.5">
               {Object.entries(weights)
@@ -65,13 +65,13 @@ export function FundPage() {
                 .map(([k, v]) => (
                   <div key={k} className="flex items-center gap-3">
                     <span className="w-64 shrink-0 text-sm text-on-dark-mute">{k}</span>
-                    <div className="h-[3px] flex-1 rounded-full bg-white/10">
+                    <div className="h-[3px] flex-1 rounded-full bg-divider-dark">
                       <div
                         className="h-[3px] rounded-full bg-hero-glow transition-all duration-700"
                         style={{ width: `${v * 100}%` }}
                       />
                     </div>
-                    <span className="w-10 text-right font-mono text-[12px] text-on-dark">{v.toFixed(2)}</span>
+                    <span className="code-sm w-10 text-right text-on-dark">{v.toFixed(2)}</span>
                   </div>
                 ))}
             </div>
@@ -83,18 +83,19 @@ export function FundPage() {
             <Card key={p.name}>
               <div className="caption-tight text-ink">{p.name}</div>
               <Eyebrow className="mt-0.5">{p.focus}</Eyebrow>
-              <p className="mt-2 text-sm leading-normal text-mute">{p.leans}</p>
+              <p className="mt-2 text-sm text-mute">{p.leans}</p>
             </Card>
           ))}
 
           <Card className="bg-bone">
             <Eyebrow>Institutional memory</Eyebrow>
-            <p className="mt-2 text-sm leading-normal text-body">
+            <p className="mt-2 text-sm text-body">
               34 memos, 47 rejected deals, and 8 portfolio outcomes ingested. Upload new memos or past decisions to
               deepen the brain.
             </p>
             <Pill
               variant="dark"
+              size="md"
               className="mt-3"
               onClick={() => setLearningNote('Memo ingestion is stubbed in this build — the backend wires in here.')}
             >

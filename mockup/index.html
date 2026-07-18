@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VC Brain — fund memory mockup</title>
+<style>
+  :root {
+    --ink: #e8ecf6;
+    --muted: #8b94ab;
+    --line: rgba(130, 150, 255, 0.16);
+    --glass: rgba(9, 12, 22, 0.78);
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: #04050c;
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    overflow: hidden;
+  }
+  #app { position: fixed; inset: 0; }
+  #app canvas { display: block; }
+  .vignette {
+    position: fixed; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at 50% 42%, transparent 55%, rgba(2, 3, 8, 0.55) 100%);
+  }
+  .hud {
+    position: fixed; z-index: 10; pointer-events: none;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .hud.tl { top: 1.1rem; left: 1.25rem; }
+  .wordmark {
+    font-size: 0.82rem; letter-spacing: 0.34em; font-weight: 600;
+    color: var(--ink); text-transform: uppercase;
+  }
+  .wordmark .dim { color: var(--muted); font-weight: 400; }
+  .subline { margin-top: 0.3rem; font-size: 0.66rem; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
+  .hud.tr { top: 1.1rem; right: 1.25rem; text-align: right; }
+  #legend { display: flex; flex-direction: column; gap: 0.28rem; align-items: flex-end; }
+  .chip { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.66rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; }
+  .chip i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+  .hud.bl { bottom: 1.1rem; left: 1.25rem; font-size: 0.66rem; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
+  .hud.br { bottom: 1.1rem; right: 1.25rem; font-size: 0.66rem; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
+  #tooltip {
+    position: fixed; z-index: 20; pointer-events: none; display: none;
+    background: var(--glass); border: 1px solid var(--line); border-radius: 6px;
+    padding: 0.45rem 0.65rem; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.72rem;
+    max-width: 240px;
+  }
+  #tooltip .t-name { color: var(--ink); font-weight: 600; }
+  #tooltip .t-meta { color: var(--muted); font-size: 0.64rem; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.15rem; }
+  #panel {
+    position: fixed; z-index: 15; top: 4.4rem; right: 1.25rem; width: 300px;
+    background: var(--glass); border: 1px solid var(--line); border-radius: 10px;
+    padding: 1rem 1.1rem 1.05rem; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    transform: translateX(24px); opacity: 0; transition: all 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+    pointer-events: none;
+  }
+  #panel.open { transform: none; opacity: 1; pointer-events: auto; }
+  #panel h2 { margin: 0 0 0.15rem; font-size: 1.02rem; letter-spacing: -0.01em; }
+  #panel .p-sector { font-family: ui-monospace, Menlo, monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; }
+  #panel .p-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.45; margin: 0.55rem 0 0.75rem; }
+  #panel .row { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.72rem; margin: 0.32rem 0; }
+  #panel .row .k { color: var(--muted); }
+  #panel .row .v { font-family: ui-monospace, Menlo, monospace; text-align: right; }
+  .fitbar { height: 3px; border-radius: 2px; background: rgba(130, 150, 255, 0.14); margin: 0.7rem 0 0.25rem; overflow: hidden; }
+  .fitbar i { display: block; height: 100%; border-radius: 2px; }
+  .fitlabel { display: flex; justify-content: space-between; font-family: ui-monospace, Menlo, monospace; font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+  #panel .actions { display: flex; gap: 0.5rem; margin-top: 0.9rem; }
+  #panel button {
+    flex: 1; cursor: pointer; border-radius: 6px; padding: 0.45rem 0;
+    font-family: ui-monospace, Menlo, monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+    border: 1px solid var(--line); background: rgba(130, 150, 255, 0.08); color: var(--ink);
+  }
+  #panel button:hover { background: rgba(130, 150, 255, 0.18); }
+  #panel button:focus-visible { outline: 1px solid rgba(160, 175, 255, 0.7); outline-offset: 1px; }
+  #toast {
+    position: fixed; z-index: 30; left: 50%; bottom: 2.4rem; transform: translate(-50%, 12px);
+    background: var(--glass); border: 1px solid var(--line); border-radius: 999px;
+    padding: 0.5rem 1.1rem; font-family: ui-monospace, Menlo, monospace; font-size: 0.7rem;
+    letter-spacing: 0.06em; color: var(--ink); opacity: 0; transition: all 0.35s ease;
+    pointer-events: none; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  #toast.show { opacity: 1; transform: translate(-50%, 0); }
+  #toast .pulse { color: #7ef0c6; }
+  @media (max-width: 640px) {
+    #panel { width: calc(100vw - 2.5rem); top: auto; bottom: 3.4rem; }
+    .hud.tr { display: none; }
+  }
+</style>
+</head>
+<body>
+  <div id="app"></div>
+  <div class="vignette"></div>
+
+  <div class="hud tl">
+    <div class="wordmark">VC Brain <span class="dim">/ fund memory</span></div>
+    <div class="subline">Meridian Ventures · visual mockup · no live data</div>
+  </div>
+  <div class="hud tr"><div id="legend"></div></div>
+  <div class="hud bl" id="counts"></div>
+  <div class="hud br">drag orbit · scroll zoom · hover inspect · click focus</div>
+
+  <div id="tooltip"></div>
+
+  <aside id="panel" aria-live="polite">
+    <h2 id="p-name"></h2>
+    <div class="p-sector" id="p-sector"></div>
+    <p class="p-desc" id="p-desc"></p>
+    <div class="row"><span class="k">Stage</span><span class="v" id="p-stage"></span></div>
+    <div class="row"><span class="k">Closest analogue</span><span class="v" id="p-analogue"></span></div>
+    <div class="row"><span class="k">Closest rejection</span><span class="v" id="p-rejection"></span></div>
+    <div class="fitbar"><i id="p-fitbar"></i></div>
+    <div class="fitlabel"><span>fund fit</span><span id="p-fit"></span></div>
+    <div class="actions">
+      <button id="btn-pass" type="button">Pass</button>
+      <button id="btn-investigate" type="button">Investigate</button>
+    </div>
+  </aside>
+
+  <div id="toast"></div>
+
+  <script src="./bundle.js"></script>
+</body>
+</html>

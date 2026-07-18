@@ -39,6 +39,7 @@ export interface Competitor {
 
 export interface SaasModel {
   arr: number
+  customers?: number
   growthPct: number
   churnPct: number
   nrrPct: number

@@ -39,6 +39,20 @@ type ChatContext = {
   axes?: { x: string; y: string; z: string }
 }
 
+export type CompanyWorkbookKind = 'tam-exit' | 'landscape'
+
+export interface CompanyWorkbookPreview {
+  kind: CompanyWorkbookKind
+  title: string
+  fileName: string
+  previewSheet: string
+  sheets: string[]
+  status: 'company-specific'
+  notes: string[]
+  columns: string[]
+  rows: { label: string; values: (string | number | null)[]; source?: string }[]
+}
+
 /*
  * The polished UI fixtures are the deterministic frontend seed. Interactive
  * endpoints hit the live brain API, and newly sourced companies are merged into
@@ -114,6 +128,38 @@ export const api = {
 
   async getCompany(id: string): Promise<Company | undefined> {
     return data.companies.find((c) => c.id === id)
+  },
+
+  async getCompanyWorkbookPreview(
+    company: Company,
+    kind: CompanyWorkbookKind,
+  ): Promise<CompanyWorkbookPreview | null> {
+    return postJson<CompanyWorkbookPreview>('/api/models/preview', { company, kind })
+  },
+
+  async downloadCompanyWorkbook(company: Company, kind: CompanyWorkbookKind): Promise<boolean> {
+    try {
+      const res = await fetch('/api/models/workbook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ company, kind }),
+      })
+      if (!res.ok) return false
+      const blob = await res.blob()
+      const disposition = res.headers.get('Content-Disposition') ?? ''
+      const fileName = disposition.match(/filename="([^"]+)"/)?.[1] ?? `${company.id}-${kind}.xlsx`
+      const href = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = href
+      link.download = fileName
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      window.setTimeout(() => URL.revokeObjectURL(href), 1_000)
+      return true
+    } catch {
+      return false
+    }
   },
 
   async getSourcing(): Promise<Company[]> {

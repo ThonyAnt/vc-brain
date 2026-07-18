@@ -21,12 +21,17 @@
     "probe:openai": "node --env-file=../.env node_modules/.bin/tsx src/scripts/probeOpenAI.ts",
     "probe:discovery": "node --env-file=../.env node_modules/.bin/tsx src/scripts/probeDiscovery.ts",
     "seed:write": "tsx src/scripts/writeSeed.ts",
-    "seed:demo": "tsx src/scripts/seedDemo.ts"
+    "seed:demo": "tsx src/scripts/seedDemo.ts",
+    "models:blank": "tsx src/scripts/generateBlankModels.ts"
   },
   "dependencies": {
+    "exceljs": "^4.4.0",
     "openai": "^4.67.0",
     "zod": "^3.23.8",
     "zod-to-json-schema": "^3.25.2"
+  },
+  "overrides": {
+    "uuid": "^11.1.1"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",

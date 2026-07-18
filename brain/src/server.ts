@@ -40,12 +40,19 @@ import type { RankedCandidate } from "./schemas/sourcing.js";
 import type { VCBrainState } from "./state.js";
 import type { Company } from "./schemas/company.js";
 import { loadSourcedCompanies, saveSourcedCompanies } from "./store/sourcedCompanies.js";
+import { buildCompanyWorkbook, buildCompanyWorkbookPreview } from "./models/companyWorkbooks.js";
+import { z } from "zod";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const SNAPSHOT = resolve(here, "../../app/src/lib/brain/snapshot.json");
 const SOURCED_COMPANIES = resolve(here, "../data/sourced-companies.json");
 const PORT = Number(process.env.VC_BRAIN_API_PORT ?? "8790");
 const MODEL = process.env.VC_BRAIN_OPENAI_MODEL ?? "gpt-4o-mini";
+
+const CompanyWorkbookRequestSchema = z.object({
+  kind: z.enum(["tam-exit", "landscape"]),
+  company: z.unknown(),
+});
 
 const state = JSON.parse(readFileSync(SNAPSHOT, "utf8")) as VCBrainState & { competitors?: Company[] };
 const persistedSourcedCompanies = loadSourcedCompanies(SOURCED_COMPANIES);
@@ -115,6 +122,18 @@ function sourcedView(c: Company, r: RankedCandidate | undefined) {
   const winner = r?.closestWinnerId ? findCompany(r.closestWinnerId) : undefined;
   const rejected = r?.closestRejectedDealId ? findCompany(r.closestRejectedDealId) : undefined;
   const competitor = r?.closestCompetitorId ? findCompany(r.closestCompetitorId) : undefined;
+  const recordedCompetitors = c.competitors.map((name) => ({
+    name,
+    kind: "direct" as const,
+    note: "Named in the sourced company record; further fields require verification.",
+  }));
+  if (competitor && !recordedCompetitors.some((entry) => entry.name.toLowerCase() === competitor.name.toLowerCase())) {
+    recordedCompetitors.push({
+      name: competitor.name,
+      kind: "direct",
+      note: "Closest external competitor by deterministic company similarity.",
+    });
+  }
 
   const analogues = [];
   if (winner) analogues.push({ companyId: winner.id, kind: "portfolio", note: `Resembles prior winner ${winner.name}.` });
@@ -136,8 +155,9 @@ function sourcedView(c: Company, r: RankedCandidate | undefined) {
   const assumptions = diligence?.financial.assumptions;
   const metrics = c.metrics;
   const model = metrics || assumptions
-    ? {
+      ? {
         arr: metrics?.arr ?? assumptions?.projectedArr ?? 0,
+        customers: metrics?.customers,
         growthPct: Math.round((metrics?.arrGrowthRate ?? 0) * 100),
         churnPct: Math.round((metrics?.churnRate ?? 0) * 100),
         nrrPct: Math.round((metrics?.nrr ?? 0) * 100),
@@ -176,9 +196,7 @@ function sourcedView(c: Company, r: RankedCandidate | undefined) {
     diligenceQuestions,
     reasonsToInvest: r?.reasonsToAdvance ?? [],
     reasonsToPass: r?.reasonsToReject ?? [],
-    competitors: competitor
-      ? [{ name: competitor.name, kind: "direct", note: "Closest external competitor by similarity." }]
-      : [],
+    competitors: recordedCompetitors,
     model,
   };
 }
@@ -357,6 +375,19 @@ const server = http.createServer(async (req, res) => {
     }
     if (req.method === "POST" && req.url === "/api/discover") {
       return res.end(JSON.stringify(await handleDiscover((await readBody(req)) as never)));
+    }
+    if (req.method === "POST" && req.url === "/api/models/preview") {
+      const body = CompanyWorkbookRequestSchema.parse(await readBody(req));
+      return res.end(JSON.stringify(buildCompanyWorkbookPreview(body.kind, body.company)));
+    }
+    if (req.method === "POST" && req.url === "/api/models/workbook") {
+      const body = CompanyWorkbookRequestSchema.parse(await readBody(req));
+      const preview = buildCompanyWorkbookPreview(body.kind, body.company);
+      const workbook = await buildCompanyWorkbook(body.kind, body.company);
+      res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+      res.setHeader("Content-Length", workbook.length);
+      res.setHeader("Content-Disposition", `attachment; filename="${preview.fileName}"`);
+      return res.end(workbook);
     }
     res.writeHead(404).end(JSON.stringify({ error: "not found" }));
   } catch (e) {

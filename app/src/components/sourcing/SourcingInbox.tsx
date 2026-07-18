@@ -17,6 +17,7 @@ export function SourcingInbox({
   const [items, setItems] = useState<Company[]>([])
   const [dismissed, setDismissed] = useState<Set<string>>(new Set())
   const [saved, setSaved] = useState<Set<string>>(new Set())
+  const [open, setOpen] = useState(false) // folded by default — the graph stays immersive
   const navigate = useNavigate()
   const setWeights = useAppStore((s) => s.setWeights)
   const setLearningNote = useAppStore((s) => s.setLearningNote)
@@ -35,12 +36,35 @@ export function SourcingInbox({
 
   const visible = items.filter((c) => !dismissed.has(c.id))
 
+  if (!open) {
+    return (
+      <button
+        onClick={() => setOpen(true)}
+        className="glass-panel pointer-events-auto flex h-fit cursor-pointer items-center gap-2.5 self-start rounded-full px-4 py-2.5 transition-colors hover:bg-white"
+      >
+        <span className="caption-tight text-ink">Sourced this week</span>
+        <span className="code-md" style={{ color: ACCENT }}>
+          {visible.length}
+        </span>
+      </button>
+    )
+  }
+
   return (
     <div className="glass-panel pointer-events-auto flex h-full w-80 flex-col overflow-hidden">
       <div className="flex items-center justify-between border-b border-hairline px-4 py-3">
         <span className="caption-tight text-ink">Sourced this week</span>
-        <span className="code-md" style={{ color: ACCENT }}>
-          {visible.length}
+        <span className="flex items-center gap-3">
+          <span className="code-md" style={{ color: ACCENT }}>
+            {visible.length}
+          </span>
+          <button
+            onClick={() => setOpen(false)}
+            title="Collapse"
+            className="cursor-pointer text-mute hover:text-ink"
+          >
+            ×
+          </button>
         </span>
       </div>
       <div className="flex-1 space-y-2 overflow-y-auto p-2">

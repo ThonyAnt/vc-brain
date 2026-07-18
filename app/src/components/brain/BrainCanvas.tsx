@@ -260,6 +260,18 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       pOutline[i] = n.role === 'portfolio' ? 1 : 0
     })
 
+    /* intro: camera swoop from distance + staggered node reveal on every mount,
+       clusters lighting up one after another */
+    const intro = { active: !reducedMotion, start: -1 }
+    const revealAt = new Float32Array(N)
+    nodes.forEach((n, i) => {
+      revealAt[i] = 0.2 + n.cluster * 0.12 + ((hash(n.id + 'reveal') % 997) / 997) * 0.45
+    })
+    if (intro.active) {
+      pDim.fill(0)
+      camera.position.set(0, 700, 3050)
+    }
+
     const pGeo = new THREE.BufferGeometry()
     pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3).setUsage(THREE.DynamicDrawUsage))
     pGeo.setAttribute('aColor', new THREE.BufferAttribute(pCol, 3))
@@ -535,6 +547,10 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     }
 
     function setFocus(node: SceneNode) {
+      if (intro.active) {
+        intro.active = false
+        pDim.fill(1)
+      }
       if (!focused) {
         home.pos.copy(camera.position)
         home.target.copy(controls.target)
@@ -612,6 +628,20 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       })
       pGeo.attributes.position.needsUpdate = true
       pMat.uniforms.uTime.value = time
+
+      /* staggered reveal while the intro plays */
+      if (intro.active && !focused) {
+        if (intro.start < 0) intro.start = time
+        const t = time - intro.start
+        let done = true
+        for (let i = 0; i < N; i++) {
+          const p = Math.min(Math.max((t - revealAt[i]) / 0.5, 0), 1)
+          pDim[i] = p * p * (3 - 2 * p)
+          if (p < 1) done = false
+        }
+        pGeo.attributes.aDim.needsUpdate = true
+        if (done && !tween.active) intro.active = false
+      }
 
       for (let i = 0; i < E; i++) {
         const e = edges[i]
@@ -713,6 +743,10 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     resize()
     const ro = new ResizeObserver(resize)
     ro.observe(container)
+
+    if (intro.active) {
+      flyToPose(new THREE.Vector3(0, 170, 1180), new THREE.Vector3(0, 0, 0), 1.9)
+    }
 
     animate()
 

@@ -72,6 +72,8 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
   const tooltipRef = useRef<HTMLDivElement>(null)
   const labelRefs = useRef<(HTMLDivElement | null)[]>([])
   const apiRef = useRef<BrainHandle>({ focusNode: () => {}, clearFocus: () => {}, pulseNodes: () => {} })
+  // Intro swoop plays once; later rebuilds (e.g. web discovery adds nodes) skip it.
+  const introPlayedRef = useRef(false)
 
   useImperativeHandle(ref, () => ({
     focusNode: (id) => apiRef.current.focusNode(id),
@@ -263,7 +265,8 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
 
     /* intro: camera swoop from distance + staggered node reveal on every mount,
        clusters lighting up one after another */
-    const intro = { active: !reducedMotion, start: -1 }
+    const intro = { active: !reducedMotion && !introPlayedRef.current, start: -1 }
+    introPlayedRef.current = true
     const revealAt = new Float32Array(N)
     nodes.forEach((n, i) => {
       revealAt[i] = 0.08 + n.cluster * 0.05 + ((hash(n.id + 'reveal') % 997) / 997) * 0.18

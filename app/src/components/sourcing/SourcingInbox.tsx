@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router'
 import { ACCENT } from '../brain/BrainCanvas'
 import { api } from '../../lib/api/client'
@@ -13,24 +13,56 @@ import { Pill } from '../ui/Pill'
 export function SourcingInbox({
   onFocus,
   onFeedback,
+  onDiscover,
   onHoverCity,
 }: {
   onFocus: (id: string) => void
   onFeedback: (changedIds: string[]) => void
+  onDiscover?: (companies: Company[]) => void
   onHoverCity?: (city: LatLng | null) => void
 }) {
   const [items, setItems] = useState<Company[]>([])
   const [dismissed, setDismissed] = useState<Set<string>>(new Set())
   const [saved, setSaved] = useState<Set<string>>(new Set())
-  // folded by default — the graph stays immersive. ?inbox opens it (demo/screenshot aid)
+  // Folded by default; ?inbox opens it for demos and screenshots.
   const [open, setOpen] = useState(() => new URLSearchParams(window.location.search).has('inbox'))
+  const [query, setQuery] = useState('')
+  const [searching, setSearching] = useState(false)
+  const [foundIds, setFoundIds] = useState<Set<string>>(new Set())
   const navigate = useNavigate()
   const setWeights = useAppStore((s) => s.setWeights)
   const setLearningNote = useAppStore((s) => s.setLearningNote)
 
   useEffect(() => {
     api.getSourcing().then(setItems)
-  }, [])
+    return api.subscribeSourcing((companies) => {
+      setItems((previous) => {
+        const incoming = new Map(companies.map((company) => [company.id, company]))
+        return [...companies, ...previous.filter((company) => !incoming.has(company.id))]
+      })
+      setFoundIds((current) => new Set([...current, ...companies.map((company) => company.id)]))
+      onDiscover?.(companies)
+    })
+  }, [onDiscover])
+
+  /* Trigger a live web search; new companies are prepended and flagged "new". */
+  async function runDiscover(e?: FormEvent) {
+    e?.preventDefault()
+    if (searching) return
+    setSearching(true)
+    try {
+      const found = await api.discover(query.trim() || undefined)
+      if (found.length) {
+        // api.discover publishes into the shared sourcing subscription, which
+        // updates this inbox and lets BrainPage add/pulse the graph nodes.
+        setQuery('')
+      } else {
+        setLearningNote('No new companies found for that search.')
+      }
+    } finally {
+      setSearching(false)
+    }
+  }
 
   async function pass(c: Company) {
     const res = await api.postFeedback({ entityId: c.id, action: 'pass' })
@@ -73,6 +105,22 @@ export function SourcingInbox({
           </button>
         </span>
       </div>
+      <form onSubmit={runDiscover} className="flex items-center gap-2 border-b border-hairline px-3 py-2">
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search the web for startups…"
+          className="min-w-0 flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-mute"
+        />
+        <button
+          type="submit"
+          disabled={searching}
+          className="caption-tight rounded-full px-3 py-1 text-white transition-opacity disabled:opacity-60"
+          style={{ backgroundColor: ACCENT }}
+        >
+          {searching ? 'Searching…' : 'Search'}
+        </button>
+      </form>
       <div className="flex-1 space-y-2 overflow-y-auto p-2">
         {visible.map((c) => (
           <div
@@ -83,7 +131,17 @@ export function SourcingInbox({
             onMouseLeave={() => onHoverCity?.(null)}
           >
             <div className="flex items-baseline justify-between">
-              <div className="text-sm font-semibold text-ink">{c.name}</div>
+              <div className="flex items-center gap-2">
+                <div className="text-sm font-semibold text-ink">{c.name}</div>
+                {foundIds.has(c.id) && (
+                  <span
+                    className="caption-tight rounded-full px-1.5 py-0.5 text-white"
+                    style={{ backgroundColor: ACCENT }}
+                  >
+                    new
+                  </span>
+                )}
+              </div>
               <div className="code-sm" style={{ color: ACCENT }}>
                 {c.fitScore}
               </div>

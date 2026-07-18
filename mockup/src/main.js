@@ -37,6 +37,8 @@ const SECTORS = [
 ];
 const ACCENT = '#266df0'; // Attio blue-500: candidates, hover ring, focus, fit bar
 const SHOW_LINES = false; // resting-state edges + shimmer; focused node's edges still show
+// uniform node radius multiplier. Default here, override with ?scale=1.5, tune live with [ and ]
+const NODE_SCALE = parseFloat(new URLSearchParams(location.search).get('scale')) || 1.0;
 // which sectors plausibly trade companies between them (cross-links)
 const SECTOR_ADJ = [[0, 4], [0, 1], [0, 2], [1, 5], [3, 1], [2, 3], [4, 1], [5, 4]];
 
@@ -222,11 +224,15 @@ pGeo.setAttribute('aOutline', new THREE.BufferAttribute(pOutline, 1));
 const pMat = new THREE.ShaderMaterial({
   transparent: true,
   depthWrite: false,
-  uniforms: { uTime: { value: 0 }, uMotion: { value: reducedMotion ? 0 : 1 } },
+  uniforms: {
+    uTime: { value: 0 },
+    uMotion: { value: reducedMotion ? 0 : 1 },
+    uScale: { value: NODE_SCALE },
+  },
   vertexShader: /* glsl */`
     attribute vec3 aColor;
     attribute float aSize, aPulse, aPhase, aDim, aOutline;
-    uniform float uTime, uMotion;
+    uniform float uTime, uMotion, uScale;
     varying vec3 vColor;
     varying float vDim, vOutline;
     void main() {
@@ -235,7 +241,7 @@ const pMat = new THREE.ShaderMaterial({
       vOutline = aOutline;
       vec4 mv = modelViewMatrix * vec4(position, 1.0);
       float pulse = 1.0 + aPulse * uMotion * 0.22 * sin(uTime * 2.2 + aPhase);
-      gl_PointSize = clamp(aSize * pulse * (620.0 / -mv.z), 2.0, 52.0);
+      gl_PointSize = clamp(aSize * uScale * pulse * (620.0 / -mv.z), 2.0, 52.0 * max(uScale, 1.0));
       gl_Position = projectionMatrix * mv;
     }`,
   fragmentShader: /* glsl */`
@@ -449,7 +455,7 @@ function updateHover() {
       <div class="t-meta" style="color:${s.color}">${s.name} · ${roleTag}</div>`;
     ringWorld.copy(hovered.pos).applyMatrix4(group.matrixWorld);
     ring.position.copy(ringWorld);
-    const sz = (hovered.role === 'portfolio' ? 15 : 10) * 3.4;
+    const sz = (hovered.role === 'portfolio' ? 15 : 10) * 3.4 * pMat.uniforms.uScale.value;
     ring.scale.set(sz, sz, 1);
     ring.visible = true;
     renderer.domElement.style.cursor = 'pointer';
@@ -640,6 +646,14 @@ function animate() {
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
 }
+
+// live node-size tuning: [ shrinks, ] grows
+window.addEventListener('keydown', (e) => {
+  if (e.key !== '[' && e.key !== ']') return;
+  const u = pMat.uniforms.uScale;
+  u.value = Math.min(3, Math.max(0.4, u.value * (e.key === ']' ? 1.1 : 1 / 1.1)));
+  showToast(`node scale ×${u.value.toFixed(2)} · <span class="pulse">?scale=${u.value.toFixed(2)}</span> to keep`);
+});
 
 // open with #demo to auto-fly into a sourced candidate after load (pitch + testing aid);
 // #demo-snap jumps straight to the end pose (deterministic screenshots)

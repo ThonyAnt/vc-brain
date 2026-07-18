@@ -1,0 +1,165 @@
+import type { StructuredRequest } from "../llm/client.js";
+import type { MockLLMOptions } from "../llm/mock.js";
+import { fundProfile } from "./sample.js";
+
+/** Extract unique `co_*` company IDs from a prompt, in order of appearance. */
+function companyIds(prompt: string): string[] {
+  const out: string[] = [];
+  for (const m of prompt.matchAll(/co_[a-z0-9]+/g)) {
+    if (!out.includes(m[0])) out.push(m[0]);
+  }
+  return out;
+}
+
+function firstMatch(prompt: string, re: RegExp, fallback: string): string {
+  return prompt.match(re)?.[0] ?? fallback;
+}
+
+/**
+ * Canned, offline agent outputs for the full pipeline. Handlers read the IDs
+ * out of each prompt so the mock stays coherent (right company/partner/criterion)
+ * without any network calls. This is what runs until VC_BRAIN_LLM=openai is set.
+ */
+export const mockAgentStructured: NonNullable<MockLLMOptions["structured"]> = {
+  FundProfile: fundProfile,
+
+  ScoutEnrichment: (req: StructuredRequest) => {
+    const ids = companyIds(req.prompt);
+    return {
+      finalistIds: ids.slice(0, 3),
+      enrichments: ids.map((id) => ({
+        companyId: id,
+        reasonsToAdvance: [`Resembles a prior winner on thesis fit (${id})`],
+        reasonsToReject: ["Distribution not yet proven at scale"],
+        unresolvedRisks: ["Depends on enterprise sales execution"],
+      })),
+    };
+  },
+
+  TechnicalAnalysis: {
+    moatScore: 0.7,
+    feasibilityScore: 0.8,
+    founderTechnicalScore: 0.75,
+    keyStrengths: ["Domain-credible founder", "Workflow integration depth"],
+    keyRisks: ["Foundation-model layer is replicable"],
+    diligenceQuestions: ["What proprietary data compounds over time?"],
+    historicalAnalogues: [],
+  },
+
+  CommercialAnalysis: {
+    marketScore: 0.75,
+    urgencyScore: 0.7,
+    competitiveIntensity: 0.55,
+    distributionScore: 0.6,
+    pricingPowerScore: 0.6,
+    scalabilityScore: 0.7,
+    keyStrengths: ["Acute hospital staffing pain"],
+    keyRisks: ["Long enterprise sales cycles"],
+    portfolioSynergies: ["Shares buyers with MedFlow"],
+    portfolioConflicts: [],
+    diligenceQuestions: ["What is the current sales cycle length?"],
+  },
+
+  FinancialAnalysis: {
+    revenueQualityScore: 0.72,
+    capitalEfficiencyScore: 0.65,
+    assumptions: {
+      investmentAmount: 2_000_000,
+      entryValuation: 18_000_000,
+      initialOwnership: 0.11,
+      projectedArr: 12_000_000,
+      exitMultiple: 9,
+      dilutionFactor: 0.6,
+      yearsToExit: 6,
+    },
+    keyStrengths: ["Recurring revenue with expansion"],
+    keyRisks: ["CAC payback unproven"],
+    diligenceQuestions: ["What is net revenue retention by cohort?"],
+  },
+
+  RiskAnalysis: {
+    criticalRisks: ["Distribution execution risk"],
+    unsupportedClaims: ["Claimed NRR not yet cohort-verified"],
+    contradictions: [],
+    missingInformation: ["Security/compliance posture"],
+    highValueQuestions: ["Show cohort retention and CAC payback"],
+  },
+
+  PartnerOpinionSet: (req: StructuredRequest) => {
+    const ids = companyIds(req.prompt);
+    const partnerId = firstMatch(req.prompt, /partner_[a-z]+/, "partner_unknown");
+    // Deliberate disagreement: technical partner is bullish, financial more cautious.
+    const bullish = partnerId === "partner_tech";
+    return {
+      opinions: ids.map((id, i) => ({
+        partnerId,
+        companyId: id,
+        vote: i === 0 ? (bullish ? "strong_yes" : "yes") : "uncertain",
+        confidence: i === 0 ? 0.8 : 0.5,
+        thesis:
+          i === 0
+            ? `Best fit to the fund's thesis via ${partnerId}'s lens`
+            : "Plausible but weaker on this partner's priorities",
+        topEvidence: ["Founder-market fit", "Workflow moat"],
+        biggestConcern: bullish ? "Replicability of the model layer" : "Distribution and CAC payback",
+        evidenceThatWouldChangeVote: ["Signed enterprise pilots with retention data"],
+      })),
+    };
+  },
+
+  CommitteeDecision: (req: StructuredRequest) => {
+    const ids = companyIds(req.prompt);
+    const min = fundProfile.checkSize.min;
+    const max = fundProfile.checkSize.max;
+    return {
+      rankedFinalistIds: ids,
+      recommendedCompanyId: ids[0] ?? "",
+      confidence: 0.72,
+      recommendedCheckSize: Math.round((min + max) / 2),
+      centralDisagreement: "Technical conviction vs. unproven distribution/CAC.",
+      strongestBullCase: "Clinician-founder with acute hospital pull, mirrors MedFlow.",
+      strongestBearCase: "Model layer is replicable and sales cycle is long.",
+      unresolvedDiligence: ["Cohort retention", "CAC payback", "Security posture"],
+      rationale: "Closest analogue to a prior winner; fits thesis and check size.",
+    };
+  },
+
+  InvestmentMemo: (req: StructuredRequest) => {
+    const id = companyIds(req.prompt)[0] ?? "";
+    return {
+      companyId: id,
+      executiveSummary: "Recommended seed investment; closest analogue to a prior winner.",
+      companyOverview: "AI clinical documentation for hospital physicians.",
+      investmentThesis: "Clinician-founder + acute workflow pain + enterprise distribution.",
+      whyNow: "Hospital staffing pressure makes documentation automation urgent.",
+      historicalAnalogues: [
+        { text: "Mirrors MedFlow's clinician-founder pattern", sourceNodeIds: ["co_medflow"], confidence: 0.8 },
+      ],
+      marketAndCompetition: "Crowded but differentiated on workflow depth vs. NoteGen.",
+      technicalMoat: "Workflow integration and clinician trust; data compounding TBD.",
+      businessModel: "Subscription SaaS into health systems.",
+      financialScenarios: "Base ~3x MOIC; bull higher on expansion, bear on churn.",
+      reasonsToInvest: [
+        { text: "Founder-market fit", sourceNodeIds: [id], confidence: 0.8 },
+      ],
+      reasonsToPass: [
+        { text: "Distribution unproven at scale", sourceNodeIds: [id], confidence: 0.5 },
+      ],
+      keyRisks: ["Distribution execution", "Model replicability"],
+      openDiligenceQuestions: ["Cohort retention", "CAC payback"],
+      committeeDisagreement: "Technical conviction vs. distribution caution.",
+      recommendation: "Advance to partner meeting with a term-sheet-conditional check.",
+    };
+  },
+
+  LearningInterpretation: (req: StructuredRequest) => ({
+    criterionId: firstMatch(req.prompt, /crit_[a-z]+/, "crit_distribution"),
+    // A pass on a weak criterion strengthens it; "incorrect"/"decrease" weakens.
+    feedbackDirection: /incorrect|decrease concern|over-?weighted/i.test(req.prompt) ? -0.6 : 0.6,
+    confidence: 0.7,
+    whatTheFundLearned:
+      "The fund now weights distribution readiness more heavily for healthcare deals.",
+  }),
+};
+
+export const mockAgentOptions: MockLLMOptions = { structured: mockAgentStructured };

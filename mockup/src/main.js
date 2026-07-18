@@ -169,7 +169,7 @@ camera.position.set(0, 170, 1180);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.06;
-controls.minDistance = 320;
+controls.minDistance = 140;
 controls.maxDistance = 3200;
 controls.autoRotate = !reducedMotion;
 controls.autoRotateSpeed = 0.45;
@@ -311,11 +311,13 @@ function labelSprite(text, colorHex) {
   sp.scale.set(190, 47.5, 1);
   return sp;
 }
+const labelSprites = [];
 SECTORS.forEach((s, i) => {
   const sp = labelSprite(s.name, s.color);
   sp.position.copy(anchors[i]).multiplyScalar(1.28);
   sp.position.y += 120;
   group.add(sp);
+  labelSprites.push(sp);
 });
 
 // --- starfield backdrop
@@ -441,19 +443,50 @@ function updateHover() {
   }
 }
 
-// camera tween: cosmos transitionDuration 800ms, cubic in/out
-const tween = { active: false, t: 0, fromT: new THREE.Vector3(), toT: new THREE.Vector3() };
+// camera fly-through: swoop along a quadratic bezier into the cluster,
+// easing cubic in/out (cosmos easing, longer duration for the travel)
+const tween = {
+  active: false, t: 0, dur: 1.25,
+  fromPos: new THREE.Vector3(), midPos: new THREE.Vector3(), toPos: new THREE.Vector3(),
+  fromT: new THREE.Vector3(), toT: new THREE.Vector3(),
+};
 const easeCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const home = { pos: new THREE.Vector3(), target: new THREE.Vector3(), saved: false };
+const flyDir = new THREE.Vector3(), flySide = new THREE.Vector3();
+
+function flyToPose(toPos, toTarget, dur) {
+  tween.active = true; tween.t = 0;
+  tween.dur = reducedMotion ? 0.001 : dur;
+  tween.fromPos.copy(camera.position);
+  tween.fromT.copy(controls.target);
+  tween.toPos.copy(toPos);
+  tween.toT.copy(toTarget);
+  // control point: lift and bank the midpoint so the dolly reads as a swoop
+  const travel = tween.fromPos.distanceTo(tween.toPos);
+  flyDir.copy(tween.toPos).sub(tween.fromPos).normalize();
+  flySide.crossVectors(flyDir, camera.up);
+  if (flySide.lengthSq() < 1e-6) flySide.set(1, 0, 0); else flySide.normalize();
+  tween.midPos.lerpVectors(tween.fromPos, tween.toPos, 0.5)
+    .addScaledVector(camera.up, Math.min(travel * 0.14, 130))
+    .addScaledVector(flySide, Math.min(travel * 0.1, 90));
+  controls.enabled = false;
+  controls.autoRotate = false;
+}
 
 function setFocus(node) {
+  if (!focused) { home.pos.copy(camera.position); home.target.copy(controls.target); home.saved = true; }
   focused = node;
   const nbrs = neighbourSets.get(node.id);
   nodes.forEach((n, i) => { pDim[i] = nbrs.has(n.id) ? 1 : GREYOUT; });
   pGeo.attributes.aDim.needsUpdate = true;
-  tween.active = true; tween.t = 0;
-  tween.fromT.copy(controls.target);
-  tween.toT.copy(node.pos).applyMatrix4(group.matrixWorld);
-  controls.autoRotate = false;
+  const targetWorld = tmpA.copy(node.pos).applyMatrix4(group.matrixWorld);
+  flyDir.copy(camera.position).sub(targetWorld).normalize();
+  const endDist = node.role === 'portfolio' ? 300 : 240;
+  flyToPose(
+    tmpB.copy(targetWorld).addScaledVector(flyDir, endDist).addScaledVector(camera.up, 24),
+    targetWorld,
+    1.25
+  );
 
   const s = SECTORS[node.sector];
   document.getElementById('p-name').textContent = node.name;
@@ -476,17 +509,24 @@ function setFocus(node) {
   panel.classList.add('open');
 }
 function clearFocus() {
+  const wasFocused = focused;
   focused = null;
   pDim.fill(1);
   pGeo.attributes.aDim.needsUpdate = true;
   panel.classList.remove('open');
-  controls.autoRotate = !reducedMotion;
+  if (wasFocused && home.saved) {
+    home.saved = false;
+    flyToPose(home.pos, home.target, 1.0);
+  } else {
+    controls.autoRotate = !reducedMotion;
+  }
 }
 
 // ---------------------------------------------------------------- animate
 
 const clock = new THREE.Clock();
 const tmpA = new THREE.Vector3();
+const tmpB = new THREE.Vector3();
 
 function animate() {
   const dt = Math.min(clock.getDelta(), 0.05);
@@ -554,21 +594,46 @@ function animate() {
   sGeo.attributes.position.needsUpdate = true;
   sGeo.attributes.color.needsUpdate = true;
 
-  // slow rotation of the whole brain (drawrange group.rotation), gentler
-  group.rotation.y += dt * 0.02 * motion;
+  // slow rotation of the whole brain (drawrange group.rotation), gentler;
+  // paused while flying or focused so the destination holds still
+  if (!focused && !tween.active) group.rotation.y += dt * 0.02 * motion;
 
   if (tween.active) {
-    tween.t = Math.min(tween.t + dt / 0.8, 1);
-    controls.target.lerpVectors(tween.fromT, tween.toT, easeCubic(tween.t));
-    if (tween.t >= 1) tween.active = false;
+    tween.t = Math.min(tween.t + dt / tween.dur, 1);
+    const e = easeCubic(tween.t);
+    // quadratic bezier through the lifted midpoint
+    tmpA.lerpVectors(tween.fromPos, tween.midPos, e);
+    tmpB.lerpVectors(tween.midPos, tween.toPos, e);
+    camera.position.lerpVectors(tmpA, tmpB, e);
+    controls.target.lerpVectors(tween.fromT, tween.toT, e);
+    if (tween.t >= 1) {
+      tween.active = false;
+      controls.enabled = true;
+      controls.autoRotate = !reducedMotion && !focused;
+    }
   } else if (focused) {
     controls.target.copy(tmpA.copy(focused.pos).applyMatrix4(group.matrixWorld));
+  }
+
+  // labels fade out as the camera flies close, so they never blow out in bloom
+  for (const sp of labelSprites) {
+    tmpA.setFromMatrixPosition(sp.matrixWorld);
+    sp.material.opacity = 0.5 * THREE.MathUtils.smoothstep(camera.position.distanceTo(tmpA), 260, 620);
   }
 
   controls.update();
   updateHover();
   composer.render();
   requestAnimationFrame(animate);
+}
+
+// open with #demo to auto-fly into a sourced candidate after load (pitch + testing aid);
+// #demo-snap jumps straight to the end pose (deterministic screenshots)
+if (location.hash.startsWith('#demo')) {
+  setTimeout(() => {
+    setFocus(nodes.find((n) => n.role === 'candidate'));
+    if (location.hash === '#demo-snap') tween.dur = 0.001;
+  }, 1500);
 }
 
 window.addEventListener('resize', () => {

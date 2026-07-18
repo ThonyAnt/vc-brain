@@ -4,11 +4,109 @@ import { Card } from '../../../components/ui/Card'
 import { Eyebrow } from '../../../components/ui/Eyebrow'
 import { CardSticky, ContainerScroll } from '@/components/ui/cards-stack'
 import { api } from '../../../lib/api/client'
-import type { Company, Founder } from '../../../lib/types'
+import type { Company, Founder, Stage } from '../../../lib/types'
 
 /* Stacked analysis cards: each section pins and stacks as you scroll the deal */
 const STACK_CARD =
   'rounded-none border-2 border-hairline-strong bg-card p-6 shadow-brutal'
+
+const STAGES: Stage[] = ['Sourced', 'Outreach', 'Meeting', 'Diligence', 'IC', 'Decision']
+
+const fmtMoney = (n: number) =>
+  n >= 1e9 ? `$${(n / 1e9).toFixed(1)}B` : `$${Math.round(n / 1e6)}M`
+
+/* ---- header band: stage tracker · valuation · fit score ------------------- */
+
+function StageTracker({ current }: { current: Stage }) {
+  const idx = STAGES.indexOf(current)
+  return (
+    <div className="rounded-none border-2 border-hairline-strong bg-card p-4 shadow-brutal">
+      <Eyebrow>Deal stage</Eyebrow>
+      <div className="mt-3 flex">
+        {STAGES.map((s, i) => {
+          const done = i < idx
+          const active = i === idx
+          return (
+            <div
+              key={s}
+              className={`code-sm -ml-[2px] flex-1 border-2 border-hairline-strong px-1 py-2 text-center uppercase tracking-[0.08em] first:ml-0 ${
+                active
+                  ? 'z-10 bg-primary text-on-primary shadow-brutal-sm'
+                  : done
+                    ? 'bg-dark text-on-dark'
+                    : 'bg-card text-charcoal'
+              }`}
+            >
+              {active ? `▸ ${s}` : s}
+            </div>
+          )
+        })}
+      </div>
+      <div className="code-sm mt-2 uppercase tracking-[0.08em] text-charcoal">
+        {idx + 1}/{STAGES.length} · {current === 'Decision' ? 'terminal stage' : `next: ${STAGES[idx + 1]}`}
+      </div>
+    </div>
+  )
+}
+
+function ValuationBlock({ company }: { company: Company }) {
+  const capM = company.raising?.match(/\$([\d.]+)M\s+cap/)?.[1]
+  const valuation = company.model?.valuation
+    ? fmtMoney(company.model.valuation)
+    : capM
+      ? `$${capM}M`
+      : '—'
+  return (
+    <div className="rounded-none border-2 border-hairline-strong bg-secondary p-4 shadow-brutal">
+      <Eyebrow>Market valuation</Eyebrow>
+      <div className="display-md mt-2 text-ink">{valuation}</div>
+      <div className="code-sm mt-1 text-charcoal">{company.raising ?? 'no active round'}</div>
+    </div>
+  )
+}
+
+function FitScoreBlock({ score }: { score: number }) {
+  const filled = Math.round(score / 10)
+  return (
+    <div className="rounded-none border-2 border-hairline-strong bg-card p-4 shadow-brutal">
+      <Eyebrow>Fund fit</Eyebrow>
+      <div className="display-md mt-2 text-primary">{score}</div>
+      <div className="mt-2 flex">
+        {Array.from({ length: 10 }, (_, i) => (
+          <i
+            key={i}
+            className={`-ml-[2px] h-4 flex-1 border-2 border-hairline-strong first:ml-0 ${
+              i < filled ? 'bg-primary' : 'bg-bone'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/* ---- founder avatar: placeholder portrait, initials block on error -------- */
+
+function FounderAvatar({ founder }: { founder: Founder }) {
+  const [broken, setBroken] = useState(false)
+  const initials = founder.name
+    .split(' ')
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join('')
+  return broken ? (
+    <div className="flex h-14 w-14 shrink-0 items-center justify-center border-2 border-hairline-strong bg-secondary">
+      <span className="code-md font-bold text-ink">{initials}</span>
+    </div>
+  ) : (
+    <img
+      src={`https://i.pravatar.cc/112?u=${founder.id}`}
+      alt={founder.name}
+      onError={() => setBroken(true)}
+      className="h-14 w-14 shrink-0 border-2 border-hairline-strong object-cover"
+    />
+  )
+}
 
 export function OverviewTab({ company, founders }: { company: Company; founders: Founder[] }) {
   const [names, setNames] = useState<Map<string, string>>(new Map())
@@ -88,8 +186,16 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
   ]
 
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-      <ContainerScroll className="space-y-4 pb-[16vh] lg:col-span-2">
+    <div>
+      {/* status band: where the deal stands, what it costs, how well it fits */}
+      <div className="mb-5 grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)]">
+        <StageTracker current={company.dealStage ?? 'Sourced'} />
+        <ValuationBlock company={company} />
+        <FitScoreBlock score={company.fitScore} />
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <ContainerScroll className="space-y-4 pb-[16vh] lg:col-span-2">
         {sections.map((s, i) => (
           <CardSticky
             key={s.key}
@@ -107,12 +213,29 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
       <div className="h-fit space-y-4 lg:sticky lg:top-4">
         {founders.map((f) => (
           <Card key={f.id}>
-            <div className="flex items-baseline justify-between">
-              <span className="caption-tight text-ink">{f.name}</span>
-              <span className="code-md text-ink">{f.score}</span>
+            <div className="flex items-start gap-3">
+              <FounderAvatar founder={f} />
+              <div className="min-w-0 flex-1">
+                <span className="caption-tight block text-ink">{f.name}</span>
+                <Eyebrow className="mt-0.5">{f.role}</Eyebrow>
+              </div>
+              {/* score stamp: the loudest thing on the card */}
+              <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center border-2 border-hairline-strong bg-primary shadow-brutal-sm">
+                <span className="font-mono text-xl font-bold leading-none text-on-primary">{f.score}</span>
+                <span className="code-sm mt-0.5 text-[9px] uppercase text-on-primary">score</span>
+              </div>
             </div>
-            <Eyebrow className="mt-0.5">{f.role}</Eyebrow>
-            <p className="mt-2 text-sm text-mute">{f.background}</p>
+            <div className="mt-3 flex">
+              {Array.from({ length: 10 }, (_, i) => (
+                <i
+                  key={i}
+                  className={`-ml-[2px] h-2.5 flex-1 border-2 border-hairline-strong first:ml-0 ${
+                    i < Math.round(f.score / 10) ? 'bg-dark' : 'bg-bone'
+                  }`}
+                />
+              ))}
+            </div>
+            <p className="mt-3 text-sm text-mute">{f.background}</p>
             <NavLink to="/founders" className="caption-tight mt-3 inline-block text-primary">
               score rationale →
             </NavLink>
@@ -140,6 +263,7 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
             ))}
           </ul>
         </Card>
+      </div>
       </div>
     </div>
   )

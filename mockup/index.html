@@ -20,12 +20,21 @@
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     overflow: hidden;
   }
-  #app { position: fixed; inset: 0; }
-  #app canvas { display: block; }
-  .vignette {
-    position: fixed; inset: 0; pointer-events: none;
-    background: radial-gradient(ellipse at 50% 42%, transparent 55%, rgba(2, 3, 8, 0.55) 100%);
+  /* animate-ui StarsBackground, ported: bottom-lit gradient + 3 parallax star layers */
+  #stars-bg {
+    position: fixed; inset: 0; z-index: 0; overflow: hidden;
+    background: radial-gradient(ellipse at bottom, #262626 0%, #000 100%);
   }
+  #star-parallax { position: absolute; inset: 0; will-change: transform; }
+  .star-layer {
+    position: absolute; top: 0; left: 0; width: 100%; height: 2000px;
+    animation: star-drift linear infinite;
+  }
+  .star-dot { position: absolute; background: transparent; border-radius: 50%; }
+  @keyframes star-drift { to { transform: translateY(-2000px); } }
+  @media (prefers-reduced-motion: reduce) { .star-layer { animation: none; } }
+  #app { position: fixed; inset: 0; z-index: 1; }
+  #app canvas { display: block; }
   .hud {
     position: fixed; z-index: 10; pointer-events: none;
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -93,8 +102,8 @@
 </style>
 </head>
 <body>
+  <div id="stars-bg"><div id="star-parallax"></div></div>
   <div id="app"></div>
-  <div class="vignette"></div>
 
   <div class="hud tl">
     <div class="wordmark">VC Brain <span class="dim">/ fund memory</span></div>

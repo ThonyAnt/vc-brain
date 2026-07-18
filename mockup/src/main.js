@@ -155,16 +155,16 @@ for (const e of edges) {
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const container = document.getElementById('app');
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x000000, 0); // transparent: DOM StarsBackground shows through
 // GalaxyThreeJS: ACESFilmic at low exposure is what turns flat discs into rich orbs
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 0.8;
 container.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color('#000004'); // near-pure black (galaxy repos), not cosmos's #222
 
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 8000);
 camera.position.set(0, 170, 1180);
@@ -215,10 +215,21 @@ pGeo.setAttribute('aPulse', new THREE.BufferAttribute(pPulse, 1));
 pGeo.setAttribute('aPhase', new THREE.BufferAttribute(pPhase, 1));
 pGeo.setAttribute('aDim', new THREE.BufferAttribute(pDim, 1).setUsage(THREE.DynamicDrawUsage));
 
+// additive over a TRANSPARENT canvas: add RGB but never write alpha, otherwise
+// glow quads occlude the DOM stars behind the canvas and read as dark patches
+function pureAdditive(mat) {
+  mat.blending = THREE.CustomBlending;
+  mat.blendEquation = THREE.AddEquation;
+  mat.blendSrc = THREE.OneFactor;
+  mat.blendDst = THREE.OneFactor;
+  mat.blendSrcAlpha = THREE.ZeroFactor;
+  mat.blendDstAlpha = THREE.OneFactor;
+  return mat;
+}
+
 const pMat = new THREE.ShaderMaterial({
   transparent: true,
   depthWrite: false,
-  blending: THREE.AdditiveBlending,
   uniforms: { uTime: { value: 0 }, uMotion: { value: reducedMotion ? 0 : 1 } },
   vertexShader: /* glsl */`
     attribute vec3 aColor;
@@ -247,6 +258,7 @@ const pMat = new THREE.ShaderMaterial({
       gl_FragColor = vec4(col, 1.0);
     }`,
 });
+pureAdditive(pMat);
 const points = new THREE.Points(pGeo, pMat);
 group.add(points);
 
@@ -260,9 +272,9 @@ const lCol = new Float32Array(E * 6);
 const lGeo = new THREE.BufferGeometry();
 lGeo.setAttribute('position', new THREE.BufferAttribute(lPos, 3).setUsage(THREE.DynamicDrawUsage));
 lGeo.setAttribute('color', new THREE.BufferAttribute(lCol, 3).setUsage(THREE.DynamicDrawUsage));
-const lMat = new THREE.LineBasicMaterial({
-  vertexColors: true, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-});
+const lMat = pureAdditive(new THREE.LineBasicMaterial({
+  vertexColors: true, transparent: true, depthWrite: false,
+}));
 const links = new THREE.LineSegments(lGeo, lMat);
 group.add(links);
 
@@ -368,23 +380,36 @@ SECTORS.forEach((s, si) => {
   }
 });
 
-// --- starfield backdrop
-{
-  const M = 900;
-  const stPos = new Float32Array(M * 3);
-  for (let i = 0; i < M; i++) {
-    const v = new THREE.Vector3((rand() - 0.5), (rand() - 0.5), (rand() - 0.5)).normalize()
-      .multiplyScalar(1900 + rand() * 1400);
-    stPos[i * 3] = v.x; stPos[i * 3 + 1] = v.y; stPos[i * 3 + 2] = v.z;
+// --- stars background (animate-ui StarsBackground, ported verbatim: three box-shadow
+// layers of 1000/400/200 dots at 1/2/3px drifting over 50/100/150s, spring mouse parallax)
+function generateStars(count, starColor) {
+  const shadows = [];
+  for (let i = 0; i < count; i++) {
+    const x = Math.floor(rand() * 4000) - 2000;
+    const y = Math.floor(rand() * 4000) - 2000;
+    shadows.push(`${x}px ${y}px ${starColor}`);
   }
-  const stGeo = new THREE.BufferGeometry();
-  stGeo.setAttribute('position', new THREE.BufferAttribute(stPos, 3));
-  const stMat = new THREE.PointsMaterial({
-    color: new THREE.Color('#5a6690'), size: 1.2, sizeAttenuation: false,
-    transparent: true, opacity: 0.28, depthWrite: false, blending: THREE.AdditiveBlending,
-  });
-  scene.add(new THREE.Points(stGeo, stMat));
+  return shadows.join(', ');
 }
+const starParallax = document.getElementById('star-parallax');
+for (const [count, size, dur] of [[1000, 1, 50], [400, 2, 100], [200, 3, 150]]) {
+  const layer = document.createElement('div');
+  layer.className = 'star-layer';
+  layer.style.animationDuration = `${dur}s`;
+  const shadow = generateStars(count, '#fff');
+  for (const top of [0, 2000]) {
+    const dot = document.createElement('div');
+    dot.className = 'star-dot';
+    dot.style.cssText = `width:${size}px;height:${size}px;top:${top}px;box-shadow:${shadow}`;
+    layer.appendChild(dot);
+  }
+  starParallax.appendChild(layer);
+}
+const parallax = { x: 0, y: 0, tx: 0, ty: 0 };
+window.addEventListener('mousemove', (e) => {
+  parallax.tx = -(e.clientX - window.innerWidth / 2) * 0.05;
+  parallax.ty = -(e.clientY - window.innerHeight / 2) * 0.05;
+});
 
 // --- bloom
 const composer = new EffectComposer(renderer);
@@ -677,6 +702,11 @@ function animate() {
     if (focused && sp.userData.sector !== focused.sector) o *= 0.25;
     sp.material.opacity = o;
   }
+
+  // spring-follow mouse parallax on the DOM star layers
+  parallax.x += (parallax.tx - parallax.x) * Math.min(1, dt * 3);
+  parallax.y += (parallax.ty - parallax.y) * Math.min(1, dt * 3);
+  starParallax.style.transform = `translate(${parallax.x}px, ${parallax.y}px)`;
 
   controls.update();
   updateHover();

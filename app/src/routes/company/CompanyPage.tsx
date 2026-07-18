@@ -25,7 +25,9 @@ export function CompanyPage() {
 
   useEffect(() => {
     if (!id) return
-    setTab('Overview')
+    // ?tab= opens a specific tab (demo/screenshot aid), else reset to Overview
+    const param = new URLSearchParams(window.location.search).get('tab')
+    setTab(TABS.find((t) => t.toLowerCase() === param?.toLowerCase()) ?? 'Overview')
     api.getCompany(id).then((c) => setCompany(c ?? null))
     api.getFounders().then((all) => setFounders(all.filter((f) => f.companyId === id)))
   }, [id])

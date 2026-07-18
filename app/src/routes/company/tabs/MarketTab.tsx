@@ -10,8 +10,6 @@ const KIND_FILL: Record<Competitor['kind'], string> = {
   emerging: 'bg-hero-glow text-ink',
 }
 
-const CHIP_ROT = [-2, 1.5, -1, 2]
-
 /* Deterministic quadrant placement: x = maturity (incumbent left, emerging right),
    y = proximity (direct high, adjacent low), spread along the diagonal. */
 function place(c: Competitor, i: number, total: number) {
@@ -65,12 +63,13 @@ export function MarketTab({ company }: { company: Company }) {
                 className="group absolute z-20 -translate-x-1/2 -translate-y-1/2"
                 style={{ left: `${p.x}%`, top: `${p.y}%` }}
               >
-                <div
-                  className={`code-sm cursor-default whitespace-nowrap border-2 border-hairline-strong px-2 py-0.5 shadow-brutal-sm transition-transform group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 ${KIND_FILL[c.kind]}`}
-                  style={{ transform: `rotate(${CHIP_ROT[i % CHIP_ROT.length]}deg)` }}
-                >
+                {/* dot at the coordinate, label floating above it */}
+                <i
+                  className={`block h-3.5 w-3.5 cursor-default rounded-full border-2 border-hairline-strong transition-transform group-hover:scale-125 ${KIND_FILL[c.kind]}`}
+                />
+                <span className="code-sm pointer-events-none absolute bottom-full left-1/2 mb-1 -translate-x-1/2 whitespace-nowrap bg-card/85 px-1 leading-tight text-ink">
                   {c.name}
-                </div>
+                </span>
                 <div className="pointer-events-none absolute top-full left-1/2 z-30 mt-2 hidden w-48 -translate-x-1/2 border-2 border-hairline-strong bg-card p-2 shadow-brutal group-hover:block">
                   <span className="caption text-body">{c.note}</span>
                 </div>
@@ -78,14 +77,12 @@ export function MarketTab({ company }: { company: Company }) {
             )
           })}
 
-          {/* the company itself — red sticker, top of the stack */}
+          {/* the company itself — big red dot, name stamped above */}
           <div className="absolute top-[38%] left-[63%] z-30 -translate-x-1/2 -translate-y-1/2">
-            <div
-              className="caption-tight whitespace-nowrap border-2 border-hairline-strong bg-primary px-2.5 py-1 text-on-primary shadow-brutal"
-              style={{ transform: 'rotate(-3deg)' }}
-            >
+            <i className="block h-5 w-5 rounded-full border-2 border-hairline-strong bg-primary shadow-brutal-sm" />
+            <span className="caption-tight absolute bottom-full left-1/2 mb-1.5 -translate-x-1/2 whitespace-nowrap border-2 border-hairline-strong bg-card px-2 py-0.5 text-ink shadow-brutal-sm">
               {company.name}
-            </div>
+            </span>
           </div>
 
           {/* white space callout */}

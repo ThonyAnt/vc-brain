@@ -11,6 +11,26 @@ import type {
   FundProfile,
 } from '../types'
 
+export type OrchestratorStreamEvent =
+  | { type: 'run_started'; runId: string; orchestrator: string; agents: string[] }
+  | { type: 'agent_started'; runId: string; agent: string; label: string }
+  | { type: 'agent_completed'; runId: string; agent: string; summary: string }
+  | { type: 'text_delta'; runId: string; delta: string }
+  | { type: 'run_completed'; runId: string; message: ChatMessage }
+  | { type: 'error'; error: string }
+
+export interface StreamChatHandlers {
+  onDelta?: (delta: string) => void
+  onEvent?: (event: OrchestratorStreamEvent) => void
+}
+
+type ChatContext = {
+  route?: string
+  companyId?: string
+  comparisonCompanyId?: string
+  axes?: { x: string; y: string; z: string }
+}
+
 /*
  * Data comes from a deterministic brain snapshot (VCBrainState), adapted into
  * the app's view types. The interactive endpoints (chat, feedback) hit the live
@@ -39,6 +59,22 @@ async function postJson<T>(path: string, body: unknown): Promise<T | null> {
   } catch {
     return null
   }
+}
+
+async function chatOnce(messages: ChatMessage[], context?: ChatContext): Promise<ChatMessage> {
+  const live = await postJson<ChatMessage>('/api/chat', { messages, context })
+  if (live?.content) return live
+  return localChat(messages, context)
+}
+
+function parseSseFrame(frame: string): OrchestratorStreamEvent | undefined {
+  const data = frame
+    .split('\n')
+    .filter((line) => line.startsWith('data:'))
+    .map((line) => line.slice(5).trimStart())
+    .join('\n')
+  if (!data) return undefined
+  return JSON.parse(data) as OrchestratorStreamEvent
 }
 
 export const api = {
@@ -85,11 +121,61 @@ export const api = {
     return localFeedback(input)
   },
 
-  async chat(messages: ChatMessage[], context?: { route?: string; companyId?: string }): Promise<ChatMessage> {
-    // Live: real OpenAI, grounded in the fund + company context.
-    const live = await postJson<ChatMessage>('/api/chat', { messages, context })
-    if (live?.content) return live
-    return localChat(messages, context)
+  async chat(messages: ChatMessage[], context?: ChatContext): Promise<ChatMessage> {
+    return chatOnce(messages, context)
+  },
+
+  /** Stream main-orchestrator lifecycle events and answer deltas over POST SSE. */
+  async streamChat(
+    messages: ChatMessage[],
+    context?: ChatContext,
+    handlers: StreamChatHandlers = {},
+  ): Promise<ChatMessage> {
+    try {
+      const res = await fetch('/api/chat/stream', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
+        body: JSON.stringify({ messages, context }),
+      })
+      if (!res.ok || !res.body) throw new Error(`chat stream failed (${res.status})`)
+
+      const reader = res.body.getReader()
+      const decoder = new TextDecoder()
+      let buffer = ''
+      let content = ''
+      let finalMessage: ChatMessage | undefined
+
+      const consume = (frame: string) => {
+        const event = parseSseFrame(frame)
+        if (!event) return
+        handlers.onEvent?.(event)
+        if (event.type === 'text_delta') {
+          content += event.delta
+          handlers.onDelta?.(event.delta)
+        } else if (event.type === 'run_completed') {
+          finalMessage = event.message
+        } else if (event.type === 'error') {
+          throw new Error(event.error)
+        }
+      }
+
+      while (true) {
+        const { done, value } = await reader.read()
+        buffer += decoder.decode(value, { stream: !done }).replace(/\r\n/g, '\n')
+        let boundary = buffer.indexOf('\n\n')
+        while (boundary >= 0) {
+          consume(buffer.slice(0, boundary))
+          buffer = buffer.slice(boundary + 2)
+          boundary = buffer.indexOf('\n\n')
+        }
+        if (done) break
+      }
+      if (buffer.trim()) consume(buffer)
+      return finalMessage ?? { role: 'assistant', content }
+    } catch {
+      // Preserve offline/demo behavior when the live API is unavailable.
+      return chatOnce(messages, context)
+    }
   },
 
   /**
@@ -142,7 +228,7 @@ function localFeedback(input: FeedbackInput): FeedbackResult {
   return { weights: { ...store.weights }, changedNodeIds, note }
 }
 
-async function localChat(messages: ChatMessage[], context?: { route?: string; companyId?: string }): Promise<ChatMessage> {
+async function localChat(messages: ChatMessage[], context?: ChatContext): Promise<ChatMessage> {
   await delay(400)
   const last = messages[messages.length - 1]?.content.toLowerCase() ?? ''
   const company = context?.companyId ? data.companies.find((c) => c.id === context.companyId) : undefined

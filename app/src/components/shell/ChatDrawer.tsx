@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { useLocation } from 'react-router'
 import { api } from '../../lib/api/client'
+import type { OrchestratorStreamEvent } from '../../lib/api/client'
 import type { ChatMessage } from '../../lib/types'
 import { useAppStore } from '../../state/store'
 import { Eyebrow } from '../ui/Eyebrow'
@@ -14,6 +15,7 @@ export function ChatDrawer() {
   ])
   const [input, setInput] = useState('')
   const [busy, setBusy] = useState(false)
+  const [agentStatus, setAgentStatus] = useState('')
   const fileRef = useRef<HTMLInputElement>(null)
 
   if (!open) return null
@@ -26,8 +28,32 @@ export function ChatDrawer() {
     setMessages(next)
     setInput('')
     setBusy(true)
-    const reply = await api.chat(next, { route: location.pathname, companyId })
-    setMessages((m) => [...m, reply])
+    setAgentStatus('Planning specialist agents…')
+    // Reserve the assistant bubble; streamed deltas append into it in place.
+    setMessages([...next, { role: 'assistant', content: '' }])
+    const onEvent = (event: OrchestratorStreamEvent) => {
+      if (event.type === 'agent_started') setAgentStatus(`${event.label} working…`)
+      if (event.type === 'agent_completed') setAgentStatus(`${event.agent.replaceAll('_', ' ')} complete`)
+    }
+    const reply = await api.streamChat(next, { route: location.pathname, companyId }, {
+      onEvent,
+      onDelta: (delta) => {
+        setMessages((current) => {
+          const updated = [...current]
+          const last = updated[updated.length - 1]
+          if (last?.role === 'assistant') updated[updated.length - 1] = { ...last, content: last.content + delta }
+          return updated
+        })
+      },
+    })
+    // The completion event is authoritative and also covers non-streaming fallback.
+    setMessages((current) => {
+      const updated = [...current]
+      if (updated.at(-1)?.role === 'assistant') updated[updated.length - 1] = reply
+      else updated.push(reply)
+      return updated
+    })
+    setAgentStatus('')
     setBusy(false)
   }
 
@@ -59,7 +85,7 @@ export function ChatDrawer() {
             {m.content}
           </div>
         ))}
-        {busy && <Eyebrow className="text-ash">thinking…</Eyebrow>}
+        {busy && <Eyebrow className="text-ash">{agentStatus || 'orchestrating…'}</Eyebrow>}
       </div>
       <div className="border-t border-hairline p-3">
         <div className="flex items-center gap-2">

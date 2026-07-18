@@ -48,9 +48,7 @@ export function BrainPage() {
             onFeedback={onFeedback}
             onHoverCity={setHoverCity}
           />
-          <div className="mt-auto">
-            <GlobeCard companies={sourced} focus={hoverCity} />
-          </div>
+          <GlobeCard companies={sourced} focus={hoverCity} />
         </div>
         <div className="flex-1" />
         {selectedId && (

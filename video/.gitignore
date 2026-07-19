@@ -1,3 +1,5 @@
 snapshots/
 contact-sheet.jpg
 node_modules/
+media/
+__pycache__/

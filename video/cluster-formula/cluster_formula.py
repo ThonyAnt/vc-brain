@@ -1,12 +1,15 @@
 """Clustering-formula animation for the VC Brain market map.
 
 Two dense slates, < 10s total, neo-brutalist: white canvas, black ink,
-2px frames with hard offset shadows, mono eyebrow tags, red/yellow accents.
+2px frames with hard offset shadows, DM Sans captions, red/yellow accents.
 
 Render (manim CE >= 0.19, LaTeX + ffmpeg required):
   manim -qh cluster_formula.py ClusterFormula -o cluster-formula.mp4
 """
 
+from pathlib import Path
+
+import manimpango
 from manim import *
 
 INK = "#000000"
@@ -15,20 +18,24 @@ RED = "#ff3333"
 YELLOW = "#ffff00"
 
 config.background_color = WHITE
-MONO = "Menlo"  # Space Mono stand-in; closest guaranteed system mono
+# Brand sans, bundled so renders don't depend on system-installed fonts.
+# Static weights, not the variable TTF — manimpango mis-spaces variable fonts.
+for _f in ("DMSans-Regular.ttf", "DMSans-Bold.ttf"):
+    manimpango.register_font(str(Path(__file__).parent / "fonts" / _f))
+SANS = "DM Sans"
 
 
 def eyebrow(step: str, title: str) -> VGroup:
-    tag = Text(step, font=MONO, weight=BOLD, color=WHITE, font_size=15)
+    tag = Text(step, font=SANS, weight=BOLD, color=WHITE, font_size=15)
     box = SurroundingRectangle(tag, buff=0.09, color=INK, fill_color=INK, fill_opacity=1, stroke_width=2)
-    label = Text(title, font=MONO, weight=BOLD, color=CHARCOAL, font_size=15)
+    label = Text(title, font=SANS, weight=BOLD, color=CHARCOAL, font_size=15)
     g = VGroup(VGroup(box, tag), label).arrange(RIGHT, buff=0.25)
     g.to_corner(UL, buff=0.5)
     return g
 
 
 def wordmark() -> Text:
-    return Text("VC BRAIN · MARKET CLUSTERING", font=MONO, weight=BOLD,
+    return Text("VC BRAIN · MARKET CLUSTERING", font=SANS, weight=BOLD,
                 color=CHARCOAL, font_size=13).to_corner(UR, buff=0.55)
 
 
@@ -72,10 +79,10 @@ class ClusterFormula(Scene):
         for head in (m1[0], m2[0], m3[0]):
             head.set_color(RED)
         m4[0][0:4].set_color(RED)
-        n1 = Text("customers · technical · founder · disruption · regulatory", font=MONO, color=CHARCOAL, font_size=12)
-        n2 = Text("industry · product taxonomy paths", font=MONO, color=CHARCOAL, font_size=12)
-        n3 = Text("problem-statement embeddings", font=MONO, color=CHARCOAL, font_size=12)
-        n4 = Text("business model · go-to-market", font=MONO, color=CHARCOAL, font_size=12)
+        n1 = Text("customers · technical · founder · disruption · regulatory", font=SANS, color=CHARCOAL, font_size=12)
+        n2 = Text("industry · product taxonomy paths", font=SANS, color=CHARCOAL, font_size=12)
+        n3 = Text("problem-statement embeddings", font=SANS, color=CHARCOAL, font_size=12)
+        n4 = Text("business model · go-to-market", font=SANS, color=CHARCOAL, font_size=12)
         grid = VGroup(
             VGroup(m1, n1).arrange(DOWN, buff=0.12, aligned_edge=LEFT),
             VGroup(m2, n2).arrange(DOWN, buff=0.12, aligned_edge=LEFT),
@@ -121,7 +128,7 @@ class ClusterFormula(Scene):
         ).next_to(rule, DOWN, buff=0.55)
         medoid[2].set_color(CHARCOAL)
         foot = Text("average linkage · deterministic ties · farthest-first seeded Lloyd refinement",
-                    font=MONO, color=CHARCOAL, font_size=13).to_edge(DOWN, buff=0.45)
+                    font=SANS, color=CHARCOAL, font_size=13).to_edge(DOWN, buff=0.45)
 
         self.play(FadeIn(lframe), Write(link), run_time=0.7)
         self.play(FadeIn(rule, shift=0.15 * UP), run_time=0.45)

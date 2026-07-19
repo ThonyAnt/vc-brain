@@ -30,7 +30,7 @@ interface BrainCompany {
   name: string
   description?: string
   attributes?: SimilarityAttrs & { industryPath?: string[]; founderArchetypes?: string[] }
-  founders?: { name: string; role?: string; background?: string }[]
+  founders?: { name: string; role?: string; background?: string; linkedin?: string; photoUrl?: string }[]
   stage?: string
   status?: string
   geography?: string
@@ -253,6 +253,8 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
         companyId: c.id,
         role: f.role ?? 'Founder',
         background: f.background ?? '',
+        linkedin: f.linkedin,
+        photoUrl: f.photoUrl,
         score,
         justification: f.background ?? 'Founder profile from sourcing.',
         signals: c.attributes?.founderArchetypes ?? [],

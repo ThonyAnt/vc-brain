@@ -428,7 +428,8 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
   }
   for (const f of founders) {
     nodes.push({ id: f.id, type: 'founder', label: f.name, score: f.score })
-    edges.push({ source: f.id, target: f.companyId, kind: 'founder', weight: 0.6 })
+    /* standalone prospects (founder scout) have no company edge; they orbit unattached */
+    if (f.companyId) edges.push({ source: f.id, target: f.companyId, kind: 'founder', weight: 0.6 })
   }
   const nodeIds = new Set(nodes.map((n) => n.id))
   for (const e of landscape?.edges ?? []) {

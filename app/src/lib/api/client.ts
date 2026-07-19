@@ -19,6 +19,7 @@ export type OrchestratorStreamEvent =
   | { type: 'agent_completed'; runId: string; agent: string; summary: string }
   | { type: 'agent_failed'; runId: string; agent: string; error: string }
   | { type: 'companies_sourced'; runId: string; companies: Company[]; founders?: Founder[] }
+  | { type: 'founders_sourced'; runId: string; founders: Founder[] }
   | { type: 'text_delta'; runId: string; delta: string }
   | { type: 'run_completed'; runId: string; message: ChatMessage }
   | { type: 'error'; error: string }
@@ -192,6 +193,22 @@ export const api = {
     return data.founders
   },
 
+  /**
+   * Founder scout: LinkedIn URL (identity anchor) or name → Tavily fan-out →
+   * fund-calibrated score. Returns null when the brain API is unreachable or
+   * has no Tavily key. The sourced founder is merged into the leads list.
+   */
+  async sourceFounder(input: {
+    linkedinUrl?: string
+    name?: string
+    company?: string
+  }): Promise<{ founder: Founder; sources: string[] } | null> {
+    const live = await postJson<{ founder: Founder; sources: string[] }>('/api/founders/source', input)
+    if (!live?.founder) return null
+    mergeSourcedCompanies([], [live.founder])
+    return live
+  },
+
   async getFounder(id: string): Promise<Founder | undefined> {
     return data.founders.find((f) => f.id === id)
   },
@@ -278,6 +295,8 @@ export const api = {
         handlers.onEvent?.(event)
         if (event.type === 'companies_sourced') {
           mergeSourcedCompanies(event.companies, event.founders)
+        } else if (event.type === 'founders_sourced') {
+          mergeSourcedCompanies([], event.founders)
         } else if (event.type === 'text_delta') {
           content += event.delta
           handlers.onDelta?.(event.delta)

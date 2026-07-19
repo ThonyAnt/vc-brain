@@ -113,12 +113,19 @@ export interface Company {
 export interface Founder {
   id: string
   name: string
-  companyId: string
+  /** Absent for standalone prospects sourced by the founder scout. */
+  companyId?: string
+  /** Display-only company name when the scout found one but it isn't in the universe. */
+  company?: string
   role: string
   background: string
   score: number
   justification: string
   signals: string[]
+  linkedin?: string
+  /** Public source URLs the scout assembled the profile from. */
+  sources?: string[]
+  confidence?: 'low' | 'medium' | 'high'
 }
 
 export interface ExecutionItem {

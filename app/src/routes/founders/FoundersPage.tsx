@@ -11,6 +11,10 @@ export function FoundersPage() {
   const [companies, setCompanies] = useState<Map<string, Company>>(new Map())
   const [openId, setOpenId] = useState<string | null>(null)
   const [note, setNote] = useState('')
+  const [showScout, setShowScout] = useState(false)
+  const [scoutQuery, setScoutQuery] = useState('')
+  const [scouting, setScouting] = useState(false)
+  const [scoutError, setScoutError] = useState<string | null>(null)
   const navigate = useNavigate()
   const setWeights = useAppStore((s) => s.setWeights)
   const setLearningNote = useAppStore((s) => s.setLearningNote)
@@ -19,6 +23,27 @@ export function FoundersPage() {
     api.getFounders().then((f) => setFounders([...f].sort((a, b) => b.score - a.score)))
     api.getCompanies().then((all) => setCompanies(new Map(all.map((c) => [c.id, c]))))
   }, [])
+
+  async function runScout() {
+    const q = scoutQuery.trim()
+    if (!q || scouting) return
+    setScouting(true)
+    setScoutError(null)
+    const input = /linkedin\.com\/in\//i.test(q) ? { linkedinUrl: q } : { name: q }
+    const res = await api.sourceFounder(input)
+    setScouting(false)
+    if (!res) {
+      setScoutError('Founder scout unavailable — brain API offline or TAVILY_API_KEY not set.')
+      return
+    }
+    setScoutQuery('')
+    setShowScout(false)
+    setFounders(await api.getFounders().then((f) => [...f].sort((a, b) => b.score - a.score)))
+    setOpenId(res.founder.id)
+    setLearningNote(
+      `Sourced ${res.founder.name} — scored ${res.founder.score}/100 from ${res.sources.length} public sources.`,
+    )
+  }
 
   async function feedback(f: Founder, action: 'agree' | 'disagree') {
     const res = await api.postFeedback({ entityId: f.id, action, justification: note || undefined })
@@ -30,12 +55,40 @@ export function FoundersPage() {
 
   return (
     <div className="mx-auto max-w-[1280px] p-8 pb-28">
-      <Eyebrow>Founders</Eyebrow>
-      <h1 className="display-lg mt-2">Leads</h1>
-      <p className="mt-3 max-w-[620px] text-body">
-        Scored against the fund's historical founder decisions. Agree or disagree with a rationale — the brain
-        re-weights its criteria from your call.
-      </p>
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <Eyebrow>Founders</Eyebrow>
+          <h1 className="display-lg mt-2">Leads</h1>
+          <p className="mt-3 max-w-[620px] text-body">
+            Scored against the fund's historical founder decisions. Agree or disagree with a rationale — the brain
+            re-weights its criteria from your call.
+          </p>
+        </div>
+        <Pill variant="primary" size="md" onClick={() => setShowScout((s) => !s)}>
+          + Source founder
+        </Pill>
+      </div>
+
+      {showScout && (
+        <div className="mt-4 flex max-w-xl items-center gap-2 border-2 border-hairline-strong bg-card p-2 shadow-brutal">
+          <input
+            autoFocus
+            value={scoutQuery}
+            onChange={(e) => setScoutQuery(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && runScout()}
+            disabled={scouting}
+            placeholder="linkedin.com/in/… or a full name"
+            className="h-10 w-full rounded-none border-2 border-hairline-strong bg-card px-3 text-sm text-ink placeholder:text-stone focus:outline-none"
+          />
+          <Pill variant="dark" size="md" onClick={runScout} disabled={scouting}>
+            {scouting ? 'Scouting…' : 'Scout'}
+          </Pill>
+        </div>
+      )}
+      {scouting && (
+        <div className="code-sm mt-2 text-charcoal">FOUNDER SCOUT · TAVILY FAN-OUT + FUND-CALIBRATED SCORING…</div>
+      )}
+      {scoutError && <div className="code-sm mt-2 text-primary">{scoutError}</div>}
 
       <div className="mt-6 overflow-hidden rounded-none border-2 border-hairline-strong bg-card shadow-brutal">
         <table className="w-full border-collapse text-left">
@@ -50,7 +103,7 @@ export function FoundersPage() {
           </thead>
           <tbody>
             {founders.map((f) => {
-              const company = companies.get(f.companyId)
+              const company = f.companyId ? companies.get(f.companyId) : undefined
               const open = openId === f.id
               return (
                 <Fragment key={f.id}>
@@ -59,15 +112,19 @@ export function FoundersPage() {
                     onClick={() => setOpenId(open ? null : f.id)}
                   >
                     <td className="caption-tight px-4 py-3 text-ink">{f.name}</td>
-                    <td
-                      className="px-4 py-3 text-sm text-primary"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        navigate(`/company/${f.companyId}`)
-                      }}
-                    >
-                      {company?.name ?? f.companyId}
-                    </td>
+                    {company ? (
+                      <td
+                        className="px-4 py-3 text-sm text-primary"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          navigate(`/company/${f.companyId}`)
+                        }}
+                      >
+                        {company.name}
+                      </td>
+                    ) : (
+                      <td className="px-4 py-3 text-sm text-mute">{f.company ?? '—'}</td>
+                    )}
                     <td className="max-w-[340px] px-4 py-3 text-sm text-mute">{f.background}</td>
                     <td className="px-4 py-3">
                       <div className="flex flex-wrap gap-1">
@@ -93,6 +150,33 @@ export function FoundersPage() {
                       <td colSpan={6} className="px-4 py-4">
                         <Eyebrow>Score rationale</Eyebrow>
                         <p className="mt-1 max-w-[760px] text-sm text-body">{f.justification}</p>
+                        {(f.linkedin || f.sources?.length) && (
+                          <div className="mt-2 flex flex-wrap items-center gap-3">
+                            {f.linkedin && (
+                              <a
+                                href={f.linkedin}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="code-sm text-primary underline"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                linkedin
+                              </a>
+                            )}
+                            {f.sources?.slice(0, 4).map((s, i) => (
+                              <a
+                                key={s}
+                                href={s}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="code-sm text-charcoal underline"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                src {i + 1}
+                              </a>
+                            ))}
+                          </div>
+                        )}
                         <div className="mt-3 flex items-center gap-2">
                           <input
                             value={note}

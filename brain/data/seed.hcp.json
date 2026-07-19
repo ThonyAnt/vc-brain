@@ -1,5 +1,5 @@
 {
-  "mandate": "Find the best seed or Series A software/AI company for a $1.0–2.5M initial check, underwritten to HCP's standard: bottom-up revenue build, explicit assumptions, founder-market fit, and a defensible moat.",
+  "mandate": "Find the best seed or Series A software/AI company for a $1.0\u20132.5M initial check, underwritten to HCP's standard: bottom-up revenue build, explicit assumptions, founder-market fit, and a defensible moat.",
   "fundProfile": {
     "thesisSummary": "HCP focuses on investing in seed and Series A software/AI companies that demonstrate strong founder-market fit, have a defensible moat, and can produce significant bottom-up revenue builds. The fund targets investments in companies with innovative use of AI and software technology, aiming to become industry control points or leaders in their respective segments.",
     "stages": [
@@ -287,7 +287,7 @@
       "companyName": "Rwazi",
       "decision": "passed",
       "date": "2025-07-15",
-      "text": "## 8. Rwazi\n\n**Stage:** Series A  \n**Proposed HCP check:** $2.5m  \n**Recommendation:** Diligence  \n**Links:** [Company](https://www.rwazi.com/) | [Series A report](https://techcrunch.com/2025/07/15/rwazi-raises-12m-series-a-to-help-companies-with-consumer-insights-and-intelligence/) | [Lumora product](https://rwazi.com/products/lumora) | [About](https://www.rwazi.com/about)\n\n### Founders and company\n\n| Founder | Role | Relevant evidence |\n|---|---|---|\n| Joseph Rutakangwa | Co-founder and CEO | Built Rwazi around real-world, zero-party consumer data and decision intelligence. |\n| Eric Sewankambo | Co-founder | Co-developed the company's distributed data and market-insight operation. |\n\n### Product description\n\nRwazi is a decision-intelligence platform that combines proprietary, directly reported consumer data with AI analysis. Its Lumora product helps brands detect demand shifts, compare competitors, test expansion, and decide where to allocate commercial resources. The company says its data coverage spans more than 190 countries and cites customers including Coca-Cola, Pampers, Visa, and Nestlé. Unlike web-traffic or panel-only tools, Rwazi emphasizes zero-party observations from people in physical markets, then turns that evidence into recommendations for strategy, product, marketing, and distribution teams.\n\n### Thesis: why invest\n\nRwazi raised a $12m Series A led by Bonfire Ventures in July 2025, with Santa Barbara Venture Partners, Newfund, and Alumni Ventures participating; TechCrunch reported a prior $4m seed. Traditional market research is slow, project-based, and backward-looking. Rwazi can transform it into a persistent software workflow where new observations update decisions continuously.\n\nThe moat is the combination of a verified collection network, historical physical-world data, and a decision layer trained on which recommendations prove useful. A chatbot over syndicated data is easy to copy. A trusted network that can collect a new, targeted observation in Lagos, Jakarta, or Lima and connect it to a customer's decision is harder.\n\n**What must be true:** data must be representative and fraud-resistant; customers must renew as software rather than projects; AI recommendations must be traceable to evidence; and collection economics must support software margins.\n\n**Next-round milestones:** $20m ARR, 100 enterprise customers, net retention above 120%, at least 70% recurring subscription revenue, gross margin above 70%, and documented decision impact at ten global accounts.\n\n### Market, TAM, and revenue build\n\n| Bottom-up step | Accounts | Annual contract | Result | Basis |\n|---|---:|---:|---:|---|\n| Regional consumer brands | 8,000 | $75,000 | $600m | HCP assumption |\n| Global brands and financial-services firms | 2,000 | $350,000 | $700m | HCP assumption |\n| Strategic enterprise platforms | 300 | $1.0m | $300m | HCP assumption |\n| **TAM** | 10,300 |  | **$1.60bn** | Annual software and data pool |\n| HCP penetration |  |  | **12.5%** | Roughly 500 blended accounts |\n| **2032 revenue opportunity** |  |  | **$200m** | HCP base case |\n\n| Revenue, $m | 2026E | 2027E | 2028E | 2029E | 2030E | 2031E | 2032E |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| Base case | 9 | 18 | 35 | 60 | 95 | 140 | 200 |\n| Illustrative customers | 60 | 100 | 170 | 250 | 340 | 420 | 500 |\n\n### Competitive landscape\n\n| Company | Category / use | Workflow | Delivery | Moat | Pricing | Capital status |\n|---|---|---|---|---|---|---|\n| **Rwazi** | Decision AI using zero-party data | X collection, analysis, recommendations | SaaS plus distributed data network | Proprietary physical-world observations and verification | Undisclosed | $12m Series A; at least $16m disclosed total; valuation undisclosed; Bonfire, Santa Barbara, Newfund, Alumni |\n| Ipsos | Global research and panels | X collection and analysis; Partial always-on software | Services plus platforms | Global panels, methods, brand | Custom/project | Public |\n| NIQ / GfK | Consumer and retail measurement | X syndicated measurement | Data subscriptions | Retail data relationships and longitudinal coverage | Custom | Private enterprise; capital not comparable |\n| Kantar | Brand and consumer research | X research and analytics | Services/data platforms | Global benchmarks and customer relationships | Custom | Private enterprise |\n| Euromonitor | Market intelligence | X syndicated data; Partial primary zero-party collection | Subscription platform | Global category database | Custom | Private enterprise |\n| Attest | Agile consumer research | X survey collection and analysis | SaaS/panel | Fast self-serve research workflow | Custom | Private; valuation undisclosed |\n| Toluna | Consumer panels and insights | X global panel and research workflow | SaaS/services | Panel scale and enterprise distribution | Custom | Private; capital data undisclosed here |\n\n### Public comps and exit model\n\n| Public comp | EV/LTM revenue |\n|---|---:|\n| [Similarweb](https://stockanalysis.com/stocks/smwb/statistics/) | 2.02x |\n| [Semrush](https://stockanalysis.com/stocks/semr/statistics/) | 3.49x |\n| [ZoomInfo](https://stockanalysis.com/stocks/gtm/statistics/) | 1.85x |\n| [Gartner](https://stockanalysis.com/stocks/it/statistics/) | 1.71x |\n| [HubSpot](https://stockanalysis.com/stocks/hubs/statistics/) | 3.04x |\n| **Median** | **2.02x** |\n\n| Return path | Base |\n|---|---:|\n| Entry post-money / ownership | $60m HCP assumption / 4.17% |\n| Future dilution / exit ownership | 35% / 2.71% |\n| 2032 revenue / multiple / EV | $200m / 3.0x / $600m |\n| HCP proceeds / MOIC | $16.3m / **6.5x** |\n| Downside / upside MOIC | 2.6x / 13.0x |\n\n### Principal risks and why invest anyway\n\n- **Data quality:** distributed collection invites fraud and bias. Audit sampling, geolocation, identity, incentives, and independent validation.\n- **Services leakage:** custom studies can inflate revenue but depress scalability. Separate subscription, data, and service gross margin.\n- **Incumbent datasets:** NIQ, Kantar, and Ipsos have deeper history. Rwazi must win on speed, hard-to-reach markets, and decision workflow.\n- **AI explainability:** recommendations without source traceability will not support high-stakes decisions. Require evidence-linked outputs and human review.\n\n---",
+      "text": "## 8. Rwazi\n\n**Stage:** Series A  \n**Proposed HCP check:** $2.5m  \n**Recommendation:** Diligence  \n**Links:** [Company](https://www.rwazi.com/) | [Series A report](https://techcrunch.com/2025/07/15/rwazi-raises-12m-series-a-to-help-companies-with-consumer-insights-and-intelligence/) | [Lumora product](https://rwazi.com/products/lumora) | [About](https://www.rwazi.com/about)\n\n### Founders and company\n\n| Founder | Role | Relevant evidence |\n|---|---|---|\n| Joseph Rutakangwa | Co-founder and CEO | Built Rwazi around real-world, zero-party consumer data and decision intelligence. |\n| Eric Sewankambo | Co-founder | Co-developed the company's distributed data and market-insight operation. |\n\n### Product description\n\nRwazi is a decision-intelligence platform that combines proprietary, directly reported consumer data with AI analysis. Its Lumora product helps brands detect demand shifts, compare competitors, test expansion, and decide where to allocate commercial resources. The company says its data coverage spans more than 190 countries and cites customers including Coca-Cola, Pampers, Visa, and Nestl\u00e9. Unlike web-traffic or panel-only tools, Rwazi emphasizes zero-party observations from people in physical markets, then turns that evidence into recommendations for strategy, product, marketing, and distribution teams.\n\n### Thesis: why invest\n\nRwazi raised a $12m Series A led by Bonfire Ventures in July 2025, with Santa Barbara Venture Partners, Newfund, and Alumni Ventures participating; TechCrunch reported a prior $4m seed. Traditional market research is slow, project-based, and backward-looking. Rwazi can transform it into a persistent software workflow where new observations update decisions continuously.\n\nThe moat is the combination of a verified collection network, historical physical-world data, and a decision layer trained on which recommendations prove useful. A chatbot over syndicated data is easy to copy. A trusted network that can collect a new, targeted observation in Lagos, Jakarta, or Lima and connect it to a customer's decision is harder.\n\n**What must be true:** data must be representative and fraud-resistant; customers must renew as software rather than projects; AI recommendations must be traceable to evidence; and collection economics must support software margins.\n\n**Next-round milestones:** $20m ARR, 100 enterprise customers, net retention above 120%, at least 70% recurring subscription revenue, gross margin above 70%, and documented decision impact at ten global accounts.\n\n### Market, TAM, and revenue build\n\n| Bottom-up step | Accounts | Annual contract | Result | Basis |\n|---|---:|---:|---:|---|\n| Regional consumer brands | 8,000 | $75,000 | $600m | HCP assumption |\n| Global brands and financial-services firms | 2,000 | $350,000 | $700m | HCP assumption |\n| Strategic enterprise platforms | 300 | $1.0m | $300m | HCP assumption |\n| **TAM** | 10,300 |  | **$1.60bn** | Annual software and data pool |\n| HCP penetration |  |  | **12.5%** | Roughly 500 blended accounts |\n| **2032 revenue opportunity** |  |  | **$200m** | HCP base case |\n\n| Revenue, $m | 2026E | 2027E | 2028E | 2029E | 2030E | 2031E | 2032E |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| Base case | 9 | 18 | 35 | 60 | 95 | 140 | 200 |\n| Illustrative customers | 60 | 100 | 170 | 250 | 340 | 420 | 500 |\n\n### Competitive landscape\n\n| Company | Category / use | Workflow | Delivery | Moat | Pricing | Capital status |\n|---|---|---|---|---|---|---|\n| **Rwazi** | Decision AI using zero-party data | X collection, analysis, recommendations | SaaS plus distributed data network | Proprietary physical-world observations and verification | Undisclosed | $12m Series A; at least $16m disclosed total; valuation undisclosed; Bonfire, Santa Barbara, Newfund, Alumni |\n| Ipsos | Global research and panels | X collection and analysis; Partial always-on software | Services plus platforms | Global panels, methods, brand | Custom/project | Public |\n| NIQ / GfK | Consumer and retail measurement | X syndicated measurement | Data subscriptions | Retail data relationships and longitudinal coverage | Custom | Private enterprise; capital not comparable |\n| Kantar | Brand and consumer research | X research and analytics | Services/data platforms | Global benchmarks and customer relationships | Custom | Private enterprise |\n| Euromonitor | Market intelligence | X syndicated data; Partial primary zero-party collection | Subscription platform | Global category database | Custom | Private enterprise |\n| Attest | Agile consumer research | X survey collection and analysis | SaaS/panel | Fast self-serve research workflow | Custom | Private; valuation undisclosed |\n| Toluna | Consumer panels and insights | X global panel and research workflow | SaaS/services | Panel scale and enterprise distribution | Custom | Private; capital data undisclosed here |\n\n### Public comps and exit model\n\n| Public comp | EV/LTM revenue |\n|---|---:|\n| [Similarweb](https://stockanalysis.com/stocks/smwb/statistics/) | 2.02x |\n| [Semrush](https://stockanalysis.com/stocks/semr/statistics/) | 3.49x |\n| [ZoomInfo](https://stockanalysis.com/stocks/gtm/statistics/) | 1.85x |\n| [Gartner](https://stockanalysis.com/stocks/it/statistics/) | 1.71x |\n| [HubSpot](https://stockanalysis.com/stocks/hubs/statistics/) | 3.04x |\n| **Median** | **2.02x** |\n\n| Return path | Base |\n|---|---:|\n| Entry post-money / ownership | $60m HCP assumption / 4.17% |\n| Future dilution / exit ownership | 35% / 2.71% |\n| 2032 revenue / multiple / EV | $200m / 3.0x / $600m |\n| HCP proceeds / MOIC | $16.3m / **6.5x** |\n| Downside / upside MOIC | 2.6x / 13.0x |\n\n### Principal risks and why invest anyway\n\n- **Data quality:** distributed collection invites fraud and bias. Audit sampling, geolocation, identity, incentives, and independent validation.\n- **Services leakage:** custom studies can inflate revenue but depress scalability. Separate subscription, data, and service gross margin.\n- **Incumbent datasets:** NIQ, Kantar, and Ipsos have deeper history. Rwazi must win on speed, hard-to-reach markets, and decision workflow.\n- **AI explainability:** recommendations without source traceability will not support high-stakes decisions. Require evidence-linked outputs and human review.\n\n---",
       "rationale": "The memo outlines several principal risks such as data quality, service leakage, incumbent datasets, and AI explainability that could affect scalability and decision support. These risks must be addressed before making an investment decision. As such, the recommendation was to conduct further diligence rather than investing immediately.",
       "identifiedMoat": "Proprietary physical-world observations and verification combined with a decision layer trained on useful recommendations.",
       "decisionDrivers": [
@@ -381,7 +381,12 @@
       "sourceRefs": [
         "memo_mem0",
         "HCP_10_Investment_Memos_2026-07-18.md"
-      ]
+      ],
+      "website": "https://mem0.ai",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=mem0.ai&sz=128"
     },
     {
       "id": "co_sekai",
@@ -484,7 +489,12 @@
       "sourceRefs": [
         "memo_alinea_invest",
         "HCP_10_Investment_Memos_2026-07-18.md"
-      ]
+      ],
+      "website": "https://www.alineainvest.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.alineainvest.com&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     },
     {
       "id": "co_sett",
@@ -583,7 +593,12 @@
       "sourceRefs": [
         "memo_tailor",
         "HCP_10_Investment_Memos_2026-07-18.md"
-      ]
+      ],
+      "website": "https://tailor.tech",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=tailor.tech&sz=128"
     },
     {
       "id": "co_cedar_money",
@@ -637,7 +652,12 @@
       "sourceRefs": [
         "memo_cedar_money",
         "HCP_10_Investment_Memos_2026-07-18.md"
-      ]
+      ],
+      "website": "https://www.cedarmoney.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.cedarmoney.com&sz=128",
+      "hqCity": "London",
+      "hqLat": 51.5074,
+      "hqLng": -0.1278
     }
   ],
   "rejectedDeals": [
@@ -687,7 +707,12 @@
       "sourceRefs": [
         "memo_phia",
         "HCP_10_Investment_Memos_2026-07-18.md"
-      ]
+      ],
+      "website": "https://www.phia.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.phia.com&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     }
   ],
   "candidateUniverse": [
@@ -1237,12 +1262,12 @@
       },
       "founders": [
         {
-          "name": "Magnus Müller",
+          "name": "Magnus M\u00fcller",
           "role": "Co-founder",
           "background": "Named in TechCrunch's funding coverage and the company's own seed-round blog post."
         },
         {
-          "name": "Gregor Žunič",
+          "name": "Gregor \u017duni\u010d",
           "role": "Co-founder",
           "background": "Named in TechCrunch's funding coverage; project originated through ETH Zurich's Student Project House accelerator."
         }
@@ -1355,7 +1380,12 @@
         "https://www.trychroma.com/",
         "https://www.trychroma.com/company/seed",
         "https://github.com/chroma-core/chroma"
-      ]
+      ],
+      "website": "https://www.trychroma.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.trychroma.com&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     },
     {
       "id": "co_patronus_ai",
@@ -1514,7 +1544,12 @@
         "https://www.axios.com/pro/enterprise-software-deals/2026/02/17/ai-observability-braintrust-80-million-800-million",
         "https://www.braintrust.dev/blog/announcing-series-b",
         "https://www.braintrust.dev/blog/announcing-series-a"
-      ]
+      ],
+      "website": "https://www.usebraintrust.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.usebraintrust.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_concourse",
@@ -1598,7 +1633,12 @@
         "https://www.concourse.co/",
         "https://www.prnewswire.com/news-releases/concourse-raises-12m-series-a-and-expands-access-to-its-enterprise-grade-ai-agents-for-finance-302670827.html",
         "https://www.concourse.co/insights/concourse-12m-series-a-launches-general-availability"
-      ]
+      ],
+      "website": "https://www.getconcourse.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.getconcourse.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_dust",
@@ -1686,7 +1726,12 @@
         "https://dust.tt/",
         "https://techcrunch.com/2024/06/27/dust-grabs-another-16-million-for-its-enterprise-ai-assistants-connected-to-internal-data/",
         "https://sifted.eu/articles/dust-series-b-40m"
-      ]
+      ],
+      "website": "https://www.dust.tt",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.dust.tt&sz=128",
+      "hqCity": "Paris",
+      "hqLat": 48.8566,
+      "hqLng": 2.3522
     },
     {
       "id": "co_squint",
@@ -1850,7 +1895,12 @@
         "https://www.axios.com/pro/fintech-deals/2024/10/17/bookkeeping-startup-kick-9-million-ai",
         "https://medium.com/kickfinance/kick-raises-to-build-the-accounting-firm-of-the-future-10af7f38cabf",
         "https://www.kick.co/pricing"
-      ]
+      ],
+      "website": "getkick.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=getkick.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_artisan",
@@ -2200,7 +2250,12 @@
         "https://spellbook.com/",
         "https://www.businesswire.com/news/home/20251009110230/en/Spellbook-Raises-$50M-Series-B-to-Expand-AI-Contract-Review-Platform",
         "https://siliconangle.com/2025/10/09/legal-ai-firm-spellbook-raises-50m-expand-contract-review-platform/"
-      ]
+      ],
+      "website": "spellbook.legal",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=spellbook.legal&sz=128",
+      "hqCity": "Toronto",
+      "hqLat": 43.65107,
+      "hqLng": -79.347015
     },
     {
       "id": "co_basis",
@@ -2474,7 +2529,12 @@
         "https://www.businesswire.com/news/home/20240610719247/en/Anterior-Secures-$20-Million-Series-A-to-Unlock-Administrative-Efficiencies-for-Healthcare-Payers",
         "https://www.anterior.com/insights/anterior-raises-40m-series",
         "https://techcrunch.com/2024/06/08/anterior-grabs-20m-from-nea-at-95m-valuation-to-expedite-health-insurance-approvals-with-ai/"
-      ]
+      ],
+      "website": "anteriorhg.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=anteriorhg.com&sz=128",
+      "hqCity": "Baltimore",
+      "hqLat": 39.2904,
+      "hqLng": -76.6122
     },
     {
       "id": "co_freed",
@@ -2562,7 +2622,12 @@
         "https://www.getfreed.ai/",
         "https://www.getfreed.ai/press/freed-secures-30m-series-a-led-by-sequoia-capital-to-free-clinicians-from-administrative-burdens-with-ai-assistant",
         "https://www.cnbc.com/2025/03/05/freed-raises-30-million-led-by-sequoia-to-tackle-clinician-burnout.html"
-      ]
+      ],
+      "website": "freed.ai",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=freed.ai&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_counsel_health",
@@ -2729,7 +2794,12 @@
         "https://www.summerhealth.com/",
         "https://www.prnewswire.com/news-releases/summer-health-announces-series-a-fundraise-from-7wireventures-and-lux-capital-302125060.html",
         "https://www.fiercehealthcare.com/digital-health/summer-health-pockets-12m-series-grow-text-based-pediatric-service"
-      ]
+      ],
+      "website": "summerhealth.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=summerhealth.com&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     },
     {
       "id": "co_millie",
@@ -2819,7 +2889,12 @@
         "https://www.businesswire.com/news/home/20250220127655/en/Millie-Secures-$12M-Series-A-to-Continue-Closing-Gaps-in-Maternal-Healthcare",
         "https://techcrunch.com/2025/02/26/maternity-clinic-millie-nabs-12m-series-a-from-an-all-star-all-female-class-of-vcs/",
         "https://www.millieclinic.com/blog/why-we-built-millie"
-      ]
+      ],
+      "website": "milliegrows.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=milliegrows.com&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     },
     {
       "id": "co_fay",
@@ -2906,7 +2981,12 @@
         "https://www.faynutrition.com/post/fay-emerges-with-25m-in-funding",
         "https://www.faynutrition.com/post/fay-series-b-announcement",
         "https://www.forerunnerventures.com/perspectives/how-fay-is-scaling-customized-nutrition-care-for-consumers-while-reshaping"
-      ]
+      ],
+      "website": "meetfay.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=meetfay.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_sohar_health",
@@ -3243,7 +3323,12 @@
         "https://www.legionhealth.com/",
         "https://bhbusiness.com/2024/10/16/legion-health-pivots-to-digital-ai-enabled-psychiatry-raises-over-6m/",
         "https://www.ycombinator.com/companies/legion-health"
-      ]
+      ],
+      "website": "legion.health",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=legion.health&sz=128",
+      "hqCity": "Austin",
+      "hqLat": 30.2672,
+      "hqLng": -97.7431
     },
     {
       "id": "co_herald",
@@ -3318,7 +3403,12 @@
         "https://www.heraldai.com/",
         "https://www.prnewswire.com/news-releases/herald-raises-12-million-to-revolutionize-insurance-connectivity-with-ai-powered-solutions-302277522.html",
         "https://docs.heraldapi.com/"
-      ]
+      ],
+      "website": "heraldapi.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=heraldapi.com&sz=128",
+      "hqCity": "Los Angeles",
+      "hqLat": 34.0522,
+      "hqLng": -118.2437
     },
     {
       "id": "co_straddle",
@@ -3477,7 +3567,12 @@
         "https://www.ycombinator.com/companies/mercoa",
         "https://mercoa.com/changelog",
         "https://www.openbankingtracker.com/embedded-finance/mercoa"
-      ]
+      ],
+      "website": "mercoa.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=mercoa.com&sz=128",
+      "hqCity": "Austin",
+      "hqLat": 30.2672,
+      "hqLng": -97.7431
     },
     {
       "id": "co_ansa",
@@ -3559,7 +3654,12 @@
         "https://ansa.dev/",
         "https://techcrunch.com/2024/04/30/wallet-as-a-service-startup-ansa-raises-14m-with-female-investors-leading-the-way/",
         "https://www.prnewswire.com/news-releases/ansa-raises-14-million-series-a-funding-to-redefine-merchant-transaction-solutions-302131675.html"
-      ]
+      ],
+      "website": "https://withansa.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=withansa.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_kudos",
@@ -3640,7 +3740,12 @@
         "https://joinkudos.com",
         "https://techcrunch.com/2024/05/17/kudos-ai-smart-wallet-10m-credit-card/",
         "https://www.finextra.com/newsarticle/44168/kudos-raises-102m-for-ai-powered-smart-wallet"
-      ]
+      ],
+      "website": "https://joinkudos.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=joinkudos.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_baselayer",
@@ -3731,7 +3836,12 @@
         "https://www.businesswire.com/news/home/20240501810500/en/Baselayer-Raises-$6.5M-Seed-Round-to-Redefine-Business-Risk-with-AI-Risk-Engine",
         "https://baselayer.com/business-verification/",
         "https://baselayer.com/identity-network/"
-      ]
+      ],
+      "website": "https://www.baselayer.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.baselayer.com&sz=128",
+      "hqCity": "Morrisville",
+      "hqLat": 35.8235,
+      "hqLng": -78.8256
     },
     {
       "id": "co_felix_pago",
@@ -3778,7 +3888,7 @@
           "background": "Identified as CEO in TechCrunch's May 2024 Series A coverage; further prior career detail not disclosed in sources reviewed."
         },
         {
-          "name": "Bernardo García",
+          "name": "Bernardo Garc\u00eda",
           "role": "Co-founder",
           "background": "Identified alongside Godoy in TechCrunch's May 2024 Series A coverage; a third co-founder was referenced in that coverage but not individually named."
         }
@@ -3813,7 +3923,12 @@
         "https://www.felixpago.com",
         "https://techcrunch.com/2024/05/28/felix-pago-raises-15-5-million-to-help-latino-workers-send-money-home-via-whatsapp/",
         "https://www.qedinvestors.com/blog/why-we-invested-in-felix-pago"
-      ]
+      ],
+      "website": "https://www.felixpago.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.felixpago.com&sz=128",
+      "hqCity": "Los Angeles",
+      "hqLat": 34.0522,
+      "hqLng": -118.2437
     },
     {
       "id": "co_formance",
@@ -3859,7 +3974,7 @@
       },
       "founders": [
         {
-          "name": "Clément Salaün",
+          "name": "Cl\u00e9ment Sala\u00fcn",
           "role": "Co-founder",
           "background": "Previously payments lead at Selency, per TechCrunch."
         },
@@ -3898,7 +4013,12 @@
         "https://www.formance.com/blog/company/formance-secures-21-million-dollar-in-series-a-funding-co-led-by-paypal-ventures-and-portage-ventures-to-expand-its-open-source-financial-infrastructure",
         "https://techcrunch.com/2025/01/29/formance-raises-21-million-to-build-the-aws-of-fintech-infrastructure/",
         "https://github.com/formancehq/ledger"
-      ]
+      ],
+      "website": "https://www.formance.cloud",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.formance.cloud&sz=128",
+      "hqCity": "Paris",
+      "hqLat": 48.8566,
+      "hqLng": 2.3522
     },
     {
       "id": "co_keep",
@@ -3980,7 +4100,12 @@
         "https://www.prnewswire.com/news-releases/keep-raises-c108m-to-transform-small-business-banking-in-canada-302459385.html",
         "https://www.newswire.ca/news-releases/keep-raises-c-108m-to-transform-small-business-banking-in-canada-879787919.html",
         "https://www.fintech.ca/2025/05/20/keep-emerges-stealth-transform-finance-small-business/"
-      ]
+      ],
+      "website": "https://www.keepfinancial.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.keepfinancial.com&sz=128",
+      "hqCity": "Toronto",
+      "hqLat": 43.65107,
+      "hqLng": -79.347015
     },
     {
       "id": "co_layer",
@@ -4061,7 +4186,12 @@
         "https://www.layerfi.com/",
         "https://www.globenewswire.com/news-release/2025/07/09/3112479/0/en/Layer-Raises-6-6M-Led-by-Emergence-Capital-to-Bring-Embedded-Accounting-to-the-SMB-Software-Stack.html",
         "https://techcrunch.com/2024/05/15/embedded-accounting-layer-2-3m-quickbooks/"
-      ]
+      ],
+      "website": "https://www.layerapps.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.layerapps.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_aembit",
@@ -4148,7 +4278,12 @@
         "https://www.securityweek.com/non-human-iam-provider-aembit-raises-25-million/",
         "https://www.prnewswire.com/news-releases/cybersecurity-startup-aembit-launches-with-16-6m-in-total-funding-to-bring-identity-first-security-to-workloads-301776133.html",
         "https://aembit.io/"
-      ]
+      ],
+      "website": "https://aembit.io",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=aembit.io&sz=128",
+      "hqCity": "Frederick",
+      "hqLat": 39.4143,
+      "hqLng": -77.4105
     },
     {
       "id": "co_p0_security",
@@ -4237,7 +4372,12 @@
         "https://www.businesswire.com/news/home/20240910761539/en/P0-Security-Closes-$15M-Series-A-Funding-to-Help-Enterprises-Govern-and-Secure-Cloud-Access-for-All-Human-and-Machine-Identities-in-Minutes",
         "https://p0.dev/about/",
         "https://www.p0.dev/"
-      ]
+      ],
+      "website": "https://p0security.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=p0security.com&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     },
     {
       "id": "co_nudge_security",
@@ -4323,7 +4463,12 @@
         "https://www.prnewswire.com/news-releases/nudge-security-raises-22-5m-series-a-to-secure-workforce-ai-and-saas-302617997.html",
         "https://www.nudgesecurity.com/about-us",
         "https://www.nudgesecurity.com/"
-      ]
+      ],
+      "website": "https://www.nudgesecurity.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.nudgesecurity.com&sz=128",
+      "hqCity": "Dallas",
+      "hqLat": 32.7767,
+      "hqLng": -96.797
     },
     {
       "id": "co_tobiko_data",
@@ -4411,7 +4556,12 @@
         "https://www.tobikodata.com/about",
         "https://www.tobikodata.com/",
         "https://www.businesswire.com/news/home/20240605904710/en/CORRECTING-and-REPLACING-Data-Infrastructure-Startup-Tobiko-Data-Launches-with-%2421.8-Million-in-Funding"
-      ]
+      ],
+      "website": "https://www.tobikodata.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.tobikodata.com&sz=128",
+      "hqCity": "Boston",
+      "hqLat": 42.3601,
+      "hqLng": -71.0589
     },
     {
       "id": "co_turso",
@@ -4495,7 +4645,12 @@
         "https://turso.tech/what-is-turso",
         "https://tracxn.com/d/companies/turso/__9yiGkZbmMa-YcuYPa2835J-NujMZua-HZOqt-ap7kg8/funding-and-investors",
         "https://turso.tech/"
-      ]
+      ],
+      "website": "https://turso.tech",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=turso.tech&sz=128",
+      "hqCity": "Miami",
+      "hqLat": 25.7617,
+      "hqLng": -80.1918
     },
     {
       "id": "co_estuary",
@@ -4577,7 +4732,12 @@
         "https://estuary.dev/blog/estuary-raises-17m-series-a-right-time-data/",
         "https://estuary.dev/product/",
         "https://estuary.dev/"
-      ]
+      ],
+      "website": "https://estuary.dev",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=estuary.dev&sz=128",
+      "hqCity": "Brooklyn",
+      "hqLat": 40.6782,
+      "hqLng": -73.9442
     },
     {
       "id": "co_runreveal",
@@ -4658,7 +4818,12 @@
         "https://blog.runreveal.com/runreveal-raises-7m-ai-security-platform/",
         "https://www.finsmes.com/2025/08/runreveal-raises-7m-in-seed-funding.html",
         "https://runreveal.com/"
-      ]
+      ],
+      "website": "https://runreveal.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=runreveal.com&sz=128",
+      "hqCity": "Menlo Park",
+      "hqLat": 37.45296,
+      "hqLng": -122.18015
     },
     {
       "id": "co_twine_security",
@@ -4747,7 +4912,12 @@
         "https://siliconangle.com/2024/11/20/ai-meets-cybersecurity-twine-launches-12m-funding-digital-cyber-employees/",
         "https://www.calcalistech.com/ctechnews/article/hy9k4eofkg",
         "https://twinesecurity.com/"
-      ]
+      ],
+      "website": "https://twine-security.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=twine-security.com&sz=128",
+      "hqCity": "Chicago",
+      "hqLat": 41.8781,
+      "hqLng": -87.6298
     },
     {
       "id": "co_edera",
@@ -4829,7 +4999,12 @@
         "https://edera.dev/stories/series-a",
         "https://www.securityweek.com/edera-banks-15m-for-kubernetes-workload-isolation-tech/",
         "https://edera.dev/"
-      ]
+      ],
+      "website": "https://ederapush.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=ederapush.com&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     },
     {
       "id": "co_prophet_security",
@@ -4911,7 +5086,12 @@
         "https://www.prophetsecurity.ai/blog/prophet-security-raises-30-million-series-a-led-by-accel",
         "https://www.businesswire.com/news/home/20240423436213/en/Prophet-Security-Secures-$11M-in-Seed-Financing-to-Supercharge-Security-Operations",
         "https://www.prophetsecurity.ai/"
-      ]
+      ],
+      "website": "https://prophetsecurity.io",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=prophetsecurity.io&sz=128",
+      "hqCity": "Austin",
+      "hqLat": 30.2672,
+      "hqLng": -97.7431
     },
     {
       "id": "co_terminal49",
@@ -4996,7 +5176,12 @@
         "https://www.prnewswire.com/news-releases/terminal49-secures-6-5m-series-a-to-power-ocean-freight-visibility-and-automation-301725978.html",
         "https://terminal49.com/blog/series-a-announcement",
         "https://terminal49.com/container-tracking-api"
-      ]
+      ],
+      "website": "https://terminal49.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=terminal49.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_nira_energy",
@@ -5082,7 +5267,12 @@
         "https://www.ycombinator.com/companies/nira-energy",
         "https://www.prnewswire.com/news-releases/nira-energy-partners-with-energize-capital-to-scale-transmission-automation-software-302467710.html",
         "https://www.latitudemedia.com/news/how-nira-energy-is-using-software-to-unclog-the-interconnection-queue/"
-      ]
+      ],
+      "website": "https://www.nira.energy",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.nira.energy&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_bayou_energy",
@@ -5167,7 +5357,12 @@
         "https://www.bayou.energy/",
         "https://www.geekwire.com/2024/this-energy-startup-wants-to-make-utility-data-more-accessible-and-spur-creation-of-new-companies/",
         "https://docs.bayou.energy/reference/getting-started-with-your-api"
-      ]
+      ],
+      "website": "https://bayouenergydata.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=bayouenergydata.com&sz=128",
+      "hqCity": "Boulder",
+      "hqLat": 40.01499,
+      "hqLng": -105.27055
     },
     {
       "id": "co_vooma",
@@ -5252,7 +5447,12 @@
         "https://www.vooma.com/",
         "https://www.businesswire.com/news/home/20241202150186/en/Vooma-Scores-Over-$16-Million-in-Seed-and-Series-A-Funding-Led-by-Index-and-Craft-Ventures",
         "https://www.indexventures.com/perspectives/vooma-secures-166-million-to-build-an-ai-powered-agent-for-the-1t-trucking-industry/"
-      ]
+      ],
+      "website": "https://www.vooma.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.vooma.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_lithos_carbon",
@@ -5343,7 +5543,12 @@
         "https://www.geekwire.com/2022/carbon-removal-company-lithos-lands-6-3m-for-ag-focused-climate-tech/",
         "https://frontierclimate.com/writing/lithos",
         "https://www.businesswire.com/news/home/20251202793450/en/Lithos-Carbon-Delivers-5160-Registry-Certified-Tons-of-Carbon-Removal-in-Worlds-Largest-Enhanced-Rock-Weathering-Issuance-to-Date"
-      ]
+      ],
+      "website": "https://www.lithoscarbon.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.lithoscarbon.com&sz=128",
+      "hqCity": "Seattle",
+      "hqLat": 47.6062,
+      "hqLng": -122.3321
     },
     {
       "id": "co_paces",
@@ -5427,7 +5632,12 @@
         "https://www.paces.com/",
         "https://www.paces.com/news/paces-raises-11-million-to-accelerate-clean-energy-development",
         "https://www.esgtoday.com/energy-infrastructure-software-startup-paces-raises-11-million-to-accelerate-green-energy-development/"
-      ]
+      ],
+      "website": "https://www.paces.ai",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.paces.ai&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     },
     {
       "id": "co_verse",
@@ -5511,7 +5721,12 @@
         "https://verse.inc/press/verse-inc-secures-20-5-million-series-a-funding-led-by-gv/",
         "https://www.prnewswire.com/news-releases/verse-secures-20-5-million-in-series-a-funding-led-by-gv-to-help-organizations-reduce-electricity-costs--emissions-302152878.html",
         "https://www.prnewswire.com/news-releases/clean-energy-procurement-and-management-software-provider-verse-closes-5-75m-seed-round-led-by-coatue-launches-first-product-and-signs-climeworks-as-customer-301879805.html"
-      ]
+      ],
+      "website": "https://www.verse.energy",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.verse.energy&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_texture",
@@ -5596,7 +5811,12 @@
         "https://www.texturehq.com/",
         "https://www.texturehq.com/blog/texture-series-a",
         "https://www.powermag.com/texture-raises-12-5m-to-tackle-the-operational-complexity-of-the-modern-grid/"
-      ]
+      ],
+      "website": "https://www.texture.co",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.texture.co&sz=128",
+      "hqCity": "Los Angeles",
+      "hqLat": 34.0522,
+      "hqLng": -118.2437
     },
     {
       "id": "co_cargado",
@@ -5773,7 +5993,12 @@
         "https://isometric.com/writing-articles/isometric-raises-40m-to-bring-agentic-certification-to-the-industrial-economy",
         "https://techfundingnews.com/isometric-40m-series-a-industrial-certification-ai/",
         "https://techcrunch.com/2023/07/17/isometric-taps-25m-to-build-a-registry-and-science-platform-focused-on-carbon-removal/"
-      ]
+      ],
+      "website": "https://www.isometric.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.isometric.com&sz=128",
+      "hqCity": "London",
+      "hqLat": 51.5074,
+      "hqLng": -0.1278
     },
     {
       "id": "co_beli",
@@ -5855,7 +6080,12 @@
         "https://beliapp.com/",
         "https://beliapp.com/ourstory",
         "https://en.wikipedia.org/wiki/Beli_(app)"
-      ]
+      ],
+      "website": "https://www.beliapp.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.beliapp.com&sz=128",
+      "hqCity": "Los Angeles",
+      "hqLat": 34.0522,
+      "hqLng": -118.2437
     },
     {
       "id": "co_partiful",
@@ -5935,7 +6165,12 @@
         "https://partiful.com/",
         "https://fortune.com/2023/05/23/partiful-founders-startup-raises-series-a/",
         "https://techcrunch.com/2024/11/18/partiful-is-googles-best-app-of-2024/"
-      ]
+      ],
+      "website": "partiful.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=partiful.com&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     },
     {
       "id": "co_posh",
@@ -6021,7 +6256,12 @@
         "https://posh.vip/",
         "https://www.forbes.com/sites/dariashunina/2024/07/23/posh-raises-22m-to-power-your-social-life/",
         "https://fortune.com/2026/03/19/exclusive-posh-lands-37m-series-b-what-are-we-doing-tonight-problem/"
-      ]
+      ],
+      "website": "https://www.posh.vip",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.posh.vip&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     },
     {
       "id": "co_pickle",
@@ -6102,7 +6342,12 @@
         "https://www.shoponpickle.com/",
         "https://alleywatch.com/2025/04/pickle-peer-to-peer-clothing-rental-marketplace-brian-mcmahon/",
         "https://techcrunch.com/2023/10/11/peer-to-peer-fashion-rental-marketplace-pickle-picks-up-8-million/"
-      ]
+      ],
+      "website": "https://www.picklefashion.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.picklefashion.com&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     },
     {
       "id": "co_pie",
@@ -6358,7 +6603,12 @@
         "https://chowdeck.com/",
         "https://techcrunch.com/2025/08/11/nigeria-profitable-food-delivery-chowdeck-lands-9m-from-novastar-y-combinator/",
         "https://afrotech.com/chowdeck-closes-9m-series-a-round"
-      ]
+      ],
+      "website": "https://www.chowdeck.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.chowdeck.com&sz=128",
+      "hqCity": "Lagos",
+      "hqLat": 6.5244,
+      "hqLng": 3.3792
     },
     {
       "id": "co_bezel",
@@ -6412,7 +6662,7 @@
         {
           "name": "Chase Payan",
           "role": "Co-founder (CFO/COO)",
-          "background": "Childhood friend of Walker's with a finance and operations background; one source spells the name \"Chase Pion\" — confirm in diligence."
+          "background": "Childhood friend of Walker's with a finance and operations background; one source spells the name \"Chase Pion\" \u2014 confirm in diligence."
         },
         {
           "name": "Darryl Johnson",
@@ -6444,7 +6694,12 @@
         "https://www.getbezel.com/",
         "https://www.getbezel.com/post/bezel-seed-round",
         "https://www.forbes.com/sites/daveknox/2024/10/14/how-bezel-is-redefining-the-luxury-watch-market-through-technology/"
-      ]
+      ],
+      "website": "https://www.bezel.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.bezel.com&sz=128",
+      "hqCity": "Miami",
+      "hqLat": 25.7617,
+      "hqLng": -80.1918
     },
     {
       "id": "co_yope",
@@ -6526,7 +6781,12 @@
         "https://yope.app/",
         "https://techcrunch.com/2025/02/24/yope-is-sparking-genz-and-vc-interest-with-an-instagram-like-app-for-private-groups/",
         "https://en.wikipedia.org/wiki/YOPE"
-      ]
+      ],
+      "website": "https://www.yope.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.yope.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_222",
@@ -6612,7 +6872,12 @@
         "https://222.place/",
         "https://www.fastcompany.com/91356813/222-aims-to-end-loneliness-by-engineering-chance",
         "https://www.ycombinator.com/companies/222"
-      ]
+      ],
+      "website": "https://www.222app.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.222app.com&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     },
     {
       "id": "co_howie",
@@ -6703,7 +6968,12 @@
         "https://howie.com/",
         "https://www.geekwire.com/2025/ai-scheduling-assistant-howie-raises-6m-launches-publicly-with-1000-paying-customers/",
         "https://www.webpronews.com/howie-ai-scheduler-raises-6m-from-sequoia-a16z-at-30m-valuation/"
-      ]
+      ],
+      "website": "https://www.howie.ai",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.howie.ai&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_chronicle",
@@ -6788,7 +7058,12 @@
       "sourceRefs": [
         "https://chroniclehq.com/",
         "https://www.forbes.com/sites/charliefink/2025/06/10/chronicle-ai-presentations-launches-with-100000-user-waitlist/"
-      ]
+      ],
+      "website": "https://www.chroniclehq.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.chroniclehq.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_fyxer",
@@ -6882,7 +7157,12 @@
         "https://sifted.eu/articles/ai-exec-assistant-startup-fyxer-raises-30m-to-expand-to-the-us",
         "https://www.fyxer.com/blog/series-b-statement",
         "https://www.fyxer.com/pricing"
-      ]
+      ],
+      "website": "https://www.fyxer.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.fyxer.com&sz=128",
+      "hqCity": "London",
+      "hqLat": 51.5074,
+      "hqLng": -0.1278
     },
     {
       "id": "co_napkin",
@@ -6965,7 +7245,12 @@
         "https://www.napkin.ai/",
         "https://techcrunch.com/2024/08/07/napkin-turns-text-into-visuals-with-a-bit-of-generative-ai/",
         "https://www.napkin.ai/pricing/"
-      ]
+      ],
+      "website": "usenapkin.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=usenapkin.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_ello",
@@ -7055,7 +7340,12 @@
         "https://www.ello.com/",
         "https://www.globenewswire.com/news-release/2023/09/07/2739711/0/en/Ello-World-s-Most-Advanced-AI-Reading-Coach-Raises-15M-Series-A.html",
         "https://techcrunch.com/2023/09/07/ai-reading-coach-startup-ello-raises-15-million-to-bolster-child-literacy/"
-      ]
+      ],
+      "website": "ello.io",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=ello.io&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     },
     {
       "id": "co_schoolai",
@@ -7140,7 +7430,12 @@
         "https://schoolai.com/",
         "https://www.globenewswire.com/news-release/2025/04/02/3054126/0/en/SchoolAI-Secures-25-Million-to-Help-Teachers-and-Schools-Reach-Every-Student.html",
         "https://schoolai.com/pricing"
-      ]
+      ],
+      "website": "schoolai.co",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=schoolai.co&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_lindy",
@@ -7217,7 +7512,12 @@
         "https://www.lindy.ai/",
         "https://www.clay.com/dossier/lindy-funding",
         "https://saasclub.io/podcast/lindy-flo-crivello-450/"
-      ]
+      ],
+      "website": "lindy.ai",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=lindy.ai&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_delphi",
@@ -7303,7 +7603,12 @@
         "https://www.delphi.ai/blog/delphi-raises-16m-series-a-from-sequoia",
         "https://www.fastcompany.com/91356476/delphi-ai-digital-mind",
         "https://www.delphi.ai/pricing"
-      ]
+      ],
+      "website": "delphi.ai",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=delphi.ai&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_happenstance",
@@ -7380,7 +7685,12 @@
         "https://happenstance.ai/",
         "https://www.ycombinator.com/companies/happenstance",
         "https://getlatka.com/companies/happenstance.ai"
-      ]
+      ],
+      "website": "happenstance.io",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=happenstance.io&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_brisk_teaching",
@@ -7460,7 +7770,12 @@
         "https://www.briskteaching.com/",
         "https://www.prnewswire.com/news-releases/brisk-teaching-raises-15-million-to-reinvent-classroom-technology-for-the-ai-era-302412034.html",
         "https://www.bvp.com/news/giving-teachers-their-time-back-our-investment-in-brisk-teaching"
-      ]
+      ],
+      "website": "briskteaching.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=briskteaching.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_theseus",
@@ -7517,7 +7832,7 @@
           "background": "Recent college graduate at founding; a viral tweet about the team's hackathon prototype led to the company's founding."
         },
         {
-          "name": "Sacha Lévy",
+          "name": "Sacha L\u00e9vy",
           "role": "Co-founder",
           "background": "Yale PhD student at founding; part of the original three-person hackathon team."
         }
@@ -7548,7 +7863,12 @@
         "https://www.theseus.us/",
         "https://www.ycombinator.com/companies/theseus",
         "https://techcrunch.com/2025/04/17/defense-tech-theseus-landed-y-combinator-the-us-special-forces-and-4-3m-from-a-tweet/"
-      ]
+      ],
+      "website": "theseus.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=theseus.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_anyware_robotics",
@@ -7630,7 +7950,12 @@
         "https://anyware-robotics.com/",
         "https://www.prnewswire.com/news-releases/anyware-robotics-secures-12m-seed-funding-deploys-pixmo-commercially-302401361.html",
         "https://spectrum.ieee.org/anyware-robotics-pixmo"
-      ]
+      ],
+      "website": "anywarerobotics.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=anywarerobotics.com&sz=128",
+      "hqCity": "Raleigh",
+      "hqLat": 35.7796,
+      "hqLng": -78.6382
     },
     {
       "id": "co_daedalus",
@@ -7708,7 +8033,12 @@
         "https://www.daedalus.de/",
         "https://techcrunch.com/2024/02/08/daedalus-manufacturing-jonas-schneider-openai-robotics-raises-21-million/",
         "https://www.ngpcap.com/insights/daedalus-a-startup-led-by-former-openai-technical-lead-secures-21m-to-redefine-manufacturing-with-ai"
-      ]
+      ],
+      "website": "daedalusindustrial.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=daedalusindustrial.com&sz=128",
+      "hqCity": "Los Angeles",
+      "hqLat": 34.0522,
+      "hqLng": -118.2437
     },
     {
       "id": "co_cartken",
@@ -7794,7 +8124,12 @@
         "https://www.cartken.com/",
         "https://www.cartken.com/press-release/cartken-announces-22-5m-in-aggregate-funding-to-advance-ai-based-technology-stack-enabling-autonomous-delivery-robots",
         "https://techcrunch.com/2025/07/20/why-cartken-pivoted-its-focus-from-last-mile-delivery-to-industrial-robots/"
-      ]
+      ],
+      "website": "cartken.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=cartken.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_contoro",
@@ -7945,7 +8280,12 @@
         "https://www.chefrobotics.ai/",
         "https://www.chefrobotics.ai/post/weve-raised-43-1m-to-accelerate-our-ai-enabled-robot-deployments",
         "https://www.cnbc.com/2025/03/31/chef-robotics-raises-20point6-million-to-continue-building-ai-robot-arms.html"
-      ]
+      ],
+      "website": "chefrobotics.ai",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=chefrobotics.ai&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_sereact",
@@ -8027,7 +8367,12 @@
         "https://sereact.ai/",
         "https://sereact.ai/posts/sereact-fundraising-series-a",
         "https://siliconangle.com/2026/04/27/sereact-raises-110m-scale-ai-robotic-brain-expand-us/"
-      ]
+      ],
+      "website": "sereact.ai",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=sereact.ai&sz=128",
+      "hqCity": "Berlin",
+      "hqLat": 52.52,
+      "hqLng": 13.405
     },
     {
       "id": "co_isembard",
@@ -8186,7 +8531,12 @@
         "https://www.orbitalindustries.com/",
         "https://techcrunch.com/2024/02/21/this-startup-is-using-ai-to-discover-new-materials/",
         "https://fortune.com/2026/05/28/exclusive-orbital-industries-raises-50-million-series-b-funding-round-ai-to-discover-exotic-new-materials/"
-      ]
+      ],
+      "website": "orbitalmaterials.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=orbitalmaterials.com&sz=128",
+      "hqCity": "Boston",
+      "hqLat": 42.3601,
+      "hqLng": -71.0589
     },
     {
       "id": "co_matic",
@@ -8268,7 +8618,12 @@
         "https://maticrobots.com/blog",
         "https://sacra.com/c/matic/",
         "https://vacuumwars.com/matic-robot-vacuum-review/"
-      ]
+      ],
+      "website": "matic.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=matic.com&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     },
     {
       "id": "co_tofu",
@@ -8353,7 +8708,12 @@
         "https://www.tofuhq.com/platform",
         "https://www.prnewswire.com/news-releases/tofu-raises-12m-series-a-to-consolidate-martech-for-enterprise-gtm-teams-302375706.html",
         "https://www.tofuhq.com/post/tofu-raises-12m-series-a-to-cut-martech-bloat-for-gtm-teams"
-      ]
+      ],
+      "website": "usetofu.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=usetofu.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_default",
@@ -8428,7 +8788,12 @@
         "https://www.default.com/post/agent-launch",
         "https://www.contentgrip.com/default-agentic-gtm-platform/",
         "https://www.demandgenreport.com/industry-news/default-launches-ai-powered-inbound-sales-funnel-reveals-6-6m-seed-funding/8099/"
-      ]
+      ],
+      "website": "default.so",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=default.so&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_thena",
@@ -8512,7 +8877,12 @@
         "https://www.thena.ai/solutions/customer-support",
         "https://www.thena.ai/slack",
         "https://getlatka.com/companies/thena"
-      ]
+      ],
+      "website": "thena.ai",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=thena.ai&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_dock",
@@ -8595,7 +8965,12 @@
         "https://www.dock.us/about-us",
         "https://www.dock.us/library/seed-round",
         "https://www.dock.us/library/craft-ventures-fundraising-announcement"
-      ]
+      ],
+      "website": "https://www.dock.us",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.dock.us&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_kula",
@@ -8669,7 +9044,12 @@
         "https://www.kula.ai/blog/seed-funding",
         "https://techcrunch.com/2022/08/30/kula-makes-the-job-recruitment-process-less-exhausting/",
         "https://www.forbes.com/sites/davidprosser/2024/09/19/why-kula-believes-ai-can-change-the-face-of-recruitment-forever/"
-      ]
+      ],
+      "website": "https://www.kula.ai",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.kula.ai&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_metaview",
@@ -8749,7 +9129,12 @@
         "https://www.metaview.ai/resources/blog/fresh-capital-announcement",
         "https://www.metaview.ai/resources/blog/series-b",
         "https://www.gv.com/news/metaview-ai-hiring"
-      ]
+      ],
+      "website": "https://www.metaview.ai",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.metaview.ai&sz=128",
+      "hqCity": "London",
+      "hqLat": 51.5074,
+      "hqLng": -0.1278
     },
     {
       "id": "co_campfire",
@@ -8823,7 +9208,12 @@
         "https://www.prnewswire.com/news-releases/campfire-raises-35-million-series-a-led-by-accel-to-build-the-next-generation-ai-driven-erp-302494153.html",
         "https://www.prnewswire.com/news-releases/campfire-raises-65-million-series-b-to-redefine-how-finance-works-in-the-ai-era-302585077.html",
         "https://techcrunch.com/2025/06/30/tiny-ai-erp-startup-campfire-is-winning-so-many-startups-from-netsuite-accel-led-a-35m-series-a/"
-      ]
+      ],
+      "website": "https://www.campfire.so",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.campfire.so&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_doss",
@@ -8902,7 +9292,12 @@
         "https://www.doss.com/news/doss-raises-55m-series-b",
         "https://techcrunch.com/2026/03/24/doss-raises-55m-for-ai-inventory-management-that-plugs-into-erp/",
         "https://www.madrona.com/investing-in-doss-a-new-form-of-ai-native-enterprise-application/"
-      ]
+      ],
+      "website": "https://www.doss.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.doss.com&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     },
     {
       "id": "co_sequence",
@@ -8985,7 +9380,12 @@
         "https://www.sequencehq.com/blog/sequence-announces-series-a",
         "https://www.sequencehq.com/blog/introducing-sequence-20",
         "https://www.sequencehq.com/products/billing"
-      ]
+      ],
+      "website": "https://www.sequencehq.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.sequencehq.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_gradient_labs",
@@ -9079,7 +9479,12 @@
         "https://gradient-labs.ai/blog/series-a-announcement",
         "https://gradient-labs.ai/blog/weve-raised-26m-to-bring-autonomous-customer-operations-to-financial-services",
         "https://sifted.eu/articles/gradient-labs-doubles-series-a"
-      ]
+      ],
+      "website": "https://www.gradientlabs.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.gradientlabs.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_bevel",
@@ -9130,7 +9535,12 @@
       "sourceRefs": [
         "memo_bevel",
         "HCP_10_Investment_Memos_2026-07-18.md"
-      ]
+      ],
+      "website": "https://www.bevel.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.bevel.com&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     },
     {
       "id": "co_rwazi",
@@ -9179,7 +9589,12 @@
       "sourceRefs": [
         "memo_rwazi",
         "HCP_10_Investment_Memos_2026-07-18.md"
-      ]
+      ],
+      "website": "https://www.rwazi.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.rwazi.com&sz=128",
+      "hqCity": "San Francisco",
+      "hqLat": 37.7749,
+      "hqLng": -122.4194
     },
     {
       "id": "co_twentyeight_health",
@@ -9233,7 +9648,12 @@
       "sourceRefs": [
         "memo_twentyeight_health",
         "HCP_10_Investment_Memos_2026-07-18.md"
-      ]
+      ],
+      "website": "https://www.twentyeighthealth.com",
+      "logoUrl": "https://www.google.com/s2/favicons?domain=www.twentyeighthealth.com&sz=128",
+      "hqCity": "New York",
+      "hqLat": 40.7128,
+      "hqLng": -74.006
     }
   ],
   "competitors": []

@@ -72,8 +72,30 @@ async function resolvePhoto(founder: FounderRec, companyName: string): Promise<s
 }
 
 let resolved = 0;
+let reused = 0;
 let skipped = 0;
 let unverified = 0;
+
+/** Photos already resolved anywhere (snapshot regenerations drop them; a
+ *  re-run should copy known photos across files instead of re-searching).
+ *  Pass --reuse-only to skip live search entirely. */
+const reuseOnly = process.argv.includes("--reuse-only");
+const known = new Map<string, string>();
+const keyOf = (name: string, company: string) => `${name.toLowerCase()}|${company.toLowerCase()}`;
+for (const file of FILES) {
+  try {
+    for (const list of companyLists(JSON.parse(readFileSync(file, "utf8")))) {
+      for (const company of list) {
+        for (const founder of company.founders ?? []) {
+          if (founder.name && founder.photoUrl) known.set(keyOf(founder.name, company.name ?? ""), founder.photoUrl);
+        }
+      }
+    }
+  } catch {
+    // missing file; the main loop reports it
+  }
+}
+console.log(`known photos indexed: ${known.size}${reuseOnly ? " (reuse-only mode, no live search)" : ""}`);
 
 for (const file of FILES) {
   let doc: unknown;
@@ -84,6 +106,7 @@ for (const file of FILES) {
     continue;
   }
   const jobs: { founder: FounderRec; company: string }[] = [];
+  let fileReused = 0;
   for (const list of companyLists(doc)) {
     for (const company of list) {
       for (const founder of company.founders ?? []) {
@@ -92,11 +115,18 @@ for (const file of FILES) {
           continue;
         }
         if (founder.photoUrl) continue;
-        jobs.push({ founder, company: company.name ?? "" });
+        const knownPhoto = known.get(keyOf(founder.name, company.name ?? ""));
+        if (knownPhoto) {
+          founder.photoUrl = knownPhoto;
+          reused++;
+          fileReused++;
+          continue;
+        }
+        if (!reuseOnly) jobs.push({ founder, company: company.name ?? "" });
       }
     }
   }
-  console.log(`${file}: ${jobs.length} founders to resolve`);
+  console.log(`${file}: ${fileReused} reused, ${jobs.length} founders to resolve`);
   let done = 0;
   for (let i = 0; i < jobs.length; i += CONCURRENCY) {
     await Promise.all(
@@ -113,9 +143,9 @@ for (const file of FILES) {
       }),
     );
   }
-  if (jobs.length > 0) writeFileSync(file, `${JSON.stringify(doc, null, 2)}\n`, "utf8");
+  if (jobs.length > 0 || fileReused > 0) writeFileSync(file, `${JSON.stringify(doc, null, 2)}\n`, "utf8");
 }
 
 console.log(
-  `\nresolved: ${resolved} · unverified (kept photoless, UI shows initials): ${unverified} · placeholder skipped: ${skipped}`,
+  `\nresolved: ${resolved} · reused: ${reused} · unverified (kept photoless, UI shows initials): ${unverified} · placeholder skipped: ${skipped}`,
 );

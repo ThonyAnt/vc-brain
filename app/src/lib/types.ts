@@ -118,6 +118,8 @@ export interface Company {
   memo?: string
   meetings?: Meeting[]
   dealStage?: Stage
+  /** Set when the company is added by a sourcing run; used for pipeline recency. */
+  sourcedAt?: string
   outcome?: string
 }
 

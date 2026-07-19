@@ -62,9 +62,22 @@ const adapted = adaptSnapshot(snapshotJson as unknown as BrainSnapshot)
 // Confirmed pipeline reservations are real companies from the seeded universe.
 // They surface in both the Meeting stage and the calendar view.
 const confirmedMeetingIds = new Set(['co_firecrawl', 'co_honeyhive', 'co_e2b'])
+
+/** Stable seed timestamps make every pre-existing pipeline lead sortable by when it was added. */
+function seededAddedAt(id: string) {
+  let hash = 2166136261
+  for (const character of id) hash = Math.imul(hash ^ character.charCodeAt(0), 16777619)
+  const minutesAgo = (hash >>> 0) % (30 * 24 * 60)
+  return new Date(Date.UTC(2026, 6, 18, 18, 0) - minutesAgo * 60_000).toISOString()
+}
+
 const data = {
   companies: adapted.companies.map((company) => (
-    confirmedMeetingIds.has(company.id) ? { ...company, dealStage: 'Meeting' as const } : company
+    {
+      ...company,
+      dealStage: confirmedMeetingIds.has(company.id) ? 'Meeting' as const : company.dealStage,
+      sourcedAt: company.sourcedAt ?? seededAddedAt(company.id),
+    }
   )),
   founders: [...adapted.founders],
   fundProfile: adapted.fundProfile,
@@ -116,12 +129,22 @@ const sourcingListeners = new Set<(companies: Company[]) => void>()
 
 function mergeSourcedCompanies(companies: Company[], founders: Founder[] = []) {
   const byId = new Map(data.companies.map((company) => [company.id, company]))
-  for (const company of companies) byId.set(company.id, company)
+  const addedAt = new Date().toISOString()
+  const pipelineCompanies = companies.map((company) => {
+    const previous = byId.get(company.id)
+    return {
+      ...company,
+      type: 'sourced' as const,
+      dealStage: company.dealStage ?? previous?.dealStage ?? 'Sourced' as const,
+      sourcedAt: company.sourcedAt ?? previous?.sourcedAt ?? addedAt,
+    }
+  })
+  for (const company of pipelineCompanies) byId.set(company.id, company)
   data.companies = [...byId.values()]
   const foundersById = new Map(data.founders.map((founder) => [founder.id, founder]))
   for (const founder of founders) foundersById.set(founder.id, founder)
   data.founders = [...foundersById.values()]
-  for (const listener of sourcingListeners) listener(companies)
+  for (const listener of sourcingListeners) listener(pipelineCompanies)
 }
 
 /** POST to the live brain API; returns null if it's unreachable or errors. */

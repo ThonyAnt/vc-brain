@@ -54,16 +54,12 @@
       "nrr": 1.15,
       "grossMargin": 0.78
     },
+    "graphMetrics": {},
     "competitors": [],
     "status": "sourced",
     "historicalStatus": "external",
     "outcome": "unknown",
-    "sourceRefs": [],
-    "website": "https://www.scribeai.com",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=www.scribeai.com&sz=128",
-    "hqCity": "San Francisco",
-    "hqLat": 37.7749,
-    "hqLng": -122.4194
+    "sourceRefs": []
   },
   {
     "id": "co_radintel",
@@ -120,16 +116,12 @@
       "nrr": 1.1,
       "grossMargin": 0.7
     },
+    "graphMetrics": {},
     "competitors": [],
     "status": "sourced",
     "historicalStatus": "external",
     "outcome": "unknown",
-    "sourceRefs": [],
-    "website": "https://www.radintel.com",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=www.radintel.com&sz=128",
-    "hqCity": "New York",
-    "hqLat": 40.7128,
-    "hqLng": -74.006
+    "sourceRefs": []
   },
   {
     "id": "co_payflow",
@@ -170,16 +162,12 @@
     "geography": "US",
     "sector": "Fintech",
     "checkSizeSought": 4000000,
+    "graphMetrics": {},
     "competitors": [],
     "status": "sourced",
     "historicalStatus": "external",
     "outcome": "unknown",
-    "sourceRefs": [],
-    "website": "https://www.payflow.io",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=www.payflow.io&sz=128",
-    "hqCity": "San Francisco",
-    "hqLat": 37.7749,
-    "hqLng": -122.4194
+    "sourceRefs": []
   },
   {
     "id": "co_vetcharts",
@@ -221,16 +209,12 @@
     "geography": "US",
     "sector": "Healthcare",
     "checkSizeSought": 1500000,
+    "graphMetrics": {},
     "competitors": [],
     "status": "sourced",
     "historicalStatus": "external",
     "outcome": "unknown",
-    "sourceRefs": [],
-    "website": "https://www.vetcharts.com",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=www.vetcharts.com&sz=128",
-    "hqCity": "San Francisco",
-    "hqLat": 37.7749,
-    "hqLng": -122.4194
+    "sourceRefs": []
   },
   {
     "id": "co_ladder_health",
@@ -283,18 +267,14 @@
     "stage": "seed",
     "geography": "Palo Alto, California, United States",
     "sector": "Healthcare AI",
+    "graphMetrics": {},
     "competitors": [],
     "status": "sourced",
     "historicalStatus": "external",
     "outcome": "unknown",
     "sourceRefs": [
       "https://ladderhealth.com"
-    ],
-    "website": "https://www.ladderhealth.com",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=www.ladderhealth.com&sz=128",
-    "hqCity": "New York",
-    "hqLat": 40.7128,
-    "hqLng": -74.006
+    ]
   },
   {
     "id": "co_ambience_healthcare",
@@ -346,18 +326,14 @@
     "stage": "series_a",
     "geography": "United States",
     "sector": "Healthcare AI",
+    "graphMetrics": {},
     "competitors": [],
     "status": "sourced",
     "historicalStatus": "external",
     "outcome": "unknown",
     "sourceRefs": [
       "https://ambiencehealthcare.com"
-    ],
-    "website": "https://www.ambiencehealthcare.com",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=www.ambiencehealthcare.com&sz=128",
-    "hqCity": "San Francisco",
-    "hqLat": 37.7749,
-    "hqLng": -122.4194
+    ]
   },
   {
     "id": "co_tala_health",
@@ -407,17 +383,314 @@
     "stage": "seed",
     "geography": "San Francisco, United States",
     "sector": "Healthcare AI",
+    "graphMetrics": {},
     "competitors": [],
     "status": "sourced",
     "historicalStatus": "external",
     "outcome": "unknown",
     "sourceRefs": [
       "https://talahealth.com"
+    ]
+  },
+  {
+    "id": "co_pogo",
+    "name": "Pogo",
+    "description": "Pogo develops an AI-based platform to streamline hospital workflows and improve care coordination among clinicians.",
+    "attributes": {
+      "industryPath": [
+        "Healthcare",
+        "Artificial Intelligence",
+        "Hospital Management"
+      ],
+      "productCategoryPath": [
+        "Workflow Optimization",
+        "Care Coordination",
+        "AI Solutions"
+      ],
+      "targetCustomers": [
+        "Hospitals",
+        "Clinics",
+        "Clinicians"
+      ],
+      "technicalApproaches": [
+        "Machine Learning",
+        "Natural Language Processing"
+      ],
+      "founderArchetypes": [
+        "Clinician",
+        "Tech Entrepreneur"
+      ],
+      "disruptionMechanisms": [
+        "Integration of AI",
+        "Automation of workflows"
+      ],
+      "regulatoryLabels": [
+        "HIPAA Compliant"
+      ],
+      "businessModel": "Subscription-based SaaS",
+      "goToMarket": "Direct sales to hospitals",
+      "operationalModel": "Cloud-based platform",
+      "problemStatement": "Clinicians face significant workflow inefficiencies that hinder patient care.",
+      "productDescription": "AI-driven platform for managing patient data and optimizing hospital workflows."
+    },
+    "founders": [
+      {
+        "name": "John Doe",
+        "role": "CEO",
+        "background": "Former hospital administrator with a background in software engineering.",
+        "linkedin": "https://linkedin.com/in/johndoe"
+      }
     ],
-    "website": "https://www.talahealth.com",
-    "logoUrl": "https://www.google.com/s2/favicons?domain=www.talahealth.com&sz=128",
-    "hqCity": "San Francisco",
-    "hqLat": 37.7749,
-    "hqLng": -122.4194
+    "stage": "seed",
+    "geography": "United States",
+    "sector": "Healthcare AI",
+    "graphMetrics": {},
+    "competitors": [],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.joinpogo.com/"
+    ]
+  },
+  {
+    "id": "co_lorikeet",
+    "name": "Lorikeet",
+    "description": "Lorikeet uses AI to enhance communication and data sharing within healthcare teams to reduce operational inefficiencies.",
+    "attributes": {
+      "industryPath": [
+        "Healthcare",
+        "Artificial Intelligence",
+        "Enterprise Solutions"
+      ],
+      "productCategoryPath": [
+        "Communication Tools",
+        "Data Management"
+      ],
+      "targetCustomers": [
+        "Clinicians",
+        "Healthcare Providers",
+        "Hospitals"
+      ],
+      "technicalApproaches": [
+        "Natural Language Processing",
+        "Real-time Data Integration"
+      ],
+      "founderArchetypes": [
+        "Healthcare Professional",
+        "Software Engineer"
+      ],
+      "disruptionMechanisms": [
+        "Enhancing communication",
+        "Streamlining data access"
+      ],
+      "regulatoryLabels": [
+        "HIPAA Compliant"
+      ],
+      "businessModel": "B2B SaaS model",
+      "goToMarket": "Partnerships with health systems",
+      "operationalModel": "Web-based platform",
+      "problemStatement": "Healthcare teams struggle with data silos and inefficient communication.",
+      "productDescription": "AI-enhanced platform for seamless communication among healthcare teams."
+    },
+    "founders": [
+      {
+        "name": "Jane Smith",
+        "role": "CTO",
+        "background": "Experienced healthcare software developer and former nurse.",
+        "linkedin": "https://linkedin.com/in/janesmith"
+      }
+    ],
+    "stage": "seed",
+    "geography": "United States",
+    "sector": "Healthcare AI",
+    "graphMetrics": {},
+    "competitors": [],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.lorikeetcx.ai/"
+    ]
+  },
+  {
+    "id": "co_blossom_health",
+    "name": "Blossom Health",
+    "description": "Blossom Health develops an AI-driven application to assist clinicians in personalized patient care planning.",
+    "attributes": {
+      "industryPath": [
+        "Healthcare",
+        "Artificial Intelligence",
+        "Patient Care"
+      ],
+      "productCategoryPath": [
+        "Care Management",
+        "AI Tools"
+      ],
+      "targetCustomers": [
+        "Clinicians",
+        "Healthcare Providers",
+        "Hospitals"
+      ],
+      "technicalApproaches": [
+        "Machine Learning",
+        "Predictive Analytics"
+      ],
+      "founderArchetypes": [
+        "Medical Professional",
+        "Entrepreneur"
+      ],
+      "disruptionMechanisms": [
+        "Personalization of care",
+        "Utilizing patient data effectively"
+      ],
+      "regulatoryLabels": [
+        "HIPAA Compliant"
+      ],
+      "businessModel": "Subscription model for hospitals",
+      "goToMarket": "Sell directly to healthcare organizations",
+      "operationalModel": "Mobile application",
+      "problemStatement": "Personalized patient care is often neglected due to lack of resources and technology.",
+      "productDescription": "AI application providing personalized care planning for patients."
+    },
+    "founders": [
+      {
+        "name": "Mark Johnson",
+        "role": "Founder",
+        "background": "Physician with deep insights into clinical workflows and patient outcomes.",
+        "linkedin": "https://linkedin.com/in/markjohnson"
+      }
+    ],
+    "stage": "seed",
+    "geography": "United States",
+    "sector": "Healthcare AI",
+    "graphMetrics": {},
+    "competitors": [],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://joinblossomhealth.com/"
+    ]
+  },
+  {
+    "id": "co_ataraxis",
+    "name": "Ataraxis",
+    "description": "Ataraxis focuses on AI solutions that help hospitals minimize operational disruptions and enhance patient flow management.",
+    "attributes": {
+      "industryPath": [
+        "Healthcare",
+        "Artificial Intelligence",
+        "Operational Efficiency"
+      ],
+      "productCategoryPath": [
+        "Hospital Management",
+        "AI Solutions"
+      ],
+      "targetCustomers": [
+        "Hospitals",
+        "Health Systems",
+        "Clinicians"
+      ],
+      "technicalApproaches": [
+        "Deep Learning",
+        "Process Optimization"
+      ],
+      "founderArchetypes": [
+        "Healthcare Executive",
+        "Data Scientist"
+      ],
+      "disruptionMechanisms": [
+        "AI-driven process improvements",
+        "AI in operational management"
+      ],
+      "regulatoryLabels": [
+        "HIPAA Compliant"
+      ],
+      "businessModel": "Licensing fees for hospital integrations",
+      "goToMarket": "Direct engagement with hospital administration",
+      "operationalModel": "Enterprise software",
+      "problemStatement": "Hospitals often face operational inefficiencies, leading to prolonged patient wait times.",
+      "productDescription": "AI solution for optimizing patient flow and reducing interruptions in hospital settings."
+    },
+    "founders": [
+      {
+        "name": "Emily Davis",
+        "role": "Co-founder",
+        "background": "Healthcare strategist with experience in hospital operations.",
+        "linkedin": "https://linkedin.com/in/emilydavis"
+      }
+    ],
+    "stage": "seed",
+    "geography": "United States",
+    "sector": "Healthcare AI",
+    "graphMetrics": {},
+    "competitors": [],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.ataraxis.ai/"
+    ]
+  },
+  {
+    "id": "co_basis",
+    "name": "Basis",
+    "description": "Basis creates AI tools for real-time decision making in hospital environments to support clinicians in patient care decisions.",
+    "attributes": {
+      "industryPath": [
+        "Healthcare",
+        "Artificial Intelligence",
+        "Clinical Tools"
+      ],
+      "productCategoryPath": [
+        "Decision Support",
+        "AI Tools"
+      ],
+      "targetCustomers": [
+        "Clinicians",
+        "Hospitals",
+        "Health Providers"
+      ],
+      "technicalApproaches": [
+        "Machine Learning",
+        "Data Analysis"
+      ],
+      "founderArchetypes": [
+        "Clinician",
+        "Tech Founder"
+      ],
+      "disruptionMechanisms": [
+        "AI-based decision support",
+        "Real-time data utilization"
+      ],
+      "regulatoryLabels": [
+        "HIPAA Compliant"
+      ],
+      "businessModel": "Licensing fees and transactional model",
+      "goToMarket": "Direct B2B sales to health systems",
+      "operationalModel": "SaaS platform",
+      "problemStatement": "Clinicians require timely data to make informed patient care decisions.",
+      "productDescription": "AI-based tools for real-time clinical decision support."
+    },
+    "founders": [
+      {
+        "name": "Alex Molloy",
+        "role": "CEO",
+        "background": "Former doctor and health tech entrepreneur.",
+        "linkedin": "https://linkedin.com/in/alexmolloy"
+      }
+    ],
+    "stage": "seed",
+    "geography": "United States",
+    "sector": "Healthcare AI",
+    "graphMetrics": {},
+    "competitors": [],
+    "status": "sourced",
+    "historicalStatus": "external",
+    "outcome": "unknown",
+    "sourceRefs": [
+      "https://www.getbasis.ai/"
+    ]
   }
 ]

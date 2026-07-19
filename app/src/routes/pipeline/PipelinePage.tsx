@@ -5,6 +5,7 @@ import { Dropdown } from '../../components/ui/dropdown'
 import { MonthGrid, type CalendarEvent } from '../../components/calendar/MonthGrid'
 import { Eyebrow } from '../../components/ui/Eyebrow'
 import { FitInfo } from '../../components/ui/FitInfo'
+import { SourceCompaniesDialog, type SourceBrief } from '../../components/sourcing/SourceCompaniesDialog'
 import { api } from '../../lib/api/client'
 import { CALENDAR_RESERVATIONS } from '../../lib/calendarReservations'
 import type { Company, Stage } from '../../lib/types'
@@ -73,7 +74,7 @@ function ScoreChip({ score }: { score: number }) {
   )
 }
 
-type SortKey = 'name' | 'stage' | 'sector' | 'fitScore' | 'raising' | 'location'
+type SortKey = 'name' | 'stage' | 'sector' | 'fitScore' | 'raising' | 'location' | 'sourcedAt'
 type ValuationBand = 'all' | 'under-10' | '10-to-15' | '15-plus'
 
 const COLUMNS: { key: SortKey; label: string }[] = [
@@ -82,8 +83,15 @@ const COLUMNS: { key: SortKey; label: string }[] = [
   { key: 'sector', label: 'Sector' },
   { key: 'fitScore', label: 'Fit' },
   { key: 'raising', label: 'Raising' },
-  { key: 'location', label: 'Location' },
+  { key: 'location', label: 'Location · added' },
 ]
+
+function formatAdded(value?: string) {
+  if (!value) return '—'
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return '—'
+  return new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(date)
+}
 
 /* stage chips step up the brutal palette: bone → yellow → black */
 function StageBadge({ stage }: { stage: Stage }) {
@@ -230,6 +238,8 @@ export function PipelinePage() {
   const [locationFilter, setLocationFilter] = useState('all')
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
   const [batchNotice, setBatchNotice] = useState('')
+  const [sourceOpen, setSourceOpen] = useState(false)
+  const [sourceNotice, setSourceNotice] = useState('')
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -310,6 +320,31 @@ export function PipelinePage() {
     setBatchNotice(`${outreachEligible.length} personalized outreach ${outreachEligible.length === 1 ? 'draft was' : 'drafts were'} queued for review.`)
   }
 
+  async function sourceCompanies(brief: SourceBrief) {
+    const geography = brief.geography === 'Selected countries'
+      ? (brief.countries.length ? brief.countries.join(', ') : 'selected countries')
+      : brief.geography
+    const industryScope = brief.industries.length ? brief.industries.join(', ') : 'the fund thesis sectors'
+    const query = [
+      `Find up to ${brief.count} ${brief.roundStatus} startups in ${industryScope}.`,
+      `Stages: ${brief.stages.join(', ')}. Geography: ${geography}.`,
+      `Valuation or cap: $${brief.valuationMin}M–$${brief.valuationMax}M.`,
+      `Fund size: $${brief.fundSize}M; initial check: $${brief.checkSize}M.`,
+      `Minimum fund fit: ${brief.minimumFit}.`,
+    ].join(' ')
+    const discovered = await api.discover(query)
+    setCompanies(await api.getCompanies())
+    if (discovered.length) {
+      setView('database')
+      localStorage.setItem('vcbrain-pipeline-view', 'database')
+      setSort({ key: 'sourcedAt', dir: -1 })
+    }
+    setSourceOpen(false)
+    setSourceNotice(discovered.length
+      ? `${discovered.length} companies sourced and added to the pipeline.`
+      : 'No new companies returned. Start the Brain API with search credentials, then try again.')
+  }
+
   return (
     <div className="mx-auto max-w-[1280px] p-8 pb-28">
       <div className="flex flex-wrap items-end justify-between gap-4">
@@ -318,27 +353,32 @@ export function PipelinePage() {
           <h1 className="display-lg mt-2">Active deals</h1>
         </div>
 
-        {/* view switcher */}
-        <div className="flex border-2 border-hairline-strong shadow-brutal-sm">
-          {(
-            [
-              { v: 'board', label: 'Board view', Icon: BoardIcon },
-              { v: 'database', label: 'Database view', Icon: DatabaseIcon },
-              { v: 'calendar', label: 'Calendar view', Icon: CalendarIcon },
-            ] as const
-          ).map(({ v, label, Icon }) => (
-            <button
-              key={v}
-              onClick={() => switchView(v)}
-              title={label}
-              aria-label={label}
-              className={`cursor-pointer p-2.5 transition-colors ${
-                view === v ? 'bg-dark text-on-dark' : 'bg-card text-ink hover:bg-bone'
-              } ${v === 'database' ? 'border-l-2 border-hairline-strong' : ''}`}
-            >
-              <Icon className="h-5 w-5" />
-            </button>
-          ))}
+        <div className="flex items-center gap-3">
+          <button type="button" onClick={() => setSourceOpen(true)} className="h-11 border-2 border-hairline-strong bg-primary px-5 text-sm font-semibold text-on-primary shadow-brutal-sm hover:bg-primary-deep">
+            Source
+          </button>
+          {/* view switcher */}
+          <div className="flex border-2 border-hairline-strong shadow-brutal-sm">
+            {(
+              [
+                { v: 'board', label: 'Board view', Icon: BoardIcon },
+                { v: 'database', label: 'Database view', Icon: DatabaseIcon },
+                { v: 'calendar', label: 'Calendar view', Icon: CalendarIcon },
+              ] as const
+            ).map(({ v, label, Icon }) => (
+              <button
+                key={v}
+                onClick={() => switchView(v)}
+                title={label}
+                aria-label={label}
+                className={`cursor-pointer p-2.5 transition-colors ${
+                  view === v ? 'bg-dark text-on-dark' : 'bg-card text-ink hover:bg-bone'
+                } ${v === 'database' ? 'border-l-2 border-hairline-strong' : ''}`}
+              >
+                <Icon className="h-5 w-5" />
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -404,6 +444,7 @@ export function PipelinePage() {
         )}
       </div>
       {batchNotice && <div role="status" className="code-sm mt-3 border-2 border-hairline-strong bg-success px-3 py-2 text-ink">{batchNotice}</div>}
+  {sourceNotice && <div role="status" className="code-sm mt-3 border-2 border-hairline-strong bg-primary px-3 py-2 text-on-primary">{sourceNotice}</div>}
 
       {view === 'board' ? (
         /* stage board */
@@ -506,7 +547,12 @@ export function PipelinePage() {
                       <span className="caption text-ash">—</span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-sm whitespace-nowrap text-ink">{c.location}</td>
+                  <td className="px-4 py-3">
+                    <div className="flex min-w-0 items-center gap-2">
+                      <span className="shrink-0 text-sm text-ink">{c.location}</span>
+                      <span title={c.sourcedAt ? new Date(c.sourcedAt).toLocaleString() : undefined} className={`code-sm max-w-[112px] truncate ${c.sourcedAt ? 'text-mute' : 'text-ash'}`}>{formatAdded(c.sourcedAt)}</span>
+                    </div>
+                  </td>
                   <td className="px-4 py-3 text-right">
                     <span className="caption-tight whitespace-nowrap text-primary">open →</span>
                   </td>
@@ -530,6 +576,7 @@ export function PipelinePage() {
           onToggleCompany={toggleCompany}
         />
       )}
+      {sourceOpen && <SourceCompaniesDialog onClose={() => setSourceOpen(false)} onSource={sourceCompanies} />}
     </div>
   )
 }

@@ -9,7 +9,20 @@ extract DISTINCT, REAL startups that plausibly fit the fund. For each, normalize
 attributes (industry/product hierarchies root->leaf, problem statement, customer/technical/founder/
 disruption/regulatory labels, business model, GTM). Ignore listicles, news outlets, funds, and
 duplicates. Only include companies actually named in the results — do not invent them. If a result
-names several companies, extract each. Attributes describe WHAT KIND of company it is, not its quality.`;
+names several companies, extract each. Attributes describe WHAT KIND of company it is, not its quality.
+When the results reveal them, include the company's official website domain and its HQ city with
+approximate latitude/longitude (your best geographic estimate for the city is fine).`;
+
+/** Favicon-service logo for a company website; null if the domain can't be parsed. */
+export function logoUrlFor(website?: string): string | undefined {
+  if (!website) return undefined;
+  try {
+    const domain = new URL(website.startsWith("http") ? website : `https://${website}`).hostname;
+    return domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=128` : undefined;
+  } catch {
+    return undefined;
+  }
+}
 
 const norm = (s: string) => s.trim().toLowerCase();
 const slug = (s: string) =>
@@ -107,6 +120,11 @@ export async function discoverCompanies(
         sector: d.sector,
         stage: d.stage,
         geography: d.geography,
+        website: d.website,
+        logoUrl: logoUrlFor(d.website),
+        hqCity: d.hqCity,
+        hqLat: d.hqLat,
+        hqLng: d.hqLng,
         historicalStatus: "external",
         status: "sourced",
         sourceRefs: d.website ? [d.website, ...d.sourceUrls] : d.sourceUrls,

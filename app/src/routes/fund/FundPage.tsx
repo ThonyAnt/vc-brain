@@ -4,7 +4,8 @@ import { Eyebrow } from '../../components/ui/Eyebrow'
 import { Pill } from '../../components/ui/Pill'
 import { ExpandableCard } from '@/components/ui/expandable-card'
 import { api } from '../../lib/api/client'
-import type { CriteriaWeights, FundProfile } from '../../lib/types'
+import { GlobeCard } from '../../components/geo/GlobeCard'
+import type { Company, CriteriaWeights, FundProfile } from '../../lib/types'
 import { useAppStore } from '../../state/store'
 
 /* Demo partner portraits (Unsplash stock) */
@@ -17,12 +18,14 @@ const PARTNER_PHOTOS: Record<string, string> = {
 
 export function FundPage() {
   const [fund, setFund] = useState<FundProfile | null>(null)
+  const [sourced, setSourced] = useState<Company[]>([])
   const [baseWeights, setBaseWeights] = useState<CriteriaWeights>({})
   const liveWeights = useAppStore((s) => s.weights)
   const setLearningNote = useAppStore((s) => s.setLearningNote)
 
   useEffect(() => {
     api.getFund().then(setFund)
+    api.getSourcing().then(setSourced)
     api.getGraph().then((g) => setBaseWeights(g.weights))
   }, [])
 
@@ -62,6 +65,8 @@ export function FundPage() {
               </div>
             </div>
           </Card>
+
+          <GlobeCard companies={sourced} globeHeight="h-[420px]" />
 
           <Card className="bg-dark text-on-dark">
             <div className="flex items-baseline justify-between">

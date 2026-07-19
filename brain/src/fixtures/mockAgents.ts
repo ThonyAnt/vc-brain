@@ -59,6 +59,9 @@ export const mockAgentStructured: NonNullable<MockLLMOptions["structured"]> = {
         sector: "Healthcare",
         stage: "seed",
         geography: "US",
+        hqCity: "Nashville",
+        hqLat: 36.1627,
+        hqLng: -86.7816,
         founders: [],
         sourceUrls: ["https://example.com/healthcare-seed"],
         attributes: {
@@ -78,9 +81,13 @@ export const mockAgentStructured: NonNullable<MockLLMOptions["structured"]> = {
       {
         name: "ClaimSync",
         description: "Automated medical claims reconciliation for health systems.",
+        website: "https://claimsync.example",
         sector: "Healthcare",
         stage: "seed",
         geography: "US",
+        hqCity: "Columbus",
+        hqLat: 39.9612,
+        hqLng: -82.9988,
         founders: [],
         sourceUrls: ["https://example.com/healthcare-seed"],
         attributes: {

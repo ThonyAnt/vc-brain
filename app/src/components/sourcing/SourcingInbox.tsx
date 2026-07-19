@@ -108,6 +108,16 @@ export function SourcingInbox({
           >
             <div className="flex items-baseline justify-between">
               <div className="flex items-center gap-2">
+                {c.logoUrl && (
+                  <img
+                    src={c.logoUrl}
+                    alt=""
+                    className="h-5 w-5 shrink-0 border border-hairline-strong bg-card object-cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none'
+                    }}
+                  />
+                )}
                 <div className="text-sm font-semibold text-ink">{c.name}</div>
                 {foundIds.has(c.id) && (
                   <span

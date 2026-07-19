@@ -2,11 +2,9 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { BrainCanvas, SECTOR_PALETTE, type BrainHandle } from '../../components/brain/BrainCanvas'
 import { DotGridBackground } from '../../components/brain/DotGridBackground'
 import { NodePanel } from '../../components/brain/NodePanel'
-import { GlobeCard } from '../../components/geo/GlobeCard'
 import { SourcingInbox } from '../../components/sourcing/SourcingInbox'
 import { api } from '../../lib/api/client'
 import type { Company, FundGraph, GraphEdge, GraphNode } from '../../lib/types'
-import type { LatLng } from '../../lib/geo'
 
 /* Turn freshly web-discovered companies into graph nodes + edges: each joins the
    market cluster matching its sector and links to its closest prior winner. */
@@ -56,8 +54,7 @@ const hudMono: React.CSSProperties = {
 export function BrainPage() {
   const [graph, setGraph] = useState<FundGraph | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const [sourced, setSourced] = useState<Company[]>([])
-  const [hoverCity, setHoverCity] = useState<LatLng | null>(null)
+  const [, setSourced] = useState<Company[]>([])
   const brainRef = useRef<BrainHandle>(null)
   const pendingDiscovered = useRef<string[]>([])
 
@@ -102,15 +99,12 @@ export function BrainPage() {
 
       {/* HUD overlays */}
       <div className="pointer-events-none absolute inset-0 flex p-4 pl-24">
-        {/* left rail: inbox stacks above the standing sourcing map */}
         <div className="flex h-full w-80 flex-col gap-3">
           <SourcingInbox
             onFocus={(id) => brainRef.current?.focusNode(id)}
             onFeedback={onFeedback}
             onDiscover={onDiscover}
-            onHoverCity={setHoverCity}
           />
-          <GlobeCard companies={sourced} focus={hoverCity} />
         </div>
         <div className="flex-1" />
         {selectedId && (

@@ -58,9 +58,6 @@ interface BrainCompany {
 }
 interface BrainRanked {
   companyId: string
-  /** Backfilled per-dimension similarity (embedding-powered), preferred over the offline mirror. */
-  dimensionsVsWinner?: Record<string, number>
-  dimensionsVsRejected?: Record<string, number>
   totalScore?: number
   fundFitScore?: number
   similarityToWinners?: number
@@ -297,14 +294,8 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
     if (c.attributes && r && (r.closestWinnerId || r.closestRejectedDealId)) {
       const winner = r.closestWinnerId ? byId.get(r.closestWinnerId) : undefined
       const rejected = r.closestRejectedDealId ? byId.get(r.closestRejectedDealId) : undefined
-      /* prefer the brain's backfilled embedding-powered dimensions; the offline
-       * mirror (no embeddings) is only the fallback */
-      const vsW =
-        r.dimensionsVsWinner ??
-        (winner?.attributes ? similarityDimensions(c.attributes, winner.attributes) : undefined)
-      const vsR =
-        r.dimensionsVsRejected ??
-        (rejected?.attributes ? similarityDimensions(c.attributes, rejected.attributes) : undefined)
+      const vsW = winner?.attributes ? similarityDimensions(c.attributes, winner.attributes) : undefined
+      const vsR = rejected?.attributes ? similarityDimensions(c.attributes, rejected.attributes) : undefined
       if (vsW || vsR) {
         fingerprint = {
           winner: winner?.name,
@@ -495,7 +486,6 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
       type: c.type,
       label: c.name,
       score: c.fitScore,
-      size: c.model?.arr,
       position: hasSemanticPosition ? [semanticPosition.x!, semanticPosition.y!, semanticPosition.z!] : undefined,
     })
     edges.push({ source: c.id, target: marketId(marketLabelFor(c)), kind: 'market', weight: 0.4 })

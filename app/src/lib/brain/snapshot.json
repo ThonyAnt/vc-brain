@@ -169,38 +169,34 @@
       "description": "Mem0 provides a critical memory layer for AI applications, showing strong developer traction with open-source adoption and API growth. The company's position as a model-neutral memory standard with a differentiated memory lifecycle provides a substantial moat. The investment is supported by the potential of Mem0 becoming a control point throughout AI applications, substantiated by strong usage and future growth potential.",
       "attributes": {
         "industryPath": [
-          "Software",
-          "AI Infrastructure",
-          "Agent memory and runtime"
+          "technology",
+          "artificial_intelligence"
         ],
         "productCategoryPath": [
-          "Developer Tools",
-          "AI Agent Infrastructure",
-          "Agent memory platform"
+          "infrastructure",
+          "memory_management"
         ],
         "targetCustomers": [
-          "AI application developers",
-          "Enterprise AI platform teams",
-          "Agent framework builders"
+          "AI developers",
+          "enterprise AI teams"
         ],
         "technicalApproaches": [
-          "Large language models",
-          "Stateful agent runtime",
-          "Open source core"
+          "control point for AI memory"
         ],
         "founderArchetypes": [
           "engineering-first team"
         ],
         "disruptionMechanisms": [
-          "Replaces ad hoc RAG/context management",
-          "New agent-runtime primitive"
+          "portability",
+          "neutral-platform advantages"
         ],
         "regulatoryLabels": [
-          "Pure software"
+          "SOC 2",
+          "encryption guarantees"
         ],
-        "businessModel": "Usage-based SaaS plus open source",
-        "goToMarket": "Developer-led / open source",
-        "operationalModel": "Pure software",
+        "businessModel": "usage SaaS plus OSS",
+        "goToMarket": "developer-first with enterprise focus",
+        "operationalModel": "lean team with rapid growth",
         "problemStatement": "AI applications lack a consistent memory layer capable of managing memory lifecycle efficiently.",
         "productDescription": "Mem0 provides a persistent memory layer for AI applications, offering managed services, open-source packages, and framework integrations for improved memory handling."
       },
@@ -604,8 +600,7 @@
         {
           "name": "Sarah Wooders",
           "role": "Co-founder and CTO",
-          "background": "Co-authored the MemGPT research paper introducing self-editing memory for LLMs; UC Berkeley Sky Computing Lab.",
-          "photoUrl": "https://i.ytimg.com/vi/VgttOIWfoeo/maxresdefault.jpg"
+          "background": "Co-authored the MemGPT research paper introducing self-editing memory for LLMs; UC Berkeley Sky Computing Lab."
         }
       ],
       "stage": "seed",
@@ -685,8 +680,7 @@
         {
           "name": "Caleb Peffer",
           "role": "Co-founder and CEO",
-          "background": "Named as CEO in the company's Series A announcement and press coverage.",
-          "photoUrl": "https://techcrunch.com/wp-content/uploads/2025/08/IMG_5763-e1755012254346.jpeg?w=637"
+          "background": "Named as CEO in the company's Series A announcement and press coverage."
         },
         {
           "name": "Eric Ciarla",
@@ -775,8 +769,7 @@
         {
           "name": "Mohak Sharma",
           "role": "Co-founder and CEO",
-          "background": "Named as founder/CEO in the company's funding announcement and independent PR Newswire release.",
-          "photoUrl": "https://pbs.twimg.com/profile_images/2053475792756043782/XbI1xBcA.jpg"
+          "background": "Named as founder/CEO in the company's funding announcement and independent PR Newswire release."
         },
         {
           "name": "Dhruv Singh",
@@ -858,8 +851,7 @@
         {
           "name": "Vasek Mlejnsky",
           "role": "Co-founder",
-          "background": "Named in company Series A materials and independent press coverage as co-founder of FoundryLabs, Inc.",
-          "photoUrl": "https://thenewstack.io/wp-content/uploads/2024/04/5c7214a5-vasek-600x600.png"
+          "background": "Named in company Series A materials and independent press coverage as co-founder of FoundryLabs, Inc."
         },
         {
           "name": "Tomas Valenta",
@@ -1021,8 +1013,7 @@
         {
           "name": "Chang She",
           "role": "Co-founder and CEO",
-          "background": "Creator of the Pandas library, a widely used Python data-analysis tool.",
-          "photoUrl": "https://i.ytimg.com/vi/slZ1xg2UznQ/maxresdefault.jpg"
+          "background": "Creator of the Pandas library, a widely used Python data-analysis tool."
         },
         {
           "name": "Lei Xu",
@@ -1110,8 +1101,7 @@
         {
           "name": "Gregor Žunič",
           "role": "Co-founder",
-          "background": "Named in TechCrunch's funding coverage; project originated through ETH Zurich's Student Project House accelerator.",
-          "photoUrl": "https://browser-use.com/images/authors/gregor.png"
+          "background": "Named in TechCrunch's funding coverage; project originated through ETH Zurich's Student Project House accelerator."
         }
       ],
       "stage": "seed",
@@ -1187,14 +1177,12 @@
         {
           "name": "Jeff Huber",
           "role": "Co-founder and CEO",
-          "background": "Machine learning background; company and independent press identify him as CEO.",
-          "photoUrl": "https://cdn.prod.website-files.com/6002179bc8122d63cfe31f13/66e8d8978c6d03ad9fa12e37_ja47fGVr6fk3Exx5IlqxLi0-TWgmGupXOFLAPVYDMIiNwhfhaR1VjjQFv7rTIA5KbcfwObDnRkXn7MjCGbOSZ4FpUS979vrZ3n4HjZBpoYYukvbyUhr-KZmhV3yhyM1toGajCmUFnT5A6yJe1FgNpItyd4YRsEhvMWJrsy11fP8.png"
+          "background": "Machine learning background; company and independent press identify him as CEO."
         },
         {
           "name": "Anton Troynikov",
           "role": "Co-founder",
-          "background": "Background as a robotics engineer, researcher, and prior edtech startup founder.",
-          "photoUrl": "https://i0.wp.com/softwareengineeringdaily.com/wp-content/uploads/2024/08/Chromas-Vector-Database-with-Anton-Troynikov.png?fit=600%2C315&ssl=1"
+          "background": "Background as a robotics engineer, researcher, and prior edtech startup founder."
         }
       ],
       "stage": "seed",
@@ -1281,8 +1269,7 @@
         {
           "name": "Rebecca Qian",
           "role": "Co-founder",
-          "background": "Former Meta AI machine learning researcher.",
-          "photoUrl": "https://rebecca-qian.github.io/authors/admin/rebecca.png"
+          "background": "Former Meta AI machine learning researcher."
         }
       ],
       "stage": "series_b",
@@ -1357,8 +1344,7 @@
         {
           "name": "Ankur Goyal",
           "role": "Founder and CEO",
-          "background": "Previously founded Impira (acquired by Figma, where he led the AI team); early team member at SingleStore/MemSQL.",
-          "photoUrl": "https://i.ytimg.com/vi/Q6XmF4NpR20/mqdefault.jpg"
+          "background": "Previously founded Impira (acquired by Figma, where he led the AI team); early team member at SingleStore/MemSQL."
         }
       ],
       "stage": "series_b",
@@ -1538,8 +1524,7 @@
         {
           "name": "Gabriel Hubert",
           "role": "Co-founder",
-          "background": "Co-founded Dust alongside Polu; named in TechCrunch's 2024 Series A coverage.",
-          "photoUrl": "https://www.autonomoussummit.ai/wp-content/uploads/2024/11/Gabriel-Hubert.jpeg"
+          "background": "Co-founded Dust alongside Polu; named in TechCrunch's 2024 Series A coverage."
         }
       ],
       "stage": "series_b",
@@ -1626,8 +1611,7 @@
         {
           "name": "Devin Bhushan",
           "role": "Founder and CEO",
-          "background": "Previously built features for Yahoo's fantasy-sports platform, where he connected with investors Tim Tully and Jess Lee, who later backed Squint's Series A and B.",
-          "photoUrl": "https://startupsavant.com/images/startup-culture/articles/squint.jpg"
+          "background": "Previously built features for Yahoo's fantasy-sports platform, where he connected with investors Tim Tully and Jess Lee, who later backed Squint's Series A and B."
         }
       ],
       "stage": "series_b",
@@ -1881,8 +1865,7 @@
         {
           "name": "Parker Gilbert",
           "role": "Co-founder",
-          "background": "Prior VP of Finance experience at Hearth, per Numeric's own Series B announcement.",
-          "photoUrl": "https://cdn.prod.website-files.com/683cd0b88bd8a76ef55c1487/688b66a6ae7fb206bf08ba8e_Parker%20Gilbert.webp"
+          "background": "Prior VP of Finance experience at Hearth, per Numeric's own Series B announcement."
         },
         {
           "name": "Anthony Alvernaz",
@@ -2064,8 +2047,7 @@
         {
           "name": "Scott Stevenson",
           "role": "Co-founder and CEO",
-          "background": "Identified as co-founder and CEO in SiliconANGLE's October 2025 Series B coverage; publicly frames Spellbook's positioning as legal work's 'spreadsheet moment.'",
-          "photoUrl": "https://www.inovia.vc/wp-content/uploads/2023/05/3-Scott-_-Spellbook.png"
+          "background": "Identified as co-founder and CEO in SiliconANGLE's October 2025 Series B coverage; publicly frames Spellbook's positioning as legal work's 'spreadsheet moment.'"
         }
       ],
       "stage": "series_b",
@@ -2153,8 +2135,7 @@
         {
           "name": "Matt Harpe",
           "role": "Co-founder and CEO",
-          "background": "Prior Boston Consulting Group and SoftBank executive experience, per SiliconANGLE's February 2026 Series B coverage.",
-          "photoUrl": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iNHBeo01HyFE/v3/-1x-1.webp"
+          "background": "Prior Boston Consulting Group and SoftBank executive experience, per SiliconANGLE's February 2026 Series B coverage."
         },
         {
           "name": "Zenna Tavares",
@@ -2164,8 +2145,7 @@
         {
           "name": "Emily Mackevicius",
           "role": "Reported co-founder / research lead",
-          "background": "Postdoctoral researcher studying memory in birds at the Aronov lab and Center for Theoretical Neuroscience; identified as a founding researcher by the same secondary source.",
-          "photoUrl": "https://i.ytimg.com/vi/ggP2A9tStTo/maxresdefault.jpg"
+          "background": "Postdoctoral researcher studying memory in birds at the Aronov lab and Center for Theoretical Neuroscience; identified as a founding researcher by the same secondary source."
         },
         {
           "name": "Eli Bingham",
@@ -2252,8 +2232,7 @@
         {
           "name": "Jay Madheswaran",
           "role": "Co-founder and CEO",
-          "background": "15+ years in AI/ML at Facebook and Rubrik (first engineer, head of product engineering); previously at Lightspeed Venture Partners, which later co-led Eve's Series A.",
-          "photoUrl": "https://lsvp.com/wp-content/uploads/2025/01/Eve-Co-founders_David-Zeng-Jay-Madheswaran-and-Matt-Noe.jpg"
+          "background": "15+ years in AI/ML at Facebook and Rubrik (first engineer, head of product engineering); previously at Lightspeed Venture Partners, which later co-led Eve's Series A."
         },
         {
           "name": "Matt Noe",
@@ -2612,14 +2591,12 @@
         {
           "name": "Ellen DaSilva",
           "role": "Founder and CEO",
-          "background": "Early employee (#8) at Hims & Hers, serving as Head of Strategic Partnerships through IPO; prior business-operations leadership at Twitter.",
-          "photoUrl": "https://www.hbswa.org/s/1738/images/gid13/editor/events/2023n/ellendasilva.jpg"
+          "background": "Early employee (#8) at Hims & Hers, serving as Head of Strategic Partnerships through IPO; prior business-operations leadership at Twitter."
         },
         {
           "name": "Matthew Woo",
           "role": "Co-founder",
-          "background": "Prior consulting at Simon-Kucher & Partners; 9+ years in product roles at Meetup, Yo, Intercom, UJET, and Meta/WhatsApp.",
-          "photoUrl": "https://substackcdn.com/image/fetch/$s_!RHIL!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcaa4a3e0-9d36-49f0-bad7-ca637fde1588_1664x1664.png"
+          "background": "Prior consulting at Simon-Kucher & Partners; 9+ years in product roles at Meetup, Yo, Intercom, UJET, and Meta/WhatsApp."
         }
       ],
       "stage": "series_a",
@@ -2702,8 +2679,7 @@
         {
           "name": "Anu Sharma",
           "role": "Founder and CEO",
-          "background": "15+ years in healthcare innovation; founded Millie after a 2019 postpartum health crisis (preeclampsia and HELLP syndrome) following her own delivery.",
-          "photoUrl": "https://techcrunch.com/wp-content/uploads/2025/02/Copy-of-Anu-1.jpg"
+          "background": "15+ years in healthcare innovation; founded Millie after a 2019 postpartum health crisis (preeclampsia and HELLP syndrome) following her own delivery."
         },
         {
           "name": "Talia Borgo",
@@ -2798,8 +2774,7 @@
         {
           "name": "Sammy Faycurry",
           "role": "Co-founder and CEO",
-          "background": "Built the platform initially for his mother and sister, both registered dietitians.",
-          "photoUrl": "https://web-summit-avenger.imgix.net/production/avatars/original/a38b0ac781f38b897a95dbda12fb4794887cfcb6.?ixlib=rb-3.4.0&auto=format&fit=crop&crop=faces&w=600&h=600"
+          "background": "Built the platform initially for his mother and sister, both registered dietitians."
         },
         {
           "name": "Mark Stefanski",
@@ -3148,8 +3123,7 @@
         {
           "name": "Daniel Wilson",
           "role": "Co-founder",
-          "background": "Co-founding member per Behavioral Health Business; current operating role unconfirmed in sources reviewed.",
-          "photoUrl": "https://alldus.com/wp-content/uploads/2023/08/dwilson.png"
+          "background": "Co-founding member per Behavioral Health Business; current operating role unconfirmed in sources reviewed."
         }
       ],
       "stage": "seed",
@@ -3231,8 +3205,7 @@
         {
           "name": "Matt Antoszyk",
           "role": "Co-founder and CEO",
-          "background": "Led Herald from its December 2021 seed round through its October 2024 Series A; public sources reviewed do not disclose detailed prior career history.",
-          "photoUrl": "https://i.ytimg.com/vi/ufxwn1pFse0/maxresdefault.jpg"
+          "background": "Led Herald from its December 2021 seed round through its October 2024 Series A; public sources reviewed do not disclose detailed prior career history."
         }
       ],
       "stage": "series_a",
@@ -3314,8 +3287,7 @@
         {
           "name": "Keith Raphael",
           "role": "Co-founder and CEO",
-          "background": "Based in Broomfield, Colorado; public sources reviewed do not disclose detailed prior career history.",
-          "photoUrl": "https://leadersinpayments.com/wp-content/uploads/2026/01/Ep-458-Website-Graphic-768x432.jpg"
+          "background": "Based in Broomfield, Colorado; public sources reviewed do not disclose detailed prior career history."
         }
       ],
       "stage": "seed",
@@ -3479,8 +3451,7 @@
         {
           "name": "Sophia Goldberg",
           "role": "Co-founder and CEO",
-          "background": "Previously a product manager at Adyen, per TechCrunch.",
-          "photoUrl": "https://arizent.brightspotcdn.com/dims4/default/5b15522/2147483647/strip/true/crop/1400x800+0+0/resize/740x423!/quality/90/?url=https%3A%2F%2Fsource-media-brightspot.s3.us-east-1.amazonaws.com%2F71%2Fea%2F9d63a8314ad19fb19eae4b75fe26%2Fsophia-goldberg-ansa.jpg"
+          "background": "Previously a product manager at Adyen, per TechCrunch."
         },
         {
           "name": "JT Cho",
@@ -3657,8 +3628,7 @@
         {
           "name": "Jonathan Awad",
           "role": "Co-founder",
-          "background": "Co-founded Baselayer in 2023 after encountering KYB gaps firsthand, per the company's May 2024 seed-round announcement.",
-          "photoUrl": "https://jsawadd.com/images/6NpXsmb0f6-293.png"
+          "background": "Co-founded Baselayer in 2023 after encountering KYB gaps firsthand, per the company's May 2024 seed-round announcement."
         },
         {
           "name": "Timothy Hyde",
@@ -4109,8 +4079,7 @@
         {
           "name": "Kevin Sapp",
           "role": "Co-founder",
-          "background": "Named as co-founder on Aembit's Series A press release; detailed prior operating history not confirmed in public sources reviewed.",
-          "photoUrl": "https://i.ytimg.com/vi/hWLTmiMO31I/maxresdefault.jpg"
+          "background": "Named as co-founder on Aembit's Series A press release; detailed prior operating history not confirmed in public sources reviewed."
         }
       ],
       "stage": "series_a",
@@ -4383,8 +4352,7 @@
         {
           "name": "Toby Mao",
           "role": "Co-founder and CTO",
-          "background": "Previously senior staff engineer at Airbnb leading the XP experimentation and Minerva metrics platforms; earlier led the XP platform at Netflix.",
-          "photoUrl": "https://i.ytimg.com/vi/ASiBidAFdwM/maxresdefault.jpg"
+          "background": "Previously senior staff engineer at Airbnb leading the XP experimentation and Minerva metrics platforms; earlier led the XP platform at Netflix."
         },
         {
           "name": "Iaroslav Zeigerman",
@@ -4478,8 +4446,7 @@
         {
           "name": "Pekka Enberg",
           "role": "Co-founder and CTO",
-          "background": "Early employee at ScyllaDB and a former Linux kernel maintainer, per Turso's own investors page.",
-          "photoUrl": "https://penberg.org/assets/me.jpg"
+          "background": "Early employee at ScyllaDB and a former Linux kernel maintainer, per Turso's own investors page."
         }
       ],
       "stage": "series_a",
@@ -4566,8 +4533,7 @@
         {
           "name": "Johnny Graettinger",
           "role": "Co-founder and CTO",
-          "background": "Prior infrastructure engineering experience at Google and YouTube.",
-          "photoUrl": "https://i.ytimg.com/vi/WslkscPp1ro/maxresdefault.jpg"
+          "background": "Prior infrastructure engineering experience at Google and YouTube."
         }
       ],
       "stage": "series_a",
@@ -4654,8 +4620,7 @@
         {
           "name": "Alan Braithwaite",
           "role": "Co-founder",
-          "background": "Named as a co-founder on RunReveal's own funding announcement; specific prior employer not confirmed in public sources reviewed.",
-          "photoUrl": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog11845528/50-Alan.jpg"
+          "background": "Named as a co-founder on RunReveal's own funding announcement; specific prior employer not confirmed in public sources reviewed."
         }
       ],
       "stage": "seed",
@@ -4734,8 +4699,7 @@
         {
           "name": "Benny Porat",
           "role": "Co-founder",
-          "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed.",
-          "photoUrl": "https://s3.amazonaws.com/cco-avatars/64ced9d8-ebc3-438a-8563-bc9b5c3df95e.png"
+          "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed."
         },
         {
           "name": "Omri Green",
@@ -4745,8 +4709,7 @@
         {
           "name": "Justin Woody",
           "role": "Co-founder",
-          "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed.",
-          "photoUrl": "https://i.ytimg.com/vi/Q8c3Q3OSXho/maxresdefault.jpg"
+          "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed."
         },
         {
           "name": "Nadav Erez",
@@ -5280,14 +5243,12 @@
         {
           "name": "Jesse Buckingham",
           "role": "Co-founder",
-          "background": "Stanford graduate; former CEO of ASG LogisTech, a logistics operator, prior to co-founding Vooma.",
-          "photoUrl": "https://pbs.twimg.com/profile_images/1631688387865513984/v58JTGFF_400x400.jpg"
+          "background": "Stanford graduate; former CEO of ASG LogisTech, a logistics operator, prior to co-founding Vooma."
         },
         {
           "name": "Mike Carter",
           "role": "Co-founder",
-          "background": "Stanford graduate; former founding engineer at Kodiak Robotics, an autonomous-trucking company, prior to co-founding Vooma.",
-          "photoUrl": "https://techcrunch.com/wp-content/uploads/2024/10/headshot-e1729047742205.jpeg?w=668"
+          "background": "Stanford graduate; former founding engineer at Kodiak Robotics, an autonomous-trucking company, prior to co-founding Vooma."
         }
       ],
       "stage": "series_a",
@@ -5372,8 +5333,7 @@
         {
           "name": "Mary Yap",
           "role": "Co-founder and CEO",
-          "background": "Identified as CEO and company spokesperson across public reporting, including the Frontier offtake announcement.",
-          "photoUrl": "https://images.fastcompany.com/image/upload/f_webp,c_fit,w_1920,q_auto/wp-cms/uploads/2023/04/p-1-90888679-lithos-day-in-the-life.jpg"
+          "background": "Identified as CEO and company spokesperson across public reporting, including the Frontier offtake announcement."
         },
         {
           "name": "Noah Planavsky",
@@ -5469,14 +5429,12 @@
         {
           "name": "James Mcwalter",
           "role": "Co-founder and CEO",
-          "background": "Identified as co-founder and CEO across multiple financing reports (ESG Dive, Utility Dive, ESG Today); company founded 2022, headquartered in Brooklyn, NY.",
-          "photoUrl": "https://deploytogether.com/wp-content/uploads/james-mcwalter-550.png"
+          "background": "Identified as co-founder and CEO across multiple financing reports (ESG Dive, Utility Dive, ESG Today); company founded 2022, headquartered in Brooklyn, NY."
         },
         {
           "name": "Charles Bai",
           "role": "Co-founder",
-          "background": "Identified alongside Mcwalter as co-founder in company and press materials; exact current title unconfirmed.",
-          "photoUrl": "https://imageio.forbes.com/specials-images/imageserve/636c5ae5da0edb9f0d7fde53/0x0.jpg?format=jpg&crop=1605,1604,x1440,y910,safe&height=416&width=416&fit=bounds"
+          "background": "Identified alongside Mcwalter as co-founder in company and press materials; exact current title unconfirmed."
         }
       ],
       "stage": "series_a",
@@ -5563,8 +5521,7 @@
         {
           "name": "Matt Penfold",
           "role": "Co-founder",
-          "background": "Identified as co-founder alongside Madaeni in company financing materials. Exact current title unconfirmed.",
-          "photoUrl": "https://www.naem.org/images/default-source/headshots/naem-2025-opex-25-tech-25-matthew-penfold-verse-1500x1500-min.jpg?sfvrsn=31629d5_1"
+          "background": "Identified as co-founder alongside Madaeni in company financing materials. Exact current title unconfirmed."
         }
       ],
       "stage": "series_a",
@@ -5744,8 +5701,7 @@
         {
           "name": "Rylan Hawkins",
           "role": "Co-founder",
-          "background": "Identified as co-founder alongside Silver in FreightWaves coverage and company materials. Exact current title unconfirmed.",
-          "photoUrl": "https://cdn.theorg.com/cbc02b3b-24c4-4d1d-adb4-9cc768ec685f_medium.jpg"
+          "background": "Identified as co-founder alongside Silver in FreightWaves coverage and company materials. Exact current title unconfirmed."
         }
       ],
       "stage": "series_a",
@@ -5832,8 +5788,7 @@
         {
           "name": "Jennifer Wilcox",
           "role": "Chief Scientist (not a founder)",
-          "background": "Former Principal Deputy Assistant Secretary at the U.S. Department of Energy; published foundational carbon-dioxide-removal research.",
-          "photoUrl": "https://www.unr.edu/main/images/colleges-schools/science/energy-solutions-exchange/profile/jen-wilcox-profile.jpg"
+          "background": "Former Principal Deputy Assistant Secretary at the U.S. Department of Energy; published foundational carbon-dioxide-removal research."
         },
         {
           "name": "Stacy Kauk",
@@ -5930,8 +5885,7 @@
         {
           "name": "Eliot Frost",
           "role": "Co-founder",
-          "background": "Harvard Business School alumnus; co-built the original restaurant-tracking concept; \"Beli\" is derived from his high school nickname.",
-          "photoUrl": "https://images.crunchbase.com/image/upload/c_thumb,h_256,w_256,f_auto,g_face,z_0.7,q_auto:eco,dpr_1/sfjcplicwdfvexygjvrw?ik-sanitizeSvg=true"
+          "background": "Harvard Business School alumnus; co-built the original restaurant-tracking concept; \"Beli\" is derived from his high school nickname."
         }
       ],
       "stage": "series_a",
@@ -6012,8 +5966,7 @@
         {
           "name": "Shreya Murthy",
           "role": "Co-founder and CEO",
-          "background": "Met co-founder Joy Tao while working at Palantir Technologies; led Partiful through early investor skepticism to becoming a widely used Gen Z consumer app.",
-          "photoUrl": "https://images.sxsw.com/Fgx-ZQropcbbkFLmZ06uxrHfATI=/0x193:2800x2993/600x600/images.sxsw.com/48/e92b951f-660d-486c-9fc3-5cc17ec416ee/pcid-1593320"
+          "background": "Met co-founder Joy Tao while working at Palantir Technologies; led Partiful through early investor skepticism to becoming a widely used Gen Z consumer app."
         },
         {
           "name": "Joy Tao",
@@ -6099,8 +6052,7 @@
         {
           "name": "Avante Price",
           "role": "Co-founder and CEO",
-          "background": "Grew up DJing in Chicago and competed in hip-hop turntable competitions before dropping out of NYU to co-found Posh.",
-          "photoUrl": "https://i.ytimg.com/vi/Xx0JVmRIx3Y/maxresdefault.jpg"
+          "background": "Grew up DJing in Chicago and competed in hip-hop turntable competitions before dropping out of NYU to co-found Posh."
         },
         {
           "name": "Eli Taylor-Lemire",
@@ -6195,8 +6147,7 @@
         {
           "name": "Julia O'Mara",
           "role": "Co-founder",
-          "background": "Former Blackstone analyst; previously worked with McMahon at Blackstone before co-founding Pickle.",
-          "photoUrl": "https://dms.licdn.com/playlist/vid/v2/D5605AQEmuX_lB08coQ/thumbnail-shrink_720_1280/B56Z8.tTzEJoAg-/0/1783463498725?e=2147483647&v=beta&t=Ya9_hSImyozCi60x9dlS2N3qw6rgzig-xEmKCUka1Ew"
+          "background": "Former Blackstone analyst; previously worked with McMahon at Blackstone before co-founding Pickle."
         }
       ],
       "stage": "series_a",
@@ -6362,8 +6313,7 @@
         {
           "name": "Maxime Barbier",
           "role": "Co-founder and CEO",
-          "background": "Serial entrepreneur with prior ventures spanning nightlife promotion and media before founding Timeleft in France.",
-          "photoUrl": "https://i.ytimg.com/vi/K01FKQ5KpcA/maxresdefault.jpg"
+          "background": "Serial entrepreneur with prior ventures spanning nightlife promotion and media before founding Timeleft in France."
         },
         {
           "name": "Adrien de Oliveira",
@@ -6447,20 +6397,17 @@
         {
           "name": "Femi Aluko",
           "role": "Co-founder and CEO",
-          "background": "Founded Chowdeck in October 2021 in Lagos; led the company through Y Combinator and multiple funding rounds while reportedly maintaining profitability.",
-          "photoUrl": "https://bookface-images.s3.us-west-2.amazonaws.com/avatars/da05aeebcda12866813892be1ab409dff3a9d5ee.jpg"
+          "background": "Founded Chowdeck in October 2021 in Lagos; led the company through Y Combinator and multiple funding rounds while reportedly maintaining profitability."
         },
         {
           "name": "Olumide Ojo",
           "role": "Co-founder",
-          "background": "Named as a founding member alongside Aluko in TechCrunch's coverage of the Series A.",
-          "photoUrl": "https://images.crunchbase.com/image/upload/c_thumb,h_256,w_256,f_auto,g_face,z_0.7,q_auto:eco,dpr_1/kfnwtka5unvbcujjpsgr?ik-sanitizeSvg=true"
+          "background": "Named as a founding member alongside Aluko in TechCrunch's coverage of the Series A."
         },
         {
           "name": "Lanre Yusuf",
           "role": "Co-founder",
-          "background": "Named as a founding member alongside Aluko and Ojo; current operating role to be confirmed in diligence.",
-          "photoUrl": "https://files.chowdeck.com/images/39_4671f5649f/1698762680.jpg"
+          "background": "Named as a founding member alongside Aluko and Ojo; current operating role to be confirmed in diligence."
         }
       ],
       "stage": "series_a",
@@ -6542,20 +6489,17 @@
         {
           "name": "Quaid Walker",
           "role": "Co-founder and CEO",
-          "background": "Former product/design employee at Google and watch collector; founded Bezel after a frustrating personal Rolex-buying experience.",
-          "photoUrl": "https://adammendler.com/wp-content/uploads/2025/04/QuaidWalker_Bezelcopy.jpg"
+          "background": "Former product/design employee at Google and watch collector; founded Bezel after a frustrating personal Rolex-buying experience."
         },
         {
           "name": "Chase Payan",
           "role": "Co-founder (CFO/COO)",
-          "background": "Childhood friend of Walker's with a finance and operations background; one source spells the name \"Chase Pion\" — confirm in diligence.",
-          "photoUrl": "https://images.labusinessjournal.com/cdn-cgi/imagedelivery/_2XQnFrfZ7ey2aE-6RbOUQ/labusinessjournal.com/2025/10/Pion_Chase_H-2.jpg/w=9999"
+          "background": "Childhood friend of Walker's with a finance and operations background; one source spells the name \"Chase Pion\" — confirm in diligence."
         },
         {
           "name": "Darryl Johnson",
           "role": "Co-founder (engineering)",
-          "background": "Named in a single Forbes profile as an engineer and prior Google employee; not corroborated elsewhere in HCP's research.",
-          "photoUrl": "https://imageio.forbes.com/specials-images/imageserve/66e3509d0a5de883ef35dc99/Quaid-ChasePion-DarrylJohnson/0x0.jpg?format=jpg&width=480"
+          "background": "Named in a single Forbes profile as an engineer and prior Google employee; not corroborated elsewhere in HCP's research."
         }
       ],
       "stage": "seed",
@@ -6636,8 +6580,7 @@
         {
           "name": "Bahram Ismailau",
           "role": "Co-founder and CEO",
-          "background": "Met co-founder Paul Rudkouski studying together at Belarusian State University; the pair worked on prior products for years before Yope.",
-          "photoUrl": "https://www.channelnews.com.au/wp-content/uploads/2025/12/Bahram-e1764641880382.jpg"
+          "background": "Met co-founder Paul Rudkouski studying together at Belarusian State University; the pair worked on prior products for years before Yope."
         },
         {
           "name": "Paul Rudkouski",
@@ -6729,8 +6672,7 @@
         {
           "name": "Keyan Kazemian",
           "role": "Co-founder",
-          "background": "One of three co-founders of 222, founded in 2023.",
-          "photoUrl": "https://images.crunchbase.com/image/upload/c_thumb,h_256,w_256,f_auto,g_face,z_0.7,q_auto:eco,dpr_1/cbeucww8upijfop57au9?ik-sanitizeSvg=true"
+          "background": "One of three co-founders of 222, founded in 2023."
         },
         {
           "name": "Arman Roshannai",
@@ -6823,8 +6765,7 @@
         {
           "name": "Dave Newman",
           "role": "Co-founder",
-          "background": "Worked with Petersmith at Assembly starting in 2013; co-founded Howie after a decade-long collaboration on the scheduling-automation idea.",
-          "photoUrl": "https://dms.licdn.com/playlist/vid/v2/D4E05AQEzhLl4tMuLbw/thumbnail-with-play-button-overlay-high/B4EZg3vsS.HED0-/0/1753281940582?e=2147483647&v=beta&t=i-o9GCgXvqes1vePoyYoDTw6hwD5RUwjYIoKTjQPUkY"
+          "background": "Worked with Petersmith at Assembly starting in 2013; co-founded Howie after a decade-long collaboration on the scheduling-automation idea."
         }
       ],
       "stage": "seed",
@@ -7003,8 +6944,7 @@
         {
           "name": "Richard Hollingsworth",
           "role": "Co-founder and CEO",
-          "background": "Co-built the UK's largest executive-assistant agency with his brother, bootstrapping it to $5m revenue, before founding Fyxer.",
-          "photoUrl": "https://www.fyxer.com/_next/image?url=%2Fapi%2Fmedia%2Ffile%2Frich.jpeg&w=3840&q=75"
+          "background": "Co-built the UK's largest executive-assistant agency with his brother, bootstrapping it to $5m revenue, before founding Fyxer."
         },
         {
           "name": "Archie Hollingsworth",
@@ -7107,8 +7047,7 @@
         {
           "name": "Jerome Scholler",
           "role": "Co-founder",
-          "background": "Was on Osmo's founding team with Sharma; previously worked at Ubisoft, LucasArts, and Google.",
-          "photoUrl": "https://www.napkin.ai/assets/v6/about-us/team/jerome.jpg"
+          "background": "Was on Osmo's founding team with Sharma; previously worked at Ubisoft, LucasArts, and Google."
         }
       ],
       "stage": "seed",
@@ -7191,14 +7130,12 @@
         {
           "name": "Tom Sayer",
           "role": "Co-founder and CEO",
-          "background": "Previously led impact and adoption programs at Google for Education.",
-          "photoUrl": "https://techcrunch.com/wp-content/uploads/2023/09/DSC05266-2-copy.jpg"
+          "background": "Previously led impact and adoption programs at Google for Education."
         },
         {
           "name": "Elizabeth Adams",
           "role": "Co-founder and Chief Experience Officer",
-          "background": "Clinical psychologist specializing in child development and behavior.",
-          "photoUrl": "https://cdn.pulse2.com/cdn/2025/03/Elizabeth-Adams-428x600.jpg"
+          "background": "Clinical psychologist specializing in child development and behavior."
         },
         {
           "name": "Catalin Voss",
@@ -7460,8 +7397,7 @@
         {
           "name": "Dara Ladjevardian",
           "role": "Co-founder and CEO",
-          "background": "Previously founded and sold Friday, an AI shopping assistant; worked as a Forward Deployed Engineer at C3 AI and as a product engineer at OpenStore.",
-          "photoUrl": "https://i.ytimg.com/vi/PPx_sVRc8E8/maxresdefault.jpg"
+          "background": "Previously founded and sold Friday, an AI shopping assistant; worked as a Forward Deployed Engineer at C3 AI and as a product engineer at OpenStore."
         },
         {
           "name": "Sam Spelsberg",
@@ -7633,8 +7569,7 @@
         {
           "name": "Arman Jaffer",
           "role": "Founder and CEO",
-          "background": "Previously worked in the White House Office of the Chief Technology Officer, on Google's mobile search team, and as a product manager on the Chan Zuckerberg Initiative's Education team; Forbes 30 Under 30 Education honoree.",
-          "photoUrl": "https://imageio.forbes.com/specials-images/imageserve/6743e85cf038c51a08b0cda5/0x0.jpg?format=jpg&crop=3291,3291,x0,y0,safe&height=416&width=416&fit=bounds"
+          "background": "Previously worked in the White House Office of the Chief Technology Officer, on Google's mobile search team, and as a product manager on the Chan Zuckerberg Initiative's Education team; Forbes 30 Under 30 Education honoree."
         }
       ],
       "stage": "series_a",
@@ -7813,8 +7748,7 @@
         {
           "name": "Thomas Tang",
           "role": "Co-founder and CEO",
-          "background": "PhD from UC Berkeley; worked at FANUC before co-founding Anyware Robotics; leads vision, strategy, and partnerships.",
-          "photoUrl": "https://images.crunchbase.com/image/upload/c_thumb,h_256,w_256,f_auto,g_face,z_0.7,q_auto:eco,dpr_1/d6ecd576215441ef89a9699219ed9c0d?ik-sanitizeSvg=true"
+          "background": "PhD from UC Berkeley; worked at FANUC before co-founding Anyware Robotics; leads vision, strategy, and partnerships."
         },
         {
           "name": "Bruce Fan",
@@ -7983,8 +7917,7 @@
         {
           "name": "Christian Bersch",
           "role": "Co-founder and CEO",
-          "background": "Nearly eight years at Google (2011-2019), including product/team lead for the Area 120 robotics delivery project, before co-founding Cartken in 2019.",
-          "photoUrl": "https://cdn.prod.website-files.com/63cee399b1ef775ba444e177/63d58c59a6453750e5be9a2e_eteam%20-%20Christian.jpg"
+          "background": "Nearly eight years at Google (2011-2019), including product/team lead for the Area 120 robotics delivery project, before co-founding Cartken in 2019."
         },
         {
           "name": "Jonas Witt",
@@ -8149,8 +8082,7 @@
         {
           "name": "Rajat Bhageria",
           "role": "Founder and CEO",
-          "background": "Previously founded ThirdEye (visual-recognition product for the visually impaired, later sold) and Prototype Capital, a pre-seed fund; holds a Master's in Robotics and Machine Learning from the University of Pennsylvania and a Bachelor's in Economics from Wharton.",
-          "photoUrl": "https://techcrunch.com/wp-content/uploads/2020/06/Rajat-Headshot-.jpg?w=668"
+          "background": "Previously founded ThirdEye (visual-recognition product for the visually impaired, later sold) and Prototype Capital, a pre-seed fund; holds a Master's in Robotics and Machine Learning from the University of Pennsylvania and a Bachelor's in Economics from Wharton."
         }
       ],
       "stage": "series_a",
@@ -8319,8 +8251,7 @@
         {
           "name": "Alexander Fitzgerald",
           "role": "Founder and CEO",
-          "background": "Studied biochemistry; worked as a UK government business-policy adviser; founded a broadband company later acquired by Octopus Telecom; identified manufacturing supply-chain inefficiencies while serving with a UK military reserve unit.",
-          "photoUrl": "https://dms.licdn.com/playlist/vid/v2/D4E05AQHWh2b3h-Rgbw/thumbnail-with-play-button-overlay-high/B4EZzxCpShHYDY-/0/1773570532958?e=2147483647&v=beta&t=26HZCoGIIOR0O6dwMjoyooQlpWrRfOsDYfgMED10i58"
+          "background": "Studied biochemistry; worked as a UK government business-policy adviser; founded a broadband company later acquired by Octopus Telecom; identified manufacturing supply-chain inefficiencies while serving with a UK military reserve unit."
         }
       ],
       "stage": "series_a",
@@ -8404,8 +8335,7 @@
         {
           "name": "Daniel Miodovnik",
           "role": "Co-founder",
-          "background": "Named as a co-founder in company-founding coverage; individual background not independently detailed in sources reviewed.",
-          "photoUrl": "https://i.ytimg.com/vi/U_iw_BKw2tE/maxresdefault.jpg"
+          "background": "Named as a co-founder in company-founding coverage; individual background not independently detailed in sources reviewed."
         }
       ],
       "stage": "series_b",
@@ -8740,8 +8670,7 @@
         {
           "name": "Govind Kavaturi",
           "role": "Co-founder",
-          "background": "Founding team member per the same sourcing; role details not further broken out publicly.",
-          "photoUrl": "https://framerusercontent.com/images/pZxbBa3Z72K37gsPY4RqLsvLfg.png?width=1410&height=1418"
+          "background": "Founding team member per the same sourcing; role details not further broken out publicly."
         },
         {
           "name": "Unmukt Raizada",
@@ -8829,8 +8758,7 @@
         {
           "name": "Alex Kracov",
           "role": "CEO and Co-founder",
-          "background": "Former VP of Marketing and third employee at Lattice; founded Dock in 2021 after building an internal customer-facing portal at Lattice.",
-          "photoUrl": "https://imageio.forbes.com/specials-images/imageserve/62b34a2821dbf48a56988c7a/Alex-Kracov/0x0.jpg?crop=780%2C585%2Cx0%2Cy0%2Csafe&height=533&width=480&fit=bounds"
+          "background": "Former VP of Marketing and third employee at Lattice; founded Dock in 2021 after building an internal customer-facing portal at Lattice."
         },
         {
           "name": "Luc",
@@ -8916,8 +8844,7 @@
         {
           "name": "Achuthanand Tanjore Ravi",
           "role": "CEO and Co-founder",
-          "background": "Previously held recruiting operating roles at Stripe, Uber, and Freshworks per the company's seed-funding announcement.",
-          "photoUrl": "https://cdn.prod.website-files.com/62efcfb57ed5f41e3fd0f849/67d90cd2b8717c4f24ab3560_Achuthanand%20Tanjore%20Ravi.webp"
+          "background": "Previously held recruiting operating roles at Stripe, Uber, and Freshworks per the company's seed-funding announcement."
         }
       ],
       "stage": "seed",
@@ -9001,8 +8928,7 @@
         {
           "name": "Shahriar Tajbakhsh",
           "role": "Co-founder and CTO",
-          "background": "Previously at Uber and Palantir; leads technical development of Metaview's interview-intelligence platform.",
-          "photoUrl": "https://res.cloudinary.com/leaddev/image/upload/f_auto/q_auto/dpr_auto/c_limit,w_1707,h_2560/next/2022/08/Metaview.ai-Image-by-Dan-Taylor-6-Shahriar-Tajbakhsh-scaled.jpg"
+          "background": "Previously at Uber and Palantir; leads technical development of Metaview's interview-intelligence platform."
         }
       ],
       "stage": "series_b",
@@ -9084,8 +9010,7 @@
         {
           "name": "John Glasgow",
           "role": "Founder and CEO",
-          "background": "Launched Campfire in 2023 to replace legacy 1990s-era ERP accounting software with an LLM-powered alternative, per TechCrunch's reporting. Additional co-founders, if any, are not identified in public sources.",
-          "photoUrl": "https://imgproxy.divecdn.com/wyUa-MSJOGEGOIlbyjEQeSnewVN74ImB0-LKtLI_Kwk/g:ce/rs:fit:1600:0/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9TY3JlZW5zaG90XzIwMjUtMTItMDhfMTQyMTE3LnBuZw==.webp"
+          "background": "Launched Campfire in 2023 to replace legacy 1990s-era ERP accounting software with an LLM-powered alternative, per TechCrunch's reporting. Additional co-founders, if any, are not identified in public sources."
         }
       ],
       "stage": "series_b",
@@ -9248,8 +9173,7 @@
         {
           "name": "Riya Grover",
           "role": "CEO and Co-founder",
-          "background": "Named CEO in the Series A financing announcement; leads product and company strategy.",
-          "photoUrl": "https://i.ytimg.com/vi/y-7j4e8DO-Q/maxresdefault.jpg"
+          "background": "Named CEO in the Series A financing announcement; leads product and company strategy."
         },
         {
           "name": "Eamon",
@@ -9695,783 +9619,777 @@
       "payload": {
         "nodes": [
           {
-            "id": "co_letta",
-            "clusterId": 0,
-            "x": 52.53181104961071,
-            "y": -33.6658725653258,
-            "z": -6.08536450460784
-          },
-          {
-            "id": "co_firecrawl",
-            "clusterId": 0,
-            "x": 55.46187229182303,
-            "y": -24.62384081855756,
-            "z": -2.2700044023154256
-          },
-          {
-            "id": "co_honeyhive",
-            "clusterId": 0,
-            "x": 56.62643915826965,
-            "y": -10.356261235334562,
-            "z": -6.983366533319432
-          },
-          {
-            "id": "co_e2b",
-            "clusterId": 0,
-            "x": 54.75243108180705,
-            "y": -18.019817117903877,
-            "z": -5.677714398338036
-          },
-          {
-            "id": "co_lancedb",
-            "clusterId": 0,
-            "x": 58.2228438419078,
-            "y": -19.20301742244911,
-            "z": -8.271055462963
-          },
-          {
-            "id": "co_browser_use",
-            "clusterId": 0,
-            "x": 54.42996832676237,
-            "y": -30.373402090000383,
-            "z": -3.3689212719557746
-          },
-          {
-            "id": "co_chroma",
-            "clusterId": 0,
-            "x": 52.46178357635979,
-            "y": -27.63206031772396,
-            "z": -4.171858568121418
-          },
-          {
-            "id": "co_patronus_ai",
-            "clusterId": 0,
-            "x": 61.36622660914209,
-            "y": -9.259754934060371,
-            "z": -5.076769353011634
-          },
-          {
-            "id": "co_braintrust",
-            "clusterId": 0,
-            "x": 59.87876286168791,
-            "y": -7.888432945286931,
-            "z": -7.799203420486053
-          },
-          {
-            "id": "co_nudge_security",
-            "clusterId": 0,
-            "x": 88.43120789926701,
-            "y": -19.86136231097502,
-            "z": -24.90232288819328
-          },
-          {
-            "id": "co_tobiko_data",
-            "clusterId": 0,
-            "x": 86.4447214820382,
-            "y": -35.623121143613986,
-            "z": 1.726744106803097
-          },
-          {
-            "id": "co_turso",
-            "clusterId": 0,
-            "x": 85.40278663560395,
-            "y": -38.75226444274335,
-            "z": 2.0051298862291
-          },
-          {
-            "id": "co_estuary",
-            "clusterId": 0,
-            "x": 88.8759239923746,
-            "y": -26.292980862831378,
-            "z": -8.986485224217748
-          },
-          {
-            "id": "co_runreveal",
-            "clusterId": 0,
-            "x": 86.92998038285654,
-            "y": -23.345056838851598,
-            "z": -23.261147813892904
-          },
-          {
-            "id": "co_bayou_energy",
-            "clusterId": 0,
-            "x": 84.10218908704843,
-            "y": -16.94940649659371,
-            "z": 19.180417013622762
-          },
-          {
-            "id": "co_metaview",
-            "clusterId": 0,
-            "x": 85.72346489435512,
-            "y": -2.5750896480604446,
-            "z": 3.521699976393914
-          },
-          {
-            "id": "co_mem0",
-            "clusterId": 0,
-            "x": 52.45076277435355,
-            "y": -33.815059924623526,
-            "z": -5.91367499833414
-          },
-          {
             "id": "co_concourse",
-            "clusterId": 1,
-            "x": -8.21550226287151,
-            "y": -71.93689795737585,
-            "z": -17.368803513527457
+            "clusterId": 0,
+            "x": -54.49805287458568,
+            "y": -27.42112889129189,
+            "z": 23.037193449786802
           },
           {
             "id": "co_dust",
-            "clusterId": 1,
-            "x": -6.726265166409831,
-            "y": -65.60414346474488,
-            "z": -16.917492848111433
+            "clusterId": 0,
+            "x": -52.87652615099684,
+            "y": -18.1456548157604,
+            "z": 23.938014966202715
           },
           {
             "id": "co_numeric",
-            "clusterId": 1,
-            "x": -11.67957763254307,
-            "y": -86.65815835700575,
-            "z": -3.5230282160386825
+            "clusterId": 0,
+            "x": -58.24102392357969,
+            "y": -47.945265590803956,
+            "z": -2.750912685036372
           },
           {
             "id": "co_happyrobot",
-            "clusterId": 1,
-            "x": -10.466078303667656,
-            "y": -84.18551148698289,
-            "z": 5.577406531811117
+            "clusterId": 0,
+            "x": -57.01061189263345,
+            "y": -42.20153314697272,
+            "z": -16.98592366711565
           },
           {
             "id": "co_basis",
-            "clusterId": 1,
-            "x": -14.33977404627225,
-            "y": -84.89508314341771,
-            "z": -1.6995128924880434
+            "clusterId": 0,
+            "x": -63.030020525156786,
+            "y": -45.013875722699794,
+            "z": -5.410822828652821
           },
           {
             "id": "co_eve",
-            "clusterId": 1,
-            "x": -12.238360416632746,
-            "y": -80.84653300316971,
-            "z": 3.56373667548839
+            "clusterId": 0,
+            "x": -60.46170746584005,
+            "y": -37.35306123314203,
+            "z": -13.136471773680618
+          },
+          {
+            "id": "co_mercoa",
+            "clusterId": 0,
+            "x": -61.26619569563131,
+            "y": 15.28582978969808,
+            "z": -13.150217872297702
           },
           {
             "id": "co_verse",
-            "clusterId": 1,
-            "x": -2.8650708440290447,
-            "y": -77.91485969795983,
-            "z": 8.589886911650531
+            "clusterId": 0,
+            "x": -45.94044038599304,
+            "y": -30.04239324423023,
+            "z": -20.75226966529914
           },
           {
             "id": "co_fyxer",
-            "clusterId": 1,
-            "x": -6.904813437377421,
-            "y": -61.55294872066263,
-            "z": -12.81363579084597
+            "clusterId": 0,
+            "x": -53.75067121915239,
+            "y": -11.822191518021166,
+            "z": 18.303058480808915
           },
           {
             "id": "co_schoolai",
-            "clusterId": 1,
-            "x": -12.709197391280988,
-            "y": -54.973147163887546,
-            "z": 10.813708737626895
+            "clusterId": 0,
+            "x": -64.52339622699634,
+            "y": -0.43840647476132233,
+            "z": -17.80453258067029
           },
           {
             "id": "co_orbital_materials",
-            "clusterId": 1,
-            "x": -12.69150630542806,
-            "y": -50.96680319002566,
-            "z": 17.679474344603094
+            "clusterId": 0,
+            "x": -64.9231937603632,
+            "y": 5.064461344747869,
+            "z": -27.16269899045112
           },
           {
             "id": "co_tofu",
-            "clusterId": 1,
-            "x": 16.548532743541625,
-            "y": -72.0832540407246,
-            "z": 0.23140970408401992
+            "clusterId": 0,
+            "x": -14.901443317166152,
+            "y": -19.547298568411964,
+            "z": -5.977694051874027
           },
           {
             "id": "co_thena",
-            "clusterId": 1,
-            "x": 11.880181951075839,
-            "y": -61.61585801671619,
-            "z": -8.359904962517827
+            "clusterId": 0,
+            "x": -24.201623695943933,
+            "y": -4.8726323793828925,
+            "z": 10.009690158875035
           },
           {
             "id": "co_dock",
-            "clusterId": 1,
-            "x": 16.03381814052603,
-            "y": -70.13657099418148,
-            "z": -2.6926932111024793
+            "clusterId": 0,
+            "x": -15.845344846590784,
+            "y": -17.52508914828918,
+            "z": -0.7139254087366833
           },
           {
             "id": "co_kula",
-            "clusterId": 1,
-            "x": 15.05441617507809,
-            "y": -68.43872506623842,
-            "z": -4.660928551262865
+            "clusterId": 0,
+            "x": -17.81575546393425,
+            "y": -14.894711695700508,
+            "z": 2.6908049482170613
           },
           {
             "id": "co_campfire",
-            "clusterId": 1,
-            "x": 12.659750129058205,
-            "y": -79.05989154866363,
-            "z": 9.090909168612997
+            "clusterId": 0,
+            "x": -20.691312748702313,
+            "y": -28.436893776608887,
+            "z": -22.092068940159724
           },
           {
             "id": "co_sequence",
-            "clusterId": 1,
-            "x": 14.636872674720081,
-            "y": -78.18298564381548,
-            "z": 8.230726815994565
+            "clusterId": 0,
+            "x": -17.60319578670147,
+            "y": -26.851065783146943,
+            "z": -20.536448387273836
           },
           {
             "id": "co_gradient_labs",
+            "clusterId": 0,
+            "x": -22.147100896387546,
+            "y": -23.304351765597218,
+            "z": -13.325349100003873
+          },
+          {
+            "id": "co_letta",
             "clusterId": 1,
-            "x": 12.022573992512726,
-            "y": -74.94862850442777,
-            "z": 4.258741096023015
+            "x": -61.678507815816396,
+            "y": -62.53405735024148,
+            "z": 21.92257695979199
+          },
+          {
+            "id": "co_firecrawl",
+            "clusterId": 1,
+            "x": -61.87050667158768,
+            "y": -57.65479723128687,
+            "z": 16.774103970325676
+          },
+          {
+            "id": "co_honeyhive",
+            "clusterId": 1,
+            "x": -60.878727644610365,
+            "y": -33.2775904628259,
+            "z": 15.315268989300868
+          },
+          {
+            "id": "co_e2b",
+            "clusterId": 1,
+            "x": -63.05561440167587,
+            "y": -45.3937839713466,
+            "z": 16.71242090373162
+          },
+          {
+            "id": "co_lancedb",
+            "clusterId": 1,
+            "x": -57.17343351932356,
+            "y": -47.35480917656669,
+            "z": 19.04662310123215
+          },
+          {
+            "id": "co_browser_use",
+            "clusterId": 1,
+            "x": -61.286129410269695,
+            "y": -61.36172483194081,
+            "z": 19.36869019493139
+          },
+          {
+            "id": "co_chroma",
+            "clusterId": 1,
+            "x": -65.4544057457171,
+            "y": -59.94922964487093,
+            "z": 19.64373523258715
+          },
+          {
+            "id": "co_patronus_ai",
+            "clusterId": 1,
+            "x": -52.75367226212847,
+            "y": -30.40125880636626,
+            "z": 3.7788254392332536
+          },
+          {
+            "id": "co_braintrust",
+            "clusterId": 1,
+            "x": -56.02379622000859,
+            "y": -29.6348886661825,
+            "z": 14.872917736048056
+          },
+          {
+            "id": "co_nudge_security",
+            "clusterId": 1,
+            "x": -5.676455427435862,
+            "y": -35.13332202121185,
+            "z": 46.45643629624989
+          },
+          {
+            "id": "co_tobiko_data",
+            "clusterId": 1,
+            "x": -8.610837574636207,
+            "y": -72.83408149097073,
+            "z": -5.057624300981782
+          },
+          {
+            "id": "co_turso",
+            "clusterId": 1,
+            "x": -10.199735155999829,
+            "y": -77.2716691066747,
+            "z": 2.0354009745263753
+          },
+          {
+            "id": "co_estuary",
+            "clusterId": 1,
+            "x": -5.226425880522086,
+            "y": -53.443310895660055,
+            "z": 14.84316144799206
+          },
+          {
+            "id": "co_runreveal",
+            "clusterId": 1,
+            "x": -8.291049860264089,
+            "y": -41.61798162839097,
+            "z": 50.87826445671023
+          },
+          {
+            "id": "co_metaview",
+            "clusterId": 1,
+            "x": -12.946755335728234,
+            "y": -11.782930941620585,
+            "z": -15.153951321132805
           },
           {
             "id": "co_squint",
             "clusterId": 2,
-            "x": -29.62693033347929,
-            "y": -56.858155002095515,
-            "z": 24.72468806331785
+            "x": -8.28380029317536,
+            "y": -25.234958142491884,
+            "z": 16.679967848437435
           },
           {
             "id": "co_artisan",
             "clusterId": 2,
-            "x": -30.69800227064643,
-            "y": -65.76385203670115,
-            "z": -3.8171011123636625
+            "x": -10.036463463085227,
+            "y": -39.80791692639201,
+            "z": -30.024778075405038
           },
           {
             "id": "co_spellbook",
             "clusterId": 2,
-            "x": -31.86743270570951,
-            "y": -66.21971971895624,
-            "z": -1.283789689032183
+            "x": -11.950076902279356,
+            "y": -40.553882224627614,
+            "z": -25.8793593826808
           },
           {
             "id": "co_prophet_security",
             "clusterId": 2,
-            "x": -28.517931034500037,
-            "y": -57.42267886978811,
-            "z": 25.110760584067442
+            "x": -6.469074167572945,
+            "y": -26.1587244714434,
+            "z": 17.311722882391308
           },
           {
             "id": "co_terminal49",
             "clusterId": 2,
-            "x": -47.680393986353884,
-            "y": -27.391407372038234,
-            "z": 1.4657730274425322
+            "x": -37.825831725151964,
+            "y": 22.983356161238202,
+            "z": -21.380074937540357
           },
           {
             "id": "co_nira_energy",
             "clusterId": 2,
-            "x": -59.075408122227145,
-            "y": -68.17501448570681,
-            "z": 6.515291717135952
+            "x": -56.47221849294457,
+            "y": -43.75345547931036,
+            "z": -13.117226172587491
           },
           {
             "id": "co_vooma",
             "clusterId": 2,
-            "x": -49.87979808459663,
-            "y": -44.64349996159031,
-            "z": 2.33919274648962
+            "x": -41.42485661318555,
+            "y": -5.247340803483365,
+            "z": -19.95084267000876
           },
           {
             "id": "co_paces",
             "clusterId": 2,
-            "x": -56.691016364101664,
-            "y": -63.31346292952573,
-            "z": 8.283094575305494
+            "x": -52.57048652510287,
+            "y": -35.79818929646859,
+            "z": -10.22445785921915
           },
           {
             "id": "co_texture",
             "clusterId": 2,
-            "x": -56.31544458771001,
-            "y": -70.46244299045603,
-            "z": 1.2404763689502847
+            "x": -51.95591452737108,
+            "y": -47.49652030526364,
+            "z": -21.74874219689131
           },
           {
             "id": "co_isometric",
             "clusterId": 2,
-            "x": -55.41082833910733,
-            "y": -59.725950927351285,
-            "z": 29.30098532289994
+            "x": -50.47563339329397,
+            "y": -29.92771511109224,
+            "z": 24.16845427320812
           },
           {
             "id": "co_chronicle",
             "clusterId": 2,
-            "x": -24.600067472450863,
-            "y": -58.818306735025004,
-            "z": 2.261484905078568
+            "x": -0.058024702401571204,
+            "y": -28.44247916001287,
+            "z": -20.078000955954117
           },
           {
             "id": "co_doss",
             "clusterId": 2,
-            "x": -37.48320467981404,
-            "y": -60.19619211072005,
-            "z": 2.4646831001897196
+            "x": -21.139521950814036,
+            "y": -30.697200683877483,
+            "z": -19.74549481849951
           },
           {
             "id": "co_anterior",
             "clusterId": 3,
-            "x": -78.7157403285096,
-            "y": 11.277075930710089,
-            "z": -2.513855106419254
+            "x": 11.14660807174521,
+            "y": 28.519865931570976,
+            "z": -14.404937848246945
           },
           {
             "id": "co_freed",
             "clusterId": 3,
-            "x": -87.07581356406773,
-            "y": 34.83641370249852,
-            "z": -18.4285956914914
+            "x": -2.5335117682590074,
+            "y": 67.07150955813385,
+            "z": -40.44724062381954
           },
           {
             "id": "co_counsel_health",
             "clusterId": 3,
-            "x": -74.02021023775968,
-            "y": 10.649970436230578,
-            "z": -3.882038313918749
+            "x": 18.83020276569962,
+            "y": 27.49369330424087,
+            "z": -16.64378309688248
           },
           {
             "id": "co_summer_health",
             "clusterId": 3,
-            "x": -67.69421543541206,
-            "y": 14.988552349578026,
-            "z": -3.8149206858859372
+            "x": 29.18183062408663,
+            "y": 34.593190980627604,
+            "z": -16.53395425101061
           },
           {
             "id": "co_millie",
             "clusterId": 3,
-            "x": -47.46407977238388,
-            "y": 18.996448659082652,
-            "z": -16.667281532397766
+            "x": 62.2856889817691,
+            "y": 41.151566759816994,
+            "z": -37.56509018166633
           },
           {
             "id": "co_fay",
             "clusterId": 3,
-            "x": -50.275827796271855,
-            "y": 21.248964397423574,
-            "z": -15.097042079659868
+            "x": 57.68464676086151,
+            "y": 44.83750160437486,
+            "z": -34.995607440822496
           },
           {
             "id": "co_sohar_health",
             "clusterId": 3,
-            "x": -73.21706039593613,
-            "y": 13.090777130382024,
-            "z": 8.17272918751543
+            "x": 20.144447961410894,
+            "y": 31.487740621943235,
+            "z": 3.0822000872825335
           },
           {
             "id": "co_tandem_health",
             "clusterId": 3,
-            "x": -85.98739627718875,
-            "y": 31.995445280228868,
-            "z": -19.980955532778072
+            "x": -0.7524652988206739,
+            "y": 62.42265213987443,
+            "z": -42.98746581865228
           },
           {
             "id": "co_synthpop",
             "clusterId": 3,
-            "x": -75.24872968756796,
-            "y": 9.78010740307214,
-            "z": 6.964349089698302
+            "x": 16.819898211467887,
+            "y": 26.07028106816343,
+            "z": 1.1048508363090548
           },
           {
             "id": "co_legion_health",
             "clusterId": 3,
-            "x": -57.9212691252052,
-            "y": 17.829589028249035,
-            "z": -14.629818217200082
+            "x": 45.17392458624331,
+            "y": 39.24216009118016,
+            "z": -34.231059302251936
           },
           {
             "id": "co_bevel",
             "clusterId": 3,
-            "x": -63.89701959990151,
-            "y": 42.2031979908719,
-            "z": 7.680566364843862
+            "x": 35.39542380946753,
+            "y": 79.12624748456301,
+            "z": 2.276842741092697
           },
           {
             "id": "co_twentyeight_health",
             "clusterId": 3,
-            "x": -60.1954678588082,
-            "y": 40.09414083162724,
-            "z": 11.25528756001556
+            "x": 41.452508476711124,
+            "y": 75.67506304216268,
+            "z": 8.126386515010019
           },
           {
-            "id": "co_herald",
+            "id": "co_lithos_carbon",
             "clusterId": 4,
-            "x": 63.117131872480705,
-            "y": 8.919746015862021,
-            "z": 6.855186647408916
+            "x": 96.4286480810754,
+            "y": -59.662588948861185,
+            "z": -65.55016873289658
           },
           {
-            "id": "co_straddle",
+            "id": "co_theseus",
             "clusterId": 4,
-            "x": 54.30067427772852,
-            "y": 28.89496584227672,
-            "z": 5.989485991876803
+            "x": 80.45272936317902,
+            "y": -35.47366960662164,
+            "z": -86.58322319813117
           },
           {
-            "id": "co_mercoa",
+            "id": "co_anyware_robotics",
             "clusterId": 4,
-            "x": 49.90096926862036,
-            "y": 28.6654350764129,
-            "z": 10.04801044836177
+            "x": 45.40405146245077,
+            "y": -46.04045099384312,
+            "z": -93.22272383642493
           },
           {
-            "id": "co_ansa",
+            "id": "co_daedalus",
             "clusterId": 4,
-            "x": 67.62757386190984,
-            "y": 32.457704283228,
-            "z": -6.164858146714908
+            "x": 84.72291896140388,
+            "y": -8.50033968281079,
+            "z": -71.4453226868662
           },
           {
-            "id": "co_kudos",
+            "id": "co_cartken",
             "clusterId": 4,
-            "x": 80.26364920356023,
-            "y": 13.284543670659264,
-            "z": -7.030668800114422
+            "x": 72.57587796933429,
+            "y": -35.52296135614981,
+            "z": -106.74203673880578
           },
           {
-            "id": "co_baselayer",
+            "id": "co_contoro",
             "clusterId": 4,
-            "x": 64.55126925119833,
-            "y": 8.217129046557906,
-            "z": 7.437879562075271
+            "x": 47.83345930540625,
+            "y": -47.61387205836597,
+            "z": -92.77543464930712
           },
           {
-            "id": "co_felix_pago",
+            "id": "co_chef_robotics",
             "clusterId": 4,
-            "x": 71.67173943213065,
-            "y": 36.04579929371518,
-            "z": -8.337658751628503
+            "x": 69.39705184199579,
+            "y": -36.428808395992334,
+            "z": -88.08114205582079
           },
           {
-            "id": "co_formance",
+            "id": "co_sereact",
             "clusterId": 4,
-            "x": 74.62860462229916,
-            "y": 11.837498990075202,
-            "z": 2.509413675861043
+            "x": 65.50903503311186,
+            "y": -62.896321021906545,
+            "z": -81.43584212437062
           },
           {
-            "id": "co_keep",
+            "id": "co_isembard",
             "clusterId": 4,
-            "x": 77.09406623187735,
-            "y": 11.233267919110272,
-            "z": -5.002301807276782
+            "x": 93.53789952583372,
+            "y": -0.042190526419325636,
+            "z": -73.9615456319292
           },
           {
-            "id": "co_layer",
+            "id": "co_matic",
             "clusterId": 4,
-            "x": 50.22661483265827,
-            "y": 18.178793968233798,
-            "z": 15.867726947697864
+            "x": 93.78030206668336,
+            "y": -25.427082888119347,
+            "z": -115.09664733075473
           },
           {
-            "id": "co_alinea_invest",
+            "id": "co_tailor",
             "clusterId": 4,
-            "x": 90.98028067886764,
-            "y": 23.873336261473547,
-            "z": 30.444870817252692
+            "x": 99.26088955133785,
+            "y": -61.292275285525726,
+            "z": -54.365539263757
           },
           {
             "id": "co_cedar_money",
             "clusterId": 4,
-            "x": 77.35025654568155,
-            "y": 45.382462772349825,
-            "z": 8.324488372883872
+            "x": 122.1752878910371,
+            "y": -60.7150786841994,
+            "z": -118.43581497604879
           },
           {
             "id": "co_cargado",
             "clusterId": 5,
-            "x": 69.16179881512899,
-            "y": 79.25476588119591,
-            "z": -14.769806047684382
+            "x": 65.6411886183686,
+            "y": 115.96489757602268,
+            "z": 6.8058751954481735
           },
           {
             "id": "co_beli",
             "clusterId": 5,
-            "x": 33.7706304759649,
-            "y": 56.80193306369792,
-            "z": 8.616276619419114
+            "x": 7.728367699736458,
+            "y": 79.22389842011691,
+            "z": 45.07401046889025
           },
           {
             "id": "co_partiful",
             "clusterId": 5,
-            "x": 30.54772015441928,
-            "y": 58.537221158607146,
-            "z": 7.533192315280133
+            "x": 2.454514446298173,
+            "y": 82.06346075724109,
+            "z": 43.30169069848101
           },
           {
             "id": "co_posh",
             "clusterId": 5,
-            "x": 49.045604415292885,
-            "y": 42.11288189911404,
-            "z": 9.035688021510826
+            "x": 32.72377960045498,
+            "y": 55.18726924170693,
+            "z": 45.76032003594942
           },
           {
             "id": "co_pickle",
             "clusterId": 5,
-            "x": 51.06976275024803,
-            "y": 41.30605051118343,
-            "z": 8.349910725067309
+            "x": 36.03603869401793,
+            "y": 53.866999697820454,
+            "z": 44.638139005405485
           },
           {
             "id": "co_pie",
             "clusterId": 5,
-            "x": 26.506966341450095,
-            "y": 66.78369187703737,
-            "z": 7.274764574209096
+            "x": -4.157628156742312,
+            "y": 95.55768556921781,
+            "z": 42.87880894036477
           },
           {
             "id": "co_timeleft",
             "clusterId": 5,
-            "x": 26.530500592901358,
-            "y": 66.02084154154657,
-            "z": 7.798931537438626
+            "x": -4.119117563458424,
+            "y": 94.30938502023288,
+            "z": 43.73653669837673
           },
           {
             "id": "co_chowdeck",
             "clusterId": 5,
-            "x": 47.30877627042804,
-            "y": 44.71941669869562,
-            "z": 7.788878542220323
+            "x": 29.881697181585224,
+            "y": 59.4525080046586,
+            "z": 43.72008634256496
           },
           {
             "id": "co_bezel",
             "clusterId": 5,
-            "x": 54.34041021422722,
-            "y": 44.25968362679346,
-            "z": 3.6781632216111166
+            "x": 41.38800727143844,
+            "y": 58.700217523364145,
+            "z": 36.99346127247717
           },
           {
             "id": "co_yope",
             "clusterId": 5,
-            "x": 29.004995724244033,
-            "y": 63.976943136321665,
-            "z": 7.883581738334834
+            "x": -0.06994371217041007,
+            "y": 90.9648239935012,
+            "z": 43.87505520893416
           },
           {
             "id": "co_222",
             "clusterId": 5,
-            "x": 27.45620738664423,
-            "y": 62.04986876756859,
-            "z": 7.259790552490174
+            "x": -2.604324628242818,
+            "y": 87.81142957190528,
+            "z": 42.85430599573381
           },
           {
             "id": "co_phia",
             "clusterId": 5,
-            "x": 63.103084839747744,
-            "y": 73.16738497820934,
-            "z": 38.15616780958444
+            "x": 55.72692938592657,
+            "y": 106.00372882568104,
+            "z": 93.41201423461533
           },
           {
             "id": "co_tavily",
             "clusterId": 6,
-            "x": 40.31475475177652,
-            "y": -31.590456081381028,
-            "z": 14.908020468238417
+            "x": -61.92497228409953,
+            "y": 18.67745488698707,
+            "z": 39.59779156838346
           },
           {
             "id": "co_kick",
             "clusterId": 6,
-            "x": 34.928868515271745,
-            "y": -44.59476054582049,
-            "z": -30.50362936668283
+            "x": -70.73824067110733,
+            "y": -2.6023160548229605,
+            "z": -34.712180888760386
           },
           {
             "id": "co_aembit",
             "clusterId": 6,
-            "x": 61.096192515983205,
-            "y": -63.388052000316584,
-            "z": -6.697304460898823
+            "x": -27.91898321539768,
+            "y": -33.35497479854383,
+            "z": 4.243623502522531
           },
           {
             "id": "co_p0_security",
             "clusterId": 6,
-            "x": 61.63024710223052,
-            "y": -62.650951849332266,
-            "z": -5.363956263348711
+            "x": -27.045075710629344,
+            "y": -32.14881091511494,
+            "z": 6.425466007604532
           },
           {
             "id": "co_twine_security",
             "clusterId": 6,
-            "x": 55.88763828010244,
-            "y": -59.67588873267705,
-            "z": -6.0572742629546
+            "x": -36.442071965020745,
+            "y": -27.280525815133686,
+            "z": 5.2909456446130765
           },
           {
             "id": "co_edera",
             "clusterId": 6,
-            "x": 60.457894308067246,
-            "y": -64.1484480594425,
-            "z": -14.166943962736514
+            "x": -28.963471191987427,
+            "y": -34.59925925893168,
+            "z": -7.979422955030055
           },
           {
             "id": "co_howie",
             "clusterId": 6,
-            "x": 28.002000811114087,
-            "y": -71.3704156180905,
-            "z": -6.679739782459924
+            "x": -82.0731150960926,
+            "y": -46.41702435490116,
+            "z": 4.272365703604366
           },
           {
             "id": "co_napkin",
             "clusterId": 6,
-            "x": 29.03269759882794,
-            "y": -62.48293926711388,
-            "z": -2.839243209402057
+            "x": -80.38652035256084,
+            "y": -31.87388123512122,
+            "z": 10.55681464133542
           },
           {
             "id": "co_lindy",
             "clusterId": 6,
-            "x": 28.38134746244601,
-            "y": -65.75373099674526,
-            "z": -7.142462017987447
+            "x": -81.45236603027672,
+            "y": -37.22608588360893,
+            "z": 3.515183863650236
           },
           {
             "id": "co_happenstance",
             "clusterId": 6,
-            "x": 27.929359137834744,
-            "y": -70.3057317560387,
-            "z": -2.495252705849669
+            "x": -82.19198328873152,
+            "y": -44.67481439881637,
+            "z": 11.119708192602964
           },
           {
             "id": "co_default",
             "clusterId": 6,
-            "x": 37.86491933198427,
-            "y": -44.78008463800009,
-            "z": -23.35062574460924
+            "x": -65.9337938801232,
+            "y": -2.9055736602077573,
+            "z": -23.00726587082178
           },
           {
-            "id": "co_lithos_carbon",
+            "id": "co_herald",
             "clusterId": 7,
-            "x": -49.82060334264405,
-            "y": 79.58913096517783,
-            "z": -7.389464949601993
+            "x": -13.850593385014236,
+            "y": 21.660560396941737,
+            "z": -44.15337400851486
           },
           {
-            "id": "co_theseus",
+            "id": "co_straddle",
             "clusterId": 7,
-            "x": -45.50255390862054,
-            "y": 58.64935765623654,
-            "z": -1.695861226058124
+            "x": -20.86161166478464,
+            "y": 21.595107659085077,
+            "z": -11.405123917800033
           },
           {
-            "id": "co_anyware_robotics",
+            "id": "co_ansa",
             "clusterId": 7,
-            "x": -21.013068238343834,
-            "y": 51.64567788714334,
-            "z": -12.454177330578537
+            "x": 2.9231446778993817,
+            "y": 15.906929542973089,
+            "z": 4.095854543879714
           },
           {
-            "id": "co_daedalus",
+            "id": "co_kudos",
             "clusterId": 7,
-            "x": -54.82755885863096,
-            "y": 45.47193699032958,
-            "z": -22.637511069822075
+            "x": 13.072502106590036,
+            "y": 52.30405157327,
+            "z": -14.74360776979276
           },
           {
-            "id": "co_cartken",
+            "id": "co_baselayer",
             "clusterId": 7,
-            "x": -38.47781498057258,
-            "y": 51.61986775323054,
-            "z": 3.085651723900053
+            "x": -16.88046541277065,
+            "y": 25.425051722920703,
+            "z": -45.103892295378614
           },
           {
-            "id": "co_contoro",
+            "id": "co_felix_pago",
             "clusterId": 7,
-            "x": -21.817466987456083,
-            "y": 52.97495399900989,
-            "z": -12.600570864918406
+            "x": 7.958811981459488,
+            "y": 23.854903287977315,
+            "z": 15.439294591156493
           },
           {
-            "id": "co_chef_robotics",
+            "id": "co_formance",
             "clusterId": 7,
-            "x": -38.32571917550543,
-            "y": 55.074181708966734,
-            "z": -6.330122998609156
+            "x": 2.3476767983827065,
+            "y": 49.99027802069989,
+            "z": -23.80962404377421
           },
           {
-            "id": "co_sereact",
+            "id": "co_keep",
             "clusterId": 7,
-            "x": -29.087120255690067,
-            "y": 68.52510823049984,
-            "z": -11.284916658764246
+            "x": 8.546664563722501,
+            "y": 43.16563188161107,
+            "z": -23.627922904204432
           },
           {
-            "id": "co_isembard",
+            "id": "co_layer",
             "clusterId": 7,
-            "x": -61.332939009844836,
-            "y": 42.1220946071395,
-            "z": -22.312893315790454
+            "x": -17.685756514766517,
+            "y": 30.616883128655317,
+            "z": -30.618141405797523
           },
           {
-            "id": "co_matic",
+            "id": "co_bayou_energy",
             "clusterId": 7,
-            "x": -53.947198963134795,
-            "y": 52.79069988642846,
-            "z": 20.372857778656787
+            "x": -38.86264228717105,
+            "y": 81.7816627592326,
+            "z": -4.545342664401929
           },
           {
-            "id": "co_tailor",
+            "id": "co_alinea_invest",
             "clusterId": 7,
-            "x": -51.373876095194944,
-            "y": 82.27844986079609,
-            "z": -17.141402397105246
-          },
-          {
-            "id": "co_ello",
-            "clusterId": 8,
-            "x": -86.9060579889255,
-            "y": -44.879046949279754,
-            "z": 5.078464579806966
-          },
-          {
-            "id": "co_delphi",
-            "clusterId": 8,
-            "x": -38.395715003674894,
-            "y": -25.925692227705902,
-            "z": 5.078464579806966
-          },
-          {
-            "id": "co_brisk_teaching",
-            "clusterId": 8,
-            "x": -80.1264345271528,
-            "y": 4.057068391997042,
-            "z": 5.078464579806966
+            "x": 36.198019482680756,
+            "y": 57.05846561461892,
+            "z": -35.66919086134306
           },
           {
             "id": "co_rwazi",
-            "clusterId": 9,
-            "x": -11.57349064348782,
-            "y": 97.25690741856135,
-            "z": 1.0580948344633132e-15
+            "clusterId": 8,
+            "x": 50.282376378580494,
+            "y": -45.159427898230675,
+            "z": 134.54915265390645
+          },
+          {
+            "id": "co_mem0",
+            "clusterId": 8,
+            "x": 76.54547442806755,
+            "y": -5.9101434943527025,
+            "z": 71.6647958215573
           },
           {
             "id": "co_sekai",
-            "clusterId": 9,
-            "x": 28.95347107957216,
-            "y": 68.83481436583942,
-            "z": 1.0580948344633132e-15
+            "clusterId": 8,
+            "x": 115.29945303147898,
+            "y": -72.11423340695416,
+            "z": 94.4590266439053
           },
           {
             "id": "co_sett",
+            "clusterId": 8,
+            "x": 39.45119718410457,
+            "y": -76.47413770891964,
+            "z": 63.87073935302962
+          },
+          {
+            "id": "co_ello",
             "clusterId": 9,
-            "x": -17.37998043608433,
-            "y": 49.90827821559924,
-            "z": 1.0580948344633132e-15
+            "x": -57.856334130042654,
+            "y": 7.590903286913274,
+            "z": -12.043220076736478
+          },
+          {
+            "id": "co_delphi",
+            "clusterId": 9,
+            "x": 21.524227118549238,
+            "y": 38.60548374039776,
+            "z": -12.043220076736478
+          },
+          {
+            "id": "co_brisk_teaching",
+            "clusterId": 9,
+            "x": -46.762404828960044,
+            "y": 87.6681829362753,
+            "z": -12.043220076736478
           }
         ],
         "edges": [
-          {
-            "source": "co_letta",
-            "target": "co_mem0",
-            "weight": 0.7661111111111112,
-            "type": "nearest"
-          },
           {
             "source": "co_letta",
             "target": "co_browser_use",
@@ -10482,6 +10400,12 @@
             "source": "co_letta",
             "target": "co_chroma",
             "weight": 0.42343722943722945,
+            "type": "nearest"
+          },
+          {
+            "source": "co_letta",
+            "target": "co_tavily",
+            "weight": 0.3855654761904762,
             "type": "nearest"
           },
           {
@@ -10527,12 +10451,6 @@
             "type": "nearest"
           },
           {
-            "source": "co_tavily",
-            "target": "co_letta",
-            "weight": 0.3855654761904762,
-            "type": "nearest"
-          },
-          {
             "source": "co_lancedb",
             "target": "co_chroma",
             "weight": 0.3755049415992812,
@@ -10552,20 +10470,14 @@
           },
           {
             "source": "co_browser_use",
-            "target": "co_mem0",
-            "weight": 0.4553252032520326,
-            "type": "nearest"
-          },
-          {
-            "source": "co_browser_use",
             "target": "co_chroma",
             "weight": 0.36870238095238095,
             "type": "nearest"
           },
           {
-            "source": "co_chroma",
-            "target": "co_mem0",
-            "weight": 0.4275714285714286,
+            "source": "co_browser_use",
+            "target": "co_firecrawl",
+            "weight": 0.31004519774011297,
             "type": "nearest"
           },
           {
@@ -11038,8 +10950,8 @@
           },
           {
             "source": "co_turso",
-            "target": "co_mem0",
-            "weight": 0.1169423558897243,
+            "target": "co_runreveal",
+            "weight": 0.11508474576271187,
             "type": "nearest"
           },
           {
@@ -11752,14 +11664,14 @@
           },
           {
             "source": "co_rwazi",
-            "target": "co_sekai",
-            "weight": 0.09999999999999999,
+            "target": "co_mem0",
+            "weight": 0.1261904761904762,
             "type": "nearest"
           },
           {
             "source": "co_rwazi",
-            "target": "co_squint",
-            "weight": 0.09960317460317461,
+            "target": "co_sekai",
+            "weight": 0.09999999999999999,
             "type": "nearest"
           },
           {
@@ -11781,20 +11693,20 @@
             "type": "nearest"
           },
           {
+            "source": "co_mem0",
+            "target": "co_sekai",
+            "weight": 0.11080357142857142,
+            "type": "nearest"
+          },
+          {
+            "source": "co_mem0",
+            "target": "co_sett",
+            "weight": 0.11,
+            "type": "nearest"
+          },
+          {
             "source": "co_sekai",
             "target": "co_sett",
-            "weight": 0.09,
-            "type": "nearest"
-          },
-          {
-            "source": "co_sekai",
-            "target": "co_summer_health",
-            "weight": 0.06142857142857143,
-            "type": "nearest"
-          },
-          {
-            "source": "co_alinea_invest",
-            "target": "co_cedar_money",
             "weight": 0.09,
             "type": "nearest"
           },
@@ -11811,21 +11723,15 @@
             "type": "nearest"
           },
           {
+            "source": "co_alinea_invest",
+            "target": "co_felix_pago",
+            "weight": 0.07142857142857142,
+            "type": "nearest"
+          },
+          {
             "source": "co_sett",
             "target": "co_vooma",
             "weight": 0.11728070175438597,
-            "type": "nearest"
-          },
-          {
-            "source": "co_sett",
-            "target": "co_nira_energy",
-            "weight": 0.09333333333333332,
-            "type": "nearest"
-          },
-          {
-            "source": "co_tailor",
-            "target": "co_dust",
-            "weight": 0.09575757575757576,
             "type": "nearest"
           },
           {
@@ -11841,21 +11747,27 @@
             "type": "nearest"
           },
           {
+            "source": "co_tailor",
+            "target": "co_numeric",
+            "weight": 0.0686875,
+            "type": "nearest"
+          },
+          {
             "source": "co_cedar_money",
             "target": "co_straddle",
-            "weight": 0.15111111111111108,
+            "weight": 0.03111111111111111,
             "type": "nearest"
           },
           {
             "source": "co_cedar_money",
             "target": "co_mercoa",
-            "weight": 0.14135714285714285,
+            "weight": 0.021357142857142856,
             "type": "nearest"
           },
           {
             "source": "co_cedar_money",
-            "target": "co_felix_pago",
-            "weight": 0.13357638888888887,
+            "target": "co_bayou_energy",
+            "weight": 0.013846153846153847,
             "type": "nearest"
           },
           {
@@ -11976,7 +11888,34 @@
         "clusters": [
           {
             "id": 0,
-            "label": "AI Infrastructure",
+            "label": "Enterprise AI Agents",
+            "memberIds": [
+              "co_concourse",
+              "co_dust",
+              "co_numeric",
+              "co_happyrobot",
+              "co_basis",
+              "co_eve",
+              "co_mercoa",
+              "co_verse",
+              "co_fyxer",
+              "co_schoolai",
+              "co_orbital_materials",
+              "co_tofu",
+              "co_thena",
+              "co_dock",
+              "co_kula",
+              "co_campfire",
+              "co_sequence",
+              "co_gradient_labs"
+            ],
+            "x": -42.76264538201965,
+            "y": -20.85918125668635,
+            "z": -5.656698552631187
+          },
+          {
+            "id": 1,
+            "label": "AI Agent Infrastructure",
             "memberIds": [
               "co_letta",
               "co_firecrawl",
@@ -11992,43 +11931,15 @@
               "co_turso",
               "co_estuary",
               "co_runreveal",
-              "co_bayou_energy",
-              "co_metaview",
-              "co_mem0"
+              "co_metaview"
             ],
-            "x": 68.47606917325105,
-            "y": -22.249223594996213,
-            "z": -5.078464579806968
-          },
-          {
-            "id": 1,
-            "label": "Enterprise AI",
-            "memberIds": [
-              "co_concourse",
-              "co_dust",
-              "co_numeric",
-              "co_happyrobot",
-              "co_basis",
-              "co_eve",
-              "co_verse",
-              "co_fyxer",
-              "co_schoolai",
-              "co_orbital_materials",
-              "co_tofu",
-              "co_thena",
-              "co_dock",
-              "co_kula",
-              "co_campfire",
-              "co_sequence",
-              "co_gradient_labs"
-            ],
-            "x": 4.408728476930472e-15,
-            "y": -72,
-            "z": -1.0580948344633132e-15
+            "x": -39.4084035283816,
+            "y": -47.97636241507713,
+            "z": 16.095790005369746
           },
           {
             "id": 2,
-            "label": "Industrial Operations",
+            "label": "Renewable Energy Automation",
             "memberIds": [
               "co_squint",
               "co_artisan",
@@ -12043,13 +11954,13 @@
               "co_chronicle",
               "co_doss"
             ],
-            "x": -42.320538165058075,
-            "y": -58.24922359499621,
-            "z": 8.217128300790128
+            "x": -29.05515856303155,
+            "y": -27.511252203602115,
+            "z": -10.332402672062477
           },
           {
             "id": 3,
-            "label": "Healthcare",
+            "label": "AI-Enhanced Healthcare",
             "memberIds": [
               "co_anterior",
               "co_freed",
@@ -12064,34 +11975,34 @@
               "co_bevel",
               "co_twentyeight_health"
             ],
-            "x": -68.47606917325105,
-            "y": 22.24922359499622,
-            "z": -5.07846457980697
+            "x": 27.90243359853193,
+            "y": 46.47428938222101,
+            "z": -18.601571531972297
           },
           {
             "id": 4,
-            "label": "Fintech",
+            "label": "Automated Logistics Robotics",
             "memberIds": [
-              "co_herald",
-              "co_straddle",
-              "co_mercoa",
-              "co_ansa",
-              "co_kudos",
-              "co_baselayer",
-              "co_felix_pago",
-              "co_formance",
-              "co_keep",
-              "co_layer",
-              "co_alinea_invest",
+              "co_lithos_carbon",
+              "co_theseus",
+              "co_anyware_robotics",
+              "co_daedalus",
+              "co_cartken",
+              "co_contoro",
+              "co_chef_robotics",
+              "co_sereact",
+              "co_isembard",
+              "co_matic",
+              "co_tailor",
               "co_cedar_money"
             ],
-            "x": 68.47606917325105,
-            "y": 22.249223594996213,
-            "z": 5.078464579806968
+            "x": 80.9231792544041,
+            "y": -39.967969954066376,
+            "z": -87.30795343542607
           },
           {
             "id": 5,
-            "label": "Consumer Social",
+            "label": "Social Event Platforms",
             "memberIds": [
               "co_cargado",
               "co_beli",
@@ -12106,13 +12017,13 @@
               "co_222",
               "co_phia"
             ],
-            "x": 42.32053816505807,
-            "y": 58.24922359499622,
-            "z": 8.217128300790128
+            "x": 21.719125736434368,
+            "y": 81.59219201678684,
+            "z": 44.420858674770095
           },
           {
             "id": 6,
-            "label": "Cybersecurity",
+            "label": "AI Cybersecurity Operations",
             "memberIds": [
               "co_tavily",
               "co_kick",
@@ -12126,53 +12037,54 @@
               "co_happenstance",
               "co_default"
             ],
-            "x": 42.32053816505807,
-            "y": -58.24922359499622,
-            "z": -8.217128300790128
+            "x": -58.64278124418426,
+            "y": -24.945982862565046,
+            "z": 1.7566390372458507
           },
           {
             "id": 7,
-            "label": "Robotics & Logistics",
+            "label": "Fintech APIs and Wallets",
             "memberIds": [
-              "co_lithos_carbon",
-              "co_theseus",
-              "co_anyware_robotics",
-              "co_daedalus",
-              "co_cartken",
-              "co_contoro",
-              "co_chef_robotics",
-              "co_sereact",
-              "co_isembard",
-              "co_matic",
-              "co_tailor"
+              "co_herald",
+              "co_straddle",
+              "co_ansa",
+              "co_kudos",
+              "co_baselayer",
+              "co_felix_pago",
+              "co_formance",
+              "co_keep",
+              "co_layer",
+              "co_bayou_energy",
+              "co_alinea_invest"
             ],
-            "x": -42.32053816505806,
-            "y": 58.24922359499622,
-            "z": -8.217128300790126
+            "x": -3.3722045139792884,
+            "y": 38.48722959890779,
+            "z": -19.46737006690648
           },
           {
             "id": 8,
-            "label": "Education",
+            "label": "Consumer AI Interfaces",
+            "memberIds": [
+              "co_rwazi",
+              "co_mem0",
+              "co_sekai",
+              "co_sett"
+            ],
+            "x": 70.3946252555579,
+            "y": -49.914485627114296,
+            "z": 91.13592861809967
+          },
+          {
+            "id": 9,
+            "label": "Digital Learning Tools",
             "memberIds": [
               "co_ello",
               "co_delphi",
               "co_brisk_teaching"
             ],
-            "x": -68.47606917325106,
-            "y": -22.249223594996206,
-            "z": 5.078464579806966
-          },
-          {
-            "id": 9,
-            "label": "AI Applications",
-            "memberIds": [
-              "co_rwazi",
-              "co_sekai",
-              "co_sett"
-            ],
-            "x": 4.408728476930472e-15,
-            "y": 72,
-            "z": 1.0580948344633132e-15
+            "x": -27.69817061348449,
+            "y": 44.62152332119545,
+            "z": -12.043220076736478
           }
         ]
       }
@@ -12554,31 +12466,7 @@
         "Scalability of the AI solution in a rapidly changing logistics environment where traditional processes are deeply ingrained.",
         "Potential regulatory hurdles or the need for industry-specific integrations that could slow adoption.",
         "The competitive landscape in AI-powered logistics solutions is growing, including well-funded incumbents."
-      ],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.263,
-        "customer": 0.182,
-        "product": 0.384,
-        "technical": 0.568,
-        "businessModel": 0.963,
-        "goToMarket": 0.784,
-        "founder": 0.291,
-        "disruption": 0.129,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.069,
-        "problem": 0.221,
-        "customer": 0.138,
-        "product": 0.294,
-        "technical": 0.386,
-        "businessModel": 0.148,
-        "goToMarket": 0.152,
-        "founder": 0.152,
-        "disruption": 0.061,
-        "regulatory": 0
-      }
+      ]
     },
     {
       "companyId": "co_isometric",
@@ -12602,31 +12490,7 @@
         "Market adoption risk if voluntary carbon market struggles continue, leading to slow sales cycles or low budget allocation.",
         "Emergent competitors with either technology or already established market relationships could nullify Isometric's competitive advantage.",
         "Dependency on the integrity and quality of third-party sensor and satellite data could impact platform reliability."
-      ],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.167,
-        "customer": 0.109,
-        "product": 0,
-        "technical": 0.341,
-        "businessModel": 0,
-        "goToMarket": 0.784,
-        "founder": 0,
-        "disruption": 0.047,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.001,
-        "problem": 0.211,
-        "customer": 0.15,
-        "product": 0,
-        "technical": 0.247,
-        "businessModel": 0,
-        "goToMarket": 0.152,
-        "founder": 0.227,
-        "disruption": 0.052,
-        "regulatory": 0
-      }
+      ]
     },
     {
       "companyId": "co_letta",
@@ -12650,31 +12514,7 @@
         "Being too focused on academic roots could slow commercial adaptation and sales growth.",
         "Risk of competing open-source projects that disrupt their market strategy or dilute their technical advantages.",
         "Market need validation: while developers benefit from persistent memory in AI agents, demand size and urgency remain uncertain."
-      ],
-      "dimensionsVsWinner": {
-        "industry": 0.283,
-        "problem": 0.677,
-        "customer": 0.936,
-        "product": 0.497,
-        "technical": 0.208,
-        "businessModel": 0.925,
-        "goToMarket": 0.592,
-        "founder": 0.291,
-        "disruption": 0.145,
-        "regulatory": 0.1
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.213,
-        "customer": 0.046,
-        "product": 0.328,
-        "technical": 0.06,
-        "businessModel": 0.143,
-        "goToMarket": 0.194,
-        "founder": 0.095,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      ]
     },
     {
       "companyId": "co_keep",
@@ -12687,31 +12527,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.461,
-        "problem": 0.385,
-        "customer": 0.016,
-        "product": 0.471,
-        "technical": 0,
-        "businessModel": 0.321,
-        "goToMarket": 0.005,
-        "founder": 0.394,
-        "disruption": 0,
-        "regulatory": 0.198
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.355,
-        "customer": 0.088,
-        "product": 0.161,
-        "technical": 0.225,
-        "businessModel": 0.113,
-        "goToMarket": 0.215,
-        "founder": 0.118,
-        "disruption": 0.205,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_paces",
@@ -12724,31 +12540,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.25,
-        "customer": 0.223,
-        "product": 0.278,
-        "technical": 0.171,
-        "businessModel": 0.963,
-        "goToMarket": 0.784,
-        "founder": 0.391,
-        "disruption": 0.102,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.26,
-        "customer": 0.099,
-        "product": 0.282,
-        "technical": 0.261,
-        "businessModel": 0.148,
-        "goToMarket": 0.152,
-        "founder": 0.107,
-        "disruption": 0.008,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_tofu",
@@ -12761,31 +12553,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.167,
-        "problem": 0.446,
-        "customer": 0.199,
-        "product": 0.497,
-        "technical": 0.186,
-        "businessModel": 0.963,
-        "goToMarket": 0.303,
-        "founder": 0.095,
-        "disruption": 0.28,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.129,
-        "problem": 0.447,
-        "customer": 0.296,
-        "product": 0.47,
-        "technical": 0.253,
-        "businessModel": 0.148,
-        "goToMarket": 0.255,
-        "founder": 0,
-        "disruption": 0.091,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_felix_pago",
@@ -12798,31 +12566,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.409,
-        "problem": 0.385,
-        "customer": 0,
-        "product": 0.39,
-        "technical": 0,
-        "businessModel": 0.246,
-        "goToMarket": 0.247,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0.141
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.205,
-        "customer": 0,
-        "product": 0.088,
-        "technical": 0.105,
-        "businessModel": 0.079,
-        "goToMarket": 0.391,
-        "founder": 0,
-        "disruption": 0.065,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_counsel_health",
@@ -12835,31 +12579,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.044,
-        "problem": 0.376,
-        "customer": 0.561,
-        "product": 0.529,
-        "technical": 0.227,
-        "businessModel": 0.348,
-        "goToMarket": 0.309,
-        "founder": 0.036,
-        "disruption": 0.058,
-        "regulatory": 0.119
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.286,
-        "customer": 0.519,
-        "product": 0.28,
-        "technical": 0.241,
-        "businessModel": 0.203,
-        "goToMarket": 0.22,
-        "founder": 0.008,
-        "disruption": 0.27,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_verse",
@@ -12872,31 +12592,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.251,
-        "customer": 0.086,
-        "product": 0.013,
-        "technical": 0.346,
-        "businessModel": 0.963,
-        "goToMarket": 0.784,
-        "founder": 0.081,
-        "disruption": 0.129,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.207,
-        "customer": 0.226,
-        "product": 0.155,
-        "technical": 0.417,
-        "businessModel": 0.148,
-        "goToMarket": 0.152,
-        "founder": 0.003,
-        "disruption": 0.036,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_nira_energy",
@@ -12909,31 +12605,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.217,
-        "customer": 0.18,
-        "product": 0.071,
-        "technical": 0.084,
-        "businessModel": 0.963,
-        "goToMarket": 0.784,
-        "founder": 0.213,
-        "disruption": 0.1,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.215,
-        "customer": 0.049,
-        "product": 0.155,
-        "technical": 0.254,
-        "businessModel": 0.148,
-        "goToMarket": 0.152,
-        "founder": 0.056,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_kudos",
@@ -12946,31 +12618,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.345,
-        "problem": 0.23,
-        "customer": 0.159,
-        "product": 0.358,
-        "technical": 0.046,
-        "businessModel": 0.113,
-        "goToMarket": 0.177,
-        "founder": 0.375,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.481,
-        "customer": 0.409,
-        "product": 0.438,
-        "technical": 0.372,
-        "businessModel": 0.21,
-        "goToMarket": 0.618,
-        "founder": 0.254,
-        "disruption": 0.08,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_ansa",
@@ -12983,31 +12631,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.333,
-        "problem": 0.3,
-        "customer": 0.079,
-        "product": 0.397,
-        "technical": 0.104,
-        "businessModel": 0.342,
-        "goToMarket": 0.111,
-        "founder": 0.321,
-        "disruption": 0,
-        "regulatory": 0.117
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.336,
-        "customer": 0.315,
-        "product": 0.145,
-        "technical": 0.253,
-        "businessModel": 0.146,
-        "goToMarket": 0.266,
-        "founder": 0.121,
-        "disruption": 0.001,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_baselayer",
@@ -13020,31 +12644,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.333,
-        "problem": 0.322,
-        "customer": 0.191,
-        "product": 0.316,
-        "technical": 0.023,
-        "businessModel": 0.394,
-        "goToMarket": 0.004,
-        "founder": 0.391,
-        "disruption": 0,
-        "regulatory": 0.224
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.271,
-        "customer": 0.076,
-        "product": 0.232,
-        "technical": 0.4,
-        "businessModel": 0.025,
-        "goToMarket": 0.177,
-        "founder": 0.178,
-        "disruption": 0.166,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_gradient_labs",
@@ -13057,31 +12657,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.347,
-        "problem": 0.434,
-        "customer": 0.181,
-        "product": 0,
-        "technical": 0,
-        "businessModel": 0.231,
-        "goToMarket": 0.837,
-        "founder": 0.188,
-        "disruption": 0.091,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.058,
-        "problem": 0.262,
-        "customer": 0.022,
-        "product": 0.317,
-        "technical": 0.11,
-        "businessModel": 0.148,
-        "goToMarket": 0.14,
-        "founder": 0.155,
-        "disruption": 0.02,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_chroma",
@@ -13094,31 +12670,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.459,
-        "problem": 0.501,
-        "customer": 1,
-        "product": 0.124,
-        "technical": 0,
-        "businessModel": 0.877,
-        "goToMarket": 0.592,
-        "founder": 0.407,
-        "disruption": 0.038,
-        "regulatory": 0.665
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.303,
-        "customer": 0,
-        "product": 0.114,
-        "technical": 0.081,
-        "businessModel": 0.124,
-        "goToMarket": 0.194,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_lancedb",
@@ -13131,31 +12683,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.459,
-        "problem": 0.421,
-        "customer": 0.652,
-        "product": 0.102,
-        "technical": 0,
-        "businessModel": 0.925,
-        "goToMarket": 0.751,
-        "founder": 0,
-        "disruption": 0.049,
-        "regulatory": 0.1
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.254,
-        "customer": 0.086,
-        "product": 0.182,
-        "technical": 0.099,
-        "businessModel": 0.143,
-        "goToMarket": 0.271,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_sequence",
@@ -13168,31 +12696,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.339,
-        "customer": 0.093,
-        "product": 0.102,
-        "technical": 0.171,
-        "businessModel": 0.963,
-        "goToMarket": 0.561,
-        "founder": 0.095,
-        "disruption": 0.048,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.071,
-        "problem": 0.32,
-        "customer": 0.032,
-        "product": 0.041,
-        "technical": 0.33,
-        "businessModel": 0.148,
-        "goToMarket": 0.14,
-        "founder": 0,
-        "disruption": 0.073,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_honeyhive",
@@ -13205,31 +12709,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.409,
-        "problem": 0.408,
-        "customer": 0.905,
-        "product": 0.068,
-        "technical": 0,
-        "businessModel": 0.783,
-        "goToMarket": 0.751,
-        "founder": 0.454,
-        "disruption": 0,
-        "regulatory": 0.642
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.281,
-        "customer": 0.015,
-        "product": 0.242,
-        "technical": 0,
-        "businessModel": 0.16,
-        "goToMarket": 0.271,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_tavily",
@@ -13242,31 +12722,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.248,
-        "problem": 0.53,
-        "customer": 0.239,
-        "product": 0.011,
-        "technical": 0.362,
-        "businessModel": 0.123,
-        "goToMarket": 0.621,
-        "founder": 0.133,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.297,
-        "customer": 0.046,
-        "product": 0.169,
-        "technical": 0.357,
-        "businessModel": 0.057,
-        "goToMarket": 0.271,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_dock",
@@ -13279,31 +12735,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.046,
-        "problem": 0.357,
-        "customer": 0.11,
-        "product": 0.072,
-        "technical": 0.258,
-        "businessModel": 0.963,
-        "goToMarket": 0.303,
-        "founder": 0.344,
-        "disruption": 0.152,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.176,
-        "problem": 0.398,
-        "customer": 0.211,
-        "product": 0.211,
-        "technical": 0.413,
-        "businessModel": 0.148,
-        "goToMarket": 0.255,
-        "founder": 0.05,
-        "disruption": 0.135,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_layer",
@@ -13316,31 +12748,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.34,
-        "problem": 0.297,
-        "customer": 0.055,
-        "product": 0.151,
-        "technical": 0,
-        "businessModel": 0.6,
-        "goToMarket": 0.292,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.247,
-        "customer": 0,
-        "product": 0.059,
-        "technical": 0.357,
-        "businessModel": 0.129,
-        "goToMarket": 0.364,
-        "founder": 0,
-        "disruption": 0.058,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_formance",
@@ -13353,31 +12761,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.333,
-        "problem": 0.305,
-        "customer": 0.262,
-        "product": 0.138,
-        "technical": 0,
-        "businessModel": 0.272,
-        "goToMarket": 0.331,
-        "founder": 0.338,
-        "disruption": 0,
-        "regulatory": 0.442
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.238,
-        "customer": 0.068,
-        "product": 0.075,
-        "technical": 0.034,
-        "businessModel": 0.099,
-        "goToMarket": 0.199,
-        "founder": 0.123,
-        "disruption": 0.042,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_default",
@@ -13390,31 +12774,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.005,
-        "problem": 0.402,
-        "customer": 0.162,
-        "product": 0.171,
-        "technical": 0.339,
-        "businessModel": 0.963,
-        "goToMarket": 0.303,
-        "founder": 0.095,
-        "disruption": 0.292,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.15,
-        "problem": 0.245,
-        "customer": 0.181,
-        "product": 0.144,
-        "technical": 0.378,
-        "businessModel": 0.148,
-        "goToMarket": 0.255,
-        "founder": 0,
-        "disruption": 0.091,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_pickle",
@@ -13427,31 +12787,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.008,
-        "problem": 0.289,
-        "customer": 0.516,
-        "product": 0.079,
-        "technical": 0.022,
-        "businessModel": 0.175,
-        "goToMarket": 0.27,
-        "founder": 0.172,
-        "disruption": 0.21,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.119,
-        "problem": 0.331,
-        "customer": 0.531,
-        "product": 0.095,
-        "technical": 0.208,
-        "businessModel": 0.385,
-        "goToMarket": 0.335,
-        "founder": 0.049,
-        "disruption": 0.267,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_artisan",
@@ -13464,31 +12800,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.342,
-        "customer": 0.289,
-        "product": 0.433,
-        "technical": 0.326,
-        "businessModel": 0.963,
-        "goToMarket": 0.183,
-        "founder": 0.009,
-        "disruption": 0.072,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.003,
-        "problem": 0.292,
-        "customer": 0.192,
-        "product": 0.447,
-        "technical": 0.356,
-        "businessModel": 0.148,
-        "goToMarket": 0.193,
-        "founder": 0.508,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_straddle",
@@ -13501,31 +12813,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.629,
-        "problem": 0.568,
-        "customer": 0.174,
-        "product": 0.428,
-        "technical": 0.364,
-        "businessModel": 0.487,
-        "goToMarket": 0.094,
-        "founder": 0,
-        "disruption": 0.245,
-        "regulatory": 0.322
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.265,
-        "customer": 0.105,
-        "product": 0.052,
-        "technical": 0.198,
-        "businessModel": 0.069,
-        "goToMarket": 0.364,
-        "founder": 0,
-        "disruption": 0.056,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_prophet_security",
@@ -13538,31 +12826,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.12,
-        "problem": 0.294,
-        "customer": 0.421,
-        "product": 0,
-        "technical": 0.068,
-        "businessModel": 0.167,
-        "goToMarket": 1,
-        "founder": 0.189,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.21,
-        "customer": 0,
-        "product": 0.302,
-        "technical": 0.309,
-        "businessModel": 0.106,
-        "goToMarket": 0.158,
-        "founder": 0,
-        "disruption": 0.002,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_kula",
@@ -13575,31 +12839,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.142,
-        "problem": 0.35,
-        "customer": 0.166,
-        "product": 0.11,
-        "technical": 0.402,
-        "businessModel": 0.963,
-        "goToMarket": 0.464,
-        "founder": 0.344,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.075,
-        "problem": 0.273,
-        "customer": 0.072,
-        "product": 0.135,
-        "technical": 0.547,
-        "businessModel": 0.148,
-        "goToMarket": 0.298,
-        "founder": 0.05,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_222",
@@ -13612,31 +12852,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.126,
-        "problem": 0.286,
-        "customer": 0.528,
-        "product": 0.776,
-        "technical": 0.365,
-        "businessModel": 0.248,
-        "goToMarket": 0.289,
-        "founder": 0.231,
-        "disruption": 0.119,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.117,
-        "problem": 0.286,
-        "customer": 0.439,
-        "product": 0.393,
-        "technical": 0.362,
-        "businessModel": 0.01,
-        "goToMarket": 0.26,
-        "founder": 0.032,
-        "disruption": 0.05,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_e2b",
@@ -13649,31 +12865,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.318,
-        "problem": 0.365,
-        "customer": 1,
-        "product": 0.025,
-        "technical": 0.004,
-        "businessModel": 0.925,
-        "goToMarket": 0.751,
-        "founder": 0.34,
-        "disruption": 0.07,
-        "regulatory": 0.374
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.126,
-        "customer": 0.023,
-        "product": 0.09,
-        "technical": 0.06,
-        "businessModel": 0.143,
-        "goToMarket": 0.271,
-        "founder": 0.002,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_browser_use",
@@ -13686,31 +12878,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.36,
-        "problem": 0.383,
-        "customer": 0.711,
-        "product": 0,
-        "technical": 0,
-        "businessModel": 0.925,
-        "goToMarket": 0.592,
-        "founder": 0.185,
-        "disruption": 0.155,
-        "regulatory": 0.281
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.247,
-        "customer": 0.022,
-        "product": 0.255,
-        "technical": 0.023,
-        "businessModel": 0.143,
-        "goToMarket": 0.194,
-        "founder": 0.028,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_bezel",
@@ -13723,31 +12891,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.192,
-        "customer": 0.526,
-        "product": 0.088,
-        "technical": 0.145,
-        "businessModel": 0.15,
-        "goToMarket": 0.306,
-        "founder": 0.187,
-        "disruption": 0.04,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.022,
-        "problem": 0.326,
-        "customer": 0.579,
-        "product": 0.167,
-        "technical": 0.419,
-        "businessModel": 0.325,
-        "goToMarket": 0.369,
-        "founder": 0.076,
-        "disruption": 0.204,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_texture",
@@ -13760,31 +12904,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.209,
-        "customer": 0.095,
-        "product": 0.018,
-        "technical": 0.012,
-        "businessModel": 0.963,
-        "goToMarket": 0.437,
-        "founder": 0.323,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.308,
-        "customer": 0.01,
-        "product": 0.195,
-        "technical": 0.2,
-        "businessModel": 0.148,
-        "goToMarket": 0.244,
-        "founder": 0,
-        "disruption": 0.03,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_mercoa",
@@ -13797,31 +12917,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.333,
-        "problem": 0.255,
-        "customer": 0,
-        "product": 0.3,
-        "technical": 0,
-        "businessModel": 0.333,
-        "goToMarket": 0.292,
-        "founder": 0.252,
-        "disruption": 0.028,
-        "regulatory": 0.027
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.02,
-        "problem": 0.262,
-        "customer": 0.036,
-        "product": 0.105,
-        "technical": 0.44,
-        "businessModel": 0.29,
-        "goToMarket": 0.364,
-        "founder": 0.041,
-        "disruption": 0.207,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_herald",
@@ -13834,31 +12930,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.392,
-        "problem": 0.171,
-        "customer": 0.007,
-        "product": 0.162,
-        "technical": 0,
-        "businessModel": 0.472,
-        "goToMarket": 0.013,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0.378
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.3,
-        "customer": 0.078,
-        "product": 0.128,
-        "technical": 0.523,
-        "businessModel": 0.041,
-        "goToMarket": 0.229,
-        "founder": 0,
-        "disruption": 0.256,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_contoro",
@@ -13871,31 +12943,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.165,
-        "problem": 0.279,
-        "customer": 0.132,
-        "product": 0.028,
-        "technical": 0,
-        "businessModel": 0.112,
-        "goToMarket": 0.817,
-        "founder": 0.131,
-        "disruption": 0.255,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.263,
-        "customer": 0.115,
-        "product": 0.206,
-        "technical": 0.091,
-        "businessModel": 0.142,
-        "goToMarket": 0.158,
-        "founder": 0,
-        "disruption": 0.059,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_beli",
@@ -13908,31 +12956,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.054,
-        "problem": 0.142,
-        "customer": 0.538,
-        "product": 0.404,
-        "technical": 0.418,
-        "businessModel": 0.274,
-        "goToMarket": 0.289,
-        "founder": 0.276,
-        "disruption": 0.137,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.117,
-        "problem": 0.372,
-        "customer": 0.535,
-        "product": 0.153,
-        "technical": 0.38,
-        "businessModel": 0.176,
-        "goToMarket": 0.284,
-        "founder": 0.158,
-        "disruption": 0.185,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_estuary",
@@ -13945,31 +12969,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.232,
-        "problem": 0.469,
-        "customer": 0.288,
-        "product": 0.005,
-        "technical": 0,
-        "businessModel": 0.084,
-        "goToMarket": 0.571,
-        "founder": 0.142,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.272,
-        "customer": 0,
-        "product": 0.088,
-        "technical": 0.024,
-        "businessModel": 0.044,
-        "goToMarket": 0.221,
-        "founder": 0.017,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_timeleft",
@@ -13982,31 +12982,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.126,
-        "problem": 0.227,
-        "customer": 0.537,
-        "product": 0.367,
-        "technical": 0.32,
-        "businessModel": 0.415,
-        "goToMarket": 0.322,
-        "founder": 0.64,
-        "disruption": 0.106,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.117,
-        "problem": 0.209,
-        "customer": 0.511,
-        "product": 0.093,
-        "technical": 0.195,
-        "businessModel": 0.103,
-        "goToMarket": 0.349,
-        "founder": 0.095,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_synthpop",
@@ -14019,31 +12995,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.206,
-        "customer": 0.059,
-        "product": 0.439,
-        "technical": 0.252,
-        "businessModel": 0.844,
-        "goToMarket": 0.52,
-        "founder": 0,
-        "disruption": 0.09,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.075,
-        "problem": 0.262,
-        "customer": 0,
-        "product": 0.252,
-        "technical": 0.301,
-        "businessModel": 0.124,
-        "goToMarket": 0.086,
-        "founder": 0,
-        "disruption": 0.108,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_summer_health",
@@ -14056,31 +13008,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.113,
-        "problem": 0.123,
-        "customer": 0.474,
-        "product": 0.286,
-        "technical": 0.027,
-        "businessModel": 0.324,
-        "goToMarket": 0.298,
-        "founder": 0.061,
-        "disruption": 0,
-        "regulatory": 0.074
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.084,
-        "problem": 0.213,
-        "customer": 0.508,
-        "product": 0,
-        "technical": 0.142,
-        "businessModel": 0.206,
-        "goToMarket": 0.199,
-        "founder": 0.429,
-        "disruption": 0.01,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_yope",
@@ -14093,31 +13021,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.147,
-        "problem": 0.217,
-        "customer": 0.628,
-        "product": 0.218,
-        "technical": 0.355,
-        "businessModel": 0.285,
-        "goToMarket": 0.283,
-        "founder": 0.098,
-        "disruption": 0.032,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.049,
-        "problem": 0.224,
-        "customer": 0.569,
-        "product": 0,
-        "technical": 0.269,
-        "businessModel": 0.061,
-        "goToMarket": 0.228,
-        "founder": 0,
-        "disruption": 0.145,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_firecrawl",
@@ -14130,31 +13034,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.429,
-        "problem": 0.348,
-        "customer": 1,
-        "product": 0.007,
-        "technical": 0,
-        "businessModel": 0.73,
-        "goToMarket": 0.474,
-        "founder": 0.226,
-        "disruption": 0.055,
-        "regulatory": 0.134
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.233,
-        "customer": 0,
-        "product": 0.171,
-        "technical": 0.22,
-        "businessModel": 0.093,
-        "goToMarket": 0.186,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_pie",
@@ -14167,31 +13047,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.126,
-        "problem": 0.279,
-        "customer": 0.558,
-        "product": 0.387,
-        "technical": 0.508,
-        "businessModel": 0.231,
-        "goToMarket": 0.025,
-        "founder": 0.489,
-        "disruption": 0.074,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.117,
-        "problem": 0.192,
-        "customer": 0.495,
-        "product": 0.12,
-        "technical": 0.389,
-        "businessModel": 0.016,
-        "goToMarket": 0.1,
-        "founder": 0.179,
-        "disruption": 0.099,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_chef_robotics",
@@ -14204,31 +13060,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.043,
-        "problem": 0.213,
-        "customer": 0.081,
-        "product": 0.31,
-        "technical": 0.323,
-        "businessModel": 0.496,
-        "goToMarket": 0.774,
-        "founder": 0.164,
-        "disruption": 0.278,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.27,
-        "customer": 0.297,
-        "product": 0.233,
-        "technical": 0.219,
-        "businessModel": 0.026,
-        "goToMarket": 0.158,
-        "founder": 0.088,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_daedalus",
@@ -14241,31 +13073,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.281,
-        "problem": 0.236,
-        "customer": 0.166,
-        "product": 0.003,
-        "technical": 0.08,
-        "businessModel": 0.165,
-        "goToMarket": 0.817,
-        "founder": 0,
-        "disruption": 0.169,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.196,
-        "customer": 0.153,
-        "product": 0.27,
-        "technical": 0.36,
-        "businessModel": 0.072,
-        "goToMarket": 0.158,
-        "founder": 0,
-        "disruption": 0.038,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_tobiko_data",
@@ -14278,31 +13086,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.173,
-        "problem": 0.349,
-        "customer": 0.606,
-        "product": 0.07,
-        "technical": 0.02,
-        "businessModel": 0.544,
-        "goToMarket": 0.699,
-        "founder": 0.016,
-        "disruption": 0.125,
-        "regulatory": 0.1
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.244,
-        "customer": 0.07,
-        "product": 0.192,
-        "technical": 0.174,
-        "businessModel": 0.114,
-        "goToMarket": 0.266,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_chowdeck",
@@ -14315,31 +13099,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.146,
-        "problem": 0.168,
-        "customer": 0.461,
-        "product": 0.182,
-        "technical": 0.206,
-        "businessModel": 0.394,
-        "goToMarket": 0.158,
-        "founder": 0.231,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.198,
-        "problem": 0.196,
-        "customer": 0.488,
-        "product": 0.302,
-        "technical": 0.236,
-        "businessModel": 0.329,
-        "goToMarket": 0.17,
-        "founder": 0.032,
-        "disruption": 0.113,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_tandem_health",
@@ -14352,31 +13112,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.183,
-        "problem": 0.419,
-        "customer": 0.128,
-        "product": 0,
-        "technical": 0,
-        "businessModel": 0.046,
-        "goToMarket": 0.344,
-        "founder": 0.184,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.251,
-        "customer": 0.006,
-        "product": 0,
-        "technical": 0.156,
-        "businessModel": 0.063,
-        "goToMarket": 0.155,
-        "founder": 0.074,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_turso",
@@ -14389,31 +13125,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.15,
-        "problem": 0.462,
-        "customer": 0.791,
-        "product": 0.019,
-        "technical": 0,
-        "businessModel": 0.361,
-        "goToMarket": 0.425,
-        "founder": 0.041,
-        "disruption": 0.134,
-        "regulatory": 0.1
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.192,
-        "customer": 0.034,
-        "product": 0,
-        "technical": 0.014,
-        "businessModel": 0.057,
-        "goToMarket": 0.14,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_twine_security",
@@ -14426,31 +13138,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.356,
-        "customer": 0.037,
-        "product": 0.401,
-        "technical": 0.307,
-        "businessModel": 0.631,
-        "goToMarket": 0.444,
-        "founder": 0.039,
-        "disruption": 0.187,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.24,
-        "customer": 0.098,
-        "product": 0.357,
-        "technical": 0.34,
-        "businessModel": 0.106,
-        "goToMarket": 0.231,
-        "founder": 0,
-        "disruption": 0.086,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_concourse",
@@ -14463,31 +13151,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.505,
-        "problem": 0.312,
-        "customer": 0.383,
-        "product": 0.012,
-        "technical": 0.055,
-        "businessModel": 0.075,
-        "goToMarket": 0.595,
-        "founder": 0,
-        "disruption": 0.09,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.303,
-        "customer": 0.167,
-        "product": 0.347,
-        "technical": 0.211,
-        "businessModel": 0.056,
-        "goToMarket": 0.249,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_lindy",
@@ -14500,31 +13164,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.344,
-        "customer": 0.148,
-        "product": 0.466,
-        "technical": 0.438,
-        "businessModel": 0.615,
-        "goToMarket": 0.49,
-        "founder": 0,
-        "disruption": 0.116,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.226,
-        "customer": 0.07,
-        "product": 0.32,
-        "technical": 0.347,
-        "businessModel": 0.096,
-        "goToMarket": 0.291,
-        "founder": 0.068,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_anyware_robotics",
@@ -14537,31 +13177,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.03,
-        "problem": 0.193,
-        "customer": 0.204,
-        "product": 0.373,
-        "technical": 0.115,
-        "businessModel": 0.496,
-        "goToMarket": 0.774,
-        "founder": 0.106,
-        "disruption": 0.261,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.161,
-        "customer": 0.127,
-        "product": 0.229,
-        "technical": 0.191,
-        "businessModel": 0.026,
-        "goToMarket": 0.158,
-        "founder": 0.06,
-        "disruption": 0.069,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_aembit",
@@ -14574,31 +13190,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.108,
-        "problem": 0.328,
-        "customer": 0.369,
-        "product": 0.026,
-        "technical": 0.269,
-        "businessModel": 0.102,
-        "goToMarket": 0.765,
-        "founder": 0.458,
-        "disruption": 0.225,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.178,
-        "customer": 0.018,
-        "product": 0.083,
-        "technical": 0,
-        "businessModel": 0.133,
-        "goToMarket": 0.142,
-        "founder": 0.093,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_delphi",
@@ -14611,31 +13203,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.029,
-        "problem": 0.332,
-        "customer": 0.316,
-        "product": 0.336,
-        "technical": 0.27,
-        "businessModel": 0.416,
-        "goToMarket": 0.19,
-        "founder": 0,
-        "disruption": 0.282,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.103,
-        "problem": 0.306,
-        "customer": 0.321,
-        "product": 0.384,
-        "technical": 0.223,
-        "businessModel": 0.024,
-        "goToMarket": 0.19,
-        "founder": 0,
-        "disruption": 0.309,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_twentyeight_health",
@@ -14648,31 +13216,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.09,
-        "problem": 0.357,
-        "customer": 0.117,
-        "product": 0.123,
-        "technical": 0,
-        "businessModel": 0.111,
-        "goToMarket": 0.111,
-        "founder": 0.432,
-        "disruption": 0.3,
-        "regulatory": 0.268
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.211,
-        "customer": 0.031,
-        "product": 0,
-        "technical": 0,
-        "businessModel": 0.242,
-        "goToMarket": 0.091,
-        "founder": 0.125,
-        "disruption": 0.095,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_runreveal",
@@ -14685,31 +13229,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.038,
-        "problem": 0.302,
-        "customer": 0.392,
-        "product": 0,
-        "technical": 0.12,
-        "businessModel": 0.562,
-        "goToMarket": 0.489,
-        "founder": 0.323,
-        "disruption": 0,
-        "regulatory": 0.1
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.238,
-        "customer": 0,
-        "product": 0.37,
-        "technical": 0.261,
-        "businessModel": 0.044,
-        "goToMarket": 0.036,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_cargado",
@@ -14722,31 +13242,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.07,
-        "problem": 0.404,
-        "customer": 0.518,
-        "product": 0.423,
-        "technical": 0.079,
-        "businessModel": 0.171,
-        "goToMarket": 0.129,
-        "founder": 0.446,
-        "disruption": 0.309,
-        "regulatory": 0.178
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.121,
-        "problem": 0.327,
-        "customer": 0.068,
-        "product": 0.155,
-        "technical": 0.221,
-        "businessModel": 0.396,
-        "goToMarket": 0.215,
-        "founder": 0.16,
-        "disruption": 0.126,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_terminal49",
@@ -14759,31 +13255,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.167,
-        "customer": 0.118,
-        "product": 0,
-        "technical": 0,
-        "businessModel": 0.17,
-        "goToMarket": 0.72,
-        "founder": 0.187,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.038,
-        "problem": 0.349,
-        "customer": 0.149,
-        "product": 0.128,
-        "technical": 0.254,
-        "businessModel": 0.04,
-        "goToMarket": 0.297,
-        "founder": 0.16,
-        "disruption": 0.093,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_theseus",
@@ -14796,31 +13268,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.015,
-        "problem": 0.222,
-        "customer": 0.173,
-        "product": 0,
-        "technical": 0,
-        "businessModel": 0,
-        "goToMarket": 0.699,
-        "founder": 0.293,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.213,
-        "customer": 0.163,
-        "product": 0.122,
-        "technical": 0.17,
-        "businessModel": 0,
-        "goToMarket": 0.197,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_partiful",
@@ -14833,31 +13281,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.044,
-        "problem": 0.128,
-        "customer": 0.571,
-        "product": 0.318,
-        "technical": 0.243,
-        "businessModel": 0.199,
-        "goToMarket": 0.293,
-        "founder": 0.193,
-        "disruption": 0.05,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.085,
-        "problem": 0.137,
-        "customer": 0.59,
-        "product": 0,
-        "technical": 0.116,
-        "businessModel": 0.1,
-        "goToMarket": 0.3,
-        "founder": 0.02,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_edera",
@@ -14870,31 +13294,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.386,
-        "customer": 0.604,
-        "product": 0.178,
-        "technical": 0.042,
-        "businessModel": 0.524,
-        "goToMarket": 0.348,
-        "founder": 0.12,
-        "disruption": 0.105,
-        "regulatory": 0.06
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.132,
-        "customer": 0,
-        "product": 0.138,
-        "technical": 0,
-        "businessModel": 0.054,
-        "goToMarket": 0.206,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_chronicle",
@@ -14907,31 +13307,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.117,
-        "problem": 0.309,
-        "customer": 0.175,
-        "product": 0.422,
-        "technical": 0.125,
-        "businessModel": 0.543,
-        "goToMarket": 0.098,
-        "founder": 0.04,
-        "disruption": 0.18,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.197,
-        "customer": 0.164,
-        "product": 0.356,
-        "technical": 0.224,
-        "businessModel": 0.091,
-        "goToMarket": 0.263,
-        "founder": 0.212,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_nudge_security",
@@ -14944,31 +13320,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.205,
-        "problem": 0.407,
-        "customer": 0.016,
-        "product": 0.442,
-        "technical": 0.243,
-        "businessModel": 0.359,
-        "goToMarket": 0.137,
-        "founder": 0.29,
-        "disruption": 0,
-        "regulatory": 0.069
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.265,
-        "customer": 0.045,
-        "product": 0.331,
-        "technical": 0.258,
-        "businessModel": 0.115,
-        "goToMarket": 0.154,
-        "founder": 0.066,
-        "disruption": 0.091,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_lithos_carbon",
@@ -14981,31 +13333,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.214,
-        "customer": 0.051,
-        "product": 0,
-        "technical": 0,
-        "businessModel": 0.047,
-        "goToMarket": 0.572,
-        "founder": 0.144,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.192,
-        "customer": 0.209,
-        "product": 0.016,
-        "technical": 0.018,
-        "businessModel": 0,
-        "goToMarket": 0.128,
-        "founder": 0.154,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_thena",
@@ -15018,31 +13346,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.05,
-        "problem": 0.221,
-        "customer": 0.027,
-        "product": 0,
-        "technical": 0.33,
-        "businessModel": 0.736,
-        "goToMarket": 0.453,
-        "founder": 0,
-        "disruption": 0.163,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.126,
-        "problem": 0.281,
-        "customer": 0.154,
-        "product": 0,
-        "technical": 0.257,
-        "businessModel": 0.12,
-        "goToMarket": 0.268,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_cartken",
@@ -15055,31 +13359,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.138,
-        "problem": 0.261,
-        "customer": 0.244,
-        "product": 0.065,
-        "technical": 0,
-        "businessModel": 0.037,
-        "goToMarket": 0.631,
-        "founder": 0.15,
-        "disruption": 0.063,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.295,
-        "customer": 0.212,
-        "product": 0.255,
-        "technical": 0.146,
-        "businessModel": 0,
-        "goToMarket": 0.348,
-        "founder": 0,
-        "disruption": 0.095,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_p0_security",
@@ -15092,31 +13372,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.145,
-        "problem": 0.325,
-        "customer": 0.408,
-        "product": 0.021,
-        "technical": 0.386,
-        "businessModel": 0.167,
-        "goToMarket": 0.588,
-        "founder": 0.513,
-        "disruption": 0.155,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.226,
-        "customer": 0.025,
-        "product": 0.152,
-        "technical": 0.171,
-        "businessModel": 0.106,
-        "goToMarket": 0.199,
-        "founder": 0.057,
-        "disruption": 0.051,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_legion_health",
@@ -15129,31 +13385,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.102,
-        "problem": 0.368,
-        "customer": 0.249,
-        "product": 0.464,
-        "technical": 0.352,
-        "businessModel": 0.052,
-        "goToMarket": 0.382,
-        "founder": 0,
-        "disruption": 0.042,
-        "regulatory": 0.009
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.212,
-        "customer": 0.238,
-        "product": 0.151,
-        "technical": 0.364,
-        "businessModel": 0,
-        "goToMarket": 0.188,
-        "founder": 0.176,
-        "disruption": 0.111,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_napkin",
@@ -15166,31 +13398,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.098,
-        "problem": 0.283,
-        "customer": 0.105,
-        "product": 0.416,
-        "technical": 0.097,
-        "businessModel": 0.543,
-        "goToMarket": 0.084,
-        "founder": 0,
-        "disruption": 0.338,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.218,
-        "customer": 0.108,
-        "product": 0.264,
-        "technical": 0.144,
-        "businessModel": 0.091,
-        "goToMarket": 0.228,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_sohar_health",
@@ -15203,31 +13411,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.165,
-        "problem": 0.341,
-        "customer": 0.044,
-        "product": 0.028,
-        "technical": 0.408,
-        "businessModel": 0,
-        "goToMarket": 0.354,
-        "founder": 0.05,
-        "disruption": 0.281,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.257,
-        "customer": 0.134,
-        "product": 0.18,
-        "technical": 0.484,
-        "businessModel": 0.02,
-        "goToMarket": 0.268,
-        "founder": 0,
-        "disruption": 0.083,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_bevel",
@@ -15240,31 +13424,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.559,
-        "problem": 0.253,
-        "customer": 0.295,
-        "product": 0.762,
-        "technical": 0.588,
-        "businessModel": 0.492,
-        "goToMarket": 0.197,
-        "founder": 0.132,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.096,
-        "problem": 0.28,
-        "customer": 0.293,
-        "product": 0.312,
-        "technical": 0.515,
-        "businessModel": 0.107,
-        "goToMarket": 0.274,
-        "founder": 0.351,
-        "disruption": 0.117,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_isembard",
@@ -15277,31 +13437,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.002,
-        "problem": 0.233,
-        "customer": 0,
-        "product": 0.134,
-        "technical": 0,
-        "businessModel": 0,
-        "goToMarket": 0.478,
-        "founder": 0.21,
-        "disruption": 0.006,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.248,
-        "customer": 0.089,
-        "product": 0.241,
-        "technical": 0.042,
-        "businessModel": 0,
-        "goToMarket": 0.248,
-        "founder": 0.085,
-        "disruption": 0.202,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_ello",
@@ -15314,31 +13450,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.145,
-        "problem": 0.216,
-        "customer": 0,
-        "product": 0.447,
-        "technical": 0.174,
-        "businessModel": 0.301,
-        "goToMarket": 0.252,
-        "founder": 0.089,
-        "disruption": 0,
-        "regulatory": 0.233
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.191,
-        "customer": 0,
-        "product": 0.303,
-        "technical": 0.117,
-        "businessModel": 0.024,
-        "goToMarket": 0.313,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_freed",
@@ -15351,31 +13463,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.298,
-        "problem": 0.316,
-        "customer": 0.234,
-        "product": 0.523,
-        "technical": 0.074,
-        "businessModel": 0.412,
-        "goToMarket": 0.38,
-        "founder": 0.206,
-        "disruption": 0,
-        "regulatory": 0.084
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.199,
-        "customer": 0.198,
-        "product": 0.275,
-        "technical": 0.093,
-        "businessModel": 0.119,
-        "goToMarket": 0.252,
-        "founder": 0,
-        "disruption": 0.085,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_kick",
@@ -15388,31 +13476,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.339,
-        "problem": 0.339,
-        "customer": 0.271,
-        "product": 0.238,
-        "technical": 0.326,
-        "businessModel": 0.155,
-        "goToMarket": 0.206,
-        "founder": 0.511,
-        "disruption": 0.072,
-        "regulatory": 0.081
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.28,
-        "customer": 0.106,
-        "product": 0.164,
-        "technical": 0.471,
-        "businessModel": 0.055,
-        "goToMarket": 0.356,
-        "founder": 0.048,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_bayou_energy",
@@ -15425,31 +13489,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.077,
-        "problem": 0.284,
-        "customer": 0.061,
-        "product": 0,
-        "technical": 0.133,
-        "businessModel": 0.178,
-        "goToMarket": 0.085,
-        "founder": 0.518,
-        "disruption": 0.187,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.266,
-        "customer": 0.039,
-        "product": 0.13,
-        "technical": 0.247,
-        "businessModel": 0,
-        "goToMarket": 0.262,
-        "founder": 0.008,
-        "disruption": 0.096,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_howie",
@@ -15462,31 +13502,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.243,
-        "customer": 0.124,
-        "product": 0.389,
-        "technical": 0.255,
-        "businessModel": 0.705,
-        "goToMarket": 0.189,
-        "founder": 0.15,
-        "disruption": 0.252,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.228,
-        "customer": 0.212,
-        "product": 0.267,
-        "technical": 0.201,
-        "businessModel": 0.103,
-        "goToMarket": 0.297,
-        "founder": 0.13,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_happenstance",
@@ -15499,31 +13515,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.067,
-        "problem": 0.287,
-        "customer": 0.154,
-        "product": 0,
-        "technical": 0.09,
-        "businessModel": 0,
-        "goToMarket": 0.05,
-        "founder": 0.018,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.292,
-        "customer": 0.142,
-        "product": 0.381,
-        "technical": 0.233,
-        "businessModel": 0,
-        "goToMarket": 0.222,
-        "founder": 0,
-        "disruption": 0.122,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_brisk_teaching",
@@ -15536,31 +13528,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.26,
-        "problem": 0.29,
-        "customer": 0.018,
-        "product": 0.496,
-        "technical": 0.275,
-        "businessModel": 0.244,
-        "goToMarket": 0.043,
-        "founder": 0,
-        "disruption": 0.163,
-        "regulatory": 0.201
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.152,
-        "customer": 0.003,
-        "product": 0.36,
-        "technical": 0.198,
-        "businessModel": 0.053,
-        "goToMarket": 0.273,
-        "founder": 0.11,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_schoolai",
@@ -15573,31 +13541,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.471,
-        "problem": 0.164,
-        "customer": 0.082,
-        "product": 0,
-        "technical": 0.111,
-        "businessModel": 0.439,
-        "goToMarket": 0.356,
-        "founder": 0.125,
-        "disruption": 0.047,
-        "regulatory": 0.459
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.151,
-        "customer": 0.09,
-        "product": 0.469,
-        "technical": 0.297,
-        "businessModel": 0.07,
-        "goToMarket": 0.197,
-        "founder": 0.124,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_millie",
@@ -15610,31 +13554,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.019,
-        "problem": 0.245,
-        "customer": 0.02,
-        "product": 0,
-        "technical": 0,
-        "businessModel": 0.058,
-        "goToMarket": 0.114,
-        "founder": 0.303,
-        "disruption": 0,
-        "regulatory": 0.136
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.162,
-        "customer": 0.34,
-        "product": 0,
-        "technical": 0.059,
-        "businessModel": 0,
-        "goToMarket": 0.119,
-        "founder": 0,
-        "disruption": 0.021,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_rwazi",
@@ -15647,31 +13567,7 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": [],
-      "dimensionsVsWinner": {
-        "industry": 0.5,
-        "problem": 0.206,
-        "customer": 0.34,
-        "product": 0.253,
-        "technical": 0.269,
-        "businessModel": 0.676,
-        "goToMarket": 0.646,
-        "founder": 0.048,
-        "disruption": 0.299,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.075,
-        "problem": 0.337,
-        "customer": 0.749,
-        "product": 0.329,
-        "technical": 0.384,
-        "businessModel": 0.082,
-        "goToMarket": 0.21,
-        "founder": 0.027,
-        "disruption": 0.138,
-        "regulatory": 0
-      }
+      "unresolvedRisks": []
     },
     {
       "companyId": "co_patronus_ai",
@@ -15685,31 +13581,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.049,
-        "problem": 0.438,
-        "customer": 0.303,
-        "product": 0,
-        "technical": 0,
-        "businessModel": 0.299,
-        "goToMarket": 1,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.234,
-        "customer": 0.033,
-        "product": 0.464,
-        "technical": 0.203,
-        "businessModel": 0.131,
-        "goToMarket": 0.158,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_braintrust",
@@ -15723,31 +13595,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.409,
-        "problem": 0.385,
-        "customer": 0.888,
-        "product": 0.003,
-        "technical": 0.155,
-        "businessModel": 0.783,
-        "goToMarket": 0.617,
-        "founder": 0.113,
-        "disruption": 0.007,
-        "regulatory": 0.661
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.26,
-        "customer": 0.049,
-        "product": 0.469,
-        "technical": 0.093,
-        "businessModel": 0.16,
-        "goToMarket": 0.263,
-        "founder": 0.017,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_dust",
@@ -15761,31 +13609,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.409,
-        "problem": 0.528,
-        "customer": 0.781,
-        "product": 0,
-        "technical": 0.082,
-        "businessModel": 0.166,
-        "goToMarket": 0.666,
-        "founder": 0.082,
-        "disruption": 0.218,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.266,
-        "customer": 0.144,
-        "product": 0.345,
-        "technical": 0.112,
-        "businessModel": 0.142,
-        "goToMarket": 0.268,
-        "founder": 0,
-        "disruption": 0.095,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_squint",
@@ -15799,31 +13623,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.195,
-        "problem": 0.27,
-        "customer": 0.442,
-        "product": 0.116,
-        "technical": 0.031,
-        "businessModel": 0.139,
-        "goToMarket": 1,
-        "founder": 0.163,
-        "disruption": 0.081,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.282,
-        "customer": 0.296,
-        "product": 0.356,
-        "technical": 0.208,
-        "businessModel": 0.177,
-        "goToMarket": 0.158,
-        "founder": 0.373,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_numeric",
@@ -15837,31 +13637,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.47,
-        "problem": 0.325,
-        "customer": 0.639,
-        "product": 0.007,
-        "technical": 0.09,
-        "businessModel": 0.219,
-        "goToMarket": 1,
-        "founder": 0.191,
-        "disruption": 0.097,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.242,
-        "customer": 0.122,
-        "product": 0.422,
-        "technical": 0.441,
-        "businessModel": 0.11,
-        "goToMarket": 0.158,
-        "founder": 0.105,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_happyrobot",
@@ -15875,31 +13651,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.193,
-        "problem": 0.292,
-        "customer": 0.239,
-        "product": 0.018,
-        "technical": 0.117,
-        "businessModel": 0.219,
-        "goToMarket": 1,
-        "founder": 0.112,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.022,
-        "problem": 0.258,
-        "customer": 0.127,
-        "product": 0.412,
-        "technical": 0.331,
-        "businessModel": 0.11,
-        "goToMarket": 0.158,
-        "founder": 0.08,
-        "disruption": 0.06,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_spellbook",
@@ -15913,31 +13665,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.095,
-        "problem": 0.259,
-        "customer": 0.013,
-        "product": 0.32,
-        "technical": 0.028,
-        "businessModel": 0.963,
-        "goToMarket": 0.28,
-        "founder": 0.017,
-        "disruption": 0.258,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.176,
-        "customer": 0.052,
-        "product": 0.257,
-        "technical": 0,
-        "businessModel": 0.148,
-        "goToMarket": 0.17,
-        "founder": 0.155,
-        "disruption": 0.012,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_basis",
@@ -15951,31 +13679,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.228,
-        "customer": 0.031,
-        "product": 0.418,
-        "technical": 0.47,
-        "businessModel": 0.716,
-        "goToMarket": 0.305,
-        "founder": 0.112,
-        "disruption": 0.12,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.159,
-        "customer": 0.026,
-        "product": 0.291,
-        "technical": 0.153,
-        "businessModel": 0.11,
-        "goToMarket": 0.089,
-        "founder": 0.139,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_eve",
@@ -15989,31 +13693,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.05,
-        "problem": 0.2,
-        "customer": 0,
-        "product": 0.227,
-        "technical": 0.084,
-        "businessModel": 0.716,
-        "goToMarket": 0.299,
-        "founder": 0.042,
-        "disruption": 0.07,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.183,
-        "customer": 0.087,
-        "product": 0.38,
-        "technical": 0.086,
-        "businessModel": 0.11,
-        "goToMarket": 0.094,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_anterior",
@@ -16027,31 +13707,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.073,
-        "problem": 0.207,
-        "customer": 0.077,
-        "product": 0.397,
-        "technical": 0.521,
-        "businessModel": 0.57,
-        "goToMarket": 0.325,
-        "founder": 0,
-        "disruption": 0.232,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.243,
-        "customer": 0.181,
-        "product": 0.282,
-        "technical": 0.246,
-        "businessModel": 0.149,
-        "goToMarket": 0.037,
-        "founder": 0.043,
-        "disruption": 0.009,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_fay",
@@ -16065,31 +13721,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.02,
-        "problem": 0.245,
-        "customer": 0.191,
-        "product": 0.104,
-        "technical": 0.174,
-        "businessModel": 0.151,
-        "goToMarket": 0.312,
-        "founder": 0.028,
-        "disruption": 0.072,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.226,
-        "customer": 0.205,
-        "product": 0.07,
-        "technical": 0.338,
-        "businessModel": 0.301,
-        "goToMarket": 0.24,
-        "founder": 0.095,
-        "disruption": 0.132,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_posh",
@@ -16103,31 +13735,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.084,
-        "problem": 0.185,
-        "customer": 0.52,
-        "product": 0.129,
-        "technical": 0.27,
-        "businessModel": 0.208,
-        "goToMarket": 0.216,
-        "founder": 0.236,
-        "disruption": 0.243,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.163,
-        "problem": 0.246,
-        "customer": 0.468,
-        "product": 0.113,
-        "technical": 0.29,
-        "businessModel": 0.327,
-        "goToMarket": 0.269,
-        "founder": 0,
-        "disruption": 0.294,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_fyxer",
@@ -16141,31 +13749,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.17,
-        "problem": 0.346,
-        "customer": 0.559,
-        "product": 0,
-        "technical": 0,
-        "businessModel": 0.075,
-        "goToMarket": 0.496,
-        "founder": 0.25,
-        "disruption": 0.105,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.081,
-        "customer": 0.121,
-        "product": 0.273,
-        "technical": 0.163,
-        "businessModel": 0.103,
-        "goToMarket": 0.187,
-        "founder": 0.131,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_sereact",
@@ -16179,31 +13763,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.306,
-        "problem": 0.46,
-        "customer": 0.167,
-        "product": 0,
-        "technical": 0,
-        "businessModel": 0.191,
-        "goToMarket": 0.817,
-        "founder": 0,
-        "disruption": 0.093,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.294,
-        "customer": 0.186,
-        "product": 0.487,
-        "technical": 0.166,
-        "businessModel": 0.057,
-        "goToMarket": 0.158,
-        "founder": 0,
-        "disruption": 0.03,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_orbital_materials",
@@ -16217,31 +13777,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0,
-        "problem": 0.239,
-        "customer": 0,
-        "product": 0,
-        "technical": 0,
-        "businessModel": 0.19,
-        "goToMarket": 0.143,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0.248
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.272,
-        "customer": 0.093,
-        "product": 0.4,
-        "technical": 0.238,
-        "businessModel": 0.096,
-        "goToMarket": 0.284,
-        "founder": 0,
-        "disruption": 0.094,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_matic",
@@ -16255,31 +13791,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.123,
-        "problem": 0.267,
-        "customer": 0.499,
-        "product": 0.407,
-        "technical": 0.255,
-        "businessModel": 0.326,
-        "goToMarket": 0.356,
-        "founder": 0.24,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0,
-        "problem": 0.289,
-        "customer": 0.442,
-        "product": 0.226,
-        "technical": 0.212,
-        "businessModel": 0.159,
-        "goToMarket": 0.156,
-        "founder": 0.244,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_metaview",
@@ -16293,31 +13805,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.452,
-        "problem": 0.308,
-        "customer": 0.386,
-        "product": 0,
-        "technical": 0.206,
-        "businessModel": 0.231,
-        "goToMarket": 0.837,
-        "founder": 0.101,
-        "disruption": 0,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.075,
-        "problem": 0.23,
-        "customer": 0.109,
-        "product": 0.19,
-        "technical": 0.457,
-        "businessModel": 0.148,
-        "goToMarket": 0.14,
-        "founder": 0,
-        "disruption": 0,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_campfire",
@@ -16331,31 +13819,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.801,
-        "problem": 0.48,
-        "customer": 0.67,
-        "product": 0.143,
-        "technical": 0,
-        "businessModel": 0.231,
-        "goToMarket": 0.837,
-        "founder": 0.101,
-        "disruption": 0.158,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.168,
-        "problem": 0.229,
-        "customer": 0.084,
-        "product": 0.319,
-        "technical": 0.102,
-        "businessModel": 0.148,
-        "goToMarket": 0.14,
-        "founder": 0,
-        "disruption": 0.086,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     },
     {
       "companyId": "co_doss",
@@ -16369,31 +13833,7 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages",
-      "dimensionsVsWinner": {
-        "industry": 0.801,
-        "problem": 0.381,
-        "customer": 0.501,
-        "product": 0.16,
-        "technical": 0.195,
-        "businessModel": 0.231,
-        "goToMarket": 0.837,
-        "founder": 0.065,
-        "disruption": 0.121,
-        "regulatory": 0
-      },
-      "dimensionsVsRejected": {
-        "industry": 0.168,
-        "problem": 0.304,
-        "customer": 0.287,
-        "product": 0.172,
-        "technical": 0.289,
-        "businessModel": 0.148,
-        "goToMarket": 0.14,
-        "founder": 0.05,
-        "disruption": 0.013,
-        "regulatory": 0
-      }
+      "eliminationReason": "stage series_b not in fund's preferred stages"
     }
   ],
   "finalists": [
@@ -16444,14 +13884,12 @@
         {
           "name": "Jesse Buckingham",
           "role": "Co-founder",
-          "background": "Stanford graduate; former CEO of ASG LogisTech, a logistics operator, prior to co-founding Vooma.",
-          "photoUrl": "https://pbs.twimg.com/profile_images/1631688387865513984/v58JTGFF_400x400.jpg"
+          "background": "Stanford graduate; former CEO of ASG LogisTech, a logistics operator, prior to co-founding Vooma."
         },
         {
           "name": "Mike Carter",
           "role": "Co-founder",
-          "background": "Stanford graduate; former founding engineer at Kodiak Robotics, an autonomous-trucking company, prior to co-founding Vooma.",
-          "photoUrl": "https://techcrunch.com/wp-content/uploads/2024/10/headshot-e1729047742205.jpeg?w=668"
+          "background": "Stanford graduate; former founding engineer at Kodiak Robotics, an autonomous-trucking company, prior to co-founding Vooma."
         }
       ],
       "stage": "series_a",
@@ -16541,8 +13979,7 @@
         {
           "name": "Sarah Wooders",
           "role": "Co-founder and CTO",
-          "background": "Co-authored the MemGPT research paper introducing self-editing memory for LLMs; UC Berkeley Sky Computing Lab.",
-          "photoUrl": "https://i.ytimg.com/vi/VgttOIWfoeo/maxresdefault.jpg"
+          "background": "Co-authored the MemGPT research paper introducing self-editing memory for LLMs; UC Berkeley Sky Computing Lab."
         }
       ],
       "stage": "seed",
@@ -16627,8 +14064,7 @@
         {
           "name": "Jennifer Wilcox",
           "role": "Chief Scientist (not a founder)",
-          "background": "Former Principal Deputy Assistant Secretary at the U.S. Department of Energy; published foundational carbon-dioxide-removal research.",
-          "photoUrl": "https://www.unr.edu/main/images/colleges-schools/science/energy-solutions-exchange/profile/jen-wilcox-profile.jpg"
+          "background": "Former Principal Deputy Assistant Secretary at the U.S. Department of Energy; published foundational carbon-dioxide-removal research."
         },
         {
           "name": "Stacy Kauk",

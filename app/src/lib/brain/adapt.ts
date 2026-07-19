@@ -486,6 +486,7 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
       type: c.type,
       label: c.name,
       score: c.fitScore,
+      size: c.model?.arr,
       position: hasSemanticPosition ? [semanticPosition.x!, semanticPosition.y!, semanticPosition.z!] : undefined,
     })
     edges.push({ source: c.id, target: marketId(marketLabelFor(c)), kind: 'market', weight: 0.4 })

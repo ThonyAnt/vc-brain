@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { findNearestCompanies } from "./similarity.js";
 import { fundFit, rankCandidates, normalizeUsd, displayFitScore } from "./fundfit.js";
 import { buildMarketLandscape } from "./landscape.js";
+import { broadMarketLabel } from "./labelClusters.js";
 import { emitGraphEvent } from "./events.js";
 import { createInitialState } from "../state.js";
 import * as fx from "../fixtures/sample.js";
@@ -128,6 +129,15 @@ describe("buildMarketLandscape", () => {
       type: "competition",
     });
     expect(land.edges.some((edge) => edge.type === "nearest")).toBe(true);
+  });
+});
+
+describe("broadMarketLabel", () => {
+  it("collapses narrow or vague labels into stable market families", () => {
+    expect(broadMarketLabel("B2B SaaS")).toBe("Enterprise AI");
+    expect(broadMarketLabel("Payments")).toBe("Fintech");
+    expect(broadMarketLabel("Logistics and supply chain")).toBe("Robotics & Logistics");
+    expect(broadMarketLabel("Technology")).toBe("Developer Tools");
   });
 });
 

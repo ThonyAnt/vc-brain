@@ -7,6 +7,8 @@ export interface GraphNode {
   type: NodeType
   label: string
   score?: number
+  /** Company operating scale in USD (currently ARR); drives rendered radius. */
+  size?: number
   position?: [number, number, number]
 }
 

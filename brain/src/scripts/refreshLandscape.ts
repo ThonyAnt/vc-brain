@@ -14,7 +14,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildMarketLandscape } from "../tools/landscape.js";
-import { labelClustersWithLLM } from "../tools/labelClusters.js";
+import { broadenClusterLabels, labelClustersWithLLM } from "../tools/labelClusters.js";
 import { OpenAILLMClient } from "../llm/openai.js";
 import type { VCBrainState } from "../state.js";
 import type { Company } from "../schemas/company.js";
@@ -37,6 +37,7 @@ if (process.env.OPENAI_API_KEY) {
   landscape = await labelClustersWithLLM(landscape, companies, new OpenAILLMClient({}));
   console.log("Cluster labels: LLM-named (modal auto-labels as fallback)");
 } else {
+  landscape = broadenClusterLabels(landscape);
   console.log("Cluster labels: modal auto-labels (set OPENAI_API_KEY for LLM naming)");
 }
 

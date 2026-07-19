@@ -107,7 +107,9 @@ export function buildMarketLandscape(
     3,
     clusters.map((cluster) => `cluster:${cluster.memberIndices.map((i) => companies[i]!.id).sort().join("|")}`),
   );
-  const anchorScale = radius * 2;
+  // Cluster clouds need enough breathing room for labels and edge inspection.
+  // A uniform anchor scale preserves all MDS distance ratios.
+  const anchorScale = radius * 1.7;
   const anchors = anchorCoordinates.map(([x = 0, y = 0, z = 0]) => ({
     x: x * anchorScale,
     y: y * anchorScale,
@@ -124,7 +126,9 @@ export function buildMarketLandscape(
     );
     const localCoordinates = classicalMds(memberDistances, 3, cl.members.map((member) => member.id));
     const anchor = anchors[clusterIndex] ?? { x: 0, y: 0, z: 0 };
-    const memberScale = radius * 0.9;
+    // Keep the pairwise geometry but make each market cloud tighter relative
+    // to the semantic distance between market anchors.
+    const memberScale = radius * 0.55;
     cl.members.forEach((m, i) => {
       const [x = 0, y = 0, z = 0] = localCoordinates[i] ?? [];
       nodes.push({

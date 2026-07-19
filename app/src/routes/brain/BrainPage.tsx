@@ -32,6 +32,7 @@ function discoveredToGraph(companies: Company[], graph: FundGraph): { nodes: Gra
       type: 'sourced',
       label: c.name,
       score: c.fitScore,
+      size: c.model?.arr,
       position: [anchor[0] + jitter(0), anchor[1] + jitter(8) * 0.7, anchor[2] + jitter(16)],
     })
     if (mkt) edges.push({ source: c.id, target: mkt.id, kind: 'market', weight: 0.4 })
@@ -135,7 +136,7 @@ export function BrainPage() {
         </div>
       )}
       <div style={hudMono} className="pointer-events-none absolute right-4 bottom-4">
-        drag orbit · scroll zoom · hover inspect · click focus · [ ] node size
+        node size = ARR · drag orbit · scroll zoom · hover nodes or edges · click focus
       </div>
       <div className="absolute right-4 bottom-12 z-20">
         <IncomingCalendar />

@@ -337,34 +337,38 @@
       "description": "Mem0 provides a critical memory layer for AI applications, showing strong developer traction with open-source adoption and API growth. The company's position as a model-neutral memory standard with a differentiated memory lifecycle provides a substantial moat. The investment is supported by the potential of Mem0 becoming a control point throughout AI applications, substantiated by strong usage and future growth potential.",
       "attributes": {
         "industryPath": [
-          "technology",
-          "artificial_intelligence"
+          "Software",
+          "AI Infrastructure",
+          "Agent memory and runtime"
         ],
         "productCategoryPath": [
-          "infrastructure",
-          "memory_management"
+          "Developer Tools",
+          "AI Agent Infrastructure",
+          "Agent memory platform"
         ],
         "targetCustomers": [
-          "AI developers",
-          "enterprise AI teams"
+          "AI application developers",
+          "Enterprise AI platform teams",
+          "Agent framework builders"
         ],
         "technicalApproaches": [
-          "control point for AI memory"
+          "Large language models",
+          "Stateful agent runtime",
+          "Open source core"
         ],
         "founderArchetypes": [
           "engineering-first team"
         ],
         "disruptionMechanisms": [
-          "portability",
-          "neutral-platform advantages"
+          "Replaces ad hoc RAG/context management",
+          "New agent-runtime primitive"
         ],
         "regulatoryLabels": [
-          "SOC 2",
-          "encryption guarantees"
+          "Pure software"
         ],
-        "businessModel": "usage SaaS plus OSS",
-        "goToMarket": "developer-first with enterprise focus",
-        "operationalModel": "lean team with rapid growth",
+        "businessModel": "Usage-based SaaS plus open source",
+        "goToMarket": "Developer-led / open source",
+        "operationalModel": "Pure software",
         "problemStatement": "AI applications lack a consistent memory layer capable of managing memory lifecycle efficiently.",
         "productDescription": "Mem0 provides a persistent memory layer for AI applications, offering managed services, open-source packages, and framework integrations for improved memory handling."
       },

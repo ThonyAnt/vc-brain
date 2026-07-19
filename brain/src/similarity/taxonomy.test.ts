@@ -29,4 +29,8 @@ describe("hierarchicalSimilarity", () => {
   it("is case-insensitive", () => {
     expect(hierarchicalSimilarity(["healthcare"], ["Healthcare"])).toBe(1);
   });
+  it("treats medicine, healthcare, fitness, and wellness as one broad market family", () => {
+    expect(hierarchicalSimilarity(["Medicine", "Clinical"], ["Healthcare", "Care delivery"])).toBe(1 / 2);
+    expect(hierarchicalSimilarity(["Fitness", "Consumer"], ["Wellness", "Consumer"])).toBe(1);
+  });
 });

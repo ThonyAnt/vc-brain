@@ -21,17 +21,50 @@ const ClusterLabelsSchema = z.object({
   ),
 });
 
-const LABELING_SYSTEM = `You name market clusters for a venture fund's market map. Each cluster
-groups startups by strategic similarity across problem, customer, product, technical approach,
-business model, and go-to-market — NOT just industry. For each cluster write ONE label:
-- 2-4 words, Title Case
-- names the shared strategic shape ("Agent Infrastructure", "Clinical Documentation AI",
-  "SMB Security Ops"), specific enough that a partner instantly knows what's inside
+const LABELING_SYSTEM = `You name broad market families for a venture fund's spatial portfolio map.
+Each cluster groups startups by strategic similarity, but its label must stay useful when zoomed out.
+For each cluster write ONE label:
+- 1-3 words, Title Case
+- use a familiar, broad market category. Prefer labels like "Healthcare", "Fintech",
+  "Cybersecurity", "Climate & Energy", "Robotics & Logistics", "Consumer Social",
+  "Education", "Enterprise AI", and "AI Infrastructure"
+- name the customer market, not a narrow feature or implementation detail
 - distinct from every other cluster's label
 - never a single member company's name, no trailing words like "Cluster" or "Companies"
-- the words "Solutions", "Technologies", "Tech", "Innovation", "Various", and "Software" are
-  BANNED — they say nothing. Name what the companies actually do ("Climate & Energy Ops",
-  "Adaptive Learning Agents") instead of abstracting to filler.`;
+- do not use mechanism-heavy modifiers like "AI-Enhanced", "Automated", "APIs and Wallets",
+  "Interfaces", "Operations", "Tools", or "Platforms" unless needed to distinguish two clusters
+- the words "Solutions", "Technologies", "Tech", "Innovation", "Various", and "Software" are banned.`;
+
+export function broadMarketLabel(label: string): string {
+  const normalized = label.trim();
+  if (/^(b2b saas|enterprise software|enterprise automation)$/i.test(normalized)) return "Enterprise AI";
+  if (/payments?|wallets?|financial infrastructure/i.test(normalized)) return "Fintech";
+  if (/^(social|event platforms?)$/i.test(normalized)) return "Consumer Social";
+  if (/logistics|supply chain|industrial automation/i.test(normalized)) return "Robotics & Logistics";
+  if (/persona platform|adaptive learning/i.test(normalized)) return "Education";
+  if (/^(data analytics|consumer applications?)$/i.test(normalized)) return "AI Applications";
+  if (/^(technology|developer infrastructure|developer platforms?)$/i.test(normalized)) return "Developer Tools";
+  if (/health|medical|medicine|fitness|wellness/i.test(normalized)) return "Healthcare";
+  if (/fintech|financial|wallet|banking/i.test(normalized)) return "Fintech";
+  if (/cyber|security/i.test(normalized)) return "Cybersecurity";
+  if (/climate|energy/i.test(normalized)) return "Climate & Energy";
+  if (/robot|logistics|industrial automation/i.test(normalized)) return "Robotics & Logistics";
+  if (/consumer|social|event/i.test(normalized)) return "Consumer Social";
+  if (/education|learning/i.test(normalized)) return "Education";
+  if (/agent infrastructure|ai infrastructure/i.test(normalized)) return "AI Infrastructure";
+  if (/enterprise ai|ai agents?/i.test(normalized)) return "Enterprise AI";
+  return normalized;
+}
+
+export function broadenClusterLabels(landscape: MarketLandscape): MarketLandscape {
+  return {
+    ...landscape,
+    clusters: landscape.clusters.map((cluster) => ({
+      ...cluster,
+      label: broadMarketLabel(cluster.label),
+    })),
+  };
+}
 
 export async function labelClustersWithLLM(
   landscape: MarketLandscape,
@@ -61,16 +94,17 @@ export async function labelClustersWithLLM(
     });
     const labelById = new Map(out.labels.map((l) => [l.clusterId, l.label.trim()]));
     const used = new Set<string>();
-    return {
+    return broadenClusterLabels({
       ...landscape,
       clusters: landscape.clusters.map((cl) => {
-        let label = labelById.get(cl.id) ?? "";
-        if (!label || used.has(label.toLowerCase())) label = cl.label; // fall back to the modal auto-label
+        let label = broadMarketLabel(labelById.get(cl.id) ?? "");
+        if (!label || used.has(label.toLowerCase())) label = broadMarketLabel(cl.label); // fall back to the modal auto-label
+        label = broadMarketLabel(label);
         used.add(label.toLowerCase());
         return { ...cl, label };
       }),
-    };
+    });
   } catch {
-    return landscape;
+    return broadenClusterLabels(landscape);
   }
 }

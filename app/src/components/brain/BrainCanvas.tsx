@@ -54,6 +54,7 @@ interface SceneNode {
   label: string
   role: string
   score?: number
+  companySize?: number
   cluster: number
   base: THREE.Vector3
   offset: THREE.Vector3
@@ -95,7 +96,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
 
     const markets = graph.nodes.filter((n) => n.type === 'market')
     const clusterCount = Math.max(markets.length, 1)
-    const POSITION_SCALE = 5.5
+    const POSITION_SCALE = 4.5
     const anchors = markets.map((market, i) => {
       if (market.position) return new THREE.Vector3(...market.position).multiplyScalar(POSITION_SCALE)
       const phi = Math.acos(1 - (2 * (i + 0.5)) / clusterCount)
@@ -146,6 +147,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         label: gn.label,
         role: gn.type,
         score: gn.score,
+        companySize: gn.size,
         cluster,
         base,
         offset: new THREE.Vector3(),
@@ -226,8 +228,19 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       if (n.role === 'rejected') return rejectedColor
       return sectorColors[n.cluster % sectorColors.length] // sourced + everything else: sector color
     }
-    const roleSize = (n: SceneNode) =>
-      n.role === 'portfolio' ? 23 : n.role === 'sourced' ? 18 : n.role === 'founder' ? 10 : n.role === 'rejected' ? 8 : 11
+    const companyLogs = nodes
+      .filter((node) => node.role !== 'founder' && node.companySize && node.companySize > 0)
+      .map((node) => Math.log10(node.companySize!))
+    const minCompanyLog = companyLogs.length ? Math.min(...companyLogs) : 0
+    const maxCompanyLog = companyLogs.length ? Math.max(...companyLogs) : 1
+    const pointSize = (node: SceneNode) => {
+      if (node.role === 'founder') return 9
+      if (!node.companySize || node.companySize <= 0) return 11
+      const normalized = maxCompanyLog - minCompanyLog > 1e-9
+        ? (Math.log10(node.companySize) - minCompanyLog) / (maxCompanyLog - minCompanyLog)
+        : 0.5
+      return 9 + 17 * Math.pow(THREE.MathUtils.clamp(normalized, 0, 1), 0.72)
+    }
 
     const pPos = new Float32Array(N * 3)
     const pCol = new Float32Array(N * 3)
@@ -242,7 +255,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       pCol[i * 3] = c.r
       pCol[i * 3 + 1] = c.g
       pCol[i * 3 + 2] = c.b
-      pSize[i] = roleSize(n)
+      pSize[i] = pointSize(n)
       pPulse[i] = n.role === 'sourced' ? 1 : 0
       pPhase[i] = n.phase
       pOutline[i] = n.role === 'portfolio' ? 1 : 0
@@ -406,6 +419,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     /* ---------------- interaction (ported, HUD → React refs) ---------------- */
 
     let hovered: SceneNode | null = null
+    let hoveredEdge: SceneEdge | null = null
     let focused: SceneNode | null = null
     const mouse = { x: -1e4, y: -1e4, downX: 0, downY: 0 }
     const proj = new THREE.Vector3()
@@ -464,6 +478,36 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       return best
     }
 
+    const edgeProjectionA = new THREE.Vector3()
+    const edgeProjectionB = new THREE.Vector3()
+    function pickHoveredEdge() {
+      const w = renderer.domElement.clientWidth
+      const h = renderer.domElement.clientHeight
+      let best: SceneEdge | null = null
+      let bestDistance = 8
+      for (const edge of edges) {
+        edgeProjectionA.copy(edge.a.pos).applyMatrix4(group.matrixWorld).project(camera)
+        edgeProjectionB.copy(edge.b.pos).applyMatrix4(group.matrixWorld).project(camera)
+        if (edgeProjectionA.z > 1 || edgeProjectionB.z > 1) continue
+        const ax = (edgeProjectionA.x * 0.5 + 0.5) * w
+        const ay = (-edgeProjectionA.y * 0.5 + 0.5) * h
+        const bx = (edgeProjectionB.x * 0.5 + 0.5) * w
+        const by = (-edgeProjectionB.y * 0.5 + 0.5) * h
+        const dx = bx - ax
+        const dy = by - ay
+        const lengthSquared = dx * dx + dy * dy
+        const t = lengthSquared > 0
+          ? THREE.MathUtils.clamp(((mouse.x - ax) * dx + (mouse.y - ay) * dy) / lengthSquared, 0, 1)
+          : 0
+        const distance = Math.hypot(mouse.x - (ax + t * dx), mouse.y - (ay + t * dy))
+        if (distance < bestDistance) {
+          best = edge
+          bestDistance = distance
+        }
+      }
+      return best
+    }
+
     const ROLE_TAG: Record<string, string> = {
       portfolio: 'portfolio',
       rejected: 'rejected',
@@ -474,19 +518,51 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     const ringWorld = new THREE.Vector3()
     function updateHover() {
       hovered = pickHovered()
+      hoveredEdge = hovered ? null : pickHoveredEdge()
       if (hovered && tooltip) {
         tooltip.style.display = 'block'
         tooltip.style.left = `${Math.min(mouse.x + 14, container!.clientWidth - 250)}px`
         tooltip.style.top = `${mouse.y + 14}px`
         const color = hovered.role === 'portfolio' ? ACCENT : SECTOR_PALETTE[hovered.cluster % SECTOR_PALETTE.length]
+        const sizeText = hovered.companySize && hovered.companySize > 0
+          ? ` · ARR ${new Intl.NumberFormat('en-US', { notation: 'compact', style: 'currency', currency: 'USD', maximumFractionDigits: 1 }).format(hovered.companySize)}`
+          : ''
         tooltip.innerHTML = `<div style="color:#000000;font-size:13px;font-weight:700">${hovered.label}</div>
-          <div style="color:${color};margin-top:2px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">${markets[hovered.cluster]?.label ?? ''} · ${ROLE_TAG[hovered.role]}${hovered.score ? ` · fit ${hovered.score}` : ''}</div>`
+          <div style="color:${color};margin-top:2px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">${markets[hovered.cluster]?.label ?? ''} · ${ROLE_TAG[hovered.role]}${hovered.score ? ` · fit ${hovered.score}` : ''}${sizeText}</div>`
         ringWorld.copy(hovered.pos).applyMatrix4(group.matrixWorld)
         ring.position.copy(ringWorld)
-        const sz = (hovered.role === 'portfolio' ? 15 : 10) * 3.4 * (pMat.uniforms.uScale.value as number)
+        const sz = pointSize(hovered) * 2.5 * (pMat.uniforms.uScale.value as number)
         ring.scale.set(sz, sz, 1)
         ring.visible = true
         renderer.domElement.style.cursor = 'pointer'
+      } else if (hoveredEdge && tooltip) {
+        tooltip.style.display = 'block'
+        tooltip.style.left = `${Math.min(mouse.x + 14, container!.clientWidth - 290)}px`
+        tooltip.style.top = `${mouse.y + 14}px`
+        const edgeLabel = hoveredEdge.kind === 'competition'
+          ? 'Competitors'
+          : hoveredEdge.kind === 'precedent'
+            ? 'Historical precedent'
+            : hoveredEdge.kind === 'founder'
+              ? hoveredEdge.a.role === 'founder' && hoveredEdge.b.role === 'founder' ? 'Shared prior organization' : 'Founder relationship'
+              : hoveredEdge.kind === 'risk'
+                ? 'Shared risk'
+                : 'Company similarity'
+        const edgeMeaning = hoveredEdge.kind === 'competition'
+          ? 'Explicit competitor match'
+          : hoveredEdge.kind === 'precedent'
+            ? 'Comparable past investment decision'
+            : hoveredEdge.kind === 'similarity'
+              ? '10-dimension weighted similarity'
+              : 'Known graph relationship'
+        const edgeWeightText = hoveredEdge.kind === 'competition'
+          ? 'Known rival'
+          : `${Math.round(hoveredEdge.weight * 100)}% strength`
+        tooltip.innerHTML = `<div style="color:#000000;font-size:13px;font-weight:700">${hoveredEdge.a.label} ↔ ${hoveredEdge.b.label}</div>
+          <div style="margin-top:3px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">${edgeLabel} · ${edgeWeightText}</div>
+          <div style="color:#555;margin-top:5px;font-size:11px">${edgeMeaning}</div>`
+        ring.visible = false
+        renderer.domElement.style.cursor = 'help'
       } else if (tooltip) {
         tooltip.style.display = 'none'
         ring.visible = false
@@ -649,6 +725,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
                 ? 0.4
                 : 0.2
         let alpha = SHOW_LINES ? restingAlpha * fade * breathe * e.weight : 0
+        if (e === hoveredEdge) alpha = 0.92
         if (focused) {
           const on = e.a === focused || e.b === focused
           alpha = on ? Math.max(restingAlpha, 0.7) * fade * breathe * e.weight : alpha * 0.05
@@ -718,6 +795,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       {
         const w = renderer.domElement.clientWidth
         const h = renderer.domElement.clientHeight
+        const placements: Array<{ el: HTMLDivElement; x: number; y: number; width: number; height: number; opacity: number }> = []
         labelAnchors.forEach((a, i) => {
           const el = labelRefs.current[i]
           if (!el) return
@@ -728,10 +806,30 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
             el.style.opacity = '0'
             return
           }
-          el.style.left = `${(tmpB.x * 0.5 + 0.5) * w}px`
-          el.style.top = `${(-tmpB.y * 0.5 + 0.5) * h}px`
-          el.style.opacity = `${0.9 * THREE.MathUtils.smoothstep(dist, 260, 620)}`
+          placements.push({
+            el,
+            x: (tmpB.x * 0.5 + 0.5) * w,
+            y: (-tmpB.y * 0.5 + 0.5) * h,
+            width: el.offsetWidth,
+            height: el.offsetHeight,
+            opacity: 0.9 * THREE.MathUtils.smoothstep(dist, 260, 620),
+          })
         })
+        placements.sort((a, b) => a.y - b.y || a.x - b.x)
+        const placed: typeof placements = []
+        for (const placement of placements) {
+          let y = placement.y
+          for (const previous of placed) {
+            const horizontalOverlap = Math.abs(placement.x - previous.x) < (placement.width + previous.width) / 2 + 10
+            const verticalOverlap = Math.abs(y - previous.y) < (placement.height + previous.height) / 2 + 8
+            if (horizontalOverlap && verticalOverlap) y = previous.y + (placement.height + previous.height) / 2 + 8
+          }
+          placement.y = THREE.MathUtils.clamp(y, 18, h - 18)
+          placement.el.style.left = `${placement.x}px`
+          placement.el.style.top = `${placement.y}px`
+          placement.el.style.opacity = `${placement.opacity}`
+          placed.push(placement)
+        }
       }
 
       controls.update()

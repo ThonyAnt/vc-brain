@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { discoverCompanies, buildDiscoveryQueries } from "./discover.js";
+import { discoverCompanies, buildDiscoveryQueries, queriesFromInvestorAsk } from "./discover.js";
 import { MockSearchClient } from "../search/mock.js";
 import { MockLLMClient } from "../llm/mock.js";
 import { mockAgentStructured, mockSearchResults } from "../fixtures/mockAgents.js";
@@ -12,6 +12,15 @@ function deps() {
   };
 }
 
+describe("queriesFromInvestorAsk", () => {
+  it("turns a chat sourcing prompt into search queries", () => {
+    const qs = queriesFromInvestorAsk("Source a new company in healthcare.");
+    expect(qs.join(" ").toLowerCase()).toContain("healthcare");
+    expect(qs.join(" ").toLowerCase()).toContain("startups");
+    expect(qs.join(" ").toLowerCase()).not.toContain("source a new");
+  });
+});
+
 describe("buildDiscoveryQueries", () => {
   it("derives sector/stage queries from the fund profile", () => {
     const qs = buildDiscoveryQueries({ mandate: "m", fundProfile });
@@ -19,7 +28,17 @@ describe("buildDiscoveryQueries", () => {
     expect(qs.join(" ").toLowerCase()).toContain("healthcare");
     expect(qs.join(" ").toLowerCase()).toContain("seed");
   });
-  it("honors explicit queries", () => {
+  it("rewrites chat-style explicit queries into search phrases", () => {
+    const qs = buildDiscoveryQueries({
+      mandate: "Source a new company in healthcare.",
+      queries: ["Source a new company in healthcare."],
+      maxQueries: 3,
+    });
+    expect(qs.length).toBeGreaterThan(0);
+    expect(qs.join(" ").toLowerCase()).toContain("healthcare");
+    expect(qs.some((q) => /source a new company/i.test(q))).toBe(false);
+  });
+  it("honors explicit search queries", () => {
     const qs = buildDiscoveryQueries({ mandate: "m", queries: ["a", "b", "c", "d"], maxQueries: 2 });
     expect(qs).toEqual(["a", "b"]);
   });

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router'
 import { Search, X } from 'lucide-react'
 import { BrainCanvas, SECTOR_PALETTE, type BrainHandle } from '../../components/brain/BrainCanvas'
 import { DotGridBackground } from '../../components/brain/DotGridBackground'
@@ -118,6 +119,7 @@ function graphForAxes(graph: FundGraph, companies: Company[], axes: GraphAxes): 
 }
 
 export function BrainPage() {
+  const [searchParams, setSearchParams] = useSearchParams()
   const [graph, setGraph] = useState<FundGraph | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
@@ -127,11 +129,37 @@ export function BrainPage() {
   const brainRef = useRef<BrainHandle>(null)
   const pendingDiscovered = useRef<string[]>([])
   const searchFocusedId = useRef<string | null>(null)
+  const deepLinkHandled = useRef<string | null>(null)
 
   useEffect(() => {
     api.getGraph().then(setGraph)
     api.getCompanies().then(setCompanies)
   }, [])
+
+  /* Analyst "View on graph" deep-link: highlight + focus like search. */
+  useEffect(() => {
+    if (!graph) return
+    const param = searchParams.get('new') ?? searchParams.get('focus')
+    if (!param || deepLinkHandled.current === param) return
+    const ids = param
+      .split(',')
+      .map((id) => decodeURIComponent(id.trim()))
+      .filter((id) => graph.nodes.some((node) => node.id === id))
+    if (!ids.length) return
+    deepLinkHandled.current = param
+    const label = graph.nodes.find((node) => node.id === ids[0])?.label ?? ''
+    if (label) setSearchQuery(label)
+    requestAnimationFrame(() => {
+      brainRef.current?.highlightNodes(ids)
+      brainRef.current?.pulseNodes(ids)
+      if (ids[0]) {
+        brainRef.current?.focusNode(ids[0])
+        searchFocusedId.current = ids[0]
+        setSelectedId(ids[0])
+      }
+    })
+    setSearchParams({}, { replace: true })
+  }, [graph, searchParams, setSearchParams])
 
   const onSelect = useCallback((id: string | null) => setSelectedId(id), [])
   const onFeedback = useCallback((ids: string[]) => brainRef.current?.pulseNodes(ids), [])

@@ -341,10 +341,10 @@ export function AnalystPage() {
                     {sourcedCompanies[i].map((company) => (
                       <Link
                         key={company.id}
-                        to={`/company/${company.id}`}
+                        to={`/?new=${encodeURIComponent(company.id)}`}
                         className="inline-flex items-center gap-1.5 font-medium text-primary underline underline-offset-2"
                       >
-                        View {company.name}
+                        View {company.name} on graph
                         <span aria-hidden>→</span>
                       </Link>
                     ))}

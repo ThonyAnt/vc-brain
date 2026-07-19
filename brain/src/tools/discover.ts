@@ -5,13 +5,15 @@ import type { LLMClient } from "../llm/client.js";
 import type { SearchClient, SearchResult } from "../search/client.js";
 
 const DISCOVERY_SYSTEM = `You are the Market Scout's discovery step. From noisy web-search results,
-extract DISTINCT, REAL startups that plausibly fit the fund. For each, normalize its similarity
+extract DISTINCT, REAL startups that match the investor's ask. For each, normalize its similarity
 attributes (industry/product hierarchies root->leaf, problem statement, customer/technical/founder/
-disruption/regulatory labels, business model, GTM). Ignore listicles, news outlets, funds, and
-duplicates. Only include companies actually named in the results — do not invent them. If a result
+disruption/regulatory labels, business model, GTM). Ignore listicles-as-entities, news outlets, funds,
+and duplicates. Only include companies actually named in the results — do not invent them. If a result
 names several companies, extract each. Attributes describe WHAT KIND of company it is, not its quality.
 When the results reveal them, include the company's official website domain and its HQ city with
-approximate latitude/longitude (your best geographic estimate for the city is fine).`;
+approximate latitude/longitude (your best geographic estimate for the city is fine).
+Match the investor ask even when it sits outside the fund's usual sectors. Prefer names not listed as
+already known.`;
 
 /** Favicon-service logo for a company website; null if the domain can't be parsed. */
 export function logoUrlFor(website?: string): string | undefined {
@@ -32,6 +34,9 @@ const slug = (s: string) =>
     .replace(/^_+|_+$/g, "")
     .slice(0, 40) || "company";
 
+const CHAT_ASK_RE =
+  /\b(source|sourcing|find|discover|scout|search for|look for|identify|surface)\b/i;
+
 export interface DiscoverInput {
   mandate: string;
   fundProfile?: FundProfile;
@@ -50,9 +55,40 @@ export interface DiscoverDeps {
   llm: LLMClient;
 }
 
+/** Turn a chat-style ask into Tavily-friendly search queries. */
+export function queriesFromInvestorAsk(ask: string): string[] {
+  const topic = ask
+    .replace(/\b(can|could|would|will|you|please|source|sourcing|find|discover|scout|identify|surface|get|me|us|our)\b/gi, " ")
+    .replace(/\b(search for|look for)\b/gi, " ")
+    .replace(/\b(some|any|few|a|an|the|new|good|great|interesting|potential)\b/gi, " ")
+    .replace(/\b(compan(?:y|ies)|startups?|deals?|candidates?|investments?|opportunities)\b/gi, " ")
+    .replace(/[^a-z0-9$&+/\-.\s]+/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const focus = topic.length >= 2 ? topic : ask.slice(0, 80).trim();
+  return [
+    `${focus} startups recently funded`,
+    `seed stage ${focus} companies`,
+    `emerging ${focus} startups`,
+  ];
+}
+
+function expandQueryList(queries: string[], maxQueries: number): string[] {
+  const out: string[] = [];
+  for (const query of queries) {
+    const next = CHAT_ASK_RE.test(query) ? queriesFromInvestorAsk(query) : [query];
+    for (const item of next) {
+      if (!out.includes(item)) out.push(item);
+      if (out.length >= maxQueries) return out;
+    }
+  }
+  return out.slice(0, maxQueries);
+}
+
 /** Derive a few focused search queries from the fund's thesis/sectors/stage. */
 export function buildDiscoveryQueries(input: DiscoverInput): string[] {
-  if (input.queries?.length) return input.queries.slice(0, input.maxQueries ?? input.queries.length);
+  const maxQueries = input.maxQueries ?? 3;
+  if (input.queries?.length) return expandQueryList(input.queries, maxQueries);
   const p = input.fundProfile;
   const stage = (p?.stages?.[0] ?? "seed").replace(/_/g, " ");
   const sectors = p?.sectors?.length ? p.sectors : ["technology"];
@@ -60,9 +96,10 @@ export function buildDiscoveryQueries(input: DiscoverInput): string[] {
   if (p?.thesisSummary) {
     queries.push(`emerging startups matching thesis: ${p.thesisSummary}`.slice(0, 200));
   } else if (input.mandate) {
-    queries.push(input.mandate.slice(0, 200));
+    if (CHAT_ASK_RE.test(input.mandate)) queries.push(...queriesFromInvestorAsk(input.mandate));
+    else queries.push(input.mandate.slice(0, 200));
   }
-  return queries.slice(0, input.maxQueries ?? 3);
+  return queries.slice(0, maxQueries);
 }
 
 /**
@@ -92,15 +129,19 @@ export async function discoverCompanies(
   const context = results
     .map((r, i) => `[${i + 1}] ${r.title}\n${r.url}\n${r.content}`)
     .join("\n\n");
+  const known = (input.excludeNames ?? []).slice(0, 40).join(", ");
 
   const extraction = await deps.llm.generateStructured({
     schema: DiscoveryExtractionSchema,
     schemaName: "DiscoveryExtraction",
     system: DISCOVERY_SYSTEM,
     prompt:
-      `Fund thesis: ${input.fundProfile?.thesisSummary ?? input.mandate}\n\n` +
+      `Investor ask (HARD TARGET — extract companies that match this ask):\n${input.mandate}\n\n` +
+      `Fund thesis (soft preference only — do not reject ask-matching companies outside it):\n` +
+      `${input.fundProfile?.thesisSummary ?? "(none)"}\n\n` +
+      (known ? `Already known — prefer other names: ${known}\n\n` : "") +
       `Web-search results:\n${context}\n\n` +
-      `Extract the distinct startups that fit the fund.`,
+      `Extract the distinct startups that match the investor ask.`,
   });
 
   const exclude = new Set((input.excludeNames ?? []).map(norm));

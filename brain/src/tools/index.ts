@@ -20,7 +20,7 @@ export type { EmitEventInput } from "./events.js";
 export { extractCompanyAttributes } from "./attributes.js";
 export type { ExtractAttributesInput } from "./attributes.js";
 
-export { discoverCompanies, buildDiscoveryQueries } from "./discover.js";
+export { discoverCompanies, buildDiscoveryQueries, queriesFromInvestorAsk } from "./discover.js";
 export type { DiscoverInput, DiscoverDeps } from "./discover.js";
 
 export { ingestMemoText, ingestMemoTexts, ingestMemoFiles } from "./ingestHistory.js";

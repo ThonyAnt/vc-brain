@@ -287,14 +287,16 @@ export function regexClassify(messages: OrchestratorChatMessage[]): RouteDecisio
   return { intent: "analyze", criteria: question };
 }
 
-/** Parse "source 2 companies…" into a count; undefined when the user didn't specify. */
+/** Parse "source 2 companies…" / "a new company" into a count; undefined when unspecified. */
 export function detectCompanySourcingCount(message: string): number | undefined {
   const text = normalizedMessage(message);
-  const raw = text.match(/\b(\d{1,2}|one|two|three|four|five)\s+(companies|startups|deals|candidates|investments)\b/)?.[1];
-  if (!raw) return undefined;
-  const count = NUMBER_WORDS[raw] ?? parseInt(raw, 10);
-  if (!Number.isFinite(count)) return undefined;
-  return Math.max(1, Math.min(count, 10));
+  const numbered = text.match(/\b(\d{1,2}|one|two|three|four|five)\s+(new\s+)?(companies|startups|deals|candidates|investments|company)\b/)?.[1];
+  if (numbered) {
+    const count = NUMBER_WORDS[numbered] ?? parseInt(numbered, 10);
+    if (Number.isFinite(count)) return Math.max(1, Math.min(count, 10));
+  }
+  if (/\b(a|an|one)\s+(new\s+)?(company|startup|deal|candidate|investment)\b/.test(text)) return 1;
+  return undefined;
 }
 
 export function isSourcingRequest(message: string): boolean {
@@ -738,12 +740,15 @@ export async function streamOrchestratorChat(
           mandate: question,
           fundProfile: options.state.fundProfile,
           queries: [question],
-          limit,
-          resultsPerQuery: Math.max(limit, 5),
+          // Overfetch so thesis-adjacent excludes and noisy listicles don't wipe the set.
+          limit: Math.max(limit * 4, 8),
+          resultsPerQuery: Math.max(limit * 3, 8),
+          maxQueries: 3,
           excludeNames: options.companies.map((company) => company.name),
         },
         { search: options.search, llm: options.llm },
       );
+      discovered = discovered.slice(0, limit);
       await emit({
         type: "agent_completed",
         runId,
@@ -756,7 +761,8 @@ export async function streamOrchestratorChat(
     }
 
     if (!discovered.length) {
-      const content = "Tavily completed the search, but no new verifiable companies were returned after deduplication. Try a narrower sector, geography, or stage.";
+      const content =
+        "Live search ran, but I couldn't extract any new startups matching that ask that aren't already in the universe. Try a more specific niche, geography, or stage — or name a company directly.";
       await emit({ type: "text_delta", runId, delta: content });
       const message: OrchestratorChatMessage = { role: "assistant", content };
       await emit({ type: "run_completed", runId, message });

@@ -42,6 +42,7 @@ function applyTraceEvent(run: TraceRun | undefined, event: OrchestratorStreamEve
   if (event.type === 'run_started') {
     return {
       startedAt: now,
+      offline: event.runId === 'offline',
       stages: event.agents.map((id) => ({ id, label: labelFor(id), status: 'queued' as const })),
     }
   }

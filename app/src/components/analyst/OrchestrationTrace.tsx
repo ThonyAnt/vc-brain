@@ -33,6 +33,8 @@ export interface TraceStage {
 export interface TraceRun {
   startedAt: number
   endedAt?: number
+  /** True when the run is the offline simulator, not the live brain API. */
+  offline?: boolean
   stages: TraceStage[]
 }
 
@@ -179,6 +181,11 @@ export function OrchestrationTrace({ run }: { run: TraceRun }) {
       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-4 [&::-webkit-details-marker]:hidden">
         <span className="flex items-center gap-2">
           <Eyebrow className={failed ? 'text-primary' : ''}>Orchestration</Eyebrow>
+          {run.offline && (
+            <span className="code-sm border-2 border-hairline-strong bg-hero-glow px-1.5 py-0.5 uppercase tracking-[0.08em] text-ink">
+              offline demo
+            </span>
+          )}
           {live && (
             <motion.i
               className="h-2 w-2 bg-primary not-italic"

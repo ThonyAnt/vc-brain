@@ -225,6 +225,7 @@ function sourcedFounderViews(c: Company, r: RankedCandidate | undefined) {
     companyId: c.id,
     role: founder.role || `Founder, ${c.name}`,
     background: founder.background,
+    photoUrl: founder.photoUrl,
     score,
     justification: founder.background || "Founder background requires further verification.",
     signals: c.attributes.founderArchetypes,

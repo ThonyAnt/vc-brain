@@ -38,6 +38,8 @@ export const FounderSchema = z.object({
   role: z.string().default(""),
   background: z.string().default(""),
   linkedin: z.string().optional(),
+  /** The founder's real profile photo, when the scout resolved one. */
+  photoUrl: z.string().optional(),
 });
 export type Founder = z.infer<typeof FounderSchema>;
 

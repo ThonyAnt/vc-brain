@@ -1,4 +1,4 @@
-import type { ExtractResult, SearchClient, SearchOptions, SearchResult } from "./client.js";
+import type { ExtractResult, ImageResult, SearchClient, SearchOptions, SearchResult } from "./client.js";
 
 interface TavilyRaw {
   results?: Array<{
@@ -8,10 +8,11 @@ interface TavilyRaw {
     score: number;
     raw_content?: string | null;
   }>;
+  images?: Array<string | { url: string; description?: string | null }>;
 }
 
 interface TavilyExtractRaw {
-  results?: Array<{ url: string; raw_content?: string | null }>;
+  results?: Array<{ url: string; raw_content?: string | null; images?: string[] | null }>;
 }
 
 export interface TavilyOptions {
@@ -42,13 +43,42 @@ export class TavilySearchClient implements SearchClient {
         "Content-Type": "application/json",
         Authorization: `Bearer ${this.apiKey}`,
       },
-      body: JSON.stringify({ urls }),
+      body: JSON.stringify({ urls, include_images: true }),
     });
     if (!res.ok) {
       throw new Error(`TavilySearchClient.extract: ${res.status} ${await res.text()}`);
     }
     const json = (await res.json()) as TavilyExtractRaw;
-    return (json.results ?? []).map((r) => ({ url: r.url, rawContent: r.raw_content ?? "" }));
+    return (json.results ?? []).map((r) => ({
+      url: r.url,
+      rawContent: r.raw_content ?? "",
+      images: r.images ?? undefined,
+    }));
+  }
+
+  /** Query-related images with vision captions, via /search include_images. */
+  async images(query: string): Promise<ImageResult[]> {
+    if (!this.apiKey) throw new Error("TavilySearchClient: TAVILY_API_KEY not set");
+    const res = await fetch(this.endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.apiKey}`,
+      },
+      body: JSON.stringify({
+        query,
+        max_results: 3,
+        include_images: true,
+        include_image_descriptions: true,
+      }),
+    });
+    if (!res.ok) {
+      throw new Error(`TavilySearchClient.images: ${res.status} ${await res.text()}`);
+    }
+    const json = (await res.json()) as TavilyRaw;
+    return (json.images ?? []).map((i) =>
+      typeof i === "string" ? { url: i } : { url: i.url, description: i.description ?? undefined },
+    );
   }
 
   async search(query: string, opts: SearchOptions = {}): Promise<SearchResult[]> {

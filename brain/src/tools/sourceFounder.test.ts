@@ -1,7 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { MockLLMClient } from "../llm/mock.js";
 import { MockSearchClient } from "../search/mock.js";
-import { founderQueries, nameFromExtractedProfile, sourceFounder } from "./sourceFounder.js";
+import {
+  founderQueries,
+  nameFromExtractedProfile,
+  pickHeadshot,
+  pickHeadshotFromImageSearch,
+  sourceFounder,
+} from "./sourceFounder.js";
 import type { SearchResult } from "../search/client.js";
 
 const searchHit: SearchResult = {
@@ -55,6 +61,65 @@ describe("nameFromExtractedProfile", () => {
   });
 });
 
+describe("pickHeadshot", () => {
+  const displayphoto =
+    "https://media.licdn.com/dms/image/v2/D5603AQE/profile-displayphoto-shrink_800_800/photo.jpg";
+  it("picks the profile displayphoto over banners, logos, and other people's thumbnails", () => {
+    expect(
+      pickHeadshot([
+        "https://media.licdn.com/dms/image/v2/D4E16AQF/profile-displaybackgroundimage-shrink_350_1400/banner.jpg",
+        displayphoto,
+        "https://media.licdn.com/dms/image/v2/C4D0BAQH/company-logo_100_100/acme.png",
+        "https://media.licdn.com/dms/image/v2/D5603AQX/profile-displayphoto-shrink_100_100/also-viewed.jpg",
+      ]),
+    ).toBe(displayphoto);
+  });
+  it("prefers larger displayphoto variants over thumbnails", () => {
+    const small = "https://media.licdn.com/dms/image/v2/A/profile-displayphoto-shrink_100_100/a.jpg";
+    expect(pickHeadshot([small, displayphoto])).toBe(displayphoto);
+  });
+  it("never falls back to arbitrary page images", () => {
+    expect(pickHeadshot(["https://example.com/office-party.jpg"])).toBeUndefined();
+    expect(pickHeadshot([])).toBeUndefined();
+    expect(pickHeadshot(undefined)).toBeUndefined();
+  });
+});
+
+describe("pickHeadshotFromImageSearch", () => {
+  it("accepts only images whose caption names the person", () => {
+    const images = [
+      { url: "https://cdn.example.com/logo.png", description: "The Acme company logo" },
+      { url: "https://cdn.example.com/jane.jpg", description: "Jane Doe speaking at a conference" },
+    ];
+    expect(pickHeadshotFromImageSearch(images, "Jane Doe")).toBe("https://cdn.example.com/jane.jpg");
+  });
+  it("rejects uncaptioned images and partial name matches", () => {
+    expect(
+      pickHeadshotFromImageSearch([{ url: "https://cdn.example.com/mystery.jpg" }], "Jane Doe"),
+    ).toBeUndefined();
+    expect(
+      pickHeadshotFromImageSearch(
+        [{ url: "https://cdn.example.com/john.jpg", description: "John Doe portrait" }],
+        "Jane Doe",
+      ),
+    ).toBeUndefined();
+  });
+  it("refuses single-token names and substring word hits", () => {
+    expect(
+      pickHeadshotFromImageSearch(
+        [{ url: "https://cdn.example.com/luc.jpg", description: "Luc presenting a dashboard" }],
+        "Luc",
+      ),
+    ).toBeUndefined();
+    expect(
+      pickHeadshotFromImageSearch(
+        [{ url: "https://cdn.example.com/lucid.jpg", description: "The Lucid Doe dashboard" }],
+        "Luc Doe",
+      ),
+    ).toBeUndefined();
+  });
+});
+
 describe("sourceFounder", () => {
   it("reads the LinkedIn profile directly (extract) and anchors identity on it", async () => {
     const url = "https://www.linkedin.com/in/janedoe";
@@ -82,6 +147,44 @@ describe("sourceFounder", () => {
 
     expect(result.sources).toContain(searchHit.url);
     expect(result.linkedin).toBeUndefined();
+    expect(result.photoUrl).toBeUndefined();
     expect(captured.prompt).not.toContain("authoritative identity anchor");
+  });
+
+  it("pulls the founder's headshot from the LinkedIn profile extract", async () => {
+    const url = "https://www.linkedin.com/in/janedoe";
+    const headshot =
+      "https://media.licdn.com/dms/image/v2/D5603AQE/profile-displayphoto-shrink_800_800/jane.jpg";
+    const search = new MockSearchClient([searchHit], {
+      [url]: {
+        rawContent: "# Jane Doe\n**Founder & CEO at Acme**",
+        images: [
+          "https://media.licdn.com/dms/image/v2/C4D0BAQH/company-logo_100_100/acme.png",
+          headshot,
+        ],
+      },
+    });
+    const { llm } = llmEcho();
+
+    const result = await sourceFounder({ linkedinUrl: url }, { search, llm });
+
+    expect(result.photoUrl).toBe(headshot);
+  });
+
+  it("falls back to caption-verified image search when the extract has no photo", async () => {
+    const url = "https://www.linkedin.com/in/janedoe";
+    const search = new MockSearchClient(
+      [searchHit],
+      { [url]: "# Jane Doe\n**Founder & CEO at Acme**" },
+      [
+        { url: "https://cdn.example.com/logo.png", description: "The Acme company logo" },
+        { url: "https://cdn.example.com/jane.jpg", description: "Jane Doe smiling in an office" },
+      ],
+    );
+    const { llm } = llmEcho();
+
+    const result = await sourceFounder({ linkedinUrl: url }, { search, llm });
+
+    expect(result.photoUrl).toBe("https://cdn.example.com/jane.jpg");
   });
 });

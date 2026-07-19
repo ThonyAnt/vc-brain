@@ -19,6 +19,15 @@ export interface SearchOptions {
 export interface ExtractResult {
   url: string;
   rawContent: string;
+  /** Image URLs found on the page, in encounter order, when the provider returns them. */
+  images?: string[];
+}
+
+/** One query-related image from a provider's image search. */
+export interface ImageResult {
+  url: string;
+  /** Provider-generated caption of what the image shows, when available. */
+  description?: string;
 }
 
 /**
@@ -33,4 +42,9 @@ export interface SearchClient {
    * callers must feature-detect and fall back to `search` when absent.
    */
   extract?(urls: string[]): Promise<ExtractResult[]>;
+  /**
+   * Query-related images with captions (e.g. Tavily /search include_images).
+   * Optional: callers must feature-detect and treat absence as "no images".
+   */
+  images?(query: string): Promise<ImageResult[]>;
 }

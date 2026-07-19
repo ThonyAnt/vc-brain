@@ -1,6 +1,6 @@
 import { z } from "zod";
 import type { LLMClient } from "../llm/client.js";
-import type { SearchClient, SearchResult } from "../search/client.js";
+import type { ImageResult, SearchClient, SearchResult } from "../search/client.js";
 import type { FundProfile } from "../schemas/fundProfile.js";
 
 /*
@@ -32,7 +32,52 @@ export type FounderSourcing = z.infer<typeof FounderSourcingSchema>;
 export interface SourcedFounderView extends FounderSourcing {
   id: string;
   linkedin?: string;
+  /** The person's own LinkedIn profile photo, when the extract surfaces one. */
+  photoUrl?: string;
   sources: string[];
+}
+
+/*
+ * Headshot selection is deliberately conservative: only LinkedIn CDN profile
+ * photos qualify, because a public profile page also carries banners, company
+ * logos, and "people also viewed" thumbnails — showing a stranger's face on a
+ * real founder is worse than showing none. The page's own og:image (the
+ * person's photo) is the first `profile-displayphoto` in encounter order;
+ * larger `shrink_NNN` variants win over thumbnail sizes.
+ */
+export function pickHeadshot(images: string[] | undefined): string | undefined {
+  if (!images?.length) return undefined;
+  const candidates = images.filter((u) => /media\.licdn\.com\/.*profile-displayphoto/i.test(u));
+  const pool = candidates.length
+    ? candidates
+    : images.filter((u) => /media\.licdn\.com\/.*profile-framedphoto/i.test(u));
+  if (pool.length === 0) return undefined;
+  for (const size of ["shrink_800", "shrink_400", "shrink_200"]) {
+    const hit = pool.find((u) => u.includes(size));
+    if (hit) return hit;
+  }
+  return pool[0];
+}
+
+/*
+ * Fallback headshot from provider image search (Tavily can't see LinkedIn's
+ * profile photo — verified: /extract returns the profile text but zero
+ * displayphoto images). Identity guard: an image only qualifies when the
+ * provider's vision caption names the person — every token of their full name
+ * must appear — so a same-query stranger or a company logo never gets through.
+ */
+export function pickHeadshotFromImageSearch(
+  images: ImageResult[] | undefined,
+  name: string,
+): string | undefined {
+  // A single token ("Luc") can't verify identity — and substring matching
+  // would let "Luc" hit "Lucid" — so require a full name matched word-for-word.
+  const tokens = name.toLowerCase().split(/\s+/).filter(Boolean);
+  if (!images?.length || tokens.length < 2) return undefined;
+  return images.find((img) => {
+    const words = new Set(img.description?.toLowerCase().split(/[^\p{L}'’.-]+/u) ?? []);
+    return words.size > 0 && tokens.every((t) => words.has(t));
+  })?.url;
 }
 
 /*
@@ -193,10 +238,12 @@ export async function sourceFounder(
   // 1. When given a LinkedIn URL, read that exact profile first (identity anchor).
   //    Best-effort: extraction failures fall through to search-only below.
   let profileName: string | undefined;
+  let photoUrl: string | undefined;
   if (input.linkedinUrl && deps.search.extract) {
     try {
       const [profile] = await deps.search.extract([input.linkedinUrl]);
       const raw = profile?.rawContent?.trim();
+      photoUrl = pickHeadshot(profile?.images);
       if (raw) {
         profileName = nameFromExtractedProfile(raw);
         results.push({
@@ -230,6 +277,17 @@ export async function sourceFounder(
     throw new Error(`sourceFounder: web search returned nothing for "${name}"`);
   }
 
+  // 3. Headshot fallback: caption-verified image search when the profile
+  //    extract had no usable photo. Best-effort, never blocks the sourcing.
+  if (!photoUrl && deps.search.images) {
+    try {
+      const query = `"${name}"${input.company ? ` "${input.company}"` : ""} linkedin`;
+      photoUrl = pickHeadshotFromImageSearch(await deps.search.images(query), name);
+    } catch {
+      // images are optional garnish; scoring proceeds without one.
+    }
+  }
+
   const context = results
     .map((r, i) => `[${i + 1}] ${r.title}\n${r.url}\n${r.content}`)
     .join("\n\n");
@@ -254,6 +312,7 @@ export async function sourceFounder(
     ...extraction,
     id: `fd_${parsed?.slug ? slugify(parsed.slug) : slugify(extraction.name || name)}`,
     linkedin: input.linkedinUrl,
+    photoUrl,
     sources: results.map((r) => r.url).slice(0, 6),
   };
 }

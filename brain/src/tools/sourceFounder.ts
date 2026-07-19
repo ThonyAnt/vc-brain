@@ -150,13 +150,20 @@ export function nameFromExtractedProfile(rawContent: string): string | undefined
   return heading && /[a-zA-Z]/.test(heading) ? heading : undefined;
 }
 
-export function founderQueries(name: string, company?: string): string[] {
+export function founderQueries(name: string, company?: string, context?: string): string[] {
   const queries = [
     `"${name}" founder startup`,
     company ? `"${name}" "${company}" founder` : `"${name}" raised OR funding OR seed`,
     `"${name}" interview OR podcast OR profile`,
     `${name} linkedin`,
   ];
+  // The chat path passes the user's full prompt: lead with it verbatim so Tavily
+  // uses the qualifiers (school, program, company) to find the RIGHT person.
+  const raw = context?.trim();
+  if (raw) {
+    queries.unshift(raw);
+    return queries.slice(0, 5);
+  }
   return queries.slice(0, 4);
 }
 
@@ -164,6 +171,8 @@ export interface SourceFounderInput {
   linkedinUrl?: string;
   name?: string;
   company?: string;
+  /** The user's full prompt (chat path), used verbatim as a leading Tavily query. */
+  context?: string;
   fundProfile?: FundProfile;
 }
 
@@ -207,7 +216,8 @@ export async function sourceFounder(
   if (!name) throw new Error("sourceFounder: provide a LinkedIn URL or a name");
 
   // 2. Corroborate with web search (funding, interviews, secondary profiles).
-  for (const q of founderQueries(name, input.company)) {
+  //    The chat path leads with the user's full prompt to disambiguate identity.
+  for (const q of founderQueries(name, input.company, input.context)) {
     const found = await deps.search.search(q, { maxResults: 4 });
     for (const r of found) {
       if (!seen.has(r.url)) {

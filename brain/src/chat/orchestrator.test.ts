@@ -40,9 +40,12 @@ describe("interactive investment orchestrator", () => {
     it("detects the name whether it sits before or after the word 'founder'", () => {
       // Name before ("<Name> as a founder") — the phrasing that previously fell through to the LLM.
       expect(detectFounderSourcing("Source Elon Musk as a founder and add to the leads list and give a score."))
-        .toEqual({ name: "Elon Musk" });
+        .toMatchObject({ name: "Elon Musk" });
       // Name after ("founder <Name>").
-      expect(detectFounderSourcing("Please vet the founder Jane Doe.")).toEqual({ name: "Jane Doe" });
+      expect(detectFounderSourcing("Please vet the founder Jane Doe.")).toMatchObject({ name: "Jane Doe" });
+      // The full prompt rides along as Tavily search context.
+      expect(detectFounderSourcing("Source Anthony Yu from UPenn M&T as a founder."))
+        .toEqual({ name: "Anthony Yu", context: "Source Anthony Yu from UPenn M&T as a founder." });
     });
     it("routes a LinkedIn URL straight to the tool", () => {
       expect(detectFounderSourcing("score https://www.linkedin.com/in/patrickcollison as a founder"))

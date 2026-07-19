@@ -110,6 +110,8 @@ const LINKEDIN_URL_RE = /(https?:\/\/)?(www\.)?linkedin\.com\/in\/[^\s)]+/i;
 export interface FounderSourcingRequest {
   linkedinUrl?: string;
   name?: string;
+  /** The user's full prompt, used verbatim as a Tavily query in the chat path. */
+  context?: string;
 }
 
 /** A capitalized 2–3 word personal name. */
@@ -147,7 +149,9 @@ export function detectFounderSourcing(message: string): FounderSourcingRequest |
   if (!/\b(source|score|evaluate|vet|scout|look ?up|check out|research|add)\b/.test(text)) return undefined;
   if (!/\bfounder\b/.test(text)) return undefined;
   const name = extractFounderName(message);
-  if (name) return { name };
+  // Pass the full prompt as search context so qualifiers the user gave (school,
+  // program, company) disambiguate the person on Tavily — not just the name.
+  if (name) return { name, context: message };
   return undefined;
 }
 

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { MockLLMClient } from "../llm/mock.js";
 import { MockSearchClient } from "../search/mock.js";
-import { nameFromExtractedProfile, sourceFounder } from "./sourceFounder.js";
+import { founderQueries, nameFromExtractedProfile, sourceFounder } from "./sourceFounder.js";
 import type { SearchResult } from "../search/client.js";
 
 const searchHit: SearchResult = {
@@ -32,6 +32,19 @@ function llmEcho() {
   });
   return { llm, captured };
 }
+
+describe("founderQueries", () => {
+  it("leads with the full prompt when context is given (chat path)", () => {
+    const q = founderQueries("Anthony Yu", undefined, "Source Anthony Yu from UPenn M&T as a founder.");
+    expect(q[0]).toBe("Source Anthony Yu from UPenn M&T as a founder.");
+    expect(q.length).toBe(5);
+  });
+  it("uses only name-based queries without context", () => {
+    const q = founderQueries("Anthony Yu");
+    expect(q.length).toBe(4);
+    expect(q[0]).toContain("Anthony Yu");
+  });
+});
 
 describe("nameFromExtractedProfile", () => {
   it("reads the display name from a markdown profile heading", () => {

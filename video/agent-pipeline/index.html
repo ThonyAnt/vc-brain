@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>VC Brain — Agent pipeline</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/MotionPathPlugin.min.js"></script>
+    <style>
+      @font-face {
+        font-family: 'DM Sans';
+        font-weight: 700;
+        src: url('fonts/dm-sans-latin-700-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'DM Sans';
+        font-weight: 800;
+        src: url('fonts/dm-sans-latin-800-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Space Mono';
+        font-weight: 400;
+        src: url('fonts/space-mono-latin-400-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Space Mono';
+        font-weight: 700;
+        src: url('fonts/space-mono-latin-700-normal.woff2') format('woff2');
+      }
+      /* Canonical VC Brain neobrutalist tokens (docs/design/site-theme.css) */
+      :root {
+        --ink: #000000;
+        --paper: #ffffff;
+        --primary: #ff3333;
+        --secondary: #ffff00;
+        --muted: #f0f0f0;
+        --muted-fg: #333333;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        font-family: 'DM Sans', sans-serif;
+        color: var(--ink);
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--paper);
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+      }
+      .eyebrow {
+        position: absolute;
+        left: 82px;
+        top: 74px;
+        font-family: 'Space Mono', monospace;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        opacity: 0;
+      }
+      .title {
+        position: absolute;
+        margin: 0;
+        left: 80px;
+        top: 100px;
+        font-weight: 800;
+        font-size: 72px;
+        letter-spacing: -0.02em;
+        opacity: 0;
+      }
+      .node {
+        position: absolute;
+        width: 150px;
+        height: 90px;
+        background: var(--paper);
+        border: 3px solid var(--ink);
+        box-shadow: 5px 5px 0 var(--ink);
+        box-sizing: border-box;
+        padding: 8px 12px;
+        opacity: 0;
+      }
+      .node .step {
+        display: inline-block;
+        border: 2px solid var(--ink);
+        font-family: 'Space Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 0 4px;
+        line-height: 14px;
+      }
+      .node h3 {
+        margin: 4px 0 0;
+        font-size: 19px;
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+      }
+      .fan {
+        position: absolute;
+        width: 150px;
+        height: 70px;
+        background: var(--muted);
+        border: 3px solid var(--ink);
+        box-shadow: 5px 5px 0 var(--ink);
+        box-sizing: border-box;
+        display: grid;
+        place-items: center;
+        font-size: 20px;
+        font-weight: 700;
+        opacity: 0;
+      }
+      .loop-label {
+        position: absolute;
+        left: 850px;
+        top: 188px;
+        width: 190px;
+        text-align: center;
+        background: var(--paper);
+        border: 2px solid var(--ink);
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        padding: 7px 0;
+        opacity: 0;
+      }
+      .legend {
+        position: absolute;
+        left: 80px;
+        top: 936px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-family: 'Space Mono', monospace;
+        font-size: 15px;
+        opacity: 0;
+      }
+      .legend + .legend {
+        left: 560px;
+      }
+      svg .draw {
+        fill: none;
+        stroke: var(--ink);
+        stroke-width: 3;
+      }
+      svg .red {
+        stroke: var(--primary);
+        stroke-width: 4;
+      }
+      svg .dashed {
+        stroke-dasharray: 8 8;
+        stroke-width: 2.5;
+        opacity: 0;
+      }
+      svg .ah {
+        fill: var(--ink);
+        opacity: 0;
+      }
+      svg .ah.redh {
+        fill: var(--primary);
+      }
+      #run-dot {
+        position: absolute;
+        left: -8px;
+        top: -8px;
+        width: 16px;
+        height: 16px;
+        background: var(--primary);
+        border: 2px solid var(--ink);
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="agent-pipeline"
+      data-start="0"
+      data-width="1920"
+      data-height="1080"
+      data-duration="14"
+    >
+      <section id="scene" class="clip scene" data-start="0" data-duration="14" data-track-index="1">
+        <div class="eyebrow" id="eye">VC BRAIN</div>
+        <h1 class="title" id="hdr">Agent pipeline</h1>
+
+        <svg id="wires" width="1920" height="1080" viewBox="0 0 1920 1080" style="position:absolute;inset:0">
+          <!-- red sequential arrows -->
+          <path class="draw red" id="r1" d="M234 540 H251" />
+          <polygon class="ah redh" points="263,540 250,533 250,547" />
+          <path class="draw red" id="r2" d="M429 540 H446" />
+          <polygon class="ah redh" points="458,540 445,533 445,547" />
+          <!-- diligence fan-out -->
+          <path class="draw red" id="f1" d="M624 540 H640 V345 H659" />
+          <polygon class="ah redh" points="671,345 658,338 658,352" />
+          <path class="draw" id="f2" d="M624 540 H659" />
+          <polygon class="ah" points="671,540 658,533 658,547" />
+          <path class="draw" id="f3" d="M624 540 H640 V735 H659" />
+          <polygon class="ah" points="671,735 658,728 658,742" />
+          <!-- fan merge into risk -->
+          <path class="draw red" id="m1" d="M829 345 H846 V540 H848" />
+          <path class="draw" id="m2" d="M829 540 H848" />
+          <path class="draw" id="m3" d="M829 735 H846 V540 H848" />
+          <polygon class="ah redh" points="858,540 845,533 845,547" />
+          <!-- right side red arrows -->
+          <path class="draw red" id="r4" d="M1014 540 H1031" />
+          <polygon class="ah redh" points="1043,540 1030,533 1030,547" />
+          <path class="draw red" id="r5" d="M1209 540 H1226" />
+          <polygon class="ah redh" points="1238,540 1225,533 1225,547" />
+          <path class="draw red" id="r6" d="M1404 540 H1421" />
+          <polygon class="ah redh" points="1433,540 1420,533 1420,547" />
+          <path class="draw red" id="r7" d="M1599 540 H1616" />
+          <polygon class="ah redh" points="1628,540 1615,533 1615,547" />
+          <!-- feedback loop (dashed, fades in then marches) -->
+          <path class="draw dashed" id="loop" d="M1715 491 V205 H155 V479" />
+          <polygon class="ah" points="155,491 148,478 162,478" />
+        </svg>
+
+        <div id="run-dot"></div>
+
+        <!-- main row -->
+        <div class="node" id="n1" style="left: 80px; top: 495px">
+          <span class="step">01</span>
+          <h3>Fund Profiler</h3>
+        </div>
+        <div class="node" id="n2" style="left: 275px; top: 495px">
+          <span class="step">02</span>
+          <h3>Market Scout</h3>
+        </div>
+        <div class="node" id="n3" style="left: 470px; top: 495px">
+          <span class="step">03</span>
+          <h3>Diligence</h3>
+        </div>
+        <div class="fan" id="fa" style="left: 675px; top: 310px">Technical</div>
+        <div class="fan" id="fb" style="left: 675px; top: 505px">Commercial</div>
+        <div class="fan" id="fc" style="left: 675px; top: 700px">Financial</div>
+        <div class="node" id="n4" style="left: 860px; top: 495px">
+          <span class="step">04</span>
+          <h3>Risk</h3>
+        </div>
+        <div class="node" id="n5" style="left: 1055px; top: 495px">
+          <span class="step">05</span>
+          <h3>Partner Review</h3>
+        </div>
+        <div class="node" id="n6" style="left: 1250px; top: 495px">
+          <span class="step">06</span>
+          <h3>Investment Committee</h3>
+        </div>
+        <div class="node" id="n7" style="left: 1445px; top: 495px">
+          <span class="step">07</span>
+          <h3>Memo Writer</h3>
+        </div>
+        <div class="node" id="n8" style="left: 1640px; top: 495px">
+          <span class="step">08</span>
+          <h3>Learning</h3>
+        </div>
+
+        <div class="loop-label" id="ll">FEEDBACK LOOP</div>
+
+        <div class="legend" id="lg1">
+          <svg width="64" height="16" viewBox="0 0 64 16"><path d="M0 8 H50" stroke="#ff3333" stroke-width="4" fill="none" /><polygon points="62,8 49,1 49,15" fill="#ff3333" /></svg>
+          <span>Vooma — one company's path</span>
+        </div>
+        <div class="legend" id="lg2">
+          <svg width="64" height="16" viewBox="0 0 64 16"><path d="M0 8 H62" stroke="#000" stroke-width="2.5" stroke-dasharray="8 8" fill="none" /></svg>
+          <span>Learning feedback → Fund Profiler</span>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      gsap.registerPlugin(MotionPathPlugin);
+      // dash-prep every solid path for line-draw; the dashed loop keeps its own pattern
+      document.querySelectorAll('#wires .draw:not(.dashed)').forEach((p) => {
+        const L = p.getTotalLength();
+        p.style.strokeDasharray = L;
+        p.style.strokeDashoffset = L;
+      });
+
+      const tl = gsap.timeline({ paused: true });
+      const pop = { opacity: 1, y: 0, duration: 0.3, ease: 'back.out(1.6)' };
+      const draw = (sel, t, d = 0.22) => tl.to(sel, { strokeDashoffset: 0, duration: d, ease: 'none' }, t);
+      const head = (i, t) => tl.to('#wires .ah:nth-of-type(' + i + ')', { opacity: 1, duration: 0.1 }, t);
+
+      tl.fromTo('#eye', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.2);
+      tl.fromTo('#hdr', { y: -28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: 'power4.out' }, 0.4);
+
+      // 01 -> 02 -> 03
+      tl.fromTo('#n1', { y: 24, opacity: 0 }, { ...pop }, 0.9);
+      draw('#r1', 1.2, 0.15);
+      head(1, 1.34);
+      tl.fromTo('#n2', { y: 24, opacity: 0 }, { ...pop }, 1.35);
+      draw('#r2', 1.65, 0.15);
+      head(2, 1.79);
+      tl.fromTo('#n3', { y: 24, opacity: 0 }, { ...pop }, 1.8);
+
+      // diligence fans out three ways at once
+      draw('#f1', 2.3, 0.4);
+      draw('#f2', 2.3, 0.4);
+      draw('#f3', 2.3, 0.4);
+      head(3, 2.68);
+      head(4, 2.68);
+      head(5, 2.68);
+      tl.fromTo('#fa', { y: 20, opacity: 0 }, { ...pop }, 2.75);
+      tl.fromTo('#fb', { y: 20, opacity: 0 }, { ...pop }, 2.85);
+      tl.fromTo('#fc', { y: 20, opacity: 0 }, { ...pop }, 2.95);
+
+      // merge into risk
+      draw('#m1', 3.35, 0.35);
+      draw('#m2', 3.35, 0.35);
+      draw('#m3', 3.35, 0.35);
+      head(6, 3.68);
+      tl.fromTo('#n4', { y: 24, opacity: 0 }, { ...pop }, 3.75);
+
+      // 05..08
+      draw('#r4', 4.1, 0.15);
+      head(7, 4.24);
+      tl.fromTo('#n5', { y: 24, opacity: 0 }, { ...pop }, 4.25);
+      draw('#r5', 4.55, 0.15);
+      head(8, 4.69);
+      tl.fromTo('#n6', { y: 24, opacity: 0 }, { ...pop }, 4.7);
+      draw('#r6', 5.0, 0.15);
+      head(9, 5.14);
+      tl.fromTo('#n7', { y: 24, opacity: 0 }, { ...pop }, 5.15);
+      draw('#r7', 5.45, 0.15);
+      head(10, 5.59);
+      tl.fromTo('#n8', { y: 24, opacity: 0 }, { ...pop }, 5.6);
+
+      // feedback loop + legend
+      tl.to('#loop', { opacity: 1, duration: 0.5 }, 6.1);
+      head(11, 6.55);
+      tl.fromTo('#ll', { scale: 1.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.28, ease: 'back.out(2)' }, 6.45);
+      tl.fromTo('#lg1', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 6.9);
+      tl.fromTo('#lg2', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 7.05);
+
+      // run one company through: dot rides the red path
+      tl.set('#run-dot', { opacity: 1, x: 155, y: 540 }, 7.6);
+      tl.to(
+        '#run-dot',
+        {
+          duration: 3.0,
+          ease: 'none',
+          motionPath: {
+            path: [
+              { x: 155, y: 540 },
+              { x: 640, y: 540 },
+              { x: 640, y: 345 },
+              { x: 846, y: 345 },
+              { x: 846, y: 540 },
+              { x: 1715, y: 540 },
+            ],
+            curviness: 0,
+          },
+        },
+        7.6,
+      );
+      // nodes tick as the run passes through
+      const ticks = [
+        ['#n2', 7.95],
+        ['#n3', 8.25],
+        ['#fa', 8.9],
+        ['#n4', 9.5],
+        ['#n5', 9.75],
+        ['#n6', 10.0],
+        ['#n7', 10.25],
+        ['#n8', 10.55],
+      ];
+      ticks.forEach(([sel, t]) => tl.to(sel, { backgroundColor: '#ffff00', duration: 0.14, yoyo: true, repeat: 1 }, t));
+
+      // learning feeds back to the profiler
+      tl.to(
+        '#run-dot',
+        {
+          duration: 1.5,
+          ease: 'power1.inOut',
+          motionPath: {
+            path: [
+              { x: 1715, y: 540 },
+              { x: 1715, y: 205 },
+              { x: 155, y: 205 },
+              { x: 155, y: 540 },
+            ],
+            curviness: 0,
+          },
+        },
+        10.9,
+      );
+      tl.set('#run-dot', { opacity: 0 }, 12.45);
+      tl.to('#n1', { backgroundColor: '#ffff00', duration: 0.16, yoyo: true, repeat: 1 }, 12.45);
+      // dashes march to show the loop is alive
+      tl.to('#loop', { strokeDashoffset: -64, duration: 1.3, ease: 'none' }, 12.4);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['agent-pipeline'] = tl;
+    </script>
+  </body>
+</html>

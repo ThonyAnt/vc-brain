@@ -78,6 +78,13 @@ export interface FitBreakdown {
   eliminationReason?: string
 }
 
+/** Per-dimension similarity of a sourced company vs its closest precedents (all 0..1). */
+export interface SimilarityFingerprint {
+  winner?: string
+  rejected?: string
+  dims: { key: string; label: string; vsWinner?: number; vsRejected?: number }[]
+}
+
 export interface Company {
   id: string
   name: string
@@ -104,6 +111,8 @@ export interface Company {
   model?: SaasModel
   /** Score components behind fitScore, when the company was ranked by the brain. */
   fitBreakdown?: FitBreakdown
+  /** 10-dimension similarity vs closest winner/rejected, for the radar. */
+  fingerprint?: SimilarityFingerprint
   memo?: string
   meetings?: Meeting[]
   dealStage?: Stage

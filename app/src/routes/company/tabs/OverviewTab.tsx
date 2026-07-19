@@ -4,6 +4,7 @@ import { Card } from '../../../components/ui/Card'
 import { Eyebrow } from '../../../components/ui/Eyebrow'
 import { FitInfo } from '../../../components/ui/FitInfo'
 import { CardSticky, ContainerScroll } from '@/components/ui/cards-stack'
+import { RadarChart } from '@/components/ui/RadarChart'
 import { api } from '../../../lib/api/client'
 import type { Company, Founder, Stage } from '../../../lib/types'
 
@@ -159,6 +160,44 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
                     <span className="text-sm text-mute">{a.note}</span>
                   </div>
                 ))}
+              </div>
+            ),
+          },
+        ]
+      : []),
+    ...(company.fingerprint
+      ? [
+          {
+            key: 'Similarity fingerprint',
+            body: (
+              <div className="mt-3">
+                <p className="caption mb-1 text-charcoal">
+                  Per-dimension similarity vs the closest precedents — the same 10 dimensions that
+                  position this company in the brain.
+                </p>
+                <RadarChart
+                  axes={company.fingerprint.dims.map((d) => d.label)}
+                  series={[
+                    ...(company.fingerprint.winner
+                      ? [
+                          {
+                            name: `vs ${company.fingerprint.winner} (winner)`,
+                            color: '#266df0',
+                            values: company.fingerprint.dims.map((d) => d.vsWinner),
+                          },
+                        ]
+                      : []),
+                    ...(company.fingerprint.rejected
+                      ? [
+                          {
+                            name: `vs ${company.fingerprint.rejected} (passed)`,
+                            color: '#ff3333',
+                            values: company.fingerprint.dims.map((d) => d.vsRejected),
+                          },
+                        ]
+                      : []),
+                  ]}
+                />
               </div>
             ),
           },

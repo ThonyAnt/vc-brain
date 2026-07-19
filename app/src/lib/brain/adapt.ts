@@ -7,6 +7,7 @@
  * defensive mapping: fields the brain produces are mapped; the rest get sensible
  * defaults so every page renders.
  */
+import { DIMENSION_LABELS, similarityDimensions, type SimilarityAttrs } from './similarityDims'
 import type {
   Analogue,
   Company,
@@ -28,7 +29,7 @@ interface BrainCompany {
   id: string
   name: string
   description?: string
-  attributes?: { industryPath?: string[]; founderArchetypes?: string[] }
+  attributes?: SimilarityAttrs & { industryPath?: string[]; founderArchetypes?: string[] }
   founders?: { name: string; role?: string; background?: string }[]
   stage?: string
   status?: string
@@ -280,6 +281,23 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
         }
       : undefined
 
+    /* 10-dimension similarity fingerprint vs closest precedents (radar data).
+     * Mirrors the brain's offline similarity recipe over snapshot attributes. */
+    let fingerprint: Company['fingerprint']
+    if (c.attributes && r && (r.closestWinnerId || r.closestRejectedDealId)) {
+      const winner = r.closestWinnerId ? byId.get(r.closestWinnerId) : undefined
+      const rejected = r.closestRejectedDealId ? byId.get(r.closestRejectedDealId) : undefined
+      const vsW = winner?.attributes ? similarityDimensions(c.attributes, winner.attributes) : undefined
+      const vsR = rejected?.attributes ? similarityDimensions(c.attributes, rejected.attributes) : undefined
+      if (vsW || vsR) {
+        fingerprint = {
+          winner: winner?.name,
+          rejected: rejected?.name,
+          dims: DIMENSION_LABELS.map((d) => ({ ...d, vsWinner: vsW?.[d.key], vsRejected: vsR?.[d.key] })),
+        }
+      }
+    }
+
     const analogues: Analogue[] = []
     if (r?.closestWinnerId && byId.has(r.closestWinnerId))
       analogues.push({ companyId: r.closestWinnerId, kind: 'portfolio', note: `Resembles prior winner ${nameOf(r.closestWinnerId)}.` })
@@ -374,6 +392,7 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
       competitors,
       model,
       fitBreakdown,
+      fingerprint,
       memo: isRec ? buildMemoText(memo, c.name) : undefined,
       outcome: c.outcomeNarrative ?? (type === 'portfolio' ? 'Portfolio company' : undefined),
     }

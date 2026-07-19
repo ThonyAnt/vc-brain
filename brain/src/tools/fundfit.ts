@@ -4,6 +4,7 @@ import type { RankedCandidate } from "../schemas/sourcing.js";
 import {
   computeFundFit,
   computeSourcingScore,
+  DEFAULT_SOURCING_COEFFICIENTS,
   effectivePreferences,
   type FundFitResult,
 } from "../fundfit/compute.js";
@@ -120,7 +121,10 @@ export function rankCandidates(input: RankInput): RankedCandidate[] {
         similarityToRejected: rej.score,
         thesisMatch: fit.score,
       },
-      fundProfile.sourcingCoefficients,
+      {
+        ...DEFAULT_SOURCING_COEFFICIENTS,
+        ...fundProfile.sourcingCoefficients,
+      },
     );
 
     return {

@@ -66,7 +66,7 @@ const g = globalThis as typeof globalThis & {
   __meridianBrain?: {
     state: VCBrainState & { competitors?: Company[] };
     competitors: Company[];
-    llm: OpenAILLMClient;
+    llm: OpenAILLMClient | undefined;
     search: TavilySearchClient | undefined;
   };
 };
@@ -78,10 +78,16 @@ function boot() {
   const initialCandidateIds = new Set(state.candidateUniverse.map((company) => company.id));
   state.candidateUniverse.push(...persistedSourcedCompanies.filter((company) => !initialCandidateIds.has(company.id)));
   const competitors = state.competitors ?? [];
-  const llm = new OpenAILLMClient({ model: MODEL });
+  const llm = process.env.OPENAI_API_KEY ? new OpenAILLMClient({ model: MODEL }) : undefined;
   const search = process.env.TAVILY_API_KEY ? new TavilySearchClient() : undefined;
   g.__meridianBrain = { state, competitors, llm, search };
   return g.__meridianBrain;
+}
+
+function requireLlm(): OpenAILLMClient {
+  const { llm } = boot();
+  if (!llm) throw new Error("OPENAI_API_KEY is not set on the server");
+  return llm;
 }
 
 function persistSourced(companies: Company[]) {
@@ -123,7 +129,8 @@ function brainAction(action: string): FeedbackActionType {
 }
 
 async function handleFeedback(body: { entityId: string; action: string; justification?: string }) {
-  const { state, competitors, llm } = boot();
+  const { state, competitors } = boot();
+  const llm = requireLlm();
   const companyId = companyIdFor(body.entityId);
   const company = findCompany(companyId) ?? findCompany(state.committeeDecision?.recommendedCompanyId);
   const feedback = InvestorFeedbackSchema.parse({
@@ -258,7 +265,8 @@ function sourcedFounderViews(c: Company, r: RankedCandidate | undefined) {
 }
 
 async function handleDiscover(body: { query?: string; limit?: number }) {
-  const { state, competitors, llm, search } = boot();
+  const { state, competitors, search } = boot();
+  const llm = requireLlm();
   if (!search) throw new Error("web search unavailable: TAVILY_API_KEY not set on the server");
   const fundProfile = state.fundProfile;
 
@@ -297,7 +305,8 @@ async function handleDiscover(body: { query?: string; limit?: number }) {
 }
 
 async function handleSourceFounder(body: { linkedinUrl?: string; name?: string; company?: string }) {
-  const { state, llm, search } = boot();
+  const { state, search } = boot();
+  const llm = requireLlm();
   if (!search) throw new Error("web search unavailable: TAVILY_API_KEY not set on the server");
   const founder = await sourceFounder(
     { linkedinUrl: body.linkedinUrl, name: body.name, company: body.company, fundProfile: state.fundProfile },
@@ -312,12 +321,12 @@ interface ChatBody {
 }
 
 async function handleChat(body: ChatBody) {
-  const { state, competitors, llm, search } = boot();
+  const { state, competitors, search } = boot();
   return runOrchestratorChat(body.messages, body.context ?? {}, {
     state,
     companies: universe(),
     competitors,
-    llm,
+    llm: requireLlm(),
     search,
   });
 }
@@ -341,7 +350,8 @@ function handleGraphCompare(body: { sourceId: string; targetId: string; axes?: G
 }
 
 async function handleStreamingChat(body: ChatBody, res: http.ServerResponse) {
-  const { state, competitors, llm, search } = boot();
+  const { state, competitors, search } = boot();
+  const llm = requireLlm();
   res.writeHead(200, {
     "Content-Type": "text/event-stream; charset=utf-8",
     "Cache-Control": "no-cache, no-transform",

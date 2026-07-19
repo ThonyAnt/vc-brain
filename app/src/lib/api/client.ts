@@ -195,6 +195,70 @@ function parseSseFrame(frame: string): OrchestratorStreamEvent | undefined {
   return JSON.parse(data) as OrchestratorStreamEvent
 }
 
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+/* Mirrors the server's isSourcingRequest gate closely enough for demo runs. */
+const OFFLINE_SOURCING = /\b(source|find|discover|scout)\b[\s\S]*\b(compan(?:y|ies)|startups?|deals?)\b/i
+
+const OFFLINE_PIPELINE = [
+  'discovery', 'fundProfiler', 'marketScout', 'technicalDiligence',
+  'commercialDiligence', 'financialDiligence', 'risk', 'partnerReview',
+  'committee', 'memo',
+]
+
+/**
+ * Offline/demo replacement for the live SSE stream: replays the same
+ * lifecycle events the orchestrator would emit (so the analyst trace UI works
+ * without the brain API), then streams the local reply in visible chunks.
+ */
+async function simulateOfflineStream(
+  messages: ChatMessage[],
+  context: ChatContext | undefined,
+  handlers: StreamChatHandlers,
+): Promise<ChatMessage> {
+  const reply = await chatOnce(messages, context)
+  const emit = (event: OrchestratorStreamEvent) => handlers.onEvent?.(event)
+  const runId = 'offline'
+  const question = [...messages].reverse().find((m) => m.role === 'user')?.content ?? ''
+
+  if (OFFLINE_SOURCING.test(question)) {
+    emit({ type: 'run_started', runId, orchestrator: 'investment_orchestrator', agents: OFFLINE_PIPELINE })
+    for (const agent of OFFLINE_PIPELINE) {
+      if (agent === 'partnerReview') {
+        for (const partner of ['partner:Partner A', 'partner:Partner B']) {
+          emit({ type: 'agent_started', runId, agent: partner, label: partner })
+          await wait(430)
+          emit({ type: 'agent_completed', runId, agent: partner, summary: 'Vote recorded.' })
+        }
+        continue
+      }
+      emit({ type: 'agent_started', runId, agent, label: agent })
+      await wait(agent === 'discovery' ? 700 : 430)
+      emit({
+        type: 'agent_completed',
+        runId,
+        agent,
+        summary:
+          agent === 'committee'
+            ? 'Committee convened — partner votes are in.'
+            : `${agent} completed.`,
+      })
+    }
+  } else {
+    emit({ type: 'run_started', runId, orchestrator: 'investment_orchestrator', agents: [] })
+    await wait(350)
+  }
+
+  for (let i = 0; i < reply.content.length; i += 64) {
+    const delta = reply.content.slice(i, i + 64)
+    emit({ type: 'text_delta', runId, delta })
+    handlers.onDelta?.(delta)
+    await wait(12)
+  }
+  emit({ type: 'run_completed', runId, message: reply })
+  return reply
+}
+
 export const api = {
   async getGraph(): Promise<FundGraph> {
     return { ...store.graph, weights: { ...store.weights } }
@@ -428,8 +492,9 @@ export const api = {
       if (buffer.trim()) consume(buffer)
       return finalMessage ?? { role: 'assistant', content }
     } catch {
-      // Preserve offline/demo behavior when the live API is unavailable.
-      return chatOnce(messages, context)
+      // Preserve offline/demo behavior when the live API is unavailable —
+      // replay a simulated orchestration so the trace UI stays alive.
+      return simulateOfflineStream(messages, context, handlers)
     }
   },
 

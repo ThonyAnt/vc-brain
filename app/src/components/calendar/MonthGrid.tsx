@@ -51,7 +51,7 @@ export function MonthGrid({
         >
           <ChevronLeft className="h-4 w-4" />
         </button>
-        <span className="code-sm uppercase tracking-[0.12em] text-ink">{monthLabel}</span>
+        <span className="caption-tight uppercase tracking-[0.08em] text-ink">{monthLabel}</span>
         <button
           type="button"
           aria-label="Next month"

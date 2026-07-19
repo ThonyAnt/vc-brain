@@ -135,7 +135,8 @@ function persistSourcedCache() {
     const companies = data.companies.filter((company) => company.type === 'sourced')
     const companyIds = new Set(companies.map((company) => company.id))
     const founders = data.founders.filter(
-      (founder) => companyIds.has(founder.companyId) || !seedFounderIds.has(founder.id),
+      (founder) =>
+        (founder.companyId != null && companyIds.has(founder.companyId)) || !seedFounderIds.has(founder.id),
     )
     localStorage.setItem(SOURCED_STORAGE_KEY, JSON.stringify({ companies, founders }))
   } catch {

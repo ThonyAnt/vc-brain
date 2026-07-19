@@ -316,3 +316,123 @@ export async function sourceFounder(
     sources: results.map((r) => r.url).slice(0, 6),
   };
 }
+
+/*
+ * Founder DISCOVERY: "source 2 founders from M&T in PE" — no names given.
+ * Search the open web for the criteria, have the LLM extract real people the
+ * results explicitly identify as founders matching them, then run the normal
+ * single-person scout on each so every lead gets the same corroboration and
+ * calibrated score. Candidates the scout can't verify are skipped, not faked.
+ */
+
+const FounderCandidateListSchema = z.object({
+  candidates: z.array(
+    z.object({
+      name: z.string(),
+      /** Current company, when the results reveal one. */
+      company: z.string().optional(),
+      /** Why this person matches the criteria, grounded in the results. */
+      evidence: z.string(),
+    }),
+  ),
+});
+
+export interface DiscoverFoundersInput {
+  /** The user's ask, verbatim (may span several chat messages). */
+  criteria: string;
+  count: number;
+  fundProfile?: FundProfile;
+}
+
+export interface DiscoverFoundersResult {
+  founders: SourcedFounderView[];
+  /** Candidates the scout couldn't corroborate — surfaced, never silently eaten. */
+  skipped: { name: string; reason: string }[];
+}
+
+export async function discoverFounders(
+  input: DiscoverFoundersInput,
+  deps: SourceFounderDeps,
+  onFound?: (founder: SourcedFounderView) => Promise<void>,
+): Promise<DiscoverFoundersResult> {
+  const count = Math.max(1, Math.min(input.count, 5));
+  const criteria = input.criteria.trim();
+
+  let queries: string[] = [`${criteria} founder startup`];
+  try {
+    const expanded = await deps.llm.generateStructured({
+      schema: z.object({ queries: z.array(z.string()).min(1).max(4) }),
+      schemaName: "FounderDiscoveryQueries",
+      system:
+        "You turn a venture fund's founder-discovery request into effective web-search queries. " +
+        "Expand abbreviations to their most likely meaning in a venture context. " +
+        "Return 2-4 diverse queries likely to surface individually named founders.",
+      prompt: `Request: ${criteria}`,
+    });
+    queries = [...expanded.queries, `${criteria} founder startup`];
+  } catch {
+    // Query expansion is an optimization; the literal ask still searches below.
+  }
+
+  const seen = new Set<string>();
+  const results: SearchResult[] = [];
+  for (const q of [...new Set(queries)]) {
+    const found = await deps.search.search(q, { maxResults: 6 });
+    for (const r of found) {
+      if (!seen.has(r.url)) {
+        seen.add(r.url);
+        results.push(r);
+      }
+    }
+  }
+  if (results.length === 0) {
+    throw new Error(`discoverFounders: web search returned nothing for "${criteria}"`);
+  }
+
+  const context = results
+    .map((r, i) => `[${i + 1}] ${r.title}\n${r.url}\n${r.content}`)
+    .join("\n\n");
+
+  const { candidates } = await deps.llm.generateStructured({
+    schema: FounderCandidateListSchema,
+    schemaName: "FounderCandidateList",
+    system:
+      "You extract candidate FOUNDERS from web-search results for a venture fund. " +
+      "Only include real, individually named people the results explicitly connect to the criteria — " +
+      "never invent names, never include companies, and never stretch a weak match. " +
+      "The user's criteria are the ONLY filter; do not screen people against the fund's own thesis. " +
+      "Fewer strong candidates beat a padded list; return an empty list when nobody qualifies.",
+    prompt:
+      `Criteria: ${criteria}\n\n` +
+      `Search results:\n${context}\n\n` +
+      `List up to ${count * 2} distinct people who match the criteria, best first.`,
+  });
+
+  const founders: SourcedFounderView[] = [];
+  const skipped: { name: string; reason: string }[] = [];
+  const named = new Set<string>();
+  for (const candidate of candidates) {
+    if (founders.length >= count) break;
+    const key = candidate.name.toLowerCase();
+    if (named.has(key)) continue;
+    named.add(key);
+    try {
+      const founder = await sourceFounder(
+        {
+          name: candidate.name,
+          company: candidate.company,
+          context: criteria,
+          fundProfile: input.fundProfile,
+        },
+        deps,
+      );
+      founders.push(founder);
+      await onFound?.(founder);
+    } catch (error) {
+      // A candidate the scout can't corroborate is skipped, never fabricated —
+      // but the skip is reported so thin results are explainable.
+      skipped.push({ name: candidate.name, reason: error instanceof Error ? error.message : String(error) });
+    }
+  }
+  return { founders, skipped };
+}

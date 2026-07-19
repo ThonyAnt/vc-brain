@@ -58,7 +58,12 @@
     "status": "sourced",
     "historicalStatus": "external",
     "outcome": "unknown",
-    "sourceRefs": []
+    "sourceRefs": [],
+    "website": "https://www.scribeai.com",
+    "logoUrl": "https://www.google.com/s2/favicons?domain=www.scribeai.com&sz=128",
+    "hqCity": "San Francisco",
+    "hqLat": 37.7749,
+    "hqLng": -122.4194
   },
   {
     "id": "co_radintel",
@@ -119,7 +124,12 @@
     "status": "sourced",
     "historicalStatus": "external",
     "outcome": "unknown",
-    "sourceRefs": []
+    "sourceRefs": [],
+    "website": "https://www.radintel.com",
+    "logoUrl": "https://www.google.com/s2/favicons?domain=www.radintel.com&sz=128",
+    "hqCity": "New York",
+    "hqLat": 40.7128,
+    "hqLng": -74.006
   },
   {
     "id": "co_payflow",
@@ -164,7 +174,12 @@
     "status": "sourced",
     "historicalStatus": "external",
     "outcome": "unknown",
-    "sourceRefs": []
+    "sourceRefs": [],
+    "website": "https://www.payflow.io",
+    "logoUrl": "https://www.google.com/s2/favicons?domain=www.payflow.io&sz=128",
+    "hqCity": "San Francisco",
+    "hqLat": 37.7749,
+    "hqLng": -122.4194
   },
   {
     "id": "co_vetcharts",
@@ -210,7 +225,12 @@
     "status": "sourced",
     "historicalStatus": "external",
     "outcome": "unknown",
-    "sourceRefs": []
+    "sourceRefs": [],
+    "website": "https://www.vetcharts.com",
+    "logoUrl": "https://www.google.com/s2/favicons?domain=www.vetcharts.com&sz=128",
+    "hqCity": "San Francisco",
+    "hqLat": 37.7749,
+    "hqLng": -122.4194
   },
   {
     "id": "co_ladder_health",
@@ -269,7 +289,12 @@
     "outcome": "unknown",
     "sourceRefs": [
       "https://ladderhealth.com"
-    ]
+    ],
+    "website": "https://www.ladderhealth.com",
+    "logoUrl": "https://www.google.com/s2/favicons?domain=www.ladderhealth.com&sz=128",
+    "hqCity": "New York",
+    "hqLat": 40.7128,
+    "hqLng": -74.006
   },
   {
     "id": "co_ambience_healthcare",
@@ -327,7 +352,12 @@
     "outcome": "unknown",
     "sourceRefs": [
       "https://ambiencehealthcare.com"
-    ]
+    ],
+    "website": "https://www.ambiencehealthcare.com",
+    "logoUrl": "https://www.google.com/s2/favicons?domain=www.ambiencehealthcare.com&sz=128",
+    "hqCity": "San Francisco",
+    "hqLat": 37.7749,
+    "hqLng": -122.4194
   },
   {
     "id": "co_tala_health",
@@ -383,6 +413,11 @@
     "outcome": "unknown",
     "sourceRefs": [
       "https://talahealth.com"
-    ]
+    ],
+    "website": "https://www.talahealth.com",
+    "logoUrl": "https://www.google.com/s2/favicons?domain=www.talahealth.com&sz=128",
+    "hqCity": "San Francisco",
+    "hqLat": 37.7749,
+    "hqLng": -122.4194
   }
 ]

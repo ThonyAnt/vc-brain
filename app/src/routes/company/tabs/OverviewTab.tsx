@@ -92,6 +92,31 @@ function FitScoreBlock({ company }: { company: Company }) {
   )
 }
 
+function AnalysisEmptyState({
+  children,
+  inverted = false,
+}: {
+  children: ReactNode
+  inverted?: boolean
+}) {
+  return (
+    <div
+      role="status"
+      className={`mt-3 border-2 border-dashed p-4 ${
+        inverted ? 'border-white/45 bg-white/10' : 'border-hairline-strong bg-bone'
+      }`}
+    >
+      <span
+        className={`code-sm font-bold uppercase tracking-[0.12em] ${
+          inverted ? 'text-on-dark' : 'text-charcoal'
+        }`}
+      >
+        Not yet analyzed
+      </span>
+      <p className={`mt-1.5 text-sm ${inverted ? 'text-on-dark/75' : 'text-mute'}`}>{children}</p>
+    </div>
+  )
+}
 export function OverviewTab({ company, founders }: { company: Company; founders: Founder[] }) {
   const [names, setNames] = useState<Map<string, string>>(new Map())
 
@@ -185,7 +210,7 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
       : []),
     {
       key: 'Reasons to invest',
-      body: (
+      body: company.reasonsToInvest.length > 0 ? (
         <ul className="mt-2 space-y-1.5">
           {company.reasonsToInvest.map((r) => (
             <li key={r} className="text-sm text-body">
@@ -193,11 +218,16 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
             </li>
           ))}
         </ul>
+      ) : (
+        <AnalysisEmptyState>
+          No investment rationale is on record. This section is populated when the company reaches
+          finalist review.
+        </AnalysisEmptyState>
       ),
     },
     {
       key: 'Reasons to pass',
-      body: (
+      body: company.reasonsToPass.length > 0 ? (
         <ul className="mt-2 space-y-1.5">
           {company.reasonsToPass.map((r) => (
             <li key={r} className="text-sm text-body">
@@ -205,6 +235,11 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
             </li>
           ))}
         </ul>
+      ) : (
+        <AnalysisEmptyState>
+          No pass rationale is on record. This section is populated when the company reaches
+          finalist review.
+        </AnalysisEmptyState>
       ),
     },
   ]
@@ -268,24 +303,36 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
 
         <Card>
           <Eyebrow>Key risks</Eyebrow>
-          <ul className="mt-2 space-y-1.5">
-            {company.risks.map((r) => (
-              <li key={r} className="text-sm text-body">
-                · {r}
-              </li>
-            ))}
-          </ul>
+          {company.risks.length > 0 ? (
+            <ul className="mt-2 space-y-1.5">
+              {company.risks.map((r) => (
+                <li key={r} className="text-sm text-body">
+                  · {r}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <AnalysisEmptyState>
+              No risk analysis is on record. Risks are populated during finalist diligence.
+            </AnalysisEmptyState>
+          )}
         </Card>
 
         <Card className="bg-dark text-on-dark">
           <span className="caption-tight text-on-dark">Missing diligence</span>
-          <ul className="mt-2 space-y-2">
-            {company.diligenceQuestions.map((q) => (
-              <li key={q} className="text-sm text-on-dark">
-                → {q}
-              </li>
-            ))}
-          </ul>
+          {company.diligenceQuestions.length > 0 ? (
+            <ul className="mt-2 space-y-2">
+              {company.diligenceQuestions.map((q) => (
+                <li key={q} className="text-sm text-on-dark">
+                  → {q}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <AnalysisEmptyState inverted>
+              No diligence review is on record. Open questions appear after specialist analysis.
+            </AnalysisEmptyState>
+          )}
         </Card>
       </div>
       </div>

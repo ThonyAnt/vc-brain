@@ -96,12 +96,10 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
 
     const markets = graph.nodes.filter((n) => n.type === 'market')
     const clusterCount = Math.max(markets.length, 1)
-    const POSITION_SCALE = 4.5
-    const anchors = markets.map((market, i) => {
-      if (market.position) return new THREE.Vector3(...market.position).multiplyScalar(POSITION_SCALE)
+    const anchors = markets.map((_market, i) => {
       const phi = Math.acos(1 - (2 * (i + 0.5)) / clusterCount)
       const theta = Math.PI * (1 + Math.sqrt(5)) * i
-      const r = 330
+      const r = 250
       return new THREE.Vector3(
         Math.sin(phi) * Math.cos(theta) * r,
         Math.cos(phi) * r * 0.72,
@@ -132,16 +130,10 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     for (const gn of graph.nodes) {
       if (gn.type === 'market' || gn.type === 'criterion') continue
       const cluster = clusterOf.get(gn.id) ?? 0
-      const semanticPosition = gn.position
-        ? new THREE.Vector3(...gn.position).multiplyScalar(POSITION_SCALE)
-        : undefined
       const clusterAnchor = anchors[cluster] ?? new THREE.Vector3()
-      const semanticRadius = semanticPosition?.distanceTo(clusterAnchor) ?? 0
-      // Preserve the brain's MDS position, with a deterministic visual offset
-      // capped below 15% of the node's distance from its market anchor.
-      const base = semanticPosition
-        ? semanticPosition.add(jitterVec(`${gn.id}:semantic`, semanticRadius * 0.08))
-        : clusterAnchor.clone().add(jitterVec(gn.id, gn.type === 'founder' ? 150 : 120))
+      // Similarity determines cluster membership and edges, while the canvas
+      // keeps the organic placement that reads as a network instead of a ring.
+      const base = clusterAnchor.clone().add(jitterVec(gn.id, gn.type === 'founder' ? 220 : 192))
       nodes.push({
         id: gn.id,
         label: gn.label,
@@ -151,7 +143,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         cluster,
         base,
         offset: new THREE.Vector3(),
-        vel: jitterVec(`${gn.id}:velocity`, semanticPosition ? 0.6 : 3),
+        vel: jitterVec(`${gn.id}:velocity`, 3),
         pos: base.clone(),
         phase: rand() * Math.PI * 2,
       })

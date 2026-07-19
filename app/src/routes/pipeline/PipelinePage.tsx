@@ -6,6 +6,7 @@ import { MonthGrid, type CalendarEvent } from '../../components/calendar/MonthGr
 import { Eyebrow } from '../../components/ui/Eyebrow'
 import { FitInfo } from '../../components/ui/FitInfo'
 import { api } from '../../lib/api/client'
+import { CALENDAR_RESERVATIONS } from '../../lib/calendarReservations'
 import type { Company, Stage } from '../../lib/types'
 
 const STAGES: Stage[] = ['Sourced', 'Outreach', 'Meeting', 'Diligence', 'IC', 'Decision']
@@ -175,7 +176,7 @@ function CalendarView({
           <MonthGrid events={gridEvents} onOpenEvent={onOpenMemo} />
         ) : (
         <div className="divide-y-2 divide-hairline-strong">
-          {CALENDAR_CALLS.map((call) => {
+          {CALENDAR_RESERVATIONS.map((call) => {
             const company = companies.find((item) => item.id === call.companyId)
             return (
               <div key={call.id} className="grid gap-3 p-5 lg:grid-cols-[22px_145px_minmax(0,1fr)_auto] lg:items-center">
@@ -187,9 +188,9 @@ function CalendarView({
                   disabled={!company}
                   className="h-4 w-4 cursor-pointer accent-primary disabled:cursor-not-allowed"
                 />
-                <div className="code-sm text-mute"><strong className="block text-ink">{call.day}</strong>{call.time}</div>
+                <div className="code-sm text-mute"><strong className="block text-ink">{call.when}</strong>{call.time}</div>
                 <div>
-                  <p className="caption-tight text-ink">{call.title} — {names.get(call.companyId) ?? 'Company'}</p>
+                  <p className="caption-tight text-ink">{call.title} — {names.get(call.companyId) ?? call.companyName}</p>
                   <p className="mt-1 text-sm text-mute">{call.founder} · Google Calendar reservation confirmed</p>
                 </div>
                 <div className="flex flex-wrap gap-2 lg:justify-end">
@@ -391,12 +392,16 @@ export function PipelinePage() {
           options={[{ value: 'all', label: 'All locations' }, ...locations.map((location) => ({ value: location, label: location }))]}
         />
         <div className="min-w-4 flex-1" />
-        <button type="button" onClick={sendBatchOutreach} disabled={!outreachEligible.length} className="h-9 shrink-0 border-2 border-hairline-strong bg-primary px-5 text-sm font-semibold text-on-primary disabled:cursor-not-allowed disabled:bg-stone disabled:text-charcoal">
-          Outbound
-        </button>
-        <button type="button" onClick={toggleAllVisible} disabled={!sorted.length} className="h-9 shrink-0 border-2 border-hairline-strong bg-dark px-3 text-sm font-semibold text-on-dark disabled:cursor-not-allowed disabled:opacity-40">
-          {allVisibleSelected ? 'Clear selection' : `Select all ${sorted.length}`}
-        </button>
+        {view !== 'calendar' && (
+          <>
+            <button type="button" onClick={sendBatchOutreach} disabled={!outreachEligible.length} className="h-9 shrink-0 border-2 border-hairline-strong bg-primary px-5 text-sm font-semibold text-on-primary disabled:cursor-not-allowed disabled:bg-stone disabled:text-charcoal">
+              Outbound
+            </button>
+            <button type="button" onClick={toggleAllVisible} disabled={!sorted.length} className="h-9 shrink-0 border-2 border-hairline-strong bg-dark px-3 text-sm font-semibold text-on-dark disabled:cursor-not-allowed disabled:opacity-40">
+              {allVisibleSelected ? 'Clear selection' : `Select all ${sorted.length}`}
+            </button>
+          </>
+        )}
       </div>
       {batchNotice && <div role="status" className="code-sm mt-3 border-2 border-hairline-strong bg-success px-3 py-2 text-ink">{batchNotice}</div>}
 

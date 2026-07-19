@@ -202,13 +202,13 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
   }
 
   /* ---- deal-stage board: recommendation -> IC, finalists/in-diligence ->
-   * Diligence, then the next best-ranked sourced companies fill Sourced.
-   * Everything else stays off the pipeline board (103 rows would drown it). */
+   * Diligence, every other non-eliminated ranked candidate -> Sourced.
+   * Only hard-filter-eliminated companies (off-stage/off-thesis) stay off the
+   * board; the pipeline database view sorts/paginates the volume. */
   const finalistIds = new Set((snap.finalists ?? []).map((f) => f.id))
   const topSourcedIds = new Set(
     (snap.sourcedCandidates ?? [])
       .filter((r) => !r.eliminationReason && !finalistIds.has(r.companyId) && r.companyId !== recId)
-      .slice(0, 20)
       .map((r) => r.companyId),
   )
   const dealStageFor = (c: BrainCompany, type: Company['type']): Stage | undefined => {

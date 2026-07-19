@@ -4,12 +4,18 @@
  * landscape with the current clustering, and replaces the
  * `market_landscape_built` event payload in place.
  *
+ * When OPENAI_API_KEY is set, clusters are named by the LLM (shared strategic
+ * shape); otherwise the deterministic modal auto-labels stay.
+ *
  *   npx tsx src/scripts/refreshLandscape.ts
+ *   node --env-file=../.env node_modules/.bin/tsx src/scripts/refreshLandscape.ts
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildMarketLandscape } from "../tools/landscape.js";
+import { labelClustersWithLLM } from "../tools/labelClusters.js";
+import { OpenAILLMClient } from "../llm/openai.js";
 import type { VCBrainState } from "../state.js";
 import type { Company } from "../schemas/company.js";
 
@@ -25,7 +31,14 @@ const companies = [
 ];
 
 // Offline: no embeddings — the problem dimension falls back to token overlap.
-const landscape = buildMarketLandscape(companies, {});
+let landscape = buildMarketLandscape(companies, {});
+
+if (process.env.OPENAI_API_KEY) {
+  landscape = await labelClustersWithLLM(landscape, companies, new OpenAILLMClient({}));
+  console.log("Cluster labels: LLM-named (modal auto-labels as fallback)");
+} else {
+  console.log("Cluster labels: modal auto-labels (set OPENAI_API_KEY for LLM naming)");
+}
 
 const event = state.events.find((e) => e.eventType === "market_landscape_built");
 if (!event) throw new Error("snapshot has no market_landscape_built event");

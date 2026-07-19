@@ -11798,7 +11798,7 @@
         "clusters": [
           {
             "id": 0,
-            "label": "B2B SaaS",
+            "label": "Agentic Enterprise Automation",
             "memberIds": [
               "co_concourse",
               "co_dust",
@@ -11822,7 +11822,7 @@
           },
           {
             "id": 1,
-            "label": "AI Infrastructure",
+            "label": "AI Agent Infrastructure",
             "memberIds": [
               "co_letta",
               "co_firecrawl",
@@ -11843,7 +11843,7 @@
           },
           {
             "id": 2,
-            "label": "Climate & Energy",
+            "label": "Renewable Energy Ops",
             "memberIds": [
               "co_squint",
               "co_artisan",
@@ -11861,7 +11861,7 @@
           },
           {
             "id": 3,
-            "label": "Healthcare",
+            "label": "AI-Driven Healthcare",
             "memberIds": [
               "co_anterior",
               "co_freed",
@@ -11879,7 +11879,7 @@
           },
           {
             "id": 4,
-            "label": "Logistics and supply chain",
+            "label": "Autonomous Robotics Logistics",
             "memberIds": [
               "co_lithos_carbon",
               "co_theseus",
@@ -11897,7 +11897,7 @@
           },
           {
             "id": 5,
-            "label": "Social",
+            "label": "Event-Centric Social Platforms",
             "memberIds": [
               "co_cargado",
               "co_beli",
@@ -11915,7 +11915,7 @@
           },
           {
             "id": 6,
-            "label": "Cybersecurity",
+            "label": "Identity and Access Management AI",
             "memberIds": [
               "co_tavily",
               "co_kick",
@@ -11932,7 +11932,7 @@
           },
           {
             "id": 7,
-            "label": "Financial Services",
+            "label": "Fintech & Payments Infrastructure",
             "memberIds": [
               "co_herald",
               "co_straddle",
@@ -11949,7 +11949,7 @@
           },
           {
             "id": 8,
-            "label": "Technology",
+            "label": "Developer-Focused AI Tools",
             "memberIds": [
               "co_rwazi",
               "co_mem0",
@@ -11959,7 +11959,7 @@
           },
           {
             "id": 9,
-            "label": "AI persona platform",
+            "label": "AI Learning Companions",
             "memberIds": [
               "co_ello",
               "co_delphi",

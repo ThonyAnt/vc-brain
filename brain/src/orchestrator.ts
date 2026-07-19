@@ -7,6 +7,7 @@ import type { LLMClient } from "./llm/client.js";
 import type { SearchClient } from "./search/client.js";
 import { CompanyIndex, findNearestCompanies, type EmbeddingMap } from "./tools/similarity.js";
 import { buildMarketLandscape } from "./tools/landscape.js";
+import { labelClustersWithLLM } from "./tools/labelClusters.js";
 import { discoverCompanies } from "./tools/discover.js";
 import { emitGraphEvent } from "./tools/events.js";
 import {
@@ -163,9 +164,12 @@ export async function runPipeline(
     opts.useEmbeddings === false ? undefined : await buildEmbeddingMap(allCompanies, llm);
 
   emit("sourcing", "candidate_universe_loaded", state.candidateUniverse.map((c) => c.id));
-  const landscape = buildMarketLandscape([...state.candidateUniverse, ...historyPool], {
+  let landscape = buildMarketLandscape([...state.candidateUniverse, ...historyPool], {
     embeddings,
   });
+  /* modal auto-labels usually collapse to the industry — let the LLM name the
+     shared strategic shape instead (falls back to auto-labels on failure) */
+  landscape = await labelClustersWithLLM(landscape, [...state.candidateUniverse, ...historyPool], llm);
   emit("sourcing", "market_landscape_built", undefined, landscape);
 
   const scout = await withRetry(

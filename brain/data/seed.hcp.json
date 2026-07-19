@@ -1,5 +1,5 @@
 {
-  "mandate": "Find the best seed or Series A software/AI company for a $1.0\u20132.5M initial check, underwritten to HCP's standard: bottom-up revenue build, explicit assumptions, founder-market fit, and a defensible moat.",
+  "mandate": "Find the best seed or Series A software/AI company for a $1.0–2.5M initial check, underwritten to HCP's standard: bottom-up revenue build, explicit assumptions, founder-market fit, and a defensible moat.",
   "fundProfile": {
     "thesisSummary": "HCP focuses on investing in seed and Series A software/AI companies that demonstrate strong founder-market fit, have a defensible moat, and can produce significant bottom-up revenue builds. The fund targets investments in companies with innovative use of AI and software technology, aiming to become industry control points or leaders in their respective segments.",
     "stages": [
@@ -287,7 +287,7 @@
       "companyName": "Rwazi",
       "decision": "passed",
       "date": "2025-07-15",
-      "text": "## 8. Rwazi\n\n**Stage:** Series A  \n**Proposed HCP check:** $2.5m  \n**Recommendation:** Diligence  \n**Links:** [Company](https://www.rwazi.com/) | [Series A report](https://techcrunch.com/2025/07/15/rwazi-raises-12m-series-a-to-help-companies-with-consumer-insights-and-intelligence/) | [Lumora product](https://rwazi.com/products/lumora) | [About](https://www.rwazi.com/about)\n\n### Founders and company\n\n| Founder | Role | Relevant evidence |\n|---|---|---|\n| Joseph Rutakangwa | Co-founder and CEO | Built Rwazi around real-world, zero-party consumer data and decision intelligence. |\n| Eric Sewankambo | Co-founder | Co-developed the company's distributed data and market-insight operation. |\n\n### Product description\n\nRwazi is a decision-intelligence platform that combines proprietary, directly reported consumer data with AI analysis. Its Lumora product helps brands detect demand shifts, compare competitors, test expansion, and decide where to allocate commercial resources. The company says its data coverage spans more than 190 countries and cites customers including Coca-Cola, Pampers, Visa, and Nestl\u00e9. Unlike web-traffic or panel-only tools, Rwazi emphasizes zero-party observations from people in physical markets, then turns that evidence into recommendations for strategy, product, marketing, and distribution teams.\n\n### Thesis: why invest\n\nRwazi raised a $12m Series A led by Bonfire Ventures in July 2025, with Santa Barbara Venture Partners, Newfund, and Alumni Ventures participating; TechCrunch reported a prior $4m seed. Traditional market research is slow, project-based, and backward-looking. Rwazi can transform it into a persistent software workflow where new observations update decisions continuously.\n\nThe moat is the combination of a verified collection network, historical physical-world data, and a decision layer trained on which recommendations prove useful. A chatbot over syndicated data is easy to copy. A trusted network that can collect a new, targeted observation in Lagos, Jakarta, or Lima and connect it to a customer's decision is harder.\n\n**What must be true:** data must be representative and fraud-resistant; customers must renew as software rather than projects; AI recommendations must be traceable to evidence; and collection economics must support software margins.\n\n**Next-round milestones:** $20m ARR, 100 enterprise customers, net retention above 120%, at least 70% recurring subscription revenue, gross margin above 70%, and documented decision impact at ten global accounts.\n\n### Market, TAM, and revenue build\n\n| Bottom-up step | Accounts | Annual contract | Result | Basis |\n|---|---:|---:|---:|---|\n| Regional consumer brands | 8,000 | $75,000 | $600m | HCP assumption |\n| Global brands and financial-services firms | 2,000 | $350,000 | $700m | HCP assumption |\n| Strategic enterprise platforms | 300 | $1.0m | $300m | HCP assumption |\n| **TAM** | 10,300 |  | **$1.60bn** | Annual software and data pool |\n| HCP penetration |  |  | **12.5%** | Roughly 500 blended accounts |\n| **2032 revenue opportunity** |  |  | **$200m** | HCP base case |\n\n| Revenue, $m | 2026E | 2027E | 2028E | 2029E | 2030E | 2031E | 2032E |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| Base case | 9 | 18 | 35 | 60 | 95 | 140 | 200 |\n| Illustrative customers | 60 | 100 | 170 | 250 | 340 | 420 | 500 |\n\n### Competitive landscape\n\n| Company | Category / use | Workflow | Delivery | Moat | Pricing | Capital status |\n|---|---|---|---|---|---|---|\n| **Rwazi** | Decision AI using zero-party data | X collection, analysis, recommendations | SaaS plus distributed data network | Proprietary physical-world observations and verification | Undisclosed | $12m Series A; at least $16m disclosed total; valuation undisclosed; Bonfire, Santa Barbara, Newfund, Alumni |\n| Ipsos | Global research and panels | X collection and analysis; Partial always-on software | Services plus platforms | Global panels, methods, brand | Custom/project | Public |\n| NIQ / GfK | Consumer and retail measurement | X syndicated measurement | Data subscriptions | Retail data relationships and longitudinal coverage | Custom | Private enterprise; capital not comparable |\n| Kantar | Brand and consumer research | X research and analytics | Services/data platforms | Global benchmarks and customer relationships | Custom | Private enterprise |\n| Euromonitor | Market intelligence | X syndicated data; Partial primary zero-party collection | Subscription platform | Global category database | Custom | Private enterprise |\n| Attest | Agile consumer research | X survey collection and analysis | SaaS/panel | Fast self-serve research workflow | Custom | Private; valuation undisclosed |\n| Toluna | Consumer panels and insights | X global panel and research workflow | SaaS/services | Panel scale and enterprise distribution | Custom | Private; capital data undisclosed here |\n\n### Public comps and exit model\n\n| Public comp | EV/LTM revenue |\n|---|---:|\n| [Similarweb](https://stockanalysis.com/stocks/smwb/statistics/) | 2.02x |\n| [Semrush](https://stockanalysis.com/stocks/semr/statistics/) | 3.49x |\n| [ZoomInfo](https://stockanalysis.com/stocks/gtm/statistics/) | 1.85x |\n| [Gartner](https://stockanalysis.com/stocks/it/statistics/) | 1.71x |\n| [HubSpot](https://stockanalysis.com/stocks/hubs/statistics/) | 3.04x |\n| **Median** | **2.02x** |\n\n| Return path | Base |\n|---|---:|\n| Entry post-money / ownership | $60m HCP assumption / 4.17% |\n| Future dilution / exit ownership | 35% / 2.71% |\n| 2032 revenue / multiple / EV | $200m / 3.0x / $600m |\n| HCP proceeds / MOIC | $16.3m / **6.5x** |\n| Downside / upside MOIC | 2.6x / 13.0x |\n\n### Principal risks and why invest anyway\n\n- **Data quality:** distributed collection invites fraud and bias. Audit sampling, geolocation, identity, incentives, and independent validation.\n- **Services leakage:** custom studies can inflate revenue but depress scalability. Separate subscription, data, and service gross margin.\n- **Incumbent datasets:** NIQ, Kantar, and Ipsos have deeper history. Rwazi must win on speed, hard-to-reach markets, and decision workflow.\n- **AI explainability:** recommendations without source traceability will not support high-stakes decisions. Require evidence-linked outputs and human review.\n\n---",
+      "text": "## 8. Rwazi\n\n**Stage:** Series A  \n**Proposed HCP check:** $2.5m  \n**Recommendation:** Diligence  \n**Links:** [Company](https://www.rwazi.com/) | [Series A report](https://techcrunch.com/2025/07/15/rwazi-raises-12m-series-a-to-help-companies-with-consumer-insights-and-intelligence/) | [Lumora product](https://rwazi.com/products/lumora) | [About](https://www.rwazi.com/about)\n\n### Founders and company\n\n| Founder | Role | Relevant evidence |\n|---|---|---|\n| Joseph Rutakangwa | Co-founder and CEO | Built Rwazi around real-world, zero-party consumer data and decision intelligence. |\n| Eric Sewankambo | Co-founder | Co-developed the company's distributed data and market-insight operation. |\n\n### Product description\n\nRwazi is a decision-intelligence platform that combines proprietary, directly reported consumer data with AI analysis. Its Lumora product helps brands detect demand shifts, compare competitors, test expansion, and decide where to allocate commercial resources. The company says its data coverage spans more than 190 countries and cites customers including Coca-Cola, Pampers, Visa, and Nestlé. Unlike web-traffic or panel-only tools, Rwazi emphasizes zero-party observations from people in physical markets, then turns that evidence into recommendations for strategy, product, marketing, and distribution teams.\n\n### Thesis: why invest\n\nRwazi raised a $12m Series A led by Bonfire Ventures in July 2025, with Santa Barbara Venture Partners, Newfund, and Alumni Ventures participating; TechCrunch reported a prior $4m seed. Traditional market research is slow, project-based, and backward-looking. Rwazi can transform it into a persistent software workflow where new observations update decisions continuously.\n\nThe moat is the combination of a verified collection network, historical physical-world data, and a decision layer trained on which recommendations prove useful. A chatbot over syndicated data is easy to copy. A trusted network that can collect a new, targeted observation in Lagos, Jakarta, or Lima and connect it to a customer's decision is harder.\n\n**What must be true:** data must be representative and fraud-resistant; customers must renew as software rather than projects; AI recommendations must be traceable to evidence; and collection economics must support software margins.\n\n**Next-round milestones:** $20m ARR, 100 enterprise customers, net retention above 120%, at least 70% recurring subscription revenue, gross margin above 70%, and documented decision impact at ten global accounts.\n\n### Market, TAM, and revenue build\n\n| Bottom-up step | Accounts | Annual contract | Result | Basis |\n|---|---:|---:|---:|---|\n| Regional consumer brands | 8,000 | $75,000 | $600m | HCP assumption |\n| Global brands and financial-services firms | 2,000 | $350,000 | $700m | HCP assumption |\n| Strategic enterprise platforms | 300 | $1.0m | $300m | HCP assumption |\n| **TAM** | 10,300 |  | **$1.60bn** | Annual software and data pool |\n| HCP penetration |  |  | **12.5%** | Roughly 500 blended accounts |\n| **2032 revenue opportunity** |  |  | **$200m** | HCP base case |\n\n| Revenue, $m | 2026E | 2027E | 2028E | 2029E | 2030E | 2031E | 2032E |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| Base case | 9 | 18 | 35 | 60 | 95 | 140 | 200 |\n| Illustrative customers | 60 | 100 | 170 | 250 | 340 | 420 | 500 |\n\n### Competitive landscape\n\n| Company | Category / use | Workflow | Delivery | Moat | Pricing | Capital status |\n|---|---|---|---|---|---|---|\n| **Rwazi** | Decision AI using zero-party data | X collection, analysis, recommendations | SaaS plus distributed data network | Proprietary physical-world observations and verification | Undisclosed | $12m Series A; at least $16m disclosed total; valuation undisclosed; Bonfire, Santa Barbara, Newfund, Alumni |\n| Ipsos | Global research and panels | X collection and analysis; Partial always-on software | Services plus platforms | Global panels, methods, brand | Custom/project | Public |\n| NIQ / GfK | Consumer and retail measurement | X syndicated measurement | Data subscriptions | Retail data relationships and longitudinal coverage | Custom | Private enterprise; capital not comparable |\n| Kantar | Brand and consumer research | X research and analytics | Services/data platforms | Global benchmarks and customer relationships | Custom | Private enterprise |\n| Euromonitor | Market intelligence | X syndicated data; Partial primary zero-party collection | Subscription platform | Global category database | Custom | Private enterprise |\n| Attest | Agile consumer research | X survey collection and analysis | SaaS/panel | Fast self-serve research workflow | Custom | Private; valuation undisclosed |\n| Toluna | Consumer panels and insights | X global panel and research workflow | SaaS/services | Panel scale and enterprise distribution | Custom | Private; capital data undisclosed here |\n\n### Public comps and exit model\n\n| Public comp | EV/LTM revenue |\n|---|---:|\n| [Similarweb](https://stockanalysis.com/stocks/smwb/statistics/) | 2.02x |\n| [Semrush](https://stockanalysis.com/stocks/semr/statistics/) | 3.49x |\n| [ZoomInfo](https://stockanalysis.com/stocks/gtm/statistics/) | 1.85x |\n| [Gartner](https://stockanalysis.com/stocks/it/statistics/) | 1.71x |\n| [HubSpot](https://stockanalysis.com/stocks/hubs/statistics/) | 3.04x |\n| **Median** | **2.02x** |\n\n| Return path | Base |\n|---|---:|\n| Entry post-money / ownership | $60m HCP assumption / 4.17% |\n| Future dilution / exit ownership | 35% / 2.71% |\n| 2032 revenue / multiple / EV | $200m / 3.0x / $600m |\n| HCP proceeds / MOIC | $16.3m / **6.5x** |\n| Downside / upside MOIC | 2.6x / 13.0x |\n\n### Principal risks and why invest anyway\n\n- **Data quality:** distributed collection invites fraud and bias. Audit sampling, geolocation, identity, incentives, and independent validation.\n- **Services leakage:** custom studies can inflate revenue but depress scalability. Separate subscription, data, and service gross margin.\n- **Incumbent datasets:** NIQ, Kantar, and Ipsos have deeper history. Rwazi must win on speed, hard-to-reach markets, and decision workflow.\n- **AI explainability:** recommendations without source traceability will not support high-stakes decisions. Require evidence-linked outputs and human review.\n\n---",
       "rationale": "The memo outlines several principal risks such as data quality, service leakage, incumbent datasets, and AI explainability that could affect scalability and decision support. These risks must be addressed before making an investment decision. As such, the recommendation was to conduct further diligence rather than investing immediately.",
       "identifiedMoat": "Proprietary physical-world observations and verification combined with a decision layer trained on useful recommendations.",
       "decisionDrivers": [
@@ -772,7 +772,8 @@
         {
           "name": "Sarah Wooders",
           "role": "Co-founder and CTO",
-          "background": "Co-authored the MemGPT research paper introducing self-editing memory for LLMs; UC Berkeley Sky Computing Lab."
+          "background": "Co-authored the MemGPT research paper introducing self-editing memory for LLMs; UC Berkeley Sky Computing Lab.",
+          "photoUrl": "https://i.ytimg.com/vi/VgttOIWfoeo/maxresdefault.jpg"
         }
       ],
       "stage": "seed",
@@ -852,7 +853,8 @@
         {
           "name": "Caleb Peffer",
           "role": "Co-founder and CEO",
-          "background": "Named as CEO in the company's Series A announcement and press coverage."
+          "background": "Named as CEO in the company's Series A announcement and press coverage.",
+          "photoUrl": "https://techcrunch.com/wp-content/uploads/2025/08/IMG_5763-e1755012254346.jpeg?w=637"
         },
         {
           "name": "Eric Ciarla",
@@ -941,7 +943,8 @@
         {
           "name": "Mohak Sharma",
           "role": "Co-founder and CEO",
-          "background": "Named as founder/CEO in the company's funding announcement and independent PR Newswire release."
+          "background": "Named as founder/CEO in the company's funding announcement and independent PR Newswire release.",
+          "photoUrl": "https://pbs.twimg.com/profile_images/2053475792756043782/XbI1xBcA.jpg"
         },
         {
           "name": "Dhruv Singh",
@@ -1023,7 +1026,8 @@
         {
           "name": "Vasek Mlejnsky",
           "role": "Co-founder",
-          "background": "Named in company Series A materials and independent press coverage as co-founder of FoundryLabs, Inc."
+          "background": "Named in company Series A materials and independent press coverage as co-founder of FoundryLabs, Inc.",
+          "photoUrl": "https://thenewstack.io/wp-content/uploads/2024/04/5c7214a5-vasek-600x600.png"
         },
         {
           "name": "Tomas Valenta",
@@ -1266,14 +1270,15 @@
       },
       "founders": [
         {
-          "name": "Magnus M\u00fcller",
+          "name": "Magnus Müller",
           "role": "Co-founder",
           "background": "Named in TechCrunch's funding coverage and the company's own seed-round blog post."
         },
         {
-          "name": "Gregor \u017duni\u010d",
+          "name": "Gregor Žunič",
           "role": "Co-founder",
-          "background": "Named in TechCrunch's funding coverage; project originated through ETH Zurich's Student Project House accelerator."
+          "background": "Named in TechCrunch's funding coverage; project originated through ETH Zurich's Student Project House accelerator.",
+          "photoUrl": "https://browser-use.com/images/authors/gregor.png"
         }
       ],
       "stage": "seed",
@@ -1349,12 +1354,14 @@
         {
           "name": "Jeff Huber",
           "role": "Co-founder and CEO",
-          "background": "Machine learning background; company and independent press identify him as CEO."
+          "background": "Machine learning background; company and independent press identify him as CEO.",
+          "photoUrl": "https://cdn.prod.website-files.com/6002179bc8122d63cfe31f13/66e8d8978c6d03ad9fa12e37_ja47fGVr6fk3Exx5IlqxLi0-TWgmGupXOFLAPVYDMIiNwhfhaR1VjjQFv7rTIA5KbcfwObDnRkXn7MjCGbOSZ4FpUS979vrZ3n4HjZBpoYYukvbyUhr-KZmhV3yhyM1toGajCmUFnT5A6yJe1FgNpItyd4YRsEhvMWJrsy11fP8.png"
         },
         {
           "name": "Anton Troynikov",
           "role": "Co-founder",
-          "background": "Background as a robotics engineer, researcher, and prior edtech startup founder."
+          "background": "Background as a robotics engineer, researcher, and prior edtech startup founder.",
+          "photoUrl": "https://i0.wp.com/softwareengineeringdaily.com/wp-content/uploads/2024/08/Chromas-Vector-Database-with-Anton-Troynikov.png?fit=600%2C315&ssl=1"
         }
       ],
       "stage": "seed",
@@ -1441,7 +1448,8 @@
         {
           "name": "Rebecca Qian",
           "role": "Co-founder",
-          "background": "Former Meta AI machine learning researcher."
+          "background": "Former Meta AI machine learning researcher.",
+          "photoUrl": "https://rebecca-qian.github.io/authors/admin/rebecca.png"
         }
       ],
       "stage": "series_b",
@@ -1516,7 +1524,8 @@
         {
           "name": "Ankur Goyal",
           "role": "Founder and CEO",
-          "background": "Previously founded Impira (acquired by Figma, where he led the AI team); early team member at SingleStore/MemSQL."
+          "background": "Previously founded Impira (acquired by Figma, where he led the AI team); early team member at SingleStore/MemSQL.",
+          "photoUrl": "https://i.ytimg.com/vi/Q6XmF4NpR20/mqdefault.jpg"
         }
       ],
       "stage": "series_b",
@@ -1696,7 +1705,8 @@
         {
           "name": "Gabriel Hubert",
           "role": "Co-founder",
-          "background": "Co-founded Dust alongside Polu; named in TechCrunch's 2024 Series A coverage."
+          "background": "Co-founded Dust alongside Polu; named in TechCrunch's 2024 Series A coverage.",
+          "photoUrl": "https://www.autonomoussummit.ai/wp-content/uploads/2024/11/Gabriel-Hubert.jpeg"
         }
       ],
       "stage": "series_b",
@@ -1783,7 +1793,8 @@
         {
           "name": "Devin Bhushan",
           "role": "Founder and CEO",
-          "background": "Previously built features for Yahoo's fantasy-sports platform, where he connected with investors Tim Tully and Jess Lee, who later backed Squint's Series A and B."
+          "background": "Previously built features for Yahoo's fantasy-sports platform, where he connected with investors Tim Tully and Jess Lee, who later backed Squint's Series A and B.",
+          "photoUrl": "https://startupsavant.com/images/startup-culture/articles/squint.jpg"
         }
       ],
       "stage": "series_b",
@@ -2037,7 +2048,8 @@
         {
           "name": "Parker Gilbert",
           "role": "Co-founder",
-          "background": "Prior VP of Finance experience at Hearth, per Numeric's own Series B announcement."
+          "background": "Prior VP of Finance experience at Hearth, per Numeric's own Series B announcement.",
+          "photoUrl": "https://cdn.prod.website-files.com/683cd0b88bd8a76ef55c1487/688b66a6ae7fb206bf08ba8e_Parker%20Gilbert.webp"
         },
         {
           "name": "Anthony Alvernaz",
@@ -2219,7 +2231,8 @@
         {
           "name": "Scott Stevenson",
           "role": "Co-founder and CEO",
-          "background": "Identified as co-founder and CEO in SiliconANGLE's October 2025 Series B coverage; publicly frames Spellbook's positioning as legal work's 'spreadsheet moment.'"
+          "background": "Identified as co-founder and CEO in SiliconANGLE's October 2025 Series B coverage; publicly frames Spellbook's positioning as legal work's 'spreadsheet moment.'",
+          "photoUrl": "https://www.inovia.vc/wp-content/uploads/2023/05/3-Scott-_-Spellbook.png"
         }
       ],
       "stage": "series_b",
@@ -2307,7 +2320,8 @@
         {
           "name": "Matt Harpe",
           "role": "Co-founder and CEO",
-          "background": "Prior Boston Consulting Group and SoftBank executive experience, per SiliconANGLE's February 2026 Series B coverage."
+          "background": "Prior Boston Consulting Group and SoftBank executive experience, per SiliconANGLE's February 2026 Series B coverage.",
+          "photoUrl": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iNHBeo01HyFE/v3/-1x-1.webp"
         },
         {
           "name": "Zenna Tavares",
@@ -2317,7 +2331,8 @@
         {
           "name": "Emily Mackevicius",
           "role": "Reported co-founder / research lead",
-          "background": "Postdoctoral researcher studying memory in birds at the Aronov lab and Center for Theoretical Neuroscience; identified as a founding researcher by the same secondary source."
+          "background": "Postdoctoral researcher studying memory in birds at the Aronov lab and Center for Theoretical Neuroscience; identified as a founding researcher by the same secondary source.",
+          "photoUrl": "https://i.ytimg.com/vi/ggP2A9tStTo/maxresdefault.jpg"
         },
         {
           "name": "Eli Bingham",
@@ -2404,7 +2419,8 @@
         {
           "name": "Jay Madheswaran",
           "role": "Co-founder and CEO",
-          "background": "15+ years in AI/ML at Facebook and Rubrik (first engineer, head of product engineering); previously at Lightspeed Venture Partners, which later co-led Eve's Series A."
+          "background": "15+ years in AI/ML at Facebook and Rubrik (first engineer, head of product engineering); previously at Lightspeed Venture Partners, which later co-led Eve's Series A.",
+          "photoUrl": "https://lsvp.com/wp-content/uploads/2025/01/Eve-Co-founders_David-Zeng-Jay-Madheswaran-and-Matt-Noe.jpg"
         },
         {
           "name": "Matt Noe",
@@ -2763,12 +2779,14 @@
         {
           "name": "Ellen DaSilva",
           "role": "Founder and CEO",
-          "background": "Early employee (#8) at Hims & Hers, serving as Head of Strategic Partnerships through IPO; prior business-operations leadership at Twitter."
+          "background": "Early employee (#8) at Hims & Hers, serving as Head of Strategic Partnerships through IPO; prior business-operations leadership at Twitter.",
+          "photoUrl": "https://www.hbswa.org/s/1738/images/gid13/editor/events/2023n/ellendasilva.jpg"
         },
         {
           "name": "Matthew Woo",
           "role": "Co-founder",
-          "background": "Prior consulting at Simon-Kucher & Partners; 9+ years in product roles at Meetup, Yo, Intercom, UJET, and Meta/WhatsApp."
+          "background": "Prior consulting at Simon-Kucher & Partners; 9+ years in product roles at Meetup, Yo, Intercom, UJET, and Meta/WhatsApp.",
+          "photoUrl": "https://substackcdn.com/image/fetch/$s_!RHIL!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcaa4a3e0-9d36-49f0-bad7-ca637fde1588_1664x1664.png"
         }
       ],
       "stage": "series_a",
@@ -2851,7 +2869,8 @@
         {
           "name": "Anu Sharma",
           "role": "Founder and CEO",
-          "background": "15+ years in healthcare innovation; founded Millie after a 2019 postpartum health crisis (preeclampsia and HELLP syndrome) following her own delivery."
+          "background": "15+ years in healthcare innovation; founded Millie after a 2019 postpartum health crisis (preeclampsia and HELLP syndrome) following her own delivery.",
+          "photoUrl": "https://techcrunch.com/wp-content/uploads/2025/02/Copy-of-Anu-1.jpg"
         },
         {
           "name": "Talia Borgo",
@@ -2946,7 +2965,8 @@
         {
           "name": "Sammy Faycurry",
           "role": "Co-founder and CEO",
-          "background": "Built the platform initially for his mother and sister, both registered dietitians."
+          "background": "Built the platform initially for his mother and sister, both registered dietitians.",
+          "photoUrl": "https://web-summit-avenger.imgix.net/production/avatars/original/a38b0ac781f38b897a95dbda12fb4794887cfcb6.?ixlib=rb-3.4.0&auto=format&fit=crop&crop=faces&w=600&h=600"
         },
         {
           "name": "Mark Stefanski",
@@ -3295,7 +3315,8 @@
         {
           "name": "Daniel Wilson",
           "role": "Co-founder",
-          "background": "Co-founding member per Behavioral Health Business; current operating role unconfirmed in sources reviewed."
+          "background": "Co-founding member per Behavioral Health Business; current operating role unconfirmed in sources reviewed.",
+          "photoUrl": "https://alldus.com/wp-content/uploads/2023/08/dwilson.png"
         }
       ],
       "stage": "seed",
@@ -3377,7 +3398,8 @@
         {
           "name": "Matt Antoszyk",
           "role": "Co-founder and CEO",
-          "background": "Led Herald from its December 2021 seed round through its October 2024 Series A; public sources reviewed do not disclose detailed prior career history."
+          "background": "Led Herald from its December 2021 seed round through its October 2024 Series A; public sources reviewed do not disclose detailed prior career history.",
+          "photoUrl": "https://i.ytimg.com/vi/ufxwn1pFse0/maxresdefault.jpg"
         }
       ],
       "stage": "series_a",
@@ -3459,7 +3481,8 @@
         {
           "name": "Keith Raphael",
           "role": "Co-founder and CEO",
-          "background": "Based in Broomfield, Colorado; public sources reviewed do not disclose detailed prior career history."
+          "background": "Based in Broomfield, Colorado; public sources reviewed do not disclose detailed prior career history.",
+          "photoUrl": "https://leadersinpayments.com/wp-content/uploads/2026/01/Ep-458-Website-Graphic-768x432.jpg"
         }
       ],
       "stage": "seed",
@@ -3623,7 +3646,8 @@
         {
           "name": "Sophia Goldberg",
           "role": "Co-founder and CEO",
-          "background": "Previously a product manager at Adyen, per TechCrunch."
+          "background": "Previously a product manager at Adyen, per TechCrunch.",
+          "photoUrl": "https://arizent.brightspotcdn.com/dims4/default/5b15522/2147483647/strip/true/crop/1400x800+0+0/resize/740x423!/quality/90/?url=https%3A%2F%2Fsource-media-brightspot.s3.us-east-1.amazonaws.com%2F71%2Fea%2F9d63a8314ad19fb19eae4b75fe26%2Fsophia-goldberg-ansa.jpg"
         },
         {
           "name": "JT Cho",
@@ -3800,7 +3824,8 @@
         {
           "name": "Jonathan Awad",
           "role": "Co-founder",
-          "background": "Co-founded Baselayer in 2023 after encountering KYB gaps firsthand, per the company's May 2024 seed-round announcement."
+          "background": "Co-founded Baselayer in 2023 after encountering KYB gaps firsthand, per the company's May 2024 seed-round announcement.",
+          "photoUrl": "https://jsawadd.com/images/6NpXsmb0f6-293.png"
         },
         {
           "name": "Timothy Hyde",
@@ -3892,7 +3917,7 @@
           "background": "Identified as CEO in TechCrunch's May 2024 Series A coverage; further prior career detail not disclosed in sources reviewed."
         },
         {
-          "name": "Bernardo Garc\u00eda",
+          "name": "Bernardo García",
           "role": "Co-founder",
           "background": "Identified alongside Godoy in TechCrunch's May 2024 Series A coverage; a third co-founder was referenced in that coverage but not individually named."
         }
@@ -3978,7 +4003,7 @@
       },
       "founders": [
         {
-          "name": "Cl\u00e9ment Sala\u00fcn",
+          "name": "Clément Salaün",
           "role": "Co-founder",
           "background": "Previously payments lead at Selency, per TechCrunch."
         },
@@ -4251,7 +4276,8 @@
         {
           "name": "Kevin Sapp",
           "role": "Co-founder",
-          "background": "Named as co-founder on Aembit's Series A press release; detailed prior operating history not confirmed in public sources reviewed."
+          "background": "Named as co-founder on Aembit's Series A press release; detailed prior operating history not confirmed in public sources reviewed.",
+          "photoUrl": "https://i.ytimg.com/vi/hWLTmiMO31I/maxresdefault.jpg"
         }
       ],
       "stage": "series_a",
@@ -4524,7 +4550,8 @@
         {
           "name": "Toby Mao",
           "role": "Co-founder and CTO",
-          "background": "Previously senior staff engineer at Airbnb leading the XP experimentation and Minerva metrics platforms; earlier led the XP platform at Netflix."
+          "background": "Previously senior staff engineer at Airbnb leading the XP experimentation and Minerva metrics platforms; earlier led the XP platform at Netflix.",
+          "photoUrl": "https://i.ytimg.com/vi/ASiBidAFdwM/maxresdefault.jpg"
         },
         {
           "name": "Iaroslav Zeigerman",
@@ -4618,7 +4645,8 @@
         {
           "name": "Pekka Enberg",
           "role": "Co-founder and CTO",
-          "background": "Early employee at ScyllaDB and a former Linux kernel maintainer, per Turso's own investors page."
+          "background": "Early employee at ScyllaDB and a former Linux kernel maintainer, per Turso's own investors page.",
+          "photoUrl": "https://penberg.org/assets/me.jpg"
         }
       ],
       "stage": "series_a",
@@ -4705,7 +4733,8 @@
         {
           "name": "Johnny Graettinger",
           "role": "Co-founder and CTO",
-          "background": "Prior infrastructure engineering experience at Google and YouTube."
+          "background": "Prior infrastructure engineering experience at Google and YouTube.",
+          "photoUrl": "https://i.ytimg.com/vi/WslkscPp1ro/maxresdefault.jpg"
         }
       ],
       "stage": "series_a",
@@ -4792,7 +4821,8 @@
         {
           "name": "Alan Braithwaite",
           "role": "Co-founder",
-          "background": "Named as a co-founder on RunReveal's own funding announcement; specific prior employer not confirmed in public sources reviewed."
+          "background": "Named as a co-founder on RunReveal's own funding announcement; specific prior employer not confirmed in public sources reviewed.",
+          "photoUrl": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog11845528/50-Alan.jpg"
         }
       ],
       "stage": "seed",
@@ -4871,7 +4901,8 @@
         {
           "name": "Benny Porat",
           "role": "Co-founder",
-          "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed."
+          "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed.",
+          "photoUrl": "https://s3.amazonaws.com/cco-avatars/64ced9d8-ebc3-438a-8563-bc9b5c3df95e.png"
         },
         {
           "name": "Omri Green",
@@ -4881,7 +4912,8 @@
         {
           "name": "Justin Woody",
           "role": "Co-founder",
-          "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed."
+          "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed.",
+          "photoUrl": "https://i.ytimg.com/vi/Q8c3Q3OSXho/maxresdefault.jpg"
         },
         {
           "name": "Nadav Erez",
@@ -5415,12 +5447,14 @@
         {
           "name": "Jesse Buckingham",
           "role": "Co-founder",
-          "background": "Stanford graduate; former CEO of ASG LogisTech, a logistics operator, prior to co-founding Vooma."
+          "background": "Stanford graduate; former CEO of ASG LogisTech, a logistics operator, prior to co-founding Vooma.",
+          "photoUrl": "https://pbs.twimg.com/profile_images/1631688387865513984/v58JTGFF_400x400.jpg"
         },
         {
           "name": "Mike Carter",
           "role": "Co-founder",
-          "background": "Stanford graduate; former founding engineer at Kodiak Robotics, an autonomous-trucking company, prior to co-founding Vooma."
+          "background": "Stanford graduate; former founding engineer at Kodiak Robotics, an autonomous-trucking company, prior to co-founding Vooma.",
+          "photoUrl": "https://techcrunch.com/wp-content/uploads/2024/10/headshot-e1729047742205.jpeg?w=668"
         }
       ],
       "stage": "series_a",
@@ -5505,7 +5539,8 @@
         {
           "name": "Mary Yap",
           "role": "Co-founder and CEO",
-          "background": "Identified as CEO and company spokesperson across public reporting, including the Frontier offtake announcement."
+          "background": "Identified as CEO and company spokesperson across public reporting, including the Frontier offtake announcement.",
+          "photoUrl": "https://images.fastcompany.com/image/upload/f_webp,c_fit,w_1920,q_auto/wp-cms/uploads/2023/04/p-1-90888679-lithos-day-in-the-life.jpg"
         },
         {
           "name": "Noah Planavsky",
@@ -5601,12 +5636,14 @@
         {
           "name": "James Mcwalter",
           "role": "Co-founder and CEO",
-          "background": "Identified as co-founder and CEO across multiple financing reports (ESG Dive, Utility Dive, ESG Today); company founded 2022, headquartered in Brooklyn, NY."
+          "background": "Identified as co-founder and CEO across multiple financing reports (ESG Dive, Utility Dive, ESG Today); company founded 2022, headquartered in Brooklyn, NY.",
+          "photoUrl": "https://deploytogether.com/wp-content/uploads/james-mcwalter-550.png"
         },
         {
           "name": "Charles Bai",
           "role": "Co-founder",
-          "background": "Identified alongside Mcwalter as co-founder in company and press materials; exact current title unconfirmed."
+          "background": "Identified alongside Mcwalter as co-founder in company and press materials; exact current title unconfirmed.",
+          "photoUrl": "https://imageio.forbes.com/specials-images/imageserve/636c5ae5da0edb9f0d7fde53/0x0.jpg?format=jpg&crop=1605,1604,x1440,y910,safe&height=416&width=416&fit=bounds"
         }
       ],
       "stage": "series_a",
@@ -5693,7 +5730,8 @@
         {
           "name": "Matt Penfold",
           "role": "Co-founder",
-          "background": "Identified as co-founder alongside Madaeni in company financing materials. Exact current title unconfirmed."
+          "background": "Identified as co-founder alongside Madaeni in company financing materials. Exact current title unconfirmed.",
+          "photoUrl": "https://www.naem.org/images/default-source/headshots/naem-2025-opex-25-tech-25-matthew-penfold-verse-1500x1500-min.jpg?sfvrsn=31629d5_1"
         }
       ],
       "stage": "series_a",
@@ -5873,7 +5911,8 @@
         {
           "name": "Rylan Hawkins",
           "role": "Co-founder",
-          "background": "Identified as co-founder alongside Silver in FreightWaves coverage and company materials. Exact current title unconfirmed."
+          "background": "Identified as co-founder alongside Silver in FreightWaves coverage and company materials. Exact current title unconfirmed.",
+          "photoUrl": "https://cdn.theorg.com/cbc02b3b-24c4-4d1d-adb4-9cc768ec685f_medium.jpg"
         }
       ],
       "stage": "series_a",
@@ -5960,7 +5999,8 @@
         {
           "name": "Jennifer Wilcox",
           "role": "Chief Scientist (not a founder)",
-          "background": "Former Principal Deputy Assistant Secretary at the U.S. Department of Energy; published foundational carbon-dioxide-removal research."
+          "background": "Former Principal Deputy Assistant Secretary at the U.S. Department of Energy; published foundational carbon-dioxide-removal research.",
+          "photoUrl": "https://www.unr.edu/main/images/colleges-schools/science/energy-solutions-exchange/profile/jen-wilcox-profile.jpg"
         },
         {
           "name": "Stacy Kauk",
@@ -6057,7 +6097,8 @@
         {
           "name": "Eliot Frost",
           "role": "Co-founder",
-          "background": "Harvard Business School alumnus; co-built the original restaurant-tracking concept; \"Beli\" is derived from his high school nickname."
+          "background": "Harvard Business School alumnus; co-built the original restaurant-tracking concept; \"Beli\" is derived from his high school nickname.",
+          "photoUrl": "https://images.crunchbase.com/image/upload/c_thumb,h_256,w_256,f_auto,g_face,z_0.7,q_auto:eco,dpr_1/sfjcplicwdfvexygjvrw?ik-sanitizeSvg=true"
         }
       ],
       "stage": "series_a",
@@ -6138,7 +6179,8 @@
         {
           "name": "Shreya Murthy",
           "role": "Co-founder and CEO",
-          "background": "Met co-founder Joy Tao while working at Palantir Technologies; led Partiful through early investor skepticism to becoming a widely used Gen Z consumer app."
+          "background": "Met co-founder Joy Tao while working at Palantir Technologies; led Partiful through early investor skepticism to becoming a widely used Gen Z consumer app.",
+          "photoUrl": "https://images.sxsw.com/Fgx-ZQropcbbkFLmZ06uxrHfATI=/0x193:2800x2993/600x600/images.sxsw.com/48/e92b951f-660d-486c-9fc3-5cc17ec416ee/pcid-1593320"
         },
         {
           "name": "Joy Tao",
@@ -6224,7 +6266,8 @@
         {
           "name": "Avante Price",
           "role": "Co-founder and CEO",
-          "background": "Grew up DJing in Chicago and competed in hip-hop turntable competitions before dropping out of NYU to co-found Posh."
+          "background": "Grew up DJing in Chicago and competed in hip-hop turntable competitions before dropping out of NYU to co-found Posh.",
+          "photoUrl": "https://i.ytimg.com/vi/Xx0JVmRIx3Y/maxresdefault.jpg"
         },
         {
           "name": "Eli Taylor-Lemire",
@@ -6319,7 +6362,8 @@
         {
           "name": "Julia O'Mara",
           "role": "Co-founder",
-          "background": "Former Blackstone analyst; previously worked with McMahon at Blackstone before co-founding Pickle."
+          "background": "Former Blackstone analyst; previously worked with McMahon at Blackstone before co-founding Pickle.",
+          "photoUrl": "https://dms.licdn.com/playlist/vid/v2/D5605AQEmuX_lB08coQ/thumbnail-shrink_720_1280/B56Z8.tTzEJoAg-/0/1783463498725?e=2147483647&v=beta&t=Ya9_hSImyozCi60x9dlS2N3qw6rgzig-xEmKCUka1Ew"
         }
       ],
       "stage": "series_a",
@@ -6485,7 +6529,8 @@
         {
           "name": "Maxime Barbier",
           "role": "Co-founder and CEO",
-          "background": "Serial entrepreneur with prior ventures spanning nightlife promotion and media before founding Timeleft in France."
+          "background": "Serial entrepreneur with prior ventures spanning nightlife promotion and media before founding Timeleft in France.",
+          "photoUrl": "https://i.ytimg.com/vi/K01FKQ5KpcA/maxresdefault.jpg"
         },
         {
           "name": "Adrien de Oliveira",
@@ -6569,17 +6614,20 @@
         {
           "name": "Femi Aluko",
           "role": "Co-founder and CEO",
-          "background": "Founded Chowdeck in October 2021 in Lagos; led the company through Y Combinator and multiple funding rounds while reportedly maintaining profitability."
+          "background": "Founded Chowdeck in October 2021 in Lagos; led the company through Y Combinator and multiple funding rounds while reportedly maintaining profitability.",
+          "photoUrl": "https://bookface-images.s3.us-west-2.amazonaws.com/avatars/da05aeebcda12866813892be1ab409dff3a9d5ee.jpg"
         },
         {
           "name": "Olumide Ojo",
           "role": "Co-founder",
-          "background": "Named as a founding member alongside Aluko in TechCrunch's coverage of the Series A."
+          "background": "Named as a founding member alongside Aluko in TechCrunch's coverage of the Series A.",
+          "photoUrl": "https://images.crunchbase.com/image/upload/c_thumb,h_256,w_256,f_auto,g_face,z_0.7,q_auto:eco,dpr_1/kfnwtka5unvbcujjpsgr?ik-sanitizeSvg=true"
         },
         {
           "name": "Lanre Yusuf",
           "role": "Co-founder",
-          "background": "Named as a founding member alongside Aluko and Ojo; current operating role to be confirmed in diligence."
+          "background": "Named as a founding member alongside Aluko and Ojo; current operating role to be confirmed in diligence.",
+          "photoUrl": "https://files.chowdeck.com/images/39_4671f5649f/1698762680.jpg"
         }
       ],
       "stage": "series_a",
@@ -6661,17 +6709,20 @@
         {
           "name": "Quaid Walker",
           "role": "Co-founder and CEO",
-          "background": "Former product/design employee at Google and watch collector; founded Bezel after a frustrating personal Rolex-buying experience."
+          "background": "Former product/design employee at Google and watch collector; founded Bezel after a frustrating personal Rolex-buying experience.",
+          "photoUrl": "https://adammendler.com/wp-content/uploads/2025/04/QuaidWalker_Bezelcopy.jpg"
         },
         {
           "name": "Chase Payan",
           "role": "Co-founder (CFO/COO)",
-          "background": "Childhood friend of Walker's with a finance and operations background; one source spells the name \"Chase Pion\" \u2014 confirm in diligence."
+          "background": "Childhood friend of Walker's with a finance and operations background; one source spells the name \"Chase Pion\" — confirm in diligence.",
+          "photoUrl": "https://images.labusinessjournal.com/cdn-cgi/imagedelivery/_2XQnFrfZ7ey2aE-6RbOUQ/labusinessjournal.com/2025/10/Pion_Chase_H-2.jpg/w=9999"
         },
         {
           "name": "Darryl Johnson",
           "role": "Co-founder (engineering)",
-          "background": "Named in a single Forbes profile as an engineer and prior Google employee; not corroborated elsewhere in HCP's research."
+          "background": "Named in a single Forbes profile as an engineer and prior Google employee; not corroborated elsewhere in HCP's research.",
+          "photoUrl": "https://imageio.forbes.com/specials-images/imageserve/66e3509d0a5de883ef35dc99/Quaid-ChasePion-DarrylJohnson/0x0.jpg?format=jpg&width=480"
         }
       ],
       "stage": "seed",
@@ -6752,7 +6803,8 @@
         {
           "name": "Bahram Ismailau",
           "role": "Co-founder and CEO",
-          "background": "Met co-founder Paul Rudkouski studying together at Belarusian State University; the pair worked on prior products for years before Yope."
+          "background": "Met co-founder Paul Rudkouski studying together at Belarusian State University; the pair worked on prior products for years before Yope.",
+          "photoUrl": "https://www.channelnews.com.au/wp-content/uploads/2025/12/Bahram-e1764641880382.jpg"
         },
         {
           "name": "Paul Rudkouski",
@@ -6844,7 +6896,8 @@
         {
           "name": "Keyan Kazemian",
           "role": "Co-founder",
-          "background": "One of three co-founders of 222, founded in 2023."
+          "background": "One of three co-founders of 222, founded in 2023.",
+          "photoUrl": "https://images.crunchbase.com/image/upload/c_thumb,h_256,w_256,f_auto,g_face,z_0.7,q_auto:eco,dpr_1/cbeucww8upijfop57au9?ik-sanitizeSvg=true"
         },
         {
           "name": "Arman Roshannai",
@@ -6937,7 +6990,8 @@
         {
           "name": "Dave Newman",
           "role": "Co-founder",
-          "background": "Worked with Petersmith at Assembly starting in 2013; co-founded Howie after a decade-long collaboration on the scheduling-automation idea."
+          "background": "Worked with Petersmith at Assembly starting in 2013; co-founded Howie after a decade-long collaboration on the scheduling-automation idea.",
+          "photoUrl": "https://dms.licdn.com/playlist/vid/v2/D4E05AQEzhLl4tMuLbw/thumbnail-with-play-button-overlay-high/B4EZg3vsS.HED0-/0/1753281940582?e=2147483647&v=beta&t=i-o9GCgXvqes1vePoyYoDTw6hwD5RUwjYIoKTjQPUkY"
         }
       ],
       "stage": "seed",
@@ -7116,7 +7170,8 @@
         {
           "name": "Richard Hollingsworth",
           "role": "Co-founder and CEO",
-          "background": "Co-built the UK's largest executive-assistant agency with his brother, bootstrapping it to $5m revenue, before founding Fyxer."
+          "background": "Co-built the UK's largest executive-assistant agency with his brother, bootstrapping it to $5m revenue, before founding Fyxer.",
+          "photoUrl": "https://www.fyxer.com/_next/image?url=%2Fapi%2Fmedia%2Ffile%2Frich.jpeg&w=3840&q=75"
         },
         {
           "name": "Archie Hollingsworth",
@@ -7219,7 +7274,8 @@
         {
           "name": "Jerome Scholler",
           "role": "Co-founder",
-          "background": "Was on Osmo's founding team with Sharma; previously worked at Ubisoft, LucasArts, and Google."
+          "background": "Was on Osmo's founding team with Sharma; previously worked at Ubisoft, LucasArts, and Google.",
+          "photoUrl": "https://www.napkin.ai/assets/v6/about-us/team/jerome.jpg"
         }
       ],
       "stage": "seed",
@@ -7302,12 +7358,14 @@
         {
           "name": "Tom Sayer",
           "role": "Co-founder and CEO",
-          "background": "Previously led impact and adoption programs at Google for Education."
+          "background": "Previously led impact and adoption programs at Google for Education.",
+          "photoUrl": "https://techcrunch.com/wp-content/uploads/2023/09/DSC05266-2-copy.jpg"
         },
         {
           "name": "Elizabeth Adams",
           "role": "Co-founder and Chief Experience Officer",
-          "background": "Clinical psychologist specializing in child development and behavior."
+          "background": "Clinical psychologist specializing in child development and behavior.",
+          "photoUrl": "https://cdn.pulse2.com/cdn/2025/03/Elizabeth-Adams-428x600.jpg"
         },
         {
           "name": "Catalin Voss",
@@ -7569,7 +7627,8 @@
         {
           "name": "Dara Ladjevardian",
           "role": "Co-founder and CEO",
-          "background": "Previously founded and sold Friday, an AI shopping assistant; worked as a Forward Deployed Engineer at C3 AI and as a product engineer at OpenStore."
+          "background": "Previously founded and sold Friday, an AI shopping assistant; worked as a Forward Deployed Engineer at C3 AI and as a product engineer at OpenStore.",
+          "photoUrl": "https://i.ytimg.com/vi/PPx_sVRc8E8/maxresdefault.jpg"
         },
         {
           "name": "Sam Spelsberg",
@@ -7741,7 +7800,8 @@
         {
           "name": "Arman Jaffer",
           "role": "Founder and CEO",
-          "background": "Previously worked in the White House Office of the Chief Technology Officer, on Google's mobile search team, and as a product manager on the Chan Zuckerberg Initiative's Education team; Forbes 30 Under 30 Education honoree."
+          "background": "Previously worked in the White House Office of the Chief Technology Officer, on Google's mobile search team, and as a product manager on the Chan Zuckerberg Initiative's Education team; Forbes 30 Under 30 Education honoree.",
+          "photoUrl": "https://imageio.forbes.com/specials-images/imageserve/6743e85cf038c51a08b0cda5/0x0.jpg?format=jpg&crop=3291,3291,x0,y0,safe&height=416&width=416&fit=bounds"
         }
       ],
       "stage": "series_a",
@@ -7836,7 +7896,7 @@
           "background": "Recent college graduate at founding; a viral tweet about the team's hackathon prototype led to the company's founding."
         },
         {
-          "name": "Sacha L\u00e9vy",
+          "name": "Sacha Lévy",
           "role": "Co-founder",
           "background": "Yale PhD student at founding; part of the original three-person hackathon team."
         }
@@ -7920,7 +7980,8 @@
         {
           "name": "Thomas Tang",
           "role": "Co-founder and CEO",
-          "background": "PhD from UC Berkeley; worked at FANUC before co-founding Anyware Robotics; leads vision, strategy, and partnerships."
+          "background": "PhD from UC Berkeley; worked at FANUC before co-founding Anyware Robotics; leads vision, strategy, and partnerships.",
+          "photoUrl": "https://images.crunchbase.com/image/upload/c_thumb,h_256,w_256,f_auto,g_face,z_0.7,q_auto:eco,dpr_1/d6ecd576215441ef89a9699219ed9c0d?ik-sanitizeSvg=true"
         },
         {
           "name": "Bruce Fan",
@@ -8089,7 +8150,8 @@
         {
           "name": "Christian Bersch",
           "role": "Co-founder and CEO",
-          "background": "Nearly eight years at Google (2011-2019), including product/team lead for the Area 120 robotics delivery project, before co-founding Cartken in 2019."
+          "background": "Nearly eight years at Google (2011-2019), including product/team lead for the Area 120 robotics delivery project, before co-founding Cartken in 2019.",
+          "photoUrl": "https://cdn.prod.website-files.com/63cee399b1ef775ba444e177/63d58c59a6453750e5be9a2e_eteam%20-%20Christian.jpg"
         },
         {
           "name": "Jonas Witt",
@@ -8254,7 +8316,8 @@
         {
           "name": "Rajat Bhageria",
           "role": "Founder and CEO",
-          "background": "Previously founded ThirdEye (visual-recognition product for the visually impaired, later sold) and Prototype Capital, a pre-seed fund; holds a Master's in Robotics and Machine Learning from the University of Pennsylvania and a Bachelor's in Economics from Wharton."
+          "background": "Previously founded ThirdEye (visual-recognition product for the visually impaired, later sold) and Prototype Capital, a pre-seed fund; holds a Master's in Robotics and Machine Learning from the University of Pennsylvania and a Bachelor's in Economics from Wharton.",
+          "photoUrl": "https://techcrunch.com/wp-content/uploads/2020/06/Rajat-Headshot-.jpg?w=668"
         }
       ],
       "stage": "series_a",
@@ -8423,7 +8486,8 @@
         {
           "name": "Alexander Fitzgerald",
           "role": "Founder and CEO",
-          "background": "Studied biochemistry; worked as a UK government business-policy adviser; founded a broadband company later acquired by Octopus Telecom; identified manufacturing supply-chain inefficiencies while serving with a UK military reserve unit."
+          "background": "Studied biochemistry; worked as a UK government business-policy adviser; founded a broadband company later acquired by Octopus Telecom; identified manufacturing supply-chain inefficiencies while serving with a UK military reserve unit.",
+          "photoUrl": "https://dms.licdn.com/playlist/vid/v2/D4E05AQHWh2b3h-Rgbw/thumbnail-with-play-button-overlay-high/B4EZzxCpShHYDY-/0/1773570532958?e=2147483647&v=beta&t=26HZCoGIIOR0O6dwMjoyooQlpWrRfOsDYfgMED10i58"
         }
       ],
       "stage": "series_a",
@@ -8507,7 +8571,8 @@
         {
           "name": "Daniel Miodovnik",
           "role": "Co-founder",
-          "background": "Named as a co-founder in company-founding coverage; individual background not independently detailed in sources reviewed."
+          "background": "Named as a co-founder in company-founding coverage; individual background not independently detailed in sources reviewed.",
+          "photoUrl": "https://i.ytimg.com/vi/U_iw_BKw2tE/maxresdefault.jpg"
         }
       ],
       "stage": "series_b",
@@ -8842,7 +8907,8 @@
         {
           "name": "Govind Kavaturi",
           "role": "Co-founder",
-          "background": "Founding team member per the same sourcing; role details not further broken out publicly."
+          "background": "Founding team member per the same sourcing; role details not further broken out publicly.",
+          "photoUrl": "https://framerusercontent.com/images/pZxbBa3Z72K37gsPY4RqLsvLfg.png?width=1410&height=1418"
         },
         {
           "name": "Unmukt Raizada",
@@ -8930,7 +8996,8 @@
         {
           "name": "Alex Kracov",
           "role": "CEO and Co-founder",
-          "background": "Former VP of Marketing and third employee at Lattice; founded Dock in 2021 after building an internal customer-facing portal at Lattice."
+          "background": "Former VP of Marketing and third employee at Lattice; founded Dock in 2021 after building an internal customer-facing portal at Lattice.",
+          "photoUrl": "https://imageio.forbes.com/specials-images/imageserve/62b34a2821dbf48a56988c7a/Alex-Kracov/0x0.jpg?crop=780%2C585%2Cx0%2Cy0%2Csafe&height=533&width=480&fit=bounds"
         },
         {
           "name": "Luc",
@@ -9016,7 +9083,8 @@
         {
           "name": "Achuthanand Tanjore Ravi",
           "role": "CEO and Co-founder",
-          "background": "Previously held recruiting operating roles at Stripe, Uber, and Freshworks per the company's seed-funding announcement."
+          "background": "Previously held recruiting operating roles at Stripe, Uber, and Freshworks per the company's seed-funding announcement.",
+          "photoUrl": "https://cdn.prod.website-files.com/62efcfb57ed5f41e3fd0f849/67d90cd2b8717c4f24ab3560_Achuthanand%20Tanjore%20Ravi.webp"
         }
       ],
       "stage": "seed",
@@ -9100,7 +9168,8 @@
         {
           "name": "Shahriar Tajbakhsh",
           "role": "Co-founder and CTO",
-          "background": "Previously at Uber and Palantir; leads technical development of Metaview's interview-intelligence platform."
+          "background": "Previously at Uber and Palantir; leads technical development of Metaview's interview-intelligence platform.",
+          "photoUrl": "https://res.cloudinary.com/leaddev/image/upload/f_auto/q_auto/dpr_auto/c_limit,w_1707,h_2560/next/2022/08/Metaview.ai-Image-by-Dan-Taylor-6-Shahriar-Tajbakhsh-scaled.jpg"
         }
       ],
       "stage": "series_b",
@@ -9182,7 +9251,8 @@
         {
           "name": "John Glasgow",
           "role": "Founder and CEO",
-          "background": "Launched Campfire in 2023 to replace legacy 1990s-era ERP accounting software with an LLM-powered alternative, per TechCrunch's reporting. Additional co-founders, if any, are not identified in public sources."
+          "background": "Launched Campfire in 2023 to replace legacy 1990s-era ERP accounting software with an LLM-powered alternative, per TechCrunch's reporting. Additional co-founders, if any, are not identified in public sources.",
+          "photoUrl": "https://imgproxy.divecdn.com/wyUa-MSJOGEGOIlbyjEQeSnewVN74ImB0-LKtLI_Kwk/g:ce/rs:fit:1600:0/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9TY3JlZW5zaG90XzIwMjUtMTItMDhfMTQyMTE3LnBuZw==.webp"
         }
       ],
       "stage": "series_b",
@@ -9345,7 +9415,8 @@
         {
           "name": "Riya Grover",
           "role": "CEO and Co-founder",
-          "background": "Named CEO in the Series A financing announcement; leads product and company strategy."
+          "background": "Named CEO in the Series A financing announcement; leads product and company strategy.",
+          "photoUrl": "https://i.ytimg.com/vi/y-7j4e8DO-Q/maxresdefault.jpg"
         },
         {
           "name": "Eamon",

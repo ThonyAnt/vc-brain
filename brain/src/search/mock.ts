@@ -1,22 +1,33 @@
-import type { ExtractResult, SearchClient, SearchOptions, SearchResult } from "./client.js";
+import type { ExtractResult, ImageResult, SearchClient, SearchOptions, SearchResult } from "./client.js";
 
 export type SearchFixtures =
   | SearchResult[]
   | Record<string, SearchResult[]>
   | ((query: string) => SearchResult[]);
 
-/** URL -> full page content, for the extract() seam. */
-export type ExtractFixtures = Record<string, string>;
+/** URL -> full page content (or content + page images), for the extract() seam. */
+export type ExtractFixtures = Record<string, string | { rawContent: string; images?: string[] }>;
 
 /** Offline, deterministic SearchClient driven by fixtures. */
 export class MockSearchClient implements SearchClient {
   constructor(
     private readonly fixtures: SearchFixtures = {},
     private readonly extractFixtures: ExtractFixtures = {},
+    private readonly imageFixtures: ImageResult[] = [],
   ) {}
 
+  async images(): Promise<ImageResult[]> {
+    return this.imageFixtures;
+  }
+
   async extract(urls: string[]): Promise<ExtractResult[]> {
-    return urls.map((url) => ({ url, rawContent: this.extractFixtures[url] ?? "" }));
+    return urls.map((url) => {
+      const fixture = this.extractFixtures[url];
+      if (typeof fixture === "string" || fixture === undefined) {
+        return { url, rawContent: fixture ?? "" };
+      }
+      return { url, rawContent: fixture.rawContent, images: fixture.images };
+    });
   }
 
   async search(query: string, opts: SearchOptions = {}): Promise<SearchResult[]> {

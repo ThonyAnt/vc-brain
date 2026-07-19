@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Card } from '../../components/ui/Card'
+import { Dropdown } from '../../components/ui/dropdown'
+import { MonthGrid, type CalendarEvent } from '../../components/calendar/MonthGrid'
 import { Eyebrow } from '../../components/ui/Eyebrow'
 import { FitInfo } from '../../components/ui/FitInfo'
 import { api } from '../../lib/api/client'
@@ -39,11 +41,23 @@ function CalendarIcon({ className }: { className?: string }) {
   )
 }
 
+const dayFromNow = (offset: number) => {
+  const d = new Date()
+  d.setDate(d.getDate() + offset)
+  d.setHours(0, 0, 0, 0)
+  return d
+}
+const dayLabel = (offset: number, d: Date) =>
+  offset === 0 ? 'Today' : offset === 1 ? 'Tomorrow' : d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
+
 const CALENDAR_CALLS = [
-  { id: 'cal-firecrawl', companyId: 'co_firecrawl', founder: 'Firecrawl team', title: 'Partner call', day: 'Today', time: '2:00 PM–2:25 PM', provider: 'Google Meet', meetingUrl: 'https://meet.google.com/' },
-  { id: 'cal-honeyhive', companyId: 'co_honeyhive', founder: 'HoneyHive team', title: 'Founder introduction', day: 'Tomorrow', time: '10:30 AM–10:55 AM', provider: 'Zoom', meetingUrl: 'https://zoom.us/join' },
-  { id: 'cal-e2b', companyId: 'co_e2b', founder: 'E2B team', title: 'Diligence call', day: 'Wed, Jul 22', time: '11:00 AM–11:25 AM', provider: 'Google Meet', meetingUrl: 'https://meet.google.com/' },
-]
+  { id: 'cal-firecrawl', companyId: 'co_firecrawl', founder: 'Firecrawl team', title: 'Partner call', offset: 0, time: '2:00 PM–2:25 PM', provider: 'Google Meet', meetingUrl: 'https://meet.google.com/' },
+  { id: 'cal-honeyhive', companyId: 'co_honeyhive', founder: 'HoneyHive team', title: 'Founder introduction', offset: 1, time: '10:30 AM–10:55 AM', provider: 'Zoom', meetingUrl: 'https://zoom.us/join' },
+  { id: 'cal-e2b', companyId: 'co_e2b', founder: 'E2B team', title: 'Diligence call', offset: 4, time: '11:00 AM–11:25 AM', provider: 'Google Meet', meetingUrl: 'https://meet.google.com/' },
+].map((call) => {
+  const date = dayFromNow(call.offset)
+  return { ...call, date, day: dayLabel(call.offset, date) }
+})
 
 /* fit scores read like highlighter marks: hot deals go yellow */
 function ScoreChip({ score }: { score: number }) {
@@ -120,6 +134,17 @@ function CalendarView({
   onToggleCompany: (companyId: string) => void
 }) {
   const names = new Map(companies.map((company) => [company.id, company.name]))
+  // ?cal=month opens the grid (demo/screenshot aid)
+  const [calView, setCalView] = useState<'list' | 'month'>(() =>
+    new URLSearchParams(window.location.search).get('cal') === 'month' ? 'month' : 'list',
+  )
+  const gridEvents: CalendarEvent[] = CALENDAR_CALLS.map((call) => ({
+    id: call.id,
+    date: call.date,
+    title: call.title,
+    companyName: names.get(call.companyId) ?? 'Company',
+    companyId: call.companyId,
+  }))
 
   return (
     <div className="mt-4">
@@ -130,9 +155,25 @@ function CalendarView({
             <h2 className="heading-sm mt-1">Confirmed company reservations</h2>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="code-sm bg-success/10 px-2 py-1 text-success">3 confirmed · synced</span>
+            <div className="flex border-2 border-hairline-strong">
+              {(['list', 'month'] as const).map((v) => (
+                <button
+                  key={v}
+                  type="button"
+                  onClick={() => setCalView(v)}
+                  className={`code-sm cursor-pointer px-3 py-1.5 uppercase transition-colors ${
+                    calView === v ? 'bg-dark text-on-dark' : 'bg-card text-ink hover:bg-bone'
+                  } ${v === 'month' ? 'border-l-2 border-hairline-strong' : ''}`}
+                >
+                  {v}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
+        {calView === 'month' ? (
+          <MonthGrid events={gridEvents} onOpenEvent={onOpenMemo} />
+        ) : (
         <div className="divide-y-2 divide-hairline-strong">
           {CALENDAR_CALLS.map((call) => {
             const company = companies.find((item) => item.id === call.companyId)
@@ -166,6 +207,7 @@ function CalendarView({
             )
           })}
         </div>
+        )}
       </section>
     </div>
   )
@@ -300,33 +342,54 @@ export function PipelinePage() {
       </div>
 
       {/* deal filters + bulk selection */}
-      <div className="mt-6 flex flex-nowrap items-center gap-2 overflow-x-auto border-2 border-hairline-strong bg-card p-3 shadow-brutal-sm">
+      <div className="mt-6 flex flex-wrap items-center gap-2 border-2 border-hairline-strong bg-card p-3 shadow-brutal-sm">
         <span className="code-sm mr-1 shrink-0 text-mute uppercase">Filter deals</span>
-        <select aria-label="Filter by stage" value={stageFilter} onChange={(event) => setStageFilter(event.target.value as Stage | 'all')} className="h-9 w-32 shrink-0 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
-          <option value="all">All stages</option>
-          {STAGES.map((stage) => <option key={stage} value={stage}>{stage}</option>)}
-        </select>
-        <select aria-label="Filter by minimum score" value={scoreFilter} onChange={(event) => setScoreFilter(Number(event.target.value))} className="h-9 w-28 shrink-0 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
-          <option value={0}>Any score</option>
-          <option value={60}>Score 60+</option>
-          <option value={70}>Score 70+</option>
-          <option value={80}>Score 80+</option>
-          <option value={90}>Score 90+</option>
-        </select>
-        <select aria-label="Filter by industry" value={sectorFilter} onChange={(event) => setSectorFilter(event.target.value)} className="h-9 w-44 shrink-0 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
-          <option value="all">All industries</option>
-          {sectors.map((sector) => <option key={sector} value={sector}>{sector}</option>)}
-        </select>
-        <select aria-label="Filter by raising valuation" value={valuationFilter} onChange={(event) => setValuationFilter(event.target.value as ValuationBand)} className="h-9 w-40 shrink-0 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
-          <option value="all">Any raising / cap</option>
-          <option value="under-10">Under $10M cap</option>
-          <option value="10-to-15">$10M–$15M cap</option>
-          <option value="15-plus">$15M+ cap</option>
-        </select>
-        <select aria-label="Filter by location" value={locationFilter} onChange={(event) => setLocationFilter(event.target.value)} className="h-9 w-36 shrink-0 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
-          <option value="all">All locations</option>
-          {locations.map((location) => <option key={location} value={location}>{location}</option>)}
-        </select>
+        <Dropdown
+          ariaLabel="Filter by stage"
+          className="w-32"
+          value={stageFilter}
+          onChange={(v) => setStageFilter(v as Stage | 'all')}
+          options={[{ value: 'all', label: 'All stages' }, ...STAGES.map((stage) => ({ value: stage, label: stage }))]}
+        />
+        <Dropdown
+          ariaLabel="Filter by minimum score"
+          className="w-28"
+          value={String(scoreFilter)}
+          onChange={(v) => setScoreFilter(Number(v))}
+          options={[
+            { value: '0', label: 'Any score' },
+            { value: '60', label: 'Score 60+' },
+            { value: '70', label: 'Score 70+' },
+            { value: '80', label: 'Score 80+' },
+            { value: '90', label: 'Score 90+' },
+          ]}
+        />
+        <Dropdown
+          ariaLabel="Filter by industry"
+          className="w-44"
+          value={sectorFilter}
+          onChange={setSectorFilter}
+          options={[{ value: 'all', label: 'All industries' }, ...sectors.map((sector) => ({ value: sector, label: sector }))]}
+        />
+        <Dropdown
+          ariaLabel="Filter by raising valuation"
+          className="w-40"
+          value={valuationFilter}
+          onChange={(v) => setValuationFilter(v as ValuationBand)}
+          options={[
+            { value: 'all', label: 'Any raising / cap' },
+            { value: 'under-10', label: 'Under $10M cap' },
+            { value: '10-to-15', label: '$10M–$15M cap' },
+            { value: '15-plus', label: '$15M+ cap' },
+          ]}
+        />
+        <Dropdown
+          ariaLabel="Filter by location"
+          className="w-36"
+          value={locationFilter}
+          onChange={setLocationFilter}
+          options={[{ value: 'all', label: 'All locations' }, ...locations.map((location) => ({ value: location, label: location }))]}
+        />
         <div className="min-w-4 flex-1" />
         <button type="button" onClick={sendBatchOutreach} disabled={!outreachEligible.length} className="h-9 shrink-0 border-2 border-hairline-strong bg-primary px-5 text-sm font-semibold text-on-primary disabled:cursor-not-allowed disabled:bg-stone disabled:text-charcoal">
           Outbound
@@ -335,7 +398,7 @@ export function PipelinePage() {
           {allVisibleSelected ? 'Clear selection' : `Select all ${sorted.length}`}
         </button>
       </div>
-      {batchNotice && <div role="status" className="mt-3 border-2 border-success bg-success/10 px-3 py-2 text-sm text-body">{batchNotice}</div>}
+      {batchNotice && <div role="status" className="code-sm mt-3 border-2 border-hairline-strong bg-success px-3 py-2 text-ink">{batchNotice}</div>}
 
       {view === 'board' ? (
         /* stage board */

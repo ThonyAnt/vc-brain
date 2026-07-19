@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Meridian — Tech stack</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: 'DM Sans';
+        font-weight: 700;
+        src: url('fonts/dm-sans-latin-700-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'DM Sans';
+        font-weight: 800;
+        src: url('fonts/dm-sans-latin-800-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Space Mono';
+        font-weight: 400;
+        src: url('fonts/space-mono-latin-400-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Space Mono';
+        font-weight: 700;
+        src: url('fonts/space-mono-latin-700-normal.woff2') format('woff2');
+      }
+      /* Canonical VC Brain neobrutalist tokens (docs/design/site-theme.css) */
+      :root {
+        --ink: #000000;
+        --paper: #ffffff;
+        --primary: #ff3333;
+        --secondary: #ffff00;
+        --muted-fg: #333333;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        font-family: 'DM Sans', sans-serif;
+        color: var(--ink);
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--paper);
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+      }
+      .eyebrow {
+        position: absolute;
+        left: 582px;
+        top: 128px;
+        font-family: 'Space Mono', monospace;
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        color: var(--muted-fg);
+        opacity: 0;
+      }
+      .title {
+        position: absolute;
+        margin: 0;
+        left: 578px;
+        top: 156px;
+        font-weight: 800;
+        font-size: 88px;
+        letter-spacing: -0.02em;
+        opacity: 0;
+      }
+      .title em {
+        font-style: normal;
+        color: var(--primary);
+      }
+      .slab {
+        position: absolute;
+        width: 760px;
+        height: 150px;
+        background: var(--paper);
+        border: 3px solid var(--ink);
+        box-shadow: 8px 8px 0 var(--ink);
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        padding: 0 34px;
+        opacity: 0;
+      }
+      .slab .idx {
+        border: 2px solid var(--ink);
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        padding: 2px 8px;
+      }
+      .slab h2 {
+        margin: 0;
+        font-size: 46px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+      .slab .role {
+        margin-left: auto;
+        font-family: 'Space Mono', monospace;
+        font-size: 16px;
+        text-align: right;
+        line-height: 1.4;
+        color: var(--muted-fg);
+      }
+      .tick {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        background: var(--primary);
+        border: 2px solid var(--ink);
+        opacity: 0;
+      }
+      .tag {
+        position: absolute;
+        left: 1210px;
+        top: 866px;
+        background: var(--secondary);
+        border: 2px solid var(--ink);
+        box-shadow: 4px 4px 0 var(--ink);
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        font-weight: 700;
+        padding: 7px 14px;
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="tech-stack"
+      data-start="0"
+      data-width="1920"
+      data-height="1080"
+      data-duration="6"
+    >
+      <section id="scene" class="clip scene" data-start="0" data-duration="6" data-track-index="1">
+        <div class="eyebrow" id="eye">VC BRAIN · TECH STACK</div>
+        <h1 class="title" id="hdr">Meridian<em>.</em></h1>
+
+        <div class="slab" id="s1" style="left: 562px; top: 360px">
+          <span class="idx">01</span>
+          <h2>React</h2>
+          <div class="role">the app<br />component shell</div>
+        </div>
+        <div class="slab" id="s2" style="left: 580px; top: 528px">
+          <span class="idx">02</span>
+          <h2>Three.js</h2>
+          <div class="role">3D market map<br />rendered live</div>
+        </div>
+        <div class="slab" id="s3" style="left: 598px; top: 696px">
+          <span class="idx">03</span>
+          <h2>TypeScript</h2>
+          <div class="role">typed end<br />to end</div>
+        </div>
+
+        <div class="tick" id="t1" style="left: 520px; top: 426px"></div>
+        <div class="tick" id="t2" style="left: 538px; top: 594px"></div>
+        <div class="tick" id="t3" style="left: 556px; top: 762px"></div>
+
+        <div class="tag" id="tag">one typed app</div>
+      </section>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo('#eye', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.2);
+      tl.fromTo('#hdr', { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: 'power4.out' }, 0.35);
+
+      // slabs drop and stack like plates
+      const slab = (id, t) =>
+        tl.fromTo(id, { y: -46, opacity: 0 }, { y: 0, opacity: 1, duration: 0.42, ease: 'back.out(1.4)' }, t);
+      slab('#s1', 1.0);
+      slab('#s2', 1.75);
+      slab('#s3', 2.5);
+
+      // red ticks stamp beside each layer
+      const tick = (id, t) =>
+        tl.fromTo(id, { scale: 2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: 'back.out(2)' }, t);
+      tick('#t1', 3.35);
+      tick('#t2', 3.5);
+      tick('#t3', 3.65);
+
+      tl.fromTo(
+        '#tag',
+        { scale: 1.4, rotation: -3, opacity: 0 },
+        { scale: 1, rotation: 0, opacity: 1, duration: 0.28, ease: 'back.out(2)' },
+        4.1,
+      );
+      // settle beat: the whole stack breathes once
+      tl.to('#s2', { x: -18, duration: 0.35, ease: 'power2.inOut' }, 4.7);
+      tl.to('#s3', { x: -36, duration: 0.35, ease: 'power2.inOut' }, 4.7);
+      tl.to('#t2', { x: -18, duration: 0.35, ease: 'power2.inOut' }, 4.7);
+      tl.to('#t3', { x: -36, duration: 0.35, ease: 'power2.inOut' }, 4.7);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['tech-stack'] = tl;
+    </script>
+  </body>
+</html>

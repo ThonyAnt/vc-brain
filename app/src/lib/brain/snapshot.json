@@ -11888,7 +11888,7 @@
         "clusters": [
           {
             "id": 0,
-            "label": "Enterprise AI Agents",
+            "label": "Enterprise AI",
             "memberIds": [
               "co_concourse",
               "co_dust",
@@ -11915,7 +11915,7 @@
           },
           {
             "id": 1,
-            "label": "AI Agent Infrastructure",
+            "label": "AI Infrastructure",
             "memberIds": [
               "co_letta",
               "co_firecrawl",
@@ -11939,7 +11939,7 @@
           },
           {
             "id": 2,
-            "label": "Renewable Energy Automation",
+            "label": "Industrial Operations",
             "memberIds": [
               "co_squint",
               "co_artisan",
@@ -11960,7 +11960,7 @@
           },
           {
             "id": 3,
-            "label": "AI-Enhanced Healthcare",
+            "label": "Healthcare",
             "memberIds": [
               "co_anterior",
               "co_freed",
@@ -11981,7 +11981,7 @@
           },
           {
             "id": 4,
-            "label": "Automated Logistics Robotics",
+            "label": "Robotics & Logistics",
             "memberIds": [
               "co_lithos_carbon",
               "co_theseus",
@@ -12002,7 +12002,7 @@
           },
           {
             "id": 5,
-            "label": "Social Event Platforms",
+            "label": "Consumer Social",
             "memberIds": [
               "co_cargado",
               "co_beli",
@@ -12023,7 +12023,7 @@
           },
           {
             "id": 6,
-            "label": "AI Cybersecurity Operations",
+            "label": "Cybersecurity",
             "memberIds": [
               "co_tavily",
               "co_kick",
@@ -12043,7 +12043,7 @@
           },
           {
             "id": 7,
-            "label": "Fintech APIs and Wallets",
+            "label": "Fintech",
             "memberIds": [
               "co_herald",
               "co_straddle",
@@ -12063,7 +12063,7 @@
           },
           {
             "id": 8,
-            "label": "Consumer AI Interfaces",
+            "label": "AI Applications",
             "memberIds": [
               "co_rwazi",
               "co_mem0",
@@ -12076,7 +12076,7 @@
           },
           {
             "id": 9,
-            "label": "Digital Learning Tools",
+            "label": "Education",
             "memberIds": [
               "co_ello",
               "co_delphi",

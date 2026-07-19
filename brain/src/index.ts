@@ -22,6 +22,8 @@ export {
   type SimilarityWeights,
 } from "./similarity/compute.js";
 export { computeFundFit, computeSourcingScore, attributeKeys } from "./fundfit/compute.js";
+export { agglomerativeClusters } from "./similarity/cluster.js";
+export type { AgglomerativeOptions, ClusterResult } from "./similarity/cluster.js";
 export {
   calculateFinancialScenarios,
   type ScenarioSet,

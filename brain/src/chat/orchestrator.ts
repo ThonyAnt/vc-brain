@@ -202,6 +202,41 @@ function nearestByOutcome(source: Company, companies: Company[], outcome: Compan
     .sort((a, b) => b.score - a.score)[0]?.company;
 }
 
+/** Companies the fund has actually put money into (as opposed to rejected/external). */
+const PAST_INVESTMENT_STATUSES: Company["historicalStatus"][] = ["portfolio", "invested"];
+
+/**
+ * The fund's nearest PAST INVESTMENTS to the focal company, ranked by cluster
+ * (attribute-similarity) score. This is how the copilot answers "what's the most
+ * similar company we've invested in" — grounded in the same similarity engine
+ * that positions the 3D graph clusters.
+ */
+function nearestPastInvestments(source: Company, companies: Company[], k = 2) {
+  return companies
+    .filter((company) => company.id !== source.id && PAST_INVESTMENT_STATUSES.includes(company.historicalStatus))
+    .map((company) => ({ company, sim: companySimilarity(source, company) }))
+    .sort((a, b) => b.sim.overall - a.sim.overall)
+    .slice(0, k);
+}
+
+/** Compact deal economics for a "is this a better deal?" comparison; nulls when unknown. */
+function dealTerms(company: Company, state: VCBrainState) {
+  const m = company.metrics;
+  const fit = state.sourcedCandidates?.find((candidate) => candidate.companyId === company.id)?.fundFitScore;
+  const pct = (v: number | undefined) => (v != null ? Math.round(v * 100) : null);
+  return {
+    valuation: company.valuation ?? null,
+    checkSizeSought: company.checkSizeSought ?? null,
+    arr: m?.arr ?? null,
+    arrGrowthPct: pct(m?.arrGrowthRate),
+    nrrPct: pct(m?.nrr),
+    grossMarginPct: pct(m?.grossMargin),
+    fundFitScore: pct(fit),
+    outcome: company.outcome,
+    historicalStatus: company.historicalStatus,
+  };
+}
+
 function specialistsFor(
   messages: OrchestratorChatMessage[],
   context: OrchestratorChatContext,
@@ -223,17 +258,54 @@ function specialistsFor(
     });
   }
 
-  if (focal && (requestedComparison || hasIntent(lower, /\b(compar(?:e|ison)?|similar|analogue|winner|fail(?:ed|ure)?|competitor|graph|axis|axes)\b/))) {
+  if (
+    focal &&
+    (requestedComparison ||
+      hasIntent(
+        lower,
+        /\b(compar(?:e|ison)?|similar|analogue|winner|fail(?:ed|ure)?|competitor|graph|axis|axes|invest(?:ed|ment|ments)?|back(?:ed)?|past|prior|previous|portfolio|deal|better)\b/,
+      ))
+  ) {
     selected.push({
       id: "analogue_analyst",
       label: "Historical analogue analyst",
       run: () => {
-        const targets = requestedComparison
-          ? [requestedComparison]
+        const rank = (company: Company, sim = companySimilarity(focal, company)) => ({
+          name: company.name,
+          clusterSimilarity: Number(sim.overall.toFixed(3)),
+          similarityDimensions: sim.dimensions,
+          sharedAttributes: sim.sharedAttributes,
+          keyDifferences: sim.keyDifferences,
+          comparison: compareGraphCompanies(focal, company, context.axes),
+          dealTerms: dealTerms(company, state),
+        });
+
+        if (requestedComparison) {
+          return JSON.stringify({
+            focal: { name: focal.name, dealTerms: dealTerms(focal, state) },
+            analogues: [rank(requestedComparison)],
+            note: "Direct comparison requested. Use dealTerms on both sides to judge which is the better deal (lower entry valuation, stronger growth/NRR/margin, higher fund-fit).",
+          });
+        }
+
+        // Prefer the fund's nearest PAST INVESTMENTS (the clusters we've backed);
+        // fall back to outcome-labelled analogues only if we've invested in nothing similar.
+        const invested = nearestPastInvestments(focal, companies, 2);
+        const pool = invested.length
+          ? invested
           : [nearestByOutcome(focal, companies, "succeeded"), nearestByOutcome(focal, companies, "failed")]
-              .filter((company): company is Company => Boolean(company));
-        if (!targets.length) return "No outcome-labelled historical analogues are available.";
-        return targets.map((target) => JSON.stringify(compareGraphCompanies(focal, target, context.axes))).join("\n");
+              .filter((company): company is Company => Boolean(company))
+              .map((company) => ({ company, sim: companySimilarity(focal, company) }));
+        if (!pool.length) {
+          return `No past investments or outcome-labelled analogues are available to compare against ${focal.name}. Say this explicitly rather than guessing.`;
+        }
+        return JSON.stringify({
+          focal: { name: focal.name, dealTerms: dealTerms(focal, state) },
+          note: invested.length
+            ? "Analogues are the fund's nearest PAST INVESTMENTS by cluster similarity. Compare dealTerms to judge whether the focal company is the better deal."
+            : "No prior investments were similar; these are the nearest outcome-labelled companies instead.",
+          analogues: pool.map(({ company, sim }) => rank(company, sim)),
+        });
       },
     });
   }

@@ -1,4 +1,5 @@
 import type { Company } from "../schemas/company.js";
+import { agglomerativeClusters } from "../similarity/cluster.js";
 import { companySimilarity, type EmbeddingMap } from "./similarity.js";
 
 export interface LandscapeNode {
@@ -33,38 +34,44 @@ export interface LandscapeOptions {
   focalId?: string;
   neighborK?: number;
   clusterThreshold?: number;
+  /** Cap on similarity clusters so the market view stays legible. */
+  maxClusters?: number;
+  /** Clusters smaller than this get absorbed into their nearest neighbor. */
+  minClusterSize?: number;
   embeddings?: EmbeddingMap;
   radius?: number;
 }
 
 /**
  * `build_market_landscape` — graph-ready nodes, nearest-neighbor edges, and
- * greedy similarity clusters. Deterministic (no randomness): cluster centers
- * are spaced on a circle, members fan out by index, distance encodes
- * dissimilarity from the cluster seed.
+ * bottom-up similarity clusters (average-linkage agglomerative over the
+ * 10-dimension similarity; see similarity/cluster.ts). Deterministic: cluster
+ * centers are spaced on a circle, members fan out by index, distance encodes
+ * dissimilarity from the cluster medoid.
  */
 export function buildMarketLandscape(
   companies: Company[],
   opts: LandscapeOptions = {},
 ): MarketLandscape {
   const neighborK = opts.neighborK ?? 3;
-  const threshold = opts.clusterThreshold ?? 0.35;
   const radius = opts.radius ?? 100;
   const emb = opts.embeddings;
 
-  // Greedy threshold clustering seeded by input order (deterministic).
-  const clusters: { id: number; seed: Company; members: Company[] }[] = [];
-  for (const c of companies) {
-    let placed = false;
-    for (const cl of clusters) {
-      if (companySimilarity(c, cl.seed, emb).overall >= threshold) {
-        cl.members.push(c);
-        placed = true;
-        break;
-      }
-    }
-    if (!placed) clusters.push({ id: clusters.length, seed: c, members: [c] });
-  }
+  const result = agglomerativeClusters(companies, {
+    threshold: opts.clusterThreshold ?? 0.45,
+    maxClusters: opts.maxClusters ?? 8,
+    minClusterSize: opts.minClusterSize ?? 3,
+    // Two-level: a dominant theme splits into sub-markets instead of one blob.
+    maxClusterSize: Math.max(10, Math.ceil(companies.length / 4)),
+    embeddings: emb,
+  });
+  // Seed = medoid: the member most similar to its own cluster on average.
+  const clusters = result.clusters.map((cl) => ({
+    id: cl.id,
+    label: cl.label,
+    seed: companies[cl.medoidIndex]!,
+    members: cl.memberIndices.map((i) => companies[i]!),
+  }));
 
   // Coordinates: each cluster gets an angular slice; members fan around its center.
   const nodes: LandscapeNode[] = [];
@@ -109,7 +116,7 @@ export function buildMarketLandscape(
     edges,
     clusters: clusters.map((cl) => ({
       id: cl.id,
-      label: cl.seed.sector ?? cl.seed.attributes.industryPath.at(-1) ?? cl.seed.name,
+      label: cl.label,
       memberIds: cl.members.map((m) => m.id),
     })),
   };

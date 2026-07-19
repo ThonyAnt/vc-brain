@@ -6,7 +6,7 @@ import { mockAgentOptions, mockSearchResults } from "../fixtures/mockAgents.js";
 import * as fx from "../fixtures/sample.js";
 import { needsSourcingClarification, streamOrchestratorChat, type ChatStreamEvent } from "./orchestrator.js";
 
-const { fundProfile, medflow, scribeai } = fx;
+const { fundProfile, medflow, careloop, scribeai } = fx;
 
 describe("interactive investment orchestrator", () => {
   it("routes to specialists and streams lifecycle plus text deltas", async () => {
@@ -34,6 +34,39 @@ describe("interactive investment orchestrator", () => {
       .toEqual(expect.arrayContaining(["company_analyst", "analogue_analyst", "fund_strategy_analyst"]));
     expect(events.some((event) => event.type === "text_delta")).toBe(true);
     expect(events.at(-1)?.type).toBe("run_completed");
+  });
+
+  it("grounds 'similar past investment / better deal' questions in the fund's portfolio clusters", async () => {
+    const state = createInitialState({
+      mandate: "Healthcare AI",
+      portfolioCompanies: [medflow, careloop],
+      candidateUniverse: [scribeai],
+    });
+    state.fundProfile = fundProfile;
+    let capturedPrompt = "";
+    const events: ChatStreamEvent[] = [];
+    await streamOrchestratorChat(
+      [{
+        role: "user",
+        content: "What's the most similar company to ScribeAI that we've invested in in the past, and is this a better deal?",
+      }],
+      { companyId: scribeai.id },
+      {
+        state,
+        companies: [scribeai, medflow, careloop],
+        llm: new MockLLMClient({ text: (req) => { capturedPrompt = req.prompt; return "ScribeAI is cheaper than MedFlow."; } }),
+        now: () => 42,
+        onEvent: (event) => { events.push(event); },
+      },
+    );
+    // The analogue specialist fires on "invested in the past / better deal" phrasing...
+    const started = events.filter((e) => e.type === "agent_started").map((e) => (e.type === "agent_started" ? e.agent : ""));
+    expect(started).toContain("analogue_analyst");
+    // ...and grounds the answer in a real PAST INVESTMENT (portfolio), with clusters + deal terms.
+    expect(capturedPrompt).toMatch(/MedFlow|CareLoop/);
+    expect(capturedPrompt).toContain("PAST INVESTMENTS");
+    expect(capturedPrompt).toContain("clusterSimilarity");
+    expect(capturedPrompt).toContain("dealTerms");
   });
 
   it.each([

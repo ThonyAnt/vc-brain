@@ -237,11 +237,16 @@ export function FundPage() {
 
           <GlobeCard companies={sourced} globeHeight="h-[420px]" />
 
-          <Card className="bg-dark text-on-dark">
-            <div className="flex items-baseline justify-between">
-              <span className="caption-tight text-hero-glow">Criteria weights · live</span>
-              <span className="caption text-on-dark-mute">
-                {isEditing ? 'drag to re-weight sourcing' : 'updates with every decision'}
+          <Card>
+            <div className="flex items-center justify-between">
+              <span className="flex items-center gap-2">
+                <span className="code-sm uppercase tracking-[0.12em] text-ink">Criteria weights</span>
+                <span className="caption-tight border-2 border-hairline-strong bg-primary px-1.5 py-0.5 text-on-primary">
+                  LIVE
+                </span>
+              </span>
+              <span className="code-sm text-charcoal">
+                {isEditing ? 'click cells to re-weight' : 'updates with every decision'}
               </span>
             </div>
             <div className="mt-4 space-y-2.5">
@@ -258,14 +263,18 @@ export function FundPage() {
                     .sort((a, b) => b[1] - a[1])
                     .map(([k, v]) => (
                       <div key={k} className="flex items-center gap-3">
-                        <span className="w-64 shrink-0 text-sm text-on-dark-mute">{k}</span>
-                        <div className="h-2.5 flex-1 border border-divider-dark bg-black">
-                          <div
-                            className="h-full bg-hero-glow transition-all duration-700"
-                            style={{ width: `${v * 100}%` }}
-                          />
+                        <span className="w-64 shrink-0 text-sm text-body">{k}</span>
+                        <div className="flex h-3.5 flex-1">
+                          {Array.from({ length: 20 }, (_, i) => (
+                            <i
+                              key={i}
+                              className={`-ml-[2px] flex-1 border-2 border-hairline-strong transition-colors duration-500 first:ml-0 ${
+                                i < Math.round(v * 20) ? 'bg-secondary' : 'bg-card'
+                              }`}
+                            />
+                          ))}
                         </div>
-                        <span className="code-sm w-10 text-right text-on-dark">{v.toFixed(2)}</span>
+                        <span className="code-sm w-10 text-right text-ink">{v.toFixed(2)}</span>
                       </div>
                     ))}
             </div>

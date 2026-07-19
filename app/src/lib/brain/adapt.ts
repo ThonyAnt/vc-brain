@@ -56,6 +56,7 @@ interface BrainCompany {
 }
 interface BrainRanked {
   companyId: string
+  totalScore?: number
   fundFitScore?: number
   closestWinnerId?: string
   closestRejectedDealId?: string
@@ -173,6 +174,20 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
   const memo = snap.investmentMemo
   const recId = snap.committeeDecision?.recommendedCompanyId
 
+  /* ---- display fit: cohort-scaled sourcing score (mirrors brain's
+   * displayFitScore in tools/fundfit.ts). Raw fund-fit collapses to ~50 for
+   * most candidates; the sourcing score differentiates continuously. */
+  const aliveScores = (snap.sourcedCandidates ?? []).map((r) => r.totalScore ?? 0).filter((s) => s > 0)
+  const scoreLo = aliveScores.length ? Math.min(...aliveScores) : 0
+  const scoreHi = aliveScores.length ? Math.max(...aliveScores) : 0
+  const displayFit = (totalScore: number | undefined): number | undefined => {
+    if (totalScore === undefined) return undefined
+    if (totalScore <= 0) return 35 // eliminated / off-thesis
+    if (scoreHi - scoreLo < 1e-9) return 70
+    const t = (totalScore - scoreLo) / (scoreHi - scoreLo)
+    return Math.round(Math.max(30, Math.min(95, 45 + t * 50)))
+  }
+
   /* ---- deal-stage board: recommendation -> IC, finalists/in-diligence ->
    * Diligence, then the next best-ranked sourced companies fill Sourced.
    * Everything else stays off the pipeline board (103 rows would drown it). */
@@ -180,7 +195,7 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
   const topSourcedIds = new Set(
     (snap.sourcedCandidates ?? [])
       .filter((r) => !r.eliminationReason && !finalistIds.has(r.companyId) && r.companyId !== recId)
-      .slice(0, 6)
+      .slice(0, 20)
       .map((r) => r.companyId),
   )
   const dealStageFor = (c: BrainCompany, type: Company['type']): Stage | undefined => {
@@ -210,9 +225,7 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
       const score =
         techScore !== undefined
           ? Math.round(techScore * 100)
-          : r?.fundFitScore !== undefined
-            ? Math.round(Math.min(0.95, r.fundFitScore * 0.9 + 0.05) * 100)
-            : 68
+          : displayFit(r?.totalScore) ?? 68
       founders.push({
         id: `f-${c.id}-${i}`,
         name: f.name,
@@ -233,13 +246,14 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
     const isRec = c.id === recId
     const type = appType(c.historicalStatus)
     const fit =
-      r?.fundFitScore !== undefined
+      displayFit(r?.totalScore) ??
+      (r?.fundFitScore !== undefined
         ? Math.round(r.fundFitScore * 100)
         : type === 'portfolio'
           ? 88
           : type === 'rejected'
             ? 42
-            : 70
+            : 70)
 
     const analogues: Analogue[] = []
     if (r?.closestWinnerId && byId.has(r.closestWinnerId))

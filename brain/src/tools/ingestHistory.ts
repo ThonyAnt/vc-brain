@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { CompanySchema, type Company } from "../schemas/company.js";
+import { normalizeUsd } from "./fundfit.js";
 import { HistoricalMemoSchema, type HistoricalMemo } from "../schemas/history.js";
 import { MemoExtractionSchema } from "../schemas/ingestion.js";
 import type { LLMClient } from "../llm/client.js";
@@ -63,7 +64,8 @@ export async function ingestMemoText(
     sector: ex.sector,
     stage: ex.stage,
     geography: ex.geography,
-    checkSizeSought: ex.checkSize,
+    // Memos write checks as "2.0" (millions) as often as "2000000".
+    checkSizeSought: ex.checkSize != null ? normalizeUsd(ex.checkSize) : undefined,
     historicalStatus: historicalStatusFor(ex.decision),
     outcome: ex.outcome,
     status: ex.decision === "invested" ? "invested" : "passed",

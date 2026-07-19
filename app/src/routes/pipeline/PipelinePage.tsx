@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import { Card } from '../../components/ui/Card'
 import { Dropdown } from '../../components/ui/dropdown'
 import { MonthGrid, type CalendarEvent } from '../../components/calendar/MonthGrid'
+import { CalendarSyncDialog, type CalendarConnection } from '../../components/calendar/CalendarSyncDialog'
 import { Eyebrow } from '../../components/ui/Eyebrow'
 import { FitInfo } from '../../components/ui/FitInfo'
 import { SourceCompaniesDialog, type SourceBrief } from '../../components/sourcing/SourceCompaniesDialog'
@@ -221,6 +222,15 @@ export function PipelinePage() {
   const [batchNotice, setBatchNotice] = useState('')
   const [sourceOpen, setSourceOpen] = useState(false)
   const [sourceNotice, setSourceNotice] = useState('')
+  const [calendarSyncOpen, setCalendarSyncOpen] = useState(false)
+  const [calendarConnection, setCalendarConnection] = useState<CalendarConnection | null>(() => {
+    try {
+      const saved = localStorage.getItem('vcbrain-google-calendar')
+      return saved ? JSON.parse(saved) as CalendarConnection : null
+    } catch {
+      return null
+    }
+  })
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -230,6 +240,16 @@ export function PipelinePage() {
   function switchView(v: View) {
     setView(v)
     localStorage.setItem('vcbrain-pipeline-view', v)
+  }
+
+  function connectCalendar(connection: CalendarConnection) {
+    setCalendarConnection(connection)
+    localStorage.setItem('vcbrain-google-calendar', JSON.stringify(connection))
+  }
+
+  function disconnectCalendar() {
+    setCalendarConnection(null)
+    localStorage.removeItem('vcbrain-google-calendar')
   }
 
   function onSort(key: SortKey) {
@@ -337,6 +357,9 @@ export function PipelinePage() {
         <div className="flex items-center gap-3">
           <button type="button" onClick={() => setSourceOpen(true)} className="h-11 border-2 border-hairline-strong bg-primary px-5 text-sm font-semibold text-on-primary shadow-brutal-sm hover:bg-primary-deep">
             Source
+          </button>
+          <button type="button" onClick={() => setCalendarSyncOpen(true)} className={`h-11 border-2 border-hairline-strong px-4 text-sm font-semibold shadow-brutal-sm ${calendarConnection ? 'bg-success text-ink' : 'bg-card text-ink hover:bg-bone'}`}>
+            {calendarConnection ? 'Calendar synced' : 'Sync calendar'}
           </button>
           {/* view switcher */}
           <div className="flex border-2 border-hairline-strong shadow-brutal-sm">
@@ -549,6 +572,7 @@ export function PipelinePage() {
         />
       )}
       {sourceOpen && <SourceCompaniesDialog onClose={() => setSourceOpen(false)} onSource={sourceCompanies} />}
+      {calendarSyncOpen && <CalendarSyncDialog connection={calendarConnection} onClose={() => setCalendarSyncOpen(false)} onConnect={connectCalendar} onDisconnect={disconnectCalendar} />}
     </div>
   )
 }

@@ -10,12 +10,32 @@ import { useAppStore } from '../../state/store'
 import { ChipEditor } from './ChipEditor'
 import { WeightSlider } from './WeightSlider'
 
-/* Demo partner portraits (Unsplash stock) */
+/* Named partner portraits, keyed by real name (Unsplash stock). */
 const PARTNER_PHOTOS: Record<string, string> = {
   'Dana Whitfield': 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&h=600&fit=crop',
   'Marcus Oyelaran': 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&h=600&fit=crop',
   'Priya Ramachandran': 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=600&fit=crop',
-  default: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop',
+}
+
+/*
+ * The research snapshot anonymizes partners as "Partner A/B". Present them as
+ * named people with DISTINCT headshots (assigned by index so no two cards ever
+ * share a face) while keeping their real focus/lens from the data.
+ */
+const PARTNER_PERSONAS: { name: string; photo: string }[] = [
+  { name: 'David Chen', photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&h=600&fit=crop' },
+  { name: 'Priya Nair', photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=600&fit=crop' },
+  { name: 'Marcus Boone', photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop' },
+  { name: 'Sarah Delgado', photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&h=600&fit=crop' },
+]
+
+const isPlaceholderPartner = (name: string) => /^partner\s+[a-z0-9]+$/i.test(name.trim())
+
+/** A realistic display name + a distinct headshot for a partner card. */
+function partnerDisplay(name: string, index: number): { name: string; photo: string } {
+  const persona = PARTNER_PERSONAS[index % PARTNER_PERSONAS.length]
+  if (isPlaceholderPartner(name)) return persona
+  return { name, photo: PARTNER_PHOTOS[name] ?? persona.photo }
 }
 
 /* Backend CompanyStage enum values -> display labels. */
@@ -273,25 +293,28 @@ export function FundPage() {
         </div>
 
         <div className="space-y-4">
-          {fund.partners.map((p) => (
-            <ExpandableCard
-              key={p.name}
-              title={p.name}
-              description={p.focus}
-              src={PARTNER_PHOTOS[p.name] ?? PARTNER_PHOTOS.default}
-              classNameExpanded="[&_h4]:text-ink [&_h4]:font-semibold"
-            >
-              <h4>Investment lens</h4>
-              <p>{p.leans}</p>
-              <h4>Focus</h4>
-              <p>{p.focus}</p>
-              <h4>In committee</h4>
-              <p>
-                The brain models {p.name.split(' ')[0]}'s likely stance on each deal from their historical
-                votes and the lens above — see the partner-fit readout on any company page.
-              </p>
-            </ExpandableCard>
-          ))}
+          {fund.partners.map((p, i) => {
+            const { name, photo } = partnerDisplay(p.name, i)
+            return (
+              <ExpandableCard
+                key={name}
+                title={name}
+                description={p.focus}
+                src={photo}
+                classNameExpanded="[&_h4]:text-ink [&_h4]:font-semibold"
+              >
+                <h4>Investment lens</h4>
+                <p>{p.leans}</p>
+                <h4>Focus</h4>
+                <p>{p.focus}</p>
+                <h4>In committee</h4>
+                <p>
+                  The brain models {name.split(' ')[0]}'s likely stance on each deal from their historical
+                  votes and the lens above — see the partner-fit readout on any company page.
+                </p>
+              </ExpandableCard>
+            )
+          })}
 
           <Card className="bg-bone">
             <Eyebrow>Institutional memory</Eyebrow>

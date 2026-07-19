@@ -1,21 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Card } from '../../components/ui/Card'
 import { Eyebrow } from '../../components/ui/Eyebrow'
 import { FitInfo } from '../../components/ui/FitInfo'
 import { api } from '../../lib/api/client'
-import type { Company, ExecutionItem, Stage } from '../../lib/types'
+import type { Company, Stage } from '../../lib/types'
 
 const STAGES: Stage[] = ['Sourced', 'Outreach', 'Meeting', 'Diligence', 'IC', 'Decision']
 
-const KIND_LABEL: Record<ExecutionItem['kind'], string> = {
-  call: 'call',
-  outreach: 'outreach',
-  schedule: 'schedule',
-  memo: 'memo',
-}
-
-type View = 'board' | 'database'
+type View = 'board' | 'database' | 'calendar'
 
 /* view-switcher icons in the hand-drawn nav family (18px grid, 1.2 stroke) */
 function BoardIcon({ className }: { className?: string }) {
@@ -37,6 +30,21 @@ function DatabaseIcon({ className }: { className?: string }) {
   )
 }
 
+function CalendarIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.2">
+      <rect x="2.5" y="3.5" width="13" height="12" />
+      <path d="M2.5 7.5h13M6 2v3M12 2v3M6 10h2M10 10h2M6 13h2" />
+    </svg>
+  )
+}
+
+const CALENDAR_CALLS = [
+  { id: 'cal-aureline', companyId: 's-aureline', founder: 'Mara Voss', title: 'Partner call', day: 'Today', time: '2:00 PM–2:25 PM', provider: 'Google Meet', meetingUrl: 'https://meet.google.com/' },
+  { id: 'cal-tessellate', companyId: 's-tessellate', founder: 'Elin Sørensen', title: 'Founder introduction', day: 'Tomorrow', time: '10:30 AM–10:55 AM', provider: 'Zoom', meetingUrl: 'https://zoom.us/join' },
+  { id: 'cal-solstice', companyId: 's-solstice', founder: 'Adaeze Okafor', title: 'Diligence call', day: 'Wed, Jul 22', time: '11:00 AM–11:25 AM', provider: 'Google Meet', meetingUrl: 'https://meet.google.com/' },
+]
+
 /* fit scores read like highlighter marks: hot deals go yellow */
 function ScoreChip({ score }: { score: number }) {
   return (
@@ -51,6 +59,7 @@ function ScoreChip({ score }: { score: number }) {
 }
 
 type SortKey = 'name' | 'stage' | 'sector' | 'fitScore' | 'raising' | 'location'
+type ValuationBand = 'all' | 'under-10' | '10-to-15' | '15-plus'
 
 const COLUMNS: { key: SortKey; label: string }[] = [
   { key: 'name', label: 'Company' },
@@ -72,21 +81,101 @@ function StageBadge({ stage }: { stage: Stage }) {
   )
 }
 
+function downloadRevenueModels(companies: Company[]) {
+  const escape = (value: string | number) => `"${String(value).replaceAll('"', '""')}"`
+  const rows = companies.map((company) => [
+    company.name,
+    company.sector,
+    company.model?.arr ?? '',
+    company.model?.growthPct ?? '',
+    company.model?.nrrPct ?? '',
+    company.model?.grossMarginPct ?? '',
+    company.model?.burnMonthly ?? '',
+    company.model?.runwayMonths ?? '',
+    company.model?.valuation ?? '',
+    company.model?.checkSize ?? '',
+  ].map(escape).join(','))
+  const csv = ['Company,Sector,ARR,Growth %,NRR %,Gross margin %,Monthly burn,Runway months,Valuation,Check size', ...rows].join('\n')
+  const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }))
+  const link = document.createElement('a')
+  link.href = url
+  link.download = 'meridian-revenue-models.csv'
+  link.click()
+  URL.revokeObjectURL(url)
+}
+
+function downloadRevenueModel(company: Company) {
+  downloadRevenueModels([company])
+}
+
+function CalendarView({ companies, onOpenMemo }: { companies: Company[]; onOpenMemo: (companyId: string) => void }) {
+  const names = new Map(companies.map((company) => [company.id, company.name]))
+
+  return (
+    <div className="mt-4">
+      <section className="border-2 border-hairline-strong bg-card shadow-brutal">
+        <div className="flex flex-wrap items-start justify-between gap-4 border-b-2 border-hairline-strong bg-bone px-5 py-4">
+          <div>
+            <p className="code-sm uppercase text-mute">Incoming calendar</p>
+            <h2 className="heading-sm mt-1">Confirmed company reservations</h2>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="code-sm bg-success/10 px-2 py-1 text-success">3 confirmed · synced</span>
+            <button type="button" onClick={() => downloadRevenueModels(companies)} className="border-2 border-hairline-strong bg-card px-3 py-2 text-sm font-semibold text-ink hover:bg-bone">
+              Download all models (.csv)
+            </button>
+          </div>
+        </div>
+        <div className="divide-y-2 divide-hairline-strong">
+          {CALENDAR_CALLS.map((call) => {
+            const company = companies.find((item) => item.id === call.companyId)
+            return (
+              <div key={call.id} className="grid gap-3 p-5 lg:grid-cols-[145px_minmax(0,1fr)_auto] lg:items-center">
+                <div className="code-sm text-mute"><strong className="block text-ink">{call.day}</strong>{call.time}</div>
+                <div>
+                  <p className="caption-tight text-ink">{call.title} — {names.get(call.companyId) ?? 'Company'}</p>
+                  <p className="mt-1 text-sm text-mute">{call.founder} · Google Calendar reservation confirmed</p>
+                </div>
+                <div className="flex flex-wrap gap-2 lg:justify-end">
+                  <a href={call.meetingUrl} target="_blank" rel="noreferrer" className="inline-flex h-9 items-center border-2 border-hairline-strong bg-card px-3 text-sm font-semibold text-ink hover:bg-bone">
+                    {call.provider} ↗
+                  </a>
+                  <button type="button" onClick={() => company && downloadRevenueModel(company)} disabled={!company} className="h-9 border-2 border-hairline-strong bg-card px-3 text-sm font-semibold text-ink hover:bg-bone disabled:cursor-not-allowed disabled:opacity-40">
+                    Revenue model ↓
+                  </button>
+                  <button type="button" onClick={() => onOpenMemo(call.companyId)} className="h-9 border-2 border-hairline-strong bg-dark px-3 text-sm font-semibold text-on-dark hover:bg-body">
+                    Investment files →
+                  </button>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </section>
+    </div>
+  )
+}
+
 export function PipelinePage() {
   const [companies, setCompanies] = useState<Company[]>([])
-  const [queue, setQueue] = useState<ExecutionItem[]>([])
   // ?view=database overrides (demo aid); otherwise last choice persists per browser
   const [view, setView] = useState<View>(() => {
     const param = new URLSearchParams(window.location.search).get('view')
-    if (param === 'database' || param === 'board') return param
+    if (param === 'database' || param === 'board' || param === 'calendar') return param
     return (localStorage.getItem('vcbrain-pipeline-view') as View) ?? 'board'
   })
   const [sort, setSort] = useState<{ key: SortKey; dir: 1 | -1 }>({ key: 'fitScore', dir: -1 })
+  const [stageFilter, setStageFilter] = useState<Stage | 'all'>('all')
+  const [scoreFilter, setScoreFilter] = useState(0)
+  const [sectorFilter, setSectorFilter] = useState('all')
+  const [valuationFilter, setValuationFilter] = useState<ValuationBand>('all')
+  const [locationFilter, setLocationFilter] = useState('all')
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
+  const [batchNotice, setBatchNotice] = useState('')
   const navigate = useNavigate()
 
   useEffect(() => {
     api.getCompanies().then(setCompanies)
-    api.getExecutionQueue().then(setQueue)
   }, [])
 
   function switchView(v: View) {
@@ -99,8 +188,27 @@ export function PipelinePage() {
   }
 
   const active = companies.filter((c) => c.dealStage)
+  const sectors = useMemo(() => [...new Set(active.map((company) => company.sector))].sort(), [active])
+  const locations = useMemo(() => [...new Set(active.map((company) => company.location))].sort(), [active])
 
-  const sorted = [...active].sort((a, b) => {
+  function valuationCap(company: Company) {
+    const cap = company.raising?.match(/at \$(\d+(?:\.\d+)?)M cap/i)
+    return cap ? Number(cap[1]) : undefined
+  }
+
+  const filtered = active.filter((company) => {
+    if (stageFilter !== 'all' && company.dealStage !== stageFilter) return false
+    if (company.fitScore < scoreFilter) return false
+    if (sectorFilter !== 'all' && company.sector !== sectorFilter) return false
+    if (locationFilter !== 'all' && company.location !== locationFilter) return false
+    const cap = valuationCap(company)
+    if (valuationFilter === 'under-10') return cap !== undefined && cap < 10
+    if (valuationFilter === '10-to-15') return cap !== undefined && cap >= 10 && cap < 15
+    if (valuationFilter === '15-plus') return cap !== undefined && cap >= 15
+    return true
+  })
+
+  const sorted = [...filtered].sort((a, b) => {
     const { key, dir } = sort
     if (key === 'fitScore') return (a.fitScore - b.fitScore) * dir
     if (key === 'stage') return (STAGES.indexOf(a.dealStage!) - STAGES.indexOf(b.dealStage!)) * dir
@@ -108,6 +216,41 @@ export function PipelinePage() {
     const bv = (b[key] ?? '') as string
     return av.localeCompare(bv) * dir
   })
+
+  const allVisibleSelected = sorted.length > 0 && sorted.every((company) => selectedIds.has(company.id))
+  const outreachEligible = active.filter((company) => selectedIds.has(company.id) && company.dealStage === 'Sourced')
+
+  function toggleCompany(companyId: string) {
+    setSelectedIds((previous) => {
+      const next = new Set(previous)
+      if (next.has(companyId)) next.delete(companyId)
+      else next.add(companyId)
+      return next
+    })
+  }
+
+  function toggleAllVisible() {
+    setSelectedIds((previous) => {
+      const next = new Set(previous)
+      if (allVisibleSelected) sorted.forEach((company) => next.delete(company.id))
+      else sorted.forEach((company) => next.add(company.id))
+      return next
+    })
+  }
+
+  function sendBatchOutreach() {
+    if (!outreachEligible.length) return
+    const eligibleIds = new Set(outreachEligible.map((company) => company.id))
+    setCompanies((previous) => previous.map((company) => (
+      eligibleIds.has(company.id) ? { ...company, dealStage: 'Outreach' } : company
+    )))
+    setSelectedIds((previous) => {
+      const next = new Set(previous)
+      eligibleIds.forEach((id) => next.delete(id))
+      return next
+    })
+    setBatchNotice(`${outreachEligible.length} personalized outreach ${outreachEligible.length === 1 ? 'draft was' : 'drafts were'} queued for review.`)
+  }
 
   return (
     <div className="mx-auto max-w-[1280px] p-8 pb-28">
@@ -123,6 +266,7 @@ export function PipelinePage() {
             [
               { v: 'board', label: 'Board view', Icon: BoardIcon },
               { v: 'database', label: 'Database view', Icon: DatabaseIcon },
+              { v: 'calendar', label: 'Calendar view', Icon: CalendarIcon },
             ] as const
           ).map(({ v, label, Icon }) => (
             <button
@@ -140,32 +284,49 @@ export function PipelinePage() {
         </div>
       </div>
 
-      {/* execution queue: today's calls, outreach, scheduling, memos */}
-      <div className="mt-6 flex gap-3 overflow-x-auto pb-1">
-        {queue.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => item.companyId && navigate(`/company/${item.companyId}`)}
-            className="flex shrink-0 cursor-pointer items-center gap-3 rounded-none border-2 border-hairline-strong bg-card py-2 pr-5 pl-3 text-left transition-colors hover:bg-bone"
-          >
-            <span
-              className={`caption rounded-none border border-hairline-strong px-2.5 py-1 ${
-                item.kind === 'call' ? 'bg-dark text-on-dark' : 'bg-bone text-charcoal'
-              }`}
-            >
-              {KIND_LABEL[item.kind]}
-            </span>
-            <span className="text-sm text-ink">{item.title}</span>
-            <span className="code-sm text-ash">{item.due}</span>
-          </button>
-        ))}
+      {/* deal filters + bulk selection */}
+      <div className="mt-6 flex flex-wrap items-center gap-2 border-2 border-hairline-strong bg-card p-3 shadow-brutal-sm">
+        <span className="code-sm mr-1 text-mute uppercase">Filter deals</span>
+        <select aria-label="Filter by stage" value={stageFilter} onChange={(event) => setStageFilter(event.target.value as Stage | 'all')} className="h-9 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
+          <option value="all">All stages</option>
+          {STAGES.map((stage) => <option key={stage} value={stage}>{stage}</option>)}
+        </select>
+        <select aria-label="Filter by minimum score" value={scoreFilter} onChange={(event) => setScoreFilter(Number(event.target.value))} className="h-9 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
+          <option value={0}>Any score</option>
+          <option value={60}>Score 60+</option>
+          <option value={70}>Score 70+</option>
+          <option value={80}>Score 80+</option>
+          <option value={90}>Score 90+</option>
+        </select>
+        <select aria-label="Filter by industry" value={sectorFilter} onChange={(event) => setSectorFilter(event.target.value)} className="h-9 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
+          <option value="all">All industries</option>
+          {sectors.map((sector) => <option key={sector} value={sector}>{sector}</option>)}
+        </select>
+        <select aria-label="Filter by raising valuation" value={valuationFilter} onChange={(event) => setValuationFilter(event.target.value as ValuationBand)} className="h-9 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
+          <option value="all">Any raising / cap</option>
+          <option value="under-10">Under $10M cap</option>
+          <option value="10-to-15">$10M–$15M cap</option>
+          <option value="15-plus">$15M+ cap</option>
+        </select>
+        <select aria-label="Filter by location" value={locationFilter} onChange={(event) => setLocationFilter(event.target.value)} className="h-9 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
+          <option value="all">All locations</option>
+          {locations.map((location) => <option key={location} value={location}>{location}</option>)}
+        </select>
+        <div className="flex-1" />
+        <button type="button" onClick={sendBatchOutreach} disabled={!outreachEligible.length} className="h-9 border-2 border-hairline-strong bg-primary px-5 text-sm font-semibold text-on-primary disabled:cursor-not-allowed disabled:bg-stone disabled:text-charcoal">
+          Outbound
+        </button>
+        <button type="button" onClick={toggleAllVisible} disabled={!sorted.length} className="h-9 border-2 border-hairline-strong bg-dark px-3 text-sm font-semibold text-on-dark disabled:cursor-not-allowed disabled:opacity-40">
+          {allVisibleSelected ? 'Clear selection' : `Select all ${sorted.length}`}
+        </button>
       </div>
+      {batchNotice && <div role="status" className="mt-3 border-2 border-success bg-success/10 px-3 py-2 text-sm text-body">{batchNotice}</div>}
 
       {view === 'board' ? (
         /* stage board */
-        <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
+        <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
           {STAGES.map((stage) => {
-            const deals = active.filter((c) => c.dealStage === stage)
+            const deals = sorted.filter((c) => c.dealStage === stage)
             return (
               <div key={stage} className="rounded-none border-2 border-hairline-strong bg-bone">
                 <div className="flex items-center justify-between border-b-2 border-hairline-strong bg-card px-3 py-2">
@@ -184,7 +345,7 @@ export function PipelinePage() {
                       onClick={() => navigate(`/company/${c.id}`)}
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <span className="caption-tight text-ink">{c.name}</span>
+                        <span className="flex items-center gap-2"><input aria-label={`Select ${c.name}`} type="checkbox" checked={selectedIds.has(c.id)} onClick={(event) => event.stopPropagation()} onChange={() => toggleCompany(c.id)} className="h-4 w-4 accent-primary" /><span className="caption-tight text-ink">{c.name}</span></span>
                         <ScoreChip score={c.fitScore} />
                       </div>
                       <div className="caption mt-1.5 line-clamp-2 text-mute">{c.oneLiner}</div>
@@ -201,12 +362,15 @@ export function PipelinePage() {
             )
           })}
         </div>
-      ) : (
+      ) : view === 'database' ? (
         /* database view */
-        <div className="mt-6 overflow-x-auto rounded-none border-2 border-hairline-strong bg-card shadow-brutal">
+        <div className="mt-4 overflow-x-auto rounded-none border-2 border-hairline-strong bg-card shadow-brutal">
           <table className="w-full border-collapse text-left">
             <thead>
               <tr className="border-b-2 border-hairline-strong bg-bone">
+                <th className="w-12 px-4 py-3">
+                  <input aria-label="Select all visible companies" type="checkbox" checked={allVisibleSelected} onChange={toggleAllVisible} className="h-4 w-4 cursor-pointer accent-primary" />
+                </th>
                 {COLUMNS.map((col) => (
                   <th
                     key={col.key}
@@ -233,6 +397,9 @@ export function PipelinePage() {
                   onClick={() => navigate(`/company/${c.id}`)}
                   className="cursor-pointer border-t border-hairline-strong transition-colors hover:bg-bone"
                 >
+                  <td className="px-4 py-3" onClick={(event) => event.stopPropagation()}>
+                    <input aria-label={`Select ${c.name}`} type="checkbox" checked={selectedIds.has(c.id)} onChange={() => toggleCompany(c.id)} className="h-4 w-4 cursor-pointer accent-primary" />
+                  </td>
                   <td className="max-w-[320px] px-4 py-3">
                     <div className="caption-tight text-ink">{c.name}</div>
                     <div className="caption mt-0.5 truncate text-mute">{c.oneLiner}</div>
@@ -264,7 +431,7 @@ export function PipelinePage() {
               ))}
               {!sorted.length && (
                 <tr>
-                  <td colSpan={7} className="caption px-4 py-8 text-center text-ash">
+                  <td colSpan={8} className="caption px-4 py-8 text-center text-ash">
                     No active deals
                   </td>
                 </tr>
@@ -272,6 +439,8 @@ export function PipelinePage() {
             </tbody>
           </table>
         </div>
+      ) : (
+        <CalendarView companies={active} onOpenMemo={(companyId) => navigate(`/company/${companyId}?tab=files`)} />
       )}
     </div>
   )

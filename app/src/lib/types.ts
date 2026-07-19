@@ -137,6 +137,42 @@ export interface Founder {
   confidence?: 'low' | 'medium' | 'high'
 }
 
+export type OutreachStatus = 'draft' | 'pending_approval' | 'sent' | 'replied' | 'awaiting_slot' | 'event_created'
+
+export interface OutreachMessage {
+  id: string
+  direction: 'outbound' | 'inbound'
+  sentAt: string
+  body: string
+}
+
+export interface OutreachSlot {
+  id: string
+  label: string
+  startAt: string
+  endAt: string
+}
+
+export interface OutreachRecord {
+  id: string
+  companyId: string
+  contact: {
+    name: string
+    role: string
+    email: string
+    source: string
+    confidence: number
+    verified: boolean
+  }
+  status: OutreachStatus
+  subject: string
+  body: string
+  personalizationFacts: string[]
+  thread: OutreachMessage[]
+  offeredSlots: OutreachSlot[]
+  event?: { title: string; startAt: string; calendar: string }
+}
+
 export interface ExecutionItem {
   id: string
   kind: 'call' | 'outreach' | 'schedule' | 'memo'

@@ -27,11 +27,11 @@ interface AnalystChatState {
   messages: ChatMessage[]
   /** Assistant message index -> orchestration trace for that run. */
   traces: Record<number, TraceRun>
-  /** Assistant message index -> founders sourced in that run. */
-  sourcedFounders: Record<number, number>
+  /** Assistant message index -> ids of founders sourced in that run. */
+  sourcedFounders: Record<number, string[]>
   setMessages: (updater: Updater<ChatMessage[]>) => void
   setTraces: (updater: Updater<Record<number, TraceRun>>) => void
-  setSourcedFounders: (updater: Updater<Record<number, number>>) => void
+  setSourcedFounders: (updater: Updater<Record<number, string[]>>) => void
   clear: () => void
 }
 
@@ -48,7 +48,13 @@ export const useAnalystChat = create<AnalystChatState>()(
     }),
     {
       name: 'vcbrain-analyst-chat',
-      version: 1,
+      version: 2,
+      migrate: (persisted, version) => {
+        const p = (persisted ?? {}) as Partial<AnalystChatState>
+        /* v1 stored counts per message; v2 stores founder ids */
+        if (version < 2) p.sourcedFounders = {}
+        return p
+      },
       partialize: (s) => ({ messages: s.messages, traces: s.traces, sourcedFounders: s.sourcedFounders }),
       merge: (persisted, current) => {
         const p = (persisted ?? {}) as Partial<AnalystChatState>

@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, useSearchParams } from 'react-router'
 import { Eyebrow } from '../../components/ui/Eyebrow'
 import { FounderAvatar } from '../../components/ui/FounderAvatar'
 import { Pill } from '../../components/ui/Pill'
@@ -17,6 +17,9 @@ export function FoundersPage() {
   const [scouting, setScouting] = useState(false)
   const [scoutError, setScoutError] = useState<string | null>(null)
   const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
+  /* rows deep-linked from the analyst chat (?new=fd_a,fd_b): flashed + scrolled to */
+  const [freshIds, setFreshIds] = useState<Set<string>>(new Set())
   const setWeights = useAppStore((s) => s.setWeights)
   const setLearningNote = useAppStore((s) => s.setLearningNote)
 
@@ -24,6 +27,22 @@ export function FoundersPage() {
     api.getFounders().then((f) => setFounders([...f].sort((a, b) => b.score - a.score)))
     api.getCompanies().then((all) => setCompanies(new Map(all.map((c) => [c.id, c]))))
   }, [])
+
+  useEffect(() => {
+    const param = searchParams.get('new')
+    if (!param || founders.length === 0) return
+    const ids = param.split(',').filter((id) => founders.some((f) => f.id === id))
+    if (ids.length === 0) return
+    setFreshIds(new Set(ids))
+    setOpenId(ids[0])
+    requestAnimationFrame(() =>
+      document.getElementById(`founder-${ids[0]}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' }),
+    )
+    /* one-shot: clear the param so refreshes don't re-flash */
+    setSearchParams({}, { replace: true })
+    const timer = setTimeout(() => setFreshIds(new Set()), 4000)
+    return () => clearTimeout(timer)
+  }, [founders, searchParams, setSearchParams])
 
   async function runScout() {
     const q = scoutQuery.trim()
@@ -109,7 +128,10 @@ export function FoundersPage() {
               return (
                 <Fragment key={f.id}>
                   <tr
-                    className="cursor-pointer border-t border-hairline hover:bg-bone"
+                    id={`founder-${f.id}`}
+                    className={`cursor-pointer border-t border-hairline transition-colors duration-700 hover:bg-bone ${
+                      freshIds.has(f.id) ? 'bg-hero-glow/50' : ''
+                    }`}
                     onClick={() => setOpenId(open ? null : f.id)}
                   >
                     <td className="px-4 py-3">

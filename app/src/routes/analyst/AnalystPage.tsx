@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
+import { motion } from 'framer-motion'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { AskInput } from '@/components/ui/ask-input'
@@ -159,15 +160,44 @@ function AssistantMarkdown({ content }: { content: string }) {
    Each orchestrated turn shows a live stage trace that stays in the thread.
    The conversation lives in a persisted store, so it survives navigation
    and reloads until the user starts a new chat. */
+interface Flight {
+  key: number
+  label: string
+  from: { x: number; y: number }
+  to: { x: number; y: number }
+}
+
 export function AnalystPage() {
   const { messages, traces, sourcedFounders, setMessages, setTraces, setSourcedFounders, clear } = useAnalystChat()
   const [busy, setBusy] = useState(false)
+  /* sourced-item chips mid-flight from the trace card to their dock icon */
+  const [flights, setFlights] = useState<Flight[]>([])
+  const flightSeq = useRef(0)
+  const liveTraceRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const el = scrollRef.current
     if (el) el.scrollTop = el.scrollHeight
   }, [messages, busy, traces])
+
+  /* Fly a chip per sourced item into its dock icon, so "it went somewhere"
+     is visible. Capped at 3 chips plus a +N overflow chip. */
+  function spawnFlights(labels: string[], dockLabel: 'Founders' | 'Pipeline') {
+    const target = document.querySelector(`[data-dock-label="${dockLabel}"]`)?.getBoundingClientRect()
+    if (!target) return
+    const source = liveTraceRef.current?.getBoundingClientRect()
+    const from = source
+      ? { x: source.left + 24, y: Math.min(source.bottom, window.innerHeight - 120) }
+      : { x: window.innerWidth / 2, y: window.innerHeight / 2 }
+    const to = { x: target.left + target.width / 2 - 30, y: target.top + target.height / 2 - 12 }
+    const shown = labels.slice(0, 3)
+    if (labels.length > 3) shown.push(`+${labels.length - 3}`)
+    setFlights((current) => [
+      ...current,
+      ...shown.map((label) => ({ key: flightSeq.current++, label, from, to })),
+    ])
+  }
 
   async function ask(question: string) {
     if (!question.trim() || busy) return
@@ -179,8 +209,12 @@ export function AnalystPage() {
       if (event.type === 'founders_sourced' && event.founders.length) {
         setSourcedFounders((current) => ({
           ...current,
-          [assistantIndex]: (current[assistantIndex] ?? 0) + event.founders.length,
+          [assistantIndex]: [...(current[assistantIndex] ?? []), ...event.founders.map((f) => f.id)],
         }))
+        spawnFlights(event.founders.map((f) => f.name), 'Founders')
+      }
+      if (event.type === 'companies_sourced' && event.companies.length) {
+        spawnFlights(event.companies.map((c) => c.name), 'Pipeline')
       }
       setTraces((current) => {
         const run = applyTraceEvent(current[assistantIndex], event)
@@ -237,7 +271,9 @@ export function AnalystPage() {
         {messages.map((m, i) => (
           <Fragment key={i}>
             {m.role === 'assistant' && traces[i] && traces[i].stages.length > 0 && (
-              <OrchestrationTrace run={traces[i]} />
+              <div ref={i === messages.length - 1 ? liveTraceRef : undefined}>
+                <OrchestrationTrace run={traces[i]} />
+              </div>
             )}
             {!m.content && m.role === 'assistant' ? null : (
               <div
@@ -248,12 +284,13 @@ export function AnalystPage() {
                 }`}
               >
                 {m.role === 'assistant' ? <AssistantMarkdown content={m.content} /> : m.content}
-                {m.role === 'assistant' && sourcedFounders[i] ? (
+                {m.role === 'assistant' && sourcedFounders[i]?.length ? (
                   <Link
-                    to="/founders"
+                    to={`/founders?new=${sourcedFounders[i].join(',')}`}
                     className="mt-3 inline-flex items-center gap-1.5 font-medium text-primary underline underline-offset-2"
                   >
-                    View {sourcedFounders[i]} new {sourcedFounders[i] === 1 ? 'lead' : 'leads'} in Founder Leads
+                    View {sourcedFounders[i].length} new{' '}
+                    {sourcedFounders[i].length === 1 ? 'lead' : 'leads'} in Founder Leads
                     <span aria-hidden>→</span>
                   </Link>
                 ) : null}
@@ -261,16 +298,40 @@ export function AnalystPage() {
             )}
           </Fragment>
         ))}
-        {busy && !liveTrace?.stages.length && (
-          <div className="max-w-[85%] border-2 border-hairline-strong bg-card p-4 shadow-brutal" aria-live="polite">
+        {busy && !liveTrace?.stages.length && !messages.at(-1)?.content && (
+          <div className="flex items-center gap-2 pl-1" aria-live="polite">
+            <motion.i
+              className="h-2 w-2 shrink-0 bg-primary not-italic"
+              animate={{ opacity: [1, 0.15, 1] }}
+              transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
+            />
             <span className="code-sm text-charcoal">Thinking…</span>
-            <div className="mt-3 h-3 overflow-hidden border-2 border-hairline-strong bg-bone">
-              <div className="h-full w-1/5 animate-pulse bg-primary" />
-            </div>
           </div>
         )}
       </div>
       <AskInput onSubmit={ask} className="shrink-0" />
+
+      {/* sourced-item chips flying into the dock */}
+      {flights.map((f, i) => (
+        <motion.div
+          key={f.key}
+          data-flight
+          className="pointer-events-none fixed top-0 left-0 z-50"
+          initial={{ x: f.from.x, y: f.from.y, opacity: 0, scale: 0.7 }}
+          animate={{
+            x: [f.from.x, f.from.x, f.to.x],
+            y: [f.from.y, f.from.y - 14, f.to.y],
+            opacity: [0, 1, 1, 0],
+            scale: [0.7, 1, 1, 0.45],
+          }}
+          transition={{ duration: 0.95, delay: i * 0.16, ease: 'easeInOut' }}
+          onAnimationComplete={() => setFlights((current) => current.filter((x) => x.key !== f.key))}
+        >
+          <span className="code-sm border-2 border-hairline-strong bg-hero-glow px-2 py-1 whitespace-nowrap shadow-brutal-sm">
+            {f.label}
+          </span>
+        </motion.div>
+      ))}
     </div>
   )
 }

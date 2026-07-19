@@ -1,42 +1,136 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router'
+import { AnimatePresence, motion } from 'framer-motion'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { AskInput } from '@/components/ui/ask-input'
+import { FlowFieldBackground } from '@/components/ui/flow-field-background'
+import { OrchestrationTrace, type TraceRun } from '@/components/analyst/OrchestrationTrace'
+import { closeTrace, useAnalystChat } from '../../state/chatStore'
 import { api } from '../../lib/api/client'
 import type { OrchestratorStreamEvent } from '../../lib/api/client'
 import type { ChatMessage } from '../../lib/types'
 
-type PipelineProgress = {
-  planned: string[]
-  completed: string[]
-  current: string
-  failed: boolean
-}
-
-const EMPTY_PROGRESS: PipelineProgress = {
-  planned: [],
-  completed: [],
-  current: 'Starting orchestration…',
-  failed: false,
-}
-
+/* Mirrors the server's agentLabel map so queued stages (ids only) read well. */
 const AGENT_LABELS: Record<string, string> = {
-  founderScout: 'Scouting the founder',
-  discovery: 'Searching the web with Tavily',
-  fundProfiler: 'Profiling the fund mandate',
-  marketScout: 'Scouting the market',
-  technicalDiligence: 'Running technical diligence',
-  commercialDiligence: 'Running commercial diligence',
-  financialDiligence: 'Running financial diligence',
-  risk: 'Reviewing risks',
-  partnerReview: 'Collecting partner reviews',
-  committee: 'Convening the investment committee',
-  memo: 'Writing the investment memo',
+  founderScout: 'Founder scout',
+  discovery: 'Tavily discovery',
+  fundProfiler: 'Fund profiler',
+  marketScout: 'Market scout',
+  technicalDiligence: 'Technical diligence',
+  commercialDiligence: 'Commercial diligence',
+  financialDiligence: 'Financial diligence',
+  risk: 'Risk review',
+  partnerReview: 'Partner review',
+  committee: 'Investment committee',
+  memo: 'Memo writer',
 }
 
-function progressAgent(agent: string) {
-  return agent.startsWith('partner:') ? 'partnerReview' : agent
+const labelFor = (id: string, label?: string) =>
+  AGENT_LABELS[id] ?? label ?? id.replace(/([a-z])([A-Z])/g, '$1 $2')
+
+const partnerId = (agent: string) => agent.slice('partner:'.length)
+
+/*
+ * Fold one SSE lifecycle event into the run trace. Stages are seeded from the
+ * run_started plan; agents the plan didn't declare append as they start.
+ * Individual partner:* agents fan into the partnerReview stage as stamps.
+ * The pipeline is sequential, so a stage starting also completes everything
+ * planned before it (heals any missed completion events).
+ */
+function applyTraceEvent(run: TraceRun | undefined, event: OrchestratorStreamEvent): TraceRun | undefined {
+  const now = Date.now()
+  if (event.type === 'run_started') {
+    return {
+      startedAt: now,
+      offline: event.runId === 'offline',
+      stages: event.agents.map((id) => ({ id, label: labelFor(id), status: 'queued' as const })),
+    }
+  }
+  if (!run || run.endedAt) return run
+  const stages: TraceRun['stages'] = run.stages.map((s) => ({
+    ...s,
+    partners: s.partners?.map((p) => ({ ...p })),
+  }))
+  const next: TraceRun = { ...run, stages }
+  const find = (id: string) => stages.find((s) => s.id === id)
+  const partnerHost = () => {
+    let stage = find('partnerReview')
+    if (!stage) {
+      stage = { id: 'partnerReview', label: AGENT_LABELS.partnerReview, status: 'queued' }
+      stages.push(stage)
+    }
+    return stage
+  }
+
+  if (event.type === 'agent_started') {
+    if (event.agent.startsWith('partner:')) {
+      const stage = partnerHost()
+      stage.status = 'running'
+      stage.startedAt = stage.startedAt ?? now
+      stage.partners = stage.partners ?? []
+      if (!stage.partners.some((p) => p.id === partnerId(event.agent)))
+        stage.partners.push({ id: partnerId(event.agent), status: 'running' })
+    } else {
+      let stage = find(event.agent)
+      if (!stage) {
+        stage = { id: event.agent, label: labelFor(event.agent, event.label), status: 'queued' }
+        stages.push(stage)
+      }
+      for (const s of stages) {
+        if (s === stage) break
+        if (s.status === 'running' || s.status === 'queued') {
+          if (s.status === 'running') s.endedAt = s.endedAt ?? now
+          s.status = 'done'
+          s.partners?.forEach((p) => { if (p.status === 'running') p.status = 'done' })
+        }
+      }
+      stage.status = 'running'
+      stage.startedAt = stage.startedAt ?? now
+    }
+  }
+
+  if (event.type === 'agent_completed') {
+    if (event.agent.startsWith('partner:')) {
+      const stage = partnerHost()
+      const partner = stage.partners?.find((p) => p.id === partnerId(event.agent))
+      if (partner) partner.status = 'done'
+      if (stage.partners?.length && stage.partners.every((p) => p.status === 'done')) {
+        stage.status = 'done'
+        stage.endedAt = now
+      }
+    } else {
+      const stage = find(event.agent)
+      if (stage) {
+        stage.status = 'done'
+        stage.endedAt = now
+        stage.startedAt = stage.startedAt ?? run.startedAt
+        stage.summary = event.summary
+      }
+    }
+  }
+
+  if (event.type === 'agent_failed') {
+    const stage = find(event.agent.startsWith('partner:') ? 'partnerReview' : event.agent)
+    if (stage) {
+      stage.status = 'failed'
+      stage.error = event.error
+      stage.endedAt = now
+    }
+  }
+
+  if (event.type === 'run_completed') {
+    next.endedAt = now
+    for (const s of stages) {
+      if (s.status === 'running' || s.status === 'queued') {
+        s.status = 'done'
+        s.endedAt = s.endedAt ?? now
+      }
+      s.partners?.forEach((p) => { if (p.status === 'running' || p.status === 'queued') p.status = 'done' })
+    }
+  }
+
+  return next
 }
 
 function AssistantMarkdown({ content }: { content: string }) {
@@ -67,18 +161,37 @@ function AssistantMarkdown({ content }: { content: string }) {
 }
 
 /* Full-screen fund-brain chat. Empty state is the big ask prompt; once a
-   question lands the page becomes a message thread with the input pinned. */
+   question lands the page becomes a message thread with the input pinned.
+   Each orchestrated turn shows a live stage trace that stays in the thread.
+   The conversation lives in a persisted store, so it survives navigation
+   and reloads until the user starts a new chat. */
+interface Flight {
+  key: number
+  label: string
+  from: { x: number; y: number }
+  to: { x: number; y: number }
+}
+
 export function AnalystPage() {
   const location = useLocation()
   const navigate = useNavigate()
   const sourcePrompt = (location.state as { sourcePrompt?: string } | null)?.sourcePrompt?.trim() ?? ''
-  const [messages, setMessages] = useState<ChatMessage[]>([])
+  const {
+    messages,
+    traces,
+    sourcedFounders,
+    sourcedCompanies,
+    setMessages,
+    setTraces,
+    setSourcedFounders,
+    setSourcedCompanies,
+    clear,
+  } = useAnalystChat()
   const [busy, setBusy] = useState(false)
-  const [progress, setProgress] = useState<PipelineProgress>(EMPTY_PROGRESS)
-  /* Assistant message index -> founders sourced in that run, so a completed
-     founder-sourcing turn shows a link through to the Founder Leads page. */
-  const [sourcedFounders, setSourcedFounders] = useState<Record<number, number>>({})
-  const [sourcedCompanies, setSourcedCompanies] = useState<Record<number, number>>({})
+  /* sourced-item chips mid-flight from the trace card to their dock icon */
+  const [flights, setFlights] = useState<Flight[]>([])
+  const flightSeq = useRef(0)
+  const liveTraceRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const autoPromptStarted = useRef(false)
   const busyRef = useRef(false)
@@ -86,7 +199,25 @@ export function AnalystPage() {
   useEffect(() => {
     const el = scrollRef.current
     if (el) el.scrollTop = el.scrollHeight
-  }, [messages, busy, progress])
+  }, [messages, busy, traces])
+
+  /* Fly a chip per sourced item into its dock icon, so "it went somewhere"
+     is visible. Capped at 3 chips plus a +N overflow chip. */
+  function spawnFlights(labels: string[], dockLabel: 'Founders' | 'Pipeline') {
+    const target = document.querySelector(`[data-dock-label="${dockLabel}"]`)?.getBoundingClientRect()
+    if (!target) return
+    const source = liveTraceRef.current?.getBoundingClientRect()
+    const from = source
+      ? { x: source.left + 24, y: Math.min(source.bottom, window.innerHeight - 120) }
+      : { x: window.innerWidth / 2, y: window.innerHeight / 2 }
+    const to = { x: target.left + target.width / 2 - 30, y: target.top + target.height / 2 - 12 }
+    const shown = labels.slice(0, 3)
+    if (labels.length > 3) shown.push(`+${labels.length - 3}`)
+    setFlights((current) => [
+      ...current,
+      ...shown.map((label) => ({ key: flightSeq.current++, label, from, to })),
+    ])
+  }
 
   async function ask(question: string, priorMessages: ChatMessage[] = messages) {
     if (!question.trim() || busyRef.current) return
@@ -95,53 +226,29 @@ export function AnalystPage() {
     const assistantIndex = next.length
     setMessages([...next, { role: 'assistant', content: '' }])
     setBusy(true)
-    setProgress(EMPTY_PROGRESS)
     const onEvent = (event: OrchestratorStreamEvent) => {
       if (event.type === 'founders_sourced' && event.founders.length) {
         setSourcedFounders((current) => ({
           ...current,
-          [assistantIndex]: (current[assistantIndex] ?? 0) + event.founders.length,
+          [assistantIndex]: [...(current[assistantIndex] ?? []), ...event.founders.map((f) => f.id)],
         }))
+        spawnFlights(event.founders.map((f) => f.name), 'Founders')
       }
       if (event.type === 'companies_sourced' && event.companies.length) {
-        setSourcedCompanies((current) => ({
-          ...current,
-          [assistantIndex]: (current[assistantIndex] ?? 0) + event.companies.length,
-        }))
-      }
-      if (event.type === 'run_started') {
-        setProgress({
-          planned: event.agents,
-          completed: [],
-          current: event.agents.length ? 'Planning the sourcing pipeline…' : 'Preparing response…',
-          failed: false,
+        setSourcedCompanies((current) => {
+          const prior = current[assistantIndex] ?? []
+          const seen = new Set(prior.map((company) => company.id))
+          const added = event.companies
+            .filter((company) => !seen.has(company.id))
+            .map((company) => ({ id: company.id, name: company.name }))
+          return { ...current, [assistantIndex]: [...prior, ...added] }
         })
+        spawnFlights(event.companies.map((c) => c.name), 'Pipeline')
       }
-      if (event.type === 'agent_started') {
-        const agent = progressAgent(event.agent)
-        setProgress((current) => ({ ...current, current: AGENT_LABELS[agent] ?? `${event.label}…` }))
-      }
-      if (event.type === 'agent_completed') {
-        const agent = progressAgent(event.agent)
-        setProgress((current) => ({
-          ...current,
-          completed: current.planned.includes(agent) && !current.completed.includes(agent)
-            ? [...current.completed, agent]
-            : current.completed,
-          current: `${AGENT_LABELS[agent] ?? event.agent} complete`,
-        }))
-      }
-      if (event.type === 'agent_failed') {
-        const agent = progressAgent(event.agent)
-        setProgress((current) => ({
-          ...current,
-          current: `${AGENT_LABELS[agent] ?? event.agent} failed`,
-          failed: true,
-        }))
-      }
-      if (event.type === 'run_completed') {
-        setProgress((current) => ({ ...current, completed: current.planned, current: 'Analysis complete' }))
-      }
+      setTraces((current) => {
+        const run = applyTraceEvent(current[assistantIndex], event)
+        return run && run !== current[assistantIndex] ? { ...current, [assistantIndex]: run } : current
+      })
     }
     const reply = await api.streamChat(next, { route: '/analyst' }, {
       onEvent,
@@ -160,6 +267,10 @@ export function AnalystPage() {
       else updated.push(reply)
       return updated
     })
+    setTraces((current) => {
+      const run = closeTrace(current[assistantIndex])
+      return run && run !== current[assistantIndex] ? { ...current, [assistantIndex]: run } : current
+    })
     busyRef.current = false
     setBusy(false)
   }
@@ -175,74 +286,118 @@ export function AnalystPage() {
     return (
       <div className="flex h-full flex-col items-center justify-center p-8">
         <AskInput title="Ask Meridian" onSubmit={ask} className="max-w-2xl" />
-        <p className="code-sm -mt-4 text-charcoal">
-          institutional memory · 34 memos · 47 passes · 8 outcomes
-        </p>
       </div>
     )
   }
 
+  const liveTrace = traces[messages.length - 1]
+
   return (
-    <div className="mx-auto flex h-full w-full max-w-[820px] flex-col px-8 pt-6 pb-8">
-      <div ref={scrollRef} className="min-h-0 flex-1 space-y-4 overflow-y-auto pr-1 pb-6">
-        {messages.map((m, i) => (!m.content && m.role === 'assistant' ? null : (
-          <div
-            key={i}
-            className={`max-w-[85%] rounded-none border-2 border-hairline-strong p-4 text-sm ${
-              m.role === 'user'
-                ? 'ml-auto bg-dark text-on-dark shadow-brutal-sm'
-                : 'bg-card text-ink shadow-brutal'
-            }`}
+    <div className="relative mx-auto flex h-full w-full max-w-[820px] flex-col px-8 pt-4 pb-8">
+      {/* ambient flow field while the agent works; fades out when it's done */}
+      <AnimatePresence>
+        {busy && (
+          <motion.div
+            key="flow"
+            className="pointer-events-none absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.45 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.9 }}
           >
-            {m.role === 'assistant' ? <AssistantMarkdown content={m.content} /> : m.content}
-            {m.role === 'assistant' && sourcedCompanies[i] ? (
-              <Link
-                to="/pipeline"
-                className="mt-3 inline-flex items-center gap-1.5 font-medium text-primary underline underline-offset-2"
-              >
-                View {sourcedCompanies[i]} new {sourcedCompanies[i] === 1 ? 'company' : 'companies'} in Pipeline
-                <span aria-hidden>→</span>
-              </Link>
-            ) : null}
-            {m.role === 'assistant' && sourcedFounders[i] ? (
-              <Link
-                to="/founders"
-                className="mt-3 inline-flex items-center gap-1.5 font-medium text-primary underline underline-offset-2"
-              >
-                View {sourcedFounders[i]} new {sourcedFounders[i] === 1 ? 'lead' : 'leads'} in Founder Leads
-                <span aria-hidden>→</span>
-              </Link>
-            ) : null}
-          </div>
-        )))}
-        {busy && (() => {
-          const total = progress.planned.length
-          const percentage = total ? Math.round((progress.completed.length / total) * 100) : 12
-          return (
-            <div className="border-2 border-hairline-strong bg-card p-4 shadow-brutal" aria-live="polite">
-              <div className="flex items-center justify-between gap-4">
-                <span className={`code-sm ${progress.failed ? 'text-primary' : 'text-charcoal'}`}>{progress.current}</span>
-                <span className="code-sm">{total ? `${percentage}%` : 'LIVE'}</span>
-              </div>
-              <div
-                className="mt-3 h-3 overflow-hidden border-2 border-hairline-strong bg-bone"
-                role="progressbar"
-                aria-label="Sourcing pipeline progress"
-                aria-valuemin={0}
-                aria-valuemax={100}
-                aria-valuenow={total ? percentage : undefined}
-              >
-                <div
-                  className={`h-full bg-primary transition-[width] duration-500 ease-out ${total ? '' : 'animate-pulse'}`}
-                  style={{ width: `${percentage}%` }}
-                />
-              </div>
-              {total > 0 && <div className="code-sm mt-2 text-charcoal">{progress.completed.length} of {total} stages complete</div>}
-            </div>
-          )
-        })()}
+            <FlowFieldBackground particleCount={160} trailOpacity={0.06} speed={0.6} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <div className="relative flex shrink-0 justify-end pb-2">
+        <button
+          type="button"
+          onClick={clear}
+          disabled={busy}
+          className="code-sm cursor-pointer border-2 border-hairline-strong bg-card px-2.5 py-1 uppercase tracking-[0.08em] text-charcoal shadow-brutal-sm transition-colors hover:bg-bone disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          New chat
+        </button>
       </div>
-      <AskInput onSubmit={ask} className="shrink-0" />
+      <div ref={scrollRef} className="relative min-h-0 flex-1 space-y-4 overflow-y-auto pr-1 pb-6">
+        {messages.map((m, i) => (
+          <Fragment key={i}>
+            {m.role === 'assistant' && traces[i] && traces[i].stages.length > 0 && (
+              <div ref={i === messages.length - 1 ? liveTraceRef : undefined}>
+                <OrchestrationTrace run={traces[i]} />
+              </div>
+            )}
+            {!m.content && m.role === 'assistant' ? null : (
+              <div
+                className={`max-w-[85%] rounded-none border-2 border-hairline-strong p-4 text-sm ${
+                  m.role === 'user'
+                    ? 'ml-auto bg-dark text-on-dark shadow-brutal-sm'
+                    : 'bg-card text-ink shadow-brutal'
+                }`}
+              >
+                {m.role === 'assistant' ? <AssistantMarkdown content={m.content} /> : m.content}
+                {m.role === 'assistant' && sourcedCompanies[i]?.length ? (
+                  <div className="mt-3 flex flex-col gap-1.5">
+                    {sourcedCompanies[i].map((company) => (
+                      <Link
+                        key={company.id}
+                        to={`/company/${company.id}`}
+                        className="inline-flex items-center gap-1.5 font-medium text-primary underline underline-offset-2"
+                      >
+                        View {company.name}
+                        <span aria-hidden>→</span>
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
+                {m.role === 'assistant' && sourcedFounders[i]?.length ? (
+                  <Link
+                    to={`/founders?new=${sourcedFounders[i].join(',')}`}
+                    className="mt-3 inline-flex items-center gap-1.5 font-medium text-primary underline underline-offset-2"
+                  >
+                    View {sourcedFounders[i].length} new{' '}
+                    {sourcedFounders[i].length === 1 ? 'lead' : 'leads'} in Founder Leads
+                    <span aria-hidden>→</span>
+                  </Link>
+                ) : null}
+              </div>
+            )}
+          </Fragment>
+        ))}
+        {busy && !liveTrace?.stages.length && !messages.at(-1)?.content && (
+          <div className="flex items-center gap-2 pl-1" aria-live="polite">
+            <motion.i
+              className="h-2 w-2 shrink-0 bg-primary not-italic"
+              animate={{ opacity: [1, 0.15, 1] }}
+              transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <span className="code-sm text-charcoal">Thinking…</span>
+          </div>
+        )}
+      </div>
+      <AskInput onSubmit={ask} className="relative shrink-0" />
+
+      {/* sourced-item chips flying into the dock */}
+      {flights.map((f, i) => (
+        <motion.div
+          key={f.key}
+          data-flight
+          className="pointer-events-none fixed top-0 left-0 z-50"
+          initial={{ x: f.from.x, y: f.from.y, opacity: 0, scale: 0.7 }}
+          animate={{
+            x: [f.from.x, f.from.x, f.to.x],
+            y: [f.from.y, f.from.y - 14, f.to.y],
+            opacity: [0, 1, 1, 0],
+            scale: [0.7, 1, 1, 0.45],
+          }}
+          transition={{ duration: 0.95, delay: i * 0.16, ease: 'easeInOut' }}
+          onAnimationComplete={() => setFlights((current) => current.filter((x) => x.key !== f.key))}
+        >
+          <span className="code-sm border-2 border-hairline-strong bg-hero-glow px-2 py-1 whitespace-nowrap shadow-brutal-sm">
+            {f.label}
+          </span>
+        </motion.div>
+      ))}
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import snapshotJson from '../brain/snapshot.json'
 import { adaptSnapshot, type BrainSnapshot } from '../brain/adapt'
+import { discoveredToGraph } from '../brain/discoveredToGraph'
 import type {
   ChatMessage,
   Company,
@@ -161,6 +162,15 @@ function mergeSourcedCompanies(companies: Company[], founders: Founder[] = []) {
   const foundersById = new Map(data.founders.map((founder) => [founder.id, founder]))
   for (const founder of founders) foundersById.set(founder.id, founder)
   data.founders = [...foundersById.values()]
+  const { nodes, edges } = discoveredToGraph(pipelineCompanies, store.graph)
+  if (nodes.length) {
+    store.graph = {
+      ...store.graph,
+      nodes: [...store.graph.nodes, ...nodes],
+      edges: [...store.graph.edges, ...edges],
+      weights: { ...store.weights },
+    }
+  }
   persistSourcedCache()
   for (const listener of sourcingListeners) listener(pipelineCompanies)
 }
@@ -233,6 +243,70 @@ function parseSseFrame(frame: string): OrchestratorStreamEvent | undefined {
     .join('\n')
   if (!data) return undefined
   return JSON.parse(data) as OrchestratorStreamEvent
+}
+
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+/* Mirrors the server's isSourcingRequest gate closely enough for demo runs. */
+const OFFLINE_SOURCING = /\b(source|find|discover|scout)\b[\s\S]*\b(compan(?:y|ies)|startups?|deals?)\b/i
+
+const OFFLINE_PIPELINE = [
+  'discovery', 'fundProfiler', 'marketScout', 'technicalDiligence',
+  'commercialDiligence', 'financialDiligence', 'risk', 'partnerReview',
+  'committee', 'memo',
+]
+
+/**
+ * Offline/demo replacement for the live SSE stream: replays the same
+ * lifecycle events the orchestrator would emit (so the analyst trace UI works
+ * without the brain API), then streams the local reply in visible chunks.
+ */
+async function simulateOfflineStream(
+  messages: ChatMessage[],
+  context: ChatContext | undefined,
+  handlers: StreamChatHandlers,
+): Promise<ChatMessage> {
+  const reply = await chatOnce(messages, context)
+  const emit = (event: OrchestratorStreamEvent) => handlers.onEvent?.(event)
+  const runId = 'offline'
+  const question = [...messages].reverse().find((m) => m.role === 'user')?.content ?? ''
+
+  if (OFFLINE_SOURCING.test(question)) {
+    emit({ type: 'run_started', runId, orchestrator: 'investment_orchestrator', agents: OFFLINE_PIPELINE })
+    for (const agent of OFFLINE_PIPELINE) {
+      if (agent === 'partnerReview') {
+        for (const partner of ['partner:Partner A', 'partner:Partner B']) {
+          emit({ type: 'agent_started', runId, agent: partner, label: partner })
+          await wait(430)
+          emit({ type: 'agent_completed', runId, agent: partner, summary: 'Vote recorded.' })
+        }
+        continue
+      }
+      emit({ type: 'agent_started', runId, agent, label: agent })
+      await wait(agent === 'discovery' ? 700 : 430)
+      emit({
+        type: 'agent_completed',
+        runId,
+        agent,
+        summary:
+          agent === 'committee'
+            ? 'Committee convened — partner votes are in.'
+            : `${agent} completed.`,
+      })
+    }
+  } else {
+    emit({ type: 'run_started', runId, orchestrator: 'investment_orchestrator', agents: [] })
+    await wait(350)
+  }
+
+  for (let i = 0; i < reply.content.length; i += 64) {
+    const delta = reply.content.slice(i, i + 64)
+    emit({ type: 'text_delta', runId, delta })
+    handlers.onDelta?.(delta)
+    await wait(12)
+  }
+  emit({ type: 'run_completed', runId, message: reply })
+  return reply
 }
 
 export const api = {
@@ -416,44 +490,55 @@ export const api = {
     return chatOnce(messages, context)
   },
 
-  /** Stream main-orchestrator lifecycle events and answer deltas over POST SSE. */
+  /**
+   * Stream main-orchestrator lifecycle events and answer deltas over POST SSE.
+   * The offline simulator covers ONLY an unreachable API. Once a live stream
+   * has started, errors surface honestly — no silent retry, no simulated
+   * success over a failed run.
+   */
   async streamChat(
     messages: ChatMessage[],
     context?: ChatContext,
     handlers: StreamChatHandlers = {},
   ): Promise<ChatMessage> {
+    let res: Response
     try {
-      const res = await fetch(apiUrl('/api/chat/stream'), {
+      res = await fetch(apiUrl('/api/chat/stream'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
         body: JSON.stringify({ messages, context }),
       })
-      if (!res.ok || !res.body) throw new Error(`chat stream failed (${res.status})`)
+    } catch {
+      return simulateOfflineStream(messages, context, handlers)
+    }
+    if (!res.ok || !res.body) return simulateOfflineStream(messages, context, handlers)
 
-      const reader = res.body.getReader()
-      const decoder = new TextDecoder()
-      let buffer = ''
-      let content = ''
-      let finalMessage: ChatMessage | undefined
+    const reader = res.body.getReader()
+    const decoder = new TextDecoder()
+    let buffer = ''
+    let content = ''
+    let finalMessage: ChatMessage | undefined
+    let runError: string | undefined
 
-      const consume = (frame: string) => {
-        const event = parseSseFrame(frame)
-        if (!event) return
-        handlers.onEvent?.(event)
-        if (event.type === 'companies_sourced') {
-          mergeSourcedCompanies(event.companies, event.founders)
-        } else if (event.type === 'founders_sourced') {
-          mergeSourcedCompanies([], event.founders)
-        } else if (event.type === 'text_delta') {
-          content += event.delta
-          handlers.onDelta?.(event.delta)
-        } else if (event.type === 'run_completed') {
-          finalMessage = event.message
-        } else if (event.type === 'error') {
-          throw new Error(event.error)
-        }
+    const consume = (frame: string) => {
+      const event = parseSseFrame(frame)
+      if (!event) return
+      handlers.onEvent?.(event)
+      if (event.type === 'companies_sourced') {
+        mergeSourcedCompanies(event.companies, event.founders)
+      } else if (event.type === 'founders_sourced') {
+        mergeSourcedCompanies([], event.founders)
+      } else if (event.type === 'text_delta') {
+        content += event.delta
+        handlers.onDelta?.(event.delta)
+      } else if (event.type === 'run_completed') {
+        finalMessage = event.message
+      } else if (event.type === 'error') {
+        runError = event.error
       }
+    }
 
+    try {
       while (true) {
         const { done, value } = await reader.read()
         buffer += decoder.decode(value, { stream: !done }).replace(/\r\n/g, '\n')
@@ -466,11 +551,20 @@ export const api = {
         if (done) break
       }
       if (buffer.trim()) consume(buffer)
-      return finalMessage ?? { role: 'assistant', content }
-    } catch {
-      // Preserve offline/demo behavior when the live API is unavailable.
-      return chatOnce(messages, context)
+    } catch (error) {
+      runError = runError ?? `connection lost mid-run (${String(error)})`
     }
+
+    if (finalMessage) return finalMessage
+    if (runError) {
+      return {
+        role: 'assistant',
+        content:
+          (content ? `${content}\n\n` : '') +
+          `The run failed server-side: ${runError}. Nothing was added — try again or rephrase.`,
+      }
+    }
+    return { role: 'assistant', content }
   },
 
   /**

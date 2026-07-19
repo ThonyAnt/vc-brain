@@ -218,7 +218,7 @@ describe("interactive investment orchestrator", () => {
         companies: [...fx.candidateUniverse, ...fx.portfolioCompanies, ...fx.rejectedDeals, ...fx.competitors],
         competitors: fx.competitors,
         search: new MockSearchClient(mockSearchResults),
-        llm: new MockLLMClient({ ...mockAgentOptions, text: () => "Live Tavily discovery completed the full pipeline." }),
+        llm: new MockLLMClient({ ...mockAgentOptions, text: () => "Live Tavily discovery completed the full pipeline on NoteHealth." }),
         now: () => 42,
         onEvent: (event) => { events.push(event); },
       },

@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>VC Brain — Fund workflow</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/MotionPathPlugin.min.js"></script>
+    <style>
+      @font-face {
+        font-family: 'DM Sans';
+        font-weight: 700;
+        src: url('fonts/dm-sans-latin-700-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'DM Sans';
+        font-weight: 800;
+        src: url('fonts/dm-sans-latin-800-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Space Mono';
+        font-weight: 400;
+        src: url('fonts/space-mono-latin-400-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Space Mono';
+        font-weight: 700;
+        src: url('fonts/space-mono-latin-700-normal.woff2') format('woff2');
+      }
+      /* Canonical VC Brain neobrutalist tokens (docs/design/site-theme.css) */
+      :root {
+        --ink: #000000;
+        --paper: #ffffff;
+        --primary: #ff3333;
+        --secondary: #ffff00;
+        --muted-fg: #333333;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        font-family: 'DM Sans', sans-serif;
+        color: var(--ink);
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--paper);
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+      }
+      .title {
+        position: absolute;
+        margin: 0;
+        left: 80px;
+        top: 48px;
+        font-weight: 800;
+        font-size: 64px;
+        letter-spacing: -0.02em;
+        opacity: 0;
+      }
+      .subtitle {
+        position: absolute;
+        left: 82px;
+        top: 138px;
+        font-family: 'Space Mono', monospace;
+        font-size: 20px;
+        color: var(--muted-fg);
+        opacity: 0;
+      }
+      .chip {
+        position: absolute;
+        left: 80px;
+        width: 150px;
+        height: 120px;
+        background: var(--ink);
+        color: var(--paper);
+        box-sizing: border-box;
+        padding: 14px 16px;
+        opacity: 0;
+      }
+      .chip .num {
+        font-weight: 800;
+        font-size: 30px;
+      }
+      .chip .lbl {
+        margin-top: 10px;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        line-height: 1.5;
+      }
+      .box {
+        position: absolute;
+        width: 270px;
+        height: 120px;
+        background: var(--paper);
+        border: 3px solid var(--ink);
+        box-shadow: 6px 6px 0 var(--ink);
+        box-sizing: border-box;
+        padding: 12px 16px;
+        opacity: 0;
+      }
+      .box .step {
+        display: inline-block;
+        border: 2px solid var(--ink);
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 0 5px;
+        line-height: 16px;
+      }
+      .box h3 {
+        margin: 6px 0 4px;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+      .box p {
+        margin: 0;
+        font-family: 'Space Mono', monospace;
+        font-size: 12.5px;
+        line-height: 1.35;
+        color: var(--muted-fg);
+      }
+      .bracket-label {
+        position: absolute;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        opacity: 0;
+      }
+      .tag {
+        position: absolute;
+        background: var(--secondary);
+        border: 2px solid var(--ink);
+        box-shadow: 4px 4px 0 var(--ink);
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        padding: 6px 12px;
+        opacity: 0;
+      }
+      svg .draw {
+        fill: none;
+        stroke: var(--ink);
+        stroke-width: 3;
+      }
+      svg .ah {
+        fill: var(--ink);
+        opacity: 0;
+      }
+      svg .bracket {
+        fill: none;
+        stroke: var(--ink);
+        stroke-width: 2;
+      }
+      #flow-dot {
+        position: absolute;
+        left: -7px;
+        top: -7px;
+        width: 14px;
+        height: 14px;
+        background: var(--primary);
+        border: 2px solid var(--ink);
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="fund-workflow"
+      data-start="0"
+      data-width="1920"
+      data-height="1080"
+      data-duration="15"
+    >
+      <section id="scene" class="clip scene" data-start="0" data-duration="15" data-track-index="1">
+        <h1 class="title" id="hdr">VC Brain — Fund workflow</h1>
+        <div class="subtitle" id="sub">From institutional memory to the next sourced company.</div>
+
+        <!-- arrows layer (under boxes) -->
+        <svg id="wires" width="1920" height="1080" viewBox="0 0 1920 1080" style="position:absolute;inset:0">
+          <!-- row 1 arrows -->
+          <path class="draw" id="a1" d="M554 310 H598" />
+          <polygon class="ah" points="610,310 596,303 596,317" />
+          <path class="draw" id="a2" d="M884 310 H928" />
+          <polygon class="ah" points="940,310 926,303 926,317" />
+          <!-- wrap 1 -->
+          <path class="draw" id="w1" d="M1075 374 V470 H248 V605 H262" />
+          <polygon class="ah" points="274,605 260,598 260,612" />
+          <!-- row 2 arrows -->
+          <path class="draw" id="a4" d="M554 605 H598" />
+          <polygon class="ah" points="610,605 596,598 596,612" />
+          <path class="draw" id="a5" d="M884 605 H928" />
+          <polygon class="ah" points="940,605 926,598 926,612" />
+          <path class="draw" id="a6" d="M1214 605 H1258" />
+          <polygon class="ah" points="1270,605 1256,598 1256,612" />
+          <path class="draw" id="a7" d="M1544 605 H1588" />
+          <polygon class="ah" points="1600,605 1586,598 1586,612" />
+          <!-- wrap 2 -->
+          <path class="draw" id="w2" d="M1735 669 V775 H248 V905 H262" />
+          <polygon class="ah" points="274,905 260,898 260,912" />
+          <!-- row 3 arrows -->
+          <path class="draw" id="a9" d="M554 905 H598" />
+          <polygon class="ah" points="610,905 596,898 596,912" />
+          <path class="draw" id="a10" d="M884 905 H928" />
+          <polygon class="ah" points="940,905 926,898 926,912" />
+          <path class="draw" id="a11" d="M1214 905 H1258" />
+          <polygon class="ah" points="1270,905 1256,898 1256,912" />
+          <path class="draw" id="a12" d="M1544 905 H1588" />
+          <polygon class="ah" points="1600,905 1586,898 1586,912" />
+          <!-- section brackets -->
+          <path class="bracket draw" id="b1" d="M280 528 V518 H1210 V528" />
+          <path class="bracket draw" id="b2" d="M1270 528 V518 H1870 V528" />
+          <path class="bracket draw" id="b3" d="M280 828 V818 H1210 V828" />
+          <!-- tag stems -->
+          <path class="draw" id="s1" d="M745 668 V684" />
+          <path class="draw" id="s2" d="M1735 968 V984" />
+        </svg>
+
+        <div id="flow-dot"></div>
+
+        <!-- phase chips -->
+        <div class="chip" id="c1" style="top: 250px">
+          <div class="num">01</div>
+          <div class="lbl">BUILD THE FUND BRAIN</div>
+        </div>
+        <div class="chip" id="c2" style="top: 545px">
+          <div class="num">02</div>
+          <div class="lbl">FIND AND EVALUATE</div>
+        </div>
+        <div class="chip" id="c3" style="top: 845px">
+          <div class="num">03</div>
+          <div class="lbl">DECIDE AND LEARN</div>
+        </div>
+
+        <!-- bracket labels -->
+        <div class="bracket-label" id="bl1" style="left: 280px; top: 492px">SOURCING</div>
+        <div class="bracket-label" id="bl2" style="left: 1270px; top: 492px">UNDERWRITING</div>
+        <div class="bracket-label" id="bl3" style="left: 280px; top: 792px">DECISIONING</div>
+
+        <!-- row 1 -->
+        <div class="box" id="x1" style="left: 280px; top: 250px">
+          <span class="step">1</span>
+          <h3>Upload</h3>
+          <p>Memos, portfolio, passes</p>
+        </div>
+        <div class="box" id="x2" style="left: 610px; top: 250px">
+          <span class="step">2</span>
+          <h3>Extract thesis</h3>
+          <p>Check size, stage, sectors, red flags</p>
+        </div>
+        <div class="box" id="x3" style="left: 940px; top: 250px">
+          <span class="step">3</span>
+          <h3>Fund graph</h3>
+          <p>Render the living graph</p>
+        </div>
+
+        <!-- row 2 -->
+        <div class="box" id="x4" style="left: 280px; top: 545px">
+          <span class="step">4</span>
+          <h3>Auto-source</h3>
+          <p>Matching companies, continuously</p>
+        </div>
+        <div class="box" id="x5" style="left: 610px; top: 545px">
+          <span class="step">5</span>
+          <h3>Rank by fit</h3>
+          <p>Closest winner / closest pass</p>
+        </div>
+        <div class="box" id="x6" style="left: 940px; top: 545px">
+          <span class="step">6</span>
+          <h3>Place in graph</h3>
+          <p>Nearest neighborhood shown</p>
+        </div>
+        <div class="box" id="x7" style="left: 1270px; top: 545px">
+          <span class="step">7</span>
+          <h3>Diligence pack</h3>
+          <p>Risks, questions, analogues, competitors</p>
+        </div>
+        <div class="box" id="x8" style="left: 1600px; top: 545px">
+          <span class="step">8</span>
+          <h3>Financial model</h3>
+          <p>Bull / base / bear returns</p>
+        </div>
+
+        <!-- row 3 -->
+        <div class="box" id="x9" style="left: 280px; top: 845px">
+          <span class="step">9</span>
+          <h3>Outreach draft</h3>
+          <p>Plus meeting brief</p>
+        </div>
+        <div class="box" id="x10" style="left: 610px; top: 845px">
+          <span class="step">10</span>
+          <h3>Partner opinions</h3>
+          <p>IC recommendation</p>
+        </div>
+        <div class="box" id="x11" style="left: 940px; top: 845px">
+          <span class="step">11</span>
+          <h3>Investment memo</h3>
+          <p>Drafted for committee</p>
+        </div>
+        <div class="box" id="x12" style="left: 1270px; top: 845px">
+          <span class="step">12</span>
+          <h3>Approve or pass</h3>
+          <p>Decision recorded</p>
+        </div>
+        <div class="box" id="x13" style="left: 1600px; top: 845px">
+          <span class="step">13</span>
+          <h3>Feedback</h3>
+          <p>Weights update, sourcing shifts</p>
+        </div>
+
+        <!-- yellow tags -->
+        <div class="tag" id="t1" style="left: 660px; top: 688px">why this company</div>
+        <div class="tag" id="t2" style="left: 1630px; top: 988px">brain gets smarter</div>
+      </section>
+    </div>
+
+    <script>
+      gsap.registerPlugin(MotionPathPlugin);
+      // line-draw prep: dash every .draw path to its own length
+      document.querySelectorAll('#wires .draw').forEach((p) => {
+        const L = p.getTotalLength();
+        p.style.strokeDasharray = L;
+        p.style.strokeDashoffset = L;
+      });
+
+      const tl = gsap.timeline({ paused: true });
+      const pop = { opacity: 1, y: 0, duration: 0.32, ease: 'back.out(1.6)' };
+      const draw = (sel, t, d = 0.28) => tl.to(sel, { strokeDashoffset: 0, duration: d, ease: 'none' }, t);
+      const head = (i, t) => tl.to('#wires .ah:nth-of-type(' + i + ')', { opacity: 1, duration: 0.1 }, t);
+      // NOTE: :nth-of-type over polygons — order arrowheads exactly as in markup
+
+      // title
+      tl.fromTo('#hdr', { y: -28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: 'power4.out' }, 0.2);
+      tl.fromTo('#sub', { opacity: 0 }, { opacity: 1, duration: 0.35 }, 0.55);
+
+      // phase 01
+      tl.fromTo('#c1', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: 'power4.out' }, 0.85);
+      const row1 = ['#x1', '#x2', '#x3'];
+      row1.forEach((id, i) => tl.fromTo(id, { y: 24, opacity: 0 }, { ...pop }, 1.1 + i * 0.34));
+      draw('#a1', 1.5);
+      head(1, 1.76);
+      draw('#a2', 1.84);
+      head(2, 2.1);
+      draw('#w1', 2.35, 0.6);
+      head(3, 2.93);
+
+      // phase 02
+      tl.fromTo('#c2', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: 'power4.out' }, 3.0);
+      draw('#b1', 3.15, 0.35);
+      draw('#b2', 3.3, 0.35);
+      tl.fromTo('#bl1', { opacity: 0 }, { opacity: 1, duration: 0.25 }, 3.25);
+      tl.fromTo('#bl2', { opacity: 0 }, { opacity: 1, duration: 0.25 }, 3.4);
+      const row2 = ['#x4', '#x5', '#x6', '#x7', '#x8'];
+      row2.forEach((id, i) => tl.fromTo(id, { y: 24, opacity: 0 }, { ...pop }, 3.35 + i * 0.3));
+      draw('#a4', 3.75);
+      head(4, 4.01);
+      draw('#a5', 4.05);
+      head(5, 4.31);
+      draw('#a6', 4.35);
+      head(6, 4.61);
+      draw('#a7', 4.65);
+      head(7, 4.91);
+      // tag: why this company
+      draw('#s1', 5.0, 0.15);
+      tl.fromTo('#t1', { scale: 1.5, rotation: -4, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.28, ease: 'back.out(2)' }, 5.12);
+      draw('#w2', 5.5, 0.6);
+      head(8, 6.08);
+
+      // phase 03
+      tl.fromTo('#c3', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: 'power4.out' }, 6.15);
+      draw('#b3', 6.3, 0.35);
+      tl.fromTo('#bl3', { opacity: 0 }, { opacity: 1, duration: 0.25 }, 6.4);
+      const row3 = ['#x9', '#x10', '#x11', '#x12', '#x13'];
+      row3.forEach((id, i) => tl.fromTo(id, { y: 24, opacity: 0 }, { ...pop }, 6.5 + i * 0.3));
+      draw('#a9', 6.9);
+      head(9, 7.16);
+      draw('#a10', 7.2);
+      head(10, 7.46);
+      draw('#a11', 7.5);
+      head(11, 7.76);
+      draw('#a12', 7.8);
+      head(12, 8.06);
+      // tag: brain gets smarter
+      draw('#s2', 8.15, 0.15);
+      tl.fromTo('#t2', { scale: 1.5, rotation: 3, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.28, ease: 'back.out(2)' }, 8.27);
+
+      // one deal flows through the machine (dot rides under the boxes)
+      tl.set('#flow-dot', { opacity: 1, x: 415, y: 310 }, 9.2);
+      tl.to(
+        '#flow-dot',
+        {
+          duration: 3.6,
+          ease: 'none',
+          motionPath: {
+            path: [
+              { x: 415, y: 310 },
+              { x: 1075, y: 310 },
+              { x: 1075, y: 470 },
+              { x: 248, y: 470 },
+              { x: 248, y: 605 },
+              { x: 1735, y: 605 },
+              { x: 1735, y: 775 },
+              { x: 248, y: 775 },
+              { x: 248, y: 905 },
+              { x: 1735, y: 905 },
+            ],
+            curviness: 0,
+          },
+        },
+        9.2,
+      );
+      tl.set('#flow-dot', { opacity: 0 }, 12.85);
+      // feedback lands: the brain gets smarter
+      tl.to('#t2', { scale: 1.12, duration: 0.16, ease: 'power2.out', yoyo: true, repeat: 1 }, 12.9);
+      tl.to('#x13', { backgroundColor: '#ffff00', duration: 0.18, yoyo: true, repeat: 1 }, 12.9);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['fund-workflow'] = tl;
+    </script>
+  </body>
+</html>

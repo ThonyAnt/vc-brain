@@ -58,6 +58,7 @@ export default function Dock({ items, className, activeLabel, orientation = 'hor
                     <Button
                       variant="ghost"
                       size="icon"
+                      data-dock-label={item.label}
                       className={cn(
                         'rounded-none relative',
                         'transition-colors',

@@ -24,3 +24,4 @@ out/
 
 # Generated golden run snapshots (regenerate with `npm run seed:demo`)
 **/data/*.snapshot.json
+.vercel

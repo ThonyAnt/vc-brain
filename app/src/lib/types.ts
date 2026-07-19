@@ -132,6 +132,8 @@ export interface Founder {
   justification: string
   signals: string[]
   linkedin?: string
+  /** The founder's real LinkedIn profile photo, when the scout pulled one. */
+  photoUrl?: string
   /** Public source URLs the scout assembled the profile from. */
   sources?: string[]
   confidence?: 'low' | 'medium' | 'high'

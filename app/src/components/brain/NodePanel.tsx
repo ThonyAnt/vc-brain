@@ -51,7 +51,7 @@ export function NodePanel({
 
   if (!company && !founder) return null
 
-  const lineColor = company ? (company.type === 'sourced' ? ACCENT : sectorColor(company.sector)) : ACCENT
+  const lineColor = company ? (company.type === 'portfolio' ? ACCENT : sectorColor(company.sector)) : ACCENT
 
   return (
     <div className="glass-panel pointer-events-auto h-fit w-80 p-4">

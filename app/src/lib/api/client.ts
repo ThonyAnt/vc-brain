@@ -9,6 +9,8 @@ import type {
   Founder,
   FundGraph,
   FundProfile,
+  FundProfilePatch,
+  FundProfileView,
 } from '../types'
 
 export type OrchestratorStreamEvent =
@@ -97,6 +99,23 @@ async function postJson<T>(path: string, body: unknown): Promise<T | null> {
   }
 }
 
+/** GET from the live brain API; returns null if it's unreachable or errors. */
+async function getJson<T>(path: string): Promise<T | null> {
+  try {
+    const res = await fetch(path)
+    if (!res.ok) return null
+    return (await res.json()) as T
+  } catch {
+    return null
+  }
+}
+
+/** Format a USD check-size range as e.g. "$1.0M – $2.5M" for display. */
+function formatCheckSize(min: number, max: number): string {
+  const m = (n: number) => `$${(n / 1_000_000).toFixed(1)}M`
+  return `${m(min)} – ${m(max)}`
+}
+
 async function chatOnce(messages: ChatMessage[], context?: ChatContext): Promise<ChatMessage> {
   const live = await postJson<ChatMessage>('/api/chat', { messages, context })
   if (live?.content) return live
@@ -176,8 +195,41 @@ export const api = {
     return data.founders.find((f) => f.id === id)
   },
 
+  /**
+   * Load the fund profile. When the brain API is up, overlay its live editable
+   * slice (thesis, check size, stages/sectors/geographies, and criteria weights)
+   * onto the fixture base so the page edits the real backend criteria. Name and
+   * partners are not editable and always come from the fixture. Falls back to the
+   * fixture wholesale when the API is unreachable.
+   */
   async getFund(): Promise<FundProfile> {
-    return data.fundProfile
+    const live = await getJson<FundProfileView>('/api/fund')
+    if (!live) return data.fundProfile
+    store.weights = { ...live.weights }
+    store.graph = { ...store.graph, weights: { ...store.weights } }
+    return {
+      ...data.fundProfile,
+      thesis: live.thesis,
+      checkSize: formatCheckSize(live.checkSizeMin, live.checkSizeMax),
+      checkSizeMin: live.checkSizeMin,
+      checkSizeMax: live.checkSizeMax,
+      stages: live.stages,
+      sectors: live.sectors,
+      geographies: live.geographies,
+    }
+  },
+
+  /**
+   * Persist an edit to the fund profile on the brain, which reshapes future
+   * discovery and ranking. Returns the updated editable slice, or null when the
+   * API is unreachable (caller should treat that as "not saved").
+   */
+  async updateFund(patch: FundProfilePatch): Promise<FundProfileView | null> {
+    const live = await postJson<FundProfileView>('/api/fund', patch)
+    if (!live) return null
+    store.weights = { ...live.weights }
+    store.graph = { ...store.graph, weights: { ...store.weights } }
+    return live
   },
 
   async getExecutionQueue(): Promise<ExecutionItem[]> {

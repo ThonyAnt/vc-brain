@@ -82,7 +82,6 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     if (!container || !tooltip) return
 
     const rand = mulberry32(20260718)
-    const pick = <T,>(arr: T[]) => arr[Math.floor(rand() * arr.length)]
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     /* uniform node radius multiplier. Priority: ?scale= param, then your last
@@ -146,36 +145,13 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         vel: new THREE.Vector3((rand() - 0.5) * 6, (rand() - 0.5) * 6, (rand() - 0.5) * 6),
         pos: base.clone(),
         phase: rand() * Math.PI * 2,
-      real: true,
-      })
-    }
-
-    const usedNames = new Set<string>()
-    for (let i = 0; i < N_FILLER; i++) {
-      const cluster = i % clusterCount
-      let name = ''
-      do name = `${pick(PREFIX)} ${pick(SUFFIX)}`
-      while (usedNames.has(name))
-      usedNames.add(name)
-      const base = anchors[cluster].clone().add(jitterVec(`filler-${i}`, 130))
-      nodes.push({
-        id: `t-${i}`,
-        label: name,
-        role: 'tracked',
-        cluster,
-        base,
-        offset: new THREE.Vector3(),
-        vel: new THREE.Vector3((rand() - 0.5) * 6, (rand() - 0.5) * 6, (rand() - 0.5) * 6),
-        pos: base.clone(),
-        phase: rand() * Math.PI * 2,
-        real: false,
       })
     }
 
     const N = nodes.length
     const byId = new Map(nodes.map((n) => [n.id, n]))
 
-    /* edges: real graph edges + procedural filler links (2 nearest same-cluster) */
+    /* edges: real graph edges only */
     type SceneEdge = { a: SceneNode; b: SceneNode; weight: number; phase: number }
     const edges: SceneEdge[] = []
     const edgeKeys = new Set<string>()
@@ -190,15 +166,6 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       if (e.kind === 'market') continue
       addEdge(byId.get(e.source), byId.get(e.target), e.kind === 'precedent' ? 1.6 : e.kind === 'founder' ? 0.9 : 0.7)
     }
-    const fillers = nodes.filter((n) => !n.real)
-    for (const n of fillers) {
-      const same = nodes.filter((o) => o !== n && o.cluster === n.cluster && !o.real)
-      same.sort((p, q) => p.base.distanceToSquared(n.base) - q.base.distanceToSquared(n.base))
-      addEdge(n, same[0], 0.8)
-      if (rand() < 0.6) addEdge(n, same[1], 0.6)
-    }
-    /* a few cross-cluster links for depth */
-    for (let k = 0; k < clusterCount * 3; k++) addEdge(pick(fillers), pick(fillers), 0.5)
 
     const neighbourSets = new Map(nodes.map((n) => [n.id, new Set([n.id])]))
     for (const e of edges) {
@@ -233,12 +200,10 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     const sectorColors = SECTOR_PALETTE.map((c) => srgb(c))
     const accentColor = srgb(ACCENT)
     const rejectedColor = srgb(REJECTED_COLOR)
-    const portfolioColors = sectorColors.map((c) => c.clone().multiplyScalar(0.82)) // deeper + ring
     const nodeColor = (n: SceneNode): THREE.Color => {
-      if (n.role === 'sourced') return accentColor
-      if (n.role === 'portfolio') return portfolioColors[n.cluster % portfolioColors.length]
+      if (n.role === 'portfolio') return accentColor // closed deals wear the blue + ring
       if (n.role === 'rejected') return rejectedColor
-      return sectorColors[n.cluster % sectorColors.length]
+      return sectorColors[n.cluster % sectorColors.length] // sourced + everything else: sector color
     }
     const roleSize = (n: SceneNode) =>
       n.role === 'portfolio' ? 23 : n.role === 'sourced' ? 18 : n.role === 'founder' ? 10 : n.role === 'rejected' ? 8 : 11
@@ -481,7 +446,6 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       rejected: 'rejected',
       sourced: 'sourced this week',
       founder: 'founder',
-      tracked: 'tracked',
     }
 
     const ringWorld = new THREE.Vector3()
@@ -491,7 +455,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         tooltip.style.display = 'block'
         tooltip.style.left = `${Math.min(mouse.x + 14, container!.clientWidth - 250)}px`
         tooltip.style.top = `${mouse.y + 14}px`
-        const color = hovered.role === 'sourced' ? ACCENT : SECTOR_PALETTE[hovered.cluster % SECTOR_PALETTE.length]
+        const color = hovered.role === 'portfolio' ? ACCENT : SECTOR_PALETTE[hovered.cluster % SECTOR_PALETTE.length]
         tooltip.innerHTML = `<div style="color:#000000;font-size:13px;font-weight:700">${hovered.label}</div>
           <div style="color:${color};margin-top:2px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">${markets[hovered.cluster]?.label ?? ''} · ${ROLE_TAG[hovered.role]}${hovered.score ? ` · fit ${hovered.score}` : ''}</div>`
         ringWorld.copy(hovered.pos).applyMatrix4(group.matrixWorld)
@@ -562,7 +526,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       flyDir.copy(camera.position).sub(targetWorld).normalize()
       const endDist = node.role === 'portfolio' ? 300 : 240
       flyToPose(tmpB.copy(targetWorld).addScaledVector(flyDir, endDist).addScaledVector(camera.up, 24), targetWorld.clone(), 1.25)
-      onSelect?.(node.real ? node.id : null)
+      onSelect?.(node.id)
     }
 
     function clearFocus() {

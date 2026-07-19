@@ -118,7 +118,9 @@ export function RadarChart({
             through consecutive zeros loops into bow-tie petals. */}
         {series.map((s, si) => {
           const live = s.values.filter((v) => clamp(v) > 0.05).length
-          const curve = live >= 5 ? curveCatmullRomClosed : curveLinearClosed
+          /* smooth only when ≤2 dead axes — more zeros makes the spline loop
+             through the center into bow-ties */
+          const curve = live >= n - 2 ? curveCatmullRomClosed : curveLinearClosed
           const d = radialPath(s.values, curve)
           return (
             <g key={s.name}>

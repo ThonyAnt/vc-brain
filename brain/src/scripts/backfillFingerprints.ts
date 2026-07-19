@@ -98,8 +98,11 @@ function cosine(a: number[], b: number[]): number {
   return na && nb ? dot / (Math.sqrt(na) * Math.sqrt(nb)) : 0;
 }
 
-/* short-label cosines run high at baseline; rescale so unrelated ≈ 0 */
+/* short-label cosines run high at baseline; rescale so unrelated ≈ 0.
+   The problem dimension uses the RAW cosine — that's exactly what the brain's
+   own similarity does for problem embeddings, and prose cosines run low. */
 const scaled = (cos: number) => Math.max(0, Math.min(1, (cos - 0.25) / 0.6));
+const RAW_COSINE_DIMS = new Set(["problem"]);
 
 function semanticDim(aId: string, bId: string, dim: string): number | undefined {
   const ta = textOf.get(keyFor(aId, dim));
@@ -108,7 +111,8 @@ function semanticDim(aId: string, bId: string, dim: string): number | undefined 
   const va = vectors[textIndex.get(ta)!];
   const vb = vectors[textIndex.get(tb)!];
   if (!va || !vb) return undefined;
-  return scaled(cosine(va, vb));
+  const cos = cosine(va, vb);
+  return RAW_COSINE_DIMS.has(dim) ? Math.max(0, Math.min(1, cos)) : scaled(cos);
 }
 
 function fingerprint(a: Company, b: Company): Record<string, number> {

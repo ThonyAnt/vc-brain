@@ -13,6 +13,7 @@ import type {
   Competitor,
   CriteriaWeights,
   ExecutionItem,
+  FitBreakdown,
   Founder,
   FundGraph,
   FundProfile,
@@ -58,6 +59,8 @@ interface BrainRanked {
   companyId: string
   totalScore?: number
   fundFitScore?: number
+  similarityToWinners?: number
+  similarityToRejected?: number
   closestWinnerId?: string
   closestRejectedDealId?: string
   closestCompetitorId?: string
@@ -265,6 +268,18 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
             ? 42
             : 70)
 
+    /* Score components behind the displayed fit, for the UI's explainer. */
+    const fitBreakdown: FitBreakdown | undefined = r
+      ? {
+          thesisMatch: r.fundFitScore ?? 0,
+          similarityToWinners: r.similarityToWinners ?? 0,
+          similarityToRejected: r.similarityToRejected ?? 0,
+          closestWinner: r.closestWinnerId ? nameOf(r.closestWinnerId) : undefined,
+          closestRejected: r.closestRejectedDealId ? nameOf(r.closestRejectedDealId) : undefined,
+          eliminationReason: r.eliminationReason,
+        }
+      : undefined
+
     const analogues: Analogue[] = []
     if (r?.closestWinnerId && byId.has(r.closestWinnerId))
       analogues.push({ companyId: r.closestWinnerId, kind: 'portfolio', note: `Resembles prior winner ${nameOf(r.closestWinnerId)}.` })
@@ -358,6 +373,7 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
       reasonsToPass,
       competitors,
       model,
+      fitBreakdown,
       memo: isRec ? buildMemoText(memo, c.name) : undefined,
       outcome: c.outcomeNarrative ?? (type === 'portfolio' ? 'Portfolio company' : undefined),
     }

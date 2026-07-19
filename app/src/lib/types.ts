@@ -63,6 +63,21 @@ export interface Meeting {
   notes?: string
 }
 
+/**
+ * Per-company components behind the displayed fund-fit score (all 0..1):
+ * sourcing_score = w₊·similarityToWinners − w₋·similarityToRejected + wₜ·thesisMatch,
+ * then cohort-scaled to 30–95 for display. Weights re-learn from feedback.
+ */
+export interface FitBreakdown {
+  thesisMatch: number
+  similarityToWinners: number
+  similarityToRejected: number
+  closestWinner?: string
+  closestRejected?: string
+  /** Present when a hard filter (stage / check size) knocked the company out. */
+  eliminationReason?: string
+}
+
 export interface Company {
   id: string
   name: string
@@ -87,6 +102,8 @@ export interface Company {
   reasonsToPass: string[]
   competitors: Competitor[]
   model?: SaasModel
+  /** Score components behind fitScore, when the company was ranked by the brain. */
+  fitBreakdown?: FitBreakdown
   memo?: string
   meetings?: Meeting[]
   dealStage?: Stage

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Card } from '../../components/ui/Card'
 import { Eyebrow } from '../../components/ui/Eyebrow'
+import { FitInfo } from '../../components/ui/FitInfo'
 import { api } from '../../lib/api/client'
 import type { Company, ExecutionItem, Stage } from '../../lib/types'
 
@@ -214,6 +215,11 @@ export function PipelinePage() {
                     title={`Sort by ${col.label}`}
                   >
                     {col.label}
+                    {col.key === 'fitScore' && (
+                      <span className="ml-1 inline-flex align-middle" onClick={(e) => e.stopPropagation()}>
+                        <FitInfo />
+                      </span>
+                    )}
                     {sort.key === col.key && <span className="ml-1">{sort.dir === 1 ? '▲' : '▼'}</span>}
                   </th>
                 ))}

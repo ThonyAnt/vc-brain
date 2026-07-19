@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import { api } from '../../lib/api/client'
 import type { Company, Founder } from '../../lib/types'
 import { useAppStore } from '../../state/store'
+import { FitInfo } from '../ui/FitInfo'
 import { Pill } from '../ui/Pill'
 import { ACCENT } from './BrainCanvas'
 import { sectorColor } from './sectorColors'
@@ -71,7 +72,10 @@ export function NodePanel({
         <>
           <p className="mt-3 text-sm text-mute">{company.oneLiner}</p>
           <div className="mt-3 flex items-center gap-3">
-            <span className="caption text-mute">Fund fit</span>
+            <span className="caption flex items-center gap-1 text-mute">
+              Fund fit
+              <FitInfo breakdown={company.fitBreakdown} />
+            </span>
             <div className="h-[3px] flex-1 rounded-none bg-bone">
               <div className="h-[3px] rounded-none" style={{ width: `${company.fitScore}%`, background: ACCENT }} />
             </div>

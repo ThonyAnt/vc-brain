@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react'
 import { NavLink } from 'react-router'
 import { Card } from '../../../components/ui/Card'
 import { Eyebrow } from '../../../components/ui/Eyebrow'
+import { FitInfo } from '../../../components/ui/FitInfo'
 import { CardSticky, ContainerScroll } from '@/components/ui/cards-stack'
 import { api } from '../../../lib/api/client'
 import type { Company, Founder, Stage } from '../../../lib/types'
@@ -65,11 +66,15 @@ function ValuationBlock({ company }: { company: Company }) {
   )
 }
 
-function FitScoreBlock({ score }: { score: number }) {
+function FitScoreBlock({ company }: { company: Company }) {
+  const score = company.fitScore
   const filled = Math.round(score / 10)
   return (
     <div className="rounded-none border-2 border-hairline-strong bg-card p-4 shadow-brutal">
-      <Eyebrow>Fund fit</Eyebrow>
+      <div className="flex items-center gap-1.5">
+        <Eyebrow>Fund fit</Eyebrow>
+        <FitInfo breakdown={company.fitBreakdown} />
+      </div>
       <div className="display-md mt-2 text-primary">{score}</div>
       <div className="mt-2 flex">
         {Array.from({ length: 10 }, (_, i) => (
@@ -191,7 +196,7 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
       <div className="mb-5 grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)]">
         <StageTracker current={company.dealStage ?? 'Sourced'} />
         <ValuationBlock company={company} />
-        <FitScoreBlock score={company.fitScore} />
+        <FitScoreBlock company={company} />
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">

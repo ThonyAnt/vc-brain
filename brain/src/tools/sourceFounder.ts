@@ -168,6 +168,20 @@ function fewShotBlock(): string {
   return `\n\nCalibration examples from this fund's assessment history (match this scoring curve):\n${blocks.join("\n\n")}`;
 }
 
+/*
+ * A lead must be a real, individually named person. LLM extraction under
+ * pressure pads with placeholders ("Unspecified Cracked Founder"), and a
+ * fabricated person in the leads table is worse than an empty result.
+ */
+const GENERIC_NAME_WORDS =
+  /\b(founder|founders|unspecified|unknown|unnamed|cracked|someone|person|people|candidate|individual|anonymous|stealth|n\/a|tbd|various)\b/i;
+
+export function looksLikePersonName(name: string | undefined): name is string {
+  if (!name) return false;
+  const tokens = name.trim().split(/\s+/).filter((t) => /[a-z]/i.test(t));
+  return tokens.length >= 2 && tokens.length <= 4 && !GENERIC_NAME_WORDS.test(name);
+}
+
 const slugify = (s: string) =>
   s
     .toLowerCase()
@@ -413,6 +427,10 @@ export async function discoverFounders(
   const named = new Set<string>();
   for (const candidate of candidates) {
     if (founders.length >= count) break;
+    if (!looksLikePersonName(candidate.name)) {
+      skipped.push({ name: candidate.name, reason: "not an individually identifiable person" });
+      continue;
+    }
     const key = candidate.name.toLowerCase();
     if (named.has(key)) continue;
     named.add(key);
@@ -426,6 +444,10 @@ export async function discoverFounders(
         },
         deps,
       );
+      if (!looksLikePersonName(founder.name)) {
+        skipped.push({ name: candidate.name, reason: "identity could not be confirmed from sources" });
+        continue;
+      }
       founders.push(founder);
       await onFound?.(founder);
     } catch (error) {

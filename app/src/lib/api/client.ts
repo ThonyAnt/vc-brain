@@ -440,44 +440,55 @@ export const api = {
     return chatOnce(messages, context)
   },
 
-  /** Stream main-orchestrator lifecycle events and answer deltas over POST SSE. */
+  /**
+   * Stream main-orchestrator lifecycle events and answer deltas over POST SSE.
+   * The offline simulator covers ONLY an unreachable API. Once a live stream
+   * has started, errors surface honestly — no silent retry, no simulated
+   * success over a failed run.
+   */
   async streamChat(
     messages: ChatMessage[],
     context?: ChatContext,
     handlers: StreamChatHandlers = {},
   ): Promise<ChatMessage> {
+    let res: Response
     try {
-      const res = await fetch('/api/chat/stream', {
+      res = await fetch('/api/chat/stream', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
         body: JSON.stringify({ messages, context }),
       })
-      if (!res.ok || !res.body) throw new Error(`chat stream failed (${res.status})`)
+    } catch {
+      return simulateOfflineStream(messages, context, handlers)
+    }
+    if (!res.ok || !res.body) return simulateOfflineStream(messages, context, handlers)
 
-      const reader = res.body.getReader()
-      const decoder = new TextDecoder()
-      let buffer = ''
-      let content = ''
-      let finalMessage: ChatMessage | undefined
+    const reader = res.body.getReader()
+    const decoder = new TextDecoder()
+    let buffer = ''
+    let content = ''
+    let finalMessage: ChatMessage | undefined
+    let runError: string | undefined
 
-      const consume = (frame: string) => {
-        const event = parseSseFrame(frame)
-        if (!event) return
-        handlers.onEvent?.(event)
-        if (event.type === 'companies_sourced') {
-          mergeSourcedCompanies(event.companies, event.founders)
-        } else if (event.type === 'founders_sourced') {
-          mergeSourcedCompanies([], event.founders)
-        } else if (event.type === 'text_delta') {
-          content += event.delta
-          handlers.onDelta?.(event.delta)
-        } else if (event.type === 'run_completed') {
-          finalMessage = event.message
-        } else if (event.type === 'error') {
-          throw new Error(event.error)
-        }
+    const consume = (frame: string) => {
+      const event = parseSseFrame(frame)
+      if (!event) return
+      handlers.onEvent?.(event)
+      if (event.type === 'companies_sourced') {
+        mergeSourcedCompanies(event.companies, event.founders)
+      } else if (event.type === 'founders_sourced') {
+        mergeSourcedCompanies([], event.founders)
+      } else if (event.type === 'text_delta') {
+        content += event.delta
+        handlers.onDelta?.(event.delta)
+      } else if (event.type === 'run_completed') {
+        finalMessage = event.message
+      } else if (event.type === 'error') {
+        runError = event.error
       }
+    }
 
+    try {
       while (true) {
         const { done, value } = await reader.read()
         buffer += decoder.decode(value, { stream: !done }).replace(/\r\n/g, '\n')
@@ -490,12 +501,20 @@ export const api = {
         if (done) break
       }
       if (buffer.trim()) consume(buffer)
-      return finalMessage ?? { role: 'assistant', content }
-    } catch {
-      // Preserve offline/demo behavior when the live API is unavailable —
-      // replay a simulated orchestration so the trace UI stays alive.
-      return simulateOfflineStream(messages, context, handlers)
+    } catch (error) {
+      runError = runError ?? `connection lost mid-run (${String(error)})`
     }
+
+    if (finalMessage) return finalMessage
+    if (runError) {
+      return {
+        role: 'assistant',
+        content:
+          (content ? `${content}\n\n` : '') +
+          `The run failed server-side: ${runError}. Nothing was added — try again or rephrase.`,
+      }
+    }
+    return { role: 'assistant', content }
   },
 
   /**

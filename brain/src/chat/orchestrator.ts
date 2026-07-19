@@ -6,7 +6,7 @@ import type { VCBrainState } from "../state.js";
 import { compareGraphCompanies, type GraphAxisSelection } from "../graph/experience.js";
 import { companySimilarity } from "../tools/similarity.js";
 import { discoverCompanies } from "../tools/discover.js";
-import { discoverFounders, sourceFounder, type SourcedFounderView } from "../tools/sourceFounder.js";
+import { discoverFounders, looksLikePersonName, sourceFounder, type SourcedFounderView } from "../tools/sourceFounder.js";
 import { describeCompany } from "../agents/util.js";
 import { runPipeline, type AgentExecutionEvent } from "../orchestrator.js";
 
@@ -171,8 +171,9 @@ const NUMBER_WORDS: Record<string, number> = { one: 1, two: 2, three: 3, four: 4
 export function detectFounderDiscovery(message: string): FounderDiscoveryRequest | undefined {
   const text = normalizedMessage(message);
   if (!/\b(source|find|discover|scout|identify|surface|get|look for|search for)\b/.test(text)) return undefined;
-  if (!/\bfounders\b/.test(text)) return undefined;
-  const raw = text.match(/\b(\d{1,2}|one|two|three|four|five)\s+founders\b/)?.[1];
+  // plural "founders", or a counted singular ("1 cracked founder from…")
+  if (!/\bfounders\b/.test(text) && !/\b(\d{1,2}|one|two|three|four|five)\b[^.]*\bfounder\b/.test(text)) return undefined;
+  const raw = text.match(/\b(\d{1,2}|one|two|three|four|five)\b[^.]*?\bfounders?\b/)?.[1];
   const count = raw ? (NUMBER_WORDS[raw] ?? parseInt(raw, 10)) : 3;
   return { criteria: message, count: Math.max(1, Math.min(count || 3, 5)) };
 }
@@ -233,6 +234,7 @@ Decide what the user wants done from the recent conversation.
 discover_founders: find people matching criteria, with no specific person named.
 scout_founder: profile and score one specific named person.
 source_companies: find companies, startups, or deals matching criteria.
+Sourcing people, founders, or talent is discover_founders or scout_founder, never source_companies.
 analyze: a question about specific companies, deals, the portfolio, or the fund.
 chat: everything else.
 A bare go-ahead like "start now" or "yes" refers to the most recent actionable request.
@@ -247,17 +249,25 @@ export async function classifyIntent(
     .slice(-6)
     .map((m) => `${m.role}: ${m.content.slice(0, 400)}`)
     .join("\n");
-  const decision = await llm.generateStructured({
-    schema: IntentSchema,
-    schemaName: "ChatIntent",
-    system: INTENT_SYSTEM,
-    prompt: `Conversation:\n${recent}`,
-  });
+  const attempt = () =>
+    llm.generateStructured({
+      schema: IntentSchema,
+      schemaName: "ChatIntent",
+      system: INTENT_SYSTEM,
+      prompt: `Conversation:\n${recent}`,
+    });
+  let decision: z.infer<typeof IntentSchema>;
+  try {
+    decision = await attempt();
+  } catch {
+    // strict:false structured outputs occasionally drop required keys — one retry
+    decision = await attempt();
+  }
   return {
     ...decision,
     criteria: decision.criteria.trim() || latestUserMessage(messages),
     count: decision.count || undefined,
-    name: decision.name?.trim() || undefined,
+    name: looksLikePersonName(decision.name?.trim()) ? decision.name!.trim() : undefined,
     linkedinUrl: decision.linkedinUrl?.trim() || undefined,
   };
 }
@@ -546,6 +556,19 @@ export async function streamOrchestratorChat(
       route = regexClassify(messages);
     }
   }
+  /* Deterministic backstop for classifier wobble: an ask whose target is
+   * people must never run the company pipeline. */
+  if (route.intent === "source_companies" && /\bfounders?\b/i.test(route.criteria) && !/\b(compan(?:y|ies)|startups?|deals?)\b/i.test(route.criteria)) {
+    const name = route.name ?? extractFounderName(route.criteria);
+    route =
+      looksLikePersonName(name) && !/\bfounders\b/i.test(route.criteria)
+        ? { intent: "scout_founder", criteria: route.criteria, name }
+        : { intent: "discover_founders", criteria: route.criteria, count: route.count };
+  }
+  /* A scout with no verifiable person to scout is a criteria search. */
+  if (route.intent === "scout_founder" && !route.linkedinUrl && !looksLikePersonName(route.name)) {
+    route = { intent: "discover_founders", criteria: route.criteria, count: route.count };
+  }
   const question = route.criteria;
   const clarificationFollowUp = isSourcingClarificationFollowUp(messages);
   if (route.intent === "source_companies" && needsSourcingClarification(question)) {
@@ -633,6 +656,15 @@ export async function streamOrchestratorChat(
         { ...founderRequest, fundProfile: options.state.fundProfile },
         { search: options.search, llm: options.llm },
       );
+      /* Never add a lead the sources couldn't pin to a real named person. */
+      if (!founderRequest.linkedinUrl && !looksLikePersonName(founder.name)) {
+        await emit({ type: "agent_completed", runId, agent: "founderScout", summary: "No identifiable person found." });
+        const content = `I couldn't pin "${question}" to a specific real person, so nothing was added. Give me a name or LinkedIn URL, or ask for founders matching criteria (e.g. "source 2 founders from …").`;
+        await emit({ type: "text_delta", runId, delta: content });
+        const message: OrchestratorChatMessage = { role: "assistant", content };
+        await emit({ type: "run_completed", runId, message });
+        return message;
+      }
       await emit({
         type: "agent_completed",
         runId,

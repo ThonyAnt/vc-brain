@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { findNearestCompanies } from "./similarity.js";
 import { fundFit, rankCandidates, normalizeUsd, displayFitScore } from "./fundfit.js";
-import { buildMarketLandscape } from "./landscape.js";
+import { buildMarketLandscape, seriateClusterAnchors } from "./landscape.js";
 import { broadMarketLabel } from "./labelClusters.js";
 import { emitGraphEvent } from "./events.js";
 import { createInitialState } from "../state.js";
@@ -116,6 +116,26 @@ describe("buildMarketLandscape", () => {
     expect(distanceFromScribe("co_medflow")).toBeLessThan(distanceFromScribe("co_vetcharts"));
     expect(distanceFromScribe("co_vetcharts")).toBeLessThan(distanceFromScribe("co_radintel"));
     expect(land.edges.length).toBeGreaterThan(0);
+  });
+
+  it("seriates the strongest cluster linkage as compact ring neighbours", () => {
+    const anchors = seriateClusterAnchors(
+      [
+        [1, 0.9, 0.1, 0.2],
+        [0.9, 1, 0.8, 0.1],
+        [0.1, 0.8, 1, 0.7],
+        [0.2, 0.1, 0.7, 1],
+      ],
+      72,
+    );
+    const distance = (a: number, b: number) =>
+      Math.hypot(
+        anchors[a]!.x - anchors[b]!.x,
+        anchors[a]!.y - anchors[b]!.y,
+        anchors[a]!.z - anchors[b]!.z,
+      );
+    expect(distance(0, 1)).toBeLessThan(distance(0, 2));
+    expect(Math.max(...anchors.map((anchor) => Math.hypot(anchor.x, anchor.y)))).toBeCloseTo(72);
   });
 
   it("adds exact-name competitor edges without replacing similarity edges", () => {

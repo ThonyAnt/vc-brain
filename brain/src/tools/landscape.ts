@@ -94,27 +94,19 @@ export function buildMarketLandscape(
 
   // Average linkage between every cluster pair, matching the quantity used by
   // agglomerativeClusters when it decides which markets belong together.
-  const clusterDistances = clusters.map((a, ai) =>
+  const clusterLinkages = clusters.map((a, ai) =>
     clusters.map((b, bi) => {
-      if (ai === bi) return 0;
+      if (ai === bi) return 1;
       let total = 0;
       for (const i of a.memberIndices) for (const j of b.memberIndices) total += similarity[i]![j]!;
-      return 1 - total / (a.memberIndices.length * b.memberIndices.length);
+      return total / (a.memberIndices.length * b.memberIndices.length);
     }),
   );
-  const anchorCoordinates = classicalMds(
-    clusterDistances,
-    3,
-    clusters.map((cluster) => `cluster:${cluster.memberIndices.map((i) => companies[i]!.id).sort().join("|")}`),
-  );
-  // Cluster clouds need enough breathing room for labels and edge inspection.
-  // A uniform anchor scale preserves all MDS distance ratios.
-  const anchorScale = radius * 1.7;
-  const anchors = anchorCoordinates.map(([x = 0, y = 0, z = 0]) => ({
-    x: x * anchorScale,
-    y: y * anchorScale,
-    z: z * anchorScale,
-  }));
+  // A low-dimensional MDS projection can make unrelated markets look close
+  // when most inter-cluster distances are nearly equal. A deterministic ring
+  // seriation instead makes the strongest average-linkage relationships the
+  // immediate neighbours and puts a hard bound on the graph's diameter.
+  const anchors = seriateClusterAnchors(clusterLinkages, radius * 0.72);
 
   // Classical MDS inside each cluster honors every member-to-member distance;
   // this replaces the old medoid radial fan, which only represented one row of
@@ -190,4 +182,67 @@ export function buildMarketLandscape(
       ...(anchors[index] ?? { x: 0, y: 0, z: 0 }),
     })),
   };
+}
+
+/**
+ * Arrange clusters on a compact ring, greedily maximizing the total linkage
+ * between adjacent markets. The result is deterministic: ties resolve by the
+ * original cluster index, which is itself stable for identical input.
+ */
+export function seriateClusterAnchors(
+  linkages: number[][],
+  ringRadius: number,
+): Array<{ x: number; y: number; z: number }> {
+  const count = linkages.length;
+  if (count === 0) return [];
+  if (count === 1) return [{ x: 0, y: 0, z: 0 }];
+
+  let first = 0;
+  let second = 1;
+  for (let i = 0; i < count; i++) {
+    for (let j = i + 1; j < count; j++) {
+      const candidate = linkages[i]?.[j] ?? 0;
+      const best = linkages[first]?.[second] ?? 0;
+      if (candidate > best) [first, second] = [i, j];
+    }
+  }
+
+  const ring = [first, second];
+  let remaining = Array.from({ length: count }, (_, i) => i).filter((i) => !ring.includes(i));
+  while (remaining.length > 0) {
+    let bestNode = remaining[0]!;
+    let bestPosition = 0;
+    let bestGain = Number.NEGATIVE_INFINITY;
+    for (const node of remaining) {
+      for (let position = 0; position < ring.length; position++) {
+        const left = ring[position]!;
+        const right = ring[(position + 1) % ring.length]!;
+        const gain =
+          (linkages[left]?.[node] ?? 0) +
+          (linkages[node]?.[right] ?? 0) -
+          (linkages[left]?.[right] ?? 0);
+        if (
+          gain > bestGain ||
+          (gain === bestGain && (node < bestNode || (node === bestNode && position < bestPosition)))
+        ) {
+          bestGain = gain;
+          bestNode = node;
+          bestPosition = position;
+        }
+      }
+    }
+    ring.splice(bestPosition + 1, 0, bestNode);
+    remaining = remaining.filter((node) => node !== bestNode);
+  }
+
+  const anchors = Array.from({ length: count }, () => ({ x: 0, y: 0, z: 0 }));
+  ring.forEach((clusterIndex, position) => {
+    const angle = (2 * Math.PI * position) / count - Math.PI / 2;
+    anchors[clusterIndex] = {
+      x: Math.cos(angle) * ringRadius,
+      y: Math.sin(angle) * ringRadius,
+      z: Math.sin(angle * 2) * ringRadius * 0.12,
+    };
+  });
+  return anchors;
 }

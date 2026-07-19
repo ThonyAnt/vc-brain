@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { findNearestCompanies } from "./similarity.js";
-import { fundFit, rankCandidates } from "./fundfit.js";
+import { fundFit, rankCandidates, normalizeUsd } from "./fundfit.js";
 import { buildMarketLandscape } from "./landscape.js";
 import { emitGraphEvent } from "./events.js";
 import { createInitialState } from "../state.js";
@@ -21,6 +21,36 @@ describe("fundFit", () => {
     const scribe = fundFit(fx.scribeai, fx.fundProfile).score;
     const pay = fundFit(fx.payflow, fx.fundProfile).score;
     expect(scribe).toBeGreaterThan(pay);
+  });
+});
+
+describe("normalizeUsd", () => {
+  it("reads small values as millions", () => {
+    expect(normalizeUsd(2.5)).toBe(2_500_000);
+    expect(normalizeUsd(1)).toBe(1_000_000);
+    expect(normalizeUsd(50)).toBe(50_000_000);
+  });
+  it("leaves dollar amounts untouched", () => {
+    expect(normalizeUsd(2_500_000)).toBe(2_500_000);
+    expect(normalizeUsd(250_000)).toBe(250_000);
+  });
+  it("does not touch zero", () => {
+    expect(normalizeUsd(0)).toBe(0);
+  });
+});
+
+describe("rankCandidates check-size units", () => {
+  it("does not eliminate dollar-denominated candidates when the profile is in millions", () => {
+    const profile = { ...fx.fundProfile, checkSize: { min: 1, max: 2.5 } };
+    const ranked = rankCandidates({
+      candidates: fx.candidateUniverse,
+      fundProfile: profile,
+      positiveHistory: fx.portfolioCompanies,
+      rejectedHistory: fx.rejectedDeals,
+    });
+    // ScribeAI seeks $2M — must survive a {min:1, max:2.5} (millions) profile.
+    const scribe = ranked.find((r) => r.companyId === "co_scribeai")!;
+    expect(scribe.eliminationReason).toBeUndefined();
   });
 });
 

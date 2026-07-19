@@ -19,6 +19,7 @@ import type {
   GraphEdge,
   GraphNode,
   SaasModel,
+  Stage,
 } from '../types'
 
 /* ---- Loose shapes for the brain snapshot (only fields we read) ---- */
@@ -29,6 +30,7 @@ interface BrainCompany {
   attributes?: { industryPath?: string[]; founderArchetypes?: string[] }
   founders?: { name: string; role?: string; background?: string }[]
   stage?: string
+  status?: string
   geography?: string
   sector?: string
   checkSizeSought?: number
@@ -56,6 +58,7 @@ interface BrainRanked {
   reasonsToAdvance?: string[]
   reasonsToReject?: string[]
   unresolvedRisks?: string[]
+  eliminationReason?: string
 }
 interface BrainMemoClaim {
   text: string
@@ -165,6 +168,26 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
   const memo = snap.investmentMemo
   const recId = snap.committeeDecision?.recommendedCompanyId
 
+  /* ---- deal-stage board: recommendation -> IC, finalists/in-diligence ->
+   * Diligence, then the next best-ranked sourced companies fill Sourced.
+   * Everything else stays off the pipeline board (103 rows would drown it). */
+  const finalistIds = new Set((snap.finalists ?? []).map((f) => f.id))
+  const topSourcedIds = new Set(
+    (snap.sourcedCandidates ?? [])
+      .filter((r) => !r.eliminationReason && !finalistIds.has(r.companyId) && r.companyId !== recId)
+      .slice(0, 6)
+      .map((r) => r.companyId),
+  )
+  const dealStageFor = (c: BrainCompany, type: Company['type']): Stage | undefined => {
+    if (type !== 'sourced') return undefined
+    if (c.id === recId) return 'IC'
+    if (finalistIds.has(c.id) || c.status === 'in_diligence') return 'Diligence'
+    if (c.status === 'meeting_scheduled') return 'Meeting'
+    if (c.status === 'contacted') return 'Outreach'
+    if (topSourcedIds.has(c.id)) return 'Sourced'
+    return undefined
+  }
+
   /* ---- weights (fund criteria) ---- */
   const weights: CriteriaWeights = {}
   for (const c of snap.fundProfile?.criteria ?? []) weights[c.name] = Number(c.weight.toFixed(2))
@@ -260,8 +283,9 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
       id: c.id,
       name: c.name,
       type,
+      dealStage: dealStageFor(c, type),
       oneLiner: c.description ?? '',
-      sector: c.sector ?? c.attributes?.industryPath?.[0] ?? 'Healthcare',
+      sector: c.sector ?? c.attributes?.industryPath?.[0] ?? 'Software',
       stage: cap(c.stage ?? 'seed'),
       location: c.geography ?? '—',
       raising: c.checkSizeSought ? `${usd(c.checkSizeSought)} round` : undefined,
@@ -297,23 +321,36 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
     })),
   }
 
-  /* ---- graph (clusters -> markets; positions are computed by BrainCanvas) ---- */
+  /* ---- graph (markets = sector families; positions computed by BrainCanvas) ----
+   * The brain's landscape clustering fragments fine-grained sectors ("Enterprise
+   * AI / Sales Agents" vs "/ Legal Drafting") into dozens of clusters, so group
+   * by the sector's family prefix instead and keep the top families as markets. */
+  const familyOf = (c: Company): string => {
+    const fam = c.sector.split(/[/,(]/)[0].replace(/\s+and\s+.*$/i, '').trim()
+    return fam || 'Software'
+  }
+  const familyCounts = new Map<string, number>()
+  for (const c of companies) familyCounts.set(familyOf(c), (familyCounts.get(familyOf(c)) ?? 0) + 1)
+  const MAX_MARKETS = 7
+  const topFamilies = [...familyCounts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, MAX_MARKETS)
+    .map(([fam]) => fam)
+  const familySet = new Set(topFamilies)
+  const marketLabelFor = (c: Company) => (familySet.has(familyOf(c)) ? familyOf(c) : 'Other')
+  const marketLabels = [...topFamilies, ...(companies.some((c) => !familySet.has(familyOf(c))) ? ['Other'] : [])]
+  const marketId = (label: string) => `mkt_${label.toLowerCase().replace(/[^a-z0-9]+/g, '_')}`
+
   const landscape = (snap.events ?? []).find((e) => e.eventType === 'market_landscape_built')?.payload as
     | { nodes?: BrainLandscapeNode[]; edges?: BrainLandscapeEdge[]; clusters?: BrainCluster[] }
     | undefined
-  const clusterOfCompany = new Map((landscape?.nodes ?? []).map((n) => [n.id, n.clusterId]))
-  const clusters = landscape?.clusters ?? [{ id: 0, label: fundProfile.sectors[0] ?? 'Market' }]
-  const marketId = (cid: number) => `mkt_${cid}`
 
   const nodes: GraphNode[] = []
   const edges: GraphEdge[] = []
-  for (const cl of clusters) nodes.push({ id: marketId(cl.id), type: 'market', label: cl.label })
-  const knownCluster = new Set(clusters.map((c) => c.id))
+  for (const label of marketLabels) nodes.push({ id: marketId(label), type: 'market', label })
   for (const c of companies) {
     nodes.push({ id: c.id, type: c.type, label: c.name, score: c.fitScore })
-    let cid = clusterOfCompany.get(c.id) ?? 0
-    if (!knownCluster.has(cid)) cid = clusters[0].id
-    edges.push({ source: c.id, target: marketId(cid), kind: 'market', weight: 0.4 })
+    edges.push({ source: c.id, target: marketId(marketLabelFor(c)), kind: 'market', weight: 0.4 })
   }
   for (const f of founders) {
     nodes.push({ id: f.id, type: 'founder', label: f.name, score: f.score })

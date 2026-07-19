@@ -43,6 +43,15 @@ export interface RankInput {
   embeddings?: EmbeddingMap;
 }
 
+/**
+ * Normalize a USD amount that may have been written in millions ("2.5") instead
+ * of dollars ("2500000") — LLM extraction and imported datasets mix both. No
+ * real check/valuation is under $100k, so smaller values are read as millions.
+ */
+export function normalizeUsd(n: number): number {
+  return n > 0 && n < 100_000 ? n * 1_000_000 : n;
+}
+
 function passesHardFilters(c: Company, profile: FundProfile): string | undefined {
   if (profile.stages.length && c.stage && !profile.stages.includes(c.stage)) {
     return `stage ${c.stage} not in fund's preferred stages`;
@@ -51,9 +60,14 @@ function passesHardFilters(c: Company, profile: FundProfile): string | undefined
   // LLM-extracted ("US" vs "United States" vs "North America"), so an exact
   // mismatch must not silently eliminate every candidate. Treated as a soft signal.
   if (c.checkSizeSought != null) {
-    const { min, max } = profile.checkSize;
-    if (c.checkSizeSought < min * 0.5 || c.checkSizeSought > max * 2) {
-      return `check size ${c.checkSizeSought} incompatible with fund range`;
+    // Units normalized on BOTH sides: the profiler has emitted {min:1, max:2.5}
+    // (millions) while candidates carry dollar amounts — comparing raw values
+    // once eliminated 101/103 candidates.
+    const min = normalizeUsd(profile.checkSize.min);
+    const max = normalizeUsd(profile.checkSize.max);
+    const sought = normalizeUsd(c.checkSizeSought);
+    if (sought < min * 0.5 || sought > max * 2) {
+      return `check size ${sought} incompatible with fund range`;
     }
   }
   return undefined;

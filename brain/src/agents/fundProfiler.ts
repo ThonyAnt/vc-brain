@@ -9,7 +9,8 @@ extract preferred stages, sectors, geographies, check size, weighted investment 
 recurring reasons to invest and pass, successful vs rejected archetypes, per-partner tendencies,
 and attribute preferences (keyed "<dimension>:<value>", e.g. "founderArchetypes:clinician-founder",
 positive weights for favored values, negative for disfavored). Criterion weights should sum near 1.
-Ground every criterion in the memos via supportingMemoIds.`;
+Ground every criterion in the memos via supportingMemoIds.
+Express ALL monetary amounts (checkSize min/max) in absolute USD, e.g. 1500000 — never in millions.`;
 
 export interface FundProfilerInput {
   mandate: string;

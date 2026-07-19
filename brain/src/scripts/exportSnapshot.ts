@@ -22,9 +22,14 @@ import { TavilySearchClient } from "../search/tavily.js";
 import type { SearchClient } from "../search/client.js";
 import { mockAgentOptions, mockSearchResults } from "../fixtures/mockAgents.js";
 import * as fx from "../fixtures/sample.js";
+import { loadBundle } from "../store/jsonStore.js";
+import { stateFromBundle, type SeedBundle } from "../store/bundle.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const OUT = resolve(here, "../../../app/src/lib/brain/snapshot.json");
+// The HCP research set is the demo seed; fall back to the small sample fixtures
+// only if the bundle is missing (or VC_BRAIN_SEED=sample is forced).
+const HCP_BUNDLE = resolve(here, "../../data/seed.hcp.json");
 
 const useOpenAI = process.env.VC_BRAIN_LLM === "openai";
 const useDiscover = process.env.VC_BRAIN_DISCOVER === "1";
@@ -51,22 +56,32 @@ function makeSearch(): SearchClient {
 }
 
 async function main() {
-  const state = createInitialState({
-    mandate: "Find the best seed-stage healthcare AI company for this fund.",
-    historicalMemos: fx.historicalMemos,
-    portfolioCompanies: fx.portfolioCompanies,
-    rejectedDeals: fx.rejectedDeals,
-    candidateUniverse: fx.candidateUniverse,
-  });
+  let bundle: SeedBundle | undefined;
+  if (process.env.VC_BRAIN_SEED !== "sample") {
+    bundle = await loadBundle(HCP_BUNDLE).catch(() => undefined);
+  }
+  const state = bundle
+    ? stateFromBundle(bundle)
+    : createInitialState({
+        mandate: "Find the best seed-stage healthcare AI company for this fund.",
+        historicalMemos: fx.historicalMemos,
+        portfolioCompanies: fx.portfolioCompanies,
+        rejectedDeals: fx.rejectedDeals,
+        candidateUniverse: fx.candidateUniverse,
+      });
+  const competitors = bundle ? bundle.competitors : fx.competitors;
+  console.log(bundle ? `• seed: HCP bundle (${state.candidateUniverse.length} candidates)` : "• seed: sample fixtures");
+  // Note: runPipeline re-runs the profiler over the bundle's memos, so the
+  // snapshot's fundProfile reflects the live pipeline end-to-end.
 
   const discoverOn = useDiscover || !useOpenAI ? useDiscover : false;
   await runPipeline(state, {
     llm: makeLLM(),
-    competitors: fx.competitors,
+    competitors,
     ...(discoverOn ? { search: makeSearch(), discover: { limit: discoverLimit } } : {}),
   });
 
-  const snapshot = { ...state, competitors: fx.competitors };
+  const snapshot = { ...state, competitors };
   mkdirSync(dirname(OUT), { recursive: true });
   writeFileSync(OUT, JSON.stringify(snapshot, null, 2));
   console.log(`Wrote snapshot: ${OUT}`);

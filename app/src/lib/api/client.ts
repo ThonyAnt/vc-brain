@@ -1,11 +1,5 @@
-import {
-  buildGraph,
-  companies as fixtureCompanies,
-  criteriaWeights,
-  executionQueue as fixtureExecutionQueue,
-  founders as fixtureFounders,
-  fundProfile as fixtureFundProfile,
-} from '../mock/fixtures'
+import snapshotJson from '../brain/snapshot.json'
+import { adaptSnapshot, type BrainSnapshot } from '../brain/adapt'
 import type {
   ChatMessage,
   Company,
@@ -54,18 +48,20 @@ export interface CompanyWorkbookPreview {
 }
 
 /*
- * The polished UI fixtures are the deterministic frontend seed. Interactive
- * endpoints hit the live brain API, and newly sourced companies are merged into
- * this dataset at runtime so the demo content and real pipeline coexist.
+ * The HCP research snapshot (100 underwritten companies + the fund's own memo
+ * history, run through the live pipeline) is the deterministic frontend seed.
+ * Interactive endpoints hit the live brain API, and newly sourced companies are
+ * merged into this dataset at runtime so demo content and real pipeline coexist.
  */
 
+const adapted = adaptSnapshot(snapshotJson as unknown as BrainSnapshot)
 const data = {
-  companies: [...fixtureCompanies],
-  founders: [...fixtureFounders],
-  fundProfile: fixtureFundProfile,
-  weights: { ...criteriaWeights },
-  graph: buildGraph(),
-  executionQueue: [...fixtureExecutionQueue],
+  companies: [...adapted.companies],
+  founders: [...adapted.founders],
+  fundProfile: adapted.fundProfile,
+  weights: { ...adapted.weights },
+  graph: adapted.graph,
+  executionQueue: [...adapted.executionQueue],
 }
 
 const store = {

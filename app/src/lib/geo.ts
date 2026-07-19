@@ -28,6 +28,39 @@ const CITY_COORDS: Record<string, LatLng> = {
   Stockholm: { lat: 59.3293, lng: 18.0686 },
 }
 
+/* Country/region fallbacks: the HCP research set records geography at country
+   granularity ("US", "United States", "UK/US"). Map to a hub city so the globe
+   still draws arcs; combos resolve to their first recognizable part. */
+const COUNTRY_COORDS: Record<string, LatLng> = {
+  us: CITY_COORDS['San Francisco'],
+  usa: CITY_COORDS['San Francisco'],
+  'united states': CITY_COORDS['San Francisco'],
+  uk: CITY_COORDS.London,
+  'united kingdom': CITY_COORDS.London,
+  canada: CITY_COORDS.Toronto,
+  de: CITY_COORDS.Berlin,
+  germany: CITY_COORDS.Berlin,
+  france: CITY_COORDS.Paris,
+  sweden: CITY_COORDS.Stockholm,
+  netherlands: CITY_COORDS.Amsterdam,
+  il: { lat: 32.0853, lng: 34.7818 }, // Tel Aviv
+  israel: { lat: 32.0853, lng: 34.7818 },
+  india: { lat: 12.9716, lng: 77.5946 }, // Bengaluru
+  japan: { lat: 35.6762, lng: 139.6503 }, // Tokyo
+  singapore: { lat: 1.3521, lng: 103.8198 },
+  australia: { lat: -33.8688, lng: 151.2093 }, // Sydney
+  eu: CITY_COORDS.Berlin,
+}
+
 export function cityLatLng(location: string): LatLng | null {
-  return CITY_COORDS[location] ?? null
+  if (!location) return null
+  const exact = CITY_COORDS[location]
+  if (exact) return exact
+  // Try each slash/comma-separated part as a city, then as a country.
+  for (const part of location.split(/[/,]/).map((p) => p.trim())) {
+    if (CITY_COORDS[part]) return CITY_COORDS[part]
+    const country = COUNTRY_COORDS[part.toLowerCase()]
+    if (country) return country
+  }
+  return null
 }

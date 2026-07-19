@@ -66,7 +66,7 @@ export function SourcingInbox({
         </button>
         <button
           onClick={() => navigate('/analyst')}
-          className="caption-tight h-11 cursor-pointer whitespace-nowrap border-2 border-hairline-strong bg-primary px-5 text-on-primary shadow-brutal-sm transition-transform hover:-translate-y-0.5 focus-visible:outline-3 focus-visible:outline-ring-focus active:translate-y-0 disabled:opacity-50"
+          className="caption-tight h-11 cursor-pointer whitespace-nowrap border-2 border-hairline-strong bg-primary px-5 text-on-primary shadow-brutal transition-colors hover:bg-primary-deep focus-visible:outline-3 focus-visible:outline-ring-focus active:translate-x-[2px] active:translate-y-[2px] active:shadow-none disabled:opacity-50"
         >
           Source
         </button>

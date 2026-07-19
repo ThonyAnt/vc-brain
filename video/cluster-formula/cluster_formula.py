@@ -1,15 +1,12 @@
 """Clustering-formula animation for the VC Brain market map.
 
 Two dense slates, < 10s total, neo-brutalist: white canvas, black ink,
-2px frames with hard offset shadows, DM Sans captions, red/yellow accents.
+2px frames with hard offset shadows, Computer Modern captions, red/yellow accents.
 
 Render (manim CE >= 0.19, LaTeX + ffmpeg required):
   manim -qh cluster_formula.py ClusterFormula -o cluster-formula.mp4
 """
 
-from pathlib import Path
-
-import manimpango
 from manim import *
 
 INK = "#000000"
@@ -18,25 +15,21 @@ RED = "#ff3333"
 YELLOW = "#ffff00"
 
 config.background_color = WHITE
-# Brand sans, bundled so renders don't depend on system-installed fonts.
-# Static weights, not the variable TTF — manimpango mis-spaces variable fonts.
-for _f in ("DMSans-Regular.ttf", "DMSans-Bold.ttf"):
-    manimpango.register_font(str(Path(__file__).parent / "fonts" / _f))
-SANS = "DM Sans"
+# Captions render via Tex so they share Computer Modern with the math labels.
 
 
 def eyebrow(step: str, title: str) -> VGroup:
-    tag = Text(step, font=SANS, weight=BOLD, color=WHITE, font_size=15)
-    box = SurroundingRectangle(tag, buff=0.09, color=INK, fill_color=INK, fill_opacity=1, stroke_width=2)
-    label = Text(title, font=SANS, weight=BOLD, color=CHARCOAL, font_size=15)
+    tag = Tex(rf"\textbf{{{step.strip()}}}", color=WHITE, font_size=24)
+    box = SurroundingRectangle(tag, buff=0.12, color=INK, fill_color=INK, fill_opacity=1, stroke_width=2)
+    label = Tex(rf"\textbf{{{title}}}", color=CHARCOAL, font_size=24)
     g = VGroup(VGroup(box, tag), label).arrange(RIGHT, buff=0.25)
     g.to_corner(UL, buff=0.5)
     return g
 
 
-def wordmark() -> Text:
-    return Text("VC BRAIN · MARKET CLUSTERING", font=SANS, weight=BOLD,
-                color=CHARCOAL, font_size=13).to_corner(UR, buff=0.55)
+def wordmark() -> Tex:
+    return Tex(r"\textbf{VC BRAIN $\cdot$ MARKET CLUSTERING}",
+               color=CHARCOAL, font_size=21).to_corner(UR, buff=0.55)
 
 
 def brutal_frame(mobj: Mobject, shadow_color=INK) -> VGroup:
@@ -79,10 +72,10 @@ class ClusterFormula(Scene):
         for head in (m1[0], m2[0], m3[0]):
             head.set_color(RED)
         m4[0][0:4].set_color(RED)
-        n1 = Text("customers · technical · founder · disruption · regulatory", font=SANS, color=CHARCOAL, font_size=12)
-        n2 = Text("industry · product taxonomy paths", font=SANS, color=CHARCOAL, font_size=12)
-        n3 = Text("problem-statement embeddings", font=SANS, color=CHARCOAL, font_size=12)
-        n4 = Text("business model · go-to-market", font=SANS, color=CHARCOAL, font_size=12)
+        n1 = Tex(r"customers $\cdot$ technical $\cdot$ founder $\cdot$ disruption $\cdot$ regulatory", color=CHARCOAL, font_size=21)
+        n2 = Tex(r"industry $\cdot$ product taxonomy paths", color=CHARCOAL, font_size=21)
+        n3 = Tex(r"problem-statement embeddings", color=CHARCOAL, font_size=21)
+        n4 = Tex(r"business model $\cdot$ go-to-market", color=CHARCOAL, font_size=21)
         grid = VGroup(
             VGroup(m1, n1).arrange(DOWN, buff=0.12, aligned_edge=LEFT),
             VGroup(m2, n2).arrange(DOWN, buff=0.12, aligned_edge=LEFT),
@@ -99,7 +92,7 @@ class ClusterFormula(Scene):
         self.play(FadeOut(VGroup(frame, sim, weights, grid)), run_time=0.35)
 
         # ---------- slate 2: agglomeration ----------
-        eb2 = eyebrow(" 02 ", "AGGLOMERATION + K-MEDOID SPLIT")
+        eb2 = eyebrow(" 02 ", "AGGLOMERATION + K-MEDOID SPLIT")  # hyphen safe in Tex text mode
         self.play(ReplacementTransform(eb, eb2), run_time=0.3)
 
         link = MathTex(
@@ -127,8 +120,8 @@ class ClusterFormula(Scene):
             font_size=32,
         ).next_to(rule, DOWN, buff=0.55)
         medoid[2].set_color(CHARCOAL)
-        foot = Text("average linkage · deterministic ties · farthest-first seeded Lloyd refinement",
-                    font=SANS, color=CHARCOAL, font_size=13).to_edge(DOWN, buff=0.45)
+        foot = Tex(r"average linkage $\cdot$ deterministic ties $\cdot$ farthest-first seeded Lloyd refinement",
+                   color=CHARCOAL, font_size=22).to_edge(DOWN, buff=0.45)
 
         self.play(FadeIn(lframe), Write(link), run_time=0.7)
         self.play(FadeIn(rule, shift=0.15 * UP), run_time=0.45)

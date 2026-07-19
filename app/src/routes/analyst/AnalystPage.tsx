@@ -1,9 +1,10 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { AskInput } from '@/components/ui/ask-input'
+import { FlowFieldBackground } from '@/components/ui/flow-field-background'
 import { OrchestrationTrace, type TraceRun } from '@/components/analyst/OrchestrationTrace'
 import { closeTrace, useAnalystChat } from '../../state/chatStore'
 import { api } from '../../lib/api/client'
@@ -257,8 +258,23 @@ export function AnalystPage() {
   const liveTrace = traces[messages.length - 1]
 
   return (
-    <div className="mx-auto flex h-full w-full max-w-[820px] flex-col px-8 pt-4 pb-8">
-      <div className="flex shrink-0 justify-end pb-2">
+    <div className="relative mx-auto flex h-full w-full max-w-[820px] flex-col px-8 pt-4 pb-8">
+      {/* ambient flow field while the agent works; fades out when it's done */}
+      <AnimatePresence>
+        {busy && (
+          <motion.div
+            key="flow"
+            className="pointer-events-none absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.45 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.9 }}
+          >
+            <FlowFieldBackground particleCount={160} trailOpacity={0.06} speed={0.6} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <div className="relative flex shrink-0 justify-end pb-2">
         <button
           type="button"
           onClick={clear}
@@ -268,7 +284,7 @@ export function AnalystPage() {
           New chat
         </button>
       </div>
-      <div ref={scrollRef} className="min-h-0 flex-1 space-y-4 overflow-y-auto pr-1 pb-6">
+      <div ref={scrollRef} className="relative min-h-0 flex-1 space-y-4 overflow-y-auto pr-1 pb-6">
         {messages.map((m, i) => (
           <Fragment key={i}>
             {m.role === 'assistant' && traces[i] && traces[i].stages.length > 0 && (
@@ -310,7 +326,7 @@ export function AnalystPage() {
           </div>
         )}
       </div>
-      <AskInput onSubmit={ask} className="shrink-0" />
+      <AskInput onSubmit={ask} className="relative shrink-0" />
 
       {/* sourced-item chips flying into the dock */}
       {flights.map((f, i) => (

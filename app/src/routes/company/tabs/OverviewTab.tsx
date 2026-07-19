@@ -3,6 +3,7 @@ import { NavLink } from 'react-router'
 import { Card } from '../../../components/ui/Card'
 import { Eyebrow } from '../../../components/ui/Eyebrow'
 import { FitInfo } from '../../../components/ui/FitInfo'
+import { FounderAvatar } from '../../../components/ui/FounderAvatar'
 import { CardSticky, ContainerScroll } from '@/components/ui/cards-stack'
 import { RadarChart } from '@/components/ui/RadarChart'
 import { api } from '../../../lib/api/client'
@@ -91,29 +92,6 @@ function FitScoreBlock({ company }: { company: Company }) {
   )
 }
 
-/* ---- founder avatar: placeholder portrait, initials block on error -------- */
-
-function FounderAvatar({ founder }: { founder: Founder }) {
-  const [broken, setBroken] = useState(false)
-  const initials = founder.name
-    .split(' ')
-    .map((w) => w[0])
-    .slice(0, 2)
-    .join('')
-  return broken ? (
-    <div className="flex h-14 w-14 shrink-0 items-center justify-center border-2 border-hairline-strong bg-secondary">
-      <span className="code-md font-bold text-ink">{initials}</span>
-    </div>
-  ) : (
-    <img
-      src={`https://i.pravatar.cc/112?u=${founder.id}`}
-      alt={founder.name}
-      onError={() => setBroken(true)}
-      className="h-14 w-14 shrink-0 border-2 border-hairline-strong object-cover"
-    />
-  )
-}
-
 export function OverviewTab({ company, founders }: { company: Company; founders: Founder[] }) {
   const [names, setNames] = useState<Map<string, string>>(new Map())
 
@@ -122,6 +100,46 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
   }, [])
 
   const sections: { key: string; body: ReactNode; bone?: boolean }[] = [
+    /* the fingerprint leads the page: the brain's core claim, visualized */
+    ...(company.fingerprint
+      ? [
+          {
+            key: 'Similarity fingerprint',
+            body: (
+              <div className="mt-3">
+                <p className="caption mb-1 text-charcoal">
+                  Per-dimension similarity vs the closest precedents — the same 10 dimensions that
+                  position this company in the brain.
+                </p>
+                <RadarChart
+                  key={company.id}
+                  axes={company.fingerprint.dims.map((d) => d.label)}
+                  series={[
+                    ...(company.fingerprint.winner
+                      ? [
+                          {
+                            name: `vs ${company.fingerprint.winner} (winner)`,
+                            color: '#266df0',
+                            values: company.fingerprint.dims.map((d) => d.vsWinner),
+                          },
+                        ]
+                      : []),
+                    ...(company.fingerprint.rejected
+                      ? [
+                          {
+                            name: `vs ${company.fingerprint.rejected} (passed)`,
+                            color: '#ff3333',
+                            values: company.fingerprint.dims.map((d) => d.vsRejected),
+                          },
+                        ]
+                      : []),
+                  ]}
+                />
+              </div>
+            ),
+          },
+        ]
+      : []),
     {
       key: 'Summary',
       body: <p className="mt-2 text-body">{company.summary}</p>,
@@ -160,44 +178,6 @@ export function OverviewTab({ company, founders }: { company: Company; founders:
                     <span className="text-sm text-mute">{a.note}</span>
                   </div>
                 ))}
-              </div>
-            ),
-          },
-        ]
-      : []),
-    ...(company.fingerprint
-      ? [
-          {
-            key: 'Similarity fingerprint',
-            body: (
-              <div className="mt-3">
-                <p className="caption mb-1 text-charcoal">
-                  Per-dimension similarity vs the closest precedents — the same 10 dimensions that
-                  position this company in the brain.
-                </p>
-                <RadarChart
-                  axes={company.fingerprint.dims.map((d) => d.label)}
-                  series={[
-                    ...(company.fingerprint.winner
-                      ? [
-                          {
-                            name: `vs ${company.fingerprint.winner} (winner)`,
-                            color: '#266df0',
-                            values: company.fingerprint.dims.map((d) => d.vsWinner),
-                          },
-                        ]
-                      : []),
-                    ...(company.fingerprint.rejected
-                      ? [
-                          {
-                            name: `vs ${company.fingerprint.rejected} (passed)`,
-                            color: '#ff3333',
-                            values: company.fingerprint.dims.map((d) => d.vsRejected),
-                          },
-                        ]
-                      : []),
-                  ]}
-                />
               </div>
             ),
           },

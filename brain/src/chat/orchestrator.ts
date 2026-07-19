@@ -5,6 +5,7 @@ import type { VCBrainState } from "../state.js";
 import { compareGraphCompanies, type GraphAxisSelection } from "../graph/experience.js";
 import { companySimilarity } from "../tools/similarity.js";
 import { discoverCompanies } from "../tools/discover.js";
+import { sourceFounder, type SourcedFounderView } from "../tools/sourceFounder.js";
 import { describeCompany } from "../agents/util.js";
 import { runPipeline, type AgentExecutionEvent } from "../orchestrator.js";
 
@@ -26,6 +27,7 @@ export type ChatStreamEvent =
   | { type: "agent_completed"; runId: string; agent: string; summary: string }
   | { type: "agent_failed"; runId: string; agent: string; error: string }
   | { type: "companies_sourced"; runId: string; companies: Company[] }
+  | { type: "founders_sourced"; runId: string; founders: SourcedFounderView[] }
   | { type: "text_delta"; runId: string; delta: string }
   | { type: "run_completed"; runId: string; message: OrchestratorChatMessage };
 
@@ -103,6 +105,28 @@ function hasIntent(text: string, pattern: RegExp): boolean {
   return pattern.test(text);
 }
 
+const LINKEDIN_URL_RE = /(https?:\/\/)?(www\.)?linkedin\.com\/in\/[^\s)]+/i;
+
+export interface FounderSourcingRequest {
+  linkedinUrl?: string;
+  name?: string;
+}
+
+/**
+ * Founder-scout trigger: any LinkedIn profile URL routes straight to the tool;
+ * otherwise an explicit "source/score/vet the founder <Name>" phrasing.
+ */
+export function detectFounderSourcing(message: string): FounderSourcingRequest | undefined {
+  const url = message.match(LINKEDIN_URL_RE)?.[0];
+  if (url) return { linkedinUrl: url.startsWith("http") ? url : `https://${url}` };
+  const text = normalizedMessage(message);
+  if (!/\b(source|score|evaluate|vet|scout|look ?up|check out|research)\b/.test(text)) return undefined;
+  if (!/\bfounder\b/.test(text)) return undefined;
+  const named = message.match(/founder(?:\s+named)?\s+["“]?([A-Z][\w.'-]+(?:\s+[A-Z][\w.'-]+){1,2})["”]?/);
+  if (named) return { name: named[1] };
+  return undefined;
+}
+
 export function isSourcingRequest(message: string): boolean {
   const text = normalizedMessage(message);
   const action = /\b(source|sourcing|find|discover|scout|search for|look for|identify|surface)\b/.test(text);
@@ -152,6 +176,7 @@ const PIPELINE_AGENTS = [
 function agentLabel(agent: string): string {
   if (agent.startsWith("partner:")) return `Partner review — ${agent.slice("partner:".length)}`;
   const labels: Record<string, string> = {
+    founderScout: "Founder scout",
     discovery: "Tavily discovery",
     fundProfiler: "Fund profiler",
     marketScout: "Market scout",
@@ -293,6 +318,50 @@ export async function streamOrchestratorChat(
     await emit({ type: "run_completed", runId, message });
     return message;
   }
+  const founderRequest = detectFounderSourcing(question);
+  if (founderRequest) {
+    const emit = async (event: ChatStreamEvent) => options.onEvent?.(event);
+    await emit({ type: "run_started", runId, orchestrator: "investment_orchestrator", agents: ["founderScout"] });
+    if (!options.search) {
+      const content = "Founder sourcing is unavailable because the server has no Tavily search client configured.";
+      await emit({ type: "text_delta", runId, delta: content });
+      const message: OrchestratorChatMessage = { role: "assistant", content };
+      await emit({ type: "run_completed", runId, message });
+      return message;
+    }
+    await emit({ type: "agent_started", runId, agent: "founderScout", label: agentLabel("founderScout") });
+    try {
+      const founder = await sourceFounder(
+        { ...founderRequest, fundProfile: options.state.fundProfile },
+        { search: options.search, llm: options.llm },
+      );
+      await emit({
+        type: "agent_completed",
+        runId,
+        agent: "founderScout",
+        summary: `${founder.name}: ${founder.score}/100 (${founder.confidence} confidence)`,
+      });
+      await emit({ type: "founders_sourced", runId, founders: [founder] });
+      const content =
+        `${founder.name} — ${founder.role}${founder.company ? ` at ${founder.company}` : ""}. ` +
+        `Founder score ${founder.score}/100 (${founder.confidence} confidence). ${founder.justification}` +
+        (founder.signals.length ? ` Signals: ${founder.signals.join(", ")}.` : "") +
+        ` Assembled from ${founder.sources.length} public sources; added to the Founders leads.`;
+      await emit({ type: "text_delta", runId, delta: content });
+      const message: OrchestratorChatMessage = { role: "assistant", content };
+      await emit({ type: "run_completed", runId, message });
+      return message;
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : String(error);
+      await emit({ type: "agent_failed", runId, agent: "founderScout", error: detail });
+      const content = `Founder scout couldn't assemble a profile: ${detail}`;
+      await emit({ type: "text_delta", runId, delta: content });
+      const message: OrchestratorChatMessage = { role: "assistant", content };
+      await emit({ type: "run_completed", runId, message });
+      return message;
+    }
+  }
+
   if (isSourcingRequest(question) || clarificationFollowUp) {
     const emit = async (event: ChatStreamEvent) => options.onEvent?.(event);
     await emit({

@@ -21,6 +21,7 @@ import { OpenAILLMClient } from "./llm/openai.js";
 import { TavilySearchClient } from "./search/tavily.js";
 import { applyFeedback } from "./orchestrator.js";
 import { discoverCompanies } from "./tools/discover.js";
+import { sourceFounder } from "./tools/sourceFounder.js";
 import { rankCandidates, displayFitScore } from "./tools/fundfit.js";
 import { InvestorFeedbackSchema, type FeedbackActionType } from "./schemas/feedback.js";
 import {
@@ -269,6 +270,16 @@ async function handleDiscover(body: { query?: string; limit?: number }) {
   return { companies, count: companies.length };
 }
 
+/** Source + score one person from the web (LinkedIn URL as identity anchor). */
+async function handleSourceFounder(body: { linkedinUrl?: string; name?: string; company?: string }) {
+  if (!search) throw new Error("web search unavailable: TAVILY_API_KEY not set on the server");
+  const founder = await sourceFounder(
+    { linkedinUrl: body.linkedinUrl, name: body.name, company: body.company, fundProfile: state.fundProfile },
+    { search, llm },
+  );
+  return { founder, sources: founder.sources };
+}
+
 interface ChatBody {
   messages: OrchestratorChatMessage[];
   context?: OrchestratorChatContext;
@@ -396,6 +407,9 @@ const server = http.createServer(async (req, res) => {
     }
     if (req.method === "POST" && req.url === "/api/discover") {
       return res.end(JSON.stringify(await handleDiscover((await readBody(req)) as never)));
+    }
+    if (req.method === "POST" && req.url === "/api/founders/source") {
+      return res.end(JSON.stringify(await handleSourceFounder((await readBody(req)) as never)));
     }
     if (req.method === "POST" && req.url === "/api/models/preview") {
       const body = CompanyWorkbookRequestSchema.parse(await readBody(req));

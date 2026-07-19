@@ -1,41 +1,38 @@
 {
   "mandate": "Find the best seed or Series A software/AI company for a $1.0–2.5M initial check, underwritten to HCP's standard: bottom-up revenue build, explicit assumptions, founder-market fit, and a defensible moat.",
   "fundProfile": {
-    "thesisSummary": "The fund focuses on investing in early-stage software and AI companies, particularly those with strong founder-market fit, a defensible moat, and the potential to become critical infrastructure points in their respective areas. Preferred investments include companies providing innovative solutions in AI, fintech, and enterprise software with clear paths to significant ownership and return on investment.",
+    "thesisSummary": "HCP focuses on investing in seed and Series A software/AI companies that demonstrate strong founder-market fit, have a defensible moat, and can produce significant bottom-up revenue builds. The fund targets investments in companies with innovative use of AI and software technology, aiming to become industry control points or leaders in their respective segments.",
     "stages": [
       "seed",
       "series_a"
     ],
     "sectors": [
       "AI",
-      "fintech",
-      "enterprise software",
+      "financial_services",
+      "technology",
       "gaming",
-      "consumer software"
+      "enterprise_software"
     ],
     "geographies": [
       "US",
-      "Africa",
-      "Japan"
+      "Japan",
+      "Africa"
     ],
     "checkSize": {
-      "min": 1000000,
+      "min": 2000000,
       "max": 2500000
     },
-    "ownershipTarget": 0.03,
+    "ownershipTarget": 0.025,
     "criteria": [
       {
-        "id": "criterion_001",
+        "id": "founder-market-fit",
         "name": "Founder-Market Fit",
-        "weight": 0.25,
+        "weight": 0.3,
         "positiveSignals": [
-          "engineering-first team with prior successes",
-          "proven track record in the sector",
-          "deep industry expertise"
+          "Founders have deep industry experience or past successful ventures."
         ],
         "negativeSignals": [
-          "lack of relevant experience",
-          "poor industry network"
+          "Founders lack industry experience or haven't scaled startups before."
         ],
         "supportingMemoIds": [
           "memo_mem0",
@@ -43,116 +40,125 @@
         ]
       },
       {
-        "id": "criterion_002",
+        "id": "defensible-moot",
         "name": "Defensible Moat",
         "weight": 0.25,
         "positiveSignals": [
-          "unique control point",
-          "strong customer integration",
-          "high switching costs"
+          "The company has a unique product lifecycle or IP that is hard to replicate."
         ],
         "negativeSignals": [
-          "easily replicable technology",
-          "low customer retention"
+          "The product can be easily replicated or lacks defensible technology."
         ],
         "supportingMemoIds": [
+          "memo_mem0",
           "memo_sett",
           "memo_tailor"
         ]
       },
       {
-        "id": "criterion_003",
-        "name": "Revenue Potential and Scalability",
-        "weight": 0.3,
+        "id": "revenue-potential",
+        "name": "Revenue Potential",
+        "weight": 0.2,
         "positiveSignals": [
-          "large addressable market",
-          "clear path to high ARR growth",
-          "scalable business model"
+          "Clear path to significant bottom-up revenue growth with scalable business model."
         ],
         "negativeSignals": [
-          "small market size",
-          "low potential for expansion"
+          "Unclear revenue model or limited market potential."
         ],
         "supportingMemoIds": [
-          "memo_mem0",
+          "memo_cedar_money",
           "memo_alinea_invest"
         ]
       },
       {
-        "id": "criterion_004",
-        "name": "Clear Go-To-Market Strategy",
-        "weight": 0.2,
+        "id": "market-demand",
+        "name": "Market Demand",
+        "weight": 0.15,
         "positiveSignals": [
-          "strong initial customer traction",
-          "aligned distribution channels",
-          "effective marketing strategy"
+          "Rapidly growing market with increasing demand for the product."
         ],
         "negativeSignals": [
-          "unclear GTM strategy",
-          "poor initial sales"
+          "Saturated market or limited customer interest."
         ],
         "supportingMemoIds": [
-          "memo_tailor",
           "memo_sekai",
-          "memo_alinea_invest"
+          "memo_sett"
+        ]
+      },
+      {
+        "id": "technical-foundation",
+        "name": "Technical Foundation",
+        "weight": 0.1,
+        "positiveSignals": [
+          "Strong technical team and foundational product technology."
+        ],
+        "negativeSignals": [
+          "Weak technical team or technology stack."
+        ],
+        "supportingMemoIds": [
+          "memo_mem0",
+          "memo_tailor"
         ]
       }
     ],
     "attributePreferences": {
-      "founderArchetypes:engineering-first team": 0.2,
-      "founderArchetypes:serial entrepreneur": 0.1,
-      "organizationArchetypes:B2B": 0.15,
-      "organizationArchetypes:B2C": 0.1,
-      "sectorFocus:AI": 0.15,
-      "sectorFocus:fintech": 0.1,
-      "sectorFocus:enterprise software": 0.1,
-      "geographyFocus:US": 0.05,
-      "geographyFocus:global reach": 0.05
+      "founderArchetype:engineering-first": 2,
+      "founderArchetype:dual-ceo": 1,
+      "industry:technology": 2,
+      "industry:financial_services": 1.5,
+      "industry:AI": 2,
+      "industry:enterprise_software": 1.5,
+      "industry:gaming": 1,
+      "geography:US": 1,
+      "geography:Japan": 0.5,
+      "geography:Africa": 0.5
     },
     "archetypes": {
       "successful": [
-        "AI infrastructure series_a",
-        "fintech series_a"
+        "engineering-founder",
+        "mission-driven-founder",
+        "serial-entrepreneur"
       ],
       "rejected": [
-        "commerce>retail>AI"
+        "consumer-and-brand-founder"
       ]
     },
     "recurringReasonsToInvest": [
-      "strong open-source developer traction",
-      "unique product-market fit",
-      "defensible technology moat"
+      "Strong founder-market fit",
+      "Defensible technology and moat",
+      "Significant market demand and growth potential",
+      "Innovative use of AI or technology"
     ],
     "recurringReasonsToPass": [
-      "unattractive valuation",
-      "insufficient market size",
-      "lack of clear founder-market fit"
+      "High entry valuation",
+      "Weakening market demand",
+      "Lack of a clear path to significant revenue"
     ],
     "partnerProfiles": [
       {
-        "id": "partner_001",
+        "id": "p1",
         "name": "John Doe",
-        "archetype": "technical investor",
+        "archetype": "engineering-focused",
         "priorities": [
-          "technology moat",
-          "scalable revenue model"
+          "technical-foundation",
+          "defensible-moat"
         ],
         "biases": {
-          "positive": 0,
-          "negative": 0
+          "sector": 0,
+          "stage": 0
         }
       },
       {
-        "id": "partner_002",
+        "id": "p2",
         "name": "Jane Smith",
-        "archetype": "market strategist",
+        "archetype": "market-growth-driven",
         "priorities": [
-          "market potential",
-          "clear GTM strategy"
+          "market-demand",
+          "revenue-potential"
         ],
         "biases": {
-          "positive": 0,
-          "negative": 0
+          "sector": 0,
+          "stage": 0
         }
       }
     ],
@@ -170,14 +176,14 @@
       "decision": "invested",
       "date": "2025-10-28",
       "text": "## 1. Mem0\n\n**Stage:** Series A  \n**Proposed HCP check:** $2.5m  \n**Recommendation:** Pursue  \n**Links:** [Company](https://mem0.ai/) | [Documentation](https://docs.mem0.ai/introduction) | [Financing](https://techcrunch.com/2025/10/28/mem0-raises-24m-from-yc-peak-xv-and-basis-set-to-build-the-memory-layer-for-ai-apps/) | [Research paper](https://arxiv.org/abs/2504.19413)\n\n### Founders and company\n\n| Founder | Role | Relevant evidence |\n|---|---|---|\n| Taranjeet Singh | Co-founder and CEO | Built Mem0 from an open-source project into a commercial memory layer; the company profile describes prior engineering and product experience. |\n| Other founding team | Technical founding group | Public sources establish a small, engineering-led team, but the financing article is the cleanest source for current team composition. Confirm titles and vesting in diligence. |\n\n### Product description\n\nMem0 provides a persistent memory layer for AI applications. Developers can store, retrieve, and update user, session, and agent memories without rebuilding that logic inside every application. The company offers a managed service, an open-source package, framework integrations, and OpenMemory for portable personal context. Its wedge is narrower than a vector database: Mem0 determines what should be remembered, how memories change, and which context should be retrieved. The product can reduce prompt size and latency while improving personalization across assistants, support agents, coding tools, and multi-agent systems.\n\n### Thesis: why invest\n\nThe strongest infrastructure companies own a control point that every application repeatedly touches. Memory is becoming such a point for long-lived agents. Mem0 combines open-source distribution with a hosted control plane and is already showing developer pull: the October 2025 financing report cited 41,000 GitHub stars, 13 million package downloads, and API calls increasing from 35 million in Q1 to 186 million in Q3. The company now reports more than 100,000 developers and 58,000 GitHub stars on its [about page](https://mem0.ai/about-us).\n\nThe moat is not raw storage. It is the memory lifecycle: extraction, consolidation, conflict resolution, retrieval, evaluation, and observability across models and frameworks. The published paper reports better answer quality with materially lower latency and token cost, although HCP should reproduce those benchmarks on customer workloads. If Mem0 becomes the model-neutral memory standard, usage can compound as each customer adds agents, end users, and retained context.\n\n**What must be true:** managed revenue must grow faster than self-hosted substitution; memory quality must remain differentiated as model vendors add native features; and enterprise buyers must accept a third party in a sensitive data path.\n\n**Next-round milestones:** at least $15m to $20m ARR, net revenue retention above 130%, five or more referenceable deployments above $250k ARR, and evidence that gross margin remains above 75% after inference and storage costs.\n\n### Founder bet\n\nThe bet is that an engineering-first team can turn unusually strong open-source adoption into an enterprise platform without alienating its community. The lean team and rapid API growth are positive signals. Diligence should focus on ownership of the core repository, security leadership, enterprise sales depth, and whether benchmark-driven developer enthusiasm converts into durable paid workloads.\n\n### Market, TAM, and revenue build\n\nThe [CNCF and SlashData 2026 report](https://www.cncf.io/announcements/2026/03/24/cncf-and-slashdata-report-finds-cloud-native-community-reaches-nearly-20-million-developers/) estimates 19.9 million cloud-native developers, about 39% of developers globally. HCP narrows this to 250,000 production AI teams, then segments by spend.\n\n| Bottom-up step | Units | Annual value | Result | Basis |\n|---|---:|---:|---:|---|\n| Small production AI teams | 220,000 | $6,000 | $1.32bn | HCP assumption: team plan plus usage |\n| Mid-market AI platforms | 27,000 | $60,000 | $1.62bn | HCP assumption: multi-application deployment |\n| Large enterprise AI estates | 3,000 | $500,000 | $1.50bn | HCP assumption: security, scale, and support |\n| **TAM** | 250,000 |  | **$4.44bn** | One annual memory-platform pool |\n| HCP penetration |  |  | **9.5% of TAM revenue** | 2,000 scaled accounts plus self-serve usage; aggressive but below 1% of global developer population |\n| **2032 revenue opportunity** |  |  | **$420m** | HCP base case |\n\n| Revenue driver, $m | 2026E | 2027E | 2028E | 2029E | 2030E | 2031E | 2032E |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| Paid teams / enterprise accounts | 500 | 1,300 | 2,700 | 4,800 | 7,500 | 10,500 | 14,000 |\n| Blended ARR per account | $12k | $14k | $17k | $19k | $23k | $27k | $30k |\n| **Revenue** | **$6** | **$18** | **$45** | **$90** | **$170** | **$280** | **$420** |\n\n### Competitive landscape\n\n| Category / company | Model and primary user | Capability and workflow | Infrastructure / delivery | ICP and hardest-to-copy moat | Pricing | Capital status |\n|---|---|---|---|---|---|---|\n| Memory platform / **Mem0** | Usage SaaS plus OSS; AI developers | X extraction, update, retrieval, graph memory, evaluation | Managed API, OSS, integrations | Model-neutral memory lifecycle plus OSS distribution | Public tiers; enterprise custom | $20m Series A; $24m total; valuation undisclosed; Basis Set, Peak XV, Kindred, YC, GitHub Fund |\n| Memory platform / Zep | SaaS plus OSS; agent teams | X temporal knowledge graph and memory | Cloud and self-hosted | Temporal context graph | Public and custom | Private; latest, total, and valuation undisclosed here |\n| Agent architecture / Letta | SaaS plus OSS; developers | X stateful agents; Partial standalone memory service | Cloud and OSS | Stateful-agent research lineage | Public and custom | Private; valuation undisclosed |\n| Knowledge engine / Cognee | SaaS plus OSS; data and AI teams | X graph-based memory and retrieval | Cloud and self-hosted | Data-ingestion-to-graph workflow | Undisclosed | Private; capital data undisclosed here |\n| Framework feature / LangMem | OSS; LangGraph developers | Partial cross-framework memory; X within LangGraph | Library | Native LangChain ecosystem integration | Open source | Product of private LangChain |\n| Personal memory / Supermemory | SaaS/API; developers and users | X personal content memory; Partial enterprise lifecycle | Hosted API and apps | Consumer content ingestion and retrieval | Public tiers | Private; valuation undisclosed |\n| Storage substitute / Pinecone | Usage SaaS; developers | X vector retrieval; Partial memory lifecycle | Managed vector database | Scale, reliability, installed base | Usage based | Private; funding public, current valuation undisclosed |\n\n**Position:** Mem0 can own memory policy above databases and below applications. The category risk is compression from both directions: databases can add memory features, while model and framework vendors can bundle them.\n\n### Public comps and exit model\n\n| Public comp | EV/LTM revenue | Relevance |\n|---|---:|---|\n| [MongoDB](https://stockanalysis.com/stocks/mdb/statistics/) | 8.74x | Developer database platform |\n| [Snowflake](https://stockanalysis.com/stocks/snow/statistics/) | 18.20x | Cloud data platform |\n| [Cloudflare](https://stockanalysis.com/stocks/net/statistics/) | 42.05x | Developer infrastructure at premium growth |\n| [Datadog](https://stockanalysis.com/stocks/ddog/statistics/) | 24.13x | Usage-oriented developer platform |\n| [GitLab](https://stockanalysis.com/stocks/gtlb/statistics/) | 4.15x | Open-core developer software |\n| **Median** | **18.20x** | HCP uses 8.0x, a 56% discount |\n\n| Return path | Base |\n|---|---:|\n| Entry post-money | $100m, HCP assumption |\n| Initial ownership | 2.50% |\n| Cumulative future dilution | 35%, HCP assumption |\n| Exit ownership | 1.63% |\n| 2032 revenue / exit multiple | $420m / 8.0x |\n| Exit enterprise value | $3.36bn |\n| HCP proceeds / MOIC | $54.6m / **21.8x** |\n| Downside / upside MOIC | 11.5x / 36.9x |\n\n### Principal risks and why invest anyway\n\n- **Bundling:** OpenAI, Anthropic, Google, or agent frameworks can bundle memory. Invest because portability, governance, and cross-model persistence remain neutral-platform advantages.\n- **OSS monetization:** adoption may not convert. Require cohort evidence for cloud conversion and paid expansion.\n- **Security and privacy:** memories can contain sensitive data. Require SOC 2, deletion guarantees, regional controls, encryption, and prompt-injection testing.\n- **Benchmark risk:** published results may not generalize. Reproduce evaluations on three production workloads before closing.\n\n---",
-      "rationale": "Mem0 provides a persistent memory layer for AI applications, combining open-source distribution with a hosted control plane. It has shown strong developer pull, with significant growth in GitHub stars and API calls. The moat is the memory lifecycle, which includes extraction, consolidation, conflict resolution, retrieval, evaluation, and observability. These attributes deliver better answer quality with lower latency and token cost. The thesis is that memory is becoming a control point every application touches, and Mem0 is positioned to capitalize on that.",
-      "identifiedMoat": "memory lifecycle",
+      "rationale": "Mem0 provides a critical memory layer for AI applications, showing strong developer traction with open-source adoption and API growth. The company's position as a model-neutral memory standard with a differentiated memory lifecycle provides a substantial moat. The investment is supported by the potential of Mem0 becoming a control point throughout AI applications, substantiated by strong usage and future growth potential.",
+      "identifiedMoat": "Memory lifecycle management: extraction, consolidation, conflict resolution, retrieval, evaluation, and observability.",
       "decisionDrivers": [
-        "open-source distribution",
-        "strong developer pull",
-        "memory lifecycle differentiation"
+        "strong open-source traction",
+        "developer pull",
+        "model-neutral memory lifecycle"
       ],
-      "outcome": "unknown"
+      "outcome": "active"
     },
     {
       "id": "memo_sekai",
@@ -186,14 +192,14 @@
       "decision": "invested",
       "date": "2026-06-01",
       "text": "## 2. Sekai\n\n**Stage:** Series A  \n**Proposed HCP check:** $2.5m  \n**Recommendation:** Pursue, high variance  \n**Links:** [Company](https://sekai.ai/) | [Financing](https://www.axios.com/2026/06/01/sekai-mini-app-startup-funding) | [Product-growth account](https://www.geekwire.com/contributor-content/how-sekai-became-tiktok-for-software-in-under-three-months/)\n\n### Founders and company\n\n| Founder | Role | Relevant evidence |\n|---|---|---|\n| Lucky Zhang | Founder and CEO | Previously founded Yi+ AI, acquired by Apple, and Blacktail, acquired by ByteDance; Axios reports Sekai was founded in 2024. |\n\n### Product description\n\nSekai is a consumer platform for creating, playing, and remixing AI-generated mini-apps. A user describes an interactive idea, the system builds an executable experience, and the result enters a feed where others can use or modify it. The product collapses coding, hosting, discovery, and collaboration into one loop. Unlike developer-first app builders, Sekai is designed for people who may never identify as programmers. Its most important asset could become a behavioral graph connecting prompts, components, remixes, play sessions, and creator followings across a new category of executable media.\n\n### Thesis: why invest\n\nAI makes software creation abundant, but distribution remains scarce. Sekai joins generation and distribution in a single consumer loop, similar to how TikTok joined video creation with an interest graph. Axios reported a $20m Series A in June 2026, co-led by Khosla Ventures and Connect Ventures, with a16z Speedrun, Mayfield, A*, MVP, 359 Capital, Parable, and 645 Ventures participating. A company-authored GeekWire contribution said Sekai was on track for two million mini-apps in under three months; treat this as a company claim until cohort data is reviewed.\n\nThe moat is not the coding model. It is the remix graph and distribution engine: which ideas convert, which components are reused, who plays them, and which creators retain an audience. If that loop compounds, model improvements lower creation cost for Sekai and competitors alike, while Sekai retains consumer demand.\n\n**What must be true:** mini-apps must drive repeat play rather than novelty; creators must earn status or money; moderation must scale; and Sekai must monetize without choking the remix loop.\n\n**Next-round milestones:** 10 million monthly active users, D30 creator retention above 20%, more than 25% of sessions from remixes or follows, $15m annualized revenue, and clear content-safety economics.\n\n### Market, TAM, and revenue build\n\nHCP uses a creator-spend model. The market is not all app-development spending; it is the subset of consumers and prosumers willing to pay for creation tools plus platform economics.\n\n| Bottom-up step | Units | Annual value | Result | Basis |\n|---|---:|---:|---:|---|\n| Hobby creators | 40m | $60 | $2.40bn | HCP assumption: global addressable creator subset |\n| Power creators / small studios | 5m | $300 | $1.50bn | HCP assumption |\n| Platform take on creator commerce | $5bn GMV | 10% | $0.50bn | HCP assumption; avoids counting all digital goods |\n| **TAM** |  |  | **$4.40bn** | Subscription and take-rate pool |\n| HCP penetration |  |  | **9.1%** | 3.5m paid creators plus commerce take |\n| **2032 revenue opportunity** |  |  | **$400m** | HCP base case |\n\n| Revenue, $m | 2026E | 2027E | 2028E | 2029E | 2030E | 2031E | 2032E |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| Subscription plus take rate | 6 | 18 | 45 | 90 | 160 | 260 | 400 |\n| Illustrative paid creators | 100k | 280k | 650k | 1.2m | 2.0m | 2.8m | 3.5m |\n\n### Competitive landscape\n\n| Company | Category / user | Workflow coverage | Delivery | Hardest-to-copy advantage | Pricing | Capital status |\n|---|---|---|---|---|---|---|\n| **Sekai** | Consumer mini-app network | X create, host, discover, remix | Web and mobile | Consumer remix and interest graph | Undisclosed | $20m Series A; valuation and total funding undisclosed; Khosla, Connect, a16z Speedrun, Mayfield, A* |\n| Roblox | UGC gaming platform | X create, distribute, monetize; Partial prompt-to-app | Apps plus Studio | Creator economy and massive player graph | Revenue share | Public |\n| Replit | Developer app builder | X generate, deploy; Partial consumer discovery | Web/cloud | Integrated coding and deployment | Public tiers | Private; valuation not used |\n| Lovable | Prompt-to-web-app builder | X generation and deployment; No evidence consumer feed | Web/cloud | Fast natural-language build loop | Public tiers | Private; valuation not used |\n| Emergent | Agentic app builder | X generation and deployment; Partial discovery | Web/cloud | Full-stack autonomous build | Public tiers | Private; capital data undisclosed here |\n| Anything | Mobile AI app builder | X mobile generation; Partial distribution | Mobile/web | Mobile-native creation | Public tiers | Private; capital data undisclosed here |\n| Figma Make | Design-to-prototype | Partial executable apps; X collaborative design | Web/cloud | Design-system and team installed base | Bundled subscription | Public company product |\n\n### Public comps and exit model\n\n| Public comp | EV/LTM revenue |\n|---|---:|\n| [Roblox](https://stockanalysis.com/stocks/rblx/statistics/) | 6.72x |\n| [Unity](https://stockanalysis.com/stocks/u/statistics/) | 6.67x |\n| [AppLovin](https://stockanalysis.com/stocks/app/statistics/) | 23.31x |\n| [Playtika](https://stockanalysis.com/stocks/pltk/statistics/) | 1.17x |\n| [Take-Two](https://stockanalysis.com/stocks/ttwo/statistics/) | 6.75x |\n| **Median** | **6.72x** |\n\n| Return path | Base |\n|---|---:|\n| Entry post-money / ownership | $90m HCP assumption / 2.78% |\n| Future dilution / exit ownership | 35% / 1.81% |\n| 2032 revenue / multiple / EV | $400m / 5.0x / $2.00bn |\n| HCP proceeds / MOIC | $36.1m / **14.4x** |\n| Downside / upside MOIC | 6.9x / 26.0x |\n\n### Principal risks and why invest anyway\n\n- **Novelty decay:** mini-app creation may be a demo, not a habit. Gate investment on cohort retention and organic consumption.\n- **Platform safety:** executable user content introduces fraud, IP, malware, and child-safety risk. Require sandboxing and moderation evidence.\n- **Incumbent response:** Roblox, Apple, Google, and Meta own distribution. Sekai's chance rests on a new content primitive and remix graph, not superior foundation models.\n- **Unproven monetization:** base revenue is entirely HCP-modeled. Structure milestones around paid conversion and creator economics.\n\n---",
-      "rationale": "Sekai combines AI-generated mini-app creation with a remix graph and distribution engine, which could form a durable moat through user engagement and retention. The company's potential to mimic the success of platforms like TikTok in software distribution and the strong founder track record bolstered confidence in its scaling and monetization capabilities. Despite inherent risks in novelty decay and platform safety, the investment thesis is based on Sekai's ability to capture consumer demand and build a unique market position.",
-      "identifiedMoat": "Remix graph and distribution engine",
+      "rationale": "Sekai combines software creation and distribution in a single consumer loop, similar to TikTok's approach with videos. The key asset is the remix graph and distribution engine, which compounds consumer demand while lowering creation cost. The largest risks include novelty decay and platform safety concerns.",
+      "identifiedMoat": "Remix graph and distribution engine, connecting prompts, components, remixes, play sessions, and creator followings.",
       "decisionDrivers": [
-        "consumer remix and interest graph",
-        "proven founder track record",
-        "unproven monetization"
+        "AI-driven creation",
+        "consumer loop",
+        "distribution scarcity"
       ],
-      "outcome": "active"
+      "outcome": "unknown"
     },
     {
       "id": "memo_alinea_invest",
@@ -203,11 +209,11 @@
       "date": "2025-04-09",
       "text": "## 3. Alinea Invest\n\n**Stage:** Series A  \n**Proposed HCP check:** $2.0m  \n**Recommendation:** Pursue  \n**Links:** [Company](https://www.alinea-invest.com/) | [Series A report](https://www.forbes.com/sites/nicolecasperson/2025/04/09/how-fintech-alinea-invest-used-storytelling-to-raise-104-million/) | [2026 financing update](https://www.alinea-invest.com/press/wealth-management-platform-alinea-secures-22-5-million-in-user-acquisition-financing-from-financial-services-firm-pvx-partners)\n\n### Founders and company\n\n| Founder | Role | Relevant evidence |\n|---|---|---|\n| Eve Halimi | Co-founder and co-CEO | Built Alinea around accessible, culturally native investing for younger users. |\n| Anam Lakhani | Co-founder and co-CEO | Leads the same consumer-finance mission; Forbes identifies both founders and the Series A syndicate. |\n\n### Product description\n\nAlinea is an SEC-registered investment adviser and mobile wealth platform aimed at first-time, younger investors, especially women. It packages investing into guided portfolios, thematic baskets, automation, education, and community rather than presenting a trading terminal. Brokerage custody is provided through infrastructure partners, allowing Alinea to focus on acquisition, advice, and experience. The wedge is behavioral: translate financial goals and cultural interests into a repeatable investing habit. In February 2026 the company reported more than two million downloads and secured $22.5m of user-acquisition financing from PVX Partners.\n\n### Thesis: why invest\n\nThe April 2025 $10.4m Series A was led by Play Ventures with GFR, Y Combinator, Gaingels, FoundersX, F7 Ventures, and Visible Connect participating. Alinea can become the relationship layer for a cohort that distrusts traditional wealth brands but still needs to move from first deposit to retirement, credit, and advice. The differentiated asset is a high-intent behavioral dataset on novice investors and an acquisition engine tailored to their language and communities.\n\n**What must be true:** funded-account conversion must rise faster than paid acquisition cost; assets and subscription revenue must expand with age; advice must remain compliant; and users must not graduate directly to free incumbent brokers.\n\n**Next-round milestones:** 500,000 funded accounts, more than $1bn in advised assets, $20m annualized net revenue, CAC payback below 12 months, and 12-month funded-account retention above 70%.\n\n### Market, TAM, and revenue build\n\nThe [U.S. Census Bureau](https://www.census.gov/newsroom/press-releases/2026/vintage-2025-pop-estimates.html) provides current age-cohort population estimates. HCP uses a narrower 40 million digital-first, investable U.S. prospect pool as an explicit underwriting assumption rather than treating an entire generation as addressable.\n\n| Bottom-up step | Units | Annual value | Result | Basis |\n|---|---:|---:|---:|---|\n| Emerging investors | 32m | $60 | $1.92bn | HCP assumption: subscription and net platform revenue |\n| Affluent emerging investors | 8m | $240 | $1.92bn | HCP assumption: higher balances and advice |\n| **TAM** | 40m |  | **$3.84bn** | U.S. annual revenue pool |\n| HCP penetration |  |  | **5.7%** | 2.8m monetized accounts, 7% of prospect pool |\n| **2032 revenue opportunity** |  |  | **$220m** | HCP base case |\n\n| Revenue driver | 2026E | 2027E | 2028E | 2029E | 2030E | 2031E | 2032E |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| Monetized accounts | 200k | 330k | 550k | 900k | 1.4m | 2.0m | 2.8m |\n| Net annual revenue/account | $60 | $67 | $73 | $78 | $79 | $80 | $79 |\n| **Revenue, $m** | **12** | **22** | **40** | **70** | **110** | **160** | **220** |\n\n### Competitive landscape\n\n| Company | Category / use | Workflow | Delivery | ICP / moat | Pricing | Capital status |\n|---|---|---|---|---|---|---|\n| **Alinea** | Guided investing for first-time investors | X onboarding, portfolios, automation, education | Mobile RIA with partner custody | Gen Z women; culturally native acquisition and behavior graph | Public terms should be confirmed | $10.4m Series A; valuation and total equity undisclosed; Play Ventures, GFR, YC, Gaingels |\n| Robinhood | Self-directed brokerage | X trading and cash; Partial guided advice | Mobile/web broker | Scale, liquidity, product breadth | Subscription plus transaction economics | Public |\n| Acorns | Automated saving/investing | X roundups, portfolios, retirement | Mobile/web RIA | Habit automation and household bundle | Public subscription tiers | Private; valuation not used |\n| Public | Social brokerage | X trading and community; Partial advice | Mobile/web broker | Investor community and multi-asset access | Membership and transaction economics | Private; valuation not used |\n| Ellevest | Wealth platform for women | X advice and managed portfolios | Digital plus human advice | Brand and planning tailored to women | Public advisory pricing | Private; capital data undisclosed here |\n| Wealthfront | Automated wealth management | X portfolios, cash, planning | Digital RIA | Tax automation and mature planning stack | AUM fee | Private subsidiary / transaction status should be refreshed |\n| Betterment | Automated wealth management | X portfolios, retirement, adviser tools | Digital RIA | Scale and tax-aware automation | AUM and subscription fees | Private; valuation not used |\n\n### Public comps and exit model\n\n| Public comp | EV/LTM revenue |\n|---|---:|\n| [Robinhood](https://stockanalysis.com/stocks/hood/statistics/) | 18.29x |\n| [SoFi](https://stockanalysis.com/stocks/sofi/statistics/) | 5.25x |\n| [Coinbase](https://stockanalysis.com/stocks/coin/statistics/) | 6.19x |\n| [Payoneer](https://stockanalysis.com/stocks/payo/statistics/) | 2.01x |\n| **Median** | **5.72x** |\n\n| Return path | Base |\n|---|---:|\n| Entry post-money / ownership | $60m HCP assumption / 3.33% |\n| Future dilution / exit ownership | 35% / 2.17% |\n| 2032 revenue / multiple / EV | $220m / 5.0x / $1.10bn |\n| HCP proceeds / MOIC | $23.8m / **11.9x** |\n| Downside / upside MOIC | 5.7x / 21.4x |\n\n### Principal risks and why invest anyway\n\n- **Economics:** downloads can mask low funded-account conversion. Underwrite only against account cohorts, contribution margin, and CAC payback.\n- **Commodity execution:** incumbents can copy features. Alinea must own trust, community, and lifecycle data rather than baskets alone.\n- **Regulatory:** personalized advice and social content create supervision risk. Require compliance testing and complaint data.\n- **Financing quality:** PVX funding is user-acquisition financing, not validation of equity value. Model its covenants and repayment priority.\n\n---",
       "rationale": "Alinea can become the relationship layer for a cohort that distrusts traditional wealth brands but still needs to move from first deposit to retirement, credit, and advice. The differentiated asset is a high-intent behavioral dataset on novice investors and an acquisition engine tailored to their language and communities.",
-      "identifiedMoat": "Culturally native acquisition and behavior graph tailored to Gen Z women.",
+      "identifiedMoat": "Gen Z women; culturally native acquisition and behavior graph",
       "decisionDrivers": [
-        "culturally native acquisition",
-        "young investor focus",
-        "high-intent behavioral dataset"
+        "gen-z-target",
+        "culturally-native-acquisition",
+        "behavioral-dataset"
       ],
       "outcome": "active"
     },
@@ -216,16 +222,16 @@
       "companyId": "co_sett",
       "companyName": "Sett",
       "decision": "invested",
-      "date": "2025-05-07",
+      "date": "2025-05",
       "text": "## 4. Sett\n\n**Stage:** Series A  \n**Proposed HCP check:** $2.5m  \n**Recommendation:** Pursue  \n**Links:** [Company](https://www.sett.ai/) | [Series A report](https://techcrunch.com/2025/05/07/game-sett-funding-a-startup-building-ai-agents-for-game-development-emerges-from-stealth-with-27m/) | [Investor profile](https://www.bvp.com/news/meet-the-founders-of-sett-amit-carmi-and-yoni-blumenfeld)\n\n### Founders and company\n\n| Founder | Role | Relevant evidence |\n|---|---|---|\n| Amit Carmi | Co-founder | Gaming and technology operator building agentic creative workflows. |\n| Yoni Blumenfeld | Co-founder | Co-developed Sett's performance-oriented AI approach; Bessemer profiles the pair. |\n\n### Product description\n\nSett builds AI agents for mobile-game growth teams. Customers provide game assets and performance context; the platform produces video ads and interactive playable ads, then uses campaign outcomes to improve subsequent creative. This is more specific than a general image or video generator. Sett aims to own the closed loop from game understanding and asset generation to ad variation, deployment-ready output, and performance learning. The company starts in user acquisition, where return on ad spend is measurable, and can expand into live operations, in-game content, and broader studio workflows.\n\n### Thesis: why invest\n\nSett emerged from stealth in May 2025 with $27m total funding, including a $15m Series A led by Bessemer Venture Partners and a prior $12m seed. Saga, vgames, F2 Venture Capital, and Akin also participated. Gaming is an attractive vertical for agentic software because outputs are digital, iteration is constant, and value is directly measured through acquisition economics.\n\nThe moat is the performance feedback loop. Generic models can generate assets, but Sett can learn which mechanics, pacing, characters, and messages convert for a specific game and audience. If customers let the platform see campaign results, every production cycle improves the next.\n\n**What must be true:** generated playables must materially shorten production cycles; creative lift must persist after novelty; platform and ad-network policy must allow scaled deployment; and Sett must broaden beyond a narrow UA budget.\n\n**Next-round milestones:** $20m ARR, more than 100 studio customers, 130% net retention, gross margin above 75%, and statistically credible improvement in cost per install or return on ad spend.\n\n### Market, TAM, and revenue build\n\n| Bottom-up step | Units | Annual value | Result | Basis |\n|---|---:|---:|---:|---|\n| Emerging mobile studios | 8,000 | $60,000 | $480m | HCP assumption: creative automation package |\n| Scaled publishers | 1,500 | $400,000 | $600m | HCP assumption: multiple titles and teams |\n| Global platforms / majors | 200 | $2.0m | $400m | HCP assumption: enterprise deployment |\n| **TAM** | 9,700 |  | **$1.48bn** | Annual software and managed-generation pool |\n| HCP penetration |  |  | **16.9% of TAM revenue** | About 500 scaled customer equivalents |\n| **2032 revenue opportunity** |  |  | **$250m** | HCP base case |\n\n| Revenue, $m | 2026E | 2027E | 2028E | 2029E | 2030E | 2031E | 2032E |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| Base case | 6 | 16 | 35 | 70 | 120 | 180 | 250 |\n| Illustrative customers | 40 | 80 | 150 | 250 | 350 | 430 | 500 |\n\n### Competitive landscape\n\n| Company | Category / user | Workflow | Delivery | Moat | Pricing | Capital status |\n|---|---|---|---|---|---|---|\n| **Sett** | AI game-growth agents | X video and playable creation; X performance loop if integrated | SaaS | Game-specific feedback data | Undisclosed | $15m Series A; $27m total; valuation undisclosed; Bessemer, Saga, vgames, F2, Akin |\n| AppLovin SparkLabs | Ad creative inside ad stack | X creative and distribution | Cloud platform | Advertiser and auction data | Spend based | Public company product |\n| Unity | Game engine and ads | X creation infrastructure; Partial automated UA creative | Engine and cloud | Installed base and engine telemetry | Subscription and ad economics | Public |\n| Layer AI | Game-asset generation | X asset workflows; Partial performance loop | SaaS | Studio asset consistency | Undisclosed | Private; capital data undisclosed here |\n| Scenario | Custom game-image models | X consistent assets; No evidence end-to-end UA | SaaS/API | Style-consistent custom models | Public tiers | Private; valuation undisclosed |\n| Ludo.ai | Game ideation and research | X ideation; Partial production | SaaS | Game-design intelligence corpus | Public tiers | Private; capital data undisclosed here |\n| Promethean AI | 3D environment production | X art-production assistance; No evidence UA loop | Desktop integrations | 3D scene workflow | Public/custom | Private; capital data undisclosed here |\n\n### Public comps and exit model\n\nThe selected gaming-tech group is [Roblox](https://stockanalysis.com/stocks/rblx/statistics/) 6.72x, [Unity](https://stockanalysis.com/stocks/u/statistics/) 6.67x, [AppLovin](https://stockanalysis.com/stocks/app/statistics/) 23.31x, [Playtika](https://stockanalysis.com/stocks/pltk/statistics/) 1.17x, and [Take-Two](https://stockanalysis.com/stocks/ttwo/statistics/) 6.75x. Median EV/LTM revenue is **6.72x**; HCP uses 5.0x.\n\n| Return path | Base |\n|---|---:|\n| Entry post-money / ownership | $80m HCP assumption / 3.13% |\n| Future dilution / exit ownership | 35% / 2.03% |\n| 2032 revenue / multiple / EV | $250m / 5.0x / $1.25bn |\n| HCP proceeds / MOIC | $25.4m / **10.2x** |\n| Downside / upside MOIC | 4.9x / 18.3x |\n\n### Principal risks and why invest anyway\n\n- **Platform capture:** AppLovin and Unity control distribution. Sett must prove independent optimization produces enough lift to overcome bundling.\n- **Creative saturation:** competitors may converge on the same model outputs. Proprietary performance data and game-specific learning are the defense.\n- **Customer concentration:** large publishers can dominate revenue. Cap single-customer exposure and test renewal economics.\n- **IP:** training data and generated assets may create ownership claims. Require provenance, indemnification, and studio permissions.\n\n---",
-      "rationale": "Sett builds AI agents that help mobile-game growth teams improve ad creation and optimize performance. The company's unique value lies in a closed feedback loop allowing continuous learning and optimization, which improves ad performance over time. The gaming industry is favorably positioned for these types of innovations due to its digital nature and measurable outcomes.",
-      "identifiedMoat": "Performance feedback loop providing continuous learning and optimization specific to game mechanics and audience.",
+      "rationale": "Sett's AI solutions target a lucrative gaming vertical, offering a unique performance feedback loop that improves ad creation through specific game and audience insights. The company's funding, reputable investors, and proven founders indicate potential for significant growth.",
+      "identifiedMoat": "The performance feedback loop that improves creative effectiveness through specific game and audience insights.",
       "decisionDrivers": [
-        "gaming-vertical",
-        "AI-agents",
-        "feedback-loop"
+        "AI game-development",
+        "performance feedback loop",
+        "gaming vertical"
       ],
-      "outcome": "unknown"
+      "outcome": "active"
     },
     {
       "id": "memo_tailor",
@@ -234,12 +240,12 @@
       "decision": "invested",
       "date": "2025-06-30",
       "text": "## 5. Tailor\n\n**Stage:** Series A  \n**Proposed HCP check:** $2.5m  \n**Recommendation:** Pursue  \n**Links:** [Company](https://www.tailor.tech/) | [Series A report](https://techcrunch.com/2025/06/30/tailor-a-headless-erp-startup-raises-22m-series-a/) | [Headless ERP product](https://www.tailor.tech/headless-erp)\n\n### Founders and company\n\n| Founder | Role | Relevant evidence |\n|---|---|---|\n| Yo Shibata | Co-founder and CEO | Enterprise-software founder leading a U.S. and Japan go-to-market. |\n| Misato Takahashi | Co-founder and CTO | Technical leader behind Tailor's API-first transaction architecture. |\n\n### Product description\n\nTailor is a headless, composable enterprise resource planning platform. Rather than forcing a retailer or business-to-business operator into a monolithic suite, it exposes inventory, order, procurement, fulfillment, and finance workflows through granular APIs and configurable applications. It integrates with systems such as Shopify, Odoo, and QuickBooks and is designed for real-time synchronization and agent access. The wedge is operational flexibility: customers can replace a painful workflow first, preserve existing systems, and expand modules over time without undertaking a single high-risk ERP migration.\n\n### Thesis: why invest\n\nTailor raised a $22m Series A in June 2025 from ANRI, JIC Venture Growth Investments, NEA, Spiral Capital, and Y Combinator, among others. TechCrunch reported roughly 50 employees and operations across San Francisco and Tokyo. The timing is compelling: AI agents need clean, permissioned read-and-write access to orders, inventory, suppliers, and financial events. Legacy ERP APIs were built mainly for integration, not autonomous action.\n\nTailor's moat can be workflow ownership without forcing full system replacement, similar to the Krida pattern. Once Tailor becomes the transaction layer connecting commerce and finance, customers accumulate schemas, permissions, integrations, and operating logic that are hard to move.\n\n**What must be true:** modular adoption must expand into a system of record; implementation must remain partner-scalable; the product must win against modern mid-market suites, not only legacy frustration; and agent access must be auditable.\n\n**Next-round milestones:** $20m ARR, 100 enterprise customers, more than 120% net retention, implementation under 90 days for the core package, and at least 30% of customers using three or more modules.\n\n### Market, TAM, and revenue build\n\n| Bottom-up step | Accounts | Annual contract | Result | Basis |\n|---|---:|---:|---:|---|\n| Mid-market commerce operators | 35,000 | $60,000 | $2.10bn | HCP assumption: U.S. and Japan initial ICP |\n| Larger multi-entity operators | 8,000 | $250,000 | $2.00bn | HCP assumption |\n| Enterprise deployments | 1,000 | $1.0m | $1.00bn | HCP assumption |\n| **TAM** | 44,000 |  | **$5.10bn** | Annual software pool |\n| HCP penetration |  |  | **4.7%** | Roughly 800 blended customers |\n| **2032 revenue opportunity** |  |  | **$240m** | HCP base case |\n\n| Revenue, $m | 2026E | 2027E | 2028E | 2029E | 2030E | 2031E | 2032E |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| Base case | 6 | 14 | 30 | 60 | 105 | 165 | 240 |\n| Illustrative customers | 60 | 115 | 210 | 350 | 500 | 650 | 800 |\n\n### Competitive landscape\n\n| Company | Category / use | Workflow | Delivery | Moat | Pricing | Capital status |\n|---|---|---|---|---|---|---|\n| **Tailor** | Composable ERP | X inventory, orders, procurement, integrations | API-first cloud | Incremental workflow ownership plus agent-ready transaction graph | Undisclosed | $22m Series A; valuation and total undisclosed; ANRI, JIC VGI, NEA, Spiral, YC |\n| NetSuite | Cloud ERP | X broad ERP | Multi-tenant cloud | Suite breadth and installed base | Custom | Oracle product |\n| SAP Business One | Mid-market ERP | X broad ERP | Cloud/partner hosted | Global channel and process depth | Custom | SAP product |\n| Microsoft Dynamics 365 | ERP/CRM suite | X broad workflows | Cloud | Microsoft distribution and ecosystem | Public modules/custom | Microsoft product |\n| Acumatica | Cloud ERP | X mid-market ERP | Cloud and partner channel | Industry editions and channel | Custom | Private business; capital status not relevant here |\n| Odoo | Open-core ERP | X broad modular workflows | Cloud/self-hosted | Module breadth and open ecosystem | Public tiers | Private; valuation not used |\n| Cin7 | Inventory and order management | X commerce operations; Partial finance | Cloud | Commerce integrations | Public/custom | Private; valuation not used |\n\n### Public comps and exit model\n\n| Public comp | EV/LTM revenue |\n|---|---:|\n| [Oracle](https://stockanalysis.com/stocks/orcl/statistics/) | 7.42x |\n| [SAP](https://stockanalysis.com/stocks/sap/statistics/) | 4.24x |\n| [Workday](https://stockanalysis.com/stocks/wday/statistics/) | 3.57x |\n| [Manhattan Associates](https://stockanalysis.com/stocks/manh/statistics/) | 8.62x |\n| [Shopify](https://stockanalysis.com/stocks/shop/statistics/) | 12.49x |\n| **Median** | **7.42x** |\n\n| Return path | Base |\n|---|---:|\n| Entry post-money / ownership | $100m HCP assumption / 2.50% |\n| Future dilution / exit ownership | 35% / 1.63% |\n| 2032 revenue / multiple / EV | $240m / 6.0x / $1.44bn |\n| HCP proceeds / MOIC | $23.4m / **9.4x** |\n| Downside / upside MOIC | 4.7x / 16.4x |\n\n### Principal risks and why invest anyway\n\n- **Implementation drag:** ERP businesses can become services-heavy. Require gross margin by cohort and partner-delivered implementation evidence.\n- **Suite response:** incumbents can expose more APIs. Tailor must prove faster configuration and safer agent write access.\n- **Fragmented product:** headless flexibility can shift complexity to customers. Standardized industry packages are essential.\n- **Geographic split:** U.S. and Japan expansion can dilute focus. Tie capital to one repeatable ICP and a clear partner strategy.\n\n---",
-      "rationale": "The company presents a compelling opportunity with a $22m Series A led by well-respected investors, an innovative headless ERP platform addressing a significant market need at the intersection of ERP and AI agents, and strong revenue growth milestones.",
-      "identifiedMoat": "Workflow ownership without forcing full system replacement, becoming a critical transaction layer that is difficult to displace.",
+      "rationale": "The decision to invest is driven by Tailor's innovative approach to enterprise resource planning (ERP) through a headless, composable platform that offers operational flexibility and does not require full system replacement. The timing is compelling as AI requires clean, permissioned access to transactional data. Tailor's ability to integrate and synchronize in real-time with various systems like Shopify and QuickBooks presents a strong value proposition.",
+      "identifiedMoat": "Workflow ownership without forcing full system replacement",
       "decisionDrivers": [
-        "unproven distribution",
+        "headless-ERP",
         "modular adoption",
-        "AI integration"
+        "U.S.-Japan expansion"
       ],
       "outcome": "active"
     },
@@ -250,12 +256,12 @@
       "decision": "invested",
       "date": "2025-01-30",
       "text": "## 6. Cedar Money\n\n**Stage:** Seed  \n**Proposed HCP check:** $2.0m  \n**Recommendation:** Pursue  \n**Links:** [Company](https://www.cedar.money/us) | [Company financing announcement](https://www.cedar.money/news-updates/cedar-money-raises-9-9m-seed-to-simplify-high-volume-cross-border-b2b-payments-for-africans) | [Financing report](https://techcrunch.com/2025/01/30/qed-seeds-9-9m-in-cedar-money-a-stablecoin-payment-platform/)\n\n### Founders and company\n\n| Founder | Role | Relevant evidence |\n|---|---|---|\n| Benjy Feinberg | Founder and CEO | Built Cedar after experiencing cross-border payment friction in African trade; public sources identify him as founder. |\n\n### Product description\n\nCedar Money provides high-value, cross-border business payments for companies operating in and around African markets. Customers use conventional fiat workflows for virtual accounts, collections, foreign exchange, invoice settlement, and bulk payouts, while Cedar can use stablecoin rails behind the scenes to improve speed and liquidity. The product reaches more than 130 countries and targets importers, exporters, and other businesses moving repeated, high-value payments. Its value is not exposure to crypto. It is a compliant abstraction layer across fragmented banking, foreign-exchange, local-payout, and treasury infrastructure.\n\n### Thesis: why invest\n\nCedar raised a $9.9m seed round in January 2025 led by QED Investors, with Lattice, NIV, Stellar, Wischoff Ventures, and others. TechCrunch reported tens of millions of dollars in monthly payment volume. The opportunity is to own the invoice-to-settlement workflow for businesses that are poorly served by correspondent banking and consumer remittance products.\n\nThe moat is corridor depth: compliance rules, bank and liquidity relationships, local payout performance, treasury routing, and failure-resolution data. Stablecoins reduce settlement friction but are not themselves durable differentiation. Cedar wins if customers see a reliable treasury product and never need to manage the rail.\n\n**What must be true:** take rate and gross profit must survive competition; compliance must scale across corridors; stablecoin partners must not create hidden counterparty risk; and volumes must be diversified across customers and currencies.\n\n**Next-round milestones:** $3bn annualized payment volume, $12m net revenue run rate, gross take rate above 35 basis points, positive contribution margin after losses and compliance, and no customer above 15% of volume.\n\n### Market, TAM, and revenue build\n\nHCP uses eligible payment volume rather than a third-party market-research estimate.\n\n| Bottom-up step | Annual flow | Eligible share | Net take | Result | Basis |\n|---|---:|---:|---:|---:|---|\n| Africa-linked import and supplier payments | $500bn | 20% | 0.35% | $350m | HCP assumption; high-value business flows suitable for Cedar |\n| Regional and global service payments | $150bn | 25% | 0.45% | $169m | HCP assumption |\n| **TAM** |  |  |  | **$519m** | One annual net-revenue pool |\n| HCP penetration |  |  |  | **38.5%** | $50bn to $60bn volume at a blended 35 to 40 bps; high and requires category leadership |\n| **2032 revenue opportunity** |  |  |  | **$200m** | HCP base case |\n\n| Revenue driver | 2026E | 2027E | 2028E | 2029E | 2030E | 2031E | 2032E |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| Payment volume, $bn | 0.8 | 2.1 | 4.8 | 10 | 20 | 34 | 53 |\n| Net take rate | 0.38% | 0.38% | 0.38% | 0.40% | 0.38% | 0.37% | 0.38% |\n| **Revenue, $m** | **3** | **8** | **18** | **40** | **75** | **125** | **200** |\n\n### Competitive landscape\n\n| Company | Category / primary use | Workflow | Infrastructure | ICP / moat | Pricing | Capital status |\n|---|---|---|---|---|---|---|\n| **Cedar Money** | Africa-linked B2B payments | X collection, FX, invoice settlement, payouts | Fiat UX with stablecoin and banking rails; registered with FinCEN and FINTRAC per company site | Importers/exporters; corridor compliance and routing | FX/take rate; exact pricing undisclosed | $9.9m seed; valuation and total undisclosed; QED, Lattice, NIV, Stellar, Wischoff |\n| Airwallex | Global business accounts and payments | X accounts, cards, FX, payouts | Proprietary global payments network | Broad licenses, product suite, scale | Public/custom | Private; latest valuation not used |\n| Wise Business | International transfers and accounts | X FX and payouts; Partial Africa corridor depth | Bank and local-payment network | Brand, liquidity, low-cost routing | Transparent transaction fees | Public |\n| Verto | Emerging-market B2B FX/payments | X FX, accounts, payouts | Banking and liquidity network | Emerging-market corridor specialization | Custom | Private; valuation undisclosed |\n| BVNK | Stablecoin payments infrastructure | X stablecoin orchestration; Partial invoice workflow | API and treasury network | Stablecoin liquidity and enterprise APIs | Custom | Private; valuation not used |\n| Conduit | Cross-border B2B payment network | X treasury and settlement | Stablecoin-enabled API/network | Emerging-market treasury routing | Custom | Private; capital data undisclosed here |\n| dLocal | Emerging-market merchant payments | X pay-ins and payouts; Partial importer workflow | Local payment network | Country coverage and enterprise distribution | Take rate | Public |\n\n### Public comps and exit model\n\n| Public comp | EV/LTM revenue |\n|---|---:|\n| [Payoneer](https://stockanalysis.com/stocks/payo/statistics/) | 2.01x |\n| [Flywire](https://stockanalysis.com/stocks/flyw/statistics/) | 2.77x |\n| [dLocal](https://stockanalysis.com/stocks/dlo/statistics/) | 2.84x |\n| [Remitly](https://stockanalysis.com/stocks/rely/statistics/) | 2.59x |\n| **Median** | **2.68x** |\n\n| Return path | Base |\n|---|---:|\n| Entry post-money / ownership | $40m HCP assumption / 5.00% |\n| Future dilution / exit ownership | 40% / 3.00% |\n| 2032 revenue / multiple / EV | $200m / 3.0x / $600m |\n| HCP proceeds / MOIC | $18.0m / **9.0x** |\n| Downside / upside MOIC | 3.6x / 18.0x |\n\n### Principal risks and why invest anyway\n\n- **Compliance and licensing:** a failure can halt corridors. Map every regulated entity, sponsor bank, safeguarding arrangement, and customer-money flow.\n- **Stablecoin dependency:** depegs, freezes, or partner failures can create losses. Require exposure limits and reconciled, short-duration treasury.\n- **Low gross margins:** high volume can hide weak economics. Underwrite gross profit after FX, liquidity, fraud, and operations.\n- **Working capital:** settlement timing can consume cash. Stress test five-day disruptions and top-corridor closures.\n\n---",
-      "rationale": "Cedar Money provides a compliant cross-border payment solution with a strong moat in corridor depth. The investment is justified by the opportunity to own the invoice-to-settlement workflow in African markets, poorly served by existing solutions.",
-      "identifiedMoat": "Corridor depth: compliance rules, bank and liquidity relationships, local payout performance.",
+      "rationale": "The opportunity to own the invoice-to-settlement workflow for businesses poorly served by existing banking products. The company raised $9.9m seed round led by prominent investors. They focus on high-value, cross-border payments, leveraging stablecoins for speed and liquidity, and have tens of millions in monthly payment volume.",
+      "identifiedMoat": "Corridor depth: compliance, bank and liquidity relationships, local payout performance, treasury routing, and failure-resolution data.",
       "decisionDrivers": [
         "corridor depth",
-        "high-volume potential",
-        "compliance scalability"
+        "high-value payments",
+        "prominent investors"
       ],
       "outcome": "unknown"
     },
@@ -264,14 +270,14 @@
       "companyId": "co_bevel",
       "companyName": "Bevel",
       "decision": "passed",
-      "date": "2025-10",
+      "date": "2025-10-30",
       "text": "## 7. Bevel\n\n**Stage:** Series A  \n**Proposed HCP check:** $2.0m  \n**Recommendation:** Diligence  \n**Links:** [Company](https://www.bevel.health/) | [Series A report](https://techcrunch.com/2025/10/30/bevel-raises-10m-series-a-from-general-catalyst-for-its-ai-health-companion/) | [Pricing](https://help.bevel.health/en/articles/11583937) | [Company profile](https://www.bevel.health/about-us)\n\n### Founders and company\n\n| Founder | Role | Relevant evidence |\n|---|---|---|\n| Grey Nguyen | Co-founder | Product and engineering leader building a unified consumer-health interface. |\n| Ben Yang | Co-founder | Co-built Bevel's consumer product and data experience. |\n| Aditya Agarwal | Co-founder / board member | Experienced technology executive; TechCrunch reports his involvement at the Series A. |\n\n### Product description\n\nBevel is a consumer health application that turns data from phones, wearables, health records, and user inputs into a daily health companion. It combines recovery, sleep, strain, stress, nutrition, strength training, biological-age, and AI guidance in one interface. Bevel does not require proprietary hardware and can work with existing devices, which lowers adoption friction and expands its data surface. The product is positioned above dashboards: it seeks to maintain a longitudinal health graph, explain tradeoffs, and recommend actions that connect fitness, sleep, nutrition, and medical context.\n\n### Thesis: why invest\n\nBevel raised a $10m Series A from General Catalyst in October 2025. TechCrunch reported more than 100,000 daily active users, eightfold annual growth, average use of eight opens per day, and more than 80% 90-day retention. Those are unusually strong disclosed engagement signals for a paid consumer-health application, although HCP must verify definitions and cohorts.\n\nHardware independence is strategically useful. Oura and Whoop optimize around their own sensors; Apple and Garmin optimize ecosystems. Bevel can become the interpretation and action layer across them. Its moat would be a permissioned, longitudinal health graph combined with high-frequency user feedback, not any single readiness score.\n\n**What must be true:** engagement must convert to paid subscriptions; recommendations must be trusted and safe; platform APIs must remain available; and device makers must not fully absorb the interpretation layer.\n\n**Next-round milestones:** 250,000 paying subscribers, $25m ARR, annual churn below 25%, blended CAC payback below nine months, and validated improvement in at least two user outcomes.\n\n### Market, TAM, and revenue build\n\n| Bottom-up step | Users | Annual value | Result | Basis |\n|---|---:|---:|---:|---|\n| Engaged wearable and quantified-self users | 25m | $100 | $2.50bn | HCP assumption: U.S. and English-speaking priority markets |\n| Premium health-coaching users | 5m | $240 | $1.20bn | HCP assumption: advanced AI and records tier |\n| **TAM** | 30m |  | **$3.70bn** | Subscription revenue pool |\n| HCP penetration |  |  | **5.9%** | 1.8m blended paid users |\n| **2032 revenue opportunity** |  |  | **$220m** | HCP base case |\n\n| Revenue driver | 2026E | 2027E | 2028E | 2029E | 2030E | 2031E | 2032E |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| Paid users | 40k | 100k | 210k | 410k | 750k | 1.2m | 1.8m |\n| Net annual revenue/user | $100 | $100 | $105 | $110 | $113 | $117 | $122 |\n| **Revenue, $m** | **4** | **10** | **22** | **45** | **85** | **140** | **220** |\n\nBevel's published Pro price is $14.99 monthly or $99.99 annually. The modeled net value allows annual-plan mix, app-store fees, discounts, and a future premium tier.\n\n### Competitive landscape\n\n| Company | Category / user | Workflow | Delivery | Moat | Pricing | Capital status |\n|---|---|---|---|---|---|---|\n| **Bevel** | Cross-device health companion | X recovery, sleep, strain, nutrition, AI, records | iOS app using device and health-data integrations | Longitudinal cross-device health graph and engagement | Free; Pro $14.99 monthly or $99.99 annual | $10m Series A; total and valuation undisclosed; General Catalyst |\n| Oura | Ring plus health app | X sleep/recovery; Partial nutrition and training | Proprietary hardware and app | Sensor data, installed base, research | Hardware plus membership | Private; valuation not used |\n| Whoop | Strap plus coaching | X strain/recovery/sleep | Proprietary hardware and app | Athlete brand and high-frequency sensor data | Membership | Private; valuation not used |\n| Apple Health / Fitness | Device health ecosystem | X data aggregation; Partial cross-domain coaching | Native iOS/watchOS | Default distribution and device data | Bundled/hardware | Public company product |\n| Athlytic | Apple Watch analytics | X recovery and training; Partial health records | iOS app | Focused Apple Watch analytics | Public subscription | Private/independent; capital undisclosed |\n| Gentler Streak | Fitness and recovery app | X activity guidance; Partial medical context | Apple ecosystem app | Consumer design and training guidance | Public subscription | Private/independent; capital undisclosed |\n| Welltory | Health and stress analytics | X stress and wearable aggregation; Partial unified coaching | Mobile app | Broad device integrations | Freemium subscription | Private; valuation undisclosed |\n\n### Public comps and exit model\n\n| Public comp | EV/LTM revenue |\n|---|---:|\n| [Hims & Hers](https://stockanalysis.com/stocks/hims/statistics/) | 3.37x |\n| [LifeMD](https://stockanalysis.com/stocks/lfmd/statistics/) | 0.89x |\n| [Teladoc](https://stockanalysis.com/stocks/tdoc/statistics/) | 0.79x |\n| [Doximity](https://stockanalysis.com/stocks/docs/statistics/) | 4.85x |\n| **Median** | **2.13x** |\n\n| Return path | Base |\n|---|---:|\n| Entry post-money / ownership | $50m HCP assumption / 4.00% |\n| Future dilution / exit ownership | 35% / 2.60% |\n| 2032 revenue / multiple / EV | $220m / 3.0x / $660m |\n| HCP proceeds / MOIC | $17.2m / **8.6x** |\n| Downside / upside MOIC | 3.4x / 17.2x |\n\n### Principal risks and why invest anyway\n\n- **Platform dependency:** Apple, Oura, and Garmin can restrict data or bundle analysis. Diversify integrations and measure data-source concentration.\n- **Clinical boundary:** wellness recommendations can drift toward medical claims. Require clinical governance and conservative product language.\n- **Retention quality:** verify that the reported 90-day figure refers to representative activated cohorts, not a selected segment.\n- **IP litigation:** a 2026 report describes a Whoop suit involving Bevel. Obtain counsel's view on claims, insurance, cost, and product-design exposure before investing.\n\n---",
-      "rationale": "Unusually strong disclosed engagement signals for a paid consumer-health application with over 100,000 daily active users and eightfold annual growth. Hardware independence is strategically useful, offering a potential moat in the form of a permissioned, longitudinal health graph combined with high-frequency user feedback.",
+      "rationale": "Bevel shows strong engagement signals with 100,000 daily active users, eightfold annual growth, and more than 80% 90-day retention. It doesn't require proprietary hardware, reducing adoption friction and allowing it to interpret data from various devices to create a longitudinal health graph. Its potential high-frequency user feedback and its moat in creating this multi-device health layer makes it a strong investment prospect. However, further diligence is required to verify user data and address risks.",
       "identifiedMoat": "Permissioned, longitudinal health graph combined with high-frequency user feedback.",
       "decisionDrivers": [
-        "hardware independence",
+        "hardware-independence",
         "strong user engagement",
-        "series_a_funding"
+        "multi-device integration"
       ],
       "outcome": "unknown"
     },
@@ -282,12 +288,12 @@
       "decision": "passed",
       "date": "2025-07-15",
       "text": "## 8. Rwazi\n\n**Stage:** Series A  \n**Proposed HCP check:** $2.5m  \n**Recommendation:** Diligence  \n**Links:** [Company](https://www.rwazi.com/) | [Series A report](https://techcrunch.com/2025/07/15/rwazi-raises-12m-series-a-to-help-companies-with-consumer-insights-and-intelligence/) | [Lumora product](https://rwazi.com/products/lumora) | [About](https://www.rwazi.com/about)\n\n### Founders and company\n\n| Founder | Role | Relevant evidence |\n|---|---|---|\n| Joseph Rutakangwa | Co-founder and CEO | Built Rwazi around real-world, zero-party consumer data and decision intelligence. |\n| Eric Sewankambo | Co-founder | Co-developed the company's distributed data and market-insight operation. |\n\n### Product description\n\nRwazi is a decision-intelligence platform that combines proprietary, directly reported consumer data with AI analysis. Its Lumora product helps brands detect demand shifts, compare competitors, test expansion, and decide where to allocate commercial resources. The company says its data coverage spans more than 190 countries and cites customers including Coca-Cola, Pampers, Visa, and Nestlé. Unlike web-traffic or panel-only tools, Rwazi emphasizes zero-party observations from people in physical markets, then turns that evidence into recommendations for strategy, product, marketing, and distribution teams.\n\n### Thesis: why invest\n\nRwazi raised a $12m Series A led by Bonfire Ventures in July 2025, with Santa Barbara Venture Partners, Newfund, and Alumni Ventures participating; TechCrunch reported a prior $4m seed. Traditional market research is slow, project-based, and backward-looking. Rwazi can transform it into a persistent software workflow where new observations update decisions continuously.\n\nThe moat is the combination of a verified collection network, historical physical-world data, and a decision layer trained on which recommendations prove useful. A chatbot over syndicated data is easy to copy. A trusted network that can collect a new, targeted observation in Lagos, Jakarta, or Lima and connect it to a customer's decision is harder.\n\n**What must be true:** data must be representative and fraud-resistant; customers must renew as software rather than projects; AI recommendations must be traceable to evidence; and collection economics must support software margins.\n\n**Next-round milestones:** $20m ARR, 100 enterprise customers, net retention above 120%, at least 70% recurring subscription revenue, gross margin above 70%, and documented decision impact at ten global accounts.\n\n### Market, TAM, and revenue build\n\n| Bottom-up step | Accounts | Annual contract | Result | Basis |\n|---|---:|---:|---:|---|\n| Regional consumer brands | 8,000 | $75,000 | $600m | HCP assumption |\n| Global brands and financial-services firms | 2,000 | $350,000 | $700m | HCP assumption |\n| Strategic enterprise platforms | 300 | $1.0m | $300m | HCP assumption |\n| **TAM** | 10,300 |  | **$1.60bn** | Annual software and data pool |\n| HCP penetration |  |  | **12.5%** | Roughly 500 blended accounts |\n| **2032 revenue opportunity** |  |  | **$200m** | HCP base case |\n\n| Revenue, $m | 2026E | 2027E | 2028E | 2029E | 2030E | 2031E | 2032E |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| Base case | 9 | 18 | 35 | 60 | 95 | 140 | 200 |\n| Illustrative customers | 60 | 100 | 170 | 250 | 340 | 420 | 500 |\n\n### Competitive landscape\n\n| Company | Category / use | Workflow | Delivery | Moat | Pricing | Capital status |\n|---|---|---|---|---|---|---|\n| **Rwazi** | Decision AI using zero-party data | X collection, analysis, recommendations | SaaS plus distributed data network | Proprietary physical-world observations and verification | Undisclosed | $12m Series A; at least $16m disclosed total; valuation undisclosed; Bonfire, Santa Barbara, Newfund, Alumni |\n| Ipsos | Global research and panels | X collection and analysis; Partial always-on software | Services plus platforms | Global panels, methods, brand | Custom/project | Public |\n| NIQ / GfK | Consumer and retail measurement | X syndicated measurement | Data subscriptions | Retail data relationships and longitudinal coverage | Custom | Private enterprise; capital not comparable |\n| Kantar | Brand and consumer research | X research and analytics | Services/data platforms | Global benchmarks and customer relationships | Custom | Private enterprise |\n| Euromonitor | Market intelligence | X syndicated data; Partial primary zero-party collection | Subscription platform | Global category database | Custom | Private enterprise |\n| Attest | Agile consumer research | X survey collection and analysis | SaaS/panel | Fast self-serve research workflow | Custom | Private; valuation undisclosed |\n| Toluna | Consumer panels and insights | X global panel and research workflow | SaaS/services | Panel scale and enterprise distribution | Custom | Private; capital data undisclosed here |\n\n### Public comps and exit model\n\n| Public comp | EV/LTM revenue |\n|---|---:|\n| [Similarweb](https://stockanalysis.com/stocks/smwb/statistics/) | 2.02x |\n| [Semrush](https://stockanalysis.com/stocks/semr/statistics/) | 3.49x |\n| [ZoomInfo](https://stockanalysis.com/stocks/gtm/statistics/) | 1.85x |\n| [Gartner](https://stockanalysis.com/stocks/it/statistics/) | 1.71x |\n| [HubSpot](https://stockanalysis.com/stocks/hubs/statistics/) | 3.04x |\n| **Median** | **2.02x** |\n\n| Return path | Base |\n|---|---:|\n| Entry post-money / ownership | $60m HCP assumption / 4.17% |\n| Future dilution / exit ownership | 35% / 2.71% |\n| 2032 revenue / multiple / EV | $200m / 3.0x / $600m |\n| HCP proceeds / MOIC | $16.3m / **6.5x** |\n| Downside / upside MOIC | 2.6x / 13.0x |\n\n### Principal risks and why invest anyway\n\n- **Data quality:** distributed collection invites fraud and bias. Audit sampling, geolocation, identity, incentives, and independent validation.\n- **Services leakage:** custom studies can inflate revenue but depress scalability. Separate subscription, data, and service gross margin.\n- **Incumbent datasets:** NIQ, Kantar, and Ipsos have deeper history. Rwazi must win on speed, hard-to-reach markets, and decision workflow.\n- **AI explainability:** recommendations without source traceability will not support high-stakes decisions. Require evidence-linked outputs and human review.\n\n---",
-      "rationale": "Rwazi has the potential to transform traditional, slow market research into a continuous software process, enhancing decision-making with AI and zero-party data. The company boasts a competitive moat consisting of a verified collection network, historical data, and a decision layer that can provide unique, actionable insights. However, considerations regarding data representativeness, customer retention, and economic margins must be addressed.",
-      "identifiedMoat": "Combination of a verified collection network, historical physical-world data, and a decision layer trained on useful recommendations.",
+      "rationale": "The memo outlines several principal risks such as data quality, service leakage, incumbent datasets, and AI explainability that could affect scalability and decision support. These risks must be addressed before making an investment decision. As such, the recommendation was to conduct further diligence rather than investing immediately.",
+      "identifiedMoat": "Proprietary physical-world observations and verification combined with a decision layer trained on useful recommendations.",
       "decisionDrivers": [
-        "innovative data collection",
-        "AI-driven insights",
-        "subscription revenue potential"
+        "data quality uncertainty",
+        "service scalability concerns",
+        "AI explainability requirements"
       ],
       "outcome": "unknown"
     },
@@ -298,12 +304,12 @@
       "decision": "rejected",
       "date": "2026-01-27",
       "text": "## 9. Phia\n\n**Stage:** Series A  \n**Proposed HCP check:** $2.5m  \n**Recommendation:** Price-sensitive  \n**Links:** [Company](https://phia.com/) | [Official Series A announcement](https://www.globenewswire.com/news-release/2026/01/27/3226735/0/en/Phia-Raises-35M-Series-A-to-Build-the-AI-Alignment-Layer-for-Commerce.html)\n\n### Founders and company\n\n| Founder | Role | Relevant evidence |\n|---|---|---|\n| Phoebe Gates | Co-founder | Consumer and brand leader building a cross-retailer shopping product. |\n| Sophia Kianni | Co-founder | Co-built Phia's consumer acquisition and mission-driven brand. |\n\n### Product description\n\nPhia is an AI shopping platform that helps consumers compare products and prices across retailers while giving brands a performance channel. The company describes an alignment layer connecting shopper preferences with more than 6,200 brands. Consumers use Phia to discover alternatives and make purchase decisions; brands use the platform to improve acquisition, conversion, order value, and returns. The core asset is a normalized, real-time product graph joined to intent and transaction signals. If successful, Phia becomes an intermediary between search, social discovery, merchant catalogs, and checkout rather than another affiliate-content site.\n\n### Thesis: why invest\n\nPhia announced a $35m Series A in January 2026 at a $185m valuation, led by Notable Capital with Khosla Ventures and Kleiner Perkins. The company said it launched in April 2025, had more than one million users and 6,200 brands, facilitated billions of dollars in GMV exposure, generated monthly sales in the millions, and grew revenue elevenfold. It also reported brand outcomes including higher conversion and order value and lower returns. These are company-reported metrics and require data-room validation.\n\nThe product can benefit from a two-sided learning loop: consumer actions improve ranking and matching; brand integrations deepen catalog, inventory, and conversion data; better matches increase consumer trust and merchant ROI. The concern is price. At the disclosed $185m valuation, even a strong operating outcome produces only a mid-single-digit base MOIC for a $2.5m check.\n\n**What must be true:** consumer retention must be independent of paid influencers; merchant economics must be incremental; affiliate dependence must not cap margin; and product data must remain accurate across retailers.\n\n**Next-round milestones:** five million monthly active shoppers, $50m annualized net revenue, more than 50% direct merchant integrations, positive contribution margin, and repeat-shopping cohorts showing durable frequency.\n\n### Market, TAM, and revenue build\n\n| Bottom-up step | Commerce volume | Monetizable share | Net rate | Result | Basis |\n|---|---:|---:|---:|---:|---|\n| Fashion, beauty, and lifestyle e-commerce | $500bn | 20% | 5% | $5.0bn | HCP assumption: attributable Phia-influenced GMV |\n| Brand software / insights | 10,000 brands |  | $50,000 ACV | $0.5bn | HCP assumption |\n| **TAM** |  |  |  | **$5.50bn** | One net-revenue pool |\n| HCP penetration |  |  |  | **9.1%** | Roughly $9bn monetized GMV plus brand software |\n| **2032 revenue opportunity** |  |  |  | **$500m** | HCP base case |\n\n| Revenue, $m | 2026E | 2027E | 2028E | 2029E | 2030E | 2031E | 2032E |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| Base case | 18 | 45 | 90 | 160 | 250 | 360 | 500 |\n| Illustrative monetized GMV, $bn at 5% | 0.36 | 0.90 | 1.8 | 3.2 | 5.0 | 7.2 | 10.0 |\n\n### Competitive landscape\n\n| Company | Category / user | Workflow | Delivery | Moat | Pricing | Capital status |\n|---|---|---|---|---|---|---|\n| **Phia** | AI shopping and brand alignment | X discovery, comparison, matching; Partial checkout | Consumer app/extension plus brand channel | Cross-retailer product graph and intent loop | Consumer free; brand economics undisclosed | $35m Series A at $185m valuation; total undisclosed; Notable, Khosla, Kleiner Perkins |\n| Google Shopping | Product search | X discovery and comparison | Search/web | Query scale, merchant feeds, auction | Ads/free listings | Alphabet product |\n| Klarna | Shopping and payments | X discovery, comparison, checkout, credit | App/web/merchant network | Payment relationships and transaction data | Merchant and credit economics | Public |\n| Lyst | Fashion discovery | X search and affiliate conversion | App/web | Fashion catalog and audience | Affiliate/merchant | Private; valuation not used |\n| Beni | Resale comparison | X secondhand alternatives; Partial new retail | Browser extension/app | Resale catalog normalization | Affiliate | Private; capital data undisclosed here |\n| Daydream | AI fashion search | X natural-language discovery; Partial merchant tools | Web/app | Fashion-focused search experience | Undisclosed | Private; valuation undisclosed |\n| Shopify Shop | Merchant discovery and checkout | X discovery, tracking, checkout | Mobile app/platform | Merchant network and Shop Pay identity | Merchant platform economics | Shopify product |\n\n### Public comps and exit model\n\n| Public comp | EV/LTM revenue |\n|---|---:|\n| [Ibotta](https://stockanalysis.com/stocks/ibta/statistics/) | 1.75x |\n| [Pinterest](https://stockanalysis.com/stocks/pins/statistics/) | 2.95x |\n| [Reddit](https://stockanalysis.com/stocks/rddt/statistics/) | 12.99x |\n| [Yelp](https://stockanalysis.com/stocks/yelp/statistics/) | 1.01x |\n| [Shopify](https://stockanalysis.com/stocks/shop/statistics/) | 12.49x |\n| **Median** | **2.95x** |\n\n| Return path | Base |\n|---|---:|\n| Entry post-money / ownership | $185m disclosed valuation / 1.35% |\n| Future dilution / exit ownership | 35% / 0.88% |\n| 2032 revenue / multiple / EV | $500m / 3.0x / $1.50bn |\n| HCP proceeds / MOIC | $13.2m / **5.3x** |\n| Downside / upside MOIC | 2.1x / 10.5x |\n\n### Principal risks and why invest anyway\n\n- **Entry price:** base returns do not meet a 10x target. Seek a lower effective price, secondary discount, ownership protection, or evidence supporting upside.\n- **Attribution:** brand-reported lift may reflect selection effects. Validate matched cohorts and incrementality.\n- **Platform disintermediation:** Google, Shopify, Klarna, and social platforms own demand or checkout. Phia must retain independent consumer intent.\n- **Affiliate concentration:** commission changes can impair revenue. Track direct merchant contracts and revenue concentration.\n\n---",
-      "rationale": "The price at the disclosed $185m valuation means even a strong operating outcome only produces a mid-single-digit base MOIC for a $2.5m check.",
+      "rationale": "The entry price at the disclosed $185m valuation does not meet a 10x target, as even a strong operating outcome produces only a mid-single-digit base MOIC for a $2.5m check.",
       "identifiedMoat": "Cross-retailer product graph and intent loop",
       "decisionDrivers": [
-        "valuation",
-        "AI shopping platform",
-        "price sensitivity"
+        "price-sensitive",
+        "unproven retention",
+        "competitive substitution"
       ],
       "outcome": "unknown"
     },
@@ -312,56 +318,61 @@
       "companyId": "co_twentyeight_health",
       "companyName": "Twentyeight Health",
       "decision": "passed",
-      "date": "2025-01-01",
+      "date": "2025-03-01",
       "text": "## 10. Twentyeight Health\n\n**Stage:** Series A  \n**Proposed HCP check:** $2.0m  \n**Recommendation:** Diligence  \n**Links:** [Company](https://www.twentyeighthealth.com/) | [Series A announcement](https://www.prnewswire.com/news-releases/twentyeight-health-secures-10m-in-series-a-funding--launches-new-payer-partnerships-amidst-surge-of-user-interest-lowering-barriers-to-sexual--reproductive-care-in-43-states-302342130.html) | [Pricing and coverage FAQ](https://www.twentyeighthealth.com/faq) | [About](https://www.twentyeighthealth.com/about)\n\n### Founders and company\n\n| Founder | Role | Relevant evidence |\n|---|---|---|\n| Bruno Van Tuykom | Co-founder and CEO | Built the payer and operating model around access for underserved patients. |\n| Amy Fan | Co-founder | Co-developed the inclusive women's-health product and consumer experience. Confirm current operating role in diligence. |\n\n### Product description\n\nTwentyeight Health is a virtual women's-health platform designed for underserved and lower-income communities, including Medicaid members. It provides reproductive and sexual-health access, prescriptions, provider messaging, and related care across 43 states. Its model combines direct-to-consumer access with insurer and Medicaid reimbursement rather than relying only on cash-pay subscriptions. The company has expanded through the acquisition of SimpleHealth and assets from The Pill Club. Its strategic wedge is payer-connected, culturally inclusive access for populations that mainstream cash-pay telehealth companies often under-serve.\n\n### Thesis: why invest\n\nTwentyeight announced a $10m Series A in January 2025 and said it had served more than 100,000 users as of October 2024. The same announcement highlighted 43-state reach and payer expansion. Its FAQ states that in-network members pay no membership fee, out-of-network users pay $19.99 per month, and Medicaid is accepted in 18 listed states.\n\nThe opportunity is to build the digital front door for a high-need population whose care is fragmented across clinics, pharmacies, and payer directories. The moat is operational, not merely virtual prescribing: payer contracting, Medicaid eligibility, culturally competent acquisition, state coverage, provider operations, and pharmacy fulfillment.\n\n**What must be true:** reimbursement must cover clinical delivery and acquisition; Medicaid engagement must retain; state and pharmacy operations must remain compliant; and broader care categories must increase revenue without eroding quality.\n\n**Next-round milestones:** 250,000 annual active patients, $25m net revenue, positive contribution margin by payer cohort, 80% prescription renewal where clinically appropriate, and at least three multi-state payer contracts.\n\n### Market, TAM, and revenue build\n\nThe company financing announcement cites 19 million women living in U.S. contraceptive deserts. HCP adds adjacent underserved patients with access but poor affordability or convenience.\n\n| Bottom-up step | Eligible people | Annual net revenue | Result | Basis |\n|---|---:|---:|---:|---|\n| Contraceptive-desert population | 19m | $240 | $4.56bn | Company-cited population; HCP reimbursement assumption |\n| Adjacent underserved population | 11m | $240 | $2.64bn | HCP assumption |\n| **TAM** | 30m |  | **$7.20bn** | Annual net-care revenue pool |\n| HCP penetration |  |  | **2.4%** | About 730,000 annual active patient equivalents |\n| **2032 revenue opportunity** |  |  | **$175m** | HCP base case |\n\n| Revenue driver | 2026E | 2027E | 2028E | 2029E | 2030E | 2031E | 2032E |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| Annual active patients | 42k | 75k | 133k | 229k | 354k | 521k | 729k |\n| Net annual revenue/patient | $240 | $240 | $240 | $240 | $240 | $240 | $240 |\n| **Revenue, $m** | **10** | **18** | **32** | **55** | **85** | **125** | **175** |\n\n### Competitive landscape\n\n| Company | Category / user | Workflow | Delivery | Moat | Pricing | Capital status |\n|---|---|---|---|---|---|---|\n| **Twentyeight Health** | Inclusive virtual women's health | X intake, provider, prescription, messaging; X Medicaid in listed states | Telehealth plus pharmacy/payer network | Payer access and underserved-community operations | $0 in-network membership; $19.99 monthly out-of-network | $10m Series A; valuation and total undisclosed; investor list in announcement |\n| Nurx | Broad sexual and reproductive telehealth | X consultation and prescription | Telehealth/pharmacy | Consumer brand and condition breadth | Insurance/cash fees | Private subsidiary; capital not comparable |\n| Wisp | Cash-pay sexual and reproductive health | X asynchronous care and fulfillment | Telehealth/pharmacy | Fast consumer access and brand | Public cash pricing | Private; valuation undisclosed |\n| Pandia Health | Birth-control telehealth | X prescription and delivery | Telehealth/pharmacy | Specialist positioning and continuity | Insurance/cash | Private; capital data undisclosed here |\n| Hers | Consumer digital health | X consultation and fulfillment; broad categories | Telehealth platform | National brand and acquisition scale | Subscription/cash | Hims & Hers product; public parent |\n| Planned Parenthood Direct | Reproductive-health access | X selected services; coverage varies | App and clinic network | Trust, clinical network, mission | Varies | Nonprofit network |\n| Hey Jane | Virtual abortion care | X abortion-care workflow; Partial broad women's health | Telehealth | Specialized clinical operations and advocacy | Insurance/cash | Private; valuation undisclosed |\n\n### Public comps and exit model\n\n| Public comp | EV/LTM revenue |\n|---|---:|\n| [Hims & Hers](https://stockanalysis.com/stocks/hims/statistics/) | 3.37x |\n| [LifeMD](https://stockanalysis.com/stocks/lfmd/statistics/) | 0.89x |\n| [Teladoc](https://stockanalysis.com/stocks/tdoc/statistics/) | 0.79x |\n| [Privia Health](https://stockanalysis.com/stocks/prva/statistics/) | 1.33x |\n| [Doximity](https://stockanalysis.com/stocks/docs/statistics/) | 4.85x |\n| **Median** | **1.33x** |\n\n| Return path | Base |\n|---|---:|\n| Entry post-money / ownership | $45m HCP assumption / 4.44% |\n| Future dilution / exit ownership | 35% / 2.89% |\n| 2032 revenue / multiple / EV | $175m / 2.0x / $350m |\n| HCP proceeds / MOIC | $10.1m / **5.1x** |\n| Downside / upside MOIC | 1.5x / 11.4x |\n\n### Principal risks and why invest anyway\n\n- **Reimbursement:** payer mix may create low or delayed collections. Review allowed amounts, denials, days sales outstanding, and contribution margin by plan.\n- **Clinical and regulatory:** state rules and reproductive-health policy can change quickly. Require current counsel review and resilient clinical protocols.\n- **Integration:** acquired patient bases and systems may not retain. Separate organic from acquired cohorts.\n- **Return profile:** base MOIC is modest. Price discipline and evidence of multi-condition expansion are necessary.\n\n---\n\n## Cross-company decision framework\n\n| Company | Core control point | Most important diligence test | 2032 revenue | Exit multiple | Base MOIC |\n|---|---|---|---:|---:|---:|\n| Mem0 | Memory lifecycle across AI apps | Paid cloud conversion and enterprise retention | $420m | 8.0x | 21.8x |\n| Sekai | Creation plus remix distribution graph | Consumption and creator retention cohorts | $400m | 5.0x | 14.4x |\n| Alinea | Guided-investing relationship with Gen Z | Funded-account cohorts and CAC payback | $220m | 5.0x | 11.9x |\n| Sett | Performance feedback loop for game creative | Incremental ad performance and renewal | $250m | 5.0x | 10.2x |\n| Tailor | Agent-ready enterprise transaction layer | Expansion from first module to system of record | $240m | 6.0x | 9.4x |\n| Cedar Money | Africa-linked invoice-to-settlement workflow | Net take rate after all losses and liquidity cost | $200m | 3.0x | 9.0x |\n| Bevel | Cross-device longitudinal health graph | Verified paid retention and platform dependence | $220m | 3.0x | 8.6x |\n| Rwazi | Verified physical-world data to decision workflow | Recurring software mix and data validity | $200m | 3.0x | 6.5x |\n| Phia | Shopper-product-brand alignment graph | Incremental merchant ROI at disclosed entry price | $500m | 3.0x | 5.3x |\n| Twentyeight Health | Medicaid-connected underserved care access | Contribution margin by payer and patient cohort | $175m | 2.0x | 5.1x |\n\n## Investment committee conclusion\n\nHCP should prioritize Mem0, Sett, Tailor, Cedar Money, and Alinea for direct diligence. Each has a specific control point, credible public financing evidence, and a plausible path to meaningful ownership within the check range. Sekai also merits pursuit, but its outcome distribution is much wider because retention, safety, and monetization are not publicly established. Bevel and Rwazi warrant data-room work before valuation discussion. Phia and Twentyeight Health may become attractive investments, but the modeled base return is currently too dependent on either a lower entry price or a materially better operating case.\n\nNo memo should advance on public evidence alone. The next step is a standardized data request covering cap table and terms, monthly revenue and gross margin, customer or user cohorts, acquisition channels, retention, security and compliance, pipeline, product telemetry, and reference calls. Private and stealth competitors identified during founder and customer calls should be added manually before final investment committee approval.\n\n## Source and assumption notes\n\n1. Company facts are sourced to official pages, financing announcements, TechCrunch, Forbes, Axios, Bessemer, and product documentation linked within each memo. Company-reported operating metrics are explicitly identified and should be verified.\n2. Public-company EV/LTM revenue multiples are point-in-time figures and can change daily. Refresh them immediately before an investment committee meeting.\n3. TAM calculations are HCP bottom-up underwriting models. Unit counts and prices labeled HCP assumption are deliberately visible so the committee can replace them with management or third-party evidence.\n4. The current-round valuation is publicly disclosed only for Phia in this set. All other post-money values are HCP assumptions for return testing, not claims about actual terms.\n5. Valuation references for competitors are intentionally omitted when reliable current public evidence was unavailable. No blank field should be interpreted as zero.",
-      "rationale": "The modeled base return is currently too dependent on either a lower entry price or a materially better operating case.",
-      "identifiedMoat": "Operational: payer contracting, Medicaid eligibility, culturally competent acquisition, state coverage, provider operations, and pharmacy fulfillment.",
+      "rationale": "Twentyeight Health may become an attractive investment, but the modeled base return is currently too dependent on either a lower entry price or a materially better operating case.",
+      "identifiedMoat": "Operational moat via payer contracting, Medicaid eligibility, culturally competent acquisition, state coverage, provider operations, and pharmacy fulfillment.",
       "decisionDrivers": [
-        "payer mix",
-        "clinical and regulatory uncertainty",
-        "integration risk"
+        "payer-access",
+        "culturally-inclusive",
+        "operational-competence"
       ],
-      "outcome": "active"
+      "outcome": "unknown"
     }
   ],
   "portfolioCompanies": [
     {
       "id": "co_mem0",
       "name": "Mem0",
-      "description": "Mem0 provides a persistent memory layer for AI applications, combining open-source distribution with a hosted control plane. It has shown strong developer pull, with significant growth in GitHub stars and API calls. The moat is the memory lifecycle, which includes extraction, consolidation, conflict resolution, retrieval, evaluation, and observability. These attributes deliver better answer quality with lower latency and token cost. The thesis is that memory is becoming a control point every application touches, and Mem0 is positioned to capitalize on that.",
+      "description": "Mem0 provides a critical memory layer for AI applications, showing strong developer traction with open-source adoption and API growth. The company's position as a model-neutral memory standard with a differentiated memory lifecycle provides a substantial moat. The investment is supported by the potential of Mem0 becoming a control point throughout AI applications, substantiated by strong usage and future growth potential.",
       "attributes": {
         "industryPath": [
-          "Artificial Intelligence"
+          "technology",
+          "artificial_intelligence"
         ],
         "productCategoryPath": [
-          "AI Infrastructure",
-          "Memory Layer"
+          "infrastructure",
+          "memory_management"
         ],
         "targetCustomers": [
-          "AI application developers"
+          "AI developers",
+          "enterprise AI teams"
         ],
         "technicalApproaches": [
-          "memory lifecycle management",
-          "open-source distribution"
+          "control point for AI memory"
         ],
         "founderArchetypes": [
           "engineering-first team"
         ],
         "disruptionMechanisms": [
-          "model-neutral memory lifecycle"
+          "portability",
+          "neutral-platform advantages"
         ],
-        "regulatoryLabels": [],
-        "businessModel": "Usage SaaS plus OSS",
-        "goToMarket": "developer-focused",
-        "operationalModel": "API and managed services",
-        "problemStatement": "There is a need for a persistent memory layer in AI applications to efficiently store, retrieve, and update memories without rebuilding logic inside each application.",
-        "productDescription": "Mem0 provides a persistent memory layer for AI applications, offering managed service, open-source packages, and framework integrations for storing, retrieving, and updating user, session, and agent memories."
+        "regulatoryLabels": [
+          "SOC 2",
+          "encryption guarantees"
+        ],
+        "businessModel": "usage SaaS plus OSS",
+        "goToMarket": "developer-first with enterprise focus",
+        "operationalModel": "lean team with rapid growth",
+        "problemStatement": "AI applications lack a consistent memory layer capable of managing memory lifecycle efficiently.",
+        "productDescription": "Mem0 provides a persistent memory layer for AI applications, offering managed services, open-source packages, and framework integrations for improved memory handling."
       },
       "founders": [],
       "stage": "series_a",
-      "geography": "unknown",
+      "geography": "global",
       "sector": "AI infrastructure",
-      "checkSizeSought": 2.5,
+      "checkSizeSought": 2500000,
       "graphMetrics": {},
       "competitors": [],
       "status": "invested",
@@ -375,40 +386,44 @@
     {
       "id": "co_sekai",
       "name": "Sekai",
-      "description": "Sekai combines AI-generated mini-app creation with a remix graph and distribution engine, which could form a durable moat through user engagement and retention. The company's potential to mimic the success of platforms like TikTok in software distribution and the strong founder track record bolstered confidence in its scaling and monetization capabilities. Despite inherent risks in novelty decay and platform safety, the investment thesis is based on Sekai's ability to capture consumer demand and build a unique market position.",
+      "description": "Sekai combines software creation and distribution in a single consumer loop, similar to TikTok's approach with videos. The key asset is the remix graph and distribution engine, which compounds consumer demand while lowering creation cost. The largest risks include novelty decay and platform safety concerns.",
       "attributes": {
         "industryPath": [
-          "software",
-          "platforms"
+          "Technology",
+          "Software"
         ],
         "productCategoryPath": [
-          "consumer applications"
+          "Consumer Apps",
+          "AI Applications"
         ],
         "targetCustomers": [
-          "consumers",
-          "creators"
+          "Consumers",
+          "Prosumers"
         ],
         "technicalApproaches": [
-          "AI-generated content"
+          "AI-driven App Generation"
         ],
         "founderArchetypes": [
-          "serial entrepreneur"
+          "Serial Entrepreneur"
         ],
         "disruptionMechanisms": [
-          "remix and distribution graph"
+          "Creative Economy",
+          "Content Remix Engine"
         ],
-        "regulatoryLabels": [],
-        "businessModel": "subscription and platform take rate",
-        "goToMarket": "B2C",
-        "operationalModel": "technology platform",
-        "problemStatement": "Creating software is labor-intensive and distribution is scarce.",
-        "productDescription": "Platform for creating, playing, and remixing AI-generated mini-apps, enabling users to design interactive experiences easily without coding."
+        "regulatoryLabels": [
+          "Content Safety"
+        ],
+        "businessModel": "Subscription plus platform take",
+        "goToMarket": "Consumer-focused",
+        "operationalModel": "Platform-based",
+        "problemStatement": "AI makes software abundant, distribution remains scarce.",
+        "productDescription": "Platform for creating, playing, and remixing AI-generated mini-apps for non-programmers."
       },
       "founders": [],
       "stage": "series_a",
-      "geography": "global",
-      "sector": "consumer software",
-      "checkSizeSought": 2.5,
+      "geography": "Global",
+      "sector": "Consumer Tech",
+      "checkSizeSought": 2500000,
       "graphMetrics": {},
       "competitors": [],
       "status": "invested",
@@ -425,38 +440,42 @@
       "description": "Alinea can become the relationship layer for a cohort that distrusts traditional wealth brands but still needs to move from first deposit to retirement, credit, and advice. The differentiated asset is a high-intent behavioral dataset on novice investors and an acquisition engine tailored to their language and communities.",
       "attributes": {
         "industryPath": [
-          "technology",
-          "financial services"
+          "financial services",
+          "wealth management"
         ],
         "productCategoryPath": [
-          "wealth management",
-          "investment platforms"
+          "investment platform",
+          "mobile wealth management"
         ],
         "targetCustomers": [
-          "young investors",
+          "younger investors",
+          "first-time investors",
           "women"
         ],
-        "technicalApproaches": [],
+        "technicalApproaches": [
+          "behavioral finance"
+        ],
         "founderArchetypes": [
-          "consumer-finance focus"
+          "dual-ceo",
+          "mission-driven"
         ],
         "disruptionMechanisms": [
-          "acquisition tailored to language and communities"
+          "cultural embedding"
         ],
         "regulatoryLabels": [
-          "SEC-registered investment adviser"
+          "SEC-registered"
         ],
-        "businessModel": "Subscription and net platform revenue",
-        "goToMarket": "Digital-first with partner custody",
-        "operationalModel": "Mobile RIA with partner custody",
-        "problemStatement": "Young investors, especially women, distrust traditional wealth brands but need to move from first deposit to retirement and credit.",
-        "productDescription": "A mobile wealth platform that provides guided portfolios, thematic baskets, automation, education, and community for first-time, younger investors, with a focus on women."
+        "businessModel": "subscription and advisory fees",
+        "goToMarket": "mobile and community-driven",
+        "operationalModel": "partner-infrastructure for custody",
+        "problemStatement": "Younger investors, especially women, need accessible, culturally native investing solutions rather than traditional wealth platforms.",
+        "productDescription": "Alinea is an investment platform providing guided portfolios, thematic baskets, automation, education, and community targeting first-time, younger investors."
       },
       "founders": [],
       "stage": "series_a",
-      "geography": "USA",
+      "geography": "United States",
       "sector": "fintech",
-      "checkSizeSought": 2,
+      "checkSizeSought": 2000000,
       "graphMetrics": {},
       "competitors": [],
       "status": "invested",
@@ -470,44 +489,44 @@
     {
       "id": "co_sett",
       "name": "Sett",
-      "description": "Sett builds AI agents that help mobile-game growth teams improve ad creation and optimize performance. The company's unique value lies in a closed feedback loop allowing continuous learning and optimization, which improves ad performance over time. The gaming industry is favorably positioned for these types of innovations due to its digital nature and measurable outcomes.",
+      "description": "Sett's AI solutions target a lucrative gaming vertical, offering a unique performance feedback loop that improves ad creation through specific game and audience insights. The company's funding, reputable investors, and proven founders indicate potential for significant growth.",
       "attributes": {
         "industryPath": [
           "technology",
           "gaming"
         ],
         "productCategoryPath": [
-          "software",
-          "AI"
+          "AI",
+          "creative automation"
         ],
         "targetCustomers": [
-          "mobile-game developers",
-          "game studios"
+          "mobile studios",
+          "scaled publishers",
+          "global platforms"
         ],
         "technicalApproaches": [
-          "AI-driven",
-          "feedback loop"
+          "AI agents",
+          "performance learning"
         ],
         "founderArchetypes": [
-          "gaming operator",
-          "technology innovator"
+          "gaming operator"
         ],
         "disruptionMechanisms": [
           "creative automation",
-          "performance optimization"
+          "performance feedback loops"
         ],
         "regulatoryLabels": [],
         "businessModel": "SaaS",
-        "goToMarket": "B2B",
-        "operationalModel": "software platform",
-        "problemStatement": "Improving ad performance and creative production for mobile games",
-        "productDescription": "AI agents for game ad creation and performance optimization through closed feedback loops"
+        "goToMarket": "direct sales",
+        "operationalModel": "B2B SaaS",
+        "problemStatement": "Game development teams require efficient, high-impact ad creation and optimization processes to maximize user acquisition.",
+        "productDescription": "AI agents for mobile-game growth teams to generate optimized video and playable ads, iteratively improved through performance feedback."
       },
       "founders": [],
       "stage": "series_a",
       "geography": "global",
       "sector": "gaming",
-      "checkSizeSought": 2.5,
+      "checkSizeSought": 2500000,
       "graphMetrics": {},
       "competitors": [],
       "status": "invested",
@@ -521,45 +540,41 @@
     {
       "id": "co_tailor",
       "name": "Tailor",
-      "description": "The company presents a compelling opportunity with a $22m Series A led by well-respected investors, an innovative headless ERP platform addressing a significant market need at the intersection of ERP and AI agents, and strong revenue growth milestones.",
+      "description": "The decision to invest is driven by Tailor's innovative approach to enterprise resource planning (ERP) through a headless, composable platform that offers operational flexibility and does not require full system replacement. The timing is compelling as AI requires clean, permissioned access to transactional data. Tailor's ability to integrate and synchronize in real-time with various systems like Shopify and QuickBooks presents a strong value proposition.",
       "attributes": {
         "industryPath": [
-          "Technology",
-          "Enterprise Software"
+          "enterprise_software",
+          "ERP"
         ],
         "productCategoryPath": [
           "ERP",
-          "Headless ERP"
+          "headless_composable"
         ],
         "targetCustomers": [
-          "Mid-market commerce operators",
-          "Larger multi-entity operators",
-          "Enterprise deployments"
+          "mid-market",
+          "enterprise"
         ],
         "technicalApproaches": [
-          "API-first transaction architecture",
-          "Real-time synchronization"
+          "API-first"
         ],
         "founderArchetypes": [
-          "Enterprise-software founder",
-          "Technical leader"
+          "experienced-enterprise"
         ],
         "disruptionMechanisms": [
-          "Composable architecture",
-          "Incremental workflow ownership"
+          "incremental-workflow-ownership"
         ],
         "regulatoryLabels": [],
-        "businessModel": "SaaS",
-        "goToMarket": "API-first",
-        "operationalModel": "Headless",
-        "problemStatement": "Legacy ERP APIs were built for integration, not autonomous action which is needed with the advent of AI agents.",
-        "productDescription": "Tailor is a headless, composable ERP platform delivering granular APIs and configurable applications to enhance operational flexibility without undergoing high-risk ERP migration."
+        "businessModel": "B2B",
+        "goToMarket": "enterprise-sales",
+        "operationalModel": "software-product",
+        "problemStatement": "Legacy ERPs are not designed for modular, real-time, API-driven interactions required by modern AI agents.",
+        "productDescription": "Headless, composable ERP that offers operational flexibility and integrates with existing systems through granular APIs."
       },
       "founders": [],
       "stage": "series_a",
-      "geography": "San Francisco and Tokyo",
-      "sector": "enterprise software",
-      "checkSizeSought": 2.5,
+      "geography": "U.S. and Japan",
+      "sector": "enterprise_software",
+      "checkSizeSought": 2500000,
       "graphMetrics": {},
       "competitors": [],
       "status": "invested",
@@ -573,45 +588,47 @@
     {
       "id": "co_cedar_money",
       "name": "Cedar Money",
-      "description": "Cedar Money provides a compliant cross-border payment solution with a strong moat in corridor depth. The investment is justified by the opportunity to own the invoice-to-settlement workflow in African markets, poorly served by existing solutions.",
+      "description": "The opportunity to own the invoice-to-settlement workflow for businesses poorly served by existing banking products. The company raised $9.9m seed round led by prominent investors. They focus on high-value, cross-border payments, leveraging stablecoins for speed and liquidity, and have tens of millions in monthly payment volume.",
       "attributes": {
         "industryPath": [
-          "Financial Services",
-          "Payments"
+          "finance",
+          "payments"
         ],
         "productCategoryPath": [
-          "B2B Payments",
-          "Cross-border Payments"
+          "business payments",
+          "cross-border payments"
         ],
         "targetCustomers": [
-          "Importers",
-          "Exporters"
+          "importers",
+          "exporters",
+          "businesses with high-value cross-border transactions"
         ],
         "technicalApproaches": [
-          "Stablecoin infrastructure",
-          "Fiat UX integration"
+          "stablecoin integration",
+          "compliance layer"
         ],
         "founderArchetypes": [
-          "Market experienced founder"
+          "problem-experienced founder"
         ],
         "disruptionMechanisms": [
-          "Improving cross-border payment efficiency"
+          "improved speed and liquidity",
+          "compliant abstraction layer"
         ],
         "regulatoryLabels": [
-          "Registered with FinCEN",
-          "Registered with FINTRAC"
+          "registered with FinCEN",
+          "registered with FINTRAC"
         ],
-        "businessModel": "Payment processing",
-        "goToMarket": "Direct to business",
-        "operationalModel": "Compliant abstraction layer across banking and treasury infrastructure",
-        "problemStatement": "African trade faces friction in high-volume cross-border payments due to fragmented banking infrastructure.",
-        "productDescription": "High-value cross-border payment platform utilizing stablecoin rails for faster and more liquid trasactions for African markets."
+        "businessModel": "transaction-based revenue model",
+        "goToMarket": "b2b",
+        "operationalModel": "compliance and relationship-driven",
+        "problemStatement": "Fragmented banking and FX infrastructure poorly serving African cross-border B2B payments.",
+        "productDescription": "A platform for high-value cross-border business payments using stablecoin rails for speed and liquidity."
       },
       "founders": [],
       "stage": "seed",
-      "geography": "Africa-linked",
-      "sector": "Fintech",
-      "checkSizeSought": 2,
+      "geography": "Africa",
+      "sector": "fintech",
+      "checkSizeSought": 2000000,
       "graphMetrics": {},
       "competitors": [],
       "status": "invested",
@@ -627,44 +644,41 @@
     {
       "id": "co_phia",
       "name": "Phia",
-      "description": "The price at the disclosed $185m valuation means even a strong operating outcome only produces a mid-single-digit base MOIC for a $2.5m check.",
+      "description": "The entry price at the disclosed $185m valuation does not meet a 10x target, as even a strong operating outcome produces only a mid-single-digit base MOIC for a $2.5m check.",
       "attributes": {
         "industryPath": [
-          "commerce",
-          "retail",
-          "AI"
+          "ecommerce"
         ],
         "productCategoryPath": [
-          "shopping",
-          "retail technology"
+          "shopping platform",
+          "AI alignment layer"
         ],
         "targetCustomers": [
           "consumers",
           "brands"
         ],
         "technicalApproaches": [
-          "AI"
+          "AI shopping platform"
         ],
         "founderArchetypes": [
-          "consumer and brand leader",
-          "mission-driven"
+          "consumer and brand leader"
         ],
         "disruptionMechanisms": [
-          "matching consumer preferences",
-          "performance channel for brands"
+          "platform disintermediation",
+          "affiliate concentration"
         ],
         "regulatoryLabels": [],
         "businessModel": "two-sided marketplace",
-        "goToMarket": "consumer app and brand channel",
-        "operationalModel": "intermediary between search and checkout",
-        "problemStatement": "Consumers need a platform to compare products across retailers; brands need a performance channel to improve metrics.",
-        "productDescription": "AI shopping platform connecting shopper preferences with brands, offering discovery, comparison, and performance metrics."
+        "goToMarket": "consumer app/extension and brand channel",
+        "operationalModel": "AI-driven insights and product graph",
+        "problemStatement": "Consumers and brands struggle with effective product discovery and comparison across retailers.",
+        "productDescription": "AI platform helps consumers compare products and prices across retailers and provides brands a performance channel."
       },
       "founders": [],
       "stage": "series_a",
-      "geography": "USA",
-      "sector": "commerce",
-      "checkSizeSought": 2.5,
+      "geography": "unknown",
+      "sector": "ecommerce",
+      "checkSizeSought": 2500000,
       "graphMetrics": {},
       "competitors": [],
       "status": "passed",
@@ -9070,42 +9084,44 @@
     {
       "id": "co_bevel",
       "name": "Bevel",
-      "description": "Unusually strong disclosed engagement signals for a paid consumer-health application with over 100,000 daily active users and eightfold annual growth. Hardware independence is strategically useful, offering a potential moat in the form of a permissioned, longitudinal health graph combined with high-frequency user feedback.",
+      "description": "Bevel shows strong engagement signals with 100,000 daily active users, eightfold annual growth, and more than 80% 90-day retention. It doesn't require proprietary hardware, reducing adoption friction and allowing it to interpret data from various devices to create a longitudinal health graph. Its potential high-frequency user feedback and its moat in creating this multi-device health layer makes it a strong investment prospect. However, further diligence is required to verify user data and address risks.",
       "attributes": {
         "industryPath": [
           "healthcare",
-          "digital health"
+          "technology"
         ],
         "productCategoryPath": [
-          "consumer health applications"
+          "consumer health applications",
+          "AI health companions"
         ],
         "targetCustomers": [
-          "consumers",
-          "wearable users"
+          "wearable users",
+          "health enthusiasts"
         ],
         "technicalApproaches": [
-          "AI-driven guidance",
-          "cross-device integration"
+          "AI-driven insights",
+          "data integration"
         ],
         "founderArchetypes": [
-          "product and engineering leader"
+          "tech-executive",
+          "product-focused"
         ],
         "disruptionMechanisms": [
-          "platform-agnostic integration",
-          "data-driven recommendations"
+          "hardware-independence",
+          "cross-platform integration"
         ],
         "regulatoryLabels": [],
         "businessModel": "subscription",
-        "goToMarket": "B2C",
-        "operationalModel": "SaaS",
-        "problemStatement": "Consumers need a unified interface to interpret health data from multiple devices and sources.",
-        "productDescription": "A consumer health application that integrates data across devices for daily health guidance, focusing on recovery, sleep, nutrition, and more."
+        "goToMarket": "digital platforms",
+        "operationalModel": "AI and data integration",
+        "problemStatement": "Integrating and interpreting data from various health devices into actionable insights.",
+        "productDescription": "A consumer health application that compiles data from phones, wearables, health records, and user inputs into a comprehensive AI-driven health companion offering guidance on recovery, sleep, nutrition, and more."
       },
       "founders": [],
       "stage": "series_a",
-      "geography": "global",
+      "geography": "U.S.",
       "sector": "healthtech",
-      "checkSizeSought": 2,
+      "checkSizeSought": 2000000,
       "graphMetrics": {},
       "competitors": [],
       "status": "in_diligence",
@@ -9119,41 +9135,42 @@
     {
       "id": "co_rwazi",
       "name": "Rwazi",
-      "description": "Rwazi has the potential to transform traditional, slow market research into a continuous software process, enhancing decision-making with AI and zero-party data. The company boasts a competitive moat consisting of a verified collection network, historical data, and a decision layer that can provide unique, actionable insights. However, considerations regarding data representativeness, customer retention, and economic margins must be addressed.",
+      "description": "The memo outlines several principal risks such as data quality, service leakage, incumbent datasets, and AI explainability that could affect scalability and decision support. These risks must be addressed before making an investment decision. As such, the recommendation was to conduct further diligence rather than investing immediately.",
       "attributes": {
         "industryPath": [
-          "Market Research",
-          "Consumer Insights"
+          "technology",
+          "data analytics"
         ],
         "productCategoryPath": [
-          "AI/ML Software"
+          "decision intelligence platform"
         ],
         "targetCustomers": [
-          "Enterprise",
-          "Brands"
+          "enterprises",
+          "brands"
         ],
         "technicalApproaches": [
-          "Zero-party data",
-          "AI analysis"
+          "AI analysis",
+          "zero-party data"
         ],
         "founderArchetypes": [
-          "Data-driven entrepreneur"
+          "technologist-founder"
         ],
         "disruptionMechanisms": [
-          "Persistent workflow"
+          "transform traditional market research",
+          "persistent software workflow"
         ],
         "regulatoryLabels": [],
-        "businessModel": "SaaS and data network",
-        "goToMarket": "Enterprise sales",
-        "operationalModel": "SaaS with distributed data collection",
-        "problemStatement": "Traditional market research is slow, project-based, and lacks continuous data updates for real-time decision making.",
-        "productDescription": "A decision-intelligence platform leveraging zero-party consumer data and AI to provide actionable brand insights across various markets."
+        "businessModel": "SaaS plus distributed data network",
+        "goToMarket": "enterprise sales",
+        "operationalModel": "distributed data collection network",
+        "problemStatement": "Traditional market research is slow, project-based, and backward-looking.",
+        "productDescription": "Rwazi is a decision-intelligence platform providing real-world consumer data and AI-driven insights."
       },
       "founders": [],
       "stage": "series_a",
-      "geography": "Global",
-      "sector": "Consumer Insights and Intelligence",
-      "checkSizeSought": 2.5,
+      "geography": "global",
+      "sector": "consumer insights and intelligence",
+      "checkSizeSought": 2500000,
       "graphMetrics": {},
       "competitors": [],
       "status": "in_diligence",
@@ -9167,44 +9184,47 @@
     {
       "id": "co_twentyeight_health",
       "name": "Twentyeight Health",
-      "description": "The modeled base return is currently too dependent on either a lower entry price or a materially better operating case.",
+      "description": "Twentyeight Health may become an attractive investment, but the modeled base return is currently too dependent on either a lower entry price or a materially better operating case.",
       "attributes": {
         "industryPath": [
-          "healthcare",
-          "sexual and reproductive health"
+          "Healthcare",
+          "Digital Health",
+          "Women's Health"
         ],
         "productCategoryPath": [
-          "telehealth",
-          "virtual women's-health platform"
+          "Telehealth",
+          "Women's Health"
         ],
         "targetCustomers": [
-          "underserved and lower-income communities",
-          "Medicaid members"
+          "Medicaid members",
+          "Lower-income communities"
         ],
         "technicalApproaches": [
-          "payer-connected access",
-          "culturally inclusive"
+          "Direct-to-consumer",
+          "Telehealth"
         ],
         "founderArchetypes": [
-          "clinician-founder"
+          "Clinician-founder",
+          "Healthcare-founder"
         ],
         "disruptionMechanisms": [
-          "inclusive healthcare access"
+          "Culturally inclusive",
+          "Payer-connected model"
         ],
         "regulatoryLabels": [
-          "Medicaid reimbursement"
+          "Medicaid compliant"
         ],
-        "businessModel": "payer-connected D2C and Medicaid reimbursement",
-        "goToMarket": "direct-to-consumer with insurer partnerships",
-        "operationalModel": "state-compliant provider operations and pharmacy fulfillment",
-        "problemStatement": "Underserved and lower-income communities lack access to affordable reproductive and sexual-health care.",
-        "productDescription": "Provides reproductive and sexual-health access, prescriptions, provider messaging, and related care across 43 states."
+        "businessModel": "Mixed reimbursement and direct-to-consumer",
+        "goToMarket": "Culturally competent acquisition and Medicaid contracts",
+        "operationalModel": "Payer-network integration",
+        "problemStatement": "Fragmented sexual and reproductive healthcare access for underserved communities.",
+        "productDescription": "Virtual women's-health platform providing reproductive and sexual-health services to underserved and lower-income communities, focusing on Medicaid member access."
       },
       "founders": [],
       "stage": "series_a",
       "geography": "United States",
-      "sector": "digital health",
-      "checkSizeSought": 2,
+      "sector": "Healthcare",
+      "checkSizeSought": 2000000,
       "graphMetrics": {},
       "competitors": [],
       "status": "in_diligence",

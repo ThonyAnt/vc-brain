@@ -29,16 +29,18 @@ function formatValue(label: string, value: string | number | null) {
   if (value === null || value === '') return 'Input required'
   if (typeof value !== 'number') return value
   const lower = label.toLowerCase()
-  if (lower.includes('arr') || lower.includes('valuation') || lower.includes('investment')) {
+  if (lower.includes('multiple') || lower.includes('moic')) return `${value.toFixed(1)}x`
+  if (lower.includes('ownership') || lower.includes('penetration')) return `${(value * 100).toFixed(1)}%`
+  if (lower.includes('arr') || lower.includes('valuation') || lower.includes('investment') || lower.includes('revenue') || lower.includes('proceeds') || lower.includes('market')) {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value)
   }
   if (lower.includes('growth')) return `${value}%`
-  if (lower.includes('multiple')) return `${value}x`
   return new Intl.NumberFormat('en-US', { maximumFractionDigits: 1 }).format(value)
 }
 
 export function FilesTab({ company }: { company: Company }) {
   const [activeId, setActiveId] = useState<WorkbookId>('tam-exit')
+  const [selectedSheet, setSelectedSheet] = useState<string | undefined>()
   const [preview, setPreview] = useState<CompanyWorkbookPreview | null>(null)
   const [loading, setLoading] = useState(true)
   const [downloading, setDownloading] = useState(false)
@@ -49,7 +51,7 @@ export function FilesTab({ company }: { company: Company }) {
     let cancelled = false
     setLoading(true)
     setError(null)
-    api.getCompanyWorkbookPreview(company, activeId).then((nextPreview) => {
+    api.getCompanyWorkbookPreview(company, activeId, selectedSheet).then((nextPreview) => {
       if (cancelled) return
       setPreview(nextPreview)
       setLoading(false)
@@ -58,7 +60,7 @@ export function FilesTab({ company }: { company: Company }) {
     return () => {
       cancelled = true
     }
-  }, [activeId, company])
+  }, [activeId, company, selectedSheet])
 
   async function downloadGeneratedWorkbook() {
     setDownloading(true)
@@ -106,7 +108,10 @@ export function FilesTab({ company }: { company: Company }) {
               aria-selected={selected}
               aria-controls="workbook-preview"
               tabIndex={selected ? 0 : -1}
-              onClick={() => setActiveId(workbook.id)}
+              onClick={() => {
+                setActiveId(workbook.id)
+                setSelectedSheet(undefined)
+              }}
               className={`caption-tight min-h-12 min-w-[190px] flex-1 whitespace-nowrap border-2 border-hairline-strong px-4 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-focus ${
                 selected
                   ? 'bg-dark text-on-dark shadow-brutal-sm'
@@ -198,9 +203,17 @@ export function FilesTab({ company }: { company: Company }) {
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
             {(preview?.sheets ?? []).map((sheet) => (
-              <span key={sheet} className="code-sm border border-hairline-strong bg-card px-2.5 py-1.5 text-ink">
+              <button
+                key={sheet}
+                type="button"
+                aria-pressed={preview?.previewSheet === sheet}
+                onClick={() => setSelectedSheet(sheet)}
+                className={`code-sm whitespace-nowrap border border-hairline-strong px-2.5 py-1.5 text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring-focus ${
+                  preview?.previewSheet === sheet ? 'bg-secondary shadow-brutal-sm' : 'bg-card hover:bg-bone'
+                }`}
+              >
                 {sheet}
-              </span>
+              </button>
             ))}
           </div>
           {preview?.notes.map((note) => (

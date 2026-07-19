@@ -110,10 +110,35 @@ export interface FundProfile {
   name: string
   thesis: string
   checkSize: string
+  /** Structured check size (USD), present when loaded from the live brain API. */
+  checkSizeMin?: number
+  checkSizeMax?: number
   stages: string[]
   sectors: string[]
   geographies: string[]
   partners: { name: string; focus: string; leans: string }[]
+}
+
+/** A partial edit to the fund profile; mirrors the brain's FundProfilePatch. */
+export interface FundProfilePatch {
+  thesis?: string
+  checkSizeMin?: number
+  checkSizeMax?: number
+  stages?: string[]
+  sectors?: string[]
+  geographies?: string[]
+  weights?: CriteriaWeights
+}
+
+/** The editable slice the brain returns from GET/POST /api/fund. */
+export interface FundProfileView {
+  thesis: string
+  checkSizeMin: number
+  checkSizeMax: number
+  stages: string[]
+  sectors: string[]
+  geographies: string[]
+  weights: CriteriaWeights
 }
 
 export interface ChatMessage {

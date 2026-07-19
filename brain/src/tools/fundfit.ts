@@ -52,6 +52,24 @@ export function normalizeUsd(n: number): number {
   return n > 0 && n < 100_000 ? n * 1_000_000 : n;
 }
 
+/**
+ * Map a sourcing score to a 0-100 display "fit" relative to its cohort.
+ * Raw fund-fit collapses to ~50 for most candidates (few exact attribute
+ * matches against a small history), while the sourcing score differentiates
+ * continuously — so the UI shows the cohort-scaled sourcing score instead.
+ * Mirrored in app/src/lib/brain/adapt.ts (the app doesn't import this package).
+ */
+export function displayFitScore(totalScore: number, cohortScores: number[]): number {
+  const alive = cohortScores.filter((s) => s > 0);
+  if (alive.length === 0) return 70;
+  const lo = Math.min(...alive);
+  const hi = Math.max(...alive);
+  if (totalScore <= 0) return 35; // eliminated / off-thesis
+  if (hi - lo < 1e-9) return 70;
+  const t = (totalScore - lo) / (hi - lo);
+  return Math.round(Math.max(30, Math.min(95, 45 + t * 50)));
+}
+
 function passesHardFilters(c: Company, profile: FundProfile): string | undefined {
   if (profile.stages.length && c.stage && !profile.stages.includes(c.stage)) {
     return `stage ${c.stage} not in fund's preferred stages`;

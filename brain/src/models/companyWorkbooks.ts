@@ -376,28 +376,133 @@ function configureWorkbook(workbook: ExcelJS.Workbook, company: CompanyWorkbookI
   workbook.calcProperties.fullCalcOnLoad = true;
 }
 
-export function buildCompanyWorkbookPreview(kind: CompanyWorkbookKind, raw: unknown): CompanyWorkbookPreview {
+function readmePreview(company: CompanyWorkbookInput) {
+  return {
+    columns: ["Value"],
+    rows: [
+      { label: "Purpose", values: ["A deterministic first-pass model populated from the company record."] },
+      { label: "Yellow cells", values: ["Required or optional investor inputs; blank when no source-backed value exists."] },
+      { label: "Blue cells", values: ["Formula outputs; review assumptions before using the model in an investment decision."] },
+      { label: "Source policy", values: ["Known fields are labelled Company record. No market-size or competitor facts are fabricated."] },
+      { label: "Generated for", values: [company.name] },
+      { label: "Sector", values: [company.sector || null] },
+      { label: "Stage", values: [company.stage || null] },
+    ],
+  };
+}
+
+function projectedExit(company: CompanyWorkbookInput) {
+  const arr = known(company.model?.arr);
+  const growth = known(company.model?.growthPct);
+  const years = known(company.model?.yearsToExit);
+  const multipleValue = known(company.model?.exitMultiple);
+  const valuation = known(company.model?.valuation);
+  const check = known(company.model?.checkSize);
+  const exitArr = arr && growth && years ? arr * (1 + growth / 100) ** years : null;
+  const exitValuation = exitArr && multipleValue ? exitArr * multipleValue : null;
+  const ownership = valuation && check ? check / valuation : null;
+  const proceeds = exitValuation && ownership ? exitValuation * ownership : null;
+  const moic = proceeds && check ? proceeds / check : null;
+  return { exitArr, exitValuation, ownership, proceeds, moic };
+}
+
+export function buildCompanyWorkbookPreview(
+  kind: CompanyWorkbookKind,
+  raw: unknown,
+  requestedSheet?: string,
+): CompanyWorkbookPreview {
   const company = CompanyWorkbookInputSchema.parse(raw);
   if (kind === "landscape") {
     const competitors = company.competitors.slice(0, 15);
+    const sheets = ["README", "Final Competitive Landscape"];
+    const previewSheet = sheets.includes(requestedSheet ?? "") ? requestedSheet! : "Final Competitive Landscape";
+    const content = previewSheet === "README"
+      ? readmePreview(company)
+      : {
+          columns: [company.name, ...competitors.map((competitor) => competitor.name)],
+          rows: [
+            { label: "Relationship", values: ["Main company", ...competitors.map((competitor) => competitor.kind)], source: "Company record" },
+            { label: "Primary use case", values: [company.oneLiner || null, ...competitors.map((competitor) => competitor.note || null)], source: "Company and sourcing records" },
+            { label: "Key moat / differentiator", values: [company.reasonsToInvest[0] ?? null, ...competitors.map((competitor) => competitor.note || null)], source: "Company and sourcing records" },
+            { label: "Latest funding", values: [company.raising ?? company.stage ?? null, ...competitors.map(() => null)], source: "Company record" },
+            { label: "Valuation", values: [known(company.model?.valuation), ...competitors.map(() => null)], source: "Company record" },
+          ],
+        };
     return {
       kind,
       title: `${company.name} — Competitive Landscape`,
       fileName: `${safeFileName(company.name)}-competitive-landscape.xlsx`,
-      previewSheet: "Final Competitive Landscape",
-      sheets: ["README", "Final Competitive Landscape"],
+      previewSheet,
+      sheets,
       status: "company-specific",
       notes: [
         `${competitors.length} named competitor${competitors.length === 1 ? "" : "s"} loaded from the company record.`,
         "Unsupported competitor facts remain blank yellow cells.",
       ],
-      columns: [company.name, ...competitors.map((competitor) => competitor.name)],
+      ...content,
+    };
+  }
+
+  const sheets = ["README", "TAM", "2 year rev build", "Exit Scenario", "TAM Penetration Required"];
+  const previewSheet = sheets.includes(requestedSheet ?? "") ? requestedSheet! : "TAM";
+  const exit = projectedExit(company);
+  let content: Pick<CompanyWorkbookPreview, "columns" | "rows">;
+  if (previewSheet === "README") {
+    content = readmePreview(company);
+  } else if (previewSheet === "2 year rev build") {
+    const quarterLabels = ["Current", "Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8"];
+    const arr = known(company.model?.arr);
+    const growth = known(company.model?.growthPct);
+    const projectedArr = quarterLabels.map((_, index) => (
+      arr && growth ? arr * (1 + growth / 100) ** (index / 4) : index === 0 ? arr : null
+    ));
+    content = {
+      columns: quarterLabels,
       rows: [
-        { label: "Relationship", values: ["Main company", ...competitors.map((competitor) => competitor.kind)], source: "Company record" },
-        { label: "Primary use case", values: [company.oneLiner || null, ...competitors.map((competitor) => competitor.note || null)], source: "Company and sourcing records" },
-        { label: "Key moat / differentiator", values: [company.reasonsToInvest[0] ?? null, ...competitors.map((competitor) => competitor.note || null)], source: "Company and sourcing records" },
-        { label: "Latest funding", values: [company.raising ?? company.stage ?? null, ...competitors.map(() => null)], source: "Company record" },
-        { label: "Valuation", values: [known(company.model?.valuation), ...competitors.map(() => null)], source: "Company record" },
+        { label: "ARR", values: projectedArr, source: "Current ARR + annual growth formula" },
+        { label: "Quarterly revenue run-rate", values: projectedArr.map((value) => value ? value / 4 : null), source: "ARR ÷ 4" },
+      ],
+    };
+  } else if (previewSheet === "Exit Scenario") {
+    content = {
+      columns: ["Value", "Source / method"],
+      rows: [
+        { label: "Entry valuation", values: [known(company.model?.valuation), company.model?.valuation ? "Company record" : null] },
+        { label: "Investment amount", values: [known(company.model?.checkSize), company.model?.checkSize ? "Company record" : null] },
+        { label: "Current ARR", values: [known(company.model?.arr), company.model?.arr ? "Company record" : null] },
+        { label: "Annual ARR growth", values: [known(company.model?.growthPct), company.model?.growthPct ? "Company record" : null] },
+        { label: "Exit revenue multiple", values: [known(company.model?.exitMultiple), company.model?.exitMultiple ? "Company record" : null] },
+        { label: "Years to exit", values: [known(company.model?.yearsToExit), company.model?.yearsToExit ? "Company record" : null] },
+        { label: "Exit ARR", values: [exit.exitArr, "Current ARR × growth over years"] },
+        { label: "Implied exit valuation", values: [exit.exitValuation, "Exit ARR × revenue multiple"] },
+        { label: "Entry ownership", values: [exit.ownership, "Investment ÷ entry valuation"] },
+        { label: "Gross proceeds", values: [exit.proceeds, "Exit valuation × ownership; dilution not modelled"] },
+        { label: "Gross MOIC", values: [exit.moic, "Gross proceeds ÷ investment"] },
+      ],
+    };
+  } else if (previewSheet === "TAM Penetration Required") {
+    content = {
+      columns: ["Value", "Source / interpretation"],
+      rows: [
+        { label: "Total addressable market", values: [null, "Requires source-backed TAM inputs"] },
+        { label: "Exit ARR", values: [exit.exitArr, "Exit Scenario formula"] },
+        { label: "Required TAM penetration", values: [null, "Calculated after TAM inputs are supplied"] },
+      ],
+    };
+  } else {
+    content = {
+      columns: ["Company-specific value", "Status"],
+      rows: [
+        { label: "Company", values: [company.name, "Known"], source: "Company record" },
+        { label: "Target market", values: [company.sector || null, company.sector ? "Known" : "Input required"], source: "Company record" },
+        { label: "Market unit", values: [marketUnit(company), "Editable mapping"], source: "Deterministic sector mapping" },
+        { label: "Current ARR", values: [known(company.model?.arr), company.model?.arr ? "Known" : "Input required"], source: "Company record" },
+        { label: "Annual growth", values: [known(company.model?.growthPct), company.model?.growthPct ? "Known" : "Input required"], source: "Company record" },
+        { label: "Entry valuation", values: [known(company.model?.valuation), company.model?.valuation ? "Known" : "Input required"], source: "Company record" },
+        { label: "Investment amount", values: [known(company.model?.checkSize), company.model?.checkSize ? "Known" : "Input required"], source: "Company record" },
+        { label: "Exit multiple", values: [known(company.model?.exitMultiple), company.model?.exitMultiple ? "Known" : "Input required"], source: "Company record" },
+        { label: "Years to exit", values: [known(company.model?.yearsToExit), company.model?.yearsToExit ? "Known" : "Input required"], source: "Company record" },
+        { label: "TAM segment counts + ACV", values: [null, "Input required"], source: "Not available in company record" },
       ],
     };
   }
@@ -406,26 +511,14 @@ export function buildCompanyWorkbookPreview(kind: CompanyWorkbookKind, raw: unkn
     kind,
     title: `${company.name} — TAM + Revenue + Exit Model`,
     fileName: `${safeFileName(company.name)}-tam-revenue-exit-model.xlsx`,
-    previewSheet: "TAM",
-    sheets: ["README", "TAM", "2 year rev build", "Exit Scenario", "TAM Penetration Required"],
+    previewSheet,
+    sheets,
     status: "company-specific",
     notes: [
       `Market unit starts as “${marketUnit(company)}” and is editable.`,
       "Yellow cells are missing or investor-controlled assumptions; blue cells are formulas.",
     ],
-    columns: ["Company-specific value", "Status"],
-    rows: [
-      { label: "Company", values: [company.name, "Known"], source: "Company record" },
-      { label: "Target market", values: [company.sector || null, company.sector ? "Known" : "Input required"], source: "Company record" },
-      { label: "Market unit", values: [marketUnit(company), "Editable mapping"], source: "Deterministic sector mapping" },
-      { label: "Current ARR", values: [known(company.model?.arr), company.model?.arr ? "Known" : "Input required"], source: "Company record" },
-      { label: "Annual growth", values: [known(company.model?.growthPct), company.model?.growthPct ? "Known" : "Input required"], source: "Company record" },
-      { label: "Entry valuation", values: [known(company.model?.valuation), company.model?.valuation ? "Known" : "Input required"], source: "Company record" },
-      { label: "Investment amount", values: [known(company.model?.checkSize), company.model?.checkSize ? "Known" : "Input required"], source: "Company record" },
-      { label: "Exit multiple", values: [known(company.model?.exitMultiple), company.model?.exitMultiple ? "Known" : "Input required"], source: "Company record" },
-      { label: "Years to exit", values: [known(company.model?.yearsToExit), company.model?.yearsToExit ? "Known" : "Input required"], source: "Company record" },
-      { label: "TAM segment counts + ACV", values: [null, "Input required"], source: "Not available in company record" },
-    ],
+    ...content,
   };
 }
 

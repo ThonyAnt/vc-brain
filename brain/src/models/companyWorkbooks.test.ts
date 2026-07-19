@@ -85,4 +85,28 @@ describe("company-specific workbooks", () => {
     expect(unit).toBe("healthcare organizations");
     expect(JSON.stringify(healthcare)).not.toContain("physician");
   });
+
+  it("previews every worksheet tab in both generated workbooks", () => {
+    const tamSheets = ["README", "TAM", "2 year rev build", "Exit Scenario", "TAM Penetration Required"];
+    for (const sheet of tamSheets) {
+      const preview = buildCompanyWorkbookPreview("tam-exit", aureline, sheet);
+      expect(preview.previewSheet).toBe(sheet);
+      expect(preview.rows.length).toBeGreaterThan(0);
+      expect(preview.columns.length).toBeGreaterThan(0);
+    }
+
+    const revenue = buildCompanyWorkbookPreview("tam-exit", aureline, "2 year rev build");
+    expect(revenue.columns).toEqual(["Current", "Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8"]);
+    expect(revenue.rows[0]?.values[0]).toBe(340_000);
+    expect(revenue.rows[0]?.values[4]).toBeCloseTo(401_200, -1);
+
+    const exit = buildCompanyWorkbookPreview("tam-exit", aureline, "Exit Scenario");
+    expect(exit.rows.find((row) => row.label === "Gross MOIC")?.values[0]).toBeTypeOf("number");
+
+    for (const sheet of ["README", "Final Competitive Landscape"]) {
+      const preview = buildCompanyWorkbookPreview("landscape", aureline, sheet);
+      expect(preview.previewSheet).toBe(sheet);
+      expect(preview.rows.length).toBeGreaterThan(0);
+    }
+  });
 });

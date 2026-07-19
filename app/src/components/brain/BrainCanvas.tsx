@@ -5,9 +5,9 @@ import type { FundGraph } from '../../lib/types'
 
 /*
  * Ported from mockup/src/main.js. Rendering core (shader points, cosmos-style
- * links, synapse shimmer, bezier fly-to) is kept; data now comes from the fund
- * graph, with procedural "tracked" companies added for visual density. All HUD
- * moved to React overlays; this component exposes an imperative handle.
+ * links, synapse shimmer, bezier fly-to) is kept; data comes entirely from the
+ * fund graph (no procedural filler companies). All HUD moved to React
+ * overlays; this component exposes an imperative handle.
  */
 
 export interface BrainHandle {
@@ -22,13 +22,12 @@ interface Props {
 }
 
 /* Final mockup palette (light mode): mid-tone sector colors that read on
-   white; one blue accent reserved for sourced candidates + focus states. */
+   white; sourced candidates take their sector color, and the blue accent is
+   reserved for closed (portfolio) deals + focus states. */
 export const SECTOR_PALETTE = ['#bd66a8', '#4f9ec4', '#7d6bc9', '#c08a3e', '#4faa74', '#c96666']
-export const ACCENT = '#266df0' // Attio blue-500: candidates, hover ring, focus, fit bar
+export const ACCENT = '#266df0' // Attio blue-500: closed deals, hover ring, focus, fit bar
 export const REJECTED_COLOR = '#b9bec8'
 const SHOW_LINES = false // resting-state edges + shimmer; focused node's edges still show
-
-const N_FILLER = 169
 
 function mulberry32(seed: number) {
   let a = seed >>> 0
@@ -50,9 +49,6 @@ function hash(s: string) {
   return h >>> 0
 }
 
-const PREFIX = ['Lumen', 'Vanta', 'Arc', 'Helio', 'Nimbus', 'Fathom', 'Ember', 'Atlas', 'Vertex', 'Sable', 'Orin', 'Cobalt', 'Drift', 'Halcyon', 'Iris', 'Juniper', 'Kite', 'Mica', 'Onyx', 'Prism', 'Rill', 'Tessel', 'Verdant', 'Willow', 'Zephyr', 'Basalt', 'Crux', 'Echo', 'Flux', 'Grove', 'Harbor', 'Alder', 'Sorrel']
-const SUFFIX = ['Labs', 'Systems', 'Works', 'Data', 'Ops', 'Cloud', 'Base', 'Flow', 'Grid', 'Stack']
-
 interface SceneNode {
   id: string
   label: string
@@ -64,7 +60,6 @@ interface SceneNode {
   vel: THREE.Vector3
   pos: THREE.Vector3
   phase: number
-  real: boolean
 }
 
 export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({ graph, onSelect }, ref) {

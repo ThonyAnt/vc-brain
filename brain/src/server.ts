@@ -21,7 +21,7 @@ import { OpenAILLMClient } from "./llm/openai.js";
 import { TavilySearchClient } from "./search/tavily.js";
 import { applyFeedback } from "./orchestrator.js";
 import { discoverCompanies } from "./tools/discover.js";
-import { rankCandidates } from "./tools/fundfit.js";
+import { rankCandidates, displayFitScore } from "./tools/fundfit.js";
 import { InvestorFeedbackSchema, type FeedbackActionType } from "./schemas/feedback.js";
 import {
   buildExperienceGraph,
@@ -41,6 +41,7 @@ import type { VCBrainState } from "./state.js";
 import type { Company } from "./schemas/company.js";
 import { loadSourcedCompanies, saveSourcedCompanies } from "./store/sourcedCompanies.js";
 import { buildCompanyWorkbook, buildCompanyWorkbookPreview } from "./models/companyWorkbooks.js";
+import { applyFundPatch, fundProfileToView, FundProfilePatchSchema } from "./fund/profileEdits.js";
 import { z } from "zod";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -52,6 +53,7 @@ const MODEL = process.env.VC_BRAIN_OPENAI_MODEL ?? "gpt-4o-mini";
 const CompanyWorkbookRequestSchema = z.object({
   kind: z.enum(["tam-exit", "landscape"]),
   company: z.unknown(),
+  sheet: z.string().optional(),
 });
 
 const state = JSON.parse(readFileSync(SNAPSHOT, "utf8")) as VCBrainState & { competitors?: Company[] };
@@ -116,8 +118,18 @@ async function handleFeedback(body: { entityId: string; action: string; justific
  * Map a freshly-discovered brain company (+ its ranking) to the app's sourced
  * Company view shape, so the dashboard can render it with no extra adaptation.
  */
+/** Cohort of sourcing scores for display-fit scaling (snapshot + runtime adds). */
+function fitCohort(): number[] {
+  return (state.sourcedCandidates ?? []).map((r) => r.totalScore);
+}
+
 function sourcedView(c: Company, r: RankedCandidate | undefined) {
-  const fit = r?.fundFitScore !== undefined ? Math.round(r.fundFitScore * 100) : 70;
+  const fit =
+    r?.totalScore !== undefined
+      ? displayFitScore(r.totalScore, fitCohort())
+      : r?.fundFitScore !== undefined
+        ? Math.round(r.fundFitScore * 100)
+        : 70;
   const diligence = state.diligence?.[c.id];
   const winner = r?.closestWinnerId ? findCompany(r.closestWinnerId) : undefined;
   const rejected = r?.closestRejectedDealId ? findCompany(r.closestRejectedDealId) : undefined;
@@ -367,6 +379,15 @@ const server = http.createServer(async (req, res) => {
     if (req.method === "POST" && req.url === "/api/feedback") {
       return res.end(JSON.stringify(await handleFeedback((await readBody(req)) as never)));
     }
+    if (req.method === "GET" && req.url === "/api/fund") {
+      if (!state.fundProfile) return res.writeHead(404).end(JSON.stringify({ error: "no fund profile" }));
+      return res.end(JSON.stringify(fundProfileToView(state.fundProfile)));
+    }
+    if (req.method === "POST" && req.url === "/api/fund") {
+      if (!state.fundProfile) return res.writeHead(404).end(JSON.stringify({ error: "no fund profile" }));
+      const patch = FundProfilePatchSchema.parse(await readBody(req));
+      return res.end(JSON.stringify(applyFundPatch(state.fundProfile, patch)));
+    }
     if (req.method === "POST" && req.url === "/api/chat") {
       return res.end(JSON.stringify(await handleChat((await readBody(req)) as never)));
     }
@@ -378,7 +399,7 @@ const server = http.createServer(async (req, res) => {
     }
     if (req.method === "POST" && req.url === "/api/models/preview") {
       const body = CompanyWorkbookRequestSchema.parse(await readBody(req));
-      return res.end(JSON.stringify(buildCompanyWorkbookPreview(body.kind, body.company)));
+      return res.end(JSON.stringify(buildCompanyWorkbookPreview(body.kind, body.company, body.sheet)));
     }
     if (req.method === "POST" && req.url === "/api/models/workbook") {
       const body = CompanyWorkbookRequestSchema.parse(await readBody(req));

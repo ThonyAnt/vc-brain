@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { findNearestCompanies } from "./similarity.js";
-import { fundFit, rankCandidates, normalizeUsd } from "./fundfit.js";
+import { fundFit, rankCandidates, normalizeUsd, displayFitScore } from "./fundfit.js";
 import { buildMarketLandscape } from "./landscape.js";
 import { emitGraphEvent } from "./events.js";
 import { createInitialState } from "../state.js";
@@ -36,6 +36,22 @@ describe("normalizeUsd", () => {
   });
   it("does not touch zero", () => {
     expect(normalizeUsd(0)).toBe(0);
+  });
+});
+
+describe("displayFitScore", () => {
+  const cohort = [0.36, 0.3, 0.28, 0.26];
+  it("spreads cohort scores across the display band", () => {
+    expect(displayFitScore(0.36, cohort)).toBe(95); // cohort max
+    expect(displayFitScore(0.26, cohort)).toBe(45); // cohort min
+    const mid = displayFitScore(0.31, cohort);
+    expect(mid).toBeGreaterThan(45);
+    expect(mid).toBeLessThan(95);
+  });
+  it("marks eliminated (score<=0) low and handles degenerate cohorts", () => {
+    expect(displayFitScore(0, cohort)).toBe(35);
+    expect(displayFitScore(0.5, [0.5, 0.5])).toBe(70);
+    expect(displayFitScore(0.5, [])).toBe(70);
   });
 });
 

@@ -129,8 +129,9 @@ export const api = {
   async getCompanyWorkbookPreview(
     company: Company,
     kind: CompanyWorkbookKind,
+    sheet?: string,
   ): Promise<CompanyWorkbookPreview | null> {
-    return postJson<CompanyWorkbookPreview>('/api/models/preview', { company, kind })
+    return postJson<CompanyWorkbookPreview>('/api/models/preview', { company, kind, sheet })
   },
 
   async downloadCompanyWorkbook(company: Company, kind: CompanyWorkbookKind): Promise<boolean> {

@@ -259,9 +259,9 @@ export function FundPage() {
                     .map(([k, v]) => (
                       <div key={k} className="flex items-center gap-3">
                         <span className="w-64 shrink-0 text-sm text-on-dark-mute">{k}</span>
-                        <div className="h-[3px] flex-1 rounded-none bg-divider-dark">
+                        <div className="h-2.5 flex-1 border border-divider-dark bg-black">
                           <div
-                            className="h-[3px] rounded-none bg-hero-glow transition-all duration-700"
+                            className="h-full bg-hero-glow transition-all duration-700"
                             style={{ width: `${v * 100}%` }}
                           />
                         </div>

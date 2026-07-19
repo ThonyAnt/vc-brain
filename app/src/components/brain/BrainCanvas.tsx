@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import type { FundGraph } from '../../lib/types'
+import type { FundGraph, GraphEdge } from '../../lib/types'
 
 /*
  * Ported from mockup/src/main.js. Rendering core (shader points, cosmos-style
@@ -27,7 +27,7 @@ interface Props {
 export const SECTOR_PALETTE = ['#bd66a8', '#4f9ec4', '#7d6bc9', '#c08a3e', '#4faa74', '#c96666']
 export const ACCENT = '#266df0' // Attio blue-500: closed deals, hover ring, focus, fit bar
 export const REJECTED_COLOR = '#b9bec8'
-const SHOW_LINES = false // resting-state edges + shimmer; focused node's edges still show
+const SHOW_LINES = true // semantic graph edges remain visible at rest
 
 function mulberry32(seed: number) {
   let a = seed >>> 0
@@ -131,9 +131,16 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     for (const gn of graph.nodes) {
       if (gn.type === 'market' || gn.type === 'criterion') continue
       const cluster = clusterOf.get(gn.id) ?? 0
-      const base = gn.position
+      const semanticPosition = gn.position
         ? new THREE.Vector3(...gn.position).multiplyScalar(POSITION_SCALE)
-        : anchors[cluster].clone().add(jitterVec(gn.id, gn.type === 'founder' ? 150 : 120))
+        : undefined
+      const clusterAnchor = anchors[cluster] ?? new THREE.Vector3()
+      const semanticRadius = semanticPosition?.distanceTo(clusterAnchor) ?? 0
+      // Preserve the brain's MDS position, with a deterministic visual offset
+      // capped below 15% of the node's distance from its market anchor.
+      const base = semanticPosition
+        ? semanticPosition.add(jitterVec(`${gn.id}:semantic`, semanticRadius * 0.08))
+        : clusterAnchor.clone().add(jitterVec(gn.id, gn.type === 'founder' ? 150 : 120))
       nodes.push({
         id: gn.id,
         label: gn.label,
@@ -142,7 +149,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         cluster,
         base,
         offset: new THREE.Vector3(),
-        vel: new THREE.Vector3((rand() - 0.5) * 6, (rand() - 0.5) * 6, (rand() - 0.5) * 6),
+        vel: jitterVec(`${gn.id}:velocity`, semanticPosition ? 0.6 : 3),
         pos: base.clone(),
         phase: rand() * Math.PI * 2,
       })
@@ -152,19 +159,33 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     const byId = new Map(nodes.map((n) => [n.id, n]))
 
     /* edges: real graph edges only */
-    type SceneEdge = { a: SceneNode; b: SceneNode; weight: number; phase: number }
+    type SceneEdge = { a: SceneNode; b: SceneNode; weight: number; kind: GraphEdge['kind']; phase: number }
     const edges: SceneEdge[] = []
-    const edgeKeys = new Set<string>()
-    const addEdge = (a?: SceneNode, b?: SceneNode, weight = 1) => {
+    const edgeByKey = new Map<string, SceneEdge>()
+    const edgePriority: Record<GraphEdge['kind'], number> = {
+      market: 0,
+      similarity: 1,
+      founder: 2,
+      precedent: 3,
+      risk: 4,
+      competition: 5,
+    }
+    const addEdge = (a: SceneNode | undefined, b: SceneNode | undefined, weight: number, kind: GraphEdge['kind']) => {
       if (!a || !b || a === b) return
       const key = a.id < b.id ? `${a.id}|${b.id}` : `${b.id}|${a.id}`
-      if (edgeKeys.has(key)) return
-      edgeKeys.add(key)
-      edges.push({ a, b, weight, phase: rand() * Math.PI * 2 })
+      const existing = edgeByKey.get(key)
+      if (existing) {
+        existing.weight = Math.max(existing.weight, weight)
+        if (edgePriority[kind] > edgePriority[existing.kind]) existing.kind = kind
+        return
+      }
+      const edge: SceneEdge = { a, b, weight, kind, phase: mulberry32(hash(`${key}:${kind}`))() * Math.PI * 2 }
+      edgeByKey.set(key, edge)
+      edges.push(edge)
     }
     for (const e of graph.edges) {
       if (e.kind === 'market') continue
-      addEdge(byId.get(e.source), byId.get(e.target), e.kind === 'precedent' ? 1.6 : e.kind === 'founder' ? 0.9 : 0.7)
+      addEdge(byId.get(e.source), byId.get(e.target), e.weight, e.kind)
     }
 
     const neighbourSets = new Map(nodes.map((n) => [n.id, new Set([n.id])]))
@@ -333,6 +354,8 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     synapse.renderOrder = 1
     group.add(synapse)
     const synTint = srgb('#5c6f9e')
+    const competitionTint = srgb('#ff3838')
+    const precedentTint = srgb(ACCENT)
 
     /* hover ring: SDF band in a fragment shader on a billboarded quad — crisp at
        any zoom (screen-space AA via fwidth), unlike the old 128px canvas texture.
@@ -616,14 +639,23 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         const len = a.distanceTo(b)
         const fade = 1 - THREE.MathUtils.smoothstep(len, LINK_FADE_NEAR, LINK_FADE_FAR) * (1 - LINK_MIN_TRANSPARENCY)
         const breathe = 0.9 + 0.1 * Math.sin(time * 0.7 + e.phase) * motion
-        let alpha = SHOW_LINES ? 0.32 * fade * breathe * e.weight : 0
+        const restingAlpha = e.kind === 'competition'
+          ? 0.68
+          : e.kind === 'precedent'
+            ? 0.44
+            : e.kind === 'founder'
+              ? 0.28
+              : e.kind === 'risk'
+                ? 0.4
+                : 0.2
+        let alpha = SHOW_LINES ? restingAlpha * fade * breathe * e.weight : 0
         if (focused) {
           const on = e.a === focused || e.b === focused
-          alpha = on ? 0.55 * fade * breathe * e.weight : alpha * 0.05
+          alpha = on ? Math.max(restingAlpha, 0.7) * fade * breathe * e.weight : alpha * 0.05
         }
         alpha = Math.min(alpha, 0.85)
-        const ca = nodeColor(e.a)
-        const cb = nodeColor(e.b)
+        const ca = e.kind === 'competition' ? competitionTint : e.kind === 'precedent' ? precedentTint : nodeColor(e.a)
+        const cb = e.kind === 'competition' ? competitionTint : e.kind === 'precedent' ? precedentTint : nodeColor(e.b)
         lCol[i * 8] = ca.r
         lCol[i * 8 + 1] = ca.g
         lCol[i * 8 + 2] = ca.b

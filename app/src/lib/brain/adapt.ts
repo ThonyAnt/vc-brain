@@ -98,6 +98,9 @@ interface BrainDiligence {
 interface BrainLandscapeNode {
   id: string
   clusterId: number
+  x?: number
+  y?: number
+  z?: number
 }
 interface BrainLandscapeEdge {
   source: string
@@ -108,6 +111,10 @@ interface BrainLandscapeEdge {
 interface BrainCluster {
   id: number
   label: string
+  memberIds?: string[]
+  x?: number
+  y?: number
+  z?: number
 }
 interface BrainEvent {
   eventType: string
@@ -432,6 +439,7 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
 
   const clusterList = landscape?.clusters ?? []
   const clusterById = new Map(clusterList.map((cl) => [cl.id, cl]))
+  const landscapeNodeById = new Map((landscape?.nodes ?? []).map((node) => [node.id, node]))
   const clusterOfCompany = new Map((landscape?.nodes ?? []).map((n) => [n.id, n.clusterId]))
   const useClusters =
     clusterList.length >= 2 && clusterList.length <= 14 && companies.every((c) => clusterOfCompany.has(c.id) || c.type === 'sourced')
@@ -456,9 +464,30 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
 
   const nodes: GraphNode[] = []
   const edges: GraphEdge[] = []
-  for (const label of marketLabels) nodes.push({ id: marketId(label), type: 'market', label })
+  for (const label of marketLabels) {
+    const cluster = clusterList.find((candidate) => candidate.label === label)
+    nodes.push({
+      id: marketId(label),
+      type: 'market',
+      label,
+      position: cluster && cluster.x != null && cluster.y != null && cluster.z != null
+        ? [cluster.x, cluster.y, cluster.z]
+        : undefined,
+    })
+  }
   for (const c of companies) {
-    nodes.push({ id: c.id, type: c.type, label: c.name, score: c.fitScore })
+    const semanticPosition = landscapeNodeById.get(c.id)
+    const hasSemanticPosition = semanticPosition
+      && semanticPosition.x != null
+      && semanticPosition.y != null
+      && semanticPosition.z != null
+    nodes.push({
+      id: c.id,
+      type: c.type,
+      label: c.name,
+      score: c.fitScore,
+      position: hasSemanticPosition ? [semanticPosition.x!, semanticPosition.y!, semanticPosition.z!] : undefined,
+    })
     edges.push({ source: c.id, target: marketId(marketLabelFor(c)), kind: 'market', weight: 0.4 })
   }
   for (const f of founders) {
@@ -469,7 +498,55 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
   const nodeIds = new Set(nodes.map((n) => n.id))
   for (const e of landscape?.edges ?? []) {
     if (nodeIds.has(e.source) && nodeIds.has(e.target))
-      edges.push({ source: e.source, target: e.target, kind: e.type === 'analogue' ? 'precedent' : 'similarity', weight: e.weight })
+      edges.push({
+        source: e.source,
+        target: e.target,
+        kind: e.type === 'competition' ? 'competition' : e.type === 'analogue' ? 'precedent' : 'similarity',
+        weight: e.weight,
+      })
+  }
+
+  // Ranked candidates can name the nearest external competitor after the
+  // landscape event was emitted. Add those links without requiring an LLM or
+  // overwriting the similarity/precedent layers.
+  const competitionKeys = new Set(
+    edges
+      .filter((edge) => edge.kind === 'competition')
+      .map((edge) => [edge.source, edge.target].sort().join('|')),
+  )
+  for (const rankedCompany of snap.sourcedCandidates ?? []) {
+    const competitorId = rankedCompany.closestCompetitorId
+    if (!competitorId || !nodeIds.has(rankedCompany.companyId) || !nodeIds.has(competitorId)) continue
+    const key = [rankedCompany.companyId, competitorId].sort().join('|')
+    if (competitionKeys.has(key)) continue
+    competitionKeys.add(key)
+    edges.push({ source: rankedCompany.companyId, target: competitorId, kind: 'competition', weight: 0.8 })
+  }
+
+  // Founder-to-founder links require an exact normalized organization name in
+  // both backgrounds (e.g. “ex-Epic” / “from Epic”). No semantic inference.
+  const organizations = (background: string): Set<string> => {
+    const names = new Set<string>()
+    const patterns = [
+      /\b(?:ex[-\s]|at\s+|from\s+)([A-Z][A-Za-z0-9&.+-]*(?:\s+[A-Z][A-Za-z0-9&.+-]*){0,3})/g,
+      /\b([A-Z][A-Za-z0-9&.+-]*(?:\s+[A-Z][A-Za-z0-9&.+-]*){0,3}\s+(?:University|College|Institute|Labs?))\b/g,
+    ]
+    for (const pattern of patterns) {
+      for (const match of background.matchAll(pattern)) names.add(match[1]!.trim().toLocaleLowerCase('en-US'))
+    }
+    return names
+  }
+  const founderOrganizations = new Map(founders.map((founder) => [founder.id, organizations(founder.background)]))
+  for (let i = 0; i < founders.length; i++) {
+    for (let j = i + 1; j < founders.length; j++) {
+      const a = founders[i]!
+      const b = founders[j]!
+      if (a.companyId === b.companyId) continue
+      const aOrganizations = founderOrganizations.get(a.id)!
+      if ([...aOrganizations].some((organization) => founderOrganizations.get(b.id)!.has(organization))) {
+        edges.push({ source: a.id, target: b.id, kind: 'founder', weight: 0.55 })
+      }
+    }
   }
   const graph: FundGraph = { nodes, edges, weights }
 

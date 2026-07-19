@@ -96,14 +96,38 @@ describe("rankCandidates", () => {
 });
 
 describe("buildMarketLandscape", () => {
-  it("clusters healthcare docs together and separates fintech", () => {
+  it("clusters healthcare docs together and emits deterministic semantic coordinates", () => {
     const all = [...fx.candidateUniverse, ...fx.portfolioCompanies, fx.notegen];
     const land = buildMarketLandscape(all, { focalId: "co_scribeai" });
+    const repeated = buildMarketLandscape(all, { focalId: "co_scribeai" });
     const clusterOf = (id: string) => land.nodes.find((n) => n.id === id)!.clusterId;
     expect(clusterOf("co_scribeai")).toBe(clusterOf("co_medflow"));
     expect(clusterOf("co_scribeai")).not.toBe(clusterOf("co_payflow"));
-    expect(land.nodes.find((n) => n.id === "co_scribeai")).toMatchObject({ x: 0, y: 0 });
+    expect(land.nodes).toEqual(repeated.nodes);
+    expect(land.clusters).toEqual(repeated.clusters);
+    expect(land.clusters.every((cluster) => [cluster.x, cluster.y, cluster.z].every(Number.isFinite))).toBe(true);
+    const scribe = land.nodes.find((node) => node.id === "co_scribeai")!;
+    const distanceFromScribe = (id: string) => {
+      const node = land.nodes.find((candidate) => candidate.id === id)!;
+      return Math.hypot(scribe.x - node.x, scribe.y - node.y, scribe.z - node.z);
+    };
+    // Canonical similarities are MedFlow .86, VetCharts .59, RadIntel .38.
+    expect(distanceFromScribe("co_medflow")).toBeLessThan(distanceFromScribe("co_vetcharts"));
+    expect(distanceFromScribe("co_vetcharts")).toBeLessThan(distanceFromScribe("co_radintel"));
     expect(land.edges.length).toBeGreaterThan(0);
+  });
+
+  it("adds exact-name competitor edges without replacing similarity edges", () => {
+    const scribeWithCompetitor = { ...fx.scribeai, competitors: ["  notegen  "] };
+    const all = [scribeWithCompetitor, fx.notegen, fx.medflow, fx.payflow];
+    const land = buildMarketLandscape(all, { minClusterSize: 1 });
+    expect(land.edges).toContainEqual({
+      source: "co_scribeai",
+      target: "co_notegen",
+      weight: 0.8,
+      type: "competition",
+    });
+    expect(land.edges.some((edge) => edge.type === "nearest")).toBe(true);
   });
 });
 

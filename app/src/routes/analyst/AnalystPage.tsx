@@ -3,7 +3,8 @@ import { Link } from 'react-router'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { AskInput } from '@/components/ui/ask-input'
-import { OrchestrationTrace, type TraceRun, type TraceStage } from '@/components/analyst/OrchestrationTrace'
+import { OrchestrationTrace, type TraceRun } from '@/components/analyst/OrchestrationTrace'
+import { closeTrace, useAnalystChat } from '../../state/chatStore'
 import { api } from '../../lib/api/client'
 import type { OrchestratorStreamEvent } from '../../lib/api/client'
 import type { ChatMessage } from '../../lib/types'
@@ -126,15 +127,6 @@ function applyTraceEvent(run: TraceRun | undefined, event: OrchestratorStreamEve
   return next
 }
 
-/** Close out a trace whose stream ended without a run_completed event. */
-function closeTrace(run: TraceRun | undefined): TraceRun | undefined {
-  if (!run || run.endedAt) return run
-  const stages: TraceStage[] = run.stages.map((s) =>
-    s.status === 'running' ? { ...s, status: 'done', endedAt: s.endedAt ?? Date.now() } : s,
-  )
-  return { ...run, endedAt: Date.now(), stages }
-}
-
 function AssistantMarkdown({ content }: { content: string }) {
   return (
     <ReactMarkdown
@@ -164,15 +156,12 @@ function AssistantMarkdown({ content }: { content: string }) {
 
 /* Full-screen fund-brain chat. Empty state is the big ask prompt; once a
    question lands the page becomes a message thread with the input pinned.
-   Each orchestrated turn shows a live stage trace that stays in the thread. */
+   Each orchestrated turn shows a live stage trace that stays in the thread.
+   The conversation lives in a persisted store, so it survives navigation
+   and reloads until the user starts a new chat. */
 export function AnalystPage() {
-  const [messages, setMessages] = useState<ChatMessage[]>([])
+  const { messages, traces, sourcedFounders, setMessages, setTraces, setSourcedFounders, clear } = useAnalystChat()
   const [busy, setBusy] = useState(false)
-  /* Assistant message index -> orchestration trace for that run. */
-  const [traces, setTraces] = useState<Record<number, TraceRun>>({})
-  /* Assistant message index -> founders sourced in that run, so a completed
-     founder-sourcing turn shows a link through to the Founder Leads page. */
-  const [sourcedFounders, setSourcedFounders] = useState<Record<number, number>>({})
   const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -226,9 +215,6 @@ export function AnalystPage() {
     return (
       <div className="flex h-full flex-col items-center justify-center p-8">
         <AskInput title="Ask the fund brain" onSubmit={ask} className="max-w-2xl" />
-        <p className="code-sm -mt-4 text-charcoal">
-          institutional memory · 34 memos · 47 passes · 8 outcomes
-        </p>
       </div>
     )
   }
@@ -236,7 +222,17 @@ export function AnalystPage() {
   const liveTrace = traces[messages.length - 1]
 
   return (
-    <div className="mx-auto flex h-full w-full max-w-[820px] flex-col px-8 pt-6 pb-8">
+    <div className="mx-auto flex h-full w-full max-w-[820px] flex-col px-8 pt-4 pb-8">
+      <div className="flex shrink-0 justify-end pb-2">
+        <button
+          type="button"
+          onClick={clear}
+          disabled={busy}
+          className="code-sm cursor-pointer border-2 border-hairline-strong bg-card px-2.5 py-1 uppercase tracking-[0.08em] text-charcoal shadow-brutal-sm transition-colors hover:bg-bone disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          New chat
+        </button>
+      </div>
       <div ref={scrollRef} className="min-h-0 flex-1 space-y-4 overflow-y-auto pr-1 pb-6">
         {messages.map((m, i) => (
           <Fragment key={i}>

@@ -137,6 +137,7 @@ describe("broadMarketLabel", () => {
     expect(broadMarketLabel("B2B SaaS")).toBe("Enterprise AI");
     expect(broadMarketLabel("Payments")).toBe("Fintech");
     expect(broadMarketLabel("Logistics and supply chain")).toBe("Robotics & Logistics");
+    expect(broadMarketLabel("Enterprise Operations Automation")).toBe("Industrial Operations");
     expect(broadMarketLabel("Technology")).toBe("Developer Tools");
   });
 });

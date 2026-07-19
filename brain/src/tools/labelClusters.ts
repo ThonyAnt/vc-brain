@@ -38,6 +38,7 @@ For each cluster write ONE label:
 export function broadMarketLabel(label: string): string {
   const normalized = label.trim();
   if (/^(b2b saas|enterprise software|enterprise automation)$/i.test(normalized)) return "Enterprise AI";
+  if (/industrial operations|industrial automation|operations automation|enterprise operations/i.test(normalized)) return "Industrial Operations";
   if (/payments?|wallets?|financial infrastructure/i.test(normalized)) return "Fintech";
   if (/^(social|event platforms?)$/i.test(normalized)) return "Consumer Social";
   if (/logistics|supply chain|industrial automation/i.test(normalized)) return "Robotics & Logistics";
@@ -48,7 +49,7 @@ export function broadMarketLabel(label: string): string {
   if (/fintech|financial|wallet|banking/i.test(normalized)) return "Fintech";
   if (/cyber|security/i.test(normalized)) return "Cybersecurity";
   if (/climate|energy/i.test(normalized)) return "Climate & Energy";
-  if (/robot|logistics|industrial automation/i.test(normalized)) return "Robotics & Logistics";
+  if (/robot|logistics/i.test(normalized)) return "Robotics & Logistics";
   if (/consumer|social|event/i.test(normalized)) return "Consumer Social";
   if (/education|learning/i.test(normalized)) return "Education";
   if (/agent infrastructure|ai infrastructure/i.test(normalized)) return "AI Infrastructure";
@@ -56,15 +57,40 @@ export function broadMarketLabel(label: string): string {
   return normalized;
 }
 
-export function broadenClusterLabels(landscape: MarketLandscape): MarketLandscape {
+export function broadenClusterLabels(landscape: MarketLandscape, companies: Company[] = []): MarketLandscape {
+  const byId = new Map(companies.map((company) => [company.id, company]));
   return {
     ...landscape,
     clusters: landscape.clusters.map((cluster) => ({
       ...cluster,
-      label: broadMarketLabel(cluster.label),
+      label: refineLabelForMembers(broadMarketLabel(cluster.label), cluster.memberIds.map((id) => byId.get(id)).filter((company): company is Company => Boolean(company))),
     })),
   };
 }
+
+function refineLabelForMembers(label: string, members: Company[]): string {
+  if (label !== "Climate & Energy" || members.length === 0) return label;
+  const climateMembers = members.filter((member) => {
+    const text = [member.sector, ...member.attributes.industryPath, member.description].filter(Boolean).join(" ");
+    return /climate|energy|carbon|renewable/i.test(text);
+  });
+  return climateMembers.length / members.length < 0.5 ? "Industrial Operations" : label;
+}
+
+const CANONICAL_MARKET_LABELS = new Set([
+  "AI Infrastructure",
+  "Enterprise AI",
+  "Industrial Operations",
+  "Healthcare",
+  "Fintech",
+  "Consumer Social",
+  "Cybersecurity",
+  "Robotics & Logistics",
+  "Education",
+  "AI Applications",
+  "Developer Tools",
+  "Climate & Energy",
+]);
 
 export async function labelClustersWithLLM(
   landscape: MarketLandscape,
@@ -73,16 +99,18 @@ export async function labelClustersWithLLM(
 ): Promise<MarketLandscape> {
   if (landscape.clusters.length === 0) return landscape;
   const byId = new Map(companies.map((c) => [c.id, c]));
+  const deterministic = broadenClusterLabels(landscape, companies);
+  const deterministicLabelById = new Map(deterministic.clusters.map((cluster) => [cluster.id, cluster.label]));
 
   const summaries = landscape.clusters.map((cl) => {
     const members = cl.memberIds
       .map((id) => byId.get(id))
       .filter((c): c is Company => Boolean(c))
-      .slice(0, 8);
+      .slice(0, 12);
     const lines = members
-      .map((m) => `- ${m.name}: ${(m.description ?? "").slice(0, 140)}`)
+      .map((m) => `- ${m.name} [${m.sector ?? m.attributes.industryPath[0] ?? "unknown"}]: ${(m.description ?? "").slice(0, 140)}`)
       .join("\n");
-    return `Cluster ${cl.id} (auto-label: "${cl.label}", ${cl.memberIds.length} members):\n${lines}`;
+    return `Cluster ${cl.id} (${cl.memberIds.length} members):\n${lines}`;
   });
 
   try {
@@ -98,13 +126,15 @@ export async function labelClustersWithLLM(
       ...landscape,
       clusters: landscape.clusters.map((cl) => {
         let label = broadMarketLabel(labelById.get(cl.id) ?? "");
+        const deterministicLabel = deterministicLabelById.get(cl.id) ?? "";
+        if (CANONICAL_MARKET_LABELS.has(deterministicLabel)) label = deterministicLabel;
         if (!label || used.has(label.toLowerCase())) label = broadMarketLabel(cl.label); // fall back to the modal auto-label
         label = broadMarketLabel(label);
         used.add(label.toLowerCase());
         return { ...cl, label };
       }),
-    });
+    }, companies);
   } catch {
-    return broadenClusterLabels(landscape);
+    return broadenClusterLabels(landscape, companies);
   }
 }

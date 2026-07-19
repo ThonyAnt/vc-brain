@@ -37,7 +37,7 @@ if (process.env.OPENAI_API_KEY) {
   landscape = await labelClustersWithLLM(landscape, companies, new OpenAILLMClient({}));
   console.log("Cluster labels: LLM-named (modal auto-labels as fallback)");
 } else {
-  landscape = broadenClusterLabels(landscape);
+  landscape = broadenClusterLabels(landscape, companies);
   console.log("Cluster labels: modal auto-labels (set OPENAI_API_KEY for LLM naming)");
 }
 

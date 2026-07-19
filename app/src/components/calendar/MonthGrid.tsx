@@ -63,7 +63,7 @@ export function MonthGrid({
       </div>
       <div className="grid grid-cols-7">
         {WEEKDAYS.map((d) => (
-          <div key={d} className="code-sm border-b-2 border-hairline-strong bg-bone px-2 py-1.5 text-center text-charcoal">
+          <div key={d} className="border-b-2 border-hairline-strong bg-bone px-2 py-1.5 text-center text-xs font-semibold text-charcoal">
             {d}
           </div>
         ))}
@@ -79,7 +79,7 @@ export function MonthGrid({
               }`}
             >
               <span
-                className={`code-sm inline-block px-1 ${
+                className={`inline-block px-1 text-xs font-semibold ${
                   isToday
                     ? 'bg-primary text-on-primary'
                     : inMonth

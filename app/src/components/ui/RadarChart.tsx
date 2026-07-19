@@ -72,7 +72,7 @@ export function RadarChart({
               key={`l${t}`}
               x={5}
               y={-R * t + 3}
-              style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, fill: '#333333' }}
+              style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 9, fill: '#333333' }}
             >
               {Math.round(t * 100)}
             </text>
@@ -101,9 +101,9 @@ export function RadarChart({
             dominantBaseline="middle"
             transform={`rotate(${angleDeg(i)}) translate(0 ${-(R + 28)}) rotate(${-angleDeg(i)})`}
             style={{
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: 11,
-              letterSpacing: '0.06em',
+              letterSpacing: '0.04em',
               textTransform: 'uppercase',
               fill: hover === i ? '#000000' : '#333333',
               fontWeight: hover === i ? 700 : 400,
@@ -145,7 +145,7 @@ export function RadarChart({
               <text
                 x={17}
                 y={4}
-                style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, fill: '#000000' }}
+                style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fill: '#000000' }}
               >
                 {s.name}
               </text>
@@ -171,7 +171,7 @@ export function RadarChart({
       {/* hover tooltip */}
       {hover !== null && (
         <div className="pointer-events-none absolute top-2 left-1/2 z-10 -translate-x-1/2 border-2 border-hairline-strong bg-card px-3 py-2 shadow-brutal-sm">
-          <div className="code-sm uppercase text-ink">{axes[hover]}</div>
+          <div className="caption-tight text-ink">{axes[hover]}</div>
           {series.map((s) => (
             <div key={s.name} className="mt-1 flex items-center gap-2">
               <i className="inline-block h-2.5 w-2.5 border border-hairline-strong" style={{ background: s.color }} />
@@ -186,13 +186,13 @@ export function RadarChart({
 
       {/* accessible table view */}
       <details className="mt-1">
-        <summary className="code-sm cursor-pointer text-charcoal">data table</summary>
+        <summary className="caption cursor-pointer text-charcoal">Data table</summary>
         <table className="mt-1 w-full border-collapse">
           <thead>
             <tr>
-              <th className="code-sm border-b border-hairline py-1 text-left text-charcoal">Dimension</th>
+              <th className="caption-tight border-b border-hairline py-1 text-left text-charcoal">Dimension</th>
               {series.map((s) => (
-                <th key={s.name} className="code-sm border-b border-hairline py-1 text-right text-charcoal">
+                <th key={s.name} className="caption-tight border-b border-hairline py-1 text-right text-charcoal">
                   {s.name}
                 </th>
               ))}

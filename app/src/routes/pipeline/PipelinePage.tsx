@@ -134,13 +134,9 @@ function downloadRevenueModel(company: Company) {
 function CalendarView({
   companies,
   onOpenMemo,
-  selectedIds,
-  onToggleCompany,
 }: {
   companies: Company[]
   onOpenMemo: (companyId: string) => void
-  selectedIds: Set<string>
-  onToggleCompany: (companyId: string) => void
 }) {
   const names = new Map(companies.map((company) => [company.id, company.name]))
   // ?cal=month opens the grid (demo/screenshot aid)
@@ -187,15 +183,7 @@ function CalendarView({
           {CALENDAR_RESERVATIONS.map((call) => {
             const company = companies.find((item) => item.id === call.companyId)
             return (
-              <div key={call.id} className="grid gap-3 p-5 lg:grid-cols-[22px_145px_minmax(0,1fr)_auto] lg:items-center">
-                <input
-                  aria-label={`Select ${names.get(call.companyId) ?? 'company'}`}
-                  type="checkbox"
-                  checked={selectedIds.has(call.companyId)}
-                  onChange={() => onToggleCompany(call.companyId)}
-                  disabled={!company}
-                  className="h-4 w-4 cursor-pointer accent-primary disabled:cursor-not-allowed"
-                />
+              <div key={call.id} className="grid gap-3 p-5 lg:grid-cols-[145px_minmax(0,1fr)_auto] lg:items-center">
                 <div className="code-sm text-mute"><strong className="block text-ink">{call.when}</strong>{call.time}</div>
                 <div>
                   <p className="caption-tight text-ink">{call.title} — {names.get(call.companyId) ?? call.companyName}</p>
@@ -224,11 +212,11 @@ function CalendarView({
 
 export function PipelinePage() {
   const [companies, setCompanies] = useState<Company[]>([])
-  // ?view=database overrides (demo aid); otherwise last choice persists per browser
+  // ?view= overrides the default database-first pipeline view (demo aid).
   const [view, setView] = useState<View>(() => {
     const param = new URLSearchParams(window.location.search).get('view')
     if (param === 'database' || param === 'board' || param === 'calendar') return param
-    return (localStorage.getItem('vcbrain-pipeline-view') as View) ?? 'board'
+    return 'database'
   })
   const [sort, setSort] = useState<{ key: SortKey; dir: 1 | -1 }>({ key: 'fitScore', dir: -1 })
   const [stageFilter, setStageFilter] = useState<Stage | 'all'>('all')
@@ -361,8 +349,8 @@ export function PipelinePage() {
           <div className="flex border-2 border-hairline-strong shadow-brutal-sm">
             {(
               [
-                { v: 'board', label: 'Board view', Icon: BoardIcon },
                 { v: 'database', label: 'Database view', Icon: DatabaseIcon },
+                { v: 'board', label: 'Board view', Icon: BoardIcon },
                 { v: 'calendar', label: 'Calendar view', Icon: CalendarIcon },
               ] as const
             ).map(({ v, label, Icon }) => (
@@ -373,7 +361,7 @@ export function PipelinePage() {
                 aria-label={label}
                 className={`cursor-pointer p-2.5 transition-colors ${
                   view === v ? 'bg-dark text-on-dark' : 'bg-card text-ink hover:bg-bone'
-                } ${v === 'database' ? 'border-l-2 border-hairline-strong' : ''}`}
+                } ${v !== 'database' ? 'border-l-2 border-hairline-strong' : ''}`}
               >
                 <Icon className="h-5 w-5" />
               </button>
@@ -432,7 +420,7 @@ export function PipelinePage() {
           options={[{ value: 'all', label: 'All locations' }, ...locations.map((location) => ({ value: location, label: location }))]}
         />
         <div className="min-w-4 flex-1" />
-        {view !== 'calendar' && (
+        {view === 'database' && (
           <>
             <button type="button" onClick={sendBatchOutreach} disabled={!outreachEligible.length} className="h-9 shrink-0 border-2 border-hairline-strong bg-primary px-5 text-sm font-semibold text-on-primary disabled:cursor-not-allowed disabled:bg-stone disabled:text-charcoal">
               Outbound
@@ -572,8 +560,6 @@ export function PipelinePage() {
         <CalendarView
           companies={active}
           onOpenMemo={(companyId) => navigate(`/company/${companyId}?tab=files`)}
-          selectedIds={selectedIds}
-          onToggleCompany={toggleCompany}
         />
       )}
       {sourceOpen && <SourceCompaniesDialog onClose={() => setSourceOpen(false)} onSource={sourceCompanies} />}

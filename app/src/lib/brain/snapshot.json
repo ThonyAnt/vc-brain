@@ -600,7 +600,8 @@
         {
           "name": "Sarah Wooders",
           "role": "Co-founder and CTO",
-          "background": "Co-authored the MemGPT research paper introducing self-editing memory for LLMs; UC Berkeley Sky Computing Lab."
+          "background": "Co-authored the MemGPT research paper introducing self-editing memory for LLMs; UC Berkeley Sky Computing Lab.",
+          "photoUrl": "https://i.ytimg.com/vi/VgttOIWfoeo/maxresdefault.jpg"
         }
       ],
       "stage": "seed",
@@ -680,7 +681,8 @@
         {
           "name": "Caleb Peffer",
           "role": "Co-founder and CEO",
-          "background": "Named as CEO in the company's Series A announcement and press coverage."
+          "background": "Named as CEO in the company's Series A announcement and press coverage.",
+          "photoUrl": "https://techcrunch.com/wp-content/uploads/2025/08/IMG_5763-e1755012254346.jpeg?w=637"
         },
         {
           "name": "Eric Ciarla",
@@ -769,7 +771,8 @@
         {
           "name": "Mohak Sharma",
           "role": "Co-founder and CEO",
-          "background": "Named as founder/CEO in the company's funding announcement and independent PR Newswire release."
+          "background": "Named as founder/CEO in the company's funding announcement and independent PR Newswire release.",
+          "photoUrl": "https://pbs.twimg.com/profile_images/2053475792756043782/XbI1xBcA.jpg"
         },
         {
           "name": "Dhruv Singh",
@@ -851,7 +854,8 @@
         {
           "name": "Vasek Mlejnsky",
           "role": "Co-founder",
-          "background": "Named in company Series A materials and independent press coverage as co-founder of FoundryLabs, Inc."
+          "background": "Named in company Series A materials and independent press coverage as co-founder of FoundryLabs, Inc.",
+          "photoUrl": "https://thenewstack.io/wp-content/uploads/2024/04/5c7214a5-vasek-600x600.png"
         },
         {
           "name": "Tomas Valenta",
@@ -1013,7 +1017,8 @@
         {
           "name": "Chang She",
           "role": "Co-founder and CEO",
-          "background": "Creator of the Pandas library, a widely used Python data-analysis tool."
+          "background": "Creator of the Pandas library, a widely used Python data-analysis tool.",
+          "photoUrl": "https://i.ytimg.com/vi/slZ1xg2UznQ/maxresdefault.jpg"
         },
         {
           "name": "Lei Xu",
@@ -1101,7 +1106,8 @@
         {
           "name": "Gregor Žunič",
           "role": "Co-founder",
-          "background": "Named in TechCrunch's funding coverage; project originated through ETH Zurich's Student Project House accelerator."
+          "background": "Named in TechCrunch's funding coverage; project originated through ETH Zurich's Student Project House accelerator.",
+          "photoUrl": "https://browser-use.com/images/authors/gregor.png"
         }
       ],
       "stage": "seed",
@@ -1177,12 +1183,14 @@
         {
           "name": "Jeff Huber",
           "role": "Co-founder and CEO",
-          "background": "Machine learning background; company and independent press identify him as CEO."
+          "background": "Machine learning background; company and independent press identify him as CEO.",
+          "photoUrl": "https://cdn.prod.website-files.com/6002179bc8122d63cfe31f13/66e8d8978c6d03ad9fa12e37_ja47fGVr6fk3Exx5IlqxLi0-TWgmGupXOFLAPVYDMIiNwhfhaR1VjjQFv7rTIA5KbcfwObDnRkXn7MjCGbOSZ4FpUS979vrZ3n4HjZBpoYYukvbyUhr-KZmhV3yhyM1toGajCmUFnT5A6yJe1FgNpItyd4YRsEhvMWJrsy11fP8.png"
         },
         {
           "name": "Anton Troynikov",
           "role": "Co-founder",
-          "background": "Background as a robotics engineer, researcher, and prior edtech startup founder."
+          "background": "Background as a robotics engineer, researcher, and prior edtech startup founder.",
+          "photoUrl": "https://i0.wp.com/softwareengineeringdaily.com/wp-content/uploads/2024/08/Chromas-Vector-Database-with-Anton-Troynikov.png?fit=600%2C315&ssl=1"
         }
       ],
       "stage": "seed",
@@ -1269,7 +1277,8 @@
         {
           "name": "Rebecca Qian",
           "role": "Co-founder",
-          "background": "Former Meta AI machine learning researcher."
+          "background": "Former Meta AI machine learning researcher.",
+          "photoUrl": "https://rebecca-qian.github.io/authors/admin/rebecca.png"
         }
       ],
       "stage": "series_b",
@@ -1344,7 +1353,8 @@
         {
           "name": "Ankur Goyal",
           "role": "Founder and CEO",
-          "background": "Previously founded Impira (acquired by Figma, where he led the AI team); early team member at SingleStore/MemSQL."
+          "background": "Previously founded Impira (acquired by Figma, where he led the AI team); early team member at SingleStore/MemSQL.",
+          "photoUrl": "https://i.ytimg.com/vi/Q6XmF4NpR20/mqdefault.jpg"
         }
       ],
       "stage": "series_b",
@@ -1524,7 +1534,8 @@
         {
           "name": "Gabriel Hubert",
           "role": "Co-founder",
-          "background": "Co-founded Dust alongside Polu; named in TechCrunch's 2024 Series A coverage."
+          "background": "Co-founded Dust alongside Polu; named in TechCrunch's 2024 Series A coverage.",
+          "photoUrl": "https://www.autonomoussummit.ai/wp-content/uploads/2024/11/Gabriel-Hubert.jpeg"
         }
       ],
       "stage": "series_b",
@@ -1611,7 +1622,8 @@
         {
           "name": "Devin Bhushan",
           "role": "Founder and CEO",
-          "background": "Previously built features for Yahoo's fantasy-sports platform, where he connected with investors Tim Tully and Jess Lee, who later backed Squint's Series A and B."
+          "background": "Previously built features for Yahoo's fantasy-sports platform, where he connected with investors Tim Tully and Jess Lee, who later backed Squint's Series A and B.",
+          "photoUrl": "https://startupsavant.com/images/startup-culture/articles/squint.jpg"
         }
       ],
       "stage": "series_b",
@@ -1865,7 +1877,8 @@
         {
           "name": "Parker Gilbert",
           "role": "Co-founder",
-          "background": "Prior VP of Finance experience at Hearth, per Numeric's own Series B announcement."
+          "background": "Prior VP of Finance experience at Hearth, per Numeric's own Series B announcement.",
+          "photoUrl": "https://cdn.prod.website-files.com/683cd0b88bd8a76ef55c1487/688b66a6ae7fb206bf08ba8e_Parker%20Gilbert.webp"
         },
         {
           "name": "Anthony Alvernaz",
@@ -2047,7 +2060,8 @@
         {
           "name": "Scott Stevenson",
           "role": "Co-founder and CEO",
-          "background": "Identified as co-founder and CEO in SiliconANGLE's October 2025 Series B coverage; publicly frames Spellbook's positioning as legal work's 'spreadsheet moment.'"
+          "background": "Identified as co-founder and CEO in SiliconANGLE's October 2025 Series B coverage; publicly frames Spellbook's positioning as legal work's 'spreadsheet moment.'",
+          "photoUrl": "https://www.inovia.vc/wp-content/uploads/2023/05/3-Scott-_-Spellbook.png"
         }
       ],
       "stage": "series_b",
@@ -2135,7 +2149,8 @@
         {
           "name": "Matt Harpe",
           "role": "Co-founder and CEO",
-          "background": "Prior Boston Consulting Group and SoftBank executive experience, per SiliconANGLE's February 2026 Series B coverage."
+          "background": "Prior Boston Consulting Group and SoftBank executive experience, per SiliconANGLE's February 2026 Series B coverage.",
+          "photoUrl": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iNHBeo01HyFE/v3/-1x-1.webp"
         },
         {
           "name": "Zenna Tavares",
@@ -2145,7 +2160,8 @@
         {
           "name": "Emily Mackevicius",
           "role": "Reported co-founder / research lead",
-          "background": "Postdoctoral researcher studying memory in birds at the Aronov lab and Center for Theoretical Neuroscience; identified as a founding researcher by the same secondary source."
+          "background": "Postdoctoral researcher studying memory in birds at the Aronov lab and Center for Theoretical Neuroscience; identified as a founding researcher by the same secondary source.",
+          "photoUrl": "https://i.ytimg.com/vi/ggP2A9tStTo/maxresdefault.jpg"
         },
         {
           "name": "Eli Bingham",
@@ -2232,7 +2248,8 @@
         {
           "name": "Jay Madheswaran",
           "role": "Co-founder and CEO",
-          "background": "15+ years in AI/ML at Facebook and Rubrik (first engineer, head of product engineering); previously at Lightspeed Venture Partners, which later co-led Eve's Series A."
+          "background": "15+ years in AI/ML at Facebook and Rubrik (first engineer, head of product engineering); previously at Lightspeed Venture Partners, which later co-led Eve's Series A.",
+          "photoUrl": "https://lsvp.com/wp-content/uploads/2025/01/Eve-Co-founders_David-Zeng-Jay-Madheswaran-and-Matt-Noe.jpg"
         },
         {
           "name": "Matt Noe",
@@ -2591,12 +2608,14 @@
         {
           "name": "Ellen DaSilva",
           "role": "Founder and CEO",
-          "background": "Early employee (#8) at Hims & Hers, serving as Head of Strategic Partnerships through IPO; prior business-operations leadership at Twitter."
+          "background": "Early employee (#8) at Hims & Hers, serving as Head of Strategic Partnerships through IPO; prior business-operations leadership at Twitter.",
+          "photoUrl": "https://www.hbswa.org/s/1738/images/gid13/editor/events/2023n/ellendasilva.jpg"
         },
         {
           "name": "Matthew Woo",
           "role": "Co-founder",
-          "background": "Prior consulting at Simon-Kucher & Partners; 9+ years in product roles at Meetup, Yo, Intercom, UJET, and Meta/WhatsApp."
+          "background": "Prior consulting at Simon-Kucher & Partners; 9+ years in product roles at Meetup, Yo, Intercom, UJET, and Meta/WhatsApp.",
+          "photoUrl": "https://substackcdn.com/image/fetch/$s_!RHIL!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcaa4a3e0-9d36-49f0-bad7-ca637fde1588_1664x1664.png"
         }
       ],
       "stage": "series_a",
@@ -2679,7 +2698,8 @@
         {
           "name": "Anu Sharma",
           "role": "Founder and CEO",
-          "background": "15+ years in healthcare innovation; founded Millie after a 2019 postpartum health crisis (preeclampsia and HELLP syndrome) following her own delivery."
+          "background": "15+ years in healthcare innovation; founded Millie after a 2019 postpartum health crisis (preeclampsia and HELLP syndrome) following her own delivery.",
+          "photoUrl": "https://techcrunch.com/wp-content/uploads/2025/02/Copy-of-Anu-1.jpg"
         },
         {
           "name": "Talia Borgo",
@@ -2774,7 +2794,8 @@
         {
           "name": "Sammy Faycurry",
           "role": "Co-founder and CEO",
-          "background": "Built the platform initially for his mother and sister, both registered dietitians."
+          "background": "Built the platform initially for his mother and sister, both registered dietitians.",
+          "photoUrl": "https://web-summit-avenger.imgix.net/production/avatars/original/a38b0ac781f38b897a95dbda12fb4794887cfcb6.?ixlib=rb-3.4.0&auto=format&fit=crop&crop=faces&w=600&h=600"
         },
         {
           "name": "Mark Stefanski",
@@ -3123,7 +3144,8 @@
         {
           "name": "Daniel Wilson",
           "role": "Co-founder",
-          "background": "Co-founding member per Behavioral Health Business; current operating role unconfirmed in sources reviewed."
+          "background": "Co-founding member per Behavioral Health Business; current operating role unconfirmed in sources reviewed.",
+          "photoUrl": "https://alldus.com/wp-content/uploads/2023/08/dwilson.png"
         }
       ],
       "stage": "seed",
@@ -3205,7 +3227,8 @@
         {
           "name": "Matt Antoszyk",
           "role": "Co-founder and CEO",
-          "background": "Led Herald from its December 2021 seed round through its October 2024 Series A; public sources reviewed do not disclose detailed prior career history."
+          "background": "Led Herald from its December 2021 seed round through its October 2024 Series A; public sources reviewed do not disclose detailed prior career history.",
+          "photoUrl": "https://i.ytimg.com/vi/ufxwn1pFse0/maxresdefault.jpg"
         }
       ],
       "stage": "series_a",
@@ -3287,7 +3310,8 @@
         {
           "name": "Keith Raphael",
           "role": "Co-founder and CEO",
-          "background": "Based in Broomfield, Colorado; public sources reviewed do not disclose detailed prior career history."
+          "background": "Based in Broomfield, Colorado; public sources reviewed do not disclose detailed prior career history.",
+          "photoUrl": "https://leadersinpayments.com/wp-content/uploads/2026/01/Ep-458-Website-Graphic-768x432.jpg"
         }
       ],
       "stage": "seed",
@@ -3451,7 +3475,8 @@
         {
           "name": "Sophia Goldberg",
           "role": "Co-founder and CEO",
-          "background": "Previously a product manager at Adyen, per TechCrunch."
+          "background": "Previously a product manager at Adyen, per TechCrunch.",
+          "photoUrl": "https://arizent.brightspotcdn.com/dims4/default/5b15522/2147483647/strip/true/crop/1400x800+0+0/resize/740x423!/quality/90/?url=https%3A%2F%2Fsource-media-brightspot.s3.us-east-1.amazonaws.com%2F71%2Fea%2F9d63a8314ad19fb19eae4b75fe26%2Fsophia-goldberg-ansa.jpg"
         },
         {
           "name": "JT Cho",
@@ -3628,7 +3653,8 @@
         {
           "name": "Jonathan Awad",
           "role": "Co-founder",
-          "background": "Co-founded Baselayer in 2023 after encountering KYB gaps firsthand, per the company's May 2024 seed-round announcement."
+          "background": "Co-founded Baselayer in 2023 after encountering KYB gaps firsthand, per the company's May 2024 seed-round announcement.",
+          "photoUrl": "https://jsawadd.com/images/6NpXsmb0f6-293.png"
         },
         {
           "name": "Timothy Hyde",
@@ -4079,7 +4105,8 @@
         {
           "name": "Kevin Sapp",
           "role": "Co-founder",
-          "background": "Named as co-founder on Aembit's Series A press release; detailed prior operating history not confirmed in public sources reviewed."
+          "background": "Named as co-founder on Aembit's Series A press release; detailed prior operating history not confirmed in public sources reviewed.",
+          "photoUrl": "https://i.ytimg.com/vi/hWLTmiMO31I/maxresdefault.jpg"
         }
       ],
       "stage": "series_a",
@@ -4352,7 +4379,8 @@
         {
           "name": "Toby Mao",
           "role": "Co-founder and CTO",
-          "background": "Previously senior staff engineer at Airbnb leading the XP experimentation and Minerva metrics platforms; earlier led the XP platform at Netflix."
+          "background": "Previously senior staff engineer at Airbnb leading the XP experimentation and Minerva metrics platforms; earlier led the XP platform at Netflix.",
+          "photoUrl": "https://i.ytimg.com/vi/ASiBidAFdwM/maxresdefault.jpg"
         },
         {
           "name": "Iaroslav Zeigerman",
@@ -4446,7 +4474,8 @@
         {
           "name": "Pekka Enberg",
           "role": "Co-founder and CTO",
-          "background": "Early employee at ScyllaDB and a former Linux kernel maintainer, per Turso's own investors page."
+          "background": "Early employee at ScyllaDB and a former Linux kernel maintainer, per Turso's own investors page.",
+          "photoUrl": "https://penberg.org/assets/me.jpg"
         }
       ],
       "stage": "series_a",
@@ -4533,7 +4562,8 @@
         {
           "name": "Johnny Graettinger",
           "role": "Co-founder and CTO",
-          "background": "Prior infrastructure engineering experience at Google and YouTube."
+          "background": "Prior infrastructure engineering experience at Google and YouTube.",
+          "photoUrl": "https://i.ytimg.com/vi/WslkscPp1ro/maxresdefault.jpg"
         }
       ],
       "stage": "series_a",
@@ -4620,7 +4650,8 @@
         {
           "name": "Alan Braithwaite",
           "role": "Co-founder",
-          "background": "Named as a co-founder on RunReveal's own funding announcement; specific prior employer not confirmed in public sources reviewed."
+          "background": "Named as a co-founder on RunReveal's own funding announcement; specific prior employer not confirmed in public sources reviewed.",
+          "photoUrl": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog11845528/50-Alan.jpg"
         }
       ],
       "stage": "seed",
@@ -4699,7 +4730,8 @@
         {
           "name": "Benny Porat",
           "role": "Co-founder",
-          "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed."
+          "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed.",
+          "photoUrl": "https://s3.amazonaws.com/cco-avatars/64ced9d8-ebc3-438a-8563-bc9b5c3df95e.png"
         },
         {
           "name": "Omri Green",
@@ -4709,7 +4741,8 @@
         {
           "name": "Justin Woody",
           "role": "Co-founder",
-          "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed."
+          "background": "Reported by CTech (Calcalist) as a former senior manager at Claroty prior to co-founding Twine in 2024; specific title at Twine not confirmed in sources reviewed.",
+          "photoUrl": "https://i.ytimg.com/vi/Q8c3Q3OSXho/maxresdefault.jpg"
         },
         {
           "name": "Nadav Erez",
@@ -4972,7 +5005,8 @@
         {
           "name": "Akshay Dodeja",
           "role": "Co-founder",
-          "background": "Co-founded Terminal49 in 2015; exact current title unconfirmed in public sources."
+          "background": "Co-founded Terminal49 in 2015; exact current title unconfirmed in public sources.",
+          "photoUrl": "https://terminal49.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fakshay-dodeja.48776b24.jpg&w=640&q=75"
         },
         {
           "name": "Philipp Gutheim",
@@ -5243,12 +5277,14 @@
         {
           "name": "Jesse Buckingham",
           "role": "Co-founder",
-          "background": "Stanford graduate; former CEO of ASG LogisTech, a logistics operator, prior to co-founding Vooma."
+          "background": "Stanford graduate; former CEO of ASG LogisTech, a logistics operator, prior to co-founding Vooma.",
+          "photoUrl": "https://pbs.twimg.com/profile_images/1631688387865513984/v58JTGFF_400x400.jpg"
         },
         {
           "name": "Mike Carter",
           "role": "Co-founder",
-          "background": "Stanford graduate; former founding engineer at Kodiak Robotics, an autonomous-trucking company, prior to co-founding Vooma."
+          "background": "Stanford graduate; former founding engineer at Kodiak Robotics, an autonomous-trucking company, prior to co-founding Vooma.",
+          "photoUrl": "https://techcrunch.com/wp-content/uploads/2024/10/headshot-e1729047742205.jpeg?w=668"
         }
       ],
       "stage": "series_a",
@@ -5333,7 +5369,8 @@
         {
           "name": "Mary Yap",
           "role": "Co-founder and CEO",
-          "background": "Identified as CEO and company spokesperson across public reporting, including the Frontier offtake announcement."
+          "background": "Identified as CEO and company spokesperson across public reporting, including the Frontier offtake announcement.",
+          "photoUrl": "https://images.fastcompany.com/image/upload/f_webp,c_fit,w_1920,q_auto/wp-cms/uploads/2023/04/p-1-90888679-lithos-day-in-the-life.jpg"
         },
         {
           "name": "Noah Planavsky",
@@ -5429,12 +5466,14 @@
         {
           "name": "James Mcwalter",
           "role": "Co-founder and CEO",
-          "background": "Identified as co-founder and CEO across multiple financing reports (ESG Dive, Utility Dive, ESG Today); company founded 2022, headquartered in Brooklyn, NY."
+          "background": "Identified as co-founder and CEO across multiple financing reports (ESG Dive, Utility Dive, ESG Today); company founded 2022, headquartered in Brooklyn, NY.",
+          "photoUrl": "https://deploytogether.com/wp-content/uploads/james-mcwalter-550.png"
         },
         {
           "name": "Charles Bai",
           "role": "Co-founder",
-          "background": "Identified alongside Mcwalter as co-founder in company and press materials; exact current title unconfirmed."
+          "background": "Identified alongside Mcwalter as co-founder in company and press materials; exact current title unconfirmed.",
+          "photoUrl": "https://imageio.forbes.com/specials-images/imageserve/636c5ae5da0edb9f0d7fde53/0x0.jpg?format=jpg&crop=1605,1604,x1440,y910,safe&height=416&width=416&fit=bounds"
         }
       ],
       "stage": "series_a",
@@ -5521,7 +5560,8 @@
         {
           "name": "Matt Penfold",
           "role": "Co-founder",
-          "background": "Identified as co-founder alongside Madaeni in company financing materials. Exact current title unconfirmed."
+          "background": "Identified as co-founder alongside Madaeni in company financing materials. Exact current title unconfirmed.",
+          "photoUrl": "https://www.naem.org/images/default-source/headshots/naem-2025-opex-25-tech-25-matthew-penfold-verse-1500x1500-min.jpg?sfvrsn=31629d5_1"
         }
       ],
       "stage": "series_a",
@@ -5701,7 +5741,8 @@
         {
           "name": "Rylan Hawkins",
           "role": "Co-founder",
-          "background": "Identified as co-founder alongside Silver in FreightWaves coverage and company materials. Exact current title unconfirmed."
+          "background": "Identified as co-founder alongside Silver in FreightWaves coverage and company materials. Exact current title unconfirmed.",
+          "photoUrl": "https://cdn.theorg.com/cbc02b3b-24c4-4d1d-adb4-9cc768ec685f_medium.jpg"
         }
       ],
       "stage": "series_a",
@@ -5788,7 +5829,8 @@
         {
           "name": "Jennifer Wilcox",
           "role": "Chief Scientist (not a founder)",
-          "background": "Former Principal Deputy Assistant Secretary at the U.S. Department of Energy; published foundational carbon-dioxide-removal research."
+          "background": "Former Principal Deputy Assistant Secretary at the U.S. Department of Energy; published foundational carbon-dioxide-removal research.",
+          "photoUrl": "https://www.unr.edu/main/images/colleges-schools/science/energy-solutions-exchange/profile/jen-wilcox-profile.jpg"
         },
         {
           "name": "Stacy Kauk",
@@ -5885,7 +5927,8 @@
         {
           "name": "Eliot Frost",
           "role": "Co-founder",
-          "background": "Harvard Business School alumnus; co-built the original restaurant-tracking concept; \"Beli\" is derived from his high school nickname."
+          "background": "Harvard Business School alumnus; co-built the original restaurant-tracking concept; \"Beli\" is derived from his high school nickname.",
+          "photoUrl": "https://images.crunchbase.com/image/upload/c_thumb,h_256,w_256,f_auto,g_face,z_0.7,q_auto:eco,dpr_1/sfjcplicwdfvexygjvrw?ik-sanitizeSvg=true"
         }
       ],
       "stage": "series_a",
@@ -5966,12 +6009,14 @@
         {
           "name": "Shreya Murthy",
           "role": "Co-founder and CEO",
-          "background": "Met co-founder Joy Tao while working at Palantir Technologies; led Partiful through early investor skepticism to becoming a widely used Gen Z consumer app."
+          "background": "Met co-founder Joy Tao while working at Palantir Technologies; led Partiful through early investor skepticism to becoming a widely used Gen Z consumer app.",
+          "photoUrl": "https://images.sxsw.com/Fgx-ZQropcbbkFLmZ06uxrHfATI=/0x193:2800x2993/600x600/images.sxsw.com/48/e92b951f-660d-486c-9fc3-5cc17ec416ee/pcid-1593320"
         },
         {
           "name": "Joy Tao",
           "role": "Co-founder and CTO",
-          "background": "Met co-founder Shreya Murthy while working at Palantir Technologies."
+          "background": "Met co-founder Shreya Murthy while working at Palantir Technologies.",
+          "photoUrl": "https://cdn.theorg.com/dc1b3c68-69e1-4806-b2ef-55295c739fa7_medium.jpg"
         }
       ],
       "stage": "series_a",
@@ -6052,7 +6097,8 @@
         {
           "name": "Avante Price",
           "role": "Co-founder and CEO",
-          "background": "Grew up DJing in Chicago and competed in hip-hop turntable competitions before dropping out of NYU to co-found Posh."
+          "background": "Grew up DJing in Chicago and competed in hip-hop turntable competitions before dropping out of NYU to co-found Posh.",
+          "photoUrl": "https://i.ytimg.com/vi/Xx0JVmRIx3Y/maxresdefault.jpg"
         },
         {
           "name": "Eli Taylor-Lemire",
@@ -6147,7 +6193,8 @@
         {
           "name": "Julia O'Mara",
           "role": "Co-founder",
-          "background": "Former Blackstone analyst; previously worked with McMahon at Blackstone before co-founding Pickle."
+          "background": "Former Blackstone analyst; previously worked with McMahon at Blackstone before co-founding Pickle.",
+          "photoUrl": "https://dms.licdn.com/playlist/vid/v2/D5605AQEmuX_lB08coQ/thumbnail-shrink_720_1280/B56Z8.tTzEJoAg-/0/1783463498725?e=2147483647&v=beta&t=Ya9_hSImyozCi60x9dlS2N3qw6rgzig-xEmKCUka1Ew"
         }
       ],
       "stage": "series_a",
@@ -6228,7 +6275,8 @@
         {
           "name": "Andy Dunn",
           "role": "Co-founder and CEO",
-          "background": "Co-founded menswear brand Bonobos and led it as CEO through its 2017 acquisition by Walmart."
+          "background": "Co-founded menswear brand Bonobos and led it as CEO through its 2017 acquisition by Walmart.",
+          "photoUrl": "https://i.ytimg.com/vi/ytB-fM3I6zI/maxresdefault.jpg"
         },
         {
           "name": "Samir Mahafzah",
@@ -6313,7 +6361,8 @@
         {
           "name": "Maxime Barbier",
           "role": "Co-founder and CEO",
-          "background": "Serial entrepreneur with prior ventures spanning nightlife promotion and media before founding Timeleft in France."
+          "background": "Serial entrepreneur with prior ventures spanning nightlife promotion and media before founding Timeleft in France.",
+          "photoUrl": "https://i.ytimg.com/vi/K01FKQ5KpcA/maxresdefault.jpg"
         },
         {
           "name": "Adrien de Oliveira",
@@ -6397,17 +6446,20 @@
         {
           "name": "Femi Aluko",
           "role": "Co-founder and CEO",
-          "background": "Founded Chowdeck in October 2021 in Lagos; led the company through Y Combinator and multiple funding rounds while reportedly maintaining profitability."
+          "background": "Founded Chowdeck in October 2021 in Lagos; led the company through Y Combinator and multiple funding rounds while reportedly maintaining profitability.",
+          "photoUrl": "https://bookface-images.s3.us-west-2.amazonaws.com/avatars/da05aeebcda12866813892be1ab409dff3a9d5ee.jpg"
         },
         {
           "name": "Olumide Ojo",
           "role": "Co-founder",
-          "background": "Named as a founding member alongside Aluko in TechCrunch's coverage of the Series A."
+          "background": "Named as a founding member alongside Aluko in TechCrunch's coverage of the Series A.",
+          "photoUrl": "https://images.crunchbase.com/image/upload/c_thumb,h_256,w_256,f_auto,g_face,z_0.7,q_auto:eco,dpr_1/kfnwtka5unvbcujjpsgr?ik-sanitizeSvg=true"
         },
         {
           "name": "Lanre Yusuf",
           "role": "Co-founder",
-          "background": "Named as a founding member alongside Aluko and Ojo; current operating role to be confirmed in diligence."
+          "background": "Named as a founding member alongside Aluko and Ojo; current operating role to be confirmed in diligence.",
+          "photoUrl": "https://files.chowdeck.com/images/39_4671f5649f/1698762680.jpg"
         }
       ],
       "stage": "series_a",
@@ -6489,17 +6541,20 @@
         {
           "name": "Quaid Walker",
           "role": "Co-founder and CEO",
-          "background": "Former product/design employee at Google and watch collector; founded Bezel after a frustrating personal Rolex-buying experience."
+          "background": "Former product/design employee at Google and watch collector; founded Bezel after a frustrating personal Rolex-buying experience.",
+          "photoUrl": "https://adammendler.com/wp-content/uploads/2025/04/QuaidWalker_Bezelcopy.jpg"
         },
         {
           "name": "Chase Payan",
           "role": "Co-founder (CFO/COO)",
-          "background": "Childhood friend of Walker's with a finance and operations background; one source spells the name \"Chase Pion\" — confirm in diligence."
+          "background": "Childhood friend of Walker's with a finance and operations background; one source spells the name \"Chase Pion\" — confirm in diligence.",
+          "photoUrl": "https://images.labusinessjournal.com/cdn-cgi/imagedelivery/_2XQnFrfZ7ey2aE-6RbOUQ/labusinessjournal.com/2025/10/Pion_Chase_H-2.jpg/w=9999"
         },
         {
           "name": "Darryl Johnson",
           "role": "Co-founder (engineering)",
-          "background": "Named in a single Forbes profile as an engineer and prior Google employee; not corroborated elsewhere in HCP's research."
+          "background": "Named in a single Forbes profile as an engineer and prior Google employee; not corroborated elsewhere in HCP's research.",
+          "photoUrl": "https://imageio.forbes.com/specials-images/imageserve/66e3509d0a5de883ef35dc99/Quaid-ChasePion-DarrylJohnson/0x0.jpg?format=jpg&width=480"
         }
       ],
       "stage": "seed",
@@ -6580,7 +6635,8 @@
         {
           "name": "Bahram Ismailau",
           "role": "Co-founder and CEO",
-          "background": "Met co-founder Paul Rudkouski studying together at Belarusian State University; the pair worked on prior products for years before Yope."
+          "background": "Met co-founder Paul Rudkouski studying together at Belarusian State University; the pair worked on prior products for years before Yope.",
+          "photoUrl": "https://www.channelnews.com.au/wp-content/uploads/2025/12/Bahram-e1764641880382.jpg"
         },
         {
           "name": "Paul Rudkouski",
@@ -6672,7 +6728,8 @@
         {
           "name": "Keyan Kazemian",
           "role": "Co-founder",
-          "background": "One of three co-founders of 222, founded in 2023."
+          "background": "One of three co-founders of 222, founded in 2023.",
+          "photoUrl": "https://images.crunchbase.com/image/upload/c_thumb,h_256,w_256,f_auto,g_face,z_0.7,q_auto:eco,dpr_1/cbeucww8upijfop57au9?ik-sanitizeSvg=true"
         },
         {
           "name": "Arman Roshannai",
@@ -6765,7 +6822,8 @@
         {
           "name": "Dave Newman",
           "role": "Co-founder",
-          "background": "Worked with Petersmith at Assembly starting in 2013; co-founded Howie after a decade-long collaboration on the scheduling-automation idea."
+          "background": "Worked with Petersmith at Assembly starting in 2013; co-founded Howie after a decade-long collaboration on the scheduling-automation idea.",
+          "photoUrl": "https://dms.licdn.com/playlist/vid/v2/D4E05AQEzhLl4tMuLbw/thumbnail-with-play-button-overlay-high/B4EZg3vsS.HED0-/0/1753281940582?e=2147483647&v=beta&t=i-o9GCgXvqes1vePoyYoDTw6hwD5RUwjYIoKTjQPUkY"
         }
       ],
       "stage": "seed",
@@ -6944,7 +7002,8 @@
         {
           "name": "Richard Hollingsworth",
           "role": "Co-founder and CEO",
-          "background": "Co-built the UK's largest executive-assistant agency with his brother, bootstrapping it to $5m revenue, before founding Fyxer."
+          "background": "Co-built the UK's largest executive-assistant agency with his brother, bootstrapping it to $5m revenue, before founding Fyxer.",
+          "photoUrl": "https://www.fyxer.com/_next/image?url=%2Fapi%2Fmedia%2Ffile%2Frich.jpeg&w=3840&q=75"
         },
         {
           "name": "Archie Hollingsworth",
@@ -7047,7 +7106,8 @@
         {
           "name": "Jerome Scholler",
           "role": "Co-founder",
-          "background": "Was on Osmo's founding team with Sharma; previously worked at Ubisoft, LucasArts, and Google."
+          "background": "Was on Osmo's founding team with Sharma; previously worked at Ubisoft, LucasArts, and Google.",
+          "photoUrl": "https://www.napkin.ai/assets/v6/about-us/team/jerome.jpg"
         }
       ],
       "stage": "seed",
@@ -7130,12 +7190,14 @@
         {
           "name": "Tom Sayer",
           "role": "Co-founder and CEO",
-          "background": "Previously led impact and adoption programs at Google for Education."
+          "background": "Previously led impact and adoption programs at Google for Education.",
+          "photoUrl": "https://techcrunch.com/wp-content/uploads/2023/09/DSC05266-2-copy.jpg"
         },
         {
           "name": "Elizabeth Adams",
           "role": "Co-founder and Chief Experience Officer",
-          "background": "Clinical psychologist specializing in child development and behavior."
+          "background": "Clinical psychologist specializing in child development and behavior.",
+          "photoUrl": "https://cdn.pulse2.com/cdn/2025/03/Elizabeth-Adams-428x600.jpg"
         },
         {
           "name": "Catalin Voss",
@@ -7397,7 +7459,8 @@
         {
           "name": "Dara Ladjevardian",
           "role": "Co-founder and CEO",
-          "background": "Previously founded and sold Friday, an AI shopping assistant; worked as a Forward Deployed Engineer at C3 AI and as a product engineer at OpenStore."
+          "background": "Previously founded and sold Friday, an AI shopping assistant; worked as a Forward Deployed Engineer at C3 AI and as a product engineer at OpenStore.",
+          "photoUrl": "https://i.ytimg.com/vi/PPx_sVRc8E8/maxresdefault.jpg"
         },
         {
           "name": "Sam Spelsberg",
@@ -7569,7 +7632,8 @@
         {
           "name": "Arman Jaffer",
           "role": "Founder and CEO",
-          "background": "Previously worked in the White House Office of the Chief Technology Officer, on Google's mobile search team, and as a product manager on the Chan Zuckerberg Initiative's Education team; Forbes 30 Under 30 Education honoree."
+          "background": "Previously worked in the White House Office of the Chief Technology Officer, on Google's mobile search team, and as a product manager on the Chan Zuckerberg Initiative's Education team; Forbes 30 Under 30 Education honoree.",
+          "photoUrl": "https://imageio.forbes.com/specials-images/imageserve/6743e85cf038c51a08b0cda5/0x0.jpg?format=jpg&crop=3291,3291,x0,y0,safe&height=416&width=416&fit=bounds"
         }
       ],
       "stage": "series_a",
@@ -7748,7 +7812,8 @@
         {
           "name": "Thomas Tang",
           "role": "Co-founder and CEO",
-          "background": "PhD from UC Berkeley; worked at FANUC before co-founding Anyware Robotics; leads vision, strategy, and partnerships."
+          "background": "PhD from UC Berkeley; worked at FANUC before co-founding Anyware Robotics; leads vision, strategy, and partnerships.",
+          "photoUrl": "https://images.crunchbase.com/image/upload/c_thumb,h_256,w_256,f_auto,g_face,z_0.7,q_auto:eco,dpr_1/d6ecd576215441ef89a9699219ed9c0d?ik-sanitizeSvg=true"
         },
         {
           "name": "Bruce Fan",
@@ -7917,7 +7982,8 @@
         {
           "name": "Christian Bersch",
           "role": "Co-founder and CEO",
-          "background": "Nearly eight years at Google (2011-2019), including product/team lead for the Area 120 robotics delivery project, before co-founding Cartken in 2019."
+          "background": "Nearly eight years at Google (2011-2019), including product/team lead for the Area 120 robotics delivery project, before co-founding Cartken in 2019.",
+          "photoUrl": "https://cdn.prod.website-files.com/63cee399b1ef775ba444e177/63d58c59a6453750e5be9a2e_eteam%20-%20Christian.jpg"
         },
         {
           "name": "Jonas Witt",
@@ -8082,7 +8148,8 @@
         {
           "name": "Rajat Bhageria",
           "role": "Founder and CEO",
-          "background": "Previously founded ThirdEye (visual-recognition product for the visually impaired, later sold) and Prototype Capital, a pre-seed fund; holds a Master's in Robotics and Machine Learning from the University of Pennsylvania and a Bachelor's in Economics from Wharton."
+          "background": "Previously founded ThirdEye (visual-recognition product for the visually impaired, later sold) and Prototype Capital, a pre-seed fund; holds a Master's in Robotics and Machine Learning from the University of Pennsylvania and a Bachelor's in Economics from Wharton.",
+          "photoUrl": "https://techcrunch.com/wp-content/uploads/2020/06/Rajat-Headshot-.jpg?w=668"
         }
       ],
       "stage": "series_a",
@@ -8251,7 +8318,8 @@
         {
           "name": "Alexander Fitzgerald",
           "role": "Founder and CEO",
-          "background": "Studied biochemistry; worked as a UK government business-policy adviser; founded a broadband company later acquired by Octopus Telecom; identified manufacturing supply-chain inefficiencies while serving with a UK military reserve unit."
+          "background": "Studied biochemistry; worked as a UK government business-policy adviser; founded a broadband company later acquired by Octopus Telecom; identified manufacturing supply-chain inefficiencies while serving with a UK military reserve unit.",
+          "photoUrl": "https://dms.licdn.com/playlist/vid/v2/D4E05AQHWh2b3h-Rgbw/thumbnail-with-play-button-overlay-high/B4EZzxCpShHYDY-/0/1773570532958?e=2147483647&v=beta&t=26HZCoGIIOR0O6dwMjoyooQlpWrRfOsDYfgMED10i58"
         }
       ],
       "stage": "series_a",
@@ -8335,7 +8403,8 @@
         {
           "name": "Daniel Miodovnik",
           "role": "Co-founder",
-          "background": "Named as a co-founder in company-founding coverage; individual background not independently detailed in sources reviewed."
+          "background": "Named as a co-founder in company-founding coverage; individual background not independently detailed in sources reviewed.",
+          "photoUrl": "https://i.ytimg.com/vi/U_iw_BKw2tE/maxresdefault.jpg"
         }
       ],
       "stage": "series_b",
@@ -8670,7 +8739,8 @@
         {
           "name": "Govind Kavaturi",
           "role": "Co-founder",
-          "background": "Founding team member per the same sourcing; role details not further broken out publicly."
+          "background": "Founding team member per the same sourcing; role details not further broken out publicly.",
+          "photoUrl": "https://framerusercontent.com/images/pZxbBa3Z72K37gsPY4RqLsvLfg.png?width=1410&height=1418"
         },
         {
           "name": "Unmukt Raizada",
@@ -8758,7 +8828,8 @@
         {
           "name": "Alex Kracov",
           "role": "CEO and Co-founder",
-          "background": "Former VP of Marketing and third employee at Lattice; founded Dock in 2021 after building an internal customer-facing portal at Lattice."
+          "background": "Former VP of Marketing and third employee at Lattice; founded Dock in 2021 after building an internal customer-facing portal at Lattice.",
+          "photoUrl": "https://imageio.forbes.com/specials-images/imageserve/62b34a2821dbf48a56988c7a/Alex-Kracov/0x0.jpg?crop=780%2C585%2Cx0%2Cy0%2Csafe&height=533&width=480&fit=bounds"
         },
         {
           "name": "Luc",
@@ -8844,7 +8915,8 @@
         {
           "name": "Achuthanand Tanjore Ravi",
           "role": "CEO and Co-founder",
-          "background": "Previously held recruiting operating roles at Stripe, Uber, and Freshworks per the company's seed-funding announcement."
+          "background": "Previously held recruiting operating roles at Stripe, Uber, and Freshworks per the company's seed-funding announcement.",
+          "photoUrl": "https://cdn.prod.website-files.com/62efcfb57ed5f41e3fd0f849/67d90cd2b8717c4f24ab3560_Achuthanand%20Tanjore%20Ravi.webp"
         }
       ],
       "stage": "seed",
@@ -8928,7 +9000,8 @@
         {
           "name": "Shahriar Tajbakhsh",
           "role": "Co-founder and CTO",
-          "background": "Previously at Uber and Palantir; leads technical development of Metaview's interview-intelligence platform."
+          "background": "Previously at Uber and Palantir; leads technical development of Metaview's interview-intelligence platform.",
+          "photoUrl": "https://res.cloudinary.com/leaddev/image/upload/f_auto/q_auto/dpr_auto/c_limit,w_1707,h_2560/next/2022/08/Metaview.ai-Image-by-Dan-Taylor-6-Shahriar-Tajbakhsh-scaled.jpg"
         }
       ],
       "stage": "series_b",
@@ -9010,7 +9083,8 @@
         {
           "name": "John Glasgow",
           "role": "Founder and CEO",
-          "background": "Launched Campfire in 2023 to replace legacy 1990s-era ERP accounting software with an LLM-powered alternative, per TechCrunch's reporting. Additional co-founders, if any, are not identified in public sources."
+          "background": "Launched Campfire in 2023 to replace legacy 1990s-era ERP accounting software with an LLM-powered alternative, per TechCrunch's reporting. Additional co-founders, if any, are not identified in public sources.",
+          "photoUrl": "https://imgproxy.divecdn.com/wyUa-MSJOGEGOIlbyjEQeSnewVN74ImB0-LKtLI_Kwk/g:ce/rs:fit:1600:0/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9TY3JlZW5zaG90XzIwMjUtMTItMDhfMTQyMTE3LnBuZw==.webp"
         }
       ],
       "stage": "series_b",
@@ -9173,7 +9247,8 @@
         {
           "name": "Riya Grover",
           "role": "CEO and Co-founder",
-          "background": "Named CEO in the Series A financing announcement; leads product and company strategy."
+          "background": "Named CEO in the Series A financing announcement; leads product and company strategy.",
+          "photoUrl": "https://i.ytimg.com/vi/y-7j4e8DO-Q/maxresdefault.jpg"
         },
         {
           "name": "Eamon",
@@ -12466,7 +12541,31 @@
         "Scalability of the AI solution in a rapidly changing logistics environment where traditional processes are deeply ingrained.",
         "Potential regulatory hurdles or the need for industry-specific integrations that could slow adoption.",
         "The competitive landscape in AI-powered logistics solutions is growing, including well-funded incumbents."
-      ]
+      ],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.263,
+        "customer": 0.182,
+        "product": 0.384,
+        "technical": 0.568,
+        "businessModel": 0.963,
+        "goToMarket": 0.784,
+        "founder": 0.291,
+        "disruption": 0.129,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.069,
+        "problem": 0.221,
+        "customer": 0.138,
+        "product": 0.294,
+        "technical": 0.386,
+        "businessModel": 0.148,
+        "goToMarket": 0.152,
+        "founder": 0.152,
+        "disruption": 0.061,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_isometric",
@@ -12490,7 +12589,31 @@
         "Market adoption risk if voluntary carbon market struggles continue, leading to slow sales cycles or low budget allocation.",
         "Emergent competitors with either technology or already established market relationships could nullify Isometric's competitive advantage.",
         "Dependency on the integrity and quality of third-party sensor and satellite data could impact platform reliability."
-      ]
+      ],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.168,
+        "customer": 0.109,
+        "product": 0,
+        "technical": 0.341,
+        "businessModel": 0,
+        "goToMarket": 0.784,
+        "founder": 0,
+        "disruption": 0.047,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.001,
+        "problem": 0.211,
+        "customer": 0.15,
+        "product": 0,
+        "technical": 0.247,
+        "businessModel": 0,
+        "goToMarket": 0.152,
+        "founder": 0.227,
+        "disruption": 0.052,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_letta",
@@ -12514,7 +12637,31 @@
         "Being too focused on academic roots could slow commercial adaptation and sales growth.",
         "Risk of competing open-source projects that disrupt their market strategy or dilute their technical advantages.",
         "Market need validation: while developers benefit from persistent memory in AI agents, demand size and urgency remain uncertain."
-      ]
+      ],
+      "dimensionsVsWinner": {
+        "industry": 0.283,
+        "problem": 0.677,
+        "customer": 0.936,
+        "product": 0.497,
+        "technical": 0.208,
+        "businessModel": 0.924,
+        "goToMarket": 0.592,
+        "founder": 0.291,
+        "disruption": 0.145,
+        "regulatory": 0.1
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.213,
+        "customer": 0.046,
+        "product": 0.328,
+        "technical": 0.06,
+        "businessModel": 0.143,
+        "goToMarket": 0.194,
+        "founder": 0.095,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_keep",
@@ -12527,7 +12674,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.461,
+        "problem": 0.385,
+        "customer": 0.016,
+        "product": 0.471,
+        "technical": 0,
+        "businessModel": 0.321,
+        "goToMarket": 0.005,
+        "founder": 0.394,
+        "disruption": 0,
+        "regulatory": 0.198
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.355,
+        "customer": 0.088,
+        "product": 0.161,
+        "technical": 0.225,
+        "businessModel": 0.113,
+        "goToMarket": 0.215,
+        "founder": 0.118,
+        "disruption": 0.205,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_paces",
@@ -12540,7 +12711,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.25,
+        "customer": 0.223,
+        "product": 0.278,
+        "technical": 0.171,
+        "businessModel": 0.963,
+        "goToMarket": 0.784,
+        "founder": 0.391,
+        "disruption": 0.102,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.26,
+        "customer": 0.099,
+        "product": 0.282,
+        "technical": 0.261,
+        "businessModel": 0.148,
+        "goToMarket": 0.152,
+        "founder": 0.107,
+        "disruption": 0.008,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_tofu",
@@ -12553,7 +12748,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.167,
+        "problem": 0.446,
+        "customer": 0.199,
+        "product": 0.497,
+        "technical": 0.186,
+        "businessModel": 0.963,
+        "goToMarket": 0.303,
+        "founder": 0.095,
+        "disruption": 0.28,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.129,
+        "problem": 0.447,
+        "customer": 0.296,
+        "product": 0.47,
+        "technical": 0.254,
+        "businessModel": 0.148,
+        "goToMarket": 0.255,
+        "founder": 0,
+        "disruption": 0.091,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_felix_pago",
@@ -12566,7 +12785,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.409,
+        "problem": 0.385,
+        "customer": 0,
+        "product": 0.39,
+        "technical": 0,
+        "businessModel": 0.246,
+        "goToMarket": 0.247,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0.141
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.205,
+        "customer": 0,
+        "product": 0.088,
+        "technical": 0.105,
+        "businessModel": 0.079,
+        "goToMarket": 0.391,
+        "founder": 0,
+        "disruption": 0.065,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_counsel_health",
@@ -12579,7 +12822,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.044,
+        "problem": 0.376,
+        "customer": 0.561,
+        "product": 0.529,
+        "technical": 0.227,
+        "businessModel": 0.348,
+        "goToMarket": 0.309,
+        "founder": 0.036,
+        "disruption": 0.058,
+        "regulatory": 0.119
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.286,
+        "customer": 0.519,
+        "product": 0.28,
+        "technical": 0.241,
+        "businessModel": 0.203,
+        "goToMarket": 0.22,
+        "founder": 0.008,
+        "disruption": 0.27,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_verse",
@@ -12592,7 +12859,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.251,
+        "customer": 0.086,
+        "product": 0.013,
+        "technical": 0.346,
+        "businessModel": 0.963,
+        "goToMarket": 0.784,
+        "founder": 0.081,
+        "disruption": 0.13,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.207,
+        "customer": 0.226,
+        "product": 0.155,
+        "technical": 0.417,
+        "businessModel": 0.148,
+        "goToMarket": 0.152,
+        "founder": 0.003,
+        "disruption": 0.036,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_nira_energy",
@@ -12605,7 +12896,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.217,
+        "customer": 0.18,
+        "product": 0.07,
+        "technical": 0.084,
+        "businessModel": 0.963,
+        "goToMarket": 0.784,
+        "founder": 0.213,
+        "disruption": 0.1,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.215,
+        "customer": 0.049,
+        "product": 0.154,
+        "technical": 0.254,
+        "businessModel": 0.148,
+        "goToMarket": 0.152,
+        "founder": 0.056,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_kudos",
@@ -12618,7 +12933,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.345,
+        "problem": 0.23,
+        "customer": 0.159,
+        "product": 0.358,
+        "technical": 0.046,
+        "businessModel": 0.113,
+        "goToMarket": 0.177,
+        "founder": 0.375,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.481,
+        "customer": 0.409,
+        "product": 0.438,
+        "technical": 0.372,
+        "businessModel": 0.21,
+        "goToMarket": 0.618,
+        "founder": 0.254,
+        "disruption": 0.08,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_ansa",
@@ -12631,7 +12970,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.333,
+        "problem": 0.3,
+        "customer": 0.079,
+        "product": 0.397,
+        "technical": 0.104,
+        "businessModel": 0.342,
+        "goToMarket": 0.111,
+        "founder": 0.321,
+        "disruption": 0,
+        "regulatory": 0.117
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.336,
+        "customer": 0.315,
+        "product": 0.145,
+        "technical": 0.253,
+        "businessModel": 0.145,
+        "goToMarket": 0.266,
+        "founder": 0.121,
+        "disruption": 0.001,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_baselayer",
@@ -12644,7 +13007,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.333,
+        "problem": 0.322,
+        "customer": 0.191,
+        "product": 0.316,
+        "technical": 0.023,
+        "businessModel": 0.394,
+        "goToMarket": 0.004,
+        "founder": 0.391,
+        "disruption": 0,
+        "regulatory": 0.224
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.271,
+        "customer": 0.076,
+        "product": 0.232,
+        "technical": 0.4,
+        "businessModel": 0.025,
+        "goToMarket": 0.177,
+        "founder": 0.178,
+        "disruption": 0.166,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_gradient_labs",
@@ -12657,7 +13044,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.347,
+        "problem": 0.434,
+        "customer": 0.179,
+        "product": 0,
+        "technical": 0,
+        "businessModel": 0.231,
+        "goToMarket": 0.837,
+        "founder": 0.188,
+        "disruption": 0.091,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.058,
+        "problem": 0.262,
+        "customer": 0.011,
+        "product": 0.317,
+        "technical": 0.11,
+        "businessModel": 0.148,
+        "goToMarket": 0.14,
+        "founder": 0.155,
+        "disruption": 0.02,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_chroma",
@@ -12670,7 +13081,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.46,
+        "problem": 0.501,
+        "customer": 1,
+        "product": 0.124,
+        "technical": 0,
+        "businessModel": 0.877,
+        "goToMarket": 0.592,
+        "founder": 0.407,
+        "disruption": 0.038,
+        "regulatory": 0.665
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.303,
+        "customer": 0,
+        "product": 0.115,
+        "technical": 0.081,
+        "businessModel": 0.124,
+        "goToMarket": 0.194,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_lancedb",
@@ -12683,7 +13118,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.46,
+        "problem": 0.421,
+        "customer": 0.652,
+        "product": 0.102,
+        "technical": 0,
+        "businessModel": 0.924,
+        "goToMarket": 0.751,
+        "founder": 0,
+        "disruption": 0.049,
+        "regulatory": 0.1
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.254,
+        "customer": 0.086,
+        "product": 0.182,
+        "technical": 0.099,
+        "businessModel": 0.143,
+        "goToMarket": 0.271,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_sequence",
@@ -12696,7 +13155,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.339,
+        "customer": 0.093,
+        "product": 0.103,
+        "technical": 0.171,
+        "businessModel": 0.963,
+        "goToMarket": 0.561,
+        "founder": 0.095,
+        "disruption": 0.048,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.072,
+        "problem": 0.32,
+        "customer": 0.032,
+        "product": 0.041,
+        "technical": 0.33,
+        "businessModel": 0.148,
+        "goToMarket": 0.14,
+        "founder": 0,
+        "disruption": 0.073,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_honeyhive",
@@ -12709,7 +13192,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.409,
+        "problem": 0.408,
+        "customer": 0.905,
+        "product": 0.068,
+        "technical": 0,
+        "businessModel": 0.783,
+        "goToMarket": 0.751,
+        "founder": 0.454,
+        "disruption": 0,
+        "regulatory": 0.642
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.281,
+        "customer": 0.015,
+        "product": 0.241,
+        "technical": 0,
+        "businessModel": 0.16,
+        "goToMarket": 0.271,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_tavily",
@@ -12722,7 +13229,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.248,
+        "problem": 0.53,
+        "customer": 0.239,
+        "product": 0.011,
+        "technical": 0.362,
+        "businessModel": 0.123,
+        "goToMarket": 0.621,
+        "founder": 0.133,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.297,
+        "customer": 0.046,
+        "product": 0.169,
+        "technical": 0.357,
+        "businessModel": 0.057,
+        "goToMarket": 0.271,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_dock",
@@ -12735,7 +13266,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.046,
+        "problem": 0.357,
+        "customer": 0.11,
+        "product": 0.072,
+        "technical": 0.258,
+        "businessModel": 0.963,
+        "goToMarket": 0.303,
+        "founder": 0.344,
+        "disruption": 0.152,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.176,
+        "problem": 0.398,
+        "customer": 0.211,
+        "product": 0.211,
+        "technical": 0.413,
+        "businessModel": 0.148,
+        "goToMarket": 0.255,
+        "founder": 0.05,
+        "disruption": 0.135,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_layer",
@@ -12748,7 +13303,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.34,
+        "problem": 0.297,
+        "customer": 0.055,
+        "product": 0.151,
+        "technical": 0,
+        "businessModel": 0.6,
+        "goToMarket": 0.292,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.247,
+        "customer": 0,
+        "product": 0.059,
+        "technical": 0.357,
+        "businessModel": 0.129,
+        "goToMarket": 0.364,
+        "founder": 0,
+        "disruption": 0.058,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_formance",
@@ -12761,7 +13340,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.333,
+        "problem": 0.305,
+        "customer": 0.262,
+        "product": 0.138,
+        "technical": 0,
+        "businessModel": 0.272,
+        "goToMarket": 0.331,
+        "founder": 0.338,
+        "disruption": 0,
+        "regulatory": 0.442
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.238,
+        "customer": 0.068,
+        "product": 0.075,
+        "technical": 0.034,
+        "businessModel": 0.099,
+        "goToMarket": 0.199,
+        "founder": 0.123,
+        "disruption": 0.042,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_default",
@@ -12774,7 +13377,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.005,
+        "problem": 0.402,
+        "customer": 0.162,
+        "product": 0.171,
+        "technical": 0.34,
+        "businessModel": 0.963,
+        "goToMarket": 0.303,
+        "founder": 0.095,
+        "disruption": 0.292,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.15,
+        "problem": 0.245,
+        "customer": 0.181,
+        "product": 0.144,
+        "technical": 0.378,
+        "businessModel": 0.148,
+        "goToMarket": 0.255,
+        "founder": 0,
+        "disruption": 0.091,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_pickle",
@@ -12787,7 +13414,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.008,
+        "problem": 0.289,
+        "customer": 0.516,
+        "product": 0.079,
+        "technical": 0.022,
+        "businessModel": 0.175,
+        "goToMarket": 0.27,
+        "founder": 0.172,
+        "disruption": 0.21,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.119,
+        "problem": 0.331,
+        "customer": 0.531,
+        "product": 0.095,
+        "technical": 0.208,
+        "businessModel": 0.385,
+        "goToMarket": 0.335,
+        "founder": 0.049,
+        "disruption": 0.267,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_artisan",
@@ -12800,7 +13451,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.342,
+        "customer": 0.29,
+        "product": 0.433,
+        "technical": 0.327,
+        "businessModel": 0.963,
+        "goToMarket": 0.183,
+        "founder": 0.009,
+        "disruption": 0.072,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.003,
+        "problem": 0.292,
+        "customer": 0.192,
+        "product": 0.447,
+        "technical": 0.356,
+        "businessModel": 0.148,
+        "goToMarket": 0.193,
+        "founder": 0.508,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_straddle",
@@ -12813,7 +13488,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.667,
+        "problem": 0.568,
+        "customer": 0.174,
+        "product": 0.428,
+        "technical": 0.364,
+        "businessModel": 0.487,
+        "goToMarket": 0.094,
+        "founder": 0,
+        "disruption": 0.245,
+        "regulatory": 0.322
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.265,
+        "customer": 0.105,
+        "product": 0.052,
+        "technical": 0.198,
+        "businessModel": 0.069,
+        "goToMarket": 0.364,
+        "founder": 0,
+        "disruption": 0.056,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_prophet_security",
@@ -12826,7 +13525,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.12,
+        "problem": 0.294,
+        "customer": 0.421,
+        "product": 0,
+        "technical": 0.069,
+        "businessModel": 0.165,
+        "goToMarket": 1,
+        "founder": 0.189,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.21,
+        "customer": 0,
+        "product": 0.303,
+        "technical": 0.31,
+        "businessModel": 0.106,
+        "goToMarket": 0.158,
+        "founder": 0,
+        "disruption": 0.002,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_kula",
@@ -12839,7 +13562,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.142,
+        "problem": 0.35,
+        "customer": 0.166,
+        "product": 0.11,
+        "technical": 0.402,
+        "businessModel": 0.963,
+        "goToMarket": 0.464,
+        "founder": 0.344,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.075,
+        "problem": 0.273,
+        "customer": 0.072,
+        "product": 0.135,
+        "technical": 0.547,
+        "businessModel": 0.148,
+        "goToMarket": 0.298,
+        "founder": 0.05,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_222",
@@ -12852,7 +13599,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.125,
+        "problem": 0.286,
+        "customer": 0.528,
+        "product": 0.776,
+        "technical": 0.365,
+        "businessModel": 0.248,
+        "goToMarket": 0.289,
+        "founder": 0.231,
+        "disruption": 0.119,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.117,
+        "problem": 0.286,
+        "customer": 0.439,
+        "product": 0.393,
+        "technical": 0.362,
+        "businessModel": 0.01,
+        "goToMarket": 0.26,
+        "founder": 0.032,
+        "disruption": 0.05,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_e2b",
@@ -12865,7 +13636,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.318,
+        "problem": 0.365,
+        "customer": 1,
+        "product": 0.025,
+        "technical": 0.004,
+        "businessModel": 0.924,
+        "goToMarket": 0.751,
+        "founder": 0.34,
+        "disruption": 0.07,
+        "regulatory": 0.374
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.126,
+        "customer": 0.023,
+        "product": 0.09,
+        "technical": 0.06,
+        "businessModel": 0.143,
+        "goToMarket": 0.271,
+        "founder": 0.002,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_browser_use",
@@ -12878,7 +13673,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.36,
+        "problem": 0.382,
+        "customer": 0.711,
+        "product": 0,
+        "technical": 0,
+        "businessModel": 0.924,
+        "goToMarket": 0.592,
+        "founder": 0.186,
+        "disruption": 0.155,
+        "regulatory": 0.281
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.247,
+        "customer": 0.022,
+        "product": 0.255,
+        "technical": 0.023,
+        "businessModel": 0.143,
+        "goToMarket": 0.194,
+        "founder": 0.028,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_bezel",
@@ -12891,7 +13710,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.192,
+        "customer": 0.526,
+        "product": 0.088,
+        "technical": 0.145,
+        "businessModel": 0.15,
+        "goToMarket": 0.306,
+        "founder": 0.187,
+        "disruption": 0.04,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.022,
+        "problem": 0.326,
+        "customer": 0.579,
+        "product": 0.167,
+        "technical": 0.419,
+        "businessModel": 0.325,
+        "goToMarket": 0.369,
+        "founder": 0.076,
+        "disruption": 0.204,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_texture",
@@ -12904,7 +13747,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.209,
+        "customer": 0.095,
+        "product": 0.018,
+        "technical": 0.013,
+        "businessModel": 0.963,
+        "goToMarket": 0.437,
+        "founder": 0.323,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.308,
+        "customer": 0.01,
+        "product": 0.195,
+        "technical": 0.2,
+        "businessModel": 0.148,
+        "goToMarket": 0.244,
+        "founder": 0,
+        "disruption": 0.03,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_mercoa",
@@ -12917,7 +13784,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.333,
+        "problem": 0.255,
+        "customer": 0,
+        "product": 0.3,
+        "technical": 0,
+        "businessModel": 0.333,
+        "goToMarket": 0.292,
+        "founder": 0.252,
+        "disruption": 0.028,
+        "regulatory": 0.027
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.02,
+        "problem": 0.262,
+        "customer": 0.035,
+        "product": 0.105,
+        "technical": 0.44,
+        "businessModel": 0.29,
+        "goToMarket": 0.364,
+        "founder": 0.041,
+        "disruption": 0.207,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_herald",
@@ -12930,7 +13821,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.392,
+        "problem": 0.171,
+        "customer": 0.007,
+        "product": 0.162,
+        "technical": 0,
+        "businessModel": 0.472,
+        "goToMarket": 0.013,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0.378
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.3,
+        "customer": 0.078,
+        "product": 0.128,
+        "technical": 0.523,
+        "businessModel": 0.041,
+        "goToMarket": 0.229,
+        "founder": 0,
+        "disruption": 0.256,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_contoro",
@@ -12943,7 +13858,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.165,
+        "problem": 0.279,
+        "customer": 0.132,
+        "product": 0.028,
+        "technical": 0,
+        "businessModel": 0.112,
+        "goToMarket": 0.817,
+        "founder": 0.131,
+        "disruption": 0.255,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.263,
+        "customer": 0.115,
+        "product": 0.205,
+        "technical": 0.091,
+        "businessModel": 0.142,
+        "goToMarket": 0.158,
+        "founder": 0,
+        "disruption": 0.059,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_beli",
@@ -12956,7 +13895,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.054,
+        "problem": 0.142,
+        "customer": 0.538,
+        "product": 0.404,
+        "technical": 0.418,
+        "businessModel": 0.274,
+        "goToMarket": 0.289,
+        "founder": 0.276,
+        "disruption": 0.137,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.117,
+        "problem": 0.372,
+        "customer": 0.535,
+        "product": 0.153,
+        "technical": 0.38,
+        "businessModel": 0.176,
+        "goToMarket": 0.284,
+        "founder": 0.158,
+        "disruption": 0.185,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_estuary",
@@ -12969,7 +13932,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.232,
+        "problem": 0.469,
+        "customer": 0.288,
+        "product": 0.005,
+        "technical": 0,
+        "businessModel": 0.084,
+        "goToMarket": 0.571,
+        "founder": 0.142,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.272,
+        "customer": 0,
+        "product": 0.088,
+        "technical": 0.024,
+        "businessModel": 0.044,
+        "goToMarket": 0.221,
+        "founder": 0.017,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_timeleft",
@@ -12982,7 +13969,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.125,
+        "problem": 0.227,
+        "customer": 0.537,
+        "product": 0.367,
+        "technical": 0.32,
+        "businessModel": 0.415,
+        "goToMarket": 0.322,
+        "founder": 0.64,
+        "disruption": 0.106,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.117,
+        "problem": 0.209,
+        "customer": 0.511,
+        "product": 0.093,
+        "technical": 0.195,
+        "businessModel": 0.103,
+        "goToMarket": 0.349,
+        "founder": 0.095,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_synthpop",
@@ -12995,7 +14006,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.206,
+        "customer": 0.059,
+        "product": 0.439,
+        "technical": 0.252,
+        "businessModel": 0.844,
+        "goToMarket": 0.52,
+        "founder": 0,
+        "disruption": 0.09,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.075,
+        "problem": 0.262,
+        "customer": 0,
+        "product": 0.252,
+        "technical": 0.301,
+        "businessModel": 0.124,
+        "goToMarket": 0.086,
+        "founder": 0,
+        "disruption": 0.108,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_summer_health",
@@ -13008,7 +14043,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.113,
+        "problem": 0.123,
+        "customer": 0.474,
+        "product": 0.286,
+        "technical": 0.027,
+        "businessModel": 0.324,
+        "goToMarket": 0.298,
+        "founder": 0.061,
+        "disruption": 0,
+        "regulatory": 0.074
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.084,
+        "problem": 0.213,
+        "customer": 0.508,
+        "product": 0,
+        "technical": 0.142,
+        "businessModel": 0.206,
+        "goToMarket": 0.199,
+        "founder": 0.429,
+        "disruption": 0.01,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_yope",
@@ -13021,7 +14080,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.147,
+        "problem": 0.217,
+        "customer": 0.628,
+        "product": 0.218,
+        "technical": 0.355,
+        "businessModel": 0.285,
+        "goToMarket": 0.283,
+        "founder": 0.098,
+        "disruption": 0.031,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.049,
+        "problem": 0.224,
+        "customer": 0.569,
+        "product": 0,
+        "technical": 0.269,
+        "businessModel": 0.061,
+        "goToMarket": 0.228,
+        "founder": 0,
+        "disruption": 0.145,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_firecrawl",
@@ -13034,7 +14117,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.43,
+        "problem": 0.348,
+        "customer": 1,
+        "product": 0.007,
+        "technical": 0,
+        "businessModel": 0.73,
+        "goToMarket": 0.474,
+        "founder": 0.226,
+        "disruption": 0.055,
+        "regulatory": 0.134
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.233,
+        "customer": 0,
+        "product": 0.171,
+        "technical": 0.22,
+        "businessModel": 0.093,
+        "goToMarket": 0.186,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_pie",
@@ -13047,7 +14154,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.125,
+        "problem": 0.279,
+        "customer": 0.558,
+        "product": 0.387,
+        "technical": 0.508,
+        "businessModel": 0.231,
+        "goToMarket": 0.025,
+        "founder": 0.489,
+        "disruption": 0.074,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.117,
+        "problem": 0.192,
+        "customer": 0.495,
+        "product": 0.12,
+        "technical": 0.389,
+        "businessModel": 0.016,
+        "goToMarket": 0.1,
+        "founder": 0.179,
+        "disruption": 0.099,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_chef_robotics",
@@ -13060,7 +14191,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.043,
+        "problem": 0.213,
+        "customer": 0.081,
+        "product": 0.31,
+        "technical": 0.323,
+        "businessModel": 0.496,
+        "goToMarket": 0.774,
+        "founder": 0.164,
+        "disruption": 0.278,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.27,
+        "customer": 0.297,
+        "product": 0.233,
+        "technical": 0.219,
+        "businessModel": 0.026,
+        "goToMarket": 0.158,
+        "founder": 0.088,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_daedalus",
@@ -13073,7 +14228,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.281,
+        "problem": 0.236,
+        "customer": 0.166,
+        "product": 0.003,
+        "technical": 0.08,
+        "businessModel": 0.165,
+        "goToMarket": 0.817,
+        "founder": 0,
+        "disruption": 0.169,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.196,
+        "customer": 0.153,
+        "product": 0.27,
+        "technical": 0.36,
+        "businessModel": 0.072,
+        "goToMarket": 0.158,
+        "founder": 0,
+        "disruption": 0.037,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_tobiko_data",
@@ -13086,7 +14265,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.173,
+        "problem": 0.349,
+        "customer": 0.606,
+        "product": 0.07,
+        "technical": 0.02,
+        "businessModel": 0.544,
+        "goToMarket": 0.699,
+        "founder": 0.016,
+        "disruption": 0.125,
+        "regulatory": 0.1
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.243,
+        "customer": 0.07,
+        "product": 0.192,
+        "technical": 0.174,
+        "businessModel": 0.114,
+        "goToMarket": 0.266,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_chowdeck",
@@ -13099,7 +14302,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.146,
+        "problem": 0.168,
+        "customer": 0.463,
+        "product": 0.182,
+        "technical": 0.207,
+        "businessModel": 0.394,
+        "goToMarket": 0.158,
+        "founder": 0.231,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.198,
+        "problem": 0.196,
+        "customer": 0.489,
+        "product": 0.302,
+        "technical": 0.236,
+        "businessModel": 0.329,
+        "goToMarket": 0.17,
+        "founder": 0.032,
+        "disruption": 0.113,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_tandem_health",
@@ -13112,7 +14339,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.183,
+        "problem": 0.419,
+        "customer": 0.128,
+        "product": 0,
+        "technical": 0,
+        "businessModel": 0.046,
+        "goToMarket": 0.344,
+        "founder": 0.184,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.251,
+        "customer": 0.006,
+        "product": 0,
+        "technical": 0.156,
+        "businessModel": 0.063,
+        "goToMarket": 0.155,
+        "founder": 0.074,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_turso",
@@ -13125,7 +14376,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.15,
+        "problem": 0.462,
+        "customer": 0.791,
+        "product": 0.019,
+        "technical": 0,
+        "businessModel": 0.361,
+        "goToMarket": 0.425,
+        "founder": 0.041,
+        "disruption": 0.134,
+        "regulatory": 0.1
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.192,
+        "customer": 0.034,
+        "product": 0,
+        "technical": 0.014,
+        "businessModel": 0.057,
+        "goToMarket": 0.14,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_twine_security",
@@ -13138,7 +14413,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.356,
+        "customer": 0.038,
+        "product": 0.394,
+        "technical": 0.307,
+        "businessModel": 0.64,
+        "goToMarket": 0.444,
+        "founder": 0.039,
+        "disruption": 0.187,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.24,
+        "customer": 0.097,
+        "product": 0.353,
+        "technical": 0.34,
+        "businessModel": 0.106,
+        "goToMarket": 0.231,
+        "founder": 0,
+        "disruption": 0.086,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_concourse",
@@ -13151,7 +14450,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.505,
+        "problem": 0.312,
+        "customer": 0.383,
+        "product": 0.012,
+        "technical": 0.055,
+        "businessModel": 0.075,
+        "goToMarket": 0.595,
+        "founder": 0,
+        "disruption": 0.09,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.303,
+        "customer": 0.167,
+        "product": 0.347,
+        "technical": 0.211,
+        "businessModel": 0.056,
+        "goToMarket": 0.249,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_lindy",
@@ -13164,7 +14487,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.344,
+        "customer": 0.148,
+        "product": 0.466,
+        "technical": 0.438,
+        "businessModel": 0.615,
+        "goToMarket": 0.49,
+        "founder": 0,
+        "disruption": 0.116,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.226,
+        "customer": 0.07,
+        "product": 0.32,
+        "technical": 0.347,
+        "businessModel": 0.096,
+        "goToMarket": 0.291,
+        "founder": 0.068,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_anyware_robotics",
@@ -13177,7 +14524,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.03,
+        "problem": 0.193,
+        "customer": 0.204,
+        "product": 0.373,
+        "technical": 0.115,
+        "businessModel": 0.496,
+        "goToMarket": 0.774,
+        "founder": 0.106,
+        "disruption": 0.261,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.161,
+        "customer": 0.127,
+        "product": 0.229,
+        "technical": 0.191,
+        "businessModel": 0.026,
+        "goToMarket": 0.158,
+        "founder": 0.06,
+        "disruption": 0.069,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_aembit",
@@ -13190,7 +14561,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.108,
+        "problem": 0.328,
+        "customer": 0.369,
+        "product": 0.026,
+        "technical": 0.269,
+        "businessModel": 0.102,
+        "goToMarket": 0.765,
+        "founder": 0.458,
+        "disruption": 0.225,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.178,
+        "customer": 0.018,
+        "product": 0.082,
+        "technical": 0,
+        "businessModel": 0.133,
+        "goToMarket": 0.142,
+        "founder": 0.093,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_delphi",
@@ -13203,7 +14598,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.029,
+        "problem": 0.332,
+        "customer": 0.316,
+        "product": 0.336,
+        "technical": 0.27,
+        "businessModel": 0.416,
+        "goToMarket": 0.19,
+        "founder": 0,
+        "disruption": 0.283,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.103,
+        "problem": 0.306,
+        "customer": 0.321,
+        "product": 0.384,
+        "technical": 0.223,
+        "businessModel": 0.024,
+        "goToMarket": 0.19,
+        "founder": 0,
+        "disruption": 0.309,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_twentyeight_health",
@@ -13216,7 +14635,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.09,
+        "problem": 0.357,
+        "customer": 0.117,
+        "product": 0.123,
+        "technical": 0,
+        "businessModel": 0.111,
+        "goToMarket": 0.111,
+        "founder": 0.432,
+        "disruption": 0.3,
+        "regulatory": 0.268
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.211,
+        "customer": 0.031,
+        "product": 0,
+        "technical": 0,
+        "businessModel": 0.242,
+        "goToMarket": 0.091,
+        "founder": 0.125,
+        "disruption": 0.095,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_runreveal",
@@ -13229,7 +14672,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.038,
+        "problem": 0.301,
+        "customer": 0.392,
+        "product": 0,
+        "technical": 0.121,
+        "businessModel": 0.562,
+        "goToMarket": 0.489,
+        "founder": 0.323,
+        "disruption": 0,
+        "regulatory": 0.1
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.238,
+        "customer": 0,
+        "product": 0.37,
+        "technical": 0.259,
+        "businessModel": 0.044,
+        "goToMarket": 0.036,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_cargado",
@@ -13242,7 +14709,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.07,
+        "problem": 0.404,
+        "customer": 0.518,
+        "product": 0.423,
+        "technical": 0.079,
+        "businessModel": 0.171,
+        "goToMarket": 0.129,
+        "founder": 0.446,
+        "disruption": 0.309,
+        "regulatory": 0.178
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.121,
+        "problem": 0.327,
+        "customer": 0.068,
+        "product": 0.155,
+        "technical": 0.221,
+        "businessModel": 0.396,
+        "goToMarket": 0.215,
+        "founder": 0.16,
+        "disruption": 0.126,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_terminal49",
@@ -13255,7 +14746,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.167,
+        "customer": 0.119,
+        "product": 0,
+        "technical": 0,
+        "businessModel": 0.17,
+        "goToMarket": 0.72,
+        "founder": 0.187,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.038,
+        "problem": 0.349,
+        "customer": 0.149,
+        "product": 0.128,
+        "technical": 0.254,
+        "businessModel": 0.04,
+        "goToMarket": 0.297,
+        "founder": 0.16,
+        "disruption": 0.093,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_theseus",
@@ -13268,7 +14783,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.015,
+        "problem": 0.222,
+        "customer": 0.173,
+        "product": 0,
+        "technical": 0,
+        "businessModel": 0,
+        "goToMarket": 0.699,
+        "founder": 0.293,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.213,
+        "customer": 0.163,
+        "product": 0.122,
+        "technical": 0.17,
+        "businessModel": 0,
+        "goToMarket": 0.197,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_partiful",
@@ -13281,7 +14820,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.044,
+        "problem": 0.128,
+        "customer": 0.571,
+        "product": 0.319,
+        "technical": 0.242,
+        "businessModel": 0.199,
+        "goToMarket": 0.293,
+        "founder": 0.193,
+        "disruption": 0.05,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.085,
+        "problem": 0.137,
+        "customer": 0.59,
+        "product": 0,
+        "technical": 0.115,
+        "businessModel": 0.1,
+        "goToMarket": 0.3,
+        "founder": 0.02,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_edera",
@@ -13294,7 +14857,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.386,
+        "customer": 0.604,
+        "product": 0.178,
+        "technical": 0.042,
+        "businessModel": 0.524,
+        "goToMarket": 0.348,
+        "founder": 0.12,
+        "disruption": 0.105,
+        "regulatory": 0.06
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.132,
+        "customer": 0,
+        "product": 0.138,
+        "technical": 0,
+        "businessModel": 0.054,
+        "goToMarket": 0.206,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_chronicle",
@@ -13307,7 +14894,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.117,
+        "problem": 0.309,
+        "customer": 0.175,
+        "product": 0.422,
+        "technical": 0.125,
+        "businessModel": 0.543,
+        "goToMarket": 0.098,
+        "founder": 0.04,
+        "disruption": 0.18,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.197,
+        "customer": 0.164,
+        "product": 0.356,
+        "technical": 0.225,
+        "businessModel": 0.091,
+        "goToMarket": 0.263,
+        "founder": 0.212,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_nudge_security",
@@ -13320,7 +14931,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.205,
+        "problem": 0.407,
+        "customer": 0.016,
+        "product": 0.442,
+        "technical": 0.243,
+        "businessModel": 0.362,
+        "goToMarket": 0.137,
+        "founder": 0.29,
+        "disruption": 0,
+        "regulatory": 0.069
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.265,
+        "customer": 0.045,
+        "product": 0.331,
+        "technical": 0.258,
+        "businessModel": 0.116,
+        "goToMarket": 0.154,
+        "founder": 0.066,
+        "disruption": 0.091,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_lithos_carbon",
@@ -13333,7 +14968,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.214,
+        "customer": 0.051,
+        "product": 0,
+        "technical": 0,
+        "businessModel": 0.047,
+        "goToMarket": 0.572,
+        "founder": 0.144,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.192,
+        "customer": 0.209,
+        "product": 0.016,
+        "technical": 0.018,
+        "businessModel": 0,
+        "goToMarket": 0.128,
+        "founder": 0.154,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_thena",
@@ -13346,7 +15005,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.05,
+        "problem": 0.221,
+        "customer": 0.024,
+        "product": 0,
+        "technical": 0.33,
+        "businessModel": 0.736,
+        "goToMarket": 0.453,
+        "founder": 0,
+        "disruption": 0.163,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.126,
+        "problem": 0.281,
+        "customer": 0.151,
+        "product": 0,
+        "technical": 0.257,
+        "businessModel": 0.12,
+        "goToMarket": 0.268,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_cartken",
@@ -13359,7 +15042,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.138,
+        "problem": 0.261,
+        "customer": 0.244,
+        "product": 0.065,
+        "technical": 0,
+        "businessModel": 0.037,
+        "goToMarket": 0.631,
+        "founder": 0.15,
+        "disruption": 0.063,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.295,
+        "customer": 0.212,
+        "product": 0.255,
+        "technical": 0.146,
+        "businessModel": 0,
+        "goToMarket": 0.348,
+        "founder": 0,
+        "disruption": 0.095,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_p0_security",
@@ -13372,7 +15079,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.145,
+        "problem": 0.325,
+        "customer": 0.408,
+        "product": 0.021,
+        "technical": 0.387,
+        "businessModel": 0.165,
+        "goToMarket": 0.588,
+        "founder": 0.513,
+        "disruption": 0.155,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.226,
+        "customer": 0.025,
+        "product": 0.152,
+        "technical": 0.171,
+        "businessModel": 0.106,
+        "goToMarket": 0.199,
+        "founder": 0.057,
+        "disruption": 0.051,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_legion_health",
@@ -13385,7 +15116,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.102,
+        "problem": 0.368,
+        "customer": 0.249,
+        "product": 0.464,
+        "technical": 0.353,
+        "businessModel": 0.052,
+        "goToMarket": 0.382,
+        "founder": 0,
+        "disruption": 0.042,
+        "regulatory": 0.009
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.212,
+        "customer": 0.238,
+        "product": 0.151,
+        "technical": 0.364,
+        "businessModel": 0,
+        "goToMarket": 0.188,
+        "founder": 0.174,
+        "disruption": 0.111,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_napkin",
@@ -13398,7 +15153,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.098,
+        "problem": 0.283,
+        "customer": 0.105,
+        "product": 0.416,
+        "technical": 0.097,
+        "businessModel": 0.543,
+        "goToMarket": 0.084,
+        "founder": 0,
+        "disruption": 0.339,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.218,
+        "customer": 0.108,
+        "product": 0.264,
+        "technical": 0.144,
+        "businessModel": 0.091,
+        "goToMarket": 0.228,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_sohar_health",
@@ -13411,7 +15190,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.165,
+        "problem": 0.341,
+        "customer": 0.044,
+        "product": 0.028,
+        "technical": 0.408,
+        "businessModel": 0,
+        "goToMarket": 0.354,
+        "founder": 0.05,
+        "disruption": 0.281,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.257,
+        "customer": 0.134,
+        "product": 0.18,
+        "technical": 0.485,
+        "businessModel": 0.02,
+        "goToMarket": 0.268,
+        "founder": 0,
+        "disruption": 0.083,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_bevel",
@@ -13424,7 +15227,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.559,
+        "problem": 0.253,
+        "customer": 0.294,
+        "product": 0.762,
+        "technical": 0.588,
+        "businessModel": 0.492,
+        "goToMarket": 0.197,
+        "founder": 0.132,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.096,
+        "problem": 0.28,
+        "customer": 0.293,
+        "product": 0.312,
+        "technical": 0.515,
+        "businessModel": 0.107,
+        "goToMarket": 0.274,
+        "founder": 0.351,
+        "disruption": 0.117,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_isembard",
@@ -13437,7 +15264,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.002,
+        "problem": 0.233,
+        "customer": 0,
+        "product": 0.134,
+        "technical": 0,
+        "businessModel": 0,
+        "goToMarket": 0.478,
+        "founder": 0.21,
+        "disruption": 0.006,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.248,
+        "customer": 0.089,
+        "product": 0.241,
+        "technical": 0.042,
+        "businessModel": 0,
+        "goToMarket": 0.248,
+        "founder": 0.084,
+        "disruption": 0.202,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_ello",
@@ -13450,7 +15301,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.145,
+        "problem": 0.216,
+        "customer": 0,
+        "product": 0.446,
+        "technical": 0.174,
+        "businessModel": 0.301,
+        "goToMarket": 0.252,
+        "founder": 0.089,
+        "disruption": 0,
+        "regulatory": 0.233
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.191,
+        "customer": 0,
+        "product": 0.303,
+        "technical": 0.117,
+        "businessModel": 0.024,
+        "goToMarket": 0.313,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_freed",
@@ -13463,7 +15338,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.298,
+        "problem": 0.316,
+        "customer": 0.234,
+        "product": 0.523,
+        "technical": 0.074,
+        "businessModel": 0.412,
+        "goToMarket": 0.38,
+        "founder": 0.206,
+        "disruption": 0,
+        "regulatory": 0.083
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.199,
+        "customer": 0.198,
+        "product": 0.275,
+        "technical": 0.093,
+        "businessModel": 0.119,
+        "goToMarket": 0.252,
+        "founder": 0,
+        "disruption": 0.085,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_kick",
@@ -13476,7 +15375,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.339,
+        "problem": 0.339,
+        "customer": 0.271,
+        "product": 0.238,
+        "technical": 0.326,
+        "businessModel": 0.155,
+        "goToMarket": 0.206,
+        "founder": 0.511,
+        "disruption": 0.072,
+        "regulatory": 0.081
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.28,
+        "customer": 0.106,
+        "product": 0.164,
+        "technical": 0.471,
+        "businessModel": 0.055,
+        "goToMarket": 0.356,
+        "founder": 0.048,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_bayou_energy",
@@ -13489,7 +15412,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.077,
+        "problem": 0.284,
+        "customer": 0.061,
+        "product": 0,
+        "technical": 0.133,
+        "businessModel": 0.178,
+        "goToMarket": 0.085,
+        "founder": 0.518,
+        "disruption": 0.187,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.266,
+        "customer": 0.039,
+        "product": 0.13,
+        "technical": 0.247,
+        "businessModel": 0,
+        "goToMarket": 0.262,
+        "founder": 0.008,
+        "disruption": 0.096,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_howie",
@@ -13502,7 +15449,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.243,
+        "customer": 0.124,
+        "product": 0.389,
+        "technical": 0.255,
+        "businessModel": 0.705,
+        "goToMarket": 0.189,
+        "founder": 0.15,
+        "disruption": 0.252,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.228,
+        "customer": 0.211,
+        "product": 0.267,
+        "technical": 0.201,
+        "businessModel": 0.103,
+        "goToMarket": 0.297,
+        "founder": 0.13,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_happenstance",
@@ -13515,7 +15486,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.067,
+        "problem": 0.287,
+        "customer": 0.154,
+        "product": 0,
+        "technical": 0.09,
+        "businessModel": 0,
+        "goToMarket": 0.05,
+        "founder": 0.018,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.292,
+        "customer": 0.142,
+        "product": 0.381,
+        "technical": 0.233,
+        "businessModel": 0,
+        "goToMarket": 0.222,
+        "founder": 0,
+        "disruption": 0.122,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_brisk_teaching",
@@ -13528,7 +15523,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.26,
+        "problem": 0.29,
+        "customer": 0.018,
+        "product": 0.496,
+        "technical": 0.275,
+        "businessModel": 0.244,
+        "goToMarket": 0.043,
+        "founder": 0,
+        "disruption": 0.163,
+        "regulatory": 0.201
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.152,
+        "customer": 0.003,
+        "product": 0.36,
+        "technical": 0.198,
+        "businessModel": 0.053,
+        "goToMarket": 0.273,
+        "founder": 0.11,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_schoolai",
@@ -13541,7 +15560,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.471,
+        "problem": 0.164,
+        "customer": 0.082,
+        "product": 0,
+        "technical": 0.111,
+        "businessModel": 0.439,
+        "goToMarket": 0.356,
+        "founder": 0.125,
+        "disruption": 0.047,
+        "regulatory": 0.459
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.151,
+        "customer": 0.09,
+        "product": 0.469,
+        "technical": 0.297,
+        "businessModel": 0.07,
+        "goToMarket": 0.197,
+        "founder": 0.124,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_millie",
@@ -13554,7 +15597,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.019,
+        "problem": 0.245,
+        "customer": 0.02,
+        "product": 0,
+        "technical": 0,
+        "businessModel": 0.058,
+        "goToMarket": 0.114,
+        "founder": 0.303,
+        "disruption": 0,
+        "regulatory": 0.136
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.162,
+        "customer": 0.34,
+        "product": 0,
+        "technical": 0.059,
+        "businessModel": 0,
+        "goToMarket": 0.119,
+        "founder": 0,
+        "disruption": 0.021,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_rwazi",
@@ -13567,7 +15634,31 @@
       "closestRejectedDealId": "co_phia",
       "reasonsToAdvance": [],
       "reasonsToReject": [],
-      "unresolvedRisks": []
+      "unresolvedRisks": [],
+      "dimensionsVsWinner": {
+        "industry": 0.5,
+        "problem": 0.206,
+        "customer": 0.34,
+        "product": 0.253,
+        "technical": 0.269,
+        "businessModel": 0.676,
+        "goToMarket": 0.646,
+        "founder": 0.048,
+        "disruption": 0.299,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.075,
+        "problem": 0.337,
+        "customer": 0.749,
+        "product": 0.329,
+        "technical": 0.384,
+        "businessModel": 0.082,
+        "goToMarket": 0.21,
+        "founder": 0.027,
+        "disruption": 0.138,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_patronus_ai",
@@ -13581,7 +15672,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.049,
+        "problem": 0.438,
+        "customer": 0.303,
+        "product": 0,
+        "technical": 0,
+        "businessModel": 0.299,
+        "goToMarket": 1,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.234,
+        "customer": 0.033,
+        "product": 0.464,
+        "technical": 0.203,
+        "businessModel": 0.131,
+        "goToMarket": 0.158,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_braintrust",
@@ -13595,7 +15710,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.409,
+        "problem": 0.385,
+        "customer": 0.888,
+        "product": 0.003,
+        "technical": 0.155,
+        "businessModel": 0.783,
+        "goToMarket": 0.617,
+        "founder": 0.113,
+        "disruption": 0.007,
+        "regulatory": 0.661
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.26,
+        "customer": 0.049,
+        "product": 0.469,
+        "technical": 0.093,
+        "businessModel": 0.16,
+        "goToMarket": 0.262,
+        "founder": 0.017,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_dust",
@@ -13609,7 +15748,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.409,
+        "problem": 0.528,
+        "customer": 0.781,
+        "product": 0,
+        "technical": 0.082,
+        "businessModel": 0.166,
+        "goToMarket": 0.665,
+        "founder": 0.082,
+        "disruption": 0.218,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.266,
+        "customer": 0.144,
+        "product": 0.345,
+        "technical": 0.112,
+        "businessModel": 0.142,
+        "goToMarket": 0.268,
+        "founder": 0,
+        "disruption": 0.095,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_squint",
@@ -13623,7 +15786,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.195,
+        "problem": 0.27,
+        "customer": 0.442,
+        "product": 0.116,
+        "technical": 0.031,
+        "businessModel": 0.139,
+        "goToMarket": 1,
+        "founder": 0.163,
+        "disruption": 0.081,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.282,
+        "customer": 0.296,
+        "product": 0.355,
+        "technical": 0.208,
+        "businessModel": 0.177,
+        "goToMarket": 0.158,
+        "founder": 0.373,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_numeric",
@@ -13637,7 +15824,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.47,
+        "problem": 0.325,
+        "customer": 0.639,
+        "product": 0.007,
+        "technical": 0.09,
+        "businessModel": 0.219,
+        "goToMarket": 1,
+        "founder": 0.191,
+        "disruption": 0.097,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.242,
+        "customer": 0.122,
+        "product": 0.422,
+        "technical": 0.441,
+        "businessModel": 0.11,
+        "goToMarket": 0.158,
+        "founder": 0.105,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_happyrobot",
@@ -13651,7 +15862,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.193,
+        "problem": 0.292,
+        "customer": 0.239,
+        "product": 0.018,
+        "technical": 0.118,
+        "businessModel": 0.219,
+        "goToMarket": 1,
+        "founder": 0.112,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.022,
+        "problem": 0.258,
+        "customer": 0.127,
+        "product": 0.412,
+        "technical": 0.331,
+        "businessModel": 0.11,
+        "goToMarket": 0.158,
+        "founder": 0.08,
+        "disruption": 0.059,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_spellbook",
@@ -13665,7 +15900,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.095,
+        "problem": 0.259,
+        "customer": 0.013,
+        "product": 0.32,
+        "technical": 0.028,
+        "businessModel": 0.963,
+        "goToMarket": 0.28,
+        "founder": 0.017,
+        "disruption": 0.258,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.176,
+        "customer": 0.052,
+        "product": 0.257,
+        "technical": 0,
+        "businessModel": 0.148,
+        "goToMarket": 0.17,
+        "founder": 0.155,
+        "disruption": 0.012,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_basis",
@@ -13679,7 +15938,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.228,
+        "customer": 0.031,
+        "product": 0.418,
+        "technical": 0.47,
+        "businessModel": 0.716,
+        "goToMarket": 0.305,
+        "founder": 0.112,
+        "disruption": 0.121,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.159,
+        "customer": 0.026,
+        "product": 0.291,
+        "technical": 0.153,
+        "businessModel": 0.11,
+        "goToMarket": 0.089,
+        "founder": 0.139,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_eve",
@@ -13693,7 +15976,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.05,
+        "problem": 0.2,
+        "customer": 0,
+        "product": 0.227,
+        "technical": 0.085,
+        "businessModel": 0.716,
+        "goToMarket": 0.299,
+        "founder": 0.042,
+        "disruption": 0.07,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.183,
+        "customer": 0.087,
+        "product": 0.38,
+        "technical": 0.086,
+        "businessModel": 0.11,
+        "goToMarket": 0.094,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_anterior",
@@ -13707,7 +16014,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.073,
+        "problem": 0.207,
+        "customer": 0.077,
+        "product": 0.397,
+        "technical": 0.521,
+        "businessModel": 0.57,
+        "goToMarket": 0.325,
+        "founder": 0,
+        "disruption": 0.232,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.243,
+        "customer": 0.181,
+        "product": 0.282,
+        "technical": 0.247,
+        "businessModel": 0.149,
+        "goToMarket": 0.037,
+        "founder": 0.043,
+        "disruption": 0.009,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_fay",
@@ -13721,7 +16052,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.02,
+        "problem": 0.245,
+        "customer": 0.191,
+        "product": 0.104,
+        "technical": 0.174,
+        "businessModel": 0.151,
+        "goToMarket": 0.312,
+        "founder": 0.028,
+        "disruption": 0.072,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.226,
+        "customer": 0.205,
+        "product": 0.07,
+        "technical": 0.338,
+        "businessModel": 0.301,
+        "goToMarket": 0.24,
+        "founder": 0.095,
+        "disruption": 0.132,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_posh",
@@ -13735,7 +16090,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.084,
+        "problem": 0.185,
+        "customer": 0.52,
+        "product": 0.129,
+        "technical": 0.27,
+        "businessModel": 0.208,
+        "goToMarket": 0.216,
+        "founder": 0.236,
+        "disruption": 0.243,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.163,
+        "problem": 0.246,
+        "customer": 0.468,
+        "product": 0.113,
+        "technical": 0.29,
+        "businessModel": 0.327,
+        "goToMarket": 0.269,
+        "founder": 0,
+        "disruption": 0.294,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_fyxer",
@@ -13749,7 +16128,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.17,
+        "problem": 0.346,
+        "customer": 0.559,
+        "product": 0,
+        "technical": 0,
+        "businessModel": 0.075,
+        "goToMarket": 0.496,
+        "founder": 0.25,
+        "disruption": 0.105,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.081,
+        "customer": 0.121,
+        "product": 0.273,
+        "technical": 0.163,
+        "businessModel": 0.103,
+        "goToMarket": 0.187,
+        "founder": 0.131,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_sereact",
@@ -13763,7 +16166,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.306,
+        "problem": 0.46,
+        "customer": 0.167,
+        "product": 0,
+        "technical": 0,
+        "businessModel": 0.191,
+        "goToMarket": 0.817,
+        "founder": 0,
+        "disruption": 0.093,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.294,
+        "customer": 0.186,
+        "product": 0.486,
+        "technical": 0.166,
+        "businessModel": 0.057,
+        "goToMarket": 0.158,
+        "founder": 0,
+        "disruption": 0.03,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_orbital_materials",
@@ -13777,7 +16204,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0,
+        "problem": 0.239,
+        "customer": 0,
+        "product": 0,
+        "technical": 0,
+        "businessModel": 0.19,
+        "goToMarket": 0.143,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0.248
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.272,
+        "customer": 0.092,
+        "product": 0.4,
+        "technical": 0.238,
+        "businessModel": 0.096,
+        "goToMarket": 0.284,
+        "founder": 0,
+        "disruption": 0.094,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_matic",
@@ -13791,7 +16242,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.123,
+        "problem": 0.267,
+        "customer": 0.499,
+        "product": 0.407,
+        "technical": 0.256,
+        "businessModel": 0.326,
+        "goToMarket": 0.356,
+        "founder": 0.24,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0,
+        "problem": 0.289,
+        "customer": 0.442,
+        "product": 0.226,
+        "technical": 0.212,
+        "businessModel": 0.159,
+        "goToMarket": 0.156,
+        "founder": 0.244,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_metaview",
@@ -13805,7 +16280,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.452,
+        "problem": 0.308,
+        "customer": 0.386,
+        "product": 0,
+        "technical": 0.206,
+        "businessModel": 0.231,
+        "goToMarket": 0.837,
+        "founder": 0.101,
+        "disruption": 0,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.075,
+        "problem": 0.23,
+        "customer": 0.109,
+        "product": 0.19,
+        "technical": 0.457,
+        "businessModel": 0.148,
+        "goToMarket": 0.14,
+        "founder": 0,
+        "disruption": 0,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_campfire",
@@ -13819,7 +16318,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.801,
+        "problem": 0.48,
+        "customer": 0.67,
+        "product": 0.143,
+        "technical": 0,
+        "businessModel": 0.231,
+        "goToMarket": 0.837,
+        "founder": 0.101,
+        "disruption": 0.158,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.168,
+        "problem": 0.229,
+        "customer": 0.084,
+        "product": 0.319,
+        "technical": 0.102,
+        "businessModel": 0.148,
+        "goToMarket": 0.14,
+        "founder": 0,
+        "disruption": 0.086,
+        "regulatory": 0
+      }
     },
     {
       "companyId": "co_doss",
@@ -13833,7 +16356,31 @@
       "reasonsToAdvance": [],
       "reasonsToReject": [],
       "unresolvedRisks": [],
-      "eliminationReason": "stage series_b not in fund's preferred stages"
+      "eliminationReason": "stage series_b not in fund's preferred stages",
+      "dimensionsVsWinner": {
+        "industry": 0.801,
+        "problem": 0.381,
+        "customer": 0.501,
+        "product": 0.16,
+        "technical": 0.195,
+        "businessModel": 0.231,
+        "goToMarket": 0.837,
+        "founder": 0.065,
+        "disruption": 0.121,
+        "regulatory": 0
+      },
+      "dimensionsVsRejected": {
+        "industry": 0.168,
+        "problem": 0.304,
+        "customer": 0.287,
+        "product": 0.172,
+        "technical": 0.289,
+        "businessModel": 0.148,
+        "goToMarket": 0.14,
+        "founder": 0.05,
+        "disruption": 0.013,
+        "regulatory": 0
+      }
     }
   ],
   "finalists": [
@@ -13884,12 +16431,14 @@
         {
           "name": "Jesse Buckingham",
           "role": "Co-founder",
-          "background": "Stanford graduate; former CEO of ASG LogisTech, a logistics operator, prior to co-founding Vooma."
+          "background": "Stanford graduate; former CEO of ASG LogisTech, a logistics operator, prior to co-founding Vooma.",
+          "photoUrl": "https://pbs.twimg.com/profile_images/1631688387865513984/v58JTGFF_400x400.jpg"
         },
         {
           "name": "Mike Carter",
           "role": "Co-founder",
-          "background": "Stanford graduate; former founding engineer at Kodiak Robotics, an autonomous-trucking company, prior to co-founding Vooma."
+          "background": "Stanford graduate; former founding engineer at Kodiak Robotics, an autonomous-trucking company, prior to co-founding Vooma.",
+          "photoUrl": "https://techcrunch.com/wp-content/uploads/2024/10/headshot-e1729047742205.jpeg?w=668"
         }
       ],
       "stage": "series_a",
@@ -13979,7 +16528,8 @@
         {
           "name": "Sarah Wooders",
           "role": "Co-founder and CTO",
-          "background": "Co-authored the MemGPT research paper introducing self-editing memory for LLMs; UC Berkeley Sky Computing Lab."
+          "background": "Co-authored the MemGPT research paper introducing self-editing memory for LLMs; UC Berkeley Sky Computing Lab.",
+          "photoUrl": "https://i.ytimg.com/vi/VgttOIWfoeo/maxresdefault.jpg"
         }
       ],
       "stage": "seed",
@@ -14064,7 +16614,8 @@
         {
           "name": "Jennifer Wilcox",
           "role": "Chief Scientist (not a founder)",
-          "background": "Former Principal Deputy Assistant Secretary at the U.S. Department of Energy; published foundational carbon-dioxide-removal research."
+          "background": "Former Principal Deputy Assistant Secretary at the U.S. Department of Energy; published foundational carbon-dioxide-removal research.",
+          "photoUrl": "https://www.unr.edu/main/images/colleges-schools/science/energy-solutions-exchange/profile/jen-wilcox-profile.jpg"
         },
         {
           "name": "Stacy Kauk",

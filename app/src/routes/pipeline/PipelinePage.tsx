@@ -7,7 +7,7 @@ import type { Company, Stage } from '../../lib/types'
 
 const STAGES: Stage[] = ['Sourced', 'Outreach', 'Meeting', 'Diligence', 'IC', 'Decision']
 
-type View = 'board' | 'database'
+type View = 'board' | 'database' | 'calendar'
 
 /* view-switcher icons in the hand-drawn nav family (18px grid, 1.2 stroke) */
 function BoardIcon({ className }: { className?: string }) {
@@ -28,6 +28,21 @@ function DatabaseIcon({ className }: { className?: string }) {
     </svg>
   )
 }
+
+function CalendarIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.2">
+      <rect x="2.5" y="3.5" width="13" height="12" />
+      <path d="M2.5 7.5h13M6 2v3M12 2v3M6 10h2M10 10h2M6 13h2" />
+    </svg>
+  )
+}
+
+const CALENDAR_CALLS = [
+  { id: 'cal-aureline', companyId: 's-aureline', founder: 'Mara Voss', title: 'Partner call', day: 'Today', time: '2:00 PM–2:25 PM', provider: 'Google Meet', meetingUrl: 'https://meet.google.com/' },
+  { id: 'cal-tessellate', companyId: 's-tessellate', founder: 'Elin Sørensen', title: 'Founder introduction', day: 'Tomorrow', time: '10:30 AM–10:55 AM', provider: 'Zoom', meetingUrl: 'https://zoom.us/join' },
+  { id: 'cal-solstice', companyId: 's-solstice', founder: 'Adaeze Okafor', title: 'Diligence call', day: 'Wed, Jul 22', time: '11:00 AM–11:25 AM', provider: 'Google Meet', meetingUrl: 'https://meet.google.com/' },
+]
 
 /* fit scores read like highlighter marks: hot deals go yellow */
 function ScoreChip({ score }: { score: number }) {
@@ -65,12 +80,87 @@ function StageBadge({ stage }: { stage: Stage }) {
   )
 }
 
+function downloadRevenueModels(companies: Company[]) {
+  const escape = (value: string | number) => `"${String(value).replaceAll('"', '""')}"`
+  const rows = companies.map((company) => [
+    company.name,
+    company.sector,
+    company.model?.arr ?? '',
+    company.model?.growthPct ?? '',
+    company.model?.nrrPct ?? '',
+    company.model?.grossMarginPct ?? '',
+    company.model?.burnMonthly ?? '',
+    company.model?.runwayMonths ?? '',
+    company.model?.valuation ?? '',
+    company.model?.checkSize ?? '',
+  ].map(escape).join(','))
+  const csv = ['Company,Sector,ARR,Growth %,NRR %,Gross margin %,Monthly burn,Runway months,Valuation,Check size', ...rows].join('\n')
+  const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }))
+  const link = document.createElement('a')
+  link.href = url
+  link.download = 'meridian-revenue-models.csv'
+  link.click()
+  URL.revokeObjectURL(url)
+}
+
+function downloadRevenueModel(company: Company) {
+  downloadRevenueModels([company])
+}
+
+function CalendarView({ companies, onOpenMemo }: { companies: Company[]; onOpenMemo: (companyId: string) => void }) {
+  const names = new Map(companies.map((company) => [company.id, company.name]))
+
+  return (
+    <div className="mt-4">
+      <section className="border-2 border-hairline-strong bg-card shadow-brutal">
+        <div className="flex flex-wrap items-start justify-between gap-4 border-b-2 border-hairline-strong bg-bone px-5 py-4">
+          <div>
+            <p className="code-sm uppercase text-mute">Incoming calendar</p>
+            <h2 className="heading-sm mt-1">Confirmed company reservations</h2>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="code-sm bg-success/10 px-2 py-1 text-success">3 confirmed · synced</span>
+            <button type="button" onClick={() => downloadRevenueModels(companies)} className="border-2 border-hairline-strong bg-card px-3 py-2 text-sm font-semibold text-ink hover:bg-bone">
+              Download all models (.csv)
+            </button>
+          </div>
+        </div>
+        <div className="divide-y-2 divide-hairline-strong">
+          {CALENDAR_CALLS.map((call) => {
+            const company = companies.find((item) => item.id === call.companyId)
+            return (
+              <div key={call.id} className="grid gap-3 p-5 lg:grid-cols-[145px_minmax(0,1fr)_auto] lg:items-center">
+                <div className="code-sm text-mute"><strong className="block text-ink">{call.day}</strong>{call.time}</div>
+                <div>
+                  <p className="caption-tight text-ink">{call.title} — {names.get(call.companyId) ?? 'Company'}</p>
+                  <p className="mt-1 text-sm text-mute">{call.founder} · Google Calendar reservation confirmed</p>
+                </div>
+                <div className="flex flex-wrap gap-2 lg:justify-end">
+                  <a href={call.meetingUrl} target="_blank" rel="noreferrer" className="inline-flex h-9 items-center border-2 border-hairline-strong bg-card px-3 text-sm font-semibold text-ink hover:bg-bone">
+                    {call.provider} ↗
+                  </a>
+                  <button type="button" onClick={() => company && downloadRevenueModel(company)} disabled={!company} className="h-9 border-2 border-hairline-strong bg-card px-3 text-sm font-semibold text-ink hover:bg-bone disabled:cursor-not-allowed disabled:opacity-40">
+                    Revenue model ↓
+                  </button>
+                  <button type="button" onClick={() => onOpenMemo(call.companyId)} className="h-9 border-2 border-hairline-strong bg-dark px-3 text-sm font-semibold text-on-dark hover:bg-body">
+                    Investment memo →
+                  </button>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </section>
+    </div>
+  )
+}
+
 export function PipelinePage() {
   const [companies, setCompanies] = useState<Company[]>([])
   // ?view=database overrides (demo aid); otherwise last choice persists per browser
   const [view, setView] = useState<View>(() => {
     const param = new URLSearchParams(window.location.search).get('view')
-    if (param === 'database' || param === 'board') return param
+    if (param === 'database' || param === 'board' || param === 'calendar') return param
     return (localStorage.getItem('vcbrain-pipeline-view') as View) ?? 'board'
   })
   const [sort, setSort] = useState<{ key: SortKey; dir: 1 | -1 }>({ key: 'fitScore', dir: -1 })
@@ -175,6 +265,7 @@ export function PipelinePage() {
             [
               { v: 'board', label: 'Board view', Icon: BoardIcon },
               { v: 'database', label: 'Database view', Icon: DatabaseIcon },
+              { v: 'calendar', label: 'Calendar view', Icon: CalendarIcon },
             ] as const
           ).map(({ v, label, Icon }) => (
             <button
@@ -221,11 +312,9 @@ export function PipelinePage() {
           {locations.map((location) => <option key={location} value={location}>{location}</option>)}
         </select>
         <div className="flex-1" />
-        {selectedIds.size > 0 && (
-          <button type="button" onClick={sendBatchOutreach} disabled={!outreachEligible.length} className="h-9 border-2 border-hairline-strong bg-primary px-3 text-sm font-semibold text-on-primary disabled:cursor-not-allowed disabled:bg-stone disabled:text-charcoal">
-            Send outreach{outreachEligible.length ? ` · ${outreachEligible.length}` : ''}
-          </button>
-        )}
+        <button type="button" onClick={sendBatchOutreach} disabled={!outreachEligible.length} className="h-9 border-2 border-hairline-strong bg-primary px-5 text-sm font-semibold text-on-primary disabled:cursor-not-allowed disabled:bg-stone disabled:text-charcoal">
+          Outbound
+        </button>
         <button type="button" onClick={toggleAllVisible} disabled={!sorted.length} className="h-9 border-2 border-hairline-strong bg-dark px-3 text-sm font-semibold text-on-dark disabled:cursor-not-allowed disabled:opacity-40">
           {allVisibleSelected ? 'Clear selection' : `Select all ${sorted.length}`}
         </button>
@@ -272,7 +361,7 @@ export function PipelinePage() {
             )
           })}
         </div>
-      ) : (
+      ) : view === 'database' ? (
         /* database view */
         <div className="mt-4 overflow-x-auto rounded-none border-2 border-hairline-strong bg-card shadow-brutal">
           <table className="w-full border-collapse text-left">
@@ -344,6 +433,8 @@ export function PipelinePage() {
             </tbody>
           </table>
         </div>
+      ) : (
+        <CalendarView companies={active} onOpenMemo={(companyId) => navigate(`/company/${companyId}?tab=memo`)} />
       )}
     </div>
   )

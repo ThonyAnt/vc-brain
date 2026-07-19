@@ -40,9 +40,9 @@ function CalendarIcon({ className }: { className?: string }) {
 }
 
 const CALENDAR_CALLS = [
-  { id: 'cal-aureline', companyId: 's-aureline', founder: 'Mara Voss', title: 'Partner call', day: 'Today', time: '2:00 PM–2:25 PM', provider: 'Google Meet', meetingUrl: 'https://meet.google.com/' },
-  { id: 'cal-tessellate', companyId: 's-tessellate', founder: 'Elin Sørensen', title: 'Founder introduction', day: 'Tomorrow', time: '10:30 AM–10:55 AM', provider: 'Zoom', meetingUrl: 'https://zoom.us/join' },
-  { id: 'cal-solstice', companyId: 's-solstice', founder: 'Adaeze Okafor', title: 'Diligence call', day: 'Wed, Jul 22', time: '11:00 AM–11:25 AM', provider: 'Google Meet', meetingUrl: 'https://meet.google.com/' },
+  { id: 'cal-firecrawl', companyId: 'co_firecrawl', founder: 'Firecrawl team', title: 'Partner call', day: 'Today', time: '2:00 PM–2:25 PM', provider: 'Google Meet', meetingUrl: 'https://meet.google.com/' },
+  { id: 'cal-honeyhive', companyId: 'co_honeyhive', founder: 'HoneyHive team', title: 'Founder introduction', day: 'Tomorrow', time: '10:30 AM–10:55 AM', provider: 'Zoom', meetingUrl: 'https://zoom.us/join' },
+  { id: 'cal-e2b', companyId: 'co_e2b', founder: 'E2B team', title: 'Diligence call', day: 'Wed, Jul 22', time: '11:00 AM–11:25 AM', provider: 'Google Meet', meetingUrl: 'https://meet.google.com/' },
 ]
 
 /* fit scores read like highlighter marks: hot deals go yellow */
@@ -108,7 +108,17 @@ function downloadRevenueModel(company: Company) {
   downloadRevenueModels([company])
 }
 
-function CalendarView({ companies, onOpenMemo }: { companies: Company[]; onOpenMemo: (companyId: string) => void }) {
+function CalendarView({
+  companies,
+  onOpenMemo,
+  selectedIds,
+  onToggleCompany,
+}: {
+  companies: Company[]
+  onOpenMemo: (companyId: string) => void
+  selectedIds: Set<string>
+  onToggleCompany: (companyId: string) => void
+}) {
   const names = new Map(companies.map((company) => [company.id, company.name]))
 
   return (
@@ -121,16 +131,21 @@ function CalendarView({ companies, onOpenMemo }: { companies: Company[]; onOpenM
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <span className="code-sm bg-success/10 px-2 py-1 text-success">3 confirmed · synced</span>
-            <button type="button" onClick={() => downloadRevenueModels(companies)} className="border-2 border-hairline-strong bg-card px-3 py-2 text-sm font-semibold text-ink hover:bg-bone">
-              Download all models (.csv)
-            </button>
           </div>
         </div>
         <div className="divide-y-2 divide-hairline-strong">
           {CALENDAR_CALLS.map((call) => {
             const company = companies.find((item) => item.id === call.companyId)
             return (
-              <div key={call.id} className="grid gap-3 p-5 lg:grid-cols-[145px_minmax(0,1fr)_auto] lg:items-center">
+              <div key={call.id} className="grid gap-3 p-5 lg:grid-cols-[22px_145px_minmax(0,1fr)_auto] lg:items-center">
+                <input
+                  aria-label={`Select ${names.get(call.companyId) ?? 'company'}`}
+                  type="checkbox"
+                  checked={selectedIds.has(call.companyId)}
+                  onChange={() => onToggleCompany(call.companyId)}
+                  disabled={!company}
+                  className="h-4 w-4 cursor-pointer accent-primary disabled:cursor-not-allowed"
+                />
                 <div className="code-sm text-mute"><strong className="block text-ink">{call.day}</strong>{call.time}</div>
                 <div>
                   <p className="caption-tight text-ink">{call.title} — {names.get(call.companyId) ?? 'Company'}</p>
@@ -144,7 +159,7 @@ function CalendarView({ companies, onOpenMemo }: { companies: Company[]; onOpenM
                     Revenue model ↓
                   </button>
                   <button type="button" onClick={() => onOpenMemo(call.companyId)} className="h-9 border-2 border-hairline-strong bg-dark px-3 text-sm font-semibold text-on-dark hover:bg-body">
-                    Investment files →
+                    Memo / files →
                   </button>
                 </div>
               </div>
@@ -345,7 +360,7 @@ export function PipelinePage() {
                       onClick={() => navigate(`/company/${c.id}`)}
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <span className="flex items-center gap-2"><input aria-label={`Select ${c.name}`} type="checkbox" checked={selectedIds.has(c.id)} onClick={(event) => event.stopPropagation()} onChange={() => toggleCompany(c.id)} className="h-4 w-4 accent-primary" /><span className="caption-tight text-ink">{c.name}</span></span>
+                        <span className="caption-tight text-ink">{c.name}</span>
                         <ScoreChip score={c.fitScore} />
                       </div>
                       <div className="caption mt-1.5 line-clamp-2 text-mute">{c.oneLiner}</div>
@@ -440,7 +455,12 @@ export function PipelinePage() {
           </table>
         </div>
       ) : (
-        <CalendarView companies={active} onOpenMemo={(companyId) => navigate(`/company/${companyId}?tab=files`)} />
+        <CalendarView
+          companies={active}
+          onOpenMemo={(companyId) => navigate(`/company/${companyId}?tab=files`)}
+          selectedIds={selectedIds}
+          onToggleCompany={toggleCompany}
+        />
       )}
     </div>
   )

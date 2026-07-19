@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Eyebrow } from '../../components/ui/Eyebrow'
+import { FounderAvatar } from '../../components/ui/FounderAvatar'
 import { Pill } from '../../components/ui/Pill'
 import { api } from '../../lib/api/client'
 import type { Company, Founder } from '../../lib/types'
@@ -111,7 +112,12 @@ export function FoundersPage() {
                     className="cursor-pointer border-t border-hairline hover:bg-bone"
                     onClick={() => setOpenId(open ? null : f.id)}
                   >
-                    <td className="caption-tight px-4 py-3 text-ink">{f.name}</td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-3">
+                        <FounderAvatar founder={f} size={9} />
+                        <span className="caption-tight text-ink">{f.name}</span>
+                      </div>
+                    </td>
                     {company ? (
                       <td
                         className="px-4 py-3 text-sm text-primary"

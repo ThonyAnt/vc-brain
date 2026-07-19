@@ -59,8 +59,13 @@ export interface CompanyWorkbookPreview {
  */
 
 const adapted = adaptSnapshot(snapshotJson as unknown as BrainSnapshot)
+// Confirmed pipeline reservations are real companies from the seeded universe.
+// They surface in both the Meeting stage and the calendar view.
+const confirmedMeetingIds = new Set(['co_firecrawl', 'co_honeyhive', 'co_e2b'])
 const data = {
-  companies: [...adapted.companies],
+  companies: adapted.companies.map((company) => (
+    confirmedMeetingIds.has(company.id) ? { ...company, dealStage: 'Meeting' as const } : company
+  )),
   founders: [...adapted.founders],
   fundProfile: adapted.fundProfile,
   weights: { ...adapted.weights },

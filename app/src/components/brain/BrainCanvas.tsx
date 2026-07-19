@@ -14,11 +14,15 @@ export interface BrainHandle {
   focusNode: (id: string) => void
   clearFocus: () => void
   pulseNodes: (ids: string[]) => void
+  highlightNodes: (ids: string[] | null) => void
 }
 
 interface Props {
   graph: FundGraph
   onSelect?: (id: string | null) => void
+  showClusterLabels?: boolean
+  showAxes?: boolean
+  axisLabels?: [string, string, string]
 }
 
 /* Final mockup palette (light mode): mid-tone sector colors that read on
@@ -62,11 +66,23 @@ interface SceneNode {
   phase: number
 }
 
-export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({ graph, onSelect }, ref) {
+export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
+  graph,
+  onSelect,
+  showClusterLabels = true,
+  showAxes = false,
+  axisLabels,
+}, ref) {
   const containerRef = useRef<HTMLDivElement>(null)
   const tooltipRef = useRef<HTMLDivElement>(null)
   const labelRefs = useRef<(HTMLDivElement | null)[]>([])
-  const apiRef = useRef<BrainHandle>({ focusNode: () => {}, clearFocus: () => {}, pulseNodes: () => {} })
+  const axisLabelRefs = useRef<(HTMLDivElement | null)[]>([])
+  const apiRef = useRef<BrainHandle>({
+    focusNode: () => {},
+    clearFocus: () => {},
+    pulseNodes: () => {},
+    highlightNodes: () => {},
+  })
   // Intro swoop plays once; later rebuilds (e.g. web discovery adds nodes) skip it.
   const introPlayedRef = useRef(false)
 
@@ -74,6 +90,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     focusNode: (id) => apiRef.current.focusNode(id),
     clearFocus: () => apiRef.current.clearFocus(),
     pulseNodes: (ids) => apiRef.current.pulseNodes(ids),
+    highlightNodes: (ids) => apiRef.current.highlightNodes(ids),
   }))
 
   useEffect(() => {
@@ -214,6 +231,22 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
 
     const group = new THREE.Group()
     scene.add(group)
+
+    const AXIS_LENGTH = 385
+    if (showAxes) {
+      const axisGeometry = new THREE.BufferGeometry()
+      axisGeometry.setAttribute('position', new THREE.Float32BufferAttribute([
+        -AXIS_LENGTH, 0, 0, AXIS_LENGTH, 0, 0,
+        0, -AXIS_LENGTH, 0, 0, AXIS_LENGTH, 0,
+        0, 0, -AXIS_LENGTH, 0, 0, AXIS_LENGTH,
+      ], 3))
+      const axisLines = new THREE.LineSegments(
+        axisGeometry,
+        new THREE.LineBasicMaterial({ color: 0x161616, transparent: true, opacity: 0.72, depthTest: false }),
+      )
+      axisLines.renderOrder = 0
+      group.add(axisLines)
+    }
 
     /* raw shaders skip three's colorspace chunk, so feed sRGB components directly
        to make on-screen colors match the chosen hexes exactly */
@@ -395,7 +428,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     ring.visible = false
     scene.add(ring)
 
-    /* cluster labels are DOM overlays (crisp Space Mono at fixed screen size,
+    /* cluster labels are DOM overlays (crisp DM Sans at fixed screen size,
        identical to the HUD) — world anchors here, projected every frame */
     const labelAnchors = anchors.map((a) => {
       const v = a.clone().multiplyScalar(1.28)
@@ -407,6 +440,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
 
     let hovered: SceneNode | null = null
     let focused: SceneNode | null = null
+    let highlighted: Set<string> | null = null
     const mouse = { x: -1e4, y: -1e4, downX: 0, downY: 0 }
     const proj = new THREE.Vector3()
     const tmpA = new THREE.Vector3()
@@ -480,7 +514,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         tooltip.style.top = `${mouse.y + 14}px`
         const color = hovered.role === 'portfolio' ? ACCENT : SECTOR_PALETTE[hovered.cluster % SECTOR_PALETTE.length]
         tooltip.innerHTML = `<div style="color:#000000;font-size:13px;font-weight:700">${hovered.label}</div>
-          <div style="color:${color};margin-top:2px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">${markets[hovered.cluster]?.label ?? ''} · ${ROLE_TAG[hovered.role]}${hovered.score ? ` · fit ${hovered.score}` : ''}</div>`
+          <div style="color:${color};margin-top:2px;font-family:'DM Sans',sans-serif;font-size:11px">${markets[hovered.cluster]?.label ?? ''} · ${ROLE_TAG[hovered.role]}${hovered.score ? ` · fit ${hovered.score}` : ''}</div>`
         ringWorld.copy(hovered.pos).applyMatrix4(group.matrixWorld)
         ring.position.copy(ringWorld)
         const sz = (hovered.role === 'portfolio' ? 15 : 10) * 3.4 * (pMat.uniforms.uScale.value as number)
@@ -508,6 +542,19 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     const home = { pos: new THREE.Vector3(), target: new THREE.Vector3(), saved: false }
     const flyDir = new THREE.Vector3()
     const flySide = new THREE.Vector3()
+
+    function applyNodeEmphasis() {
+      const neighbours = focused ? neighbourSets.get(focused.id) : null
+      nodes.forEach((n, i) => {
+        const isHighlighted = highlighted?.has(n.id) ?? false
+        if (highlighted) pDim[i] = isHighlighted ? 1 : 0.12
+        else if (neighbours) pDim[i] = neighbours.has(n.id) ? 1 : GREYOUT
+        else pDim[i] = 1
+        pOutline[i] = n.role === 'portfolio' || isHighlighted ? 1 : 0
+      })
+      pGeo.attributes.aDim.needsUpdate = true
+      pGeo.attributes.aOutline.needsUpdate = true
+    }
 
     function flyToPose(toPos: THREE.Vector3, toTarget: THREE.Vector3, dur: number) {
       tween.active = true
@@ -540,11 +587,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         home.saved = true
       }
       focused = node
-      const nbrs = neighbourSets.get(node.id)!
-      nodes.forEach((n, i) => {
-        pDim[i] = nbrs.has(n.id) ? 1 : GREYOUT
-      })
-      pGeo.attributes.aDim.needsUpdate = true
+      applyNodeEmphasis()
       const targetWorld = tmpA.copy(node.pos).applyMatrix4(group.matrixWorld)
       flyDir.copy(camera.position).sub(targetWorld).normalize()
       const endDist = node.role === 'portfolio' ? 300 : 240
@@ -555,8 +598,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
     function clearFocus() {
       const wasFocused = focused
       focused = null
-      pDim.fill(1)
-      pGeo.attributes.aDim.needsUpdate = true
+      applyNodeEmphasis()
       onSelect?.(null)
       if (wasFocused && home.saved) {
         home.saved = false
@@ -584,6 +626,10 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
           })
           pGeo.attributes.aPulse.needsUpdate = true
         }, 4200)
+      },
+      highlightNodes: (ids) => {
+        highlighted = ids === null ? null : new Set(ids)
+        applyNodeEmphasis()
       },
     }
 
@@ -653,6 +699,10 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
           const on = e.a === focused || e.b === focused
           alpha = on ? Math.max(restingAlpha, 0.7) * fade * breathe * e.weight : alpha * 0.05
         }
+        if (highlighted) {
+          const on = highlighted.has(e.a.id) || highlighted.has(e.b.id)
+          alpha = on ? Math.max(alpha, restingAlpha * 0.8) : alpha * 0.05
+        }
         alpha = Math.min(alpha, 0.85)
         const ca = e.kind === 'competition' ? competitionTint : e.kind === 'precedent' ? precedentTint : nodeColor(e.a)
         const cb = e.kind === 'competition' ? competitionTint : e.kind === 'precedent' ? precedentTint : nodeColor(e.b)
@@ -669,7 +719,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       lGeo.attributes.aRGBA.needsUpdate = true
 
       let seg = 0
-      if (SHOW_LINES && !focused) {
+      if (SHOW_LINES && !focused && !highlighted) {
         outer: for (let i = 0; i < N; i++) {
           const a = nodes[i]
           for (let j = i + 1; j < N; j++) {
@@ -732,6 +782,24 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
           el.style.top = `${(-tmpB.y * 0.5 + 0.5) * h}px`
           el.style.opacity = `${0.9 * THREE.MathUtils.smoothstep(dist, 260, 620)}`
         })
+        if (showAxes) {
+          const axisAnchors = [
+            tmpA.set(AXIS_LENGTH * 0.88, 0, 0).clone(),
+            tmpA.set(-AXIS_LENGTH * 0.88, 0, 0).clone(),
+            tmpA.set(0, AXIS_LENGTH * 0.72, 0).clone(),
+            tmpA.set(0, -AXIS_LENGTH * 0.72, 0).clone(),
+            tmpA.set(0, 0, AXIS_LENGTH * 0.88).clone(),
+            tmpA.set(0, 0, -AXIS_LENGTH * 0.88).clone(),
+          ]
+          axisAnchors.forEach((anchor, i) => {
+            const el = axisLabelRefs.current[i]
+            if (!el) return
+            anchor.applyMatrix4(group.matrixWorld).project(camera)
+            el.style.left = `${(anchor.x * 0.5 + 0.5) * w}px`
+            el.style.top = `${(-anchor.y * 0.5 + 0.5) * h}px`
+            el.style.opacity = anchor.z > 1 ? '0' : '1'
+          })
+        }
       }
 
       controls.update()
@@ -769,7 +837,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
       renderer.dispose()
       container.removeChild(renderer.domElement)
     }
-  }, [graph, onSelect])
+  }, [graph, onSelect, showAxes, showClusterLabels])
 
   return (
     <div ref={containerRef} className="absolute inset-0 overflow-hidden">
@@ -778,7 +846,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         className="pointer-events-none absolute z-10 hidden rounded-none border-2 border-hairline-strong bg-white px-3 py-2 shadow-brutal-sm"
       />
       {/* cluster labels: real DOM text so they match the HUD exactly */}
-      {graph.nodes
+      {showClusterLabels && graph.nodes
         .filter((n) => n.type === 'market')
         .map((m, i) => (
           <div
@@ -789,7 +857,7 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
             className="pointer-events-none absolute z-[5] -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
             style={{
               opacity: 0,
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'DM Sans', sans-serif",
               fontWeight: 700,
               fontSize: '11px',
               letterSpacing: '0.1em',
@@ -800,6 +868,25 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
             <span style={{ borderLeft: `3px solid ${SECTOR_PALETTE[i % SECTOR_PALETTE.length]}`, paddingLeft: 6 }}>
               {m.label}
             </span>
+          </div>
+        ))}
+      {showAxes &&
+        (['X', 'Y', 'Z'] as const).flatMap((axis, i) => {
+          const label = axisLabels?.[i] ?? axis
+          return [
+            { key: `${axis}+`, sign: '+', text: label, index: i * 2 },
+            { key: `${axis}-`, sign: '−', text: label, index: i * 2 + 1 },
+          ]
+        }).map(({ key, sign, text, index }) => (
+          <div
+            key={key}
+            ref={(el) => {
+              axisLabelRefs.current[index] = el
+            }}
+            className="pointer-events-none absolute z-[6] -translate-x-1/2 -translate-y-1/2 border-2 border-hairline-strong bg-dark px-2 py-1 text-xs font-semibold text-on-dark"
+            style={{ opacity: 0 }}
+          >
+            {sign} {text}
           </div>
         ))}
     </div>

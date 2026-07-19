@@ -5,7 +5,7 @@ import type { LatLng } from '../../lib/geo'
 /**
  * Sticker globe (GlobeStickers reference): light dotted cobe sphere with
  * die-cut company logo stickers anchored to their cities — real favicons
- * when sourcing captured a website (logoUrl), neobrutal Space Mono
+ * when sourcing captured a website (logoUrl), neobrutal DM Sans
  * letter-marks as the fallback. White edge, hard shadow, slight rotations.
  * Drag with momentum, 0.003 auto-spin, hover-to-rotate via the focus prop.
  * Props are unchanged — this stays the GlobeCard integration boundary.
@@ -200,7 +200,7 @@ export function CompanyGlobe({
               border: '2px solid #000000',
               /* die-cut sticker edge + hard lift */
               boxShadow: '0 0 0 2px #ffffff, 2px 3px 0px 0px rgba(0,0,0,0.35)',
-              fontFamily: "'Space Mono', monospace",
+              fontFamily: "'DM Sans', sans-serif",
               fontWeight: 700,
               fontSize: m.kind === 'hq' ? '0.5rem' : '0.7rem',
               lineHeight: 1,

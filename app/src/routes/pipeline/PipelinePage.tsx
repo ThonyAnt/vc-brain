@@ -398,7 +398,7 @@ export function PipelinePage() {
         />
         <Dropdown
           ariaLabel="Filter by minimum score"
-          className="w-28"
+          className="w-32"
           value={String(scoreFilter)}
           onChange={(v) => setScoreFilter(Number(v))}
           options={[

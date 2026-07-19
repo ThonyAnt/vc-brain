@@ -15,6 +15,8 @@ const CompanyModelSchema = z.object({
   checkSize: z.number().nonnegative().optional(),
   exitMultiple: z.number().positive().optional(),
   yearsToExit: z.number().positive().optional(),
+  /** Fields the adapter backfilled with stage-scaled assumptions rather than company data. */
+  estimatedFields: z.array(z.string()).default([]),
 });
 
 export const CompanyWorkbookInputSchema = z.object({
@@ -99,6 +101,23 @@ function valueOrBlank(value: number | undefined): number | null {
   return known(value);
 }
 
+/**
+ * Source label for a model-derived cell: "Company record" for sourced values,
+ * "HCP assumption" for adapter-backfilled estimates, "Input required" when blank.
+ */
+function modelSource(company: CompanyWorkbookInput, field: string, value: number | null): string {
+  if (value === null) return "Input required";
+  return company.model?.estimatedFields.includes(field) ? "HCP assumption" : "Company record";
+}
+
+/** TAM-sheet status column: "Known" / "HCP assumption" / "Input required". */
+function statusLabel(company: CompanyWorkbookInput, field: string): string {
+  const raw = (company.model as Record<string, number | string[] | undefined> | undefined)?.[field];
+  const value = known(typeof raw === "number" ? raw : undefined);
+  if (value === null) return "Input required";
+  return company.model?.estimatedFields.includes(field) ? "HCP assumption" : "Known";
+}
+
 function styleTitle(sheet: ExcelJS.Worksheet, range: string, title: string) {
   sheet.mergeCells(range);
   const cell = sheet.getCell(range.split(":")[0]!);
@@ -167,8 +186,8 @@ function addTamSheet(workbook: ExcelJS.Workbook, company: CompanyWorkbookInput) 
     ["Company", company.name, "Company record"],
     ["Target market", company.sector || null, company.sector ? "Company record" : "Input required"],
     ["Market unit", marketUnit(company), "Deterministic sector mapping — edit if needed"],
-    ["Known ARR", valueOrBlank(company.model?.arr), company.model?.arr ? "Company record" : "Input required"],
-    ["Known customers", valueOrBlank(company.model?.customers), company.model?.customers ? "Company record" : "Input required"],
+    ["Known ARR", valueOrBlank(company.model?.arr), modelSource(company, "arr", valueOrBlank(company.model?.arr))],
+    ["Known customers", valueOrBlank(company.model?.customers), modelSource(company, "customers", valueOrBlank(company.model?.customers))],
   ];
   metadata.forEach((values, index) => {
     const row = sheet.getRow(index + 3);
@@ -222,16 +241,16 @@ function addRevenueBuild(workbook: ExcelJS.Workbook, company: CompanyWorkbookInp
   sheet.getCell("B3").value = valueOrBlank(company.model?.arr);
   sheet.getCell("B3").numFmt = money;
   styleInput(sheet.getCell("B3"));
-  sheet.getCell("C3").value = company.model?.arr ? "Company record" : "Input required";
+  sheet.getCell("C3").value = modelSource(company, "arr", valueOrBlank(company.model?.arr));
   sheet.getCell("A4").value = "Annual ARR growth assumption";
   sheet.getCell("B4").value = known(company.model?.growthPct) ? company.model!.growthPct! / 100 : null;
   sheet.getCell("B4").numFmt = percent;
   styleInput(sheet.getCell("B4"));
-  sheet.getCell("C4").value = company.model?.growthPct ? "Company record" : "Input required";
+  sheet.getCell("C4").value = modelSource(company, "growthPct", known(company.model?.growthPct));
   sheet.getCell("A5").value = "Current customers";
   sheet.getCell("B5").value = valueOrBlank(company.model?.customers);
   styleInput(sheet.getCell("B5"));
-  sheet.getCell("C5").value = company.model?.customers ? "Company record" : "Optional input";
+  sheet.getCell("C5").value = company.model?.customers ? modelSource(company, "customers", valueOrBlank(company.model?.customers)) : "Optional input";
 
   const quarters = ["Current", "Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8"];
   sheet.getRow(7).values = ["Metric", ...quarters];
@@ -262,12 +281,12 @@ function addExitScenario(workbook: ExcelJS.Workbook, company: CompanyWorkbookInp
   sheet.columns = [{ width: 34 }, { width: 20 }, { width: 24 }, { width: 50 }];
   styleTitle(sheet, "A1:D1", `${company.name} — Exit Scenario`);
   const inputs: Array<[string, number | null, string, string]> = [
-    ["Entry valuation", valueOrBlank(company.model?.valuation), money, company.model?.valuation ? "Company record" : "Input required"],
-    ["Investment amount", valueOrBlank(company.model?.checkSize), money, company.model?.checkSize ? "Company record" : "Input required"],
-    ["Current ARR", valueOrBlank(company.model?.arr), money, company.model?.arr ? "Company record" : "Input required"],
-    ["Annual ARR growth", known(company.model?.growthPct) ? company.model!.growthPct! / 100 : null, percent, company.model?.growthPct ? "Company record" : "Input required"],
-    ["Exit revenue multiple", valueOrBlank(company.model?.exitMultiple), multiple, company.model?.exitMultiple ? "Company record" : "Input required"],
-    ["Years to exit", valueOrBlank(company.model?.yearsToExit), "0.0", company.model?.yearsToExit ? "Company record" : "Input required"],
+    ["Entry valuation", valueOrBlank(company.model?.valuation), money, modelSource(company, "valuation", valueOrBlank(company.model?.valuation))],
+    ["Investment amount", valueOrBlank(company.model?.checkSize), money, modelSource(company, "checkSize", valueOrBlank(company.model?.checkSize))],
+    ["Current ARR", valueOrBlank(company.model?.arr), money, modelSource(company, "arr", valueOrBlank(company.model?.arr))],
+    ["Annual ARR growth", known(company.model?.growthPct) ? company.model!.growthPct! / 100 : null, percent, modelSource(company, "growthPct", known(company.model?.growthPct))],
+    ["Exit revenue multiple", valueOrBlank(company.model?.exitMultiple), multiple, modelSource(company, "exitMultiple", valueOrBlank(company.model?.exitMultiple))],
+    ["Years to exit", valueOrBlank(company.model?.yearsToExit), "0.0", modelSource(company, "yearsToExit", valueOrBlank(company.model?.yearsToExit))],
   ];
   sheet.getRow(3).values = ["Assumption", "Value", "Source", "Notes"];
   styleHeader(sheet.getRow(3));
@@ -425,7 +444,7 @@ export function buildCompanyWorkbookPreview(
             { label: "Primary use case", values: [company.oneLiner || null, ...competitors.map((competitor) => competitor.note || null)], source: "Company and sourcing records" },
             { label: "Key moat / differentiator", values: [company.reasonsToInvest[0] ?? null, ...competitors.map((competitor) => competitor.note || null)], source: "Company and sourcing records" },
             { label: "Latest funding", values: [company.raising ?? company.stage ?? null, ...competitors.map(() => null)], source: "Company record" },
-            { label: "Valuation", values: [known(company.model?.valuation), ...competitors.map(() => null)], source: "Company record" },
+            { label: "Valuation", values: [known(company.model?.valuation), ...competitors.map(() => null)], source: modelSource(company, "valuation", known(company.model?.valuation)) },
           ],
         };
     return {
@@ -467,12 +486,12 @@ export function buildCompanyWorkbookPreview(
     content = {
       columns: ["Value", "Source / method"],
       rows: [
-        { label: "Entry valuation", values: [known(company.model?.valuation), company.model?.valuation ? "Company record" : null] },
-        { label: "Investment amount", values: [known(company.model?.checkSize), company.model?.checkSize ? "Company record" : null] },
-        { label: "Current ARR", values: [known(company.model?.arr), company.model?.arr ? "Company record" : null] },
-        { label: "Annual ARR growth", values: [known(company.model?.growthPct), company.model?.growthPct ? "Company record" : null] },
-        { label: "Exit revenue multiple", values: [known(company.model?.exitMultiple), company.model?.exitMultiple ? "Company record" : null] },
-        { label: "Years to exit", values: [known(company.model?.yearsToExit), company.model?.yearsToExit ? "Company record" : null] },
+        { label: "Entry valuation", values: [known(company.model?.valuation), modelSource(company, "valuation", known(company.model?.valuation))] },
+        { label: "Investment amount", values: [known(company.model?.checkSize), modelSource(company, "checkSize", known(company.model?.checkSize))] },
+        { label: "Current ARR", values: [known(company.model?.arr), modelSource(company, "arr", known(company.model?.arr))] },
+        { label: "Annual ARR growth", values: [known(company.model?.growthPct), modelSource(company, "growthPct", known(company.model?.growthPct))] },
+        { label: "Exit revenue multiple", values: [known(company.model?.exitMultiple), modelSource(company, "exitMultiple", known(company.model?.exitMultiple))] },
+        { label: "Years to exit", values: [known(company.model?.yearsToExit), modelSource(company, "yearsToExit", known(company.model?.yearsToExit))] },
         { label: "Exit ARR", values: [exit.exitArr, "Current ARR × growth over years"] },
         { label: "Implied exit valuation", values: [exit.exitValuation, "Exit ARR × revenue multiple"] },
         { label: "Entry ownership", values: [exit.ownership, "Investment ÷ entry valuation"] },
@@ -496,12 +515,12 @@ export function buildCompanyWorkbookPreview(
         { label: "Company", values: [company.name, "Known"], source: "Company record" },
         { label: "Target market", values: [company.sector || null, company.sector ? "Known" : "Input required"], source: "Company record" },
         { label: "Market unit", values: [marketUnit(company), "Editable mapping"], source: "Deterministic sector mapping" },
-        { label: "Current ARR", values: [known(company.model?.arr), company.model?.arr ? "Known" : "Input required"], source: "Company record" },
-        { label: "Annual growth", values: [known(company.model?.growthPct), company.model?.growthPct ? "Known" : "Input required"], source: "Company record" },
-        { label: "Entry valuation", values: [known(company.model?.valuation), company.model?.valuation ? "Known" : "Input required"], source: "Company record" },
-        { label: "Investment amount", values: [known(company.model?.checkSize), company.model?.checkSize ? "Known" : "Input required"], source: "Company record" },
-        { label: "Exit multiple", values: [known(company.model?.exitMultiple), company.model?.exitMultiple ? "Known" : "Input required"], source: "Company record" },
-        { label: "Years to exit", values: [known(company.model?.yearsToExit), company.model?.yearsToExit ? "Known" : "Input required"], source: "Company record" },
+        { label: "Current ARR", values: [known(company.model?.arr), statusLabel(company, "arr")], source: modelSource(company, "arr", known(company.model?.arr)) },
+        { label: "Annual growth", values: [known(company.model?.growthPct), statusLabel(company, "growthPct")], source: modelSource(company, "growthPct", known(company.model?.growthPct)) },
+        { label: "Entry valuation", values: [known(company.model?.valuation), statusLabel(company, "valuation")], source: modelSource(company, "valuation", known(company.model?.valuation)) },
+        { label: "Investment amount", values: [known(company.model?.checkSize), statusLabel(company, "checkSize")], source: modelSource(company, "checkSize", known(company.model?.checkSize)) },
+        { label: "Exit multiple", values: [known(company.model?.exitMultiple), statusLabel(company, "exitMultiple")], source: modelSource(company, "exitMultiple", known(company.model?.exitMultiple)) },
+        { label: "Years to exit", values: [known(company.model?.yearsToExit), statusLabel(company, "yearsToExit")], source: modelSource(company, "yearsToExit", known(company.model?.yearsToExit)) },
         { label: "TAM segment counts + ACV", values: [null, "Input required"], source: "Not available in company record" },
       ],
     };

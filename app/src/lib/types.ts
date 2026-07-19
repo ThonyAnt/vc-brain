@@ -52,6 +52,8 @@ export interface SaasModel {
   checkSize: number
   exitMultiple: number
   yearsToExit: number
+  /** Fields backfilled with stage-scaled HCP assumptions (not company data). */
+  estimatedFields?: string[]
 }
 
 export interface Meeting {

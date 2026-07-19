@@ -94,6 +94,11 @@ export function ModelTab({ company }: { company: Company }) {
             </label>
           ))}
         </div>
+        {(m.estimatedFields?.length ?? 0) > 0 && (
+          <p className="caption mt-3 border-l-2 border-hairline-strong pl-2 text-mute">
+            Seeded with stage-based HCP assumptions ({m.estimatedFields!.join(', ')}) — edit before relying.
+          </p>
+        )}
         <div className="mt-4 border-t border-hairline pt-3">
           <Eyebrow>Current actuals</Eyebrow>
           <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1">

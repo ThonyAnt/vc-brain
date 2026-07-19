@@ -149,8 +149,9 @@ export const api = {
     company: Company,
     kind: CompanyWorkbookKind,
     sheet?: string,
-  ): Promise<CompanyWorkbookPreview | null> {
-    return postJson<CompanyWorkbookPreview>('/api/models/preview', { company, kind, sheet })
+  ): Promise<CompanyWorkbookPreview> {
+    const live = await postJson<CompanyWorkbookPreview>('/api/models/preview', { company, kind, sheet })
+    return live ?? localWorkbookPreview(company, kind, sheet)
   },
 
   async downloadCompanyWorkbook(company: Company, kind: CompanyWorkbookKind): Promise<boolean> {
@@ -321,6 +322,155 @@ export const api = {
 }
 
 /* ---------------- local fallbacks (used when the API is down) ------------- */
+
+/**
+ * Offline mirror of the brain's workbook preview (brain/src/models/
+ * companyWorkbooks.ts): same sheets, rows, and source-label policy, built from
+ * the company record already in the client. Downloads still need the live API —
+ * this keeps the Files tab readable when it's off.
+ */
+function localWorkbookPreview(
+  company: Company,
+  kind: CompanyWorkbookKind,
+  requestedSheet?: string,
+): CompanyWorkbookPreview {
+  const m = company.model
+  const estimated = new Set(m?.estimatedFields ?? [])
+  const val = (v: number | undefined): number | null =>
+    v !== undefined && Number.isFinite(v) && v > 0 ? v : null
+  const src = (field: string, v: number | null): string =>
+    v === null ? 'Input required' : estimated.has(field) ? 'HCP assumption' : 'Company record'
+  const status = (field: string, v: number | null): string =>
+    v === null ? 'Input required' : estimated.has(field) ? 'HCP assumption' : 'Known'
+  const fileBase = company.name.replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'company'
+  const offlineNote = 'Preview generated locally — start the brain API to download the editable workbook.'
+
+  const readme = {
+    columns: ['Value'],
+    rows: [
+      { label: 'Purpose', values: ['A deterministic first-pass model populated from the company record.'] },
+      { label: 'Yellow cells', values: ['Required or optional investor inputs; blank when no source-backed value exists.'] },
+      { label: 'Blue cells', values: ['Formula outputs; review assumptions before using the model in an investment decision.'] },
+      { label: 'Source policy', values: ['Known fields are labelled Company record; backfilled ones HCP assumption. No market-size or competitor facts are fabricated.'] },
+      { label: 'Generated for', values: [company.name] },
+      { label: 'Sector', values: [company.sector || null] },
+      { label: 'Stage', values: [company.stage || null] },
+    ] as CompanyWorkbookPreview['rows'],
+  }
+
+  if (kind === 'landscape') {
+    const competitors = company.competitors.slice(0, 15)
+    const sheets = ['README', 'Final Competitive Landscape']
+    const previewSheet = sheets.includes(requestedSheet ?? '') ? requestedSheet! : 'Final Competitive Landscape'
+    const content =
+      previewSheet === 'README'
+        ? readme
+        : {
+            columns: [company.name, ...competitors.map((c) => c.name)],
+            rows: [
+              { label: 'Relationship', values: ['Main company', ...competitors.map((c) => c.kind)], source: 'Company record' },
+              { label: 'Primary use case', values: [company.oneLiner || null, ...competitors.map((c) => c.note || null)], source: 'Company and sourcing records' },
+              { label: 'Key moat / differentiator', values: [company.reasonsToInvest[0] ?? null, ...competitors.map((c) => c.note || null)], source: 'Company and sourcing records' },
+              { label: 'Latest funding', values: [company.raising ?? company.stage ?? null, ...competitors.map(() => null)], source: 'Company record' },
+              { label: 'Valuation', values: [val(m?.valuation), ...competitors.map(() => null)], source: src('valuation', val(m?.valuation)) },
+            ] as CompanyWorkbookPreview['rows'],
+          }
+    return {
+      kind,
+      title: `${company.name} — Competitive Landscape`,
+      fileName: `${fileBase}-competitive-landscape.xlsx`,
+      previewSheet,
+      sheets,
+      status: 'company-specific',
+      notes: [
+        `${competitors.length} named competitor${competitors.length === 1 ? '' : 's'} loaded from the company record.`,
+        offlineNote,
+      ],
+      ...content,
+    }
+  }
+
+  const sheets = ['README', 'TAM', '2 year rev build', 'Exit Scenario', 'TAM Penetration Required']
+  const previewSheet = sheets.includes(requestedSheet ?? '') ? requestedSheet! : 'TAM'
+  const arr = val(m?.arr)
+  const growth = val(m?.growthPct)
+  const valuation = val(m?.valuation)
+  const check = val(m?.checkSize)
+  const exitMultiple = val(m?.exitMultiple)
+  const years = val(m?.yearsToExit)
+  const exitArr = arr && growth && years ? arr * (1 + growth / 100) ** years : null
+  const exitValuation = exitArr && exitMultiple ? exitArr * exitMultiple : null
+  const ownership = valuation && check ? check / valuation : null
+  const proceeds = exitValuation && ownership ? exitValuation * ownership : null
+  const moic = proceeds && check ? proceeds / check : null
+
+  let content: Pick<CompanyWorkbookPreview, 'columns' | 'rows'>
+  if (previewSheet === 'README') {
+    content = readme
+  } else if (previewSheet === '2 year rev build') {
+    const quarters = ['Current', 'Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8']
+    const projected = quarters.map((_, i) => (arr && growth ? arr * (1 + growth / 100) ** (i / 4) : i === 0 ? arr : null))
+    content = {
+      columns: quarters,
+      rows: [
+        { label: 'ARR', values: projected, source: 'Current ARR + annual growth formula' },
+        { label: 'Quarterly revenue run-rate', values: projected.map((v) => (v ? v / 4 : null)), source: 'ARR ÷ 4' },
+      ],
+    }
+  } else if (previewSheet === 'Exit Scenario') {
+    content = {
+      columns: ['Value', 'Source / method'],
+      rows: [
+        { label: 'Entry valuation', values: [valuation, src('valuation', valuation)] },
+        { label: 'Investment amount', values: [check, src('checkSize', check)] },
+        { label: 'Current ARR', values: [arr, src('arr', arr)] },
+        { label: 'Annual ARR growth', values: [growth, src('growthPct', growth)] },
+        { label: 'Exit revenue multiple', values: [exitMultiple, src('exitMultiple', exitMultiple)] },
+        { label: 'Years to exit', values: [years, src('yearsToExit', years)] },
+        { label: 'Exit ARR', values: [exitArr, 'Current ARR × growth over years'] },
+        { label: 'Implied exit valuation', values: [exitValuation, 'Exit ARR × revenue multiple'] },
+        { label: 'Entry ownership', values: [ownership, 'Investment ÷ entry valuation'] },
+        { label: 'Gross proceeds', values: [proceeds, 'Exit valuation × ownership; dilution not modelled'] },
+        { label: 'Gross MOIC', values: [moic, 'Gross proceeds ÷ investment'] },
+      ],
+    }
+  } else if (previewSheet === 'TAM Penetration Required') {
+    content = {
+      columns: ['Value', 'Source / interpretation'],
+      rows: [
+        { label: 'Total addressable market', values: [null, 'Requires source-backed TAM inputs'] },
+        { label: 'Exit ARR', values: [exitArr, 'Exit Scenario formula'] },
+        { label: 'Required TAM penetration', values: [null, 'Calculated after TAM inputs are supplied'] },
+      ],
+    }
+  } else {
+    content = {
+      columns: ['Company-specific value', 'Status'],
+      rows: [
+        { label: 'Company', values: [company.name, 'Known'], source: 'Company record' },
+        { label: 'Target market', values: [company.sector || null, company.sector ? 'Known' : 'Input required'], source: 'Company record' },
+        { label: 'Current ARR', values: [arr, status('arr', arr)], source: src('arr', arr) },
+        { label: 'Annual growth', values: [growth, status('growthPct', growth)], source: src('growthPct', growth) },
+        { label: 'Entry valuation', values: [valuation, status('valuation', valuation)], source: src('valuation', valuation) },
+        { label: 'Investment amount', values: [check, status('checkSize', check)], source: src('checkSize', check) },
+        { label: 'Exit multiple', values: [exitMultiple, status('exitMultiple', exitMultiple)], source: src('exitMultiple', exitMultiple) },
+        { label: 'Years to exit', values: [years, status('yearsToExit', years)], source: src('yearsToExit', years) },
+        { label: 'TAM segment counts + ACV', values: [null, 'Input required'], source: 'Not available in company record' },
+      ],
+    }
+  }
+
+  return {
+    kind,
+    title: `${company.name} — TAM + Revenue + Exit Model`,
+    fileName: `${fileBase}-tam-revenue-exit-model.xlsx`,
+    previewSheet,
+    sheets,
+    status: 'company-specific',
+    notes: ['Yellow cells are missing or investor-controlled assumptions; blue cells are formulas.', offlineNote],
+    ...content,
+  }
+}
 
 function localFeedback(input: FeedbackInput): FeedbackResult {
   const founder = data.founders.find((f) => f.id === input.entityId)

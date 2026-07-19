@@ -55,7 +55,6 @@ export function FilesTab({ company }: { company: Company }) {
       if (cancelled) return
       setPreview(nextPreview)
       setLoading(false)
-      if (!nextPreview) setError('The Brain API is required to generate company-specific files.')
     })
     return () => {
       cancelled = true

@@ -135,6 +135,16 @@ const usd = (n: number | undefined, digits = 1) =>
   n === undefined ? '—' : `$${(n / 1_000_000).toFixed(digits)}M`
 const cap = (s: string) => (s ? s[0].toUpperCase() + s.slice(1) : s)
 
+/** FNV-1a — deterministic per-company jitter so estimates differ but never change between loads. */
+function idHash(s: string): number {
+  let h = 2166136261
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i)
+    h = Math.imul(h, 16777619)
+  }
+  return h >>> 0
+}
+
 /** Reject extraction placeholders like "Co-Founder Name" / "Unknown". */
 function isRealFounderName(n: string | undefined): boolean {
   if (!n || n.trim().length < 3) return false
@@ -269,24 +279,51 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
     const dil = diligence[c.id]
     const a = dil?.financial?.assumptions
     const m = c.metrics
-    const model: SaasModel | undefined =
-      m || a
-        ? {
-            arr: m?.arr ?? a?.projectedArr ?? 0,
-            growthPct: Math.round((m?.arrGrowthRate ?? 1.2) * 100),
-            churnPct: Math.round((m?.churnRate ?? 0.06) * 100),
-            nrrPct: Math.round((m?.nrr ?? 1.1) * 100),
-            grossMarginPct: Math.round((m?.grossMargin ?? 0.72) * 100),
-            cac: m?.cac ?? 15_000,
-            cacPaybackMonths: 14,
-            burnMonthly: m?.monthlyBurn ?? 250_000,
-            runwayMonths: m?.runwayMonths ?? 18,
-            valuation: c.valuation ?? a?.entryValuation ?? 0,
-            checkSize: a?.investmentAmount ?? c.checkSizeSought ?? 0,
-            exitMultiple: a?.exitMultiple ?? 8,
-            yearsToExit: a?.yearsToExit ?? 6,
-          }
-        : undefined
+    /* Every company gets a model so the Model tab and workbooks always render.
+     * Source-backed values come from metrics / financial diligence; the rest are
+     * stage-scaled, deterministically jittered HCP assumptions. Backfilled
+     * fields are tracked so downstream labels read "HCP assumption", never
+     * "Company record". */
+    const estimatedFields: string[] = []
+    const estimate = (field: string, sourced: number | undefined, fallback: number): number => {
+      if (sourced !== undefined && Number.isFinite(sourced) && sourced > 0) return sourced
+      estimatedFields.push(field)
+      return fallback
+    }
+    const stageLc = (c.stage ?? 'seed').toLowerCase()
+    const jitter = 0.8 + ((idHash(c.id) % 401) / 1000) // 0.80 – 1.20
+    const baseArr = stageLc.includes('series b')
+      ? 6_000_000
+      : stageLc.includes('series a')
+        ? 2_200_000
+        : stageLc.includes('pre')
+          ? 400_000
+          : 900_000
+    const model: SaasModel = {
+      arr: estimate('arr', m?.arr ?? a?.projectedArr, Math.round((baseArr * jitter) / 10_000) * 10_000),
+      growthPct: estimate(
+        'growthPct',
+        m?.arrGrowthRate !== undefined ? Math.round(m.arrGrowthRate * 100) : undefined,
+        stageLc.includes('series') ? 110 : 140,
+      ),
+      churnPct: Math.round((m?.churnRate ?? 0.06) * 100),
+      nrrPct: Math.round((m?.nrr ?? 1.1) * 100),
+      grossMarginPct: Math.round((m?.grossMargin ?? 0.72) * 100),
+      cac: m?.cac ?? 15_000,
+      cacPaybackMonths: 14,
+      burnMonthly: m?.monthlyBurn ?? 250_000,
+      runwayMonths: m?.runwayMonths ?? 18,
+      valuation: estimate(
+        'valuation',
+        c.valuation ?? a?.entryValuation,
+        // Round size × 5 ≈ 20% dilution round; else a stage-scaled default.
+        c.checkSizeSought ? c.checkSizeSought * 5 : Math.round((15_000_000 * jitter) / 100_000) * 100_000,
+      ),
+      checkSize: estimate('checkSize', a?.investmentAmount ?? c.checkSizeSought, 2_000_000),
+      exitMultiple: estimate('exitMultiple', a?.exitMultiple, 8),
+      yearsToExit: estimate('yearsToExit', a?.yearsToExit, 6),
+      estimatedFields,
+    }
 
     const risks = isRec && memo?.keyRisks?.length ? memo.keyRisks : dil?.risk?.criticalRisks ?? r?.unresolvedRisks ?? []
     const diligenceQuestions =

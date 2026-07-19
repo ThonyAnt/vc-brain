@@ -34,10 +34,11 @@ export interface SourcedFounderView extends FounderSourcing {
 
 /*
  * Calibrated exemplars from the fund's founder-assessment history. The curve:
- * serial exited founders actively building score at the ceiling (97); elite
- * operators in stealth land in the 80s with confidence capped by unknowns;
- * strong pre-founders without an active venture sit in the low 70s; very
- * early founders with undescribed companies score ~50 at low confidence.
+ * generational founders (Jensen Huang) define the 95 ceiling; serial exited
+ * founders actively building land ~85-90; elite operators in stealth in the
+ * high 70s with confidence capped by unknowns; strong pre-founders without an
+ * active venture in the mid-to-high 60s; very early founders with undescribed
+ * companies down at ~30 with low confidence.
  */
 export const FEW_SHOT_EXAMPLES: {
   profile: string;
@@ -47,24 +48,32 @@ export const FEW_SHOT_EXAMPLES: {
 }[] = [
   {
     profile:
-      "Hossein Azari — Founder/CEO of OpenFi (7.5 yrs, AI × DeFi financial services, NYC). Harvard CS PhD + Columbia Executive MBA; ex-Google Research scientist; co-founded Clarity Money (Chief Data Scientist), acquired by Goldman Sachs; six-month post-acquisition stint at Goldman before returning to founding.",
-    score: 97,
+      "Jensen Huang — Founder/CEO of NVIDIA since 1993 (30+ yrs). Built the company from a startup into the defining platform of the AI compute era; invented the GPU category, drove CUDA into the industry standard, and navigated multiple near-death pivots to a multi-trillion-dollar company. Oregon State EE, Stanford MSEE.",
+    score: 95,
     confidence: "high",
     justification:
-      "Rare signal stack: elite technical credentials (Harvard PhD, Google Research), a validated exit in the fund's exact domain (Clarity Money → Goldman Sachs), and 7+ years actively building in fintech. The short post-acquisition tenure reads as a founder eager to build, not a flag. OpenFi's traction after 7.5 years is the open question, but the founder quality itself is top-decile.",
+      "The calibration ceiling: a generational founder with three decades of category creation, repeated reinvention, and platform-scale execution. Scores of 95+ are reserved for this tier — no single exit or strong pedigree reaches it.",
   },
   {
     profile:
       "Brian O'Kelley — Co-founder/CEO of Scope3 (4 yrs, decarbonizing media/advertising). Previously co-founder/CEO of AppNexus for 11 yrs through its $1.6B sale to AT&T; CTO of Right Media through its Yahoo acquisition; co-founded Waybridge; invented core programmatic ad-tech (ad exchange, DSP, SSP, header bidding), 17 patents; Princeton CS.",
-    score: 97,
+    score: 90,
     confidence: "high",
     justification:
-      "One of the strongest imaginable seed-stage profiles: a repeat exited CEO who operated at platform scale, deep engineering credentials, and unusual credibility selling back into his old buyer set. The Waybridge hand-off is worth probing for commitment horizon, but the exit record plus a live company four years in puts this at the ceiling.",
+      "The strongest realistic seed-stage profile short of the generational tier: a repeat exited CEO who operated at platform scale, deep engineering credentials, and unusual credibility selling back into his old buyer set. The Waybridge hand-off is worth probing for commitment horizon; category-defining invention plus a $1.6B exit and a live company four years in earn the top of the serial-founder band.",
+  },
+  {
+    profile:
+      "Hossein Azari — Founder/CEO of OpenFi (7.5 yrs, AI × DeFi financial services, NYC). Harvard CS PhD + Columbia Executive MBA; ex-Google Research scientist; co-founded Clarity Money (Chief Data Scientist), acquired by Goldman Sachs; six-month post-acquisition stint at Goldman before returning to founding.",
+    score: 85,
+    confidence: "high",
+    justification:
+      "Strong signal stack: elite technical credentials (Harvard PhD, Google Research), a validated exit in the fund's exact domain (Clarity Money → Goldman Sachs), and 7+ years actively building in fintech. Held below the top of the serial-founder band because the exit was as a non-CEO co-founder at undisclosed terms and OpenFi shows no visible traction markers after 7.5 years.",
   },
   {
     profile:
       "Nonso Maduka — Co-founder/CEO of a stealth company at the AI × financial-services intersection (8 months). Princeton EE, Harvard MBA with Distinction; six years Citi mortgage trading; product leadership at NerdWallet and Glassdoor; GM / Head of Product at Plaid; Head of Product at Invisible (acquired by Perplexity).",
-    score: 82,
+    score: 78,
     confidence: "medium",
     justification:
       "High-conviction fintech operator with an engineering foundation, elite product credentials at Plaid, and a decade of preparation for exactly what he is now building. Scores below the serial-exit tier because the venture is stealth: capital raised, segment, and founding team are unknown — medium confidence until those resolve.",
@@ -72,15 +81,15 @@ export const FEW_SHOT_EXAMPLES: {
   {
     profile:
       "Rohini Pandhi — Member-in-residence at South Park Commons (exploring her next venture). Nearly eight years at Block/Square rising to Product Lead for Square Payments and the Bitcoin Wallet; Head of Expansion at Mercury; co-founded Transparent Collective (10 yrs; helped 70+ underrepresented startups raise $70M+) and the Sataza restaurant concept; First Round Angel Track; Michigan BSE + Booth MBA.",
-    score: 72,
+    score: 68,
     confidence: "high",
     justification:
-      "Seasoned fintech product operator with genuine founding instincts and a clear pre-founding posture — the SPC residency is a strong intent signal. Capped in the low 70s because there is no confirmed tech venture yet; the score jumps the moment she commits to what she is building.",
+      "Seasoned fintech product operator with genuine founding instincts and a clear pre-founding posture — the SPC residency is a strong intent signal. Capped in the high 60s because there is no confirmed tech venture yet; the score jumps the moment she commits to what she is building.",
   },
   {
     profile:
       "Hakeem Angulu — Member of Technical Staff at Anthropic (Product Platform, ~2 yrs); previously four years at Google (SWE II → Senior); CTO of Oak Systems for three years; Harvard CS/Statistics; Goldman Sachs IBD internship.",
-    score: 71,
+    score: 65,
     confidence: "high",
     justification:
       "Technically exceptional with rare frontier-AI experience and early operator instincts from the startup CTO stint, but currently an IC with no visible startup idea or intent to leave. A watch-closely pre-founder rather than an active opportunity — the score reflects potential without a catalyst, and unknowns about whether Oak Systems was venture-scale.",
@@ -88,10 +97,10 @@ export const FEW_SHOT_EXAMPLES: {
   {
     profile:
       "Zach Richards — Co-founder of Machina (3 months old; no public product, sector, or team information). Previously led the Frontier Data team at Mercor (built APEX-Agents benchmarks); two years as a BCG consultant deploying RAG systems and energy models; Ohio State chemical engineering.",
-    score: 52,
+    score: 30,
     confidence: "low",
     justification:
-      "Legitimate applied-AI and engineering background with a deliberate early leap into founding, but the company is too new and undescribed to underwrite: no product description, traction, funding, or co-founder information, and a short total career. Low confidence — needs clarity on what Machina builds before scoring higher.",
+      "Legitimate applied-AI and engineering background with a deliberate early leap into founding, but there is essentially nothing to underwrite: a three-month-old company with no product description, traction, funding, or co-founder information, and a short total career. Scores this low when the venture is unverifiable — clarity on what Machina builds could move it substantially.",
   },
 ];
 

@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { AskInput } from '@/components/ui/ask-input'
@@ -22,6 +22,7 @@ const EMPTY_PROGRESS: PipelineProgress = {
 }
 
 const AGENT_LABELS: Record<string, string> = {
+  founderScout: 'Scouting the founder',
   discovery: 'Searching the web with Tavily',
   fundProfiler: 'Profiling the fund mandate',
   marketScout: 'Scouting the market',
@@ -68,22 +69,29 @@ function AssistantMarkdown({ content }: { content: string }) {
 /* Full-screen fund-brain chat. Empty state is the big ask prompt; once a
    question lands the page becomes a message thread with the input pinned. */
 export function AnalystPage() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const sourcePrompt = (location.state as { sourcePrompt?: string } | null)?.sourcePrompt?.trim() ?? ''
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [busy, setBusy] = useState(false)
   const [progress, setProgress] = useState<PipelineProgress>(EMPTY_PROGRESS)
   /* Assistant message index -> founders sourced in that run, so a completed
      founder-sourcing turn shows a link through to the Founder Leads page. */
   const [sourcedFounders, setSourcedFounders] = useState<Record<number, number>>({})
+  const [sourcedCompanies, setSourcedCompanies] = useState<Record<number, number>>({})
   const scrollRef = useRef<HTMLDivElement>(null)
+  const autoPromptStarted = useRef(false)
+  const busyRef = useRef(false)
 
   useEffect(() => {
     const el = scrollRef.current
     if (el) el.scrollTop = el.scrollHeight
   }, [messages, busy, progress])
 
-  async function ask(question: string) {
-    if (!question.trim() || busy) return
-    const next: ChatMessage[] = [...messages, { role: 'user', content: question }]
+  async function ask(question: string, priorMessages: ChatMessage[] = messages) {
+    if (!question.trim() || busyRef.current) return
+    busyRef.current = true
+    const next: ChatMessage[] = [...priorMessages, { role: 'user', content: question }]
     const assistantIndex = next.length
     setMessages([...next, { role: 'assistant', content: '' }])
     setBusy(true)
@@ -93,6 +101,12 @@ export function AnalystPage() {
         setSourcedFounders((current) => ({
           ...current,
           [assistantIndex]: (current[assistantIndex] ?? 0) + event.founders.length,
+        }))
+      }
+      if (event.type === 'companies_sourced' && event.companies.length) {
+        setSourcedCompanies((current) => ({
+          ...current,
+          [assistantIndex]: (current[assistantIndex] ?? 0) + event.companies.length,
         }))
       }
       if (event.type === 'run_started') {
@@ -146,8 +160,16 @@ export function AnalystPage() {
       else updated.push(reply)
       return updated
     })
+    busyRef.current = false
     setBusy(false)
   }
+
+  useLayoutEffect(() => {
+    if (!sourcePrompt || autoPromptStarted.current) return
+    autoPromptStarted.current = true
+    void ask(sourcePrompt, [])
+    navigate(location.pathname, { replace: true, state: null })
+  }, [sourcePrompt, location.pathname, navigate])
 
   if (messages.length === 0) {
     return (
@@ -173,6 +195,15 @@ export function AnalystPage() {
             }`}
           >
             {m.role === 'assistant' ? <AssistantMarkdown content={m.content} /> : m.content}
+            {m.role === 'assistant' && sourcedCompanies[i] ? (
+              <Link
+                to="/pipeline"
+                className="mt-3 inline-flex items-center gap-1.5 font-medium text-primary underline underline-offset-2"
+              >
+                View {sourcedCompanies[i]} new {sourcedCompanies[i] === 1 ? 'company' : 'companies'} in Pipeline
+                <span aria-hidden>→</span>
+              </Link>
+            ) : null}
             {m.role === 'assistant' && sourcedFounders[i] ? (
               <Link
                 to="/founders"

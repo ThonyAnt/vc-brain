@@ -6,9 +6,10 @@ import { MonthGrid, type CalendarEvent } from '../../components/calendar/MonthGr
 import { CalendarSyncDialog, type CalendarConnection } from '../../components/calendar/CalendarSyncDialog'
 import { Eyebrow } from '../../components/ui/Eyebrow'
 import { FitInfo } from '../../components/ui/FitInfo'
-import { SourceCompaniesDialog, type SourceBrief } from '../../components/sourcing/SourceCompaniesDialog'
+import { SourceCompaniesDialog, buildSourcePrompt, type SourceBrief } from '../../components/sourcing/SourceCompaniesDialog'
 import { api } from '../../lib/api/client'
 import { CALENDAR_RESERVATIONS } from '../../lib/calendarReservations'
+import { industryFamily } from '../../lib/industryFamily'
 import type { Company, Stage } from '../../lib/types'
 
 const STAGES: Stage[] = ['Sourced', 'Outreach', 'Meeting', 'Diligence', 'IC', 'Decision']
@@ -76,7 +77,6 @@ function ScoreChip({ score }: { score: number }) {
 }
 
 type SortKey = 'name' | 'stage' | 'sector' | 'fitScore' | 'raising' | 'location' | 'sourcedAt'
-type ValuationBand = 'all' | 'under-10' | '10-to-15' | '15-plus'
 
 const COLUMNS: { key: SortKey; label: string; className?: string }[] = [
   { key: 'name', label: 'Company' },
@@ -216,12 +216,10 @@ export function PipelinePage() {
   const [stageFilter, setStageFilter] = useState<Stage | 'all'>('all')
   const [scoreFilter, setScoreFilter] = useState(0)
   const [sectorFilter, setSectorFilter] = useState('all')
-  const [valuationFilter, setValuationFilter] = useState<ValuationBand>('all')
   const [locationFilter, setLocationFilter] = useState('all')
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
   const [batchNotice, setBatchNotice] = useState('')
   const [sourceOpen, setSourceOpen] = useState(false)
-  const [sourceNotice, setSourceNotice] = useState('')
   const [calendarSyncOpen, setCalendarSyncOpen] = useState(false)
   const [calendarConnection, setCalendarConnection] = useState<CalendarConnection | null>(() => {
     try {
@@ -257,23 +255,17 @@ export function PipelinePage() {
   }
 
   const active = companies.filter((c) => c.dealStage)
-  const sectors = useMemo(() => [...new Set(active.map((company) => company.sector))].sort(), [active])
+  const sectors = useMemo(
+    () => [...new Set(active.map((company) => industryFamily(company.sector)))].sort(),
+    [active],
+  )
   const locations = useMemo(() => [...new Set(active.map((company) => company.location))].sort(), [active])
-
-  function valuationCap(company: Company) {
-    const cap = company.raising?.match(/at \$(\d+(?:\.\d+)?)M cap/i)
-    return cap ? Number(cap[1]) : undefined
-  }
 
   const filtered = active.filter((company) => {
     if (stageFilter !== 'all' && company.dealStage !== stageFilter) return false
     if (company.fitScore < scoreFilter) return false
-    if (sectorFilter !== 'all' && company.sector !== sectorFilter) return false
+    if (sectorFilter !== 'all' && industryFamily(company.sector) !== sectorFilter) return false
     if (locationFilter !== 'all' && company.location !== locationFilter) return false
-    const cap = valuationCap(company)
-    if (valuationFilter === 'under-10') return cap !== undefined && cap < 10
-    if (valuationFilter === '10-to-15') return cap !== undefined && cap >= 10 && cap < 15
-    if (valuationFilter === '15-plus') return cap !== undefined && cap >= 15
     return true
   })
 
@@ -321,29 +313,9 @@ export function PipelinePage() {
     setBatchNotice(`${outreachEligible.length} personalized outreach ${outreachEligible.length === 1 ? 'draft was' : 'drafts were'} queued for review.`)
   }
 
-  async function sourceCompanies(brief: SourceBrief) {
-    const geography = brief.geography === 'Selected countries'
-      ? (brief.countries.length ? brief.countries.join(', ') : 'selected countries')
-      : brief.geography
-    const industryScope = brief.industries.length ? brief.industries.join(', ') : 'the fund thesis sectors'
-    const query = [
-      `Find up to ${brief.count} ${brief.roundStatus} startups in ${industryScope}.`,
-      `Stages: ${brief.stages.join(', ')}. Geography: ${geography}.`,
-      `Valuation or cap: $${brief.valuationMin}M–$${brief.valuationMax}M.`,
-      `Fund size: $${brief.fundSize}M; initial check: $${brief.checkSize}M.`,
-      `Minimum fund fit: ${brief.minimumFit}.`,
-    ].join(' ')
-    const discovered = await api.discover(query)
-    setCompanies(await api.getCompanies())
-    if (discovered.length) {
-      setView('database')
-      localStorage.setItem('vcbrain-pipeline-view', 'database')
-      setSort({ key: 'sourcedAt', dir: -1 })
-    }
+  function sourceCompanies(brief: SourceBrief) {
     setSourceOpen(false)
-    setSourceNotice(discovered.length
-      ? `${discovered.length} companies sourced and added to the pipeline.`
-      : 'No new companies returned. Start the Brain API with search credentials, then try again.')
+    navigate('/analyst', { state: { sourcePrompt: buildSourcePrompt(brief) } })
   }
 
   return (
@@ -417,18 +389,6 @@ export function PipelinePage() {
           options={[{ value: 'all', label: 'All industries' }, ...sectors.map((sector) => ({ value: sector, label: sector }))]}
         />
         <Dropdown
-          ariaLabel="Filter by raising valuation"
-          className="w-40"
-          value={valuationFilter}
-          onChange={(v) => setValuationFilter(v as ValuationBand)}
-          options={[
-            { value: 'all', label: 'Any raising / cap' },
-            { value: 'under-10', label: 'Under $10M cap' },
-            { value: '10-to-15', label: '$10M–$15M cap' },
-            { value: '15-plus', label: '$15M+ cap' },
-          ]}
-        />
-        <Dropdown
           ariaLabel="Filter by location"
           className="w-36"
           value={locationFilter}
@@ -448,7 +408,6 @@ export function PipelinePage() {
         )}
       </div>
       {batchNotice && <div role="status" className="code-sm mt-3 border-2 border-hairline-strong bg-success px-3 py-2 text-ink">{batchNotice}</div>}
-  {sourceNotice && <div role="status" className="code-sm mt-3 border-2 border-hairline-strong bg-primary px-3 py-2 text-on-primary">{sourceNotice}</div>}
 
       {view === 'board' ? (
         /* stage board */

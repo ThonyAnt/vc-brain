@@ -14,8 +14,6 @@ export function FoundersPage() {
   const [note, setNote] = useState('')
   const [showScout, setShowScout] = useState(false)
   const [scoutQuery, setScoutQuery] = useState('')
-  const [scouting, setScouting] = useState(false)
-  const [scoutError, setScoutError] = useState<string | null>(null)
   const navigate = useNavigate()
   const setWeights = useAppStore((s) => s.setWeights)
   const setLearningNote = useAppStore((s) => s.setLearningNote)
@@ -25,25 +23,18 @@ export function FoundersPage() {
     api.getCompanies().then((all) => setCompanies(new Map(all.map((c) => [c.id, c]))))
   }, [])
 
-  async function runScout() {
-    const q = scoutQuery.trim()
-    if (!q || scouting) return
-    setScouting(true)
-    setScoutError(null)
-    const input = /linkedin\.com\/in\//i.test(q) ? { linkedinUrl: q } : { name: q }
-    const res = await api.sourceFounder(input)
-    setScouting(false)
-    if (!res) {
-      setScoutError('Founder scout unavailable — brain API offline or TAVILY_API_KEY not set.')
-      return
+  function buildFounderPrompt(query: string): string {
+    const q = query.trim()
+    if (/linkedin\.com\/in\//i.test(q)) {
+      return `Source the founder at ${q}. Score them against the fund's historical founder decisions and add them to Founder Leads.`
     }
-    setScoutQuery('')
-    setShowScout(false)
-    setFounders(await api.getFounders().then((f) => [...f].sort((a, b) => b.score - a.score)))
-    setOpenId(res.founder.id)
-    setLearningNote(
-      `Sourced ${res.founder.name} — scored ${res.founder.score}/100 from ${res.sources.length} public sources.`,
-    )
+    return `Source the founder ${q}. Score them against the fund's historical founder decisions and add them to Founder Leads.`
+  }
+
+  function runScout() {
+    const q = scoutQuery.trim()
+    if (!q) return
+    navigate('/analyst', { state: { sourcePrompt: buildFounderPrompt(q) } })
   }
 
   async function feedback(f: Founder, action: 'agree' | 'disagree') {
@@ -71,25 +62,23 @@ export function FoundersPage() {
       </div>
 
       {showScout && (
-        <div className="mt-4 flex max-w-xl items-center gap-2 border-2 border-hairline-strong bg-card p-2 shadow-brutal">
-          <input
-            autoFocus
-            value={scoutQuery}
-            onChange={(e) => setScoutQuery(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && runScout()}
-            disabled={scouting}
-            placeholder="linkedin.com/in/… or a full name"
-            className="h-10 w-full rounded-none border-2 border-hairline-strong bg-card px-3 text-sm text-ink placeholder:text-stone focus:outline-none"
-          />
-          <Pill variant="dark" size="md" onClick={runScout} disabled={scouting}>
-            {scouting ? 'Scouting…' : 'Scout'}
-          </Pill>
+        <div className="mt-4 max-w-xl border-2 border-hairline-strong bg-card p-3 shadow-brutal">
+          <p className="mb-2 text-sm text-body">We’ll open Analyst and run the founder scout live.</p>
+          <div className="flex items-center gap-2">
+            <input
+              autoFocus
+              value={scoutQuery}
+              onChange={(e) => setScoutQuery(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && runScout()}
+              placeholder="linkedin.com/in/… or a full name"
+              className="h-10 w-full rounded-none border-2 border-hairline-strong bg-card px-3 text-sm text-ink placeholder:text-stone focus:outline-none"
+            />
+            <Pill variant="dark" size="md" onClick={runScout} disabled={!scoutQuery.trim()}>
+              Scout in Analyst →
+            </Pill>
+          </div>
         </div>
       )}
-      {scouting && (
-        <div className="code-sm mt-2 text-charcoal">FOUNDER SCOUT · TAVILY FAN-OUT + FUND-CALIBRATED SCORING…</div>
-      )}
-      {scoutError && <div className="code-sm mt-2 text-primary">{scoutError}</div>}
 
       <div className="mt-6 overflow-hidden rounded-none border-2 border-hairline-strong bg-card shadow-brutal">
         <table className="w-full border-collapse text-left">

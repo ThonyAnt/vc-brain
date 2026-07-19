@@ -14,9 +14,24 @@ export type SourceBrief = {
   minimumFit: number
 }
 
+export function buildSourcePrompt(brief: SourceBrief): string {
+  const geography = brief.geography === 'Selected countries'
+    ? (brief.countries.length ? brief.countries.join(', ') : 'selected countries')
+    : brief.geography
+  const industryScope = brief.industries.length ? brief.industries.join(', ') : 'the fund thesis sectors'
+  return [
+    `Source up to ${brief.count} ${brief.roundStatus} startups in ${industryScope}.`,
+    `Stages: ${brief.stages.join(', ')}. Geography: ${geography}.`,
+    `Valuation or cap: $${brief.valuationMin}M–$${brief.valuationMax}M.`,
+    `Fund size: $${brief.fundSize}M; initial check: $${brief.checkSize}M.`,
+    `Minimum fund fit: ${brief.minimumFit}.`,
+    'Rank against the fund thesis, run the sourcing pipeline, and add the best matches to the pipeline.',
+  ].join(' ')
+}
+
 type SourceCompaniesDialogProps = {
   onClose: () => void
-  onSource: (brief: SourceBrief) => Promise<void>
+  onSource: (brief: SourceBrief) => void | Promise<void>
 }
 
 const GENERIC_INDUSTRIES = [
@@ -98,10 +113,10 @@ export function SourceCompaniesDialog({ onClose, onSource }: SourceCompaniesDial
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-deep/45 p-4 py-8" role="dialog" aria-modal="true" aria-labelledby="source-companies-title">
+    <div className="pointer-events-auto fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-deep/45 p-4 py-8" role="dialog" aria-modal="true" aria-labelledby="source-companies-title">
       <div className="w-full max-w-[880px] border-2 border-hairline-strong bg-card shadow-[8px_8px_0_0_#000]">
         <header className="flex items-start justify-between gap-4 border-b-2 border-hairline-strong bg-bone px-6 py-5">
-          <div><p className="code-sm uppercase text-mute">Source companies</p><h2 id="source-companies-title" className="heading-md mt-1">Set the sourcing brief</h2><p className="mt-1 text-sm text-body">The fund thesis ranks results after these hard constraints are applied.</p></div>
+          <div><p className="code-sm uppercase text-mute">Source companies</p><h2 id="source-companies-title" className="heading-md mt-1">Set the sourcing brief</h2><p className="mt-1 text-sm text-body">We turn this into a prompt and run it in Analyst so you can watch sourcing live.</p></div>
           <button type="button" onClick={onClose} className="h-9 w-9 border-2 border-hairline-strong bg-card text-xl leading-none hover:bg-bone" aria-label="Close sourcing brief">×</button>
         </header>
 
@@ -132,7 +147,7 @@ export function SourceCompaniesDialog({ onClose, onSource }: SourceCompaniesDial
           <section className="space-y-3"><span className="code-sm block uppercase text-mute">Geography</span><div className="flex flex-wrap gap-2">{(['US only', 'Worldwide', 'Selected countries'] as const).map((option) => <button key={option} type="button" onClick={() => setGeographyScope(option)} className={`h-10 border-2 border-hairline-strong px-3 text-sm font-semibold ${geography === option ? 'bg-dark text-on-dark' : 'bg-card text-ink hover:bg-bone'}`}>{option}</button>)}</div><div className="mt-2 flex gap-2"><select value={countryToAdd} onChange={(event) => setCountryToAdd(event.target.value)} className="h-10 min-w-0 flex-1 border-2 border-hairline-strong bg-card px-2 text-sm text-ink"><option value="">Choose a country / region</option>{COUNTRY_OPTIONS.map((country) => <option key={country} value={country}>{country}</option>)}</select><button type="button" disabled={!countryToAdd} onClick={addCountry} className="h-10 border-2 border-hairline-strong bg-card px-3 text-sm font-semibold hover:bg-bone disabled:opacity-40">Add</button></div>{geography === 'Selected countries' && <div className="flex flex-wrap gap-1.5">{countries.map((country) => <button type="button" key={country} onClick={() => setCountries((previous) => previous.filter((item) => item !== country))} className="border border-hairline-strong bg-bone px-2 py-1 text-xs text-ink">{country} ×</button>)}</div>}</section>
         </div>
 
-        <footer className="flex flex-wrap justify-end gap-3 border-t-2 border-hairline-strong bg-bone px-6 py-4"><button type="button" onClick={onClose} className="h-11 border-2 border-hairline-strong bg-card px-5 text-sm font-semibold text-ink hover:bg-bone">Cancel</button><button type="button" onClick={submit} disabled={submitting || stages.length === 0} className="h-11 border-2 border-hairline-strong bg-primary px-5 text-sm font-semibold text-on-primary disabled:cursor-not-allowed disabled:bg-stone">{submitting ? 'Sourcing…' : `Source ${count} companies →`}</button></footer>
+        <footer className="flex flex-wrap justify-end gap-3 border-t-2 border-hairline-strong bg-bone px-6 py-4"><button type="button" onClick={onClose} className="h-11 border-2 border-hairline-strong bg-card px-5 text-sm font-semibold text-ink hover:bg-bone">Cancel</button><button type="button" onClick={submit} disabled={submitting || stages.length === 0} className="h-11 border-2 border-hairline-strong bg-primary px-5 text-sm font-semibold text-on-primary disabled:cursor-not-allowed disabled:bg-stone">{submitting ? 'Opening Analyst…' : `Source ${count} in Analyst →`}</button></footer>
       </div>
     </div>
   )

@@ -4,9 +4,9 @@ import type { LatLng } from '../../lib/geo'
 
 /**
  * Sticker globe (GlobeStickers reference): light dotted cobe sphere with
- * die-cut company "logo" stickers anchored to their cities — neobrutal
- * letter-marks (Space Mono monograms, white edge, hard shadow, slight
- * rotations) since the demo companies are fictional and have no real logos.
+ * die-cut company logo stickers anchored to their cities — real favicons
+ * when sourcing captured a website (logoUrl), neobrutal Space Mono
+ * letter-marks as the fallback. White edge, hard shadow, slight rotations.
  * Drag with momentum, 0.003 auto-spin, hover-to-rotate via the focus prop.
  * Props are unchanged — this stays the GlobeCard integration boundary.
  */
@@ -14,6 +14,7 @@ export interface GlobeMarker extends LatLng {
   label?: string
   city?: string
   kind?: 'hq' | 'company'
+  logoUrl?: string
 }
 
 const DEG = Math.PI / 180
@@ -209,7 +210,25 @@ export function CompanyGlobe({
               transition: 'opacity 0.2s',
             }}
           >
+            {/* letter mark sits underneath; the favicon covers it and reveals it on load error */}
             {m.mark}
+            {m.logoUrl && m.kind !== 'hq' && (
+              <img
+                src={m.logoUrl}
+                alt=""
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none'
+                }}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  background: '#ffffff',
+                }}
+              />
+            )}
           </div>
         ))}
       </div>

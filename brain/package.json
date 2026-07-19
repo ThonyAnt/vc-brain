@@ -1,7 +1,7 @@
 {
   "name": "@vc-brain/brain",
   "version": "0.1.0",
-  "description": "VC Brain agent + logic layer: fund-specific investment reasoning.",
+  "description": "Meridian agent + logic layer: fund-specific investment reasoning.",
   "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",

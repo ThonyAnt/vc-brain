@@ -174,7 +174,7 @@ export function AnalystPage() {
   if (messages.length === 0) {
     return (
       <div className="flex h-full flex-col items-center justify-center p-8">
-        <AskInput title="Ask the fund brain" onSubmit={ask} className="max-w-2xl" />
+        <AskInput title="Ask Meridian" onSubmit={ask} className="max-w-2xl" />
         <p className="code-sm -mt-4 text-charcoal">
           institutional memory · 34 memos · 47 passes · 8 outcomes
         </p>

@@ -419,7 +419,7 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
   /* ---- fund profile ---- */
   const fp = snap.fundProfile
   const fundProfile: FundProfile = {
-    name: 'Meridian Ventures',
+    name: 'Meridian',
     thesis: fp?.thesisSummary ?? '',
     checkSize: fp?.checkSize ? `${usd(fp.checkSize.min, 0)} – ${usd(fp.checkSize.max, 0)} initial` : '—',
     stages: (fp?.stages ?? ['seed']).map(cap),

@@ -1,0 +1,16 @@
+{
+  "name": "meridian",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@vercel/node": "^5.1.8",
+    "exceljs": "^4.4.0",
+    "openai": "^4.67.0",
+    "zod": "^3.23.8",
+    "zod-to-json-schema": "^3.25.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "typescript": "^5.8.2"
+  }
+}

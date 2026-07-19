@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "npm install && npm ci --prefix app && npm ci --prefix brain",
+  "buildCommand": "npm run build --prefix app",
+  "outputDirectory": "app/dist",
+  "functions": {
+    "api/[...path].ts": {
+      "maxDuration": 300,
+      "includeFiles": "{app/src/lib/brain/snapshot.json,brain/data/sourced-companies.json,brain/src/**}"
+    }
+  },
+  "rewrites": [{ "source": "/((?!api/).*)", "destination": "/index.html" }]
+}

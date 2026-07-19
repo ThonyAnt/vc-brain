@@ -1,6 +1,6 @@
 # Outreach and Scheduling Automation
 
-This document defines a safe production path for turning a sourced company into a founder meeting without turning VC Brain into an unsupervised email bot.
+This document defines a safe production path for turning a sourced company into a founder meeting without turning Meridian into an unsupervised email bot.
 
 ## Product principle
 

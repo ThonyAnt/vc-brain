@@ -3,7 +3,7 @@ export interface LatLng {
   lng: number
 }
 
-/** Fund HQ (Meridian Ventures) — arcs on the sourcing globe originate here. */
+/** Fund HQ (Meridian) — arcs on the sourcing globe originate here. */
 export const FUND_HQ: LatLng = { lat: 37.7749, lng: -122.4194 } // San Francisco
 
 /** Coordinates for every city used in fixtures' `location` fields. */

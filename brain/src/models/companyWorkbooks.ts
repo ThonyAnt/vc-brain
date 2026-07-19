@@ -387,7 +387,7 @@ function addLandscape(workbook: ExcelJS.Workbook, company: CompanyWorkbookInput)
 }
 
 function configureWorkbook(workbook: ExcelJS.Workbook, company: CompanyWorkbookInput) {
-  workbook.creator = "VC Brain";
+  workbook.creator = "Meridian";
   workbook.company = company.name;
   workbook.title = `${company.name} diligence model`;
   workbook.subject = "Company-specific venture diligence workbook";

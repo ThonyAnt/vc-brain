@@ -1,8 +1,8 @@
-# VC Brain — Product Plan
+# Meridian — Product Plan
 
-We are building an AI-native operating system for venture capital firms that learns how a specific fund thinks, automatically discovers relevant startups, evaluates them using the fund's historical decision-making patterns, and supports the entire investment workflow from sourcing through diligence and investment committee review.
+We are building Meridian, an AI-native operating system for venture capital firms that learns how a specific fund thinks, automatically discovers relevant startups, evaluates them using the fund's historical decision-making patterns, and supports the entire investment workflow from sourcing through diligence and investment committee review.
 
-The product begins by ingesting a fund's prior investment memos, rejected deals, portfolio companies, stated thesis, check size, preferred stages, sectors, geographies, partner preferences, and historical outcomes. From this information, it creates a fund-specific "investment brain" rather than relying on a generic startup scoring model.
+The product begins by ingesting a fund's prior investment memos, rejected deals, portfolio companies, stated thesis, check size, preferred stages, sectors, geographies, partner preferences, and historical outcomes. From this information, it creates a fund-specific investment system rather than relying on a generic startup scoring model.
 
 ## Core Product Experience
 

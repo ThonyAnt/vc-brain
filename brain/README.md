@@ -1,9 +1,9 @@
 # @vc-brain/brain
 
-The **agent + logic layer** for VC Brain: the fund-specific reasoning engine that
+The **agent + logic layer** for Meridian: the fund-specific reasoning engine that
 learns how one fund thinks, sources and evaluates candidates, simulates an
 investment committee, writes a memo, and learns from feedback — emitting
-graph-ready events for the 3D fund brain.
+graph-ready events for the 3D fund graph.
 
 Self-contained TypeScript package. Mock-first (runs offline), OpenAI-ready.
 

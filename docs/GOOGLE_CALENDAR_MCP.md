@@ -1,6 +1,6 @@
 # Google Calendar MCP setup
 
-VC Brain is configured to use the `@cocal/google-calendar-mcp` server locally through VS Code's MCP support. The MCP server gives the AI calendar tools such as free/busy lookup, event creation, update, and cancellation.
+Meridian is configured to use the `@cocal/google-calendar-mcp` server locally through VS Code's MCP support. The MCP server gives the AI calendar tools such as free/busy lookup, event creation, update, and cancellation.
 
 ## One-time Google setup
 
@@ -31,7 +31,7 @@ Use the MCP server only for narrow calendar operations:
 - Create an event only after a founder confirms a slot
 - Update or cancel an event
 
-For the VC Brain workflow, use free/busy data to propose times without exposing the names or details of existing calendar events.
+For the Meridian workflow, use free/busy data to propose times without exposing the names or details of existing calendar events.
 
 ## Important
 

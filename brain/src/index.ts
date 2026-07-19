@@ -1,4 +1,4 @@
-// Public API for the VC Brain agent + logic layer.
+// Public API for the Meridian agent + logic layer.
 
 export * from "./schemas/index.js";
 export * from "./state.js";

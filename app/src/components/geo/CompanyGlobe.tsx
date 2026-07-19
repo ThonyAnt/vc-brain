@@ -50,7 +50,7 @@ export function CompanyGlobe({
     ...m,
     id: `${slug(m.kind === 'hq' ? 'hq' : (m.label ?? 'm'))}-${i}`,
     mark: m.kind === 'hq' ? 'MV' : (m.label ?? '?').slice(0, 1).toUpperCase(),
-    title: m.kind === 'hq' ? 'Meridian Ventures (HQ)' : `${m.label ?? ''}${m.city ? ` · ${m.city}` : ''}`,
+    title: m.kind === 'hq' ? 'Meridian (HQ)' : `${m.label ?? ''}${m.city ? ` · ${m.city}` : ''}`,
     rot: STICKER_ROT[i % STICKER_ROT.length],
   }))
   const markersKey = JSON.stringify(items.map((m) => ({ lat: m.lat, lng: m.lng, id: m.id })))

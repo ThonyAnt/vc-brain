@@ -10,11 +10,11 @@ import type {
 } from '../types'
 
 /* ------------------------------------------------------------------ */
-/* Demo fund: Meridian Ventures — seed-stage B2B software/AI          */
+/* Demo fund: Meridian — seed-stage B2B software/AI                   */
 /* ------------------------------------------------------------------ */
 
 export const fundProfile: FundProfile = {
-  name: 'Meridian Ventures',
+  name: 'Meridian',
   thesis:
     'Technical founders building system-of-record software and AI-native workflow tools for unglamorous B2B markets. We believe the next decade of enterprise value comes from vertical depth, not horizontal platforms.',
   checkSize: '$1M – $3M initial, $5M reserve per winner',

@@ -113,7 +113,7 @@ function outreachFor(companyId: string): OutreachRecord {
     },
     status: 'draft',
     subject: `Quick question about ${company?.name ?? 'your company'}`,
-    body: `Hi ${firstName},\n\nI came across ${company?.name ?? 'the company'} and was impressed by ${company?.whySurfaced?.[0]?.toLowerCase() ?? 'the team’s approach'}. At Meridian, we partner with technical founders building durable B2B infrastructure and workflow software.\n\nWould you be open to a brief 25-minute conversation next week to compare notes?\n\nBest,\nDana\nMeridian Ventures`,
+    body: `Hi ${firstName},\n\nI came across ${company?.name ?? 'the company'} and was impressed by ${company?.whySurfaced?.[0]?.toLowerCase() ?? 'the team’s approach'}. At Meridian, we partner with technical founders building durable B2B infrastructure and workflow software.\n\nWould you be open to a brief 25-minute conversation next week to compare notes?\n\nBest,\nDana\nMeridian`,
     personalizationFacts: [
       company?.whySurfaced?.[0] ?? 'Matches Meridian’s seed-stage investment focus.',
       founder?.signals[0] ?? 'Founder profile is a strong match for the fund thesis.',
@@ -147,10 +147,16 @@ function mergeSourcedCompanies(companies: Company[], founders: Founder[] = []) {
   for (const listener of sourcingListeners) listener(pipelineCompanies)
 }
 
+const API_BASE = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, '') ?? ''
+
+function apiUrl(path: string): string {
+  return `${API_BASE}${path}`
+}
+
 /** POST to the live brain API; returns null if it's unreachable or errors. */
 async function postJson<T>(path: string, body: unknown): Promise<T | null> {
   try {
-    const res = await fetch(path, {
+    const res = await fetch(apiUrl(path), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
@@ -165,7 +171,7 @@ async function postJson<T>(path: string, body: unknown): Promise<T | null> {
 /** GET from the live brain API; returns null if it's unreachable or errors. */
 async function getJson<T>(path: string): Promise<T | null> {
   try {
-    const res = await fetch(path)
+    const res = await fetch(apiUrl(path))
     if (!res.ok) return null
     return (await res.json()) as T
   } catch {
@@ -219,7 +225,7 @@ export const api = {
 
   async downloadCompanyWorkbook(company: Company, kind: CompanyWorkbookKind): Promise<boolean> {
     try {
-      const res = await fetch('/api/models/workbook', {
+      const res = await fetch(apiUrl('/api/models/workbook'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ company, kind }),
@@ -383,7 +389,7 @@ export const api = {
     handlers: StreamChatHandlers = {},
   ): Promise<ChatMessage> {
     try {
-      const res = await fetch('/api/chat/stream', {
+      const res = await fetch(apiUrl('/api/chat/stream'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
         body: JSON.stringify({ messages, context }),
@@ -648,7 +654,7 @@ async function localChat(messages: ChatMessage[], context?: ChatContext): Promis
   } else if (last.includes('check size') || last.includes('criteria')) {
     content = `${fund.name} writes ${fund.checkSize} at ${fund.stages.join('/')} in ${fund.sectors.slice(0, 3).join(', ')}. Current top criteria: ${topCriteria(3)}.`
   } else {
-    content = `I'm the fund brain for ${fund.name}. I can explain why a company surfaced, compare it to past decisions, or update the sourcing criteria. What are you evaluating?`
+    content = `I'm Meridian for ${fund.name}. I can explain why a company surfaced, compare it to past decisions, or update the sourcing criteria. What are you evaluating?`
   }
   return { role: 'assistant', content }
 }

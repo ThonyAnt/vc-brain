@@ -155,9 +155,6 @@ function CalendarView({
             <h2 className="heading-sm mt-1">Confirmed company reservations</h2>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="code-sm border-2 border-hairline-strong bg-success px-2 py-1 uppercase text-ink">
-              {CALENDAR_CALLS.length} confirmed · synced
-            </span>
             <div className="flex border-2 border-hairline-strong">
               {(['list', 'month'] as const).map((v) => (
                 <button

@@ -785,8 +785,11 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
         if (showAxes) {
           const axisAnchors = [
             tmpA.set(AXIS_LENGTH * 0.88, 0, 0).clone(),
+            tmpA.set(-AXIS_LENGTH * 0.88, 0, 0).clone(),
             tmpA.set(0, AXIS_LENGTH * 0.72, 0).clone(),
+            tmpA.set(0, -AXIS_LENGTH * 0.72, 0).clone(),
             tmpA.set(0, 0, AXIS_LENGTH * 0.88).clone(),
+            tmpA.set(0, 0, -AXIS_LENGTH * 0.88).clone(),
           ]
           axisAnchors.forEach((anchor, i) => {
             const el = axisLabelRefs.current[i]
@@ -867,18 +870,25 @@ export const BrainCanvas = forwardRef<BrainHandle, Props>(function BrainCanvas({
             </span>
           </div>
         ))}
-      {showAxes && (['X', 'Y', 'Z'] as const).map((axis, i) => (
-        <div
-          key={axis}
-          ref={(el) => {
-            axisLabelRefs.current[i] = el
-          }}
-          className="pointer-events-none absolute z-[6] -translate-x-1/2 -translate-y-1/2 border-2 border-hairline-strong bg-dark px-2 py-1 text-xs font-semibold text-on-dark"
-          style={{ opacity: 0 }}
-        >
-          {axis} · {axisLabels?.[i] ?? ''}
-        </div>
-      ))}
+      {showAxes &&
+        (['X', 'Y', 'Z'] as const).flatMap((axis, i) => {
+          const label = axisLabels?.[i] ?? axis
+          return [
+            { key: `${axis}+`, sign: '+', text: label, index: i * 2 },
+            { key: `${axis}-`, sign: '−', text: label, index: i * 2 + 1 },
+          ]
+        }).map(({ key, sign, text, index }) => (
+          <div
+            key={key}
+            ref={(el) => {
+              axisLabelRefs.current[index] = el
+            }}
+            className="pointer-events-none absolute z-[6] -translate-x-1/2 -translate-y-1/2 border-2 border-hairline-strong bg-dark px-2 py-1 text-xs font-semibold text-on-dark"
+            style={{ opacity: 0 }}
+          >
+            {sign} {text}
+          </div>
+        ))}
     </div>
   )
 })

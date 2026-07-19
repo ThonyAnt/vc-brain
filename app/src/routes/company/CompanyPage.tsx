@@ -10,8 +10,9 @@ import { ModelTab } from './tabs/ModelTab'
 import { MarketTab } from './tabs/MarketTab'
 import { MemoTab } from './tabs/MemoTab'
 import { OverviewTab } from './tabs/OverviewTab'
+import { OutreachTab } from './tabs/OutreachTab'
 
-const TABS = ['Overview', 'Market map', 'Model', 'Memo'] as const
+const TABS = ['Overview', 'Market map', 'Model', 'Memo', 'Outreach'] as const
 type Tab = (typeof TABS)[number]
 
 export function CompanyPage() {
@@ -95,6 +96,7 @@ export function CompanyPage() {
         {tab === 'Market map' && <MarketTab company={company} />}
         {tab === 'Model' && <ModelTab company={company} />}
         {tab === 'Memo' && <MemoTab company={company} founders={founders} />}
+        {tab === 'Outreach' && <OutreachTab company={company} />}
       </div>
 
       {company.raising && (

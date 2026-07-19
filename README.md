@@ -17,6 +17,7 @@ The core idea: a living institutional memory and reasoning system for venture in
 - **Partner intelligence.** Predicts which partners will support or oppose a deal and why.
 
 See [docs/PLAN.md](docs/PLAN.md) for the full product plan and demo narrative.
+See [docs/OUTREACH_AUTOMATION.md](docs/OUTREACH_AUTOMATION.md) for the staged, production-safe approach to founder outreach, reply handling, and calendar scheduling.
 
 ## Getting started
 

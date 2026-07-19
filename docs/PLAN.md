@@ -140,6 +140,8 @@ Once the investor approves a sourced company, the system can:
 
 For the hackathon, some parts of this flow can be simulated if live integrations are too expensive or unreliable.
 
+For the implementation sequence, backend workflow/state model, provider integration approach, AI guardrails, and compliance controls, see [Outreach Automation](OUTREACH_AUTOMATION.md).
+
 ## Pre-Meeting Intelligence
 
 Before the meeting, the system generates a concise briefing containing:

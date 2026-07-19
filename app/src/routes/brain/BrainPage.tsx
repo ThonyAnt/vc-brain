@@ -4,6 +4,7 @@ import { DotGridBackground } from '../../components/brain/DotGridBackground'
 import { NodePanel } from '../../components/brain/NodePanel'
 import { GlobeCard } from '../../components/geo/GlobeCard'
 import { SourcingInbox } from '../../components/sourcing/SourcingInbox'
+import { IncomingCalendar } from '../../components/calendar/IncomingCalendar'
 import { api } from '../../lib/api/client'
 import type { Company, FundGraph, GraphEdge, GraphNode } from '../../lib/types'
 import type { LatLng } from '../../lib/geo'
@@ -138,6 +139,9 @@ export function BrainPage() {
       </div>
       <div style={hudMono} className="pointer-events-none absolute right-4 bottom-4">
         drag orbit · scroll zoom · hover inspect · click focus · [ ] node size
+      </div>
+      <div className="absolute right-4 bottom-12 z-20">
+        <IncomingCalendar />
       </div>
     </div>
   )

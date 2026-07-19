@@ -15,6 +15,7 @@ import type {
   Founder,
   FundGraph,
   FundProfile,
+  OutreachRecord,
 } from '../types'
 
 export type OrchestratorStreamEvent =
@@ -58,6 +59,39 @@ const store = {
   graph: data.graph,
   weights: { ...data.weights },
   feedbackLog: [] as { input: FeedbackInput; note: string }[],
+  outreach: new Map<string, OutreachRecord>(),
+}
+
+function outreachFor(companyId: string): OutreachRecord {
+  const existing = store.outreach.get(companyId)
+  if (existing) return existing
+  const company = data.companies.find((item) => item.id === companyId)
+  const founder = data.founders.find((item) => item.companyId === companyId)
+  const contactName = founder?.name ?? 'Founder'
+  const firstName = contactName.split(' ')[0]
+  const record: OutreachRecord = {
+    id: `outreach-${companyId}`,
+    companyId,
+    contact: {
+      name: contactName,
+      role: founder?.role ?? `Founder, ${company?.name ?? 'company'}`,
+      email: `${firstName.toLowerCase()}@${(company?.name ?? 'company').toLowerCase().replace(/\s/g, '')}.com`,
+      source: 'Founder profile · verified work email',
+      confidence: 94,
+      verified: true,
+    },
+    status: 'draft',
+    subject: `Quick question about ${company?.name ?? 'your company'}`,
+    body: `Hi ${firstName},\n\nI came across ${company?.name ?? 'the company'} and was impressed by ${company?.whySurfaced?.[0]?.toLowerCase() ?? 'the team’s approach'}. At Meridian, we partner with technical founders building durable B2B infrastructure and workflow software.\n\nWould you be open to a brief 25-minute conversation next week to compare notes?\n\nBest,\nDana\nMeridian Ventures`,
+    personalizationFacts: [
+      company?.whySurfaced?.[0] ?? 'Matches Meridian’s seed-stage investment focus.',
+      founder?.signals[0] ?? 'Founder profile is a strong match for the fund thesis.',
+    ],
+    thread: [],
+    offeredSlots: [],
+  }
+  store.outreach.set(companyId, record)
+  return record
 }
 
 const sourcingListeners = new Set<(companies: Company[]) => void>()
@@ -139,6 +173,51 @@ export const api = {
 
   async getExecutionQueue(): Promise<ExecutionItem[]> {
     return data.executionQueue
+  },
+
+  async getOutreach(companyId: string): Promise<OutreachRecord> {
+    return structuredClone(outreachFor(companyId))
+  },
+
+  async saveOutreachDraft(companyId: string, draft: Pick<OutreachRecord, 'subject' | 'body'>): Promise<OutreachRecord> {
+    const record = outreachFor(companyId)
+    record.subject = draft.subject
+    record.body = draft.body
+    return structuredClone(record)
+  },
+
+  async sendOutreach(companyId: string): Promise<OutreachRecord> {
+    const record = outreachFor(companyId)
+    record.status = 'sent'
+    record.thread.push({ id: `message-${record.thread.length + 1}`, direction: 'outbound', sentAt: new Date().toISOString(), body: record.body })
+    return structuredClone(record)
+  },
+
+  async simulatePositiveReply(companyId: string): Promise<OutreachRecord> {
+    const record = outreachFor(companyId)
+    record.status = 'replied'
+    record.thread.push({ id: `message-${record.thread.length + 1}`, direction: 'inbound', sentAt: new Date().toISOString(), body: 'Thanks Dana — happy to chat. Next week works for me. What times do you have?' })
+    return structuredClone(record)
+  },
+
+  async proposeOutreachSlots(companyId: string): Promise<OutreachRecord> {
+    const record = outreachFor(companyId)
+    record.status = 'awaiting_slot'
+    record.offeredSlots = [
+      { id: 'slot-1', label: 'Tuesday, Jul 21 · 10:00 AM PT', startAt: '2026-07-21T17:00:00.000Z', endAt: '2026-07-21T17:25:00.000Z' },
+      { id: 'slot-2', label: 'Tuesday, Jul 21 · 1:30 PM PT', startAt: '2026-07-21T20:30:00.000Z', endAt: '2026-07-21T20:55:00.000Z' },
+      { id: 'slot-3', label: 'Wednesday, Jul 22 · 11:00 AM PT', startAt: '2026-07-22T18:00:00.000Z', endAt: '2026-07-22T18:25:00.000Z' },
+    ]
+    return structuredClone(record)
+  },
+
+  async confirmOutreachSlot(companyId: string, slotId: string): Promise<OutreachRecord> {
+    const record = outreachFor(companyId)
+    const slot = record.offeredSlots.find((item) => item.id === slotId)
+    if (!slot) throw new Error('Selected time is no longer available.')
+    record.status = 'event_created'
+    record.event = { title: `Meridian × ${data.companies.find((item) => item.id === companyId)?.name ?? 'Founder'}`, startAt: slot.startAt, calendar: 'Dana Whitfield · Google Calendar' }
+    return structuredClone(record)
   },
 
   async postFeedback(input: FeedbackInput): Promise<FeedbackResult> {

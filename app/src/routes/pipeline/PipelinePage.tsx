@@ -77,21 +77,14 @@ function ScoreChip({ score }: { score: number }) {
 type SortKey = 'name' | 'stage' | 'sector' | 'fitScore' | 'raising' | 'location' | 'sourcedAt'
 type ValuationBand = 'all' | 'under-10' | '10-to-15' | '15-plus'
 
-const COLUMNS: { key: SortKey; label: string }[] = [
+const COLUMNS: { key: SortKey; label: string; className?: string }[] = [
   { key: 'name', label: 'Company' },
   { key: 'stage', label: 'Stage' },
-  { key: 'sector', label: 'Sector' },
-  { key: 'fitScore', label: 'Fit' },
-  { key: 'raising', label: 'Raising' },
-  { key: 'location', label: 'Location · added' },
+  { key: 'sector', label: 'Sector', className: 'hidden xl:table-cell' },
+  { key: 'fitScore', label: 'Fit', className: 'hidden lg:table-cell' },
+  { key: 'raising', label: 'Raising', className: 'hidden xl:table-cell' },
+  { key: 'location', label: 'Location' },
 ]
-
-function formatAdded(value?: string) {
-  if (!value) return '—'
-  const date = new Date(value)
-  if (Number.isNaN(date.getTime())) return '—'
-  return new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(date)
-}
 
 /* stage chips step up the brutal palette: bone → yellow → black */
 function StageBadge({ stage }: { stage: Stage }) {
@@ -488,8 +481,8 @@ export function PipelinePage() {
         </div>
       ) : view === 'database' ? (
         /* database view */
-        <div className="mt-4 overflow-x-auto rounded-none border-2 border-hairline-strong bg-card shadow-brutal">
-          <table className="w-full border-collapse text-left">
+        <div className="mt-4 overflow-hidden rounded-none border-2 border-hairline-strong bg-card shadow-brutal">
+          <table className="w-full table-fixed border-collapse text-left">
             <thead>
               <tr className="border-b-2 border-hairline-strong bg-bone">
                 <th className="w-12 px-4 py-3">
@@ -499,7 +492,7 @@ export function PipelinePage() {
                   <th
                     key={col.key}
                     onClick={() => onSort(col.key)}
-                    className="code-sm cursor-pointer px-4 py-3 uppercase select-none hover:bg-stone/40"
+                    className={`code-sm cursor-pointer px-4 py-3 uppercase select-none hover:bg-stone/40 ${col.className ?? ''}`}
                     title={`Sort by ${col.label}`}
                   >
                     {col.label}
@@ -511,7 +504,6 @@ export function PipelinePage() {
                     {sort.key === col.key && <span className="ml-1">{sort.dir === 1 ? '▲' : '▼'}</span>}
                   </th>
                 ))}
-                <th className="px-4 py-3" />
               </tr>
             </thead>
             <tbody>
@@ -524,15 +516,15 @@ export function PipelinePage() {
                   <td className="px-4 py-3" onClick={(event) => event.stopPropagation()}>
                     <input aria-label={`Select ${c.name}`} type="checkbox" checked={selectedIds.has(c.id)} onChange={() => toggleCompany(c.id)} className="h-4 w-4 cursor-pointer accent-primary" />
                   </td>
-                  <td className="max-w-[320px] px-4 py-3">
+                  <td className="min-w-0 px-4 py-3">
                     <div className="caption-tight text-ink">{c.name}</div>
                     <div className="caption mt-0.5 truncate text-mute">{c.oneLiner}</div>
                   </td>
                   <td className="px-4 py-3">
                     <StageBadge stage={c.dealStage!} />
                   </td>
-                  <td className="px-4 py-3 text-sm whitespace-nowrap text-ink">{c.sector}</td>
-                  <td className="px-4 py-3">
+                  <td className="hidden px-4 py-3 text-sm text-ink xl:table-cell">{c.sector}</td>
+                  <td className="hidden px-4 py-3 lg:table-cell">
                     <div className="flex items-center gap-2">
                       <ScoreChip score={c.fitScore} />
                       <div className="h-2 w-16 border border-hairline-strong bg-card">
@@ -540,7 +532,7 @@ export function PipelinePage() {
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 whitespace-nowrap">
+                  <td className="hidden px-4 py-3 xl:table-cell">
                     {c.raising ? (
                       <span className="code-sm inline-block bg-dark px-1.5 py-0.5 text-on-dark">{c.raising}</span>
                     ) : (
@@ -548,19 +540,13 @@ export function PipelinePage() {
                     )}
                   </td>
                   <td className="px-4 py-3">
-                    <div className="flex min-w-0 items-center gap-2">
-                      <span className="shrink-0 text-sm text-ink">{c.location}</span>
-                      <span title={c.sourcedAt ? new Date(c.sourcedAt).toLocaleString() : undefined} className={`code-sm max-w-[112px] truncate ${c.sourcedAt ? 'text-mute' : 'text-ash'}`}>{formatAdded(c.sourcedAt)}</span>
-                    </div>
-                  </td>
-                  <td className="px-4 py-3 text-right">
-                    <span className="caption-tight whitespace-nowrap text-primary">open →</span>
+                    <span className="text-sm text-ink">{c.location}</span>
                   </td>
                 </tr>
               ))}
               {!sorted.length && (
                 <tr>
-                  <td colSpan={8} className="caption px-4 py-8 text-center text-ash">
+                  <td colSpan={7} className="caption px-4 py-8 text-center text-ash">
                     No active deals
                   </td>
                 </tr>

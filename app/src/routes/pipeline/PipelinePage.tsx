@@ -285,38 +285,38 @@ export function PipelinePage() {
       </div>
 
       {/* deal filters + bulk selection */}
-      <div className="mt-6 flex flex-wrap items-center gap-2 border-2 border-hairline-strong bg-card p-3 shadow-brutal-sm">
-        <span className="code-sm mr-1 text-mute uppercase">Filter deals</span>
-        <select aria-label="Filter by stage" value={stageFilter} onChange={(event) => setStageFilter(event.target.value as Stage | 'all')} className="h-9 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
+      <div className="mt-6 flex flex-nowrap items-center gap-2 overflow-x-auto border-2 border-hairline-strong bg-card p-3 shadow-brutal-sm">
+        <span className="code-sm mr-1 shrink-0 text-mute uppercase">Filter deals</span>
+        <select aria-label="Filter by stage" value={stageFilter} onChange={(event) => setStageFilter(event.target.value as Stage | 'all')} className="h-9 w-32 shrink-0 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
           <option value="all">All stages</option>
           {STAGES.map((stage) => <option key={stage} value={stage}>{stage}</option>)}
         </select>
-        <select aria-label="Filter by minimum score" value={scoreFilter} onChange={(event) => setScoreFilter(Number(event.target.value))} className="h-9 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
+        <select aria-label="Filter by minimum score" value={scoreFilter} onChange={(event) => setScoreFilter(Number(event.target.value))} className="h-9 w-28 shrink-0 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
           <option value={0}>Any score</option>
           <option value={60}>Score 60+</option>
           <option value={70}>Score 70+</option>
           <option value={80}>Score 80+</option>
           <option value={90}>Score 90+</option>
         </select>
-        <select aria-label="Filter by industry" value={sectorFilter} onChange={(event) => setSectorFilter(event.target.value)} className="h-9 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
+        <select aria-label="Filter by industry" value={sectorFilter} onChange={(event) => setSectorFilter(event.target.value)} className="h-9 w-44 shrink-0 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
           <option value="all">All industries</option>
           {sectors.map((sector) => <option key={sector} value={sector}>{sector}</option>)}
         </select>
-        <select aria-label="Filter by raising valuation" value={valuationFilter} onChange={(event) => setValuationFilter(event.target.value as ValuationBand)} className="h-9 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
+        <select aria-label="Filter by raising valuation" value={valuationFilter} onChange={(event) => setValuationFilter(event.target.value as ValuationBand)} className="h-9 w-40 shrink-0 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
           <option value="all">Any raising / cap</option>
           <option value="under-10">Under $10M cap</option>
           <option value="10-to-15">$10M–$15M cap</option>
           <option value="15-plus">$15M+ cap</option>
         </select>
-        <select aria-label="Filter by location" value={locationFilter} onChange={(event) => setLocationFilter(event.target.value)} className="h-9 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
+        <select aria-label="Filter by location" value={locationFilter} onChange={(event) => setLocationFilter(event.target.value)} className="h-9 w-36 shrink-0 border-2 border-hairline-strong bg-card px-2 text-sm text-ink">
           <option value="all">All locations</option>
           {locations.map((location) => <option key={location} value={location}>{location}</option>)}
         </select>
-        <div className="flex-1" />
-        <button type="button" onClick={sendBatchOutreach} disabled={!outreachEligible.length} className="h-9 border-2 border-hairline-strong bg-primary px-5 text-sm font-semibold text-on-primary disabled:cursor-not-allowed disabled:bg-stone disabled:text-charcoal">
+        <div className="min-w-4 flex-1" />
+        <button type="button" onClick={sendBatchOutreach} disabled={!outreachEligible.length} className="h-9 shrink-0 border-2 border-hairline-strong bg-primary px-5 text-sm font-semibold text-on-primary disabled:cursor-not-allowed disabled:bg-stone disabled:text-charcoal">
           Outbound
         </button>
-        <button type="button" onClick={toggleAllVisible} disabled={!sorted.length} className="h-9 border-2 border-hairline-strong bg-dark px-3 text-sm font-semibold text-on-dark disabled:cursor-not-allowed disabled:opacity-40">
+        <button type="button" onClick={toggleAllVisible} disabled={!sorted.length} className="h-9 shrink-0 border-2 border-hairline-strong bg-dark px-3 text-sm font-semibold text-on-dark disabled:cursor-not-allowed disabled:opacity-40">
           {allVisibleSelected ? 'Clear selection' : `Select all ${sorted.length}`}
         </button>
       </div>

@@ -113,29 +113,36 @@ export function RadarChart({
           </text>
         ))}
 
-        {/* series: fills fade in, thick strokes draw themselves */}
-        {series.map((s, si) => (
-          <g key={s.name}>
-            <motion.path
-              d={radialPath(s.values, curveCatmullRomClosed)}
-              fill={s.color}
-              stroke="none"
-              initial={reduced ? false : { opacity: 0 }}
-              animate={{ opacity: 0.18 }}
-              transition={{ duration: 0.5, delay: reduced ? 0 : 0.75 + si * 0.3 }}
-            />
-            <motion.path
-              d={radialPath(s.values, curveCatmullRomClosed)}
-              fill="none"
-              stroke={s.color}
-              strokeWidth={4}
-              strokeLinejoin="round"
-              initial={reduced ? false : { pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 1.05, delay: reduced ? 0 : 0.25 + si * 0.3, ease: 'easeInOut' }}
-            />
-          </g>
-        ))}
+        {/* series: fills fade in, thick strokes draw themselves. Sparse series
+            (few live dims) render as straight polygons — a smooth spline
+            through consecutive zeros loops into bow-tie petals. */}
+        {series.map((s, si) => {
+          const live = s.values.filter((v) => clamp(v) > 0.05).length
+          const curve = live >= 5 ? curveCatmullRomClosed : curveLinearClosed
+          const d = radialPath(s.values, curve)
+          return (
+            <g key={s.name}>
+              <motion.path
+                d={d}
+                fill={s.color}
+                stroke="none"
+                initial={reduced ? false : { opacity: 0 }}
+                animate={{ opacity: 0.18 }}
+                transition={{ duration: 0.5, delay: reduced ? 0 : 0.75 + si * 0.3 }}
+              />
+              <motion.path
+                d={d}
+                fill="none"
+                stroke={s.color}
+                strokeWidth={4}
+                strokeLinejoin="round"
+                initial={reduced ? false : { pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1.05, delay: reduced ? 0 : 0.25 + si * 0.3, ease: 'easeInOut' }}
+              />
+            </g>
+          )
+        })}
 
         {/* in-chart legend, top-left */}
         <g transform={`translate(${-half + 8} ${-half + 14})`}>

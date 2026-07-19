@@ -161,7 +161,7 @@ function CalendarView({
                   key={v}
                   type="button"
                   onClick={() => setCalView(v)}
-                  className={`code-sm cursor-pointer px-3 py-1.5 uppercase transition-colors ${
+                  className={`caption-tight cursor-pointer px-3 py-1.5 uppercase transition-colors ${
                     calView === v ? 'bg-dark text-on-dark' : 'bg-card text-ink hover:bg-bone'
                   } ${v === 'month' ? 'border-l-2 border-hairline-strong' : ''}`}
                 >

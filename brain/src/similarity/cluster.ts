@@ -87,27 +87,25 @@ export function agglomerativeClusters(
     { threshold, maxClusters, minClusterSize },
   );
 
-  // Level 2: split oversized clusters with a second pass over their members
-  // (threshold > 1 disables similarity merging, so the sub-pass is driven purely
-  // by the sub-cluster count — it undoes the forced merges of a dominant theme).
+  // Level 2: split oversized clusters via k-medoids refinement (farthest-first
+  // seeded, deterministic). A dendrogram cut can't do this well — average
+  // linkage chains satellites onto the dense blob, yielding [n-2, 1, 1]-style
+  // skew that min-size absorption immediately re-merges. K-medoids instead
+  // carves the dominant theme into coherent, comparably-sized sub-markets.
   const maxClusterSize = opts.maxClusterSize ?? Infinity;
   if (Number.isFinite(maxClusterSize)) {
-    const next: WorkingCluster[] = [];
-    for (const cl of clusters) {
-      if (cl.members.length <= maxClusterSize) {
-        next.push(cl);
-        continue;
-      }
-      const parts = Math.ceil(cl.members.length / maxClusterSize);
-      next.push(
-        ...clusterIndices(cl.members, sim, {
-          threshold: 1.01,
-          maxClusters: parts,
-          minClusterSize,
-        }),
-      );
+    // Recurse: k-medoids splits can come out uneven (a tight core plus a broad
+    // remainder), so keep carving until every cluster fits under the cap.
+    let guard = 10;
+    while (guard-- > 0) {
+      const oversized = clusters.findIndex((cl) => cl.members.length > maxClusterSize);
+      if (oversized < 0) break;
+      const cl = clusters[oversized]!;
+      const k = Math.ceil(cl.members.length / maxClusterSize);
+      const parts = splitKMedoids(cl.members, sim, k, minClusterSize);
+      if (parts.length <= 1) break; // cannot split further (degenerate similarity)
+      clusters = [...clusters.filter((_, i) => i !== oversized), ...parts];
     }
-    clusters = next;
   }
 
   // Stable output order: by size desc, then by first member asc.
@@ -123,6 +121,26 @@ export function agglomerativeClusters(
       medoidIndex: medoid(cl.members, sim),
     };
   });
+
+  // Sibling sub-markets can share a modal label; qualify duplicates with a
+  // distinguishing modal attribute so the market legend stays unambiguous.
+  const seen = new Map<string, number>();
+  for (const cl of out) seen.set(cl.label, (seen.get(cl.label) ?? 0) + 1);
+  for (const cl of out) {
+    if ((seen.get(cl.label) ?? 0) < 2) continue;
+    const members = cl.memberIndices.map((m) => companies[m]!);
+    for (const pick of [
+      (c: Company) => c.attributes.productCategoryPath.at(-1),
+      (c: Company) => c.attributes.goToMarket,
+      (c: Company) => c.attributes.businessModel,
+    ]) {
+      const m = modal(members.map((c) => pick(c) ?? ""));
+      if (m && m.share >= 1 / 3 && prettyLabel(m.value) !== cl.label) {
+        cl.label = `${cl.label} · ${prettyLabel(m.value)}`;
+        break;
+      }
+    }
+  }
 
   return { assignments, clusters: out };
 }
@@ -202,6 +220,89 @@ function clusterIndices(
   }
 
   return clusters;
+}
+
+/**
+ * Split one oversized cluster into k coherent groups by k-medoids refinement.
+ * Deterministic: medoids seed farthest-first from the cluster medoid (ties by
+ * smallest index), then assign -> recompute medoid -> repeat until stable.
+ * Undersized groups are folded into their most-similar sibling at the end.
+ */
+function splitKMedoids(
+  members: number[],
+  sim: number[][],
+  k: number,
+  minClusterSize: number,
+): WorkingCluster[] {
+  if (k <= 1 || members.length <= k) return [{ members, key: Math.min(...members) }];
+
+  // Farthest-first seeding, starting from the cluster's own medoid.
+  const medoids: number[] = [medoid(members, sim)];
+  while (medoids.length < k) {
+    let farthest = -1;
+    let farthestScore = Infinity; // lower max-similarity to seeds = farther away
+    for (const i of members) {
+      if (medoids.includes(i)) continue;
+      const nearestSeedSim = Math.max(...medoids.map((m) => sim[i]![m]!));
+      if (nearestSeedSim < farthestScore - 1e-12 || (Math.abs(nearestSeedSim - farthestScore) <= 1e-12 && i < farthest)) {
+        farthestScore = nearestSeedSim;
+        farthest = i;
+      }
+    }
+    medoids.push(farthest);
+  }
+
+  // Lloyd-style refinement in similarity space.
+  let assignment = new Map<number, number>();
+  for (let iter = 0; iter < 10; iter++) {
+    const nextAssign = new Map<number, number>();
+    for (const i of members) {
+      let best = 0;
+      for (let g = 1; g < medoids.length; g++) {
+        if (sim[i]![medoids[g]!]! > sim[i]![medoids[best]!]! + 1e-12) best = g;
+      }
+      nextAssign.set(i, best);
+    }
+    const changed = [...nextAssign].some(([i, g]) => assignment.get(i) !== g);
+    assignment = nextAssign;
+    if (!changed && iter > 0) break;
+    for (let g = 0; g < medoids.length; g++) {
+      const group = members.filter((i) => assignment.get(i) === g);
+      if (group.length > 0) medoids[g] = medoid(group, sim);
+    }
+  }
+
+  let groups: WorkingCluster[] = medoids
+    .map((_, g) => members.filter((i) => assignment.get(i) === g))
+    .filter((g) => g.length > 0)
+    .map((g) => ({ members: g.sort((a, b) => a - b), key: Math.min(...g) }));
+
+  // Fold undersized groups into their most-similar sibling (stay within the split).
+  let guard = groups.length;
+  while (guard-- > 0 && groups.length > 1) {
+    const smallIdx = groups.findIndex((g) => g.members.length < minClusterSize);
+    if (smallIdx < 0) break;
+    const small = groups[smallIdx]!;
+    let nearest = -1;
+    let nearestSim = -1;
+    for (let i = 0; i < groups.length; i++) {
+      if (i === smallIdx) continue;
+      let total = 0;
+      for (const a of small.members) for (const b of groups[i]!.members) total += sim[a]![b]!;
+      const s = total / (small.members.length * groups[i]!.members.length);
+      if (s > nearestSim) {
+        nearestSim = s;
+        nearest = i;
+      }
+    }
+    const merged: WorkingCluster = {
+      members: [...small.members, ...groups[nearest]!.members].sort((a, b) => a - b),
+      key: Math.min(small.key, groups[nearest]!.key),
+    };
+    groups = groups.filter((_, i) => i !== smallIdx && i !== nearest);
+    groups.push(merged);
+  }
+  return groups;
 }
 
 /** Member with the highest average similarity to its own cluster. */

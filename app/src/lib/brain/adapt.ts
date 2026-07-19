@@ -395,29 +395,45 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
     })),
   }
 
-  /* ---- graph (markets = sector families; positions computed by BrainCanvas) ----
-   * The brain's landscape clustering fragments fine-grained sectors ("Enterprise
-   * AI / Sales Agents" vs "/ Legal Drafting") into dozens of clusters, so group
-   * by the sector's family prefix instead and keep the top families as markets. */
+  /* ---- graph (markets = the brain's similarity clusters) ----
+   * Clusters come from the brain's hierarchical agglomerative pass (average
+   * linkage over 10-dimension similarity, k-medoid split of dominant themes,
+   * auto-labeled from modal member attributes). Sector-prefix families remain
+   * as a fallback for snapshots without a usable landscape (or degenerate
+   * cluster counts). */
   const familyOf = (c: Company): string => {
     const fam = c.sector.split(/[/,(]/)[0].replace(/\s+and\s+.*$/i, '').trim()
     return fam || 'Software'
   }
-  const familyCounts = new Map<string, number>()
-  for (const c of companies) familyCounts.set(familyOf(c), (familyCounts.get(familyOf(c)) ?? 0) + 1)
-  const MAX_MARKETS = 7
-  const topFamilies = [...familyCounts.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, MAX_MARKETS)
-    .map(([fam]) => fam)
-  const familySet = new Set(topFamilies)
-  const marketLabelFor = (c: Company) => (familySet.has(familyOf(c)) ? familyOf(c) : 'Other')
-  const marketLabels = [...topFamilies, ...(companies.some((c) => !familySet.has(familyOf(c))) ? ['Other'] : [])]
   const marketId = (label: string) => `mkt_${label.toLowerCase().replace(/[^a-z0-9]+/g, '_')}`
 
   const landscape = (snap.events ?? []).find((e) => e.eventType === 'market_landscape_built')?.payload as
     | { nodes?: BrainLandscapeNode[]; edges?: BrainLandscapeEdge[]; clusters?: BrainCluster[] }
     | undefined
+
+  const clusterList = landscape?.clusters ?? []
+  const clusterById = new Map(clusterList.map((cl) => [cl.id, cl]))
+  const clusterOfCompany = new Map((landscape?.nodes ?? []).map((n) => [n.id, n.clusterId]))
+  const useClusters =
+    clusterList.length >= 2 && clusterList.length <= 14 && companies.every((c) => clusterOfCompany.has(c.id) || c.type === 'sourced')
+
+  let marketLabels: string[]
+  let marketLabelFor: (c: Company) => string
+  if (useClusters) {
+    marketLabels = clusterList.map((cl) => cl.label)
+    const fallback = clusterList[0].label
+    marketLabelFor = (c) => clusterById.get(clusterOfCompany.get(c.id) ?? -1)?.label ?? fallback
+  } else {
+    const familyCounts = new Map<string, number>()
+    for (const c of companies) familyCounts.set(familyOf(c), (familyCounts.get(familyOf(c)) ?? 0) + 1)
+    const topFamilies = [...familyCounts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 7)
+      .map(([fam]) => fam)
+    const familySet = new Set(topFamilies)
+    marketLabelFor = (c) => (familySet.has(familyOf(c)) ? familyOf(c) : 'Other')
+    marketLabels = [...topFamilies, ...(companies.some((c) => !familySet.has(familyOf(c))) ? ['Other'] : [])]
+  }
 
   const nodes: GraphNode[] = []
   const edges: GraphEdge[] = []

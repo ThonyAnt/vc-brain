@@ -62,7 +62,7 @@ export function buildMarketLandscape(
     maxClusters: opts.maxClusters ?? 8,
     minClusterSize: opts.minClusterSize ?? 3,
     // Two-level: a dominant theme splits into sub-markets instead of one blob.
-    maxClusterSize: Math.max(10, Math.ceil(companies.length / 4)),
+    maxClusterSize: Math.max(10, Math.ceil(companies.length / 5)),
     embeddings: emb,
   });
   // Seed = medoid: the member most similar to its own cluster on average.

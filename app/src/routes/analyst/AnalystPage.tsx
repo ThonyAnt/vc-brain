@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { AskInput } from '@/components/ui/ask-input'
+import { FlowFieldBackground } from '@/components/ui/flow-field-background'
 import { api } from '../../lib/api/client'
 import type { OrchestratorStreamEvent } from '../../lib/api/client'
 import type { ChatMessage } from '../../lib/types'
@@ -151,18 +152,22 @@ export function AnalystPage() {
 
   if (messages.length === 0) {
     return (
-      <div className="flex h-full flex-col items-center justify-center p-8">
-        <AskInput title="Ask the fund brain" onSubmit={ask} className="max-w-2xl" />
-        <p className="code-sm -mt-4 text-charcoal">
-          institutional memory · 34 memos · 47 passes · 8 outcomes
-        </p>
+      <div className="relative flex h-full flex-col items-center justify-center p-8">
+        <FlowFieldBackground />
+        <div className="relative flex w-full flex-col items-center">
+          <AskInput title="Ask the fund brain" onSubmit={ask} className="max-w-2xl" />
+          <p className="code-sm -mt-4 text-charcoal">
+            institutional memory · 34 memos · 47 passes · 8 outcomes
+          </p>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="mx-auto flex h-full w-full max-w-[820px] flex-col px-8 pt-6 pb-8">
-      <div ref={scrollRef} className="min-h-0 flex-1 space-y-4 overflow-y-auto pr-1 pb-6">
+    <div className="relative mx-auto flex h-full w-full max-w-[820px] flex-col px-8 pt-6 pb-8">
+      {busy && <FlowFieldBackground particleCount={150} trailOpacity={0.12} className="opacity-60" />}
+      <div ref={scrollRef} className="relative min-h-0 flex-1 space-y-4 overflow-y-auto pr-1 pb-6">
         {messages.map((m, i) => (!m.content && m.role === 'assistant' ? null : (
           <div
             key={i}
@@ -211,7 +216,7 @@ export function AnalystPage() {
           )
         })()}
       </div>
-      <AskInput onSubmit={ask} className="shrink-0" />
+      <AskInput onSubmit={ask} className="relative shrink-0" />
     </div>
   )
 }

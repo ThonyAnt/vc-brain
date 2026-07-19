@@ -69,6 +69,10 @@ export interface Company {
   sector: string
   stage: string
   location: string
+  /** Favicon-service logo derived from the company website at sourcing time. */
+  logoUrl?: string
+  /** Structured HQ coordinates from sourcing; preferred over city-name lookup. */
+  hqLatLng?: { lat: number; lng: number }
   raising?: string
   fitScore: number
   summary: string

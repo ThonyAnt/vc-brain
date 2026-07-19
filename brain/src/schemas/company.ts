@@ -92,6 +92,14 @@ export const CompanySchema = z.object({
   founders: z.array(FounderSchema).default([]),
   stage: CompanyStage.optional(),
   geography: z.string().optional(),
+  /** Official site (canonical domain). Also used to derive `logoUrl`. */
+  website: z.string().optional(),
+  /** Favicon-service URL derived from `website` at ingestion. */
+  logoUrl: z.string().optional(),
+  /** Structured HQ for the sourcing globe. Approximate coords are fine. */
+  hqCity: z.string().optional(),
+  hqLat: z.number().min(-90).max(90).optional(),
+  hqLng: z.number().min(-180).max(180).optional(),
   sector: z.string().optional(),
   round: z.string().optional(),
   checkSizeSought: z.number().optional(),

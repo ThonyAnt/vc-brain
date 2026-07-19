@@ -29,7 +29,7 @@ function StageTracker({ current }: { current: Stage }) {
           return (
             <div
               key={s}
-              className={`code-sm -ml-[2px] flex-1 border-2 border-hairline-strong px-1 py-2 text-center uppercase tracking-[0.08em] first:ml-0 ${
+              className={`code-sm -ml-[2px] flex-1 overflow-hidden border-2 border-hairline-strong px-0.5 py-2 text-center uppercase tracking-[0.08em] whitespace-nowrap first:ml-0 ${
                 active
                   ? 'z-10 bg-primary text-on-primary shadow-brutal-sm'
                   : done
@@ -37,7 +37,7 @@ function StageTracker({ current }: { current: Stage }) {
                     : 'bg-card text-charcoal'
               }`}
             >
-              {active ? `▸ ${s}` : s}
+              {s}
             </div>
           )
         })}

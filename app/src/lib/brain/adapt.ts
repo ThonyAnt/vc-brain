@@ -32,6 +32,11 @@ interface BrainCompany {
   stage?: string
   status?: string
   geography?: string
+  website?: string
+  logoUrl?: string
+  hqCity?: string
+  hqLat?: number
+  hqLng?: number
   sector?: string
   checkSizeSought?: number
   valuation?: number
@@ -301,7 +306,9 @@ export function adaptSnapshot(snap: BrainSnapshot): AdaptedData {
       oneLiner: c.description ?? '',
       sector: c.sector ?? c.attributes?.industryPath?.[0] ?? 'Software',
       stage: cap(c.stage ?? 'seed'),
-      location: c.geography ?? '—',
+      location: c.hqCity ?? c.geography ?? '—',
+      logoUrl: c.logoUrl,
+      hqLatLng: c.hqLat != null && c.hqLng != null ? { lat: c.hqLat, lng: c.hqLng } : undefined,
       raising: c.checkSizeSought ? `${usd(c.checkSizeSought)} round` : undefined,
       fitScore: fit,
       summary: (isRec && memo?.companyOverview) || c.description || '',

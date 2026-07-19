@@ -9,6 +9,10 @@ export const DiscoveredCompanySchema = z.object({
   sector: z.string().optional(),
   stage: CompanyStage.optional(),
   geography: z.string().optional(),
+  /** HQ city ("Austin", "Berlin") and approximate coordinates. */
+  hqCity: z.string().optional(),
+  hqLat: z.number().min(-90).max(90).optional(),
+  hqLng: z.number().min(-180).max(180).optional(),
   founders: z.array(FounderSchema).default([]),
   attributes: CompanyAttributesSchema,
   /** Which search-result indices support this company (for provenance). */

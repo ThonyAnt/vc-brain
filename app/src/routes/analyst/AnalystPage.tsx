@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { AskInput } from '@/components/ui/ask-input'
@@ -70,6 +71,9 @@ export function AnalystPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [busy, setBusy] = useState(false)
   const [progress, setProgress] = useState<PipelineProgress>(EMPTY_PROGRESS)
+  /* Assistant message index -> founders sourced in that run, so a completed
+     founder-sourcing turn shows a link through to the Founder Leads page. */
+  const [sourcedFounders, setSourcedFounders] = useState<Record<number, number>>({})
   const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -80,10 +84,17 @@ export function AnalystPage() {
   async function ask(question: string) {
     if (!question.trim() || busy) return
     const next: ChatMessage[] = [...messages, { role: 'user', content: question }]
+    const assistantIndex = next.length
     setMessages([...next, { role: 'assistant', content: '' }])
     setBusy(true)
     setProgress(EMPTY_PROGRESS)
     const onEvent = (event: OrchestratorStreamEvent) => {
+      if (event.type === 'founders_sourced' && event.founders.length) {
+        setSourcedFounders((current) => ({
+          ...current,
+          [assistantIndex]: (current[assistantIndex] ?? 0) + event.founders.length,
+        }))
+      }
       if (event.type === 'run_started') {
         setProgress({
           planned: event.agents,
@@ -162,6 +173,15 @@ export function AnalystPage() {
             }`}
           >
             {m.role === 'assistant' ? <AssistantMarkdown content={m.content} /> : m.content}
+            {m.role === 'assistant' && sourcedFounders[i] ? (
+              <Link
+                to="/founders"
+                className="mt-3 inline-flex items-center gap-1.5 font-medium text-primary underline underline-offset-2"
+              >
+                View {sourcedFounders[i]} new {sourcedFounders[i] === 1 ? 'lead' : 'leads'} in Founder Leads
+                <span aria-hidden>→</span>
+              </Link>
+            ) : null}
           </div>
         )))}
         {busy && (() => {

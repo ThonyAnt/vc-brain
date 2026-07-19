@@ -194,9 +194,26 @@ export async function runPipeline(
   emit("sourcing", "semifinalists_selected", scout.semifinalistIds);
   emit("sourcing", "finalists_selected", scout.finalistIds);
 
-  const finalists = scout.finalistIds
+  let finalists = scout.finalistIds
     .map((id) => index.get(id))
     .filter((c): c is Company => Boolean(c));
+  // Hard filters can wipe the shortlist; fall back to top ranked / universe so
+  // diligence → IC → memo still run on real discovered companies.
+  if (finalists.length === 0 && state.candidateUniverse.length > 0) {
+    const rankedIds = (state.sourcedCandidates ?? [])
+      .filter((candidate) => Number.isFinite(candidate.totalScore) && candidate.totalScore !== -Infinity)
+      .slice(0, 3)
+      .map((candidate) => candidate.companyId);
+    finalists = rankedIds
+      .map((id) => index.get(id))
+      .filter((c): c is Company => Boolean(c));
+    if (finalists.length === 0) {
+      finalists = state.candidateUniverse.slice(0, Math.min(3, state.candidateUniverse.length));
+    }
+    emit("sourcing", "finalists_selected", finalists.map((company) => company.id), {
+      fallback: true,
+    });
+  }
   state.finalists = finalists;
 
   // --- 3. Diligence (per finalist; specialists run in parallel) ---

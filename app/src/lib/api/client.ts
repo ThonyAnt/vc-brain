@@ -1,5 +1,6 @@
 import snapshotJson from '../brain/snapshot.json'
 import { adaptSnapshot, type BrainSnapshot } from '../brain/adapt'
+import { discoveredToGraph } from '../brain/discoveredToGraph'
 import type {
   ChatMessage,
   Company,
@@ -126,6 +127,23 @@ function outreachFor(companyId: string): OutreachRecord {
 }
 
 const sourcingListeners = new Set<(companies: Company[]) => void>()
+const SOURCED_STORAGE_KEY = 'vcbrain-sourced-v1'
+const seedFounderIds = new Set(adapted.founders.map((founder) => founder.id))
+
+function persistSourcedCache() {
+  if (typeof localStorage === 'undefined') return
+  try {
+    const companies = data.companies.filter((company) => company.type === 'sourced')
+    const companyIds = new Set(companies.map((company) => company.id))
+    const founders = data.founders.filter(
+      (founder) =>
+        (founder.companyId != null && companyIds.has(founder.companyId)) || !seedFounderIds.has(founder.id),
+    )
+    localStorage.setItem(SOURCED_STORAGE_KEY, JSON.stringify({ companies, founders }))
+  } catch {
+    /* quota / private mode */
+  }
+}
 
 function mergeSourcedCompanies(companies: Company[], founders: Founder[] = []) {
   const byId = new Map(data.companies.map((company) => [company.id, company]))
@@ -144,8 +162,34 @@ function mergeSourcedCompanies(companies: Company[], founders: Founder[] = []) {
   const foundersById = new Map(data.founders.map((founder) => [founder.id, founder]))
   for (const founder of founders) foundersById.set(founder.id, founder)
   data.founders = [...foundersById.values()]
+  const { nodes, edges } = discoveredToGraph(pipelineCompanies, store.graph)
+  if (nodes.length) {
+    store.graph = {
+      ...store.graph,
+      nodes: [...store.graph.nodes, ...nodes],
+      edges: [...store.graph.edges, ...edges],
+      weights: { ...store.weights },
+    }
+  }
+  persistSourcedCache()
   for (const listener of sourcingListeners) listener(pipelineCompanies)
 }
+
+function hydrateSourcedCache() {
+  if (typeof localStorage === 'undefined') return
+  try {
+    const raw = localStorage.getItem(SOURCED_STORAGE_KEY)
+    if (!raw) return
+    const cached = JSON.parse(raw) as { companies?: Company[]; founders?: Founder[] }
+    if ((cached.companies?.length ?? 0) || (cached.founders?.length ?? 0)) {
+      mergeSourcedCompanies(cached.companies ?? [], cached.founders ?? [])
+    }
+  } catch {
+    localStorage.removeItem(SOURCED_STORAGE_KEY)
+  }
+}
+
+hydrateSourcedCache()
 
 /** POST to the live brain API; returns null if it's unreachable or errors. */
 async function postJson<T>(path: string, body: unknown): Promise<T | null> {

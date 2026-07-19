@@ -48,7 +48,10 @@ function applyTraceEvent(run: TraceRun | undefined, event: OrchestratorStreamEve
     }
   }
   if (!run || run.endedAt) return run
-  const stages = run.stages.map((s) => ({ ...s, partners: s.partners?.map((p) => ({ ...p })) }))
+  const stages: TraceRun['stages'] = run.stages.map((s) => ({
+    ...s,
+    partners: s.partners?.map((p) => ({ ...p })),
+  }))
   const next: TraceRun = { ...run, stages }
   const find = (id: string) => stages.find((s) => s.id === id)
   const partnerHost = () => {
@@ -119,11 +122,11 @@ function applyTraceEvent(run: TraceRun | undefined, event: OrchestratorStreamEve
   if (event.type === 'run_completed') {
     next.endedAt = now
     for (const s of stages) {
-      if (s.status === 'running') {
+      if (s.status === 'running' || s.status === 'queued') {
         s.status = 'done'
         s.endedAt = s.endedAt ?? now
       }
-      s.partners?.forEach((p) => { if (p.status === 'running') p.status = 'done' })
+      s.partners?.forEach((p) => { if (p.status === 'running' || p.status === 'queued') p.status = 'done' })
     }
   }
 
@@ -170,7 +173,17 @@ interface Flight {
 }
 
 export function AnalystPage() {
-  const { messages, traces, sourcedFounders, setMessages, setTraces, setSourcedFounders, clear } = useAnalystChat()
+  const {
+    messages,
+    traces,
+    sourcedFounders,
+    sourcedCompanies,
+    setMessages,
+    setTraces,
+    setSourcedFounders,
+    setSourcedCompanies,
+    clear,
+  } = useAnalystChat()
   const [busy, setBusy] = useState(false)
   /* sourced-item chips mid-flight from the trace card to their dock icon */
   const [flights, setFlights] = useState<Flight[]>([])
@@ -216,6 +229,14 @@ export function AnalystPage() {
         spawnFlights(event.founders.map((f) => f.name), 'Founders')
       }
       if (event.type === 'companies_sourced' && event.companies.length) {
+        setSourcedCompanies((current) => {
+          const prior = current[assistantIndex] ?? []
+          const seen = new Set(prior.map((company) => company.id))
+          const added = event.companies
+            .filter((company) => !seen.has(company.id))
+            .map((company) => ({ id: company.id, name: company.name }))
+          return { ...current, [assistantIndex]: [...prior, ...added] }
+        })
         spawnFlights(event.companies.map((c) => c.name), 'Pipeline')
       }
       setTraces((current) => {
@@ -301,6 +322,20 @@ export function AnalystPage() {
                 }`}
               >
                 {m.role === 'assistant' ? <AssistantMarkdown content={m.content} /> : m.content}
+                {m.role === 'assistant' && sourcedCompanies[i]?.length ? (
+                  <div className="mt-3 flex flex-col gap-1.5">
+                    {sourcedCompanies[i].map((company) => (
+                      <Link
+                        key={company.id}
+                        to={`/company/${company.id}`}
+                        className="inline-flex items-center gap-1.5 font-medium text-primary underline underline-offset-2"
+                      >
+                        View {company.name}
+                        <span aria-hidden>→</span>
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
                 {m.role === 'assistant' && sourcedFounders[i]?.length ? (
                   <Link
                     to={`/founders?new=${sourcedFounders[i].join(',')}`}

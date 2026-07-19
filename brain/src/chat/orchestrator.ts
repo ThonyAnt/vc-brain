@@ -281,8 +281,20 @@ export function regexClassify(messages: OrchestratorChatMessage[]): RouteDecisio
   if (founder) {
     return { intent: "scout_founder", criteria: question, name: founder.name, linkedinUrl: founder.linkedinUrl };
   }
-  if (isSourcingRequest(question)) return { intent: "source_companies", criteria: question };
+  if (isSourcingRequest(question)) {
+    return { intent: "source_companies", criteria: question, count: detectCompanySourcingCount(question) };
+  }
   return { intent: "analyze", criteria: question };
+}
+
+/** Parse "source 2 companies…" into a count; undefined when the user didn't specify. */
+export function detectCompanySourcingCount(message: string): number | undefined {
+  const text = normalizedMessage(message);
+  const raw = text.match(/\b(\d{1,2}|one|two|three|four|five)\s+(companies|startups|deals|candidates|investments)\b/)?.[1];
+  if (!raw) return undefined;
+  const count = NUMBER_WORDS[raw] ?? parseInt(raw, 10);
+  if (!Number.isFinite(count)) return undefined;
+  return Math.max(1, Math.min(count, 10));
 }
 
 export function isSourcingRequest(message: string): boolean {
@@ -363,6 +375,11 @@ function mergePipelineState(target: VCBrainState, pipeline: VCBrainState): void 
   target.investmentMemo = pipeline.investmentMemo;
   target.financialScenarios = pipeline.financialScenarios;
   target.events.push(...pipeline.events);
+}
+
+function companyNameById(companies: Company[], id?: string): string | undefined {
+  if (!id) return undefined;
+  return companies.find((company) => company.id === id)?.name;
 }
 
 function mentionsCompany(message: string, company: Company): boolean {
@@ -694,6 +711,10 @@ export async function streamOrchestratorChat(
 
   if (route.intent === "source_companies" || clarificationFollowUp) {
     const emit = async (event: ChatStreamEvent) => options.onEvent?.(event);
+    const limit = Math.max(
+      1,
+      Math.min(route.count ?? detectCompanySourcingCount(question) ?? 6, 12),
+    );
     await emit({
       type: "run_started",
       runId,
@@ -717,8 +738,8 @@ export async function streamOrchestratorChat(
           mandate: question,
           fundProfile: options.state.fundProfile,
           queries: [question],
-          limit: 10,
-          resultsPerQuery: 10,
+          limit,
+          resultsPerQuery: Math.max(limit, 5),
           excludeNames: options.companies.map((company) => company.name),
         },
         { search: options.search, llm: options.llm },
@@ -763,12 +784,27 @@ export async function streamOrchestratorChat(
       llm: options.llm,
       competitors: options.competitors,
       maxRetries: 1,
+      useEmbeddings: false,
       onAgentEvent,
     });
     mergePipelineState(options.state, pipelineState);
+    if (!pipelineState.investmentMemo) {
+      await emit({
+        type: "agent_completed",
+        runId,
+        agent: "memo",
+        summary: "Skipped — no recommended finalist to memo.",
+      });
+    }
     await emit({ type: "companies_sourced", runId, companies: discovered });
 
-    const scoreById = new Map((pipelineState.sourcedCandidates ?? []).map((candidate) => [candidate.companyId, candidate]));
+    const knownCompanies = [
+      ...discovered,
+      ...(pipelineState.finalists ?? []),
+      ...options.state.portfolioCompanies,
+      ...options.state.rejectedDeals,
+    ];
+    const recommendationId = pipelineState.committeeDecision?.recommendedCompanyId;
     const report = {
       query: question,
       discovered: discovered.map((company) => ({
@@ -778,25 +814,34 @@ export async function streamOrchestratorChat(
         stage: company.stage,
         sector: company.sector,
         sources: company.sourceRefs,
-        fundFit: scoreById.get(company.id)?.fundFitScore,
-        reasonsToAdvance: scoreById.get(company.id)?.reasonsToAdvance,
-        unresolvedRisks: scoreById.get(company.id)?.unresolvedRisks,
       })),
-      finalists: pipelineState.finalists?.map((company) => company.name) ?? [],
-      recommendation: pipelineState.committeeDecision,
-      memo: pipelineState.investmentMemo,
+      finalists: (pipelineState.finalists ?? []).map((company) => company.name),
+      recommendation: pipelineState.committeeDecision
+        ? {
+            company:
+              companyNameById(knownCompanies, recommendationId) ??
+              pipelineState.finalists?.[0]?.name ??
+              "none",
+            companyId: recommendationId,
+            recommendedCheckSize: pipelineState.committeeDecision.recommendedCheckSize,
+            confidence: pipelineState.committeeDecision.confidence,
+            rationale: pipelineState.committeeDecision.rationale,
+            keyRisks: pipelineState.committeeDecision.keyRisks,
+          }
+        : null,
+      memoTitle: pipelineState.investmentMemo?.title,
     };
     const prompt = [
       `Investor sourcing request: ${question}`,
       "",
-      "FULL PIPELINE RESULT (only name companies present here):",
+      "PIPELINE RESULT (only name companies listed under discovered/finalists/recommendation.company):",
       JSON.stringify(report),
       "",
-      "Summarize what the live search found, identify the finalists and recommendation, cite source URLs inline, and call out the most important unresolved risks. Explicitly say that the result came from live Tavily discovery followed by the full investment pipeline. Do not add companies or facts absent from the result.",
+      "Summarize the live search, the finalists, and the recommendation using only those real company names. Cite source URLs when present. Call out the top unresolved risks. Explicitly say this came from live Tavily discovery followed by the full investment pipeline. Never invent companies, placeholder ids like finalist_1, or sectors absent from the result.",
     ].join("\n");
     let content = "";
     for await (const delta of options.llm.streamText({
-      system: "You are the main VC investment orchestrator reporting a completed sourcing pipeline. Be concise, factual, and strictly grounded in the supplied pipeline result.",
+      system: "You are the main VC investment orchestrator reporting a completed sourcing pipeline. Be concise, factual, and strictly grounded in the supplied pipeline result. If recommendation.company is \"none\", say no investment recommendation was made.",
       prompt,
     })) {
       content += delta;

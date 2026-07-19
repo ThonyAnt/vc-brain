@@ -112,18 +112,42 @@ export interface FounderSourcingRequest {
   name?: string;
 }
 
+/** A capitalized 2–3 word personal name. */
+const PERSON_NAME = "([A-Z][\\w.'-]+(?:\\s+[A-Z][\\w.'-]+){1,2})";
+
+/** Pull a person's name from a founder request, on whichever side of "founder" it sits. */
+export function extractFounderName(message: string): string | undefined {
+  // Drop a leading command verb/article first so a capitalized sentence-start
+  // verb ("Source Elon Musk...") can't be mistaken for part of the name.
+  const text = message.replace(
+    /^\s*(please\s+|can you\s+|could you\s+)?(source|score|evaluate|vet|scout|look ?up|check out|research|add|find)\s+(the\s+|an?\s+)?/i,
+    "",
+  );
+  // Trim trailing sentence punctuation the name char class may have swallowed.
+  const clean = (n: string | undefined) => n?.replace(/[.,;:]+$/, "").trim() || undefined;
+  // "the founder [named] Jane Doe"
+  const after = text.match(new RegExp(`[Ff]ounder(?:\\s+named)?\\s+["“]?${PERSON_NAME}`));
+  if (after) return clean(after[1]);
+  // "Jane Doe as a founder"
+  const before = text.match(new RegExp(`${PERSON_NAME}["”]?\\s+as\\s+(?:an?\\s+)?[Ff]ounder`));
+  if (before) return clean(before[1]);
+  // Fallback: the first capitalized name that remains.
+  return clean(text.match(new RegExp(PERSON_NAME))?.[1]);
+}
+
 /**
  * Founder-scout trigger: any LinkedIn profile URL routes straight to the tool;
- * otherwise an explicit "source/score/vet the founder <Name>" phrasing.
+ * otherwise an explicit "source/score/vet/add ... founder ... <Name>" phrasing,
+ * with the name on either side of the word "founder".
  */
 export function detectFounderSourcing(message: string): FounderSourcingRequest | undefined {
   const url = message.match(LINKEDIN_URL_RE)?.[0];
   if (url) return { linkedinUrl: url.startsWith("http") ? url : `https://${url}` };
   const text = normalizedMessage(message);
-  if (!/\b(source|score|evaluate|vet|scout|look ?up|check out|research)\b/.test(text)) return undefined;
+  if (!/\b(source|score|evaluate|vet|scout|look ?up|check out|research|add)\b/.test(text)) return undefined;
   if (!/\bfounder\b/.test(text)) return undefined;
-  const named = message.match(/founder(?:\s+named)?\s+["“]?([A-Z][\w.'-]+(?:\s+[A-Z][\w.'-]+){1,2})["”]?/);
-  if (named) return { name: named[1] };
+  const name = extractFounderName(message);
+  if (name) return { name };
   return undefined;
 }
 

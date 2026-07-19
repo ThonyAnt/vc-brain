@@ -6,10 +6,13 @@ import type { FundProfile } from "../schemas/fundProfile.js";
 /*
  * Founder scout: source and score a single person from the open web.
  *
- * The LinkedIn URL is an IDENTITY ANCHOR, not a scrape target — LinkedIn serves
- * an authwall to crawlers, so Tavily only ever sees the thin search snippet of
- * a public profile. The slug gives us the name; secondary sources (funding
- * news, Crunchbase, interviews, personal sites) give us the substance.
+ * Given a LinkedIn URL, we read that specific profile via the search provider's
+ * extract endpoint (Tavily resolves the public profile past the crawler snippet)
+ * and use it as the IDENTITY ANCHOR — the real name/role/background, not a guess
+ * from the URL slug. We then corroborate with web search (funding news,
+ * Crunchbase, interviews, personal sites) for substance. With only a name, we
+ * rely on search alone. Extraction is best-effort: if it fails we fall back to
+ * the slug-derived name and search.
  */
 
 export const FounderSourcingSchema = z.object({
@@ -76,6 +79,12 @@ export function parseLinkedinUrl(url: string): { slug: string; nameGuess: string
   return { slug, nameGuess };
 }
 
+/** Best-effort display name from an extracted profile's leading markdown heading. */
+export function nameFromExtractedProfile(rawContent: string): string | undefined {
+  const heading = rawContent.match(/^#\s+([^\n#|]{2,60})/m)?.[1]?.trim();
+  return heading && /[a-zA-Z]/.test(heading) ? heading : undefined;
+}
+
 export function founderQueries(name: string, company?: string): string[] {
   const queries = [
     `"${name}" founder startup`,
@@ -103,11 +112,36 @@ export async function sourceFounder(
   deps: SourceFounderDeps,
 ): Promise<SourcedFounderView> {
   const parsed = input.linkedinUrl ? parseLinkedinUrl(input.linkedinUrl) : undefined;
-  const name = input.name?.trim() || parsed?.nameGuess;
-  if (!name) throw new Error("sourceFounder: provide a LinkedIn URL or a name");
 
   const seen = new Set<string>();
   const results: SearchResult[] = [];
+
+  // 1. When given a LinkedIn URL, read that exact profile first (identity anchor).
+  //    Best-effort: extraction failures fall through to search-only below.
+  let profileName: string | undefined;
+  if (input.linkedinUrl && deps.search.extract) {
+    try {
+      const [profile] = await deps.search.extract([input.linkedinUrl]);
+      const raw = profile?.rawContent?.trim();
+      if (raw) {
+        profileName = nameFromExtractedProfile(raw);
+        results.push({
+          title: `LinkedIn profile${profileName ? ` — ${profileName}` : ""}`,
+          url: input.linkedinUrl,
+          content: raw.slice(0, 4000),
+          score: 1,
+        });
+        seen.add(input.linkedinUrl);
+      }
+    } catch {
+      // extract is optional; corroborating search still runs below.
+    }
+  }
+
+  const name = input.name?.trim() || profileName || parsed?.nameGuess;
+  if (!name) throw new Error("sourceFounder: provide a LinkedIn URL or a name");
+
+  // 2. Corroborate with web search (funding, interviews, secondary profiles).
   for (const q of founderQueries(name, input.company)) {
     const found = await deps.search.search(q, { maxResults: 4 });
     for (const r of found) {
@@ -134,7 +168,10 @@ export async function sourceFounder(
       `Target person: ${name}` +
       (input.company ? ` (reportedly at ${input.company})` : "") +
       (input.linkedinUrl ? `\nLinkedIn: ${input.linkedinUrl}` : "") +
-      `\n\nWeb-search results:\n${context}\n\n` +
+      (profileName || (input.linkedinUrl && seen.has(input.linkedinUrl))
+        ? `\n\nNote: source [1] is the person's own LinkedIn profile — treat it as the authoritative identity anchor for name, role, and background.`
+        : "") +
+      `\n\nSources:\n${context}\n\n` +
       `Assemble this person's founder profile and score them for the fund.`,
   });
 

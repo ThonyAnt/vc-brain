@@ -4,7 +4,7 @@ import { MockSearchClient } from "../search/mock.js";
 import { createInitialState } from "../state.js";
 import { mockAgentOptions, mockSearchResults } from "../fixtures/mockAgents.js";
 import * as fx from "../fixtures/sample.js";
-import { needsSourcingClarification, streamOrchestratorChat, type ChatStreamEvent } from "./orchestrator.js";
+import { detectFounderSourcing, needsSourcingClarification, streamOrchestratorChat, type ChatStreamEvent } from "./orchestrator.js";
 
 const { fundProfile, medflow, careloop, scribeai } = fx;
 
@@ -34,6 +34,24 @@ describe("interactive investment orchestrator", () => {
       .toEqual(expect.arrayContaining(["company_analyst", "analogue_analyst", "fund_strategy_analyst"]));
     expect(events.some((event) => event.type === "text_delta")).toBe(true);
     expect(events.at(-1)?.type).toBe("run_completed");
+  });
+
+  describe("detectFounderSourcing", () => {
+    it("detects the name whether it sits before or after the word 'founder'", () => {
+      // Name before ("<Name> as a founder") — the phrasing that previously fell through to the LLM.
+      expect(detectFounderSourcing("Source Elon Musk as a founder and add to the leads list and give a score."))
+        .toEqual({ name: "Elon Musk" });
+      // Name after ("founder <Name>").
+      expect(detectFounderSourcing("Please vet the founder Jane Doe.")).toEqual({ name: "Jane Doe" });
+    });
+    it("routes a LinkedIn URL straight to the tool", () => {
+      expect(detectFounderSourcing("score https://www.linkedin.com/in/patrickcollison as a founder"))
+        .toEqual({ linkedinUrl: "https://www.linkedin.com/in/patrickcollison" });
+    });
+    it("ignores messages with no founder intent", () => {
+      expect(detectFounderSourcing("What is the fund thesis?")).toBeUndefined();
+      expect(detectFounderSourcing("Compare Vooma to our portfolio.")).toBeUndefined();
+    });
   });
 
   it("grounds 'similar past investment / better deal' questions in the fund's portfolio clusters", async () => {

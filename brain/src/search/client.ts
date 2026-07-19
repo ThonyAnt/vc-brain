@@ -15,6 +15,12 @@ export interface SearchOptions {
   includeRawContent?: boolean;
 }
 
+/** Full page content for one URL, from a provider's extract endpoint. */
+export interface ExtractResult {
+  url: string;
+  rawContent: string;
+}
+
 /**
  * The seam between discovery and any web-search provider. Discovery depends
  * only on this interface, so it runs offline against MockSearchClient and swaps
@@ -22,4 +28,9 @@ export interface SearchOptions {
  */
 export interface SearchClient {
   search(query: string, opts?: SearchOptions): Promise<SearchResult[]>;
+  /**
+   * Fetch full page content for specific URLs (e.g. Tavily /extract). Optional:
+   * callers must feature-detect and fall back to `search` when absent.
+   */
+  extract?(urls: string[]): Promise<ExtractResult[]>;
 }

@@ -20,7 +20,9 @@ export function GlobeCard({
     { ...FUND_HQ, kind: 'hq' as const },
     ...companies.flatMap((c) => {
       const ll = c.hqLatLng ?? cityLatLng(c.location)
-      return ll ? [{ ...ll, label: c.name, city: c.location, kind: 'company' as const }] : []
+      return ll
+        ? [{ ...ll, label: c.name, city: c.location, kind: 'company' as const, logoUrl: c.logoUrl }]
+        : []
     }),
   ]
   const cityCount = new Set(companies.map((c) => c.location)).size
